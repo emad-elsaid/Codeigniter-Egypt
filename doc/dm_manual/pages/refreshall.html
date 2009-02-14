@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Refresh All : DataMapper User Guide</title>
+
+<style type='text/css' media='all'>@import url('../css/userguide.css');</style>
+<link rel='stylesheet' type='text/css' media='all' href='../css/userguide.css' />
+
+<meta http-equiv='expires' content='-1' />
+<meta http-equiv= 'pragma' content='no-cache' />
+<meta name='robots' content='all' />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="http://stensi.com/">DataMapper Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Refresh All
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Refresh All</h1>
+
+<p>Refresh All is really only used in one scenario. For example, if you get a number of object, loop through its all list, and delete one or more records, but not all of them.  Refresh All will do just that, refresh the all list so the deleted items are removed.  We're not able to dynamically remove them from the all list while you're looping through it as that would cause issues with the loop itself. Here's an example of when you'd use refresh_all():</p>
+
+<code>
+// Get a number of books from the year 2000<br />
+$b = new Book();<br />
+$b->where('year', 2000)->get();<br />
+<br />
+// Loop through the all list and delete those that are fiction<br />
+foreach ($b->all as $book)<br />
+{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if ($book->fiction)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$book->delete();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<br />
+// Refresh the book objects all list to remove the deleted entries (which are simply empty entries in the all list now)<br />
+$b->refresh_all();<br/ >
+<br />
+// Now we can loop through the all list again looking at only existing objects<br />
+foreach ($b->all as $book)<br />
+{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;echo $book->name ."&lt;br /&gt;";<br />
+}<br />
+</code>
+
+<p>Alternatively, you could instead run your get query again but that will execute a database call whereas Refresh All just removes empty records from the objects all list.</p>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+Previous Topic:&nbsp;&nbsp;<a href="deleteall.html">Delete All</a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href="validate.html">Validate</a>
+</p>
+<p><a href="http://stensi.com">DataMapper</a> &nbsp;&middot;&nbsp; Copyright &#169; 2008 &nbsp;&middot;&nbsp; <a href="http://stensi.com/">Simon Stenhouse</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006-2008 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">Ellislab, Inc.</a></p>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagepath: ''
+		});
+
+	});	
+//-->
+</script>
+</body>
+</html>

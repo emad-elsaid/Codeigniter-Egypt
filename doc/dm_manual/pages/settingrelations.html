@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Setting up Relationships : DataMapper User Guide</title>
+
+<style type='text/css' media='all'>@import url('../css/userguide.css');</style>
+<link rel='stylesheet' type='text/css' media='all' href='../css/userguide.css' />
+
+<meta http-equiv='expires' content='-1' />
+<meta http-equiv= 'pragma' content='no-cache' />
+<meta name='robots' content='all' />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="http://stensi.com/">DataMapper Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Setting up Relationships
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Setting up Relationships</h1>
+
+<p>In order for your DataMapper models to know the relationships it has between other DataMapper models, you need to set its <kbd>$has_one</kbd> and <kbd>$has_many</kbd> variables.  You do this by adding a class variable of <kbd>$has_one</kbd> and <kbd>$has_many</kbd>, both of which are arrays.</p>
+<p>The values you add to these arrays is the related models name in lowercase. For example:</p>
+
+<h3>User</h3>
+
+<code>
+class <var>User</var> extends <samp>DataMapper</samp> {<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;var <kbd>$has_one</kbd> = array("<var>country</var>");<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;function <var>User</var>()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent::<samp>DataMapper()</samp>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<br />
+/* End of file user.php */<br />
+/* Location: ./application/models/user.php */
+</code>
+
+<h3>Country</h3>
+<code>
+class <var>Country</var> extends <samp>DataMapper</samp> {<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;var <kbd>$table</kbd> = "<dfn>countries</dfn>";<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;var <kbd>$has_many</kbd> = array("<var>user</var>");<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;function <var>Country</var>()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent::<samp>DataMapper()</samp>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<br />
+/* End of file country.php */<br />
+/* Location: ./application/models/country.php */
+</code>
+
+<p>Looking above, we can see that a user can relate to only one country but a country can relate to many users. For example, I was born in Australia. It's not really possible for me to have been born in more than one country.  That's where the <kbd>$has_one</kbd> setting in the <var>User</var> model comes into play. Australia however has lots of people (or users in this example) which is where the <kbd>$has_many</kbd> setting in the <var>Country</var> model comes into play.</p>
+
+<h2>Multiple Relations</h2>
+
+<p>You can setup as many relationships as you need. You simply add more lowercase model names into the <kbd>$has_one</kbd> or <kbd>$has_many</kbd> variables as needed.</p>
+
+<h3>User</h3>
+<code>
+<kbd>$has_one</kbd> = array("<var>country</var>", "<var>group</var>");<br />
+<kbd>$has_many</kbd> = array("<var>book</var>", "<var>setting</var>");
+</code>
+
+<h2>Auto Populating Related Objects</h2>
+
+<p>By default, DataMapper does not auto populate your related objects when you first access them.  You have to populate them in much the same way you do your normal objects (read <a href="get.html">Get</a> for more information). For example:</p>
+
+<code>
+// Create a Country object and get the record for Australia<br />
+$c = new Country();<br />
+$c->where('name', 'Australia)->get();<br />
+<br />
+// Populate the related users object with all related records<br />
+$c->user->get();<br />
+<br />
+// Loop through to see all related users<br />
+foreach ($c->user->all as $u)<br />
+{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;echo $u->username . '&lt;br /&gt;';<br />
+}<br />
+</code>
+
+<p>An example of populating your related users with a more refined list could be paged results of users who are older than 18 years of age.</p>
+
+<code>
+// Create a Country object and get the record for Australia<br />
+$c = new Country();<br />
+$c->where('name', 'Australia)->get();<br />
+<br />
+// How many related records we want to limit ourselves to<br />
+$limit = 20;<br />
+<br />
+// The page we're looking at<br />
+$page = 2;<br />
+<br />
+// Set the offset for our paging<br />
+$offset = $page * $limit;<br />
+<br />
+// Populate the related users object<br />
+$c->user->where('age >', '18')->get($limit, $offset);<br />
+<br />
+// Loop through to see all related users matching our related query above<br />
+foreach ($c->user->all as $u)<br />
+{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;echo $u->username . '&lt;br /&gt;';<br />
+}<br />
+</code>
+
+
+<p>Now, if you'd prefer your related objects are auto populated when you first access them, you can do so by setting the <kbd>$auto_populate_has_many</kbd> and <kbd>$auto_populate_has_one</kbd> class variables in your DataMapper models to TRUE or by setting them to TRUE in the DataMapper <a href="config.html">Configuration</a>.  Obviously these will auto populate their respective relation type.</p>
+
+<code>
+var $auto_populate_has_many = TRUE;<br />
+var $auto_populate_has_one = TRUE;<br />
+</code>
+
+<p>With your model set to auto populate "has many" and/or "has one" related objects, you can go directly to looping through the related objects. For example:</p>
+<code>
+// Create a Country object and get the record for Australia<br />
+$c = new Country();<br />
+$c->where('name', 'Australia)->get();<br />
+<br />
+// Loop through to see all related users<br />
+foreach ($c->user->all as $u)<br />
+{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;echo $u->username . '&lt;br /&gt;';<br />
+}<br />
+</code>
+
+<p>The only downside of auto populating is that it will populate with all related records.  So, looking at the above example, if we had a hundred thousand users related to Australia, all of those users would have to be read from the Database and loaded into memory, which is not good for performance, and why it is recommended you stick to manually populating with sensibly defined query clauses.</p>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+Previous Topic:&nbsp;&nbsp;<a href="relationtypes.html">Relationship Types</a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href="controllers.html">DataMapper in Controllers</a>
+</p>
+<p><a href="http://stensi.com">DataMapper</a> &nbsp;&middot;&nbsp; Copyright &#169; 2008 &nbsp;&middot;&nbsp; <a href="http://stensi.com/">Simon Stenhouse</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006-2008 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">Ellislab, Inc.</a></p>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagepath: ''
+		});
+
+	});	
+//-->
+</script>
+</body>
+</html>

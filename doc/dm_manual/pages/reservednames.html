@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Reserved Names : DataMapper User Guide</title>
+
+<style type='text/css' media='all'>@import url('../css/userguide.css');</style>
+<link rel='stylesheet' type='text/css' media='all' href='../css/userguide.css' />
+
+<meta http-equiv='expires' content='-1' />
+<meta http-equiv= 'pragma' content='no-cache' />
+<meta name='robots' content='all' />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="http://stensi.com/">DataMapper Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Reserved Names
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Reserved Names</h1>
+
+<p>In order to help out, DataMapper uses a series of functions and variable names in its operation. Because of this, some names cannot be used by a developer. The following is a list of reserved names that cannot be used as function names in your model or field names in your Database tables.
+
+<h3>Functions</h3>
+<ul>
+	<li>DataMapper</li>
+	<li>autoload</li>
+	<li>recursive_require_once</li>
+	<li>__set</li>
+	<li>__get</li>
+	<li>__call</li>
+	<li>__clone</li>
+	<li>__toString</li>
+	<li>get</li>
+	<li>save</li>
+	<li>delete</li>
+	<li>delete_all</li>
+   	<li>refresh_all</li>
+   	<li>validate</li>
+	<li>clear</li>
+	<li>count</li>
+	<li>exists</li>
+	<li>query</li>
+	<li>error_message</li>
+	<li>get_clone</li>
+	<li>get_copy</li>
+	<li>_get_by</li>
+	<li>_get_by_related</li>
+	<li>select</li>
+	<li>select_max</li>
+	<li>select_min</li>
+	<li>select_avg</li>
+	<li>select_sum</li>	
+	<li>distinct</li>
+	<li>get_where</li>
+	<li>where</li>
+	<li>or_where</li>
+	<li>_where</li>
+	<li>where_in</li>
+	<li>or_where_in</li>
+	<li>where_not_in</li>
+	<li>or_where_not_in</li>
+	<li>_where_in</li>
+	<li>like</li>
+	<li>not_like</li>
+	<li>or_like</li>
+	<li>or_not_like</li>
+	<li>_like</li>
+	<li>group_by</li>
+	<li>having</li>
+	<li>or_having</li>
+	<li>_having</li>
+	<li>order_by</li>
+	<li>limit</li>
+	<li>offset</li>
+	<li>start_cache</li>
+	<li>stop_cache</li>
+	<li>flush_cache</li>
+	<li>trans_off</li>
+	<li>trans_strict</li>
+	<li>trans_start</li>
+	<li>trans_complete</li>
+	<li>trans_begin</li>
+	<li>trans_status</li>
+	<li>trans_commit</li>
+	<li>trans_rollback</li>
+	<li>_auto_trans_begin</li>
+	<li>_auto_trans_complete</li>
+   	<li>_changed</li>
+   	<li>_changed_existing</li>
+   	<li>_changed_non_existing</li>
+   	<li>_related</li>
+   	<li>_get_relation</li>
+   	<li>_save_relation</li>
+   	<li>_delete_relation</li>
+	<li>_get_relationship_table</li>
+	<li>_count_related</li>
+	<li>_related_required</li>
+	<li>_related_min_size</li>
+	<li>_related_max_size</li>
+	<li>_alpha_dash_dot</li>
+	<li>_alpha_slash_dot</li>
+   	<li>_matches</li>
+	<li>_min_date</li>
+	<li>_max_date</li>
+	<li>_min_size</li>
+	<li>_max_size</li>
+   	<li>_unique</li>
+   	<li>_unique_pair</li>
+   	<li>_valid_date</li>
+   	<li>_valid_date_group</li>
+   	<li>_valid_match</li>
+   	<li>_encode_php_tags</li>
+   	<li>_prep_for_form</li>
+   	<li>_prep_url</li>
+   	<li>_stip_image_tags</li>
+   	<li>_xss_clean</li>
+   	<li>_to_array</li>
+   	<li>_to_object</li>
+   	<li>_refresh_stored_values</li>
+   	<li>_assign_libraries</li>
+   	<li>_load_languages</li>
+   	<li>_load_helpers</li>
+</ul>
+
+<br />
+
+<p>The following are variables that should only be used in your Models as described in this User Guide.  For information on their use, read <a href="models.html">DataMapper Models</a>.</p>
+
+<h3>Variables</h3>
+<ul>
+	<li>$config</li>
+	<li>$common</li>
+	<li>$error</li>
+	<li>$prefix</li>
+	<li>$join_prefix</li>
+	<li>$table</li>
+	<li>$model</li>
+	<li>$error_prefix</li>
+	<li>$error_suffix</li>
+	<li>$created_field</li>
+	<li>$updated_field</li>
+	<li>$auto_transaction</li>
+	<li>$auto_populate_has_many</li>
+	<li>$auto_populate_has_one</li>
+	<li>$valid</li>
+	<li>$validated</li>
+	<li>$local_time</li>
+	<li>$unix_timestamp</li>
+	<li>$fields</li>
+	<li>$all</li>
+	<li>$parent</li>
+	<li>$validation</li>
+	<li>$has_many</li>
+	<li>$has_one</li>
+	<li>$query_related</li>
+</ul>
+
+<p class="important"><strong>Important:</strong>&nbsp; The field names in your Database tables <kbd>cannot</kbd> be the same as these variables.</p>
+
+
+</div>
+
+
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+Previous Topic:&nbsp;&nbsp;<a href="config.html">Configuration</a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href="database.html">Database Tables</a>
+</p>
+<p><a href="http://stensi.com">DataMapper</a> &nbsp;&middot;&nbsp; Copyright &#169; 2008 &nbsp;&middot;&nbsp; <a href="http://stensi.com/">Simon Stenhouse</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006-2008 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">Ellislab, Inc.</a></p>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagepath: ''
+		});
+
+	});	
+//-->
+</script>
+</body>
+</html>

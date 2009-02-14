@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Get By : DataMapper User Guide</title>
+
+<style type='text/css' media='all'>@import url('../css/userguide.css');</style>
+<link rel='stylesheet' type='text/css' media='all' href='../css/userguide.css' />
+
+<meta http-equiv='expires' content='-1' />
+<meta http-equiv= 'pragma' content='no-cache' />
+<meta name='robots' content='all' />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="http://stensi.com/">DataMapper Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Get By
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Get By</h1>
+
+<p>Get By is a dynamic method that gives you an easier way to lookup records based on a single where condition. For example, normally you might lookup a user's record based on their <var>id</var> in this way:</p>
+
+<code>
+// We'll assume $id was populated via their Session Cookie<br />
+<br />
+// Get user by ID<br />
+$u = new User();<br />
+$u->where('id', $id)->get();<br />
+</code>
+
+<p>Using the Get By method, you can do exactly as above in this way:</p>
+
+<code>
+// We'll assume $id was populated via their Session Cookie<br />
+<br />
+// Get user by ID<br />
+$u = new User();<br />
+$u->get_by_<var>id</var>($id);<br />
+</code>
+
+
+<p>I mentioned that Get By is a dynamic method.  What I mean by this is, you can Get By any fields belonging to the object.  For example, a user object might have a <var>username</var> field.  So, to Get By username:</p>
+
+<code>
+// We'll assume $username was populated via a POST request<br />
+<br />
+// Get user by username<br />
+$u = new User();<br />
+$u->get_by_<var>username</var>($username);<br />
+</code>
+
+<p>Likewise, if they had an <var>email</var> field, you could Get By email:</p>
+
+<code>
+// We'll assume $email was populated via a POST request<br />
+<br />
+// Get user by email<br />
+$u = new User();<br />
+$u->get_by_<var>email</var>($email);<br />
+</code>
+
+<p>Get By is primarily a convenience method for developers.  Whether you choose to use it instead of specifying the where clause yourself is up to you, but whatever your choice, I recommend being consistent with it.</p>
+
+
+<p>&nbsp;</p>
+
+
+<h1><a name="advanced"></a>Get By (Advanced)</h1>
+
+<p>Similarly to the advanced queries available in <a href="get.html#advanced">Get (Advanced)</a>, there is a Get By Related equivelant for where_related clauses.  Here's the example of a simple <dfn>where_related()</dfn> usage:</p>
+
+<p>Here's how you would do the above, but using an advanced query:</p>
+
+<code>
+// Create user object<br />
+$u = new User();<br />
+
+<br />
+// Get users that are related to the Moderator group<br />
+$u->where_related_group('name', 'Moderator')->get();<br />
+<br />
+// ...
+</code>
+
+<p>And here's how you do the exact same thing but using Get By Related:</p>
+
+<code>
+// Create user object<br />
+$u = new User();<br />
+
+<br />
+// Get users that are related to the Moderator group<br />
+$u->get_by_related_group('name', 'Moderator');<br />
+<br />
+// ...
+</code>
+
+<h2>$object->get_by_related_{model}($field, $value);</h2>
+
+<p>Just like with the different usage formats in <a href="get.html#advanced">Get (Advanced)</a>, there are different ways you can use Get By Related.</p>
+
+<ul>
+	<li><samp>{model}</samp> - Replace with related model name.</li>
+	<li><kbd>$field</kbd> - First parameter for chosen query type.</li>
+	<li><kbd>$value</kbd> - Second parameter for chosen query type.</li>
+</ul>
+
+<code>
+// Create user<br />
+$u = new User();<br />
+<br />
+// Get all users relating to the Moderator group (goes by 'group', 'name', 'Moderator')<br />
+$u->get_by_related_<samp>group</samp>('<kbd>name</kbd>', '<kbd>Moderator</kbd>');
+
+</code>
+
+
+<h2>$object->get_by_related($model, $field, $value);</h2>
+
+<p>Alternatively, rather than specifying the related model as part of the method, you could instead supply it as the first parameter.</p>
+
+<ul>
+	<li><samp>$model</samp> - Supply related model name.</li>
+	<li><kbd>$field</kbd> - First parameter for chosen query type.</li>
+	<li><kbd>$value</kbd> - Second parameter for chosen query type.</li>
+</ul>
+
+<p>Here's an example using the <var>where</var> query:</p>
+
+<code>
+// Create user<br />
+$u = new User();<br />
+<br />
+// Get all users relating to the Moderator group (goes by 'group', 'name', 'Moderator')<br />
+$u->get_by_related('<samp>group</samp>', '<kbd>name</kbd>', '<kbd>Moderator</kbd>');
+
+</code>
+
+
+<h2>$object->get_by_related($related_object, $field, $value);</h2>
+
+<ul>
+	<li><kbd>$related_object</kbd> - Supply related object.</li>
+	<li><strong>Optional:</strong> <kbd>$field</kbd> - First parameter for chosen query type.</li>
+	<li><strong>Optional:</strong> <kbd>$value</kbd> - Second parameter for chosen query type.</li>
+</ul>
+
+<p class="important"><strong>Note:</strong>&nbsp; Both the <kbd>$field</kbd> and <kbd>$value</kbd> parameters are optional if the <kbd>$related_object</kbd> contains a valid <strong>id</strong>.</p>
+
+<p>Here's an example using the <var>where</var> query:</p>
+
+<code>
+// Create and get the Moderator group<br />
+$g = new Group();<br />
+$g->get_by_name('Moderator');<br />
+<br />
+// Create user<br />
+
+$u = new User();<br />
+<br />
+// Get all users relating to the Moderator group (goes by 'group', 'id', $g->id)<br />
+$u->get_by_related(<kbd>$g</kbd>);
+</code>
+
+<p>Here's a similar way of doing the above, but with an unpopulated related object (no id):</p>
+
+<code>
+// Create and get the Moderator group<br />
+
+$g = new Group();<br />
+<br />
+// Create user<br />
+$u = new User();<br />
+<br />
+// Get all users relating to the Moderator group (goes by 'group', 'name', 'Moderator')<br />
+$u->get_by_related(<kbd>$g</kbd>, '<kbd>name</kbd>', '<kbd>Moderator</kbd>');
+
+</code>
+
+
+<p>Which of the available usage formats you use will depend on your personal preference, although you should be consistent with your choice.  It also might depend on whether you have a related object already available to use.</p>
+
+<p class="important"><strong>Note:</strong>&nbsp; For Self Referencing Relationships, you can only use the usage format where you pass a related object with an id, for example:<br /><br />$object->get_by_related($related_object);</p>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+Previous Topic:&nbsp;&nbsp;<a href="get.html">Get</a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href="getclone.html">Get Clone</a>
+</p>
+<p><a href="http://stensi.com">DataMapper</a> &nbsp;&middot;&nbsp; Copyright &#169; 2008 &nbsp;&middot;&nbsp; <a href="http://stensi.com/">Simon Stenhouse</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006-2008 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">Ellislab, Inc.</a></p>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagepath: ''
+		});
+
+	});	
+//-->
+</script>
+</body>
+</html>

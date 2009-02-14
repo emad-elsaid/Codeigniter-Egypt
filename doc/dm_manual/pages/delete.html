@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Delete : DataMapper User Guide</title>
+
+<style type='text/css' media='all'>@import url('../css/userguide.css');</style>
+<link rel='stylesheet' type='text/css' media='all' href='../css/userguide.css' />
+
+<meta http-equiv='expires' content='-1' />
+<meta http-equiv= 'pragma' content='no-cache' />
+<meta name='robots' content='all' />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="http://stensi.com/">DataMapper Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Delete
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Delete</h1>
+
+<p>There are a number of ways to run Delete and its effect will be different depending on whether you pass in a parameter. It's very similar to the <a href="save.html">Save</a> function.</p>
+<p class="important"><strong>Note:</strong>&nbsp; Delete should only be used on existing objects.</p>
+
+<h2>Delete on an Existing Object</h2>
+<p>Running Delete on an existing object will delete its corresponding record from the database.</p>
+<p class="important"><strong>Note:</strong>&nbsp; When you delete an object, all its relations to other objects will also be deleted. Free house cleaning! :)</p>
+<code>
+// Get user foo<br />
+$u = new User();<br />
+$u->where('username', 'foo')->get();<br />
+<br />
+// Delete user<br />
+$u->delete();
+</code>
+
+<h2>Delete a Relationship on an Existing Object</h2>
+
+<p>It's easy to delete the relationships your objects have with each other, and there are a few ways of doing it. It's </p>
+<p class="important"><strong>Note:</strong>&nbsp; You can only delete relations from objects that already exist in the Database.</p>
+
+<h3>Delete a Single Relation</h3>
+
+<p>To delete a relation, you pass the object you want to delete the relation to, into your current object.</p>
+
+<code>
+// Get user foo<br />
+$u = new User();<br />
+$u->where('username', 'foo')->get();<br />
+<br />
+// Get country object for Australia<br />
+$c = new Country();<br />
+$c->where('name', 'Australia')->get();<br />
+<br />
+// Delete relation between user foo and country Australia<br />
+$u->delete($c);<br />
+</code>
+
+<h3>Delete Multiple Relations</h3>
+
+<p>To delete multiple relations, you pass an object's all property or an array of objects.</p>
+<code>
+// Get user foo<br />
+$u = new User();<br />
+$u->where('username', 'foo')->get();<br />
+<br />
+<br />
+// Get country object for Australia<br />
+$c = new Country();<br />
+$c->where('name', 'Australia')->get();<br />
+<br />
+// Get a number of books from the year 2000<br />
+$b = new Book();<br />
+$b->where('year', 2000)->get();<br />
+<br />
+// Get a movie with ID of 5<br />
+$m = new Movie();<br />
+$m->where('id', 5)->get();<br />
+<br />
+// Delete relation between user foo and all the books<br />
+$u->delete($b->all);<br />
+<br />
+// Or we could pass everything in one go (it's ok to have a mix of single objects and all lists from objects)<br />
+$u->delete(array($c, $b->all, $m));<br />
+</code>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+Previous Topic:&nbsp;&nbsp;<a href="save.html">Save</a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href="deleteall.html">Delete All</a>
+</p>
+<p><a href="http://stensi.com">DataMapper</a> &nbsp;&middot;&nbsp; Copyright &#169; 2008 &nbsp;&middot;&nbsp; <a href="http://stensi.com/">Simon Stenhouse</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006-2008 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">Ellislab, Inc.</a></p>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagepath: ''
+		});
+
+	});	
+//-->
+</script>
+</body>
+</html>

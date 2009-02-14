@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Automated Timestamps : DataMapper User Guide</title>
+
+<style type='text/css' media='all'>@import url('../css/userguide.css');</style>
+<link rel='stylesheet' type='text/css' media='all' href='../css/userguide.css' />
+
+<meta http-equiv='expires' content='-1' />
+<meta http-equiv= 'pragma' content='no-cache' />
+<meta name='robots' content='all' />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="http://stensi.com/">DataMapper Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Automated Timestamps
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Automated Timestamps</h1>
+
+<p>DataMapper has the ability to automattically manage your Created and Updated timestamps, if your tables have the Created and Updated fields. By default, DataMapper looks for fields names <var>created</var> and <var>updated</var>.  If they exist, it looks after the values for these fields without you ever needing to set them.
+
+<p class="important"><strong>Note:</strong> By default, the Created and Updated fields are of the <strong>DateTime</strong> type, and GMT/UTC time is used.</p>
+
+<p>If you would like to change the name of the Created and Updated fields, you can do so by setting the <kbd>$created_field</kbd> and <kbd>$updated_field</kbd> class variables in your DataMapper model.  For example, we'll set them in our User model:</p>
+
+<textarea class="textarea" style="width:100%" cols="50" rows="15"><?php
+
+class User extends DataMapper {
+	
+	var $created_field = 'created_on';
+	var $updated_field = 'updated_on';
+	
+	function User()
+	{
+		parent::DataMapper();
+	}
+}
+
+/* End of file user.php */
+/* Location: ./application/models/user.php */</textarea>
+
+<p>If you'd prefer to use Unix Timestamps or if you'd like to use Local Time instead of GMT/UTC, you can do so by setting the <kbd>$unix_timestamp</kbd> and <kbd>$local_time</kbd> class variables respectively.  FOr example:</p>
+
+<textarea class="textarea" style="width:100%" cols="50" rows="17"><?php
+
+class User extends DataMapper {
+	
+	var $created_field = 'created_on';
+	var $updated_field = 'updated_on';
+	var $local_time = TRUE;
+	var $unix_timestamp = TRUE;
+	
+	function User()
+	{
+		parent::DataMapper();
+	}
+}
+
+/* End of file user.php */
+/* Location: ./application/models/user.php */</textarea>
+
+<p>Alternatively, you can set this up globally for all your DataMapper models by setting them in the <a href="config.html">Configuration</a>.</p>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+Previous Topic:&nbsp;&nbsp;<a href="controllers.html">DataMapper in Controllers</a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href="validation.html">Validation</a>
+</p>
+<p><a href="http://stensi.com">DataMapper</a> &nbsp;&middot;&nbsp; Copyright &#169; 2008 &nbsp;&middot;&nbsp; <a href="http://stensi.com/">Simon Stenhouse</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006-2008 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">Ellislab, Inc.</a></p>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagepath: ''
+		});
+
+	});	
+//-->
+</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Accessing Relationships : DataMapper User Guide</title>
+
+<style type='text/css' media='all'>@import url('../css/userguide.css');</style>
+<link rel='stylesheet' type='text/css' media='all' href='../css/userguide.css' />
+
+<meta http-equiv='expires' content='-1' />
+<meta http-equiv= 'pragma' content='no-cache' />
+<meta name='robots' content='all' />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="http://stensi.com/">DataMapper Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Accessing Relationships
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Accessing Relationships</h1>
+
+<p>You need to specify your DataMapper models <kbd>$has_one</kbd> and <kbd>$has_many</kbd> relationships before it is possible to access them.  Read <a href="settingrelations.html">Setting up Relationships</a> to see how.</p>
+
+<p>If you haven't already, you should have read the <a href="save.html">Save</a> and <a href="delete.html">Delete</a> topics to see how you save and delete relationships.  I'll do a quick summary now to setup the example of accessing our relationships.</p>
+
+<h2>Models</h2>
+<p>Let's use the following Models for our example:</p>
+
+<h3>User</h3>
+
+<code>
+class <var>User</var> extends <samp>DataMapper</samp> {<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;var <kbd>$has_one</kbd> = array("<var>country</var>");<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;function <var>User</var>()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent::<samp>DataMapper()</samp>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<br />
+/* End of file user.php */<br />
+/* Location: ./application/models/user.php */
+</code>
+
+<h3>Country</h3>
+<code>
+class <var>Country</var> extends <samp>DataMapper</samp> {<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;var <kbd>$table</kbd> = "<dfn>countries</dfn>";<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;var <kbd>$has_many</kbd> = array("<var>user</var>");<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;function <var>Country</var>()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent::<samp>DataMapper()</samp>;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<br />
+/* End of file country.php */<br />
+/* Location: ./application/models/country.php */
+</code>
+
+<p>Looking above, we can see that a user can relate to only one country but a country can relate to many users.</p>
+
+<h2>In a Controller</h2>
+<p>First we'll create some users:</p>
+
+<textarea class="textarea" style="width:100%" cols="50" rows="18">
+// Create Users
+$u = new User();
+$u->username = 'Fred Smith';
+$u->email = 'fred@smith.com';
+$u->password = 'apples';
+$u->save();
+		
+$u = new User();
+$u->username = 'Jayne Doe';
+$u->email = 'jayne@doe.com';
+$u->password = 'poppies';
+$u->save();
+		
+$u = new User();
+$u->username = 'Joe Public';
+$u->email = 'joe@public.com';
+$u->password = 'rockets';
+$u->save();
+</textarea>
+
+<p>Now a few groups:</p>
+
+<textarea class="textarea" style="width:100%" cols="50" rows="12">
+// Create Groups
+$g = new Group();
+$g->name = 'Administrator';
+$g->save();
+		
+$g = new Group();
+$g->name = 'Moderator';
+$g->save();
+		
+$g = new Group();
+$g->name = 'Member';
+$g->save();
+</textarea>
+
+<p>With data to play around with, we'll get user Fred Smith and relate him to the Administrator group:</p>
+
+<textarea class="textarea" style="width:100%" cols="50" rows="17">
+// Get Fred Smith
+$u = new User();
+$u->where('username', 'Fred Smith')->get();
+
+// Get Administrator Group
+$g = new Group();
+$g->where('name', 'Administrator')->get();
+
+// Here's where we make Fred an Administrator, and it's quite easy!
+$u->save($g);
+
+// We've decided Fred should be a Moderator instead so we'll change the Group to Moderator
+$g->where('name', 'Moderator')->get();
+
+// And then we'll update Fred's relation so he's a Moderator
+// Since the User model "has one" Country, it will overwrite the existing relation
+$u->save($g);
+</textarea>
+
+<p>It's easy to add multiple relations as well. We'll add users Jayne Doe and Joe Public to the Member group:</p>
+
+<textarea class="textarea" style="width:100%" cols="50" rows="10">
+// Get users Jayne Doe and Joe Public
+$u = new User();
+$u->where('username', 'Jayne Doe')->where('username', 'Joe Public')->get();
+
+// Get Member Group
+$g = new Group();
+$g->where('name', 'Member')->get();
+
+// Now we'll add both Jayne and Joe to the Member Group
+$g->save($u->all);
+</textarea>
+
+
+<h2>Finally the Accessing</h2>
+
+<p>Now that we understand what our relationships currently are, we can look at how to access them.</p>
+
+<p>To access a relationship, you use the singular name of the related object, in lowercase, as though it is a property of the current object.  To demonstrate, we'll look at which group Fred is related to.  From the user objects point of view we're expecting only one result so we can just grab all related groups.</p>
+
+<textarea class="textarea" style="width:100%" cols="50" rows="9">
+// Get Fred
+$u = new User();
+$u->where('username', 'Fred Smith')->get();
+
+// Get the related group
+$u->group->get();
+
+// Show which Group Fred is in
+echo '<p>' . $u->group->name . '</p>';
+</textarea>
+
+<p>As you can see, we populated the related object in the same way we do normal objects (read <a href="get.html">Get</a> for more information) before accessing the values themselves.  Now we'll look at which users are related to the Member Group.  From the groups point of view, there may be one or more users.  We know it has 2 users since we added them.  The related objects are fully functional DataMapper objects.  You can do all the usual get, save and delete actions on them.  Since we expect multiple related objects, we'll use the related all list.</p>
+
+<textarea class="textarea" style="width:100%" cols="50" rows="19">
+// Get Member Group
+$g = new Group();
+$g->where('name', 'Member')->get();
+
+// Get the related users
+$g->user->get();
+
+// Loop through the Member groups related users
+foreach ($g->user->all as $u)
+{
+	echo '<p>' . $u->username . '</p>';
+	
+	// We don't have to stop here, we can do any DataMapper functions we want on these objects
+	if ($u->username == "Joe Public")
+	{
+		$u->username = "Joe Private";
+		$u->save();
+	}
+}
+</textarea>
+
+<p>You can dig as deep as you want with the related items.  For example:</p>
+
+<textarea class="textarea" style="width:100%" cols="50" rows="27">
+// Get Fred and add him to the Member Group (yep, downgrading him again!)
+$u = new User();
+$u->where('username', 'Fred Smith')->get();
+
+$g = new Group();
+$g->where('name', 'Member')->get();
+
+$u->save($g);
+
+// Get Jayne Doe
+$u->where('username', 'Jayne Doe')->get();
+
+// Rather than populating our related group, and its related users outside of the loop,
+// we can instead use chaining and do it inside.  Since our current user has one group,
+// we wont need to loop through group->get()->all as we do the following related users.
+
+// Look at which group she is related to and then what other users are related to the group
+foreach ($u->group->get()->user->get()->all as $user)
+{
+
+	// Don't show if it is Jayne
+	if ($user->id != $u->id)
+	{
+		// This will show Fred Smith the first time through, and then Joe Private
+		echo '<p>' . $u->username . '</p>';
+	}
+}
+</textarea>
+
+<p>I highly recommend you checkout the <a href="examples.html">Usage Examples</a> as they go into further depth on Accessing Relationships.</p>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+Previous Topic:&nbsp;&nbsp;<a href="validate.html">Validate</a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href="savingrelations.html">Saving Relationships</a>
+</p>
+<p><a href="http://stensi.com">DataMapper</a> &nbsp;&middot;&nbsp; Copyright &#169; 2008 &nbsp;&middot;&nbsp; <a href="http://stensi.com/">Simon Stenhouse</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006-2008 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">Ellislab, Inc.</a></p>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagepath: ''
+		});
+
+	});	
+//-->
+</script>
+</body>
+</html>

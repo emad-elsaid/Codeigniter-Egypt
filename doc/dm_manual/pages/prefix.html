@@ -1,0 +1,438 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Setting up Table Prefixes : DataMapper User Guide</title>
+
+<style type='text/css' media='all'>@import url('../css/userguide.css');</style>
+<link rel='stylesheet' type='text/css' media='all' href='../css/userguide.css' />
+
+<meta http-equiv='expires' content='-1' />
+<meta http-equiv= 'pragma' content='no-cache' />
+<meta name='robots' content='all' />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="http://stensi.com/">DataMapper Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Setting up Table Prefixes
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Setting up Table Prefixes</h1>
+
+<p>The final step of the <a href="installation.html">Installation Instructions</a> asks you to make sure you set the <kbd>dbprefix</kbd> in your database settings to an empty string. The reason for this is because DataMapper has its own way of managing prefixing, giving some added flexibility as well.</p>
+
+<p>If you don't plan on using prefixes, go right ahead and skip to the <a href="relationtypes.html">Relationship Types</a> section.</p>
+
+<h2>Prefix Settings</h2>
+
+<p>There's a few ways you can define your prefixes, with the use of the <kbd>$prefix</kbd> and <kbd>$join_prefix</kbd> class variables.</p>
+
+<ul>
+	<li><kbd>$prefix</kbd> - If set, will require all tables (both normal and joining tables) to have this prefix.</li>
+	<li><kbd>$join_prefix</kbd> - If set, will require all joining tables to have this prefix (overrides <kbd>$prefix</kbd>).</li>
+</ul>
+
+<p>To make all your DataMapper models use the same prefixes, I recommend setting the prefixes in the main DataMapper model (<dfn>datamapper.php</dfn>), rather than setting the same prefixes in all of them.  If you do this, you can still override the prefix for individual models by setting the prefix within them.</p>
+
+<h2>Prefix Only</h2>
+
+<p>Let's go with the assumption that we've set our prefix up like so, and it applies to <strong>all</strong> of our models:</p>
+
+<code>
+var $prefix = "ci_";<br />
+var $join_prefix = "";
+</code>
+
+<p>Using the first group of tables from the <a href="database.html">Database Tables</a> section, those being <strong>countries</strong>, <strong>countries_users</strong> and <strong>users</strong>, this is how they would be changed to work with the above set prefix:</p>
+
+<h3>ci_countries</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:25%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>code</th>
+	<th>name</th>
+</tr>
+<tr>
+	<td class="td">12</td>
+	<td class="td">AM</td>
+	<td class="td">Armenia</td>
+</tr>
+<tr>
+	<td class="td">13</td>
+	<td class="td">AW</td>
+	<td class="td">Aruba</td>
+</tr>
+<tr>
+	<td class="td">14</td>
+	<td class="td">AU</td>
+	<td class="td">Australia</td>
+</tr>
+<tr>
+	<td class="td">15</td>
+	<td class="td">AT</td>
+	<td class="td">Austria</td>
+</tr>
+</table>
+
+<h3>ci_countries_users</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:20%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>country_id</th>
+	<th>user_id</th>
+</tr>
+<tr>
+	<td class="td">1</td>
+	<td class="td">14</td>
+	<td class="td">7</td>
+</tr>
+<tr>
+	<td class="td">1</td>
+	<td class="td">12</td>
+	<td class="td">8</td>
+</tr>
+</table>
+
+<h3>ci_users</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:25%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>username</th>
+	<th>password</th>
+	<th>email</th>
+
+</tr>
+<tr>
+	<td class="td">7</td>
+	<td class="td">Foo</td>
+	<td class="td">ec773c1da6f96b0265d76fa0a53db697e66a8eea</td>
+	<td class="td">foo@bar.com</td>
+</tr>
+<tr>
+	<td class="td">8</td>
+	<td class="td">Baz</td>
+	<td class="td">383f27f548397ea123ec444505ef4c7cd993dbf6</td>
+	<td class="td">baz@qux.com</td>
+</tr>
+</table>
+
+<p>You'll notice that only the table names were affected, including the joining table's name, and that prefixing has no affect on the field names.</p>
+
+<h2>Both Prefixes</h2>
+
+<p>Let's change our prefixes so we're setting a different prefix for our joining tables:</p>
+
+<code>
+var $prefix = "normal_";<br />
+var $join_prefix = "join_";
+</code>
+
+<h3>normal_countries</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:25%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>code</th>
+	<th>name</th>
+</tr>
+<tr>
+	<td class="td">12</td>
+	<td class="td">AM</td>
+	<td class="td">Armenia</td>
+</tr>
+<tr>
+	<td class="td">13</td>
+	<td class="td">AW</td>
+	<td class="td">Aruba</td>
+</tr>
+<tr>
+	<td class="td">14</td>
+	<td class="td">AU</td>
+	<td class="td">Australia</td>
+</tr>
+<tr>
+	<td class="td">15</td>
+	<td class="td">AT</td>
+	<td class="td">Austria</td>
+</tr>
+</table>
+
+<h3>join_countries_users</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:20%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>country_id</th>
+	<th>user_id</th>
+</tr>
+<tr>
+	<td class="td">1</td>
+	<td class="td">14</td>
+	<td class="td">7</td>
+</tr>
+<tr>
+	<td class="td">1</td>
+	<td class="td">12</td>
+	<td class="td">8</td>
+</tr>
+</table>
+
+<h3>normal_users</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:25%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>username</th>
+	<th>password</th>
+	<th>email</th>
+
+</tr>
+<tr>
+	<td class="td">7</td>
+	<td class="td">Foo</td>
+	<td class="td">ec773c1da6f96b0265d76fa0a53db697e66a8eea</td>
+	<td class="td">foo@bar.com</td>
+</tr>
+<tr>
+	<td class="td">8</td>
+	<td class="td">Baz</td>
+	<td class="td">383f27f548397ea123ec444505ef4c7cd993dbf6</td>
+	<td class="td">baz@qux.com</td>
+</tr>
+</table>
+
+
+<h2>Join Prefix Only</h2>
+<p>Now let's change it so we're only prefixing our joining table's, leaving our normal tables without a prefix:</p>
+
+<code>
+var $prefix = "";<br />
+var $join_prefix = "join_";
+</code>
+
+
+<h3>countries</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:25%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>code</th>
+	<th>name</th>
+</tr>
+<tr>
+	<td class="td">12</td>
+	<td class="td">AM</td>
+	<td class="td">Armenia</td>
+</tr>
+<tr>
+	<td class="td">13</td>
+	<td class="td">AW</td>
+	<td class="td">Aruba</td>
+</tr>
+<tr>
+	<td class="td">14</td>
+	<td class="td">AU</td>
+	<td class="td">Australia</td>
+</tr>
+<tr>
+	<td class="td">15</td>
+	<td class="td">AT</td>
+	<td class="td">Austria</td>
+</tr>
+</table>
+
+<h3>join_countries_users</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:20%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>country_id</th>
+	<th>user_id</th>
+</tr>
+<tr>
+	<td class="td">1</td>
+	<td class="td">14</td>
+	<td class="td">7</td>
+</tr>
+<tr>
+	<td class="td">1</td>
+	<td class="td">12</td>
+	<td class="td">8</td>
+</tr>
+</table>
+
+<h3>users</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:25%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>username</th>
+	<th>password</th>
+	<th>email</th>
+
+</tr>
+<tr>
+	<td class="td">7</td>
+	<td class="td">Foo</td>
+	<td class="td">ec773c1da6f96b0265d76fa0a53db697e66a8eea</td>
+	<td class="td">foo@bar.com</td>
+</tr>
+<tr>
+	<td class="td">8</td>
+	<td class="td">Baz</td>
+	<td class="td">383f27f548397ea123ec444505ef4c7cd993dbf6</td>
+	<td class="td">baz@qux.com</td>
+</tr>
+</table>
+
+
+<h2>Combination Prefix</h2>
+
+<p>As mentioned earlier, you can set specific prefixes for individual models.  If we had the following prefixes setup to apply to <strong>all</strong> of our models, by setting it in the main DataMapper model (<dfn>datamapper.php</dfn>):</p>
+
+<code>
+var $prefix = "normal_";<br />
+var $join_prefix = "join_";
+</code>
+
+<p>And then had the following in our <strong>users</strong> model:</p>
+
+<code>
+var $prefix = "special_";<br />
+</code>
+
+<p class="important"><strong>Note:</strong> All joining tables must use the same prefix, so you should not override the <kbd>$join_prefix</kbd> with a different value if it is already set.</p>
+
+<p>The tables would end up as:</p>
+
+<h3>normal_countries</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:25%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>code</th>
+	<th>name</th>
+</tr>
+<tr>
+	<td class="td">12</td>
+	<td class="td">AM</td>
+	<td class="td">Armenia</td>
+</tr>
+<tr>
+	<td class="td">13</td>
+	<td class="td">AW</td>
+	<td class="td">Aruba</td>
+</tr>
+<tr>
+	<td class="td">14</td>
+	<td class="td">AU</td>
+	<td class="td">Australia</td>
+</tr>
+<tr>
+	<td class="td">15</td>
+	<td class="td">AT</td>
+	<td class="td">Austria</td>
+</tr>
+</table>
+
+<h3>join_countries_users</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:20%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>country_id</th>
+	<th>user_id</th>
+</tr>
+<tr>
+	<td class="td">1</td>
+	<td class="td">14</td>
+	<td class="td">7</td>
+</tr>
+<tr>
+	<td class="td">1</td>
+	<td class="td">12</td>
+	<td class="td">8</td>
+</tr>
+</table>
+
+<h3>special_users</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:25%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>username</th>
+	<th>password</th>
+	<th>email</th>
+
+</tr>
+<tr>
+	<td class="td">7</td>
+	<td class="td">Foo</td>
+	<td class="td">ec773c1da6f96b0265d76fa0a53db697e66a8eea</td>
+	<td class="td">foo@bar.com</td>
+</tr>
+<tr>
+	<td class="td">8</td>
+	<td class="td">Baz</td>
+	<td class="td">383f27f548397ea123ec444505ef4c7cd993dbf6</td>
+	<td class="td">baz@qux.com</td>
+</tr>
+</table>
+
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+Next Topic:&nbsp;&nbsp;<a href="models.html">Database Models</a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href="relationtypes.html">Relationship Types</a>
+</p>
+<p><a href="http://stensi.com">DataMapper</a> &nbsp;&middot;&nbsp; Copyright &#169; 2008 &nbsp;&middot;&nbsp; <a href="http://stensi.com/">Simon Stenhouse</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006-2008 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">Ellislab, Inc.</a></p>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagepath: ''
+		});
+
+	});	
+//-->
+</script>
+</body>
+</html>
