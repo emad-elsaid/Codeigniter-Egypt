@@ -1,0 +1,18 @@
+--------------------------------------------------------
+CodeIgniter+DataMapper+Dojo Toolkit Package
+--------------------------------------------------------
+this package contains a :
+PHP framework: Codeigniter 1.7.1 + manual
+PHP dataMapper: DataMapper 1.6.0 + manual
+javascript toolkit: DojoToolkit 1.2.3
+
+it has everything you need , 
+and codeigniter is made to consider the application folder as the root folder for
+easy use ,
+ and datamapper is installed in the system folder not the aplication folder as said in the manual
+
+for any ideas or problems please contact the packager :
+Packager: Blaze Boy , E-mail: Blazeeboy@gmail.com
+
+This Package can be downloaded from http://blazeeboy.wordpress.com
+
