@@ -7,7 +7,7 @@ class Layout extends Content {
 	}
 	
 	function cells(){
-		$c = $this->load->view($this->path,array('mode'=>'config'),TRUE);
+		$c = ($this->path!='' AND $this->path!=NULL)? $this->load->view($this->path,array('mode'=>'config'),TRUE) : 0;
 		return intval($c);
 	}
 }

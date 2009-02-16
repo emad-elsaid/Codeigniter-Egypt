@@ -7,6 +7,6 @@ class Page extends Controller{
 	
 	function index(){
 		$l = new Layout();
-		print_r($l->cells());
+		//print_r($l->cells());
 	}
 }
