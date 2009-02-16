@@ -10,7 +10,12 @@
 |
 */
 
-
+$hook['post_controller_constructor'] = array(
+                                'class'    => '',
+                                'function' => 'init_user',
+                                'filename' => 'user.php',
+                                'filepath' => 'hooks',
+                                );
 
 /* End of file hooks.php */
 /* Location: ./system/application/config/hooks.php */
