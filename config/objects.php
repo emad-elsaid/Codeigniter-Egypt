@@ -20,7 +20,7 @@ $config['objects'] = array(
 
 	'section' => array(
 		'name' => array( 'type'=>'LONGTEXT') ,
-		'parent' => array( 'type'=>'BIGINT','null'=>TRUE ),
+		'parent_section' => array( 'type'=>'BIGINT','null'=>TRUE ),
 		'sort' => array( 'type'=>'INT','null'=>TRUE ),
 		'view' => array( 'type'=>'LONGTEXT','null'=>TRUE),
 		'add' => array( 'type'=>'LONGTEXT','null'=>TRUE),
