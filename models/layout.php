@@ -22,6 +22,20 @@ class Layout extends Content {
 		}
 	}
 	
+	function delete( $object='' )
+	{
+		if( empty($object) )
+		{
+			foreach($this->content->get() as $item ){
+				$temp = new ($item->type)();
+				$temp->get_by_id( $item->id );
+				$temp->delete();
+			}
+		}
+		
+		return parent::delete( $object );
+	}
+	
 	/*function children($section_id,$parent,$cell){
 		
 		$cur_sec = new Section();
