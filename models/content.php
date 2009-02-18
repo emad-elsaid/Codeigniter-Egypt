@@ -39,4 +39,12 @@ class Content extends DataMapper {
 		return parent::save( $object );
 	}
 	
+	function render( $text='' ){
+		
+		if( ! (empty($this->view)  or perm_chck( $this->view )) )
+			$text='';
+		
+		
+		return $text;
+	}
 }

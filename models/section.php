@@ -8,7 +8,7 @@ class Section extends DataMapper {
         parent::DataMapper();
     }
 	
-	function get($limit,$offset)
+	function get($limit='',$offset='')
 	{	
 		
 		$c = new Section();

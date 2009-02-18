@@ -9,7 +9,6 @@ class Page extends Controller
 	
 	function index()
 	{
-		$s = new section();
-		$s->name = '';
+		echo "dghgkjdhgdjkghdjkgsd";
 	}
 }
