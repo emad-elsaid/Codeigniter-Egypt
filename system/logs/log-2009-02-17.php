@@ -528,3 +528,30 @@ DEBUG - 2009-02-17 19:43:12 --> Helper loaded: security_helper
 DEBUG - 2009-02-17 19:43:12 --> Config file loaded: config/datamapper.php
 DEBUG - 2009-02-17 19:43:12 --> Final output sent to browser
 DEBUG - 2009-02-17 19:43:12 --> Total execution time: 0.4076
+DEBUG - 2009-02-17 20:36:57 --> Config Class Initialized
+DEBUG - 2009-02-17 20:36:57 --> Hooks Class Initialized
+DEBUG - 2009-02-17 20:36:57 --> URI Class Initialized
+DEBUG - 2009-02-17 20:36:57 --> No URI present. Default controller set.
+DEBUG - 2009-02-17 20:36:57 --> Router Class Initialized
+DEBUG - 2009-02-17 20:36:57 --> Output Class Initialized
+DEBUG - 2009-02-17 20:36:57 --> Input Class Initialized
+DEBUG - 2009-02-17 20:36:57 --> Global POST and COOKIE data sanitized
+DEBUG - 2009-02-17 20:36:57 --> Language Class Initialized
+DEBUG - 2009-02-17 20:36:57 --> Loader Class Initialized
+DEBUG - 2009-02-17 20:36:57 --> Config file loaded: config/objects.php
+DEBUG - 2009-02-17 20:36:57 --> Config file loaded: config/vunsy_config.php
+DEBUG - 2009-02-17 20:36:57 --> Helper loaded: perm_helper
+DEBUG - 2009-02-17 20:36:58 --> Database Driver Class Initialized
+DEBUG - 2009-02-17 20:36:58 --> Session Class Initialized
+DEBUG - 2009-02-17 20:36:58 --> Helper loaded: string_helper
+DEBUG - 2009-02-17 20:36:58 --> Session routines successfully run
+DEBUG - 2009-02-17 20:36:58 --> Controller Class Initialized
+DEBUG - 2009-02-17 20:36:58 --> Helper loaded: form_helper
+DEBUG - 2009-02-17 20:36:58 --> Form Validation Class Initialized
+DEBUG - 2009-02-17 20:36:58 --> Language file loaded: language/english/form_validation_lang.php
+DEBUG - 2009-02-17 20:36:58 --> Language file loaded: language/english/datamapper_lang.php
+DEBUG - 2009-02-17 20:36:58 --> Helper loaded: inflector_helper
+DEBUG - 2009-02-17 20:36:58 --> Helper loaded: security_helper
+DEBUG - 2009-02-17 20:36:58 --> Config file loaded: config/datamapper.php
+DEBUG - 2009-02-17 20:36:58 --> Final output sent to browser
+DEBUG - 2009-02-17 20:36:58 --> Total execution time: 0.4959

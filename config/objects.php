@@ -2,7 +2,7 @@
 
 $config['objects'] = array(
 	'content' => array(
-		'section' => array( 'type'=>'BIGINT','null'=>TRUE ),
+		//'section' => array( 'type'=>'BIGINT','null'=>TRUE ),
 		'subsection' => array( 'type'=>'TINYINT' ,'default'=>TRUE),
 		//'parent' => array( 'type'=>'BIGINT','null'=>TRUE ),
 		'cell' => array( 'type'=>'TINYINT','null'=>TRUE ),
