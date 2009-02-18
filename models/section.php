@@ -10,7 +10,6 @@ class Section extends DataMapper {
 	
 	function get($limit,$offset)
 	{	
-		parent::get($limit,$offset);
 		
 		$c = new Section();
 		$c->get_by_id( $this->parent_section );
@@ -22,6 +21,8 @@ class Section extends DataMapper {
 			array_push( $this->parents, $c );
 			$c = $c->get_by_id( $this->parent_section );	
 		}
+		
+		return parent::get($limit,$offset);
 	}
 	
 	function save( $object= '' )
@@ -74,4 +75,99 @@ class Section extends DataMapper {
 		
 	}
 	
+	function attach( $object='', $parent='', $cell='', $sort='' )
+	{
+		if(! empty($object) )
+		{
+			// synchronyze the cell and sort numbers
+			// to prevent paradox
+			if( empty($cell)) 
+				$cell = $object->cell;
+			else
+				$object->cell = $cell;
+			if( empty($sort))
+				$sort = $object->sort;
+			else
+				$object->sort = $sort;
+			
+			// check if that place it took
+			$cont = new Content();
+			$cont->where_relate_section('id',$this->id);//same section
+			if(!empty($parent))
+				$cont->where_related($parent);//same parent
+			$cont->where('cell',$cell);// same cell
+			$cont->where('sort',$sort);//greater sort
+			$cont->get();//get them to process
+			
+			// if that content object exists then that place is taken
+			// so we have to get a place for it
+			if( $cont->exists() )
+			{
+				// put the content in it's place require change all it's 
+				// sisters that has a greater sort number to be increased
+				// get all this content belong to this parent and this section
+				// and the same cell and has a sort number greater that this
+				// sort number
+				$cont->where_relate_section('id',$this->id);//same section
+				if(!empty($parent))
+					$cont->where_related($parent);//same parent
+				$cont->where('cell',$cell);// same cell
+				$cont->where('sort >=',$sort);//greater sort
+				$cont->get();//get them to process
+				foreach( $cont->all as $item )
+				{
+					$item->sort++;
+					$item->save();
+				}
+				
+			}
+			// save relation to the section
+			$this->save($object);
+			
+			//save relation to the parent
+			$parent->save($object);
+			
+			//save the object itself
+			$object->save();
+			
+		}
+	}
+	
+	function deattach( $object='')
+	{
+		$l = new Layout();
+		$l->where_related($object)->get();
+		
+		$l->delete( $object );
+		$this->delete( $object );
+		
+		$cont = new Content();
+		$cont->where_relate_section('id',$this->id);//same section
+		$cont->where_related($l);//same parent
+		$cont->where('cell',$object->cell);// same cell
+		$cont->where('sort',$object->sort);//greater sort
+		$cont->get();//get them to process
+		
+		// if that content object exists then that place is taken
+		// so we have to get a place for it
+		if(! $cont->exists() )
+		{
+			// put the content in it's place require change all it's 
+			// sisters that has a greater sort number to be increased
+			// get all this content belong to this parent and this section
+			// and the same cell and has a sort number greater that this
+			// sort number
+			$cont->where_relate_section('id',$this->id);//same section
+			$cont->where_related($l);//same parent
+			$cont->where('cell',$object->cell);// same cell
+			$cont->where('sort >',$object->sort);//greater sort
+			$cont->get();//get them to process
+			foreach( $cont->all as $item )
+			{
+				$item->sort--;
+				$item->save();
+			}
+			
+		}
+	}
 }
