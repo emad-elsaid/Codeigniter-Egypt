@@ -1140,3 +1140,213 @@ DEBUG - 2009-02-19 20:53:11 --> Controller Class Initialized
 DEBUG - 2009-02-19 20:53:11 --> DB Transaction Failure
 ERROR - 2009-02-19 20:53:11 --> Query error: Table 'vunsy.content_section' doesn't exist
 DEBUG - 2009-02-19 20:53:11 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2009-02-19 23:38:59 --> Config Class Initialized
+DEBUG - 2009-02-19 23:38:59 --> Hooks Class Initialized
+DEBUG - 2009-02-19 23:38:59 --> URI Class Initialized
+DEBUG - 2009-02-19 23:38:59 --> No URI present. Default controller set.
+DEBUG - 2009-02-19 23:38:59 --> Router Class Initialized
+DEBUG - 2009-02-19 23:38:59 --> Output Class Initialized
+DEBUG - 2009-02-19 23:38:59 --> Input Class Initialized
+DEBUG - 2009-02-19 23:38:59 --> Global POST and COOKIE data sanitized
+DEBUG - 2009-02-19 23:38:59 --> Language Class Initialized
+DEBUG - 2009-02-19 23:38:59 --> Loader Class Initialized
+DEBUG - 2009-02-19 23:38:59 --> Config file loaded: config/vunsy_config.php
+DEBUG - 2009-02-19 23:38:59 --> Helper loaded: perm_helper
+DEBUG - 2009-02-19 23:38:59 --> Database Driver Class Initialized
+DEBUG - 2009-02-19 23:38:59 --> Session Class Initialized
+DEBUG - 2009-02-19 23:38:59 --> Helper loaded: string_helper
+DEBUG - 2009-02-19 23:38:59 --> A session cookie was not found.
+DEBUG - 2009-02-19 23:38:59 --> Session routines successfully run
+DEBUG - 2009-02-19 23:39:00 --> Helper loaded: form_helper
+DEBUG - 2009-02-19 23:39:00 --> Form Validation Class Initialized
+DEBUG - 2009-02-19 23:39:00 --> Language file loaded: language/english/form_validation_lang.php
+DEBUG - 2009-02-19 23:39:00 --> Language file loaded: language/english/datamapper_lang.php
+DEBUG - 2009-02-19 23:39:00 --> Helper loaded: inflector_helper
+DEBUG - 2009-02-19 23:39:00 --> Helper loaded: security_helper
+DEBUG - 2009-02-19 23:39:00 --> Config file loaded: config/datamapper.php
+DEBUG - 2009-02-19 23:39:00 --> Controller Class Initialized
+DEBUG - 2009-02-19 23:39:00 --> DB Transaction Failure
+ERROR - 2009-02-19 23:39:00 --> Query error: Table 'vunsy.section' doesn't exist
+DEBUG - 2009-02-19 23:39:00 --> Language file loaded: language/english/db_lang.php
+DEBUG - 2009-02-19 23:39:23 --> Config Class Initialized
+DEBUG - 2009-02-19 23:39:23 --> Hooks Class Initialized
+DEBUG - 2009-02-19 23:39:23 --> URI Class Initialized
+DEBUG - 2009-02-19 23:39:23 --> Router Class Initialized
+DEBUG - 2009-02-19 23:39:23 --> Output Class Initialized
+DEBUG - 2009-02-19 23:39:23 --> Input Class Initialized
+DEBUG - 2009-02-19 23:39:23 --> Global POST and COOKIE data sanitized
+DEBUG - 2009-02-19 23:39:23 --> Language Class Initialized
+DEBUG - 2009-02-19 23:39:23 --> Loader Class Initialized
+DEBUG - 2009-02-19 23:39:23 --> Config file loaded: config/vunsy_config.php
+DEBUG - 2009-02-19 23:39:23 --> Helper loaded: perm_helper
+DEBUG - 2009-02-19 23:39:23 --> Database Driver Class Initialized
+DEBUG - 2009-02-19 23:39:23 --> Session Class Initialized
+DEBUG - 2009-02-19 23:39:23 --> Helper loaded: string_helper
+DEBUG - 2009-02-19 23:39:23 --> Session routines successfully run
+DEBUG - 2009-02-19 23:39:23 --> Helper loaded: form_helper
+DEBUG - 2009-02-19 23:39:23 --> Form Validation Class Initialized
+DEBUG - 2009-02-19 23:39:23 --> Language file loaded: language/english/form_validation_lang.php
+DEBUG - 2009-02-19 23:39:23 --> Language file loaded: language/english/datamapper_lang.php
+DEBUG - 2009-02-19 23:39:23 --> Helper loaded: inflector_helper
+DEBUG - 2009-02-19 23:39:23 --> Helper loaded: security_helper
+DEBUG - 2009-02-19 23:39:23 --> Config file loaded: config/datamapper.php
+DEBUG - 2009-02-19 23:39:23 --> Controller Class Initialized
+DEBUG - 2009-02-19 23:39:23 --> Database Forge Class Initialized
+DEBUG - 2009-02-19 23:39:23 --> Config file loaded: config/objects.php
+DEBUG - 2009-02-19 23:39:23 --> Database Forge Class Initialized
+DEBUG - 2009-02-19 23:39:24 --> Final output sent to browser
+DEBUG - 2009-02-19 23:39:24 --> Total execution time: 0.4738
+DEBUG - 2009-02-19 23:39:31 --> Config Class Initialized
+DEBUG - 2009-02-19 23:39:31 --> Hooks Class Initialized
+DEBUG - 2009-02-19 23:39:31 --> URI Class Initialized
+DEBUG - 2009-02-19 23:39:31 --> No URI present. Default controller set.
+DEBUG - 2009-02-19 23:39:31 --> Router Class Initialized
+DEBUG - 2009-02-19 23:39:31 --> Output Class Initialized
+DEBUG - 2009-02-19 23:39:31 --> Input Class Initialized
+DEBUG - 2009-02-19 23:39:31 --> Global POST and COOKIE data sanitized
+DEBUG - 2009-02-19 23:39:31 --> Language Class Initialized
+DEBUG - 2009-02-19 23:39:31 --> Loader Class Initialized
+DEBUG - 2009-02-19 23:39:31 --> Config file loaded: config/vunsy_config.php
+DEBUG - 2009-02-19 23:39:31 --> Helper loaded: perm_helper
+DEBUG - 2009-02-19 23:39:31 --> Database Driver Class Initialized
+DEBUG - 2009-02-19 23:39:31 --> Session Class Initialized
+DEBUG - 2009-02-19 23:39:31 --> Helper loaded: string_helper
+DEBUG - 2009-02-19 23:39:31 --> Session routines successfully run
+DEBUG - 2009-02-19 23:39:31 --> Helper loaded: form_helper
+DEBUG - 2009-02-19 23:39:31 --> Form Validation Class Initialized
+DEBUG - 2009-02-19 23:39:31 --> Language file loaded: language/english/form_validation_lang.php
+DEBUG - 2009-02-19 23:39:31 --> Language file loaded: language/english/datamapper_lang.php
+DEBUG - 2009-02-19 23:39:31 --> Helper loaded: inflector_helper
+DEBUG - 2009-02-19 23:39:31 --> Helper loaded: security_helper
+DEBUG - 2009-02-19 23:39:31 --> Config file loaded: config/datamapper.php
+DEBUG - 2009-02-19 23:39:31 --> Controller Class Initialized
+DEBUG - 2009-02-19 23:41:05 --> Config Class Initialized
+DEBUG - 2009-02-19 23:41:05 --> Hooks Class Initialized
+DEBUG - 2009-02-19 23:41:05 --> URI Class Initialized
+DEBUG - 2009-02-19 23:41:05 --> No URI present. Default controller set.
+DEBUG - 2009-02-19 23:41:05 --> Router Class Initialized
+DEBUG - 2009-02-19 23:41:05 --> Output Class Initialized
+DEBUG - 2009-02-19 23:41:05 --> Input Class Initialized
+DEBUG - 2009-02-19 23:41:05 --> Global POST and COOKIE data sanitized
+DEBUG - 2009-02-19 23:41:05 --> Language Class Initialized
+DEBUG - 2009-02-19 23:41:05 --> Loader Class Initialized
+DEBUG - 2009-02-19 23:41:05 --> Config file loaded: config/vunsy_config.php
+DEBUG - 2009-02-19 23:41:05 --> Helper loaded: perm_helper
+DEBUG - 2009-02-19 23:41:05 --> Database Driver Class Initialized
+DEBUG - 2009-02-19 23:41:05 --> Session Class Initialized
+DEBUG - 2009-02-19 23:41:05 --> Helper loaded: string_helper
+DEBUG - 2009-02-19 23:41:05 --> Session routines successfully run
+DEBUG - 2009-02-19 23:41:05 --> Helper loaded: form_helper
+DEBUG - 2009-02-19 23:41:05 --> Form Validation Class Initialized
+DEBUG - 2009-02-19 23:41:05 --> Language file loaded: language/english/form_validation_lang.php
+DEBUG - 2009-02-19 23:41:05 --> Language file loaded: language/english/datamapper_lang.php
+DEBUG - 2009-02-19 23:41:05 --> Helper loaded: inflector_helper
+DEBUG - 2009-02-19 23:41:05 --> Helper loaded: security_helper
+DEBUG - 2009-02-19 23:41:05 --> Config file loaded: config/datamapper.php
+DEBUG - 2009-02-19 23:41:05 --> Controller Class Initialized
+DEBUG - 2009-02-19 23:41:08 --> Config Class Initialized
+DEBUG - 2009-02-19 23:41:08 --> Hooks Class Initialized
+DEBUG - 2009-02-19 23:41:08 --> URI Class Initialized
+DEBUG - 2009-02-19 23:41:08 --> No URI present. Default controller set.
+DEBUG - 2009-02-19 23:41:08 --> Router Class Initialized
+DEBUG - 2009-02-19 23:41:08 --> Output Class Initialized
+DEBUG - 2009-02-19 23:41:08 --> Input Class Initialized
+DEBUG - 2009-02-19 23:41:08 --> Global POST and COOKIE data sanitized
+DEBUG - 2009-02-19 23:41:08 --> Language Class Initialized
+DEBUG - 2009-02-19 23:41:08 --> Loader Class Initialized
+DEBUG - 2009-02-19 23:41:08 --> Config file loaded: config/vunsy_config.php
+DEBUG - 2009-02-19 23:41:08 --> Helper loaded: perm_helper
+DEBUG - 2009-02-19 23:41:08 --> Database Driver Class Initialized
+DEBUG - 2009-02-19 23:41:08 --> Session Class Initialized
+DEBUG - 2009-02-19 23:41:08 --> Helper loaded: string_helper
+DEBUG - 2009-02-19 23:41:08 --> Session routines successfully run
+DEBUG - 2009-02-19 23:41:08 --> Helper loaded: form_helper
+DEBUG - 2009-02-19 23:41:08 --> Form Validation Class Initialized
+DEBUG - 2009-02-19 23:41:08 --> Language file loaded: language/english/form_validation_lang.php
+DEBUG - 2009-02-19 23:41:08 --> Language file loaded: language/english/datamapper_lang.php
+DEBUG - 2009-02-19 23:41:08 --> Helper loaded: inflector_helper
+DEBUG - 2009-02-19 23:41:08 --> Helper loaded: security_helper
+DEBUG - 2009-02-19 23:41:08 --> Config file loaded: config/datamapper.php
+DEBUG - 2009-02-19 23:41:08 --> Controller Class Initialized
+DEBUG - 2009-02-19 23:43:22 --> Config Class Initialized
+DEBUG - 2009-02-19 23:43:22 --> Hooks Class Initialized
+DEBUG - 2009-02-19 23:43:22 --> URI Class Initialized
+DEBUG - 2009-02-19 23:43:22 --> No URI present. Default controller set.
+DEBUG - 2009-02-19 23:43:22 --> Router Class Initialized
+DEBUG - 2009-02-19 23:43:22 --> Output Class Initialized
+DEBUG - 2009-02-19 23:43:22 --> Input Class Initialized
+DEBUG - 2009-02-19 23:43:22 --> Global POST and COOKIE data sanitized
+DEBUG - 2009-02-19 23:43:22 --> Language Class Initialized
+DEBUG - 2009-02-19 23:43:22 --> Loader Class Initialized
+DEBUG - 2009-02-19 23:43:22 --> Config file loaded: config/vunsy_config.php
+DEBUG - 2009-02-19 23:43:22 --> Helper loaded: perm_helper
+DEBUG - 2009-02-19 23:43:22 --> Database Driver Class Initialized
+DEBUG - 2009-02-19 23:43:22 --> Session Class Initialized
+DEBUG - 2009-02-19 23:43:22 --> Helper loaded: string_helper
+DEBUG - 2009-02-19 23:43:22 --> Session routines successfully run
+DEBUG - 2009-02-19 23:43:22 --> Helper loaded: form_helper
+DEBUG - 2009-02-19 23:43:22 --> Form Validation Class Initialized
+DEBUG - 2009-02-19 23:43:22 --> Language file loaded: language/english/form_validation_lang.php
+DEBUG - 2009-02-19 23:43:22 --> Language file loaded: language/english/datamapper_lang.php
+DEBUG - 2009-02-19 23:43:22 --> Helper loaded: inflector_helper
+DEBUG - 2009-02-19 23:43:22 --> Helper loaded: security_helper
+DEBUG - 2009-02-19 23:43:22 --> Config file loaded: config/datamapper.php
+DEBUG - 2009-02-19 23:43:22 --> Controller Class Initialized
+DEBUG - 2009-02-19 23:43:22 --> File loaded: /home/blaze/vunsy/system/application/views/text.php
+DEBUG - 2009-02-19 23:43:22 --> Final output sent to browser
+DEBUG - 2009-02-19 23:43:22 --> Total execution time: 0.5395
+DEBUG - 2009-02-19 23:45:49 --> Config Class Initialized
+DEBUG - 2009-02-19 23:45:49 --> Hooks Class Initialized
+DEBUG - 2009-02-19 23:45:49 --> URI Class Initialized
+DEBUG - 2009-02-19 23:45:49 --> Router Class Initialized
+DEBUG - 2009-02-19 23:45:49 --> Output Class Initialized
+DEBUG - 2009-02-19 23:45:49 --> Input Class Initialized
+DEBUG - 2009-02-19 23:45:49 --> Global POST and COOKIE data sanitized
+DEBUG - 2009-02-19 23:45:49 --> Language Class Initialized
+DEBUG - 2009-02-19 23:45:49 --> Loader Class Initialized
+DEBUG - 2009-02-19 23:45:49 --> Config file loaded: config/vunsy_config.php
+DEBUG - 2009-02-19 23:45:49 --> Helper loaded: perm_helper
+DEBUG - 2009-02-19 23:45:49 --> Database Driver Class Initialized
+DEBUG - 2009-02-19 23:45:49 --> Session Class Initialized
+DEBUG - 2009-02-19 23:45:49 --> Helper loaded: string_helper
+DEBUG - 2009-02-19 23:45:49 --> Session routines successfully run
+DEBUG - 2009-02-19 23:45:49 --> Helper loaded: form_helper
+DEBUG - 2009-02-19 23:45:49 --> Form Validation Class Initialized
+DEBUG - 2009-02-19 23:45:49 --> Language file loaded: language/english/form_validation_lang.php
+DEBUG - 2009-02-19 23:45:49 --> Language file loaded: language/english/datamapper_lang.php
+DEBUG - 2009-02-19 23:45:49 --> Helper loaded: inflector_helper
+DEBUG - 2009-02-19 23:45:49 --> Helper loaded: security_helper
+DEBUG - 2009-02-19 23:45:49 --> Config file loaded: config/datamapper.php
+DEBUG - 2009-02-19 23:45:49 --> Controller Class Initialized
+DEBUG - 2009-02-19 23:45:49 --> Database Forge Class Initialized
+DEBUG - 2009-02-19 23:45:49 --> Config file loaded: config/objects.php
+DEBUG - 2009-02-19 23:45:49 --> Database Forge Class Initialized
+DEBUG - 2009-02-19 23:45:49 --> Final output sent to browser
+DEBUG - 2009-02-19 23:45:49 --> Total execution time: 0.5148
+DEBUG - 2009-02-19 23:45:52 --> Config Class Initialized
+DEBUG - 2009-02-19 23:45:52 --> Hooks Class Initialized
+DEBUG - 2009-02-19 23:45:52 --> URI Class Initialized
+DEBUG - 2009-02-19 23:45:52 --> No URI present. Default controller set.
+DEBUG - 2009-02-19 23:45:52 --> Router Class Initialized
+DEBUG - 2009-02-19 23:45:52 --> Output Class Initialized
+DEBUG - 2009-02-19 23:45:52 --> Input Class Initialized
+DEBUG - 2009-02-19 23:45:52 --> Global POST and COOKIE data sanitized
+DEBUG - 2009-02-19 23:45:52 --> Language Class Initialized
+DEBUG - 2009-02-19 23:45:52 --> Loader Class Initialized
+DEBUG - 2009-02-19 23:45:52 --> Config file loaded: config/vunsy_config.php
+DEBUG - 2009-02-19 23:45:52 --> Helper loaded: perm_helper
+DEBUG - 2009-02-19 23:45:53 --> Database Driver Class Initialized
+DEBUG - 2009-02-19 23:45:53 --> Session Class Initialized
+DEBUG - 2009-02-19 23:45:53 --> Helper loaded: string_helper
+DEBUG - 2009-02-19 23:45:53 --> Session routines successfully run
+DEBUG - 2009-02-19 23:45:53 --> Helper loaded: form_helper
+DEBUG - 2009-02-19 23:45:53 --> Form Validation Class Initialized
+DEBUG - 2009-02-19 23:45:53 --> Language file loaded: language/english/form_validation_lang.php
+DEBUG - 2009-02-19 23:45:53 --> Language file loaded: language/english/datamapper_lang.php
+DEBUG - 2009-02-19 23:45:53 --> Helper loaded: inflector_helper
+DEBUG - 2009-02-19 23:45:53 --> Helper loaded: security_helper
+DEBUG - 2009-02-19 23:45:53 --> Config file loaded: config/datamapper.php
+DEBUG - 2009-02-19 23:45:53 --> Controller Class Initialized
+DEBUG - 2009-02-19 23:45:53 --> File loaded: /home/blaze/vunsy/system/application/views/text.php
+DEBUG - 2009-02-19 23:45:53 --> Final output sent to browser
+DEBUG - 2009-02-19 23:45:53 --> Total execution time: 0.4737

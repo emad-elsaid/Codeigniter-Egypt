@@ -9,11 +9,13 @@ class Vunsy {
 		{
 			if( ! isset($CI->uri) )
 				$CI->load->library('URI');
-			$this->section = new Section();
-			$this->section->get_by_id($CI->uri->rsegment(1));
-			if( ! $this->section->exists()){
-				$this->section->get();
+			$sec = new Section();
+			$sec->get_by_id($CI->uri->rsegment(1));
+			if( ! $sec->exists()){
+				$sec->get();
 			}
+			
+			return $sec;
 		}
     }
 	
@@ -67,24 +69,33 @@ class Vunsy {
 		$before_page->sub_section = intval(TRUE);
 		$before_page->cell = 0;
 		$before_page->sort = 0;
+		$before_page->parent_section = $index->id;
 		$before_page->info = 'BEFORE_PAGE_LOCKED';
 		$before_page->save();
-		$index->save( $before_page );
 		
-		$page_head = $before_page->copy();
+		$page_head = new Layout();
+		$page_head->sub_section = intval(TRUE);
+		$page_head->cell = 0;
+		$page_head->sort = 0;
+		$page_head->parent_section = $index->id;
 		$page_head->info = 'PAGE_HEAD_LOCKED';
 		$page_head->save();
-		$index->save($page_head);
 		
-		$page_body = $page_head->copy();
+		$page_body = new Layout();
+		$page_body->sub_section = intval(TRUE);
+		$page_body->cell = 0;
+		$page_body->sort = 0;
+		$page_body->parent_section = $index->id;
 		$page_body->info = 'PAGE_BODY_LOCKED';
 		$page_body->save();
-		$index->save($page_body);
 		
-		$after_page = $page_body->copy();
+		$after_page = new Layout();
+		$after_page->sub_section = intval(TRUE);
+		$after_page->cell = 0;
+		$after_page->sort = 0;
+		$after_page->parent_section = $index->id;
 		$after_page->info = 'AFTER_PAGE_LOCKED';
 		$after_page->save();
-		$index->save($after_page);
 	}
 	
 }

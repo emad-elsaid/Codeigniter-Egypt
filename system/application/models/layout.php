@@ -16,15 +16,17 @@ class Layout extends Content {
 		return intval($c);
 	}
 	
-	function render(){
+	function render()
+	{
 		
+		$CI =& get_instance();
 		// the main render code
 		$cell_number = $this->cells();
 		$layout_content = array();
-		for( $i==0; $i<$cell_number; $i++ )
+		for( $i=0; $i<$cell_number; $i++ )
 		{
 			// getting the contetn in that cell
-			$c_children = $this->children( $this->vunsy->section(), $i );
+			$c_children = $this->children( $CI->vunsy->section(), $i );
 			
 			// text that holds the rendered content
 			$cell_text = '';
@@ -74,7 +76,7 @@ class Layout extends Content {
 	function children($section='',$cell='')
 	{
 		
-		$children_objs = new Content();
+	
 		$par_sec = $section->get_parents();
 		
 		$sql_stat = sprintf(
@@ -83,15 +85,17 @@ class Layout extends Content {
 		if( ! empty($cell) )
 			$sql_stat .= sprintf(" AND `cell`=%s",$cell );
 		if( ! empty($section) )
-			$sql_stat .= sprintf("AND 
+			$sql_stat .= sprintf(" AND 
 			(
 				(`parent_section`=%s)", $section->id );
 				//foreach($par_sec as $sss ){
+					if( count($par_sec) >0 )
 					$sql_stat .= sprintf(" OR (`section` IN (%s) AND `childs`=%s)", implode(',',$par_sec), intval(TRUE));
 				//}
 				$sql_stat = $sql_stat . sprintf("
 			 ) ORDER BY `sort` ASC");
 		
+		$children = new Content();
 		$children->query($sql_stat);
 	
 		/*if( ! empty($cell) )

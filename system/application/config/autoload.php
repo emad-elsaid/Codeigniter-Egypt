@@ -51,7 +51,7 @@ $autoload['libraries'] = array('database','session','vunsy','datamapper');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('perm');
+$autoload['helper'] = array('perm', 'html');
 
 
 /*
