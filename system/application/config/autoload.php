@@ -39,7 +39,7 @@
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','session','vunsy');
+$autoload['libraries'] = array('database','session','vunsy','datamapper');
 
 
 /*
@@ -79,7 +79,7 @@ $autoload['plugin'] = array();
 |
 */
 
-$autoload['config'] = array('objects','vunsy_config');
+$autoload['config'] = array('vunsy_config');
 
 
 /*

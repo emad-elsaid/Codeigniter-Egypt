@@ -1,28 +1,25 @@
 <?php
 class Section extends DataMapper {
 	var $table = 'section';
-	var $has_many = array('content','section');
+	//var $has_many = array('content','section');
 	
     function Section()
     {
         parent::DataMapper();
     }
 	
-	function get($limit='',$offset='')
+	function get_parents()
 	{	
-		
 		$c = new Section();
-		$c->get_by_id( $this->parent_section );
+		$c = $this->clone();
 		
-		$this->parents = array();
-		
-		while( $c->exists() )
+		$parents = array();
+		while( !empty($c->parent_section) )
 		{
-			array_push( $this->parents, $c );
-			$c = $c->get_by_id( $this->parent_section );	
+			$c = $c->get_by_id( $c->parent_section );
+			array_push( $parents, $c );
 		}
-		
-		return parent::get($limit,$offset);
+		return $parents;
 	}
 	
 	function save( $object= '' )
@@ -31,7 +28,7 @@ class Section extends DataMapper {
 		{
 			$s = new Section();
 			$s->where( 'sort >=', $this->sort );
-			$s->where( 'parent', $this->parent_section );
+			$s->where( 'parent_section', $this->parent_section );
 			$s->get();
 			
 			foreach( $s->all as $item )
@@ -50,17 +47,20 @@ class Section extends DataMapper {
 		if(empty($object))
 		{
 			// getting the subsections
-			$this->section->get();
+			$c = new Section();
+			$c->get_where_parent_section( $this->id );
 			// delete all subsections relations
-			$this->delete($this->section->all);
+			$c->delete_all();
 			// delete all children
-			$this->section->delete_all();
+			$cont = new Content();
+			$cont->get_where_parent_section($this->id);
+			$cont->delete_all();
 			
 			// update all the sections sort after that section
 			// that in the same parent section
 			$s = new Section();
 			$s->where( 'sort >', $this->sort );
-			$s->where( 'parent', $this->parent_section );
+			$s->where( 'parent_section', $this->parent_section );
 			$s->get();
 			
 			foreach( $s->all as $item )
@@ -92,9 +92,8 @@ class Section extends DataMapper {
 			
 			// check if that place it took
 			$cont = new Content();
-			$cont->where_relate_section('id',$this->id);//same section
-			//if(!empty($parent))
-				$cont->where_related($parent);//same parent
+			$cont->where('parent_section',$this->id);//same section
+			$cont->where('parent_content',$parent);//same parent
 			$cont->where('cell',$cell);// same cell
 			$cont->where('sort',$sort);//greater sort
 			$cont->get();//get them to process
@@ -108,9 +107,8 @@ class Section extends DataMapper {
 				// get all this content belong to this parent and this section
 				// and the same cell and has a sort number greater that this
 				// sort number
-				$cont->where_relate_section('id',$this->id);//same section
-				//if(!empty($parent))
-					$cont->where_related($parent);//same parent
+				$cont->where('parent_section',$this->id);//same section
+				$cont->where('parent_content',$parent);//same parent
 				$cont->where('cell',$cell);// same cell
 				$cont->where('sort >=',$sort);//greater sort
 				$cont->get();//get them to process
@@ -128,28 +126,21 @@ class Section extends DataMapper {
 			$parent->save($object);
 			
 			//save the object itself
-			//$object->save();
+			$object->save();
 			
 		}
 	}
 	
 	function deattach( $object='' )
-	{
-		
-		// delete relation to the parent and the section
-		$l = new Layout();
-		$l->where_related($object)->get();
-		$l->delete( $object );
-		$this->delete( $object );
-		
+	{	
 		//=========================
 		//normalize the  sort numbers
 		//=========================
 		$cont = new Content();
-		$cont->where_relate_section('id',$this->id);//same section
-		$cont->where_related($l);//same parent
-		$cont->where('cell',$object->cell);// same cell
-		$cont->where('sort',$object->sort);//greater sort
+		$cont->where( 'parent_section',$object->parent_section );//same section
+		$cont->where( 'parent_content',$object->parent_content );//same parent
+		$cont->where( 'cell',$object->cell );// same cell
+		$cont->where( 'sort',$object->sort );//greater sort
 		$cont->get();//get them to process
 		
 		// if that content object exists then 
@@ -160,10 +151,10 @@ class Section extends DataMapper {
 			// we have to push all the content up to fill that hole
 			// these content must me in the same section,parent,cell
 			// and have sort nubmer greater than that content
-			$cont->where_relate_section('id',$this->id);//same section
-			$cont->where_related($l);//same parent
-			$cont->where('cell',$object->cell);// same cell
-			$cont->where('sort >',$object->sort);//greater sort
+			$cont->where( 'parent_section',$object->parent_section );//same section
+			$cont->where( 'parent_content',$object->parent_content );//same parent
+			$cont->where( 'cell',$object->cell );// same cell
+			$cont->where( 'sort >',$object->sort );//greater sort
 			$cont->get();//get them to process
 			foreach( $cont->all as $item )
 			{

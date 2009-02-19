@@ -26,9 +26,10 @@ class Content extends DataMapper {
 	function deattach()
 	{
 		$sec = new Section();
-		$sec->where_related_content('id',$this->id )->get();
+		$sec->get_by_id($this->id );
 		$sec->deattach( $this );
 	}
+	
 	function save( $object = '')
 	{
 		if( empty($object) )
@@ -41,10 +42,43 @@ class Content extends DataMapper {
 	
 	function render( $text='' ){
 		
-		if( ! (empty($this->view)  or perm_chck( $this->view )) )
+		if( ! $this->can_view() )
 			$text='';
-		
-		
+			
 		return $text;
 	}
+	
+	function can_view()
+	{
+		if( ! (empty($this->view)  or perm_chck( $this->view )) )
+			return FALSE;
+		else
+			return TRUE;
+	}
+	
+	function can_edit()
+	{
+		if( perm_chck( $this->edit ) )
+			return TRUE;
+		else
+			return FALSE;
+	}
+	
+	function can_addin()
+	{
+		if( perm_chck( $this->addin ) )
+			return TRUE;
+		else
+			return FALSE;
+	}
+	
+	function can_delete()
+	{
+		if( perm_chck( $this->del ) )
+			return TRUE;
+		else
+			return FALSE;
+	}
+	
+	
 }

@@ -2,12 +2,12 @@
 
 $config['objects'] = array(
 	'content' => array(
-		//'section' => array( 'type'=>'BIGINT','null'=>TRUE ),
+		'parent_content' => array( 'type'=>'BIGINT','null'=>TRUE ),
+		'parent_section' => array( 'type'=>'BIGINT','null'=>TRUE ),
 		'subsection' => array( 'type'=>'TINYINT' ,'default'=>TRUE),
-		//'parent' => array( 'type'=>'BIGINT','null'=>TRUE ),
 		'cell' => array( 'type'=>'TINYINT','null'=>TRUE ),
-		'path' => array( 'type'=>'VARCHAR', 'constraint'=>100,'null'=>TRUE ),
 		'sort' => array( 'type'=>'INT','null'=>TRUE ),
+		'path' => array( 'type'=>'VARCHAR', 'constraint'=>100,'null'=>TRUE ),
 		'view' => array( 'type'=>'LONGTEXT','null'=>TRUE),
 		'addin' => array( 'type'=>'LONGTEXT','null'=>TRUE),
 		'edit' => array( 'type'=>'LONGTEXT','null'=>TRUE),
@@ -19,8 +19,8 @@ $config['objects'] = array(
 
 
 	'section' => array(
-		'name' => array( 'type'=>'LONGTEXT') ,
 		'parent_section' => array( 'type'=>'BIGINT','null'=>TRUE ),
+		'name' => array( 'type'=>'VARCHAR', 'constraint'=>100,'null'=>TRUE) ,
 		'sort' => array( 'type'=>'INT','null'=>TRUE ),
 		'view' => array( 'type'=>'LONGTEXT','null'=>TRUE),
 		'add' => array( 'type'=>'LONGTEXT','null'=>TRUE),
@@ -29,9 +29,9 @@ $config['objects'] = array(
 
 
 	'user' => array(
+		'level' => array( 'type'=>'BIGINT','null'=>TRUE ),
 		'name' => array( 'type'=>'VARCHAR', 'constraint'=>30 ),
 		'password' => array( 'type'=>'VARCHAR', 'constraint'=>50 ),
-		//'level' => array( 'type'=>'TINYINT' ),
 		'lastenter' => array( 'type'=>'VARCHAR', 'constraint'=>14,'null'=>TRUE ),
 		'curenter' => array( 'type'=>'VARCHAR', 'constraint'=>14,'null'=>TRUE ),
 		'email' => array( 'type'=>'VARCHAR', 'constraint'=>50,'null'=>TRUE ),
