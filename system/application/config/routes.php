@@ -45,6 +45,8 @@ $route['scaffolding_trigger'] = "";
 
 $route['(:num)'] = "page/index/$1";
 $route['(:num)/(:any)'] = "page/index/$1/$2";
+$route['login'] = "users/login";
+$route['logout'] = "users/logout";
 
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */

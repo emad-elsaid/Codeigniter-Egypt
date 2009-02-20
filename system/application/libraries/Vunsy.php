@@ -2,7 +2,31 @@
 
 class Vunsy {
 	
-    function section()
+	var $js = array();
+	var $css = array();
+	var $section = '';
+	var $user = '';
+	
+	function Vunsy()
+	{
+		if( $this->installed() )
+		{
+			$CI =& get_instance();
+			
+			// getting the current section 
+			$this->section = $this->get_section();
+			
+			//getting the current user data
+			$this->user = new User();
+			$this->user->from_session();
+			
+			//getting the autoloading css and javascript paths
+			$this->css = $CI->config->item('css');
+			$this->js = $CI->config->item('js');
+		}
+	}
+	
+    function get_section()
     {
 		$CI =& get_instance();
 		if( $this->installed() )
@@ -11,7 +35,8 @@ class Vunsy {
 				$CI->load->library('URI');
 			$sec = new Section();
 			$sec->get_by_id($CI->uri->rsegment(1));
-			if( ! $sec->exists()){
+			if( ! $sec->exists())
+			{
 				$sec->get();
 			}
 			
@@ -54,10 +79,8 @@ class Vunsy {
 				$CI->dbforge->create_table($item);
 				$CI->db->query("ALTER TABLE `".$item."` ADD COLUMN `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT, ADD PRIMARY KEY (`id`)");
 		}
-	}
 	
-	function install_content()
-	{
+		$CI->load->library('datamapper');
 		//adding the default section
 		$index = new Section();
 		$index->paren_section = 0;

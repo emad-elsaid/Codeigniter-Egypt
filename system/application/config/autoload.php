@@ -39,7 +39,7 @@
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','session','vunsy','datamapper');
+$autoload['libraries'] = array('database','session','datamapper','vunsy');
 
 
 /*
@@ -51,7 +51,7 @@ $autoload['libraries'] = array('database','session','vunsy','datamapper');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('perm', 'html');
+$autoload['helper'] = array('perm', 'html','url','page');
 
 
 /*

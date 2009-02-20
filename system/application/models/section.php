@@ -164,4 +164,37 @@ class Section extends DataMapper {
 			
 		}
 	}
+	
+	function can_view()
+	{
+		if( ! (empty($this->view)  or perm_chck( $this->view )) )
+			return FALSE;
+		else
+			return TRUE;
+	}
+	
+	function can_edit()
+	{
+		if( perm_chck( $this->edit ) )
+			return TRUE;
+		else
+			return FALSE;
+	}
+	
+	function can_addin()
+	{
+		if( perm_chck( $this->addin ) )
+			return TRUE;
+		else
+			return FALSE;
+	}
+	
+	function can_delete()
+	{
+		if( perm_chck( $this->del ) )
+			return TRUE;
+		else
+			return FALSE;
+	}
+	
 }

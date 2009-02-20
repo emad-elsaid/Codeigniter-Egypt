@@ -9,6 +9,10 @@ class Page extends Controller
 	
 	function index($section=0)
 	{
+		
+		if(!$this->vunsy->section->can_view())
+			show_error('Access denied');
+		
 		$before_page = new Layout();
 		$before_page->get_by_info( 'BEFORE_PAGE_LOCKED' );
 		$before_page_text = $before_page->render();
@@ -25,6 +29,14 @@ class Page extends Controller
 		$after_page->get_by_info( 'AFTER_PAGE_LOCKED' );
 		$after_page_text = $after_page->render();	
 		
+		$css_text = '';
+		foreach( $this->vunsy->css as $item )
+			$css_text .= "	".link_tag( $item )."\n";
+		
+		$js_text = '';
+		foreach( $this->vunsy->js as $item )
+			$js_text .= "	<script type=\"text/javascript\" src=\"".$item."\" ></script>\n";
+		
 		// Rendering the page 
 		$OUTPUT  = $before_page_text;
 		$OUTPUT .= doctype( $this->config->item('doctype') );
@@ -33,12 +45,14 @@ class Page extends Controller
 					   ."	<title>"
 					  .$this->config->item('site_name')
 					  ." "
-					  .$this->vunsy->section()->name
+					  .$this->vunsy->get_section()->name
 					  ."</title>\n"
 					  ."	<meta http-equiv=\"content-type\" content=\"text/html;charset="
 					  .$this->config->item('charset')
 					  ."\" />\n"
 					  . "	<meta name=\"generator\" content=\"VUNSY system\" />\n"
+					  . $css_text
+					  . $js_text
 					  . $page_head_text
 					  . "\n"
 					  . "</head>\n"
@@ -49,5 +63,15 @@ class Page extends Controller
 					  . $after_page_text;
 		
 		echo $OUTPUT;	
+	}
+	
+	function login()
+	{
+		$this->load->view('login');
+	}
+	
+	function login_action()
+	{
+		
 	}
 }

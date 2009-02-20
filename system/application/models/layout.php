@@ -26,7 +26,7 @@ class Layout extends Content {
 		for( $i=0; $i<$cell_number; $i++ )
 		{
 			// getting the contetn in that cell
-			$c_children = $this->children( $CI->vunsy->section(), $i );
+			$c_children = $this->children( $CI->vunsy->get_section(), $i );
 			
 			// text that holds the rendered content
 			$cell_text = '';
