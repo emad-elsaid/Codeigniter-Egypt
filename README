@@ -1,13 +1,12 @@
---------------------------------------------------------
-CodeIgniter+DataMapper+Dojo Toolkit Package
---------------------------------------------------------
-this package contains a :
-PHP framework: Codeigniter 1.7.1 + manual
-PHP dataMapper: DataMapper 1.6.0 + manual
-javascript toolkit: DojoToolkit 1.2.3
+Vunsy system
+=====================
+is a PHP program that built on codeIgniter and Jquery 
 
-for any ideas or problems please contact the packager :
-Packager: Blaze Boy , E-mail: Blazeeboy@gmail.com
+[The idea]
+the idea is to make a site with fast way debending on the widgets and layouts
+giving permissions to evey content for several things
+viewing, deleting and so.
 
-This Package can be downloaded from http://blazeeboy.wordpress.com
+so as the section has the same thing
+built on it some applications accessible by a task bar like facebook one
 
