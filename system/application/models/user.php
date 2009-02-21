@@ -55,15 +55,18 @@ class User extends DataMapper {
 	
 	function logged()
 	{
-		return ! $this->is_guest();
+		return (! $this->is_guest() );
 	}
 	
 	function login( $username='' ,$password='')
 	{
+		
 		$result = FALSE;
+		$CI =& get_instance();
 		
 		if( empty($username) or empty($password) )
 			return FALSE;
+			
 		// check if it is a normal user
 		$this->where( 'name', $username );
 		$this->where( 'password' , md5($password) );
@@ -73,19 +76,20 @@ class User extends DataMapper {
 		if( $this->exists() )
 		{
 			$result = TRUE;
-			$this->session->set_userdata('id', $this->id);
-			$this->session->set_userdata('level', $this->level);
+			$CI->session->set_userdata('id', $this->id);
+			$CI->session->set_userdata('level', $this->level);
 		}
 		else 
 		{
 			// check if it is the root
-			$g_name = $this->config->item('root');
-			$g_pass = $this->config->item('root_password');
+			$g_name = $CI->config->item('root');
+			$g_pass = $CI->config->item('root_password');
 			if( $username == $g_name and $password== $g_pass )
 			{
 				$result = TRUE;
-				$this->session->set_userdata('id', -1);
-				$this->session->set_userdata('level', -1);
+				$CI->session->set_userdata('mode', 'edit');
+				$CI->session->set_userdata('id', -1);
+				$CI->session->set_userdata('level', -1);
 			}
 		}
 		
@@ -94,5 +98,13 @@ class User extends DataMapper {
 		
 		// return the login result
 		return $result;
+	}
+	
+	function logout()
+	{
+		$CI =& get_instance();
+		$CI->session->set_userdata('id', 0);
+		$CI->session->set_userdata('level', 0);
+		$CI->session->set_userdata('mode', 'view');
 	}
 }

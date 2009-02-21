@@ -11,7 +11,13 @@ if ( ! function_exists('add_js')){
 		else
 		{
 			$CI =& get_instance();
-			array_push( $CI->vunsy->js, $script );
+			if( is_local($script) )
+			{
+				$script = base_url().$script;
+			}
+			
+			if(! in_array($script, $CI->vunsy->js))
+				array_push( $CI->vunsy->js, $script );
 		}
 	}
 }
@@ -27,7 +33,19 @@ if ( ! function_exists('add_css')){
 		else
 		{
 			$CI =& get_instance();
-			array_push( $CI->vunsy->css, $style );
+			
+			if(! in_array($style, $CI->vunsy->css))
+				array_push( $CI->vunsy->css, $style );
 		}
+	}
+}
+
+if ( ! function_exists('is_local')){
+	function is_local( $path )
+	{
+		if( str_split($path,7)=="http://" )
+			return FALSE;
+		else
+			return TRUE;
 	}
 }

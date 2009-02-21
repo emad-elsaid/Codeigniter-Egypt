@@ -11,20 +11,44 @@
 	<script type="text/javascript" src="<?= base_url() ?>jquery/jquery-ui.js" ></script>
 	<script type="text/javascript" >
 	$(document).ready(function(){
-    	$("#dialog").dialog({ closeOnEscape: false , draggable: false , modal: true , resizable: false});
+    	$("#dialog").dialog(
+			{  closeOnEscape: false ,
+				draggable: false ,
+				modal: true ,
+				resizable: false,
+				buttons: {
+					Ok: function(){
+						$('#login').submit();
+					}
+					}
+			});
   	});
 
 	</script>
 </head>
 
-<body class=".ui-helper-reset">
+<body style="font-size: 12px" >
 		<div id="dialog" title="Dialog Title" >
 			<p>
-			<form method="POST" action="<?= site_url('page/login_action') ?>" >
-			<label>User name</label> <input id='user' type="text" ><br />
-			<label>Password</label> <input id='pass' type="text" >
-			<input type="submit" value="Enter" >
+			<?php if( $this->vunsy->user->logged() ){ ?>
+			<div class="ui-state-highlight" >
+				<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+<strong>Logged in</strong></p>
+			</div>
+			<?php }else{ ?>
+			<form method="POST" action="<?= site_url('login') ?>" id="login" >
+			<table>
+				<tr>
+					<td><label>User name</label></td>
+					<td><input name="user" type="text" ></td>
+				</tr>
+				<tr>
+					<td><label>Password</label></td>
+					<td><input name="pass" type="password" ></td>
+				</tr>
+			</table>
 			</form>
+			<?php } ?>
 			</p>
 		</div>
 </body>

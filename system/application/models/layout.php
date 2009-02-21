@@ -23,20 +23,36 @@ class Layout extends Content {
 		// the main render code
 		$cell_number = $this->cells();
 		$layout_content = array();
+		if( $CI->vunsy->edit_mode())
+				$add_button = $CI->load->view('edit_mode/buttons','',TRUE);
+		
 		for( $i=0; $i<$cell_number; $i++ )
 		{
-			// getting the contetn in that cell
+			// getting the content in that cell
 			$c_children = $this->children( $CI->vunsy->get_section(), $i );
 			
 			// text that holds the rendered content
 			$cell_text = '';
+			if( $CI->vunsy->edit_mode())
+				$cell_text = $add_button;
+				
 			foreach( $c_children as $item )
 			{
-				$cellChilds .= $item->render();
+				$cell_text .= $item->render();
+				if( $CI->vunsy->edit_mode())
+					$cell_text .= $add_button;
 			}
 			
 			// put the cell text in it's place in the layout text array
-			$layout_content[ $i ] = $cell_text;
+			if( $CI->vunsy->edit_mode())
+			{
+				$add_button = $CI->load->view('edit_mode/buttons','',TRUE);
+				$cell_text .= $add_button;
+			}
+			if( $CI->vunsy->edit_mode())
+				$layout_content[ $i ] = $CI->load->view('edit_mode/container',array('text'=>$cell_text),TRUE);
+			else
+				$layout_content[ $i ] = $cell_text;
 		}
 		
 		
@@ -57,6 +73,11 @@ class Layout extends Content {
 		{
 			$text = $layout_content[0];
 		}
+		
+		if( $CI->vunsy->edit_mode())
+				$text = $CI->load->view('edit_mode/container',array('text'=>$text),TRUE);
+			else
+				$text = $cell_text;
 		
 		return parent::render($text);
 	}

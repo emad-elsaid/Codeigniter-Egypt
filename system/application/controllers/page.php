@@ -4,7 +4,6 @@ class Page extends Controller
 	function Page()
 	{
 		parent::Controller();
-		//$this->load->library('datamapper');
 	}
 	
 	function index($section=0)
@@ -24,6 +23,8 @@ class Page extends Controller
 		$page_body = new Layout();
 		$page_body->get_by_info( 'PAGE_BODY_LOCKED' );
 		$page_body_text = $page_body->render();
+		if( $this->vunsy->edit_mode()=='edit' )
+				$page_body_text = $this->load->view('edit_mode/buttons','',TRUE).$page_body_text;
 		
 		$after_page = new Layout();
 		$after_page->get_by_info( 'AFTER_PAGE_LOCKED' );
@@ -61,17 +62,7 @@ class Page extends Controller
 					  . "</body>\n"
 					  . "</html>"
 					  . $after_page_text;
-		
 		echo $OUTPUT;	
 	}
 	
-	function login()
-	{
-		$this->load->view('login');
-	}
-	
-	function login_action()
-	{
-		
-	}
 }

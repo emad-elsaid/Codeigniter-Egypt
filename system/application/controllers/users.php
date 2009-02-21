@@ -9,12 +9,26 @@ class Users extends Controller {
 	
 	function login()
 	{
+		if( $this->input->post('user') != NULL )
+		{
+			if( $this->vunsy->user->login
+				( 
+					$this->input->post('user'),
+					$this->input->post('pass')
+				) == TRUE
+			 )
+			{
+			//redirect( index_page() );
+			}
+		}
+		
 		$this->load->view('login');
 	}
 	
-	function login_action()
+	function logout()
 	{
-		
+		$this->vunsy->user->logout();
+		redirect( index_page() );
 	}
 	
 }

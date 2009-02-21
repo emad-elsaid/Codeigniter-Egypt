@@ -6,6 +6,7 @@ class Vunsy {
 	var $css = array();
 	var $section = '';
 	var $user = '';
+	var $mode = '';
 	
 	function Vunsy()
 	{
@@ -20,11 +21,28 @@ class Vunsy {
 			$this->user = new User();
 			$this->user->from_session();
 			
+			// getting the site mode
+			$this->mode = $CI->session->userdata('mode');
+			
 			//getting the autoloading css and javascript paths
 			$this->css = $CI->config->item('css');
 			$this->js = $CI->config->item('js');
 		}
 	}
+	
+	/* function of checking site mode
+	 * 
+	 * */
+	function edit_mode()
+	{
+		return ($this->mode=='edit')? TRUE:FALSE;
+	}
+	
+	function view_mode()
+	{
+		return ($this->mode=='view')? TRUE:FALSE;
+	}
+	
 	
     function get_section()
     {
