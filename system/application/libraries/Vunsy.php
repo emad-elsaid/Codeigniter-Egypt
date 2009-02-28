@@ -27,6 +27,7 @@ class Vunsy {
 			//getting the autoloading css and javascript paths
 			$this->css = $CI->config->item('css');
 			$this->js = $CI->config->item('js');
+			
 		}
 	}
 	

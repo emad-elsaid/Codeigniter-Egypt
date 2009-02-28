@@ -1,3 +1,3 @@
-<div style="border: black 1px solid">
+<div>
 <?= $text ?>
 </div>

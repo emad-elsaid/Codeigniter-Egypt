@@ -2,4 +2,4 @@
 add_js( 'jquery/jquery.js');
 add_css( 'jquery/theme/ui.all.css');
 ?>
-<button>+</button>
+<img src="adminTheme/add.gif" >

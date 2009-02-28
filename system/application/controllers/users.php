@@ -18,7 +18,7 @@ class Users extends Controller {
 				) == TRUE
 			 )
 			{
-			//redirect( index_page() );
+			redirect( );
 			}
 		}
 		
