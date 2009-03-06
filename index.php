@@ -47,7 +47,8 @@
 | END OF USER CONFIGURABLE SETTINGS
 |===============================================================
 */
-
+// vunsy defined constant
+define('APP', $system_folder.'/'.$application_folder.'/');
 
 /*
 |---------------------------------------------------------------
