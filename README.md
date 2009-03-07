@@ -3,6 +3,7 @@ Vunsy system
 is a PHP program that built on codeIgniter and Jquery 
 
 [The idea]
+---
 * the idea is to make a site with fast way debending on the widgets and layouts
 giving permissions to evey content for several things
 viewing, deleting and so.
@@ -12,7 +13,7 @@ built on it some applications accessible by a task bar like facebook one
 
 -----------------------------------------------------------------
 [ Installation ]
-
+---
 * 1- copy the vunsy folder to your web folder
 * 2- files needed to be configured 
 			vunsy/system/application/config/config.php
@@ -24,6 +25,7 @@ built on it some applications accessible by a task bar like facebook one
 	ex: http://localhost/vunsy/index.php/install
 -----------------------------------------------------------------
 [ Running ]
+---
 * 1- normal site: 
 	vunsyURL/index.php
 	ex: http://localhost/vunsy/index.php/install
@@ -35,6 +37,7 @@ built on it some applications accessible by a task bar like facebook one
 	ex: http://localhost/vunsy/index.php/logout
 -----------------------------------------------------------------
 [ Root default logon ]
+---
 * 1- user name: root
 	password: toor
 * you can change it from:
