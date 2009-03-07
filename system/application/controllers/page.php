@@ -71,24 +71,6 @@ class Page extends Controller
 		$after_page_text = $after_page->render();	
 		
 		
-		/**********************************************
-		 *  CAUTION 
-		 * don't ever change this two blocks place
-		 * they are in the right place 
-		 * after all the widgets 
-		 * *********************************************/
-		
-		// rendering the CSS files
-		$css_text = '';
-		foreach( $this->vunsy->css as $item )
-			$css_text .= "	".link_tag( $item )."\n";
-		
-		// rendering the JS files
-		$js_text = '';
-		foreach( $this->vunsy->js as $item )
-			$js_text .= "	<script type=\"text/javascript\" src=\"".$item."\" ></script>\n";
-		
-		
 		/*********************************************************
 		 * display the page content
 		 * i sum all the page content text
@@ -108,8 +90,9 @@ class Page extends Controller
 					  .$this->config->item('charset')
 					  ."\" />\n"
 					  . "	<meta name=\"generator\" content=\"VUNSY system\" />\n"
-					  . $css_text
-					  . $js_text
+					  .  $this->vunsy->css_text()
+					  .  $this->vunsy->js_text()
+					  .  $this->vunsy->dojo_text()
 					  . $page_head_text
 					  . "\n"
 					  . "</head>\n"

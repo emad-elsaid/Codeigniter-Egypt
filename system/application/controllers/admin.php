@@ -10,5 +10,6 @@ class Admin extends Controller {
 	{
 		$config = array( 'name'=>$appname,'page'=>$page );
 		$this->load->library( 'app',$config);
+		echo $this->app->render();
 	}
 }

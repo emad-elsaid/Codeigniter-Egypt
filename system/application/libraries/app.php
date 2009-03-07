@@ -16,10 +16,8 @@ class app {
 	var $index = '';
 	var $page = '';
 	
-	//css and js files
-	var $css_files = array();
-	var $js_files = array();
-	
+	var $info_msg = '';
+	var $error_msg = '';
 	// application view specifications
 	var $show_toolbar = TRUE;
 	var $show_title = TRUE;
@@ -31,7 +29,7 @@ class app {
 	 * to include images and javascript and css files 
 	 * from your app folder
 	 */
-	var $folder = '';
+	var $full_url = '';
 	
 	/*like apps/appname/
 	 * used to include view files
@@ -70,7 +68,7 @@ class app {
 		$u_temp = explode($name,current_url());
 		$this->url = $u_temp[0] .$name.'/';
 		$this->ci_folder = APP.'views/apps/'.$name.'/';
-		$this->folder = base_url().$this->ci_folder;
+		$this->full_url = base_url().$this->ci_folder;
 		$this->full_folder = str_replace('/','\\',APPPATH).'views\\apps\\'.$name.'\\';
 		if( ! file_exists( $this->full_folder) )
 			$this->full_folder = str_replace('\\','/',$this->full_folder);
@@ -103,59 +101,176 @@ class app {
 	
 	function render()
 	{
+		// getting the page itself
+		$CI =& get_instance();
+		$p = $this->page;
+		$page_text = $CI->load->view( $this->view_folder.$this->pages->$p, '', TRUE);
+		
+		$toolbar_text = ( $this->show_toolbar)? $this->toolbar() : "";
+		$title_text = ( $this->show_title)? $this->title() : "";
+		
+		if(!$this->can_view())
+			show_error('Access denied');
+		
+		$OUTPUT = doctype( "XHTML 1.0 Strict" );
+		$OUTPUT .= "<html xmlns=\"http://www.w3.org/1999/xhtml\" >\n"
+					   ."<head>\n"
+					   ."	<title>"
+					  .$this->name
+					  ." "
+					  .$this->page
+					  ."</title>\n"
+					  ."	<meta http-equiv=\"content-type\" content=\"text/html;charset="
+					  ."UTF-8"
+					  ."\" />\n"
+					  . "	<meta name=\"generator\" content=\"VUNSY system\" />\n"
+					  .  $this->css_text()
+					  .  $this->js_text()
+					  .  $this->dojo_text()
+					  . "\n"
+					  . "</head>\n"
+					  . "<body style=\"font-size: 12px\" class=\"tundra ui-helper-reset\">\n"
+					  . $toolbar_text
+					  . "<div class=\"ui-widget  ui-corner-all\" style=\"margin:10px;\">"
+					  . $title_text
+					  . "<div class=\"ui-widget-content  ui-corner-all\" style=\"padding:10px;\" >"
+					  . $page_text
+					  . "</div>"
+					  . "</div>"
+					  . "\n</body>\n"
+					  . "</html>";
+		echo $OUTPUT;	
 		
 	}
 	
-	function add_css($path="")
+	function add_css( $path="", $local=FALSE )
 	{
+		if( $local )
+			$path = $this->full_folder.$path;
 		
+		add_css( $path );
 	}
 	
-	function add_js( $path="" )
+	function add_js( $path="", $local=FALSE  )
 	{
+		if( $local )
+			$path = $this->full_folder.$path;
 		
+		add_js( $path );
 	}
 	
 	function toolbar()
 	{
+			
+		add_js('jquery/jquery.js');
+		add_js('jquery/jquery.droppy.js');
+		add_css('jquery/droppy.css');
 		
+		$text = '<script type="text/javascript">
+  $(document).ready(function() {
+    $(\'#nav\').droppy();
+  });
+</script>';
+		$text .= '<ul id="nav"><li><a href="#">Menu</a><ul>';
+		
+		foreach( $this->pages as $key=>$item )
+		{
+			$text .= '<li><a href="'.$this->app_url($key).'">'.$key.'</a></li>';
+		}
+		
+	 	$text .= '</ul></li>
+		<li>
+		<a href="#">Help</a>
+		<ul>
+			<li><a target="_blank" href="'.$this->website.'" >Author website</a></li>
+			<li><a id="helpMenuItem" href="#" >About</a></li>
+		</ul>
+		</li></ul>';
+
+		return $text.$this->help_dlg();
 	}
 	
 	function title()
 	{
-		
+		return "<h1 class=\"ui-widget-header ui-corner-all\">&nbsp;&nbsp;".$this->page."</h1>\n";
 	}
 	
 	function help_dlg()
 	{
+		add_js('jquery/jquery.js');
+		add_js('jquery/jquery-ui.js');
+		add_css('jquery/theme/ui.all.css');
 		
+		$text = '<script type="text/javascript">
+	$(document).ready(function() {
+		$("#aboutDlg").dialog({
+			bgiframe: true,
+			modal: true,
+			autoOpen: false,
+			buttons: {
+				Ok: function() {
+					$(this).dialog(\'close\');
+				}
+			}
+		});
+	});
+	$(\'#helpMenuItem\').click(function() {
+			$(\'#aboutDlg\').dialog(\'open\');
+		});
+	</script>
+	<div id="aboutDlg" title="About">
+	<p><strong>App Name: </strong>'.$this->name.'</p>
+	<p><strong>App Version: </strong>'.$this->ver.'</p>
+	<p><strong>App Author: </strong>'.$this->author.'</p>
+	<p><strong>Website: </strong><a target="_blank" href="'.$this->website.'">'.$this->website.'</a></p>
+</div>
+';
+	return $text;
 	}
 	
-	function css()
+	function css_text()
 	{
-		
+		$CI =& get_instance();
+		return $CI->vunsy->css_text();
 	}
 	
-	function js()
+	function js_text()
 	{
-		
+		$CI =& get_instance();
+		return $CI->vunsy->js_text();
+	}
+	
+	function dojo_text()
+	{
+		$CI =& get_instance();
+		return $CI->vunsy->dojo_text();
 	}
 	
 	function can_view()
 	{
-		/*$CI =& get_instance();
-		
-		// give permission to the root
-		if( $CI->vunsy->user->is_root() )
-			return TRUE;
-		
-		// execute the perm expression;
-		eval('$temp = '.$this->perm.';');
-		if( isset($temp)==TRUE )
-			return $temp;
-		else
-			return FALSE;*/
 		return perm_chck( $this->perm );
+	}
+	
+	function app_url( $p='' )
+	{
+		if( ! empty($p) )
+		{
+			return $this->url.$p;
+		}
+		else
+		{
+			return FALSE;
+		}
+	}
+	
+	function info( $text='' )
+	{
+		array_push( $this->info_msg, $text);
+	}
+	
+	function error( $text='' )
+	{
+		array_push( $this->error_msg, $text);
 	}
 	
 }

@@ -9,7 +9,7 @@ $a = array(
 	'perm' =>'$this->vunsy->is_admin()',
 	
 	// pages and sections of the application
-	'pages' => array(),
+	'pages' => array('test page'=>'test.php','2nd page'=>'test2.php'),
 	'index' =>'',
 	
 	//css and js files

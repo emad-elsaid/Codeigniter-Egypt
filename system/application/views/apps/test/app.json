@@ -5,8 +5,11 @@
 	"website":"http:\/\/blazeeboy.wordpress.com",
 	
 	"perm":"$CI->vunsy->user->is_root()",
-	"pages":[],
-	"index":"",
+	"pages":{
+		"test page":"test.php"
+		,"text page2":"test2.php"
+	},
+	"index":"test page",
 	
 	"css_files":[],
 	"js_files":[],

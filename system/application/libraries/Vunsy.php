@@ -4,6 +4,7 @@ class Vunsy {
 	
 	var $js = array();
 	var $css = array();
+	var $dojo = array();
 	var $section = '';
 	var $user = '';
 	var $mode = '';
@@ -138,6 +139,43 @@ class Vunsy {
 		$after_page->parent_section = $index->id;
 		$after_page->info = 'AFTER_PAGE_LOCKED';
 		$after_page->save();
+	}
+	
+	function css_text()
+	{
+		$css_t= '';
+		foreach( $this->css as $item )
+			$css_t .= "	".link_tag( $item )."\n";
+		
+		return $css_t;
+	}
+	
+	function js_text()
+	{
+		$js_t = '';
+		foreach( $this->js as $item )
+			$js_t .= "	<script type=\"text/javascript\" src=\"".$item."\" ></script>\n";
+			
+		return $js_t;
+	}
+	
+	function dojo_text()
+	{
+		
+		$text = 
+		"\t<script type=\"text/javascript\" src=\"".base_url()."dojo/dojo/dojo.js\"
+	djConfig=\"parseOnLoad:true\"></script>\n";
+		
+		if( count($this->dojo) > 0 )
+		{
+			$text .= "<script type=\"text/javascript\">\n";
+			foreach( $this->dojo as $item )
+				$text .= "dojo.require(\"".$item."\");\n";
+				
+			$text .= "</script>\n";
+		}
+		
+		return $text;
 	}
 	
 }
