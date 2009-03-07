@@ -1,4 +1,4 @@
-h1. Vunsy system
+Vunsy system
 =====================
 is a PHP program that built on codeIgniter and Jquery 
 
@@ -12,6 +12,7 @@ built on it some applications accessible by a task bar like facebook one
 
 -----------------------------------------------------------------
 [ Installation ]
++++++++
 1- copy the vunsy folder to your web folder
 2- files needed to be configured 
 			vunsy/system/application/config/config.php
