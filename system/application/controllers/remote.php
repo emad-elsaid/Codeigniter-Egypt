@@ -5,7 +5,14 @@ class Remote extends Controller {
 		$perm = $this->vunsy->edit_mode();
 		if( ! $perm ) redirect();
 	}
-	
+
+	/* that's a model data grapper using ajax
+	 * you can use it to get data from model
+	 * send your paramters using POST method
+	 * @model : the model name you want to invstigate
+	 * @function : the function member you want to execute
+	 * @param : a JSON text with the paramters
+	 */
 	function model()
 	{
 		

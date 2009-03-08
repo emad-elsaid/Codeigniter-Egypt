@@ -16,8 +16,8 @@ class app {
 	var $index = '';
 	var $page = '';
 	
-	var $info_msg = '';
-	var $error_msg = '';
+	var $info_msg = array();
+	var $error_msg = array();
 	// application view specifications
 	var $show_toolbar = TRUE;
 	var $show_title = TRUE;
@@ -133,6 +133,8 @@ class app {
 					  . $toolbar_text
 					  . "<div class=\"ui-widget  ui-corner-all\" style=\"margin:10px;\">"
 					  . $title_text
+					  . $this->error_text()
+					  . $this->info_text()
 					  . "<div class=\"ui-widget-content  ui-corner-all\" style=\"padding:10px;\" >"
 					  . $page_text
 					  . "</div>"
@@ -157,6 +159,11 @@ class app {
 			$path = $this->full_folder.$path;
 		
 		add_js( $path );
+	}
+	
+	function add_dojo( $path="" )
+	{
+		add_dojo( $path );
 	}
 	
 	function toolbar()
@@ -263,14 +270,49 @@ class app {
 		}
 	}
 	
-	function info( $text='' )
+	function add_info( $text='' )
 	{
-		array_push( $this->info_msg, $text);
+		if( is_array($text) )
+		{
+			foreach( $text as $item )
+				$this->add_info( $item );
+		}
+		else
+		{		
+			array_push( $this->info_msg, $text);
+		}
 	}
 	
-	function error( $text='' )
+	function add_error( $text='' )
 	{
-		array_push( $this->error_msg, $text);
+		if( is_array($text) )
+		{
+			foreach( $text as $item )
+				$this->add_error( $item );
+		}
+		else
+		{
+			array_push( $this->error_msg, $text);
+		}
 	}
 	
+	function info_text()
+	{
+		$t = '';
+		$CI =& get_instance();
+		foreach( $this->info_msg as $item )
+			$t .= $CI->load->view( 'info', array('text'=>$item), TRUE);
+		
+		return $t;
+	}
+	
+	function error_text()
+	{
+		$t = '';
+		$CI =& get_instance();
+		foreach( $this->error_msg as $item )
+			$t .= $CI->load->view( 'error', array('text'=>$item), TRUE);
+		
+		return $t;
+	}
 }

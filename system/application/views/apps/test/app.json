@@ -6,8 +6,8 @@
 	
 	"perm":"$CI->vunsy->user->is_root()",
 	"pages":{
-		"test page":"test.php"
-		,"text page2":"test2.php"
+		"test page":"test"
+		,"text page2":"test2"
 	},
 	"index":"test page",
 	
