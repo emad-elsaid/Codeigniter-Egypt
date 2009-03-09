@@ -7,6 +7,30 @@ class Gui {
 		$CI =& get_instance();
 		$CI->load->helper('form');
 	}
+	
+	
+	/*******************************************
+	 * a form maker 
+	 *******************************************/
+	function form($action = '', $data=array(), $attributes = '', $hidden = array())
+	{
+		$text = form_open( $action, $attributes, $hidden);
+		$text .= "\n\t<table  class=\"ui-helper-reset\">";
+		foreach( $data as $key=>$value )
+		{
+			$text .= "\n\t<tr>";
+			$text .= "\n\t<td>".form_label( $key )."</td>";
+			$text .= "\n\t<td>".$value."</td>";
+			$text .= "\n\t</tr>";
+		}
+		$text .= "\n\t</table>";
+		$text .= form_close();
+		return $text;
+	}
+	/*******************************************
+	 * File chooser using the fsbrowser, use it with CAUTION
+	 * it makes an dojo textinput linked with a jquery fsbrowser
+	 *******************************************/
 	function file( $ID='',$value='', $attr=array(), $param=array())
 	{
 		add_js( "jquery/jquery.js");
@@ -18,7 +42,7 @@ class Gui {
 		define( 'BASE_URL', base_url() );
 		include( 'jquery/sfbrowser/init.php' );
 
-		$text = "<input type=\"text\" 
+		$text = "\n<input type=\"text\" 
 		dojoType=\"dijit.form.TextBox\"
 		id=\"$ID\" 
 		name=\"$ID\" 
@@ -35,6 +59,9 @@ class Gui {
 		return $text;
 	}
 	
+	/*******************************************
+	 * a color chooser field linked with a dojo color picker dialog
+	 *******************************************/
 	function color( $ID='',$value='', $attr=array() )
 	{
 		add_dojo( "dojox.widget.ColorPicker" );
@@ -60,6 +87,9 @@ class Gui {
 		 return $text;
 	}
 	
+	/*******************************************
+	 * a date field picker using dojo
+	 *******************************************/
 	function date( $ID='', $value='', $attr=array() )
 	{
 		add_css( "dojo/dijit/themes/tundra/tundra.css" );
@@ -73,6 +103,9 @@ class Gui {
 		return $text;
 	}
 	
+	/*******************************************
+	 * a Time chooser input field
+	 *******************************************/
 	function time( $ID='', $value='', $attr=array() )
 	{
 		add_css( "dojo/dijit/themes/tundra/tundra.css" );
@@ -86,6 +119,73 @@ class Gui {
 		return $text;
 	}
 	
+	/*******************************************
+	 * an input field with dojo
+	 *******************************************/
+	function textbox( $ID='', $value='', $attr=array() )
+	{
+		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+		add_dojo("dijit.form.TextBox");
+  		add_dojo("dojo.parser");
+		
+		$value = form_prep( $value );
+		$attr = $this->_attributes_to_string( $attr );
+		
+		$text = "<input type=\"text\" dojoType=\"dijit.form.TextBox\" id=\"$ID\" name=\"$ID\" value=\"$value\" $attr >";
+		return $text;
+	}
+	
+	/*******************************************
+	 * an button with dojo
+	 *******************************************/
+	function button( $ID='', $value='', $attr=array() )
+	{
+		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+		add_dojo("dijit.form.Button");
+  		add_dojo("dojo.parser");
+		
+		$value = form_prep( $value );
+		$attr = $this->_attributes_to_string( $attr );
+		
+		$text = "<button dojoType=\"dijit.form.Button\" id=\"$ID\" name=\"$ID\" $attr >$value</button>";
+		return $text;
+	}
+	
+	/*******************************************
+	 * an password field with dojo
+	 *******************************************/
+	function password( $ID='', $value='', $attr=array() )
+	{
+		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+		add_dojo("dijit.form.TextBox");
+  		add_dojo("dojo.parser");
+		
+		$value = form_prep( $value );
+		$attr = $this->_attributes_to_string( $attr );
+		
+		$text = "<input type=\"password\" dojoType=\"dijit.form.TextBox\" id=\"$ID\" name=\"$ID\" value=\"$value\" $attr >";
+		return $text;
+	}
+	
+	/*******************************************
+	 * an input spinner with dojo
+	 *******************************************/
+	function number( $ID='', $value='', $attr=array() )
+	{
+		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+		add_dojo("dijit.form.NumberSpinner");
+  		add_dojo("dojo.parser");
+		
+		$value = form_prep( $value );
+		$attr = $this->_attributes_to_string( $attr );
+		
+		$text = "<input type=\"text\" dojoType=\"dijit.form.NumberSpinner\" id=\"$ID\" name=\"$ID\" value=\"$value\" $attr >";
+		return $text;
+	}
+	
+	/*******************************************
+	 * a textarea field auto grown
+	 *******************************************/
 	function textarea( $ID='', $value='', $attr=array() )
 	{
 		add_css( "dojo/dijit/themes/tundra/tundra.css" );
@@ -102,6 +202,9 @@ class Gui {
 		return $text;
 	}
 	
+	/*******************************************
+	 * an rich text editor with dojo
+	 *******************************************/
 	function editor( $ID='', $value='', $attr=array() )
 	{
 		add_css( "dojo/dijit/themes/tundra/tundra.css" );
@@ -118,6 +221,9 @@ class Gui {
 		return $text;
 	}
 	
+	/*******************************************
+	 * a dropdown menu using dojo
+	 *******************************************/
 	function dropdown( $ID='', $value='', $options=array(), $attr=array() )
 	{
 		add_css( "dojo/dijit/themes/tundra/tundra.css" );
@@ -129,16 +235,43 @@ class Gui {
 			
 		$attr = $this->_attributes_to_string( $attr );
 		
-		 $text = form_dropdown($ID, $options, $value, 'dojoType="dijit.form.FilteringSelect" '.$attr);
+		$text = form_dropdown($ID, $options, $value, 'dojoType="dijit.form.FilteringSelect" '.$attr);
 		return $text;
 	}
 	
-	function checkbox( $ID='', $value='', $attr=array() )
+	/*******************************************
+	 * a checkbox using dojo
+	 *******************************************/
+	function checkbox( $ID='', $value='', $checked=FALSE, $attr=array() )
 	{
 		add_css( "dojo/dijit/themes/tundra/tundra.css" );
 		add_dojo("dijit.form.CheckBox");
   		add_dojo("dojo.parser");
+		
+		$attr['dojoType'] = "dijit.form.CheckBox";
+		$attr = $this->_attributes_to_string( $attr );
+		
+		
+		return "\n\t".form_checkbox($ID, $value, $checked, $attr);
 	}
+	
+	/*******************************************
+	 * a Tooltip using dojo
+	 *******************************************/
+	function tooltip( $ID='', $value='' )
+	{
+		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+		add_dojo("dijit.Tooltip");
+  		add_dojo("dojo.parser");
+		
+		return "\n\t<div dojoType=\"dijit.Tooltip\" connectId=\"$ID\">$value</div>";
+	}
+	
+	
+	/*******************************************
+	 * helper functions to convert paramters to JS object paramters 
+	 * and convert the attribute array to HTML attributes
+	 *******************************************/
 	function _attributes_to_string( $attr= array() )
 	{
 		$att = '';

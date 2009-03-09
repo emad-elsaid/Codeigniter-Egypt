@@ -127,20 +127,19 @@ class app {
 					  .  $this->css_text()
 					  .  $this->js_text()
 					  .  $this->dojo_text()
-					  . "\n"
-					  . "</head>\n"
-					  . "<body style=\"font-size: 12px\" class=\"tundra ui-helper-reset\">\n"
+					  . "\n</head>"
+					  . "\n<body style=\"font-size: 12px\" class=\"tundra ui-helper-reset\">"
 					  . $toolbar_text
-					  . "<div class=\"ui-widget  ui-corner-all\" style=\"margin:10px;\">"
+					  . "\n<div class=\"ui-widget  ui-corner-all\" style=\"margin:10px;\">"
 					  . $title_text
 					  . $this->error_text()
 					  . $this->info_text()
-					  . "<div class=\"ui-widget-content  ui-corner-all\" style=\"padding:10px;\" >"
+					  . "\n<div class=\"ui-widget-content  ui-corner-all\" style=\"padding:10px;\" >"
 					  . $page_text
-					  . "</div>"
-					  . "</div>"
-					  . "\n</body>\n"
-					  . "</html>";
+					  . "\n</div>"
+					  . "\n</div>"
+					  . "\n</body>"
+					  . "\n</html>";
 		echo $OUTPUT;	
 		
 	}
@@ -173,33 +172,37 @@ class app {
 		add_js('jquery/jquery.droppy.js');
 		add_css('jquery/droppy.css');
 		
-		$text = '<script type="text/javascript">
-  $(document).ready(function() {
-    $(\'#nav\').droppy();
-  });
-</script>';
-		$text .= '<ul id="nav"><li><a href="#">Menu</a><ul>';
+		$text = '
+	<script type="text/javascript">
+		$(document).ready(function() {
+		$(\'#nav\').droppy();
+  		});
+	</script>';
+		$text .= "\n<ul id=\"nav\"><li><a href=\"#\">Menu</a><ul>";
 		
 		foreach( $this->pages as $key=>$item )
 		{
 			$text .= '<li><a href="'.$this->app_url($key).'">'.$key.'</a></li>';
 		}
 		
-	 	$text .= '</ul></li>
-		<li>
-		<a href="#">Help</a>
-		<ul>
-			<li><a target="_blank" href="'.$this->website.'" >Author website</a></li>
-			<li><a id="helpMenuItem" href="#" >About</a></li>
-		</ul>
-		</li></ul>';
+	 	$text .= '
+	</ul>
+	</li>
+	<li>
+	<a href="#">Help</a>
+	<ul>
+		<li><a target="_blank" href="'.$this->website.'" >Author website</a></li>
+		<li><a id="helpMenuItem" href="#" >About</a></li>
+	</ul>
+	</li>
+	</ul>';
 
 		return $text.$this->help_dlg();
 	}
 	
 	function title()
 	{
-		return "<h1 class=\"ui-widget-header ui-corner-all\">&nbsp;&nbsp;".$this->page."</h1>\n";
+		return "\n<h1 class=\"ui-widget-header ui-corner-all\">&nbsp;&nbsp;".$this->page."</h1>";
 	}
 	
 	function help_dlg()
@@ -208,7 +211,8 @@ class app {
 		add_js('jquery/jquery-ui.js');
 		add_css('jquery/theme/ui.all.css');
 		
-		$text = '<script type="text/javascript">
+		$text = '
+	<script type="text/javascript">
 	$(document).ready(function() {
 		$("#aboutDlg").dialog({
 			bgiframe: true,
@@ -230,8 +234,7 @@ class app {
 	<p><strong>App Version: </strong>'.$this->ver.'</p>
 	<p><strong>App Author: </strong>'.$this->author.'</p>
 	<p><strong>Website: </strong><a target="_blank" href="'.$this->website.'">'.$this->website.'</a></p>
-</div>
-';
+</div>';
 	return $text;
 	}
 	

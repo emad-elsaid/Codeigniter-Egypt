@@ -159,24 +159,30 @@ class Vunsy {
 		return $js_t;
 	}
 	
-	function dojo_text()
+	function dojo_text($force=FALSE)
 	{
 		
+		// if force equal to FALSE
+		if( count($this->dojo) == 0 and $force==FALSE )
+			return "";
+		
+		// make the text even if there isn't any requirements
 		$text = 
 		"\t<script type=\"text/javascript\" src=\"".base_url()."dojo/dojo/dojo.js\"
 	djConfig=\"parseOnLoad:true\"></script>\n";
 		
 		if( count($this->dojo) > 0 )
 		{
-			$text .= "<script type=\"text/javascript\">\n";
+			$text .= "\t<script type=\"text/javascript\">\n";
 			foreach( $this->dojo as $item )
-				$text .= "dojo.require(\"".$item."\");\n";
+				$text .= "\t\tdojo.require(\"".$item."\");\n";
 				
-			$text .= "</script>\n";
+			$text .= "\t</script>\n";
 		}
 		
 		return $text;
 	}
+	
 	
 }
 
