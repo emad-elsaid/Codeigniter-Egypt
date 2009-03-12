@@ -1,7 +1,7 @@
 <?php
 define("SFB_PATH",			BASE_URL."jquery/sfbrowser/");// path of sfbrowser (relative to the page it is run from)
 
-define("SFB_rPATH",			"/home/blaze/vunsy/jquery/sfbrowser/");
+define("SFB_rPATH",			str_replace("index.php","",FCPATH)."jquery/sfbrowser/");
 define("SFB_BASE",			"../../");		// upload folder (relative to sfbpath)
 
 define("SFB_LANG",			"en");				// the language ISO code

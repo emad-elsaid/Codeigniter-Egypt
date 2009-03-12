@@ -107,4 +107,9 @@ class User extends DataMapper {
 		$CI->session->set_userdata('level', 0);
 		$CI->session->set_userdata('mode', 'view');
 	}
+	
+	function set_password( $password="" )
+	{
+		$this->password = md5( $password );
+	}
 }

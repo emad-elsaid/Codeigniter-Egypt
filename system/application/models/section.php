@@ -92,7 +92,7 @@ class Section extends DataMapper {
 			// check if that place it took
 			$cont = new Content();
 			$cont->where('parent_section',$this->id);//same section
-			$cont->where('parent_content',$parent);//same parent
+			$cont->where('parent_content',$parent->id);//same parent
 			$cont->where('cell',$cell);// same cell
 			$cont->where('sort',$sort);//greater sort
 			$cont->get();//get them to process
@@ -107,7 +107,7 @@ class Section extends DataMapper {
 				// and the same cell and has a sort number greater that this
 				// sort number
 				$cont->where('parent_section',$this->id);//same section
-				$cont->where('parent_content',$parent);//same parent
+				$cont->where('parent_content',$parent->id);//same parent
 				$cont->where('cell',$cell);// same cell
 				$cont->where('sort >=',$sort);//greater sort
 				$cont->get();//get them to process

@@ -6,6 +6,8 @@ class Gui {
 	{
 		$CI =& get_instance();
 		$CI->load->helper('form');
+		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+		add_dojo( "dojo.parser" );
 	}
 	
 	
@@ -33,7 +35,9 @@ class Gui {
 	 *******************************************/
 	function file( $ID='',$value='', $attr=array(), $param=array())
 	{
-		add_js( "jquery/jquery.js");
+		
+		return $this->textbox( $ID, $value, $attr );
+		/*add_js( "jquery/jquery.js");
 		add_dojo( "dijit.form.TextBox" );
 		
 		$value = form_prep( $value );
@@ -56,7 +60,7 @@ class Gui {
 			}
 			);\"
 		value=\"$value\" $attr >";
-		return $text;
+		return $text;*/
 	}
 	
 	/*******************************************
@@ -65,12 +69,11 @@ class Gui {
 	function color( $ID='',$value='', $attr=array() )
 	{
 		add_dojo( "dojox.widget.ColorPicker" );
-		add_dojo( "dojo.parser" );
+
 		add_dojo( "dijit.Dialog" );
 		add_dojo( "dijit.form.TextBox" );
 
 		add_css( "dojo/dojox/widget/ColorPicker/ColorPicker.css" );
-		add_css( "dojo/dijit/themes/tundra/tundra.css" );
 		
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
@@ -92,10 +95,9 @@ class Gui {
 	 *******************************************/
 	function date( $ID='', $value='', $attr=array() )
 	{
-		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+
 		add_dojo("dijit.form.DateTextBox");
-  		add_dojo("dojo.parser");
-		
+  
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
@@ -108,10 +110,9 @@ class Gui {
 	 *******************************************/
 	function time( $ID='', $value='', $attr=array() )
 	{
-		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+
 		add_dojo("dijit.form.TimeTextBox");
-  		add_dojo("dojo.parser");
-		
+  
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
@@ -124,10 +125,9 @@ class Gui {
 	 *******************************************/
 	function textbox( $ID='', $value='', $attr=array() )
 	{
-		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+
 		add_dojo("dijit.form.TextBox");
-  		add_dojo("dojo.parser");
-		
+  
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
@@ -140,10 +140,9 @@ class Gui {
 	 *******************************************/
 	function button( $ID='', $value='', $attr=array() )
 	{
-		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+
 		add_dojo("dijit.form.Button");
-  		add_dojo("dojo.parser");
-		
+  
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
@@ -156,10 +155,9 @@ class Gui {
 	 *******************************************/
 	function password( $ID='', $value='', $attr=array() )
 	{
-		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+
 		add_dojo("dijit.form.TextBox");
-  		add_dojo("dojo.parser");
-		
+  
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
@@ -172,10 +170,9 @@ class Gui {
 	 *******************************************/
 	function number( $ID='', $value='', $attr=array() )
 	{
-		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+
 		add_dojo("dijit.form.NumberSpinner");
-  		add_dojo("dojo.parser");
-		
+  
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
@@ -188,17 +185,14 @@ class Gui {
 	 *******************************************/
 	function textarea( $ID='', $value='', $attr=array() )
 	{
-		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+
 		add_dojo("dijit.form.Textarea");
-  		add_dojo("dojo.parser");
-		
+  
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
 		$text = 
-		"<textarea  dojoType=\"dijit.form.Textarea\" id=\"$ID\" name=\"$ID\" $attr >
-		$value
-		</textarea>";
+		"<textarea  dojoType=\"dijit.form.Textarea\" id=\"$ID\" name=\"$ID\" $attr >$value</textarea>";
 		return $text;
 	}
 	
@@ -207,10 +201,9 @@ class Gui {
 	 *******************************************/
 	function editor( $ID='', $value='', $attr=array() )
 	{
-		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+
 		add_dojo("dijit.Editor");
-  		add_dojo("dojo.parser");
-		
+  
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
@@ -226,10 +219,8 @@ class Gui {
 	 *******************************************/
 	function dropdown( $ID='', $value='', $options=array(), $attr=array() )
 	{
-		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+
 		add_dojo("dijit.form.FilteringSelect");
-  		add_dojo("dojo.parser");
-		
 		foreach( $options as $key=>$item )
 			$options[$key] = form_prep( $item );
 			
@@ -244,10 +235,8 @@ class Gui {
 	 *******************************************/
 	function checkbox( $ID='', $value='', $checked=FALSE, $attr=array() )
 	{
-		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+
 		add_dojo("dijit.form.CheckBox");
-  		add_dojo("dojo.parser");
-		
 		$attr['dojoType'] = "dijit.form.CheckBox";
 		$attr = $this->_attributes_to_string( $attr );
 		
@@ -260,14 +249,25 @@ class Gui {
 	 *******************************************/
 	function tooltip( $ID='', $value='' )
 	{
-		add_css( "dojo/dijit/themes/tundra/tundra.css" );
+
 		add_dojo("dijit.Tooltip");
-  		add_dojo("dojo.parser");
-		
 		return "\n\t<div dojoType=\"dijit.Tooltip\" connectId=\"$ID\">$value</div>";
 	}
 	
 	
+	function accordion( $data=array(), $attr=array() )
+	{
+		add_dojo( "dijit.layout.AccordionContainer" );
+		$attr = $this->_attributes_to_string( $attr );
+		
+		$text = "<div dojoType=\"dijit.layout.AccordionContainer\" style=\"height:400\" >";
+		
+		foreach($data as $key=>$value )
+			$text .= "<div dojoType=\"dijit.layout.AccordionPane\" title=\"$key\" >$value</div>";
+			
+		$text .= "</div>";
+		return $text;
+	}
 	/*******************************************
 	 * helper functions to convert paramters to JS object paramters 
 	 * and convert the attribute array to HTML attributes

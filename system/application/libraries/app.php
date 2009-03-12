@@ -103,8 +103,16 @@ class app {
 	{
 		// getting the page itself
 		$CI =& get_instance();
+		
 		$p = $this->page;
-		$page_text = $CI->load->view( $this->view_folder.$this->pages->$p, '', TRUE);
+		if( isset($this->pages->$p) ) 
+		{
+			$page_text = $CI->load->view( $this->view_folder.$this->pages->$p, '', TRUE);
+		}
+		else
+		{
+			$page_text = $CI->load->view( $this->view_folder.$p, '', TRUE);
+		}
 		
 		$toolbar_text = ( $this->show_toolbar)? $this->toolbar() : "";
 		$title_text = ( $this->show_title)? $this->title() : "";
@@ -202,6 +210,7 @@ class app {
 	
 	function title()
 	{
+		add_css('jquery/theme/ui.all.css');
 		return "\n<h1 class=\"ui-widget-header ui-corner-all\">&nbsp;&nbsp;".$this->page."</h1>";
 	}
 	

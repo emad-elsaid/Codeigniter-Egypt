@@ -1,7 +1,7 @@
 <?php
 class Layout extends Content {
 	
-	var $has_many = array('content');
+	//var $has_many = array('content');
 	
 	function Layout()
 	{
@@ -17,14 +17,22 @@ class Layout extends Content {
 	 * **************************************/
 	function cells()
 	{
-		if(! empty($this->path) )
+		if( $this->path !='' )
 			$c = $this->load->view($this->path,array('mode'=>'config'),TRUE);
 		else
 			$c = 1;
+			
 		return intval($c);
 	}
 	
-	
+	function add_button( $cell='', $sort='' )
+	{
+		$ci =& get_instance();
+		$link = site_url( 'admin/app/content Inserter/index/'.$ci->vunsy->section->id.'/'.$this->id.'/'.$cell.'/'.$sort );
+		$img = base_url()."adminTheme/add.gif";
+		$text = "<a target=\"_blank\" href=\"$link\" ><img src=\"$img\" ></a>";
+		return $text;
+	}
 	/***************************************
 	 * rendering the cells and encapsulate it in the
 	 * layout then return all of that
@@ -45,10 +53,6 @@ class Layout extends Content {
 		
 		$layout_content = array();
 		
-		// loading the control buttons if edit mode opened
-		if( $CI->vunsy->edit_mode())
-				$add_button = $CI->load->view('edit_mode/buttons','',TRUE);
-		
 		
 		/***************************************
 		 *  starting to render the cells
@@ -60,14 +64,16 @@ class Layout extends Content {
 			
 			$cell_text = '';
 			if( $CI->vunsy->edit_mode())
-				$cell_text = $add_button; // +++ buttons +++ in start of every cell
+				$cell_text = $this->add_button($i,0); // +++ buttons +++ in start of every cell
 				
 			// rendering the cell content
+			$sort_num = 0;
 			foreach( $c_children as $item )
 			{
+				$sort_num++;
 				$cell_text .= $item->render();
 				if( $CI->vunsy->edit_mode())
-					$cell_text .= $add_button;// +++ buttons +++ after every widget
+					$cell_text .= $this->add_button($i, $sort_num);// +++ buttons +++ after every widget
 			}
 			
 			// put the cell text in it's place in the layout text array
@@ -80,16 +86,19 @@ class Layout extends Content {
 		
 		// if the layout exists render the layout with the corresponding 
 		// cells text if not just pass the first cell value
+		
 		if( $this->path != '' )
 		{
 			$text = $this->load->view( 
-								'layouts/'.$this->path,
+								$this->path,
 								array(
 										'id'=>$this->id,
-										'cell'=> $layout_content
+										'cell'=> $layout_content,
+										'mode'=> 'view'
 								),
 								TRUE
 			);
+			
 		}
 		else
 		{
@@ -99,8 +108,8 @@ class Layout extends Content {
 		// enclose the layout in a container
 		if( $CI->vunsy->edit_mode())
 				$text = $CI->load->view('edit_mode/container',array('text'=>$text),TRUE);
-		else
-				$text = $cell_text;
+		/*else
+				$text = $cell_text;*/
 		
 		return parent::render($text);
 	}
@@ -164,7 +173,7 @@ class Layout extends Content {
 		// submit the query
 		$children = new Content();
 		$children->query($sql_stat);
-	
+		
 		/***************************************
 		 * building the children array with the respect objects
 		 * in other meaning we'll convert all the content to their 
@@ -180,7 +189,8 @@ class Layout extends Content {
 				array_push( $final_c, $temp);
 		}
 		
-		// rturning the final array of children
+		
+		// returning the final array of children
 		return $final_c;
 	}
 }

@@ -30,7 +30,7 @@ class Content extends DataMapper {
 		$sec->deattach( $this );
 	}
 	
-	function save( $object = '')
+	/*function save( $object = '')
 	{
 		if( empty($object) )
 		{
@@ -38,13 +38,12 @@ class Content extends DataMapper {
 		}
 		
 		return parent::save( $object );
-	}
+	}*/
 	
 	function render( $text='' ){
 		
 		if( ! $this->can_view() )
 			$text='';
-			
 		return $text;
 	}
 	
