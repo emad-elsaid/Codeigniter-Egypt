@@ -31,10 +31,18 @@ class Layout extends Content {
 	function add_button( $cell='', $sort='' )
 	{
 		$ci =& get_instance();
+		$ci->load->library( 'gui' );
+		add_dojo( 'dijit.form.Button' );
+		
 		$link = site_url( 'admin/app/content Inserter/index/'.$ci->vunsy->section->id.'/'.$this->id.'/'.$cell.'/'.$sort );
-		$img = base_url()."adminTheme/add.gif";
-		$text = "<a target=\"_blank\" href=\"$link\" ><img src=\"$img\" ></a>";
-		return $text;
+		$bText = <<<EOT
+		 <span>Insert</span>
+	<script type="dojo/method" event="onClick" args="evt">
+		open("$link");
+	</script>
+EOT;
+		return $ci->gui->button( "", $bText, 
+				array("style"=>"font-size:13px","iconClass"=>"dijitEditorIcon dijitEditorIconInsertImage") );
 	}
 	
 	/***************************************

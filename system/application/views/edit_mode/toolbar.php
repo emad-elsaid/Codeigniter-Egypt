@@ -1,15 +1,19 @@
 <?php
 add_js( 'jquery/jquery.js' );
+add_js( 'jquery/jqDock.js' );
 add_js( 'jquery/aqFloater.js' );
 ?>
 <script type="text/javascript" >
 $("document").ready( function(){
-	$("#adminToolBar").aqFloater({attach: 'ne', duration: .3, opacity: 1});
-	$("document").addClass( "nihilo" );
+	$("#adminToolBar").aqFloater({attach: 'n', duration: .3, opacity: 1});
+	$("#adminToolBarIcons").jqDock({align:'top',duration:200});
 }
 );
 </script>
 <div id="adminToolBar">
-<img src="<?= base_url() ?>adminTheme/edit.gif" >
+<div id='adminToolBarIcons'>
+	<a href="<?= site_url('admin/app/user manager') ?>" title="Users Manager">
+    	<img src="<?= base_url() ?>images/admin/users.png" alt="" title="" />
+	</a>
 </div>
-
+</div>

@@ -54,8 +54,8 @@ class Page extends Controller
 		$page_body = new Layout();
 		$page_body->get_by_info( 'PAGE_BODY_LOCKED' );
 		$page_body_text = $page_body->render();
-		/*if( $this->vunsy->edit_mode()=='edit' )
-				$page_body_text .= $this->load->view( 'edit_mode/toolbar', '', TRUE );*/
+		if( $this->vunsy->edit_mode())
+				$page_body_text .= $this->load->view( 'edit_mode/toolbar', '', TRUE );
 		
 		
 		/*********************************************
