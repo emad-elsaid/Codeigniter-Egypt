@@ -41,7 +41,7 @@
 */
 
 $route['default_controller'] = "page";
-$route['scaffolding_trigger'] = "";
+$route['scaffolding_trigger'] = "db";
 
 $route['(:num)'] = "page/index/$1";
 $route['(:num)/(:any)'] = "page/index/$1/$2";

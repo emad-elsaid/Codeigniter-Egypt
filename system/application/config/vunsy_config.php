@@ -12,6 +12,7 @@ $config["charset"] = "utf-8";
  * site autoloading css style sheets
  * and javascript files that autoloads in every page
  */
+$config["dojoStyle"] = "tundra";
 $config["css"] = array();
 $config["js"] = array();
 

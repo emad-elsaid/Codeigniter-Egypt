@@ -5,6 +5,7 @@ class Vunsy {
 	var $js = array();
 	var $css = array();
 	var $dojo = array();
+	var $dojoStyle = "";
 	var $section = '';
 	var $user = '';
 	var $mode = '';
@@ -28,6 +29,7 @@ class Vunsy {
 			//getting the autoloading css and javascript paths
 			$this->css = $CI->config->item('css');
 			$this->js = $CI->config->item('js');
+			$this->dojoStyle = $CI->config->item( 'dojoStyle' );
 			
 		}
 	}
@@ -165,19 +167,21 @@ class Vunsy {
 		// if force equal to FALSE
 		if( count($this->dojo) == 0 and $force==FALSE )
 			return "";
+			
 		
 		// make the text even if there isn't any requirements
-		$text = 
-		"\t<script type=\"text/javascript\" src=\"".base_url()."dojo/dojo/dojo.js\"
-	djConfig=\"parseOnLoad:true\"></script>\n";
+		$text = "\n\t".link_tag( "dojo/dijit/themes/{$this->dojoStyle}/{$this->dojoStyle}.css" );
+		$text .= 
+		"\n\t<script type=\"text/javascript\" src=\"".base_url()."dojo/dojo/dojo.js\"
+	djConfig=\"parseOnLoad:true\"></script>";
 		
 		if( count($this->dojo) > 0 )
 		{
-			$text .= "\t<script type=\"text/javascript\">\n";
+			$text .= "\n\t<script type=\"text/javascript\">";
 			foreach( $this->dojo as $item )
-				$text .= "\t\tdojo.require(\"".$item."\");\n";
+				$text .= "\n\t\tdojo.require(\"".$item."\");";
 				
-			$text .= "\t</script>\n";
+			$text .= "\n\t</script>";
 		}
 		
 		return $text;

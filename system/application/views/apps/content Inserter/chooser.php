@@ -18,5 +18,5 @@ echo $CI->gui->form(
 		,$hidden
 );
 
-echo $CI->gui->tooltip("content","you can choose a widget or a layout from <br> system/application/views ");
+echo $CI->gui->tooltip("path","you can choose a widget or a layout from <br> system/application/views ");
 ?>

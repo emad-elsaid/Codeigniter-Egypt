@@ -3,7 +3,7 @@ $CI =& get_instance();
 $CI->load->library('gui');
 //echo $CI->gui->color( 'color' ,'#822a34');
 echo $CI->gui->file( "T", '', array( "size" => "50" ), array('sfbpath'=>'system') );
-/*echo $CI->gui->date( 'datetttt' );
+echo $CI->gui->date( 'datetttt' );
 echo $CI->gui->time( 'time', 'T11:00' );
 echo $CI->gui->textarea( 'textarea', 'sdsdfsdfsdfsdf');
 echo $CI->gui->editor( 'textareaxzxc', 'sdsd<textarea></textarea></textarea>fsdfsdfsdf');
@@ -11,7 +11,7 @@ echo $CI->gui->dropdown( "sdsdf", "ar", array( 'ar'=>'Arabic', 'en'=>'English', 
 echo $CI->gui->checkbox( "ID", "value", TRUE);
 echo $CI->gui->textbox( "IDxzczx", "skdjfhsdkjfhskjf" );
 echo $CI->gui->password( "IDdcdfgrg", 50 );
-echo $CI->gui->button( "sdjkfhsdf", "sdfhsdgf" );*/
+echo $CI->gui->button( "sdjkfhsdf", "sdfhsdgf" );
 
 /*
 echo $CI->gui->form( $this->app->app_url("text page2"), array(

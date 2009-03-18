@@ -26,7 +26,7 @@ class Content extends DataMapper {
 	function deattach()
 	{
 		$sec = new Section();
-		$sec->get_by_id($this->id );
+		$sec->get_by_id($this->parent_section );
 		$sec->deattach( $this );
 	}
 	
@@ -42,8 +42,24 @@ class Content extends DataMapper {
 	
 	function render( $text='' ){
 		
+		$CI =& get_instance();
+		
+		if( $CI->vunsy->edit_mode() AND !strstr($this->info, "LOCKED"))
+		{
+				$text = $CI->load->view('edit_mode/container'
+						,array(
+							'text'=>$text
+							,'parent'=>$this->parent_content
+							,'id'=>$this->id
+							,'cell'=>$this->cell
+							,'sort'=>$this->sort
+						)
+						, TRUE);
+		}
+				
 		if( ! $this->can_view() )
 			$text='';
+			
 		return $text;
 	}
 	

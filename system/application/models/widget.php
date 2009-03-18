@@ -11,10 +11,11 @@ class Widget extends Content{
 		if( !empty($this->path) )
 		{
 			$text = $this->load->view(
-							'widget/'.$this->path,
+							$this->path,
 							array(
-									'id'=> $this->id,
-									'data'=>unserialize($this->info);
+									'id'=> $this->id
+									,'info'=>json_decode($this->info)
+									,'mode'=>'view'
 							),
 							TRUE
 			);

@@ -79,27 +79,26 @@ class Page extends Controller
 		// Rendering the page 
 		$OUTPUT  = $before_page_text;
 		$OUTPUT .= doctype( $this->config->item('doctype') );
-		$OUTPUT .= "<html xmlns=\"http://www.w3.org/1999/xhtml\" >\n"
-					   ."<head>\n"
-					   ."	<title>"
+		$OUTPUT .= "<html xmlns=\"http://www.w3.org/1999/xhtml\" >"
+					   ."\n<head>"
+					   ."\n\t<title>"
 					  .$this->config->item('site_name')
 					  ." "
 					  .$this->vunsy->get_section()->name
-					  ."</title>\n"
-					  ."	<meta http-equiv=\"content-type\" content=\"text/html;charset="
+					  ."</title>"
+					  ."\n\t<meta http-equiv=\"content-type\" content=\"text/html;charset="
 					  .$this->config->item('charset')
-					  ."\" />\n"
-					  . "	<meta name=\"generator\" content=\"VUNSY system\" />\n"
+					  ."\" />"
+					  . "\n\t<meta name=\"generator\" content=\"VUNSY system\" />"
 					  .  $this->vunsy->css_text()
 					  .  $this->vunsy->js_text()
 					  .  $this->vunsy->dojo_text()
-					  . $page_head_text
-					  . "\n"
-					  . "</head>\n"
-					  . "<body>\n"
+					  .	$page_head_text
+					  . "\n</head>"
+					  . "\n<body class=\"{$this->vunsy->dojoStyle}\" >"
 					  . $page_body_text
-					  . "</body>\n"
-					  . "</html>"
+					  . "\n</body>"
+					  . "\n</html>"
 					  . $after_page_text;
 		echo $OUTPUT;	
 	}

@@ -11,7 +11,7 @@
 |	http://example.com/
 |
 */
-$config['base_url']	= "http://localhost/b/vunsy/";
+$config['base_url']	= "http://localhost:8080/";
 
 /*
 |--------------------------------------------------------------------------

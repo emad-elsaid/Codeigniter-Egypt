@@ -21,7 +21,8 @@ class Remote extends Controller {
 		$func = $this->input->post( 'function' );
 		$param = $this->input->post( 'param' );
 		$param = json_decode( $param );
-		$modName = split( '/', $mod )[-1] ;
+		$modName = split( '/', $mod );
+		$modName = $modName[-1] ;
 		
 		//load the model if not loaded
 		if(! isset($this->$modName) )
@@ -43,8 +44,8 @@ class Remote extends Controller {
 		$func = $this->input->post( 'function' );
 		$param = $this->input->post( 'param' );
 		$param = json_decode( $param );
-		
-		$obj = new $mod();
+		echo( "cxvxcvxcvcxv" );
+		/*$obj = new $mod();
 		$obj->get_by_id( $id );
 		if( $obj->exists() )
 		{
@@ -52,6 +53,6 @@ class Remote extends Controller {
 			eval( $expression );
 			if( isset( $result ) )
 				return json_encode( $result );
-		}
+		}*/
 	}
 }

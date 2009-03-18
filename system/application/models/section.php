@@ -136,32 +136,20 @@ class Section extends DataMapper {
 		//normalize the  sort numbers
 		//=========================
 		$cont = new Content();
+		// we have to push all the content up to fill that hole
+		// these content must me in the same section,parent,cell
+		// and have sort nubmer greater than that content
 		$cont->where( 'parent_section',$object->parent_section );//same section
 		$cont->where( 'parent_content',$object->parent_content );//same parent
 		$cont->where( 'cell',$object->cell );// same cell
-		$cont->where( 'sort',$object->sort );//greater sort
+		$cont->where( 'sort >',$object->sort );//greater sort
 		$cont->get();//get them to process
-		
-		// if that content object exists then 
-		// we don't have to change any sort number
-		// if not exists then we need to fillthat hole
-		if(! $cont->exists() )
+		foreach( $cont->all as $item )
 		{
-			// we have to push all the content up to fill that hole
-			// these content must me in the same section,parent,cell
-			// and have sort nubmer greater than that content
-			$cont->where( 'parent_section',$object->parent_section );//same section
-			$cont->where( 'parent_content',$object->parent_content );//same parent
-			$cont->where( 'cell',$object->cell );// same cell
-			$cont->where( 'sort >',$object->sort );//greater sort
-			$cont->get();//get them to process
-			foreach( $cont->all as $item )
-			{
-				$item->sort--;
-				$item->save();
-			}
-			
+			$item->sort--;
+			$item->save();
 		}
+			
 	}
 	
 	function can_view()

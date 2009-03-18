@@ -6,7 +6,6 @@ class Gui {
 	{
 		$CI =& get_instance();
 		$CI->load->helper('form');
-		add_css( "dojo/dijit/themes/tundra/tundra.css" );
 		add_dojo( "dojo.parser" );
 	}
 	
@@ -14,8 +13,13 @@ class Gui {
 	/*******************************************
 	 * a form maker 
 	 *******************************************/
-	function form($action = '', $data=array(), $attributes = '', $hidden = array())
+	function form($action = '', $data=array(), $attributes = array(), $hidden = array())
 	{
+		add_dojo( "dijit.form.Form" );
+		
+		$attributes['dojoType'] = 'dijit.form.Form';
+		$attributes = $this->_attributes_to_string( $attributes );
+		
 		$text = form_open( $action, $attributes, $hidden);
 		$text .= "\n\t<table  class=\"ui-helper-reset\">";
 		foreach( $data as $key=>$value )
@@ -125,7 +129,6 @@ class Gui {
 	 *******************************************/
 	function textbox( $ID='', $value='', $attr=array() )
 	{
-
 		add_dojo("dijit.form.TextBox");
   
 		$value = form_prep( $value );
@@ -143,7 +146,6 @@ class Gui {
 
 		add_dojo("dijit.form.Button");
   
-		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
 		$text = "<button dojoType=\"dijit.form.Button\" id=\"$ID\" name=\"$ID\" $attr >$value</button>";
@@ -204,13 +206,13 @@ class Gui {
 
 		add_dojo("dijit.Editor");
   
-		$value = form_prep( $value );
+		//$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
 		$text = 
-		"<textarea  dojoType=\"dijit.Editor\" id=\"$ID\" name=\"$ID\" $attr >
+		"<div  dojoType=\"dijit.Editor\" id=\"$ID\" name=\"$ID\" $attr >
 		$value
-		</textarea>";
+		</div>";
 		return $text;
 	}
 	
@@ -274,6 +276,7 @@ class Gui {
 	 *******************************************/
 	function _attributes_to_string( $attr= array() )
 	{
+		if( is_string($attr) ) return $attr;
 		$att = '';
 
 		foreach ($attr as $key => $val)

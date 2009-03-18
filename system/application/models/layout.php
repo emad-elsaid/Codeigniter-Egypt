@@ -25,6 +25,9 @@ class Layout extends Content {
 		return intval($c);
 	}
 	
+	/***************************************
+	 * the add button function
+	 * **************************************/
 	function add_button( $cell='', $sort='' )
 	{
 		$ci =& get_instance();
@@ -33,6 +36,7 @@ class Layout extends Content {
 		$text = "<a target=\"_blank\" href=\"$link\" ><img src=\"$img\" ></a>";
 		return $text;
 	}
+	
 	/***************************************
 	 * rendering the cells and encapsulate it in the
 	 * layout then return all of that
@@ -63,7 +67,7 @@ class Layout extends Content {
 			$c_children = $this->children( $CI->vunsy->get_section(), $i );
 			
 			$cell_text = '';
-			if( $CI->vunsy->edit_mode())
+			if( $CI->vunsy->edit_mode() AND count($c_children)==0 )
 				$cell_text = $this->add_button($i,0); // +++ buttons +++ in start of every cell
 				
 			// rendering the cell content
@@ -72,14 +76,18 @@ class Layout extends Content {
 			{
 				$sort_num++;
 				$cell_text .= $item->render();
-				if( $CI->vunsy->edit_mode())
-					$cell_text .= $this->add_button($i, $sort_num);// +++ buttons +++ after every widget
+				/*if( $CI->vunsy->edit_mode())
+					$cell_text .= $this->add_button($i, $sort_num);// +++ buttons +++ after every widget*/
 			}
 			
 			// put the cell text in it's place in the layout text array
-			if( $CI->vunsy->edit_mode())
+			/* that commented block was putting every cell in container,
+			 * we have to put all the content in a container not the empty cell
+			 * the page was disply even the empty cell plus button in a container
+			 * */
+			/*if( $CI->vunsy->edit_mode())
 				$layout_content[ $i ] = $CI->load->view('edit_mode/container',array('text'=>$cell_text),TRUE);
-			else
+			else*/
 				$layout_content[ $i ] = $cell_text;
 		}
 		
@@ -106,9 +114,12 @@ class Layout extends Content {
 		}
 		
 		// enclose the layout in a container
-		if( $CI->vunsy->edit_mode())
+		/* i comented that block and i'll make the parent class display all 
+		 * the layoutsand widgets in a container
+		 */
+		/*if( $CI->vunsy->edit_mode())
 				$text = $CI->load->view('edit_mode/container',array('text'=>$text),TRUE);
-		/*else
+		else
 				$text = $cell_text;*/
 		
 		return parent::render($text);
@@ -123,7 +134,7 @@ class Layout extends Content {
 	{
 		if( empty($object) )
 		{
-			$c = $this->children;
+			$c = $this->children();
 			foreach( $c as $item )
 				$item->delete();
 		}
@@ -143,7 +154,8 @@ class Layout extends Content {
 	{
 		
 		// getting the section path to the main index page
-		$par_sec = $section->get_parents();
+		if( ! empty($section) )
+			$par_sec = $section->get_parents();
 		
 		// selecting all the content of that parent
 		$sql_stat = sprintf(
@@ -161,6 +173,7 @@ class Layout extends Content {
 		 * shared in the sub sections ordered in ascending with sort field
 		 * **************************************/
 		if( ! empty($section) )
+		{
 			$sql_stat .= sprintf(" AND 
 			(
 				(`parent_section`=%s)", $section->id );
@@ -169,7 +182,7 @@ class Layout extends Content {
 				$sql_stat = $sql_stat . sprintf("
 			 ) ORDER BY `sort` ASC");
 		
-		
+		}
 		// submit the query
 		$children = new Content();
 		$children->query($sql_stat);
