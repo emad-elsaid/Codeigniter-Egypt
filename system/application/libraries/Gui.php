@@ -25,7 +25,7 @@ class Gui {
 		foreach( $data as $key=>$value )
 		{
 			$text .= "\n\t<tr>";
-			$text .= "\n\t<td>".form_label( $key )."</td>";
+			$text .= "\n\t<td align=\"right\" >".form_label( $key )."</td>";
 			$text .= "\n\t<td>".$value."</td>";
 			$text .= "\n\t</tr>";
 		}
@@ -153,6 +153,27 @@ class Gui {
 	}
 	
 	/*******************************************
+	 * an tooltipbutton with dojo
+	 *******************************************/
+	function tooltipbutton( $text='', $title='', $dialog='', $attr=array() )
+	{
+
+		add_dojo("dijit.form.Button");
+		add_dojo( "dijit.Dialog" );
+  
+		$attr = $this->_attributes_to_string( $attr );
+		
+		return <<<EOT
+<div dojoType="dijit.form.DropDownButton" $attr >
+  <span>$text</span>
+  <div dojoType="dijit.TooltipDialog" title="$title" >
+  $dialog
+  </div>
+</div>
+EOT;
+	}
+	
+	/*******************************************
 	 * an password field with dojo
 	 *******************************************/
 	function password( $ID='', $value='', $attr=array() )
@@ -205,12 +226,19 @@ class Gui {
 	{
 
 		add_dojo("dijit.Editor");
+		add_dojo("dijit._editor.plugins.AlwaysShowToolbar");
+		add_dojo("dijit._editor.plugins.EnterKeyHandling");
+		add_dojo("dijit._editor.plugins.TextColor");
+		add_dojo("dijit._editor.plugins.LinkDialog");
+		add_dojo("dijit._editor.plugins.FontChoice");
+		add_dojo("dijit._editor.plugins.ToggleDir");
+		add_css('jquery/theme/ui.all.css');
   
-		//$value = form_prep( $value );
+		$attr['plugins'] = "['undo','redo','|','cut','delete','copy','paste','|','bold','italic','underline','strikethrough','|','justifyLeft','justifyCenter','justifyRight','justifyFull','|','toggleDir','|','createLink','foreColor','hiliteColor','|','selectAll','removeFormat','|','insertUnorderedList','insertOrderedList','|','indent','outdent','|','subscript','superscript','|','fontName','fontSize','formatBlock']";
 		$attr = $this->_attributes_to_string( $attr );
 		
 		$text = 
-		"<div  dojoType=\"dijit.Editor\" id=\"$ID\" name=\"$ID\" $attr >
+		"<div  dojoType=\"dijit.Editor\" id=\"$ID\" name=\"$ID\" $attr  >
 		$value
 		</div>";
 		return $text;
@@ -245,6 +273,19 @@ class Gui {
 		
 		return "\n\t".form_checkbox($ID, $value, $checked, $attr);
 	}
+	/*******************************************
+	 * a radio button using dojo
+	 *******************************************/
+	function radio( $ID='', $value='', $checked=FALSE, $attr=array() )
+	{
+
+		add_dojo("dijit.form.CheckBox");
+		$attr['dojoType'] = "dijit.form.RadioButton";
+		$attr = $this->_attributes_to_string( $attr );
+		
+		
+		return "\n\t".form_radio($ID, $value, $checked, $attr);
+	}
 	
 	/*******************************************
 	 * a Tooltip using dojo
@@ -256,19 +297,158 @@ class Gui {
 		return "\n\t<div dojoType=\"dijit.Tooltip\" connectId=\"$ID\">$value</div>";
 	}
 	
-	
-	function accordion( $data=array(), $attr=array() )
+	/*******************************************
+	 * an accordion of dojo toolkit
+	 *******************************************/
+	function accordion( $data=array(), $attr=array(), $style=array() )
 	{
 		add_dojo( "dijit.layout.AccordionContainer" );
+		if( !isset($style['width']) ) $style['width'] ='100%';
+		if( !isset($style['height']) ) $style['height'] = '300px';
+		$style = $this->_array_to_style( $style );
+		
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = "<div dojoType=\"dijit.layout.AccordionContainer\" style=\"height:400\" >";
+		$text = "<div dojoType=\"dijit.layout.AccordionContainer\" style=\"$style\"  $attr >";
 		
 		foreach($data as $key=>$value )
 			$text .= "<div dojoType=\"dijit.layout.AccordionPane\" title=\"$key\" >$value</div>";
 			
 		$text .= "</div>";
 		return $text;
+	}
+	
+	/*******************************************
+	 * a jquery styled grid
+	 *******************************************/
+	function grid( $headers = array(), $body=array(), $attr=array() )
+	{
+		
+		add_css( 'jquery/theme/ui.all.css' );
+		
+		if( ! isset($attr['align']) ) $attr['align'] = "center";
+		if( ! isset($attr['width']) ) $attr['width'] = "98%";
+		if( !isset($attr['class']) )
+			$attr['class'] = "ui-widget-content ui-corner-all ui-helper-reset";
+		else
+			$attr['class'] .= "ui-widget-content ui-corner-all ui-helper-reset";
+		
+		$attr = $this->_attributes_to_string( $attr );
+		
+		$text = "
+<table $attr >
+	<thead class=\"ui-widget-header\" >
+	<tr>";
+
+		foreach( $headers as $item=>$value )
+		{
+		$text .= "\n\t<th>$value</th>";
+		}
+		
+		$text .= "
+	</tr>
+	</thead>
+	<tbody class=\"\">";
+
+		foreach( $body as $item )
+		{
+			$text .= "\n\t\t<tr>";
+			foreach( $headers as $key=>$value )
+			{
+				$text .= (is_object($item))? "<td>{$item->$key}</td>":"<td>{$item[$key]}</td>";
+			}
+			$text .= "\n\t\t</tr>";
+		}
+		
+		$text .= "
+	</tbody>
+</table>";
+
+		return $text;
+	}
+	
+	/*******************************************
+	 * a error box using jquery
+	 *******************************************/
+	function error( $text='', $attr=array() )
+	{
+		add_css( 'jquery/theme/ui.all.css' );
+		$attr = $this->_attributes_to_string( $attr );
+		
+		return <<<EOT
+		<div class="ui-widget" $attr >
+				<div class="ui-state-error ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+					<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+					<strong>Error : </strong>$text</p>
+				</div>
+</div>
+EOT;
+	}
+	
+	/*******************************************
+	 * an Info box using jquery
+	 *******************************************/
+	function info( $text='', $attr=array() )
+	{
+		add_css( 'jquery/theme/ui.all.css' );
+		$attr = $this->_attributes_to_string( $attr );
+		
+		return <<<EOT
+		<div class="ui-widget" $attr >
+				<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
+					<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+					<strong>Info : </strong>$text</p>
+				</div>
+</div>
+
+EOT;
+	}
+	
+	/*******************************************
+	 * a horizontal box with dojo
+	 *******************************************/
+	function hbox( $content='', $attr=array(), $style=array() )
+	{
+		add_dojo( "dijit.layout.SplitContainer" );
+		add_dojo( "dijit.layout.ContentPane" );
+		
+		if( !isset($style['width']) ) $style['width'] ='100%';
+		if( !isset($style['height']) ) $style['height'] = '300px';
+		$style = $this->_array_to_style( $style );
+		
+		$attr = $this->_attributes_to_string( $attr );
+		
+		$text = "<div dojoType=\"dijit.layout.SplitContainer\" orientation=\"horizontal\" $attr style=\"$style\" >";
+		foreach( $content as $item )
+		{
+  			$text .= "<div dojoType=\"dijit.layout.ContentPane\" >$item</div>";
+		}
+		$text .= "</div>";
+
+	return $text;
+	}
+	/*******************************************
+	 * a vertical box with dojo
+	 *******************************************/
+	function vbox( $content='', $attr=array(), $style=array() )
+	{
+		add_dojo( "dijit.layout.SplitContainer" );
+		add_dojo( "dijit.layout.ContentPane" );
+		
+		if( !isset($style['width']) ) $style['width'] ='100%';
+		if( !isset($style['height']) ) $style['height'] = '300px';
+		$style = $this->_array_to_style( $style );
+		
+		$attr = $this->_attributes_to_string( $attr );
+		
+		$text = "<div dojoType=\"dijit.layout.SplitContainer\" orientation=\"vertical\" $attr style=\"$style\" >";
+		foreach( $content as $item )
+		{
+  			$text .= "<div dojoType=\"dijit.layout.ContentPane\" >$item</div>";
+		}
+		$text .= "</div>";
+
+	return $text;
 	}
 	/*******************************************
 	 * helper functions to convert paramters to JS object paramters 
@@ -300,5 +480,15 @@ class Gui {
 		}
 
 		return $att;
+	}
+	
+	function _array_to_style( $style=array() )
+	{
+		$arr = array();
+		foreach( $style as $key=>$value )
+		{
+			array_push( $arr, $key.':'.$value.';');
+		}
+		return implode( '', $arr );
 	}
 }

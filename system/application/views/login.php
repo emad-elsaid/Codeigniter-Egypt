@@ -36,8 +36,13 @@
 <strong>Logged in</strong></p>
 			</div>
 			<?php }else{ ?>
+			
 			<form method="POST" action="<?= site_url('login') ?>" id="login" >
+				
 			<table>
+				<tr>
+					<img src="<?= base_url() ?>images/admin/logo.png" align="center" >
+				</tr>
 				<tr>
 					<td><label>User name</label></td>
 					<td><input name="user" type="text" ></td>
@@ -47,6 +52,7 @@
 					<td><input name="pass" type="password" ></td>
 				</tr>
 			</table>
+			
 			</form>
 			<?php } ?>
 			</p>

@@ -136,7 +136,7 @@ class app {
 					  .  $this->js_text()
 					  .  $this->dojo_text()
 					  . "\n</head>"
-					  . "\n<body style=\"font-size: 12px\" class=\"tundra ui-helper-reset\">"
+					  . "\n<body style=\"font-size: 12px\" class=\"{$CI->vunsy->dojoStyle} ui-helper-reset\">"
 					  . $toolbar_text
 					  . "\n<div class=\"ui-widget  ui-corner-all\" style=\"margin:10px;\">"
 					  . $title_text
@@ -312,8 +312,9 @@ class app {
 	{
 		$t = '';
 		$CI =& get_instance();
+		$CI->load->library('gui');
 		foreach( $this->info_msg as $item )
-			$t .= $CI->load->view( 'info', array('text'=>$item), TRUE);
+			$t .= $CI->gui->info( $item );
 		
 		return $t;
 	}
@@ -323,7 +324,7 @@ class app {
 		$t = '';
 		$CI =& get_instance();
 		foreach( $this->error_msg as $item )
-			$t .= $CI->load->view( 'error', array('text'=>$item), TRUE);
+			$t .= $CI->gui->error( $item );
 		
 		return $t;
 	}

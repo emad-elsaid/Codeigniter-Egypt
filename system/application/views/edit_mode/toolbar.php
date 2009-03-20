@@ -12,7 +12,7 @@ $("document").ready( function(){
 </script>
 <div id="adminToolBar">
 <div id='adminToolBarIcons'>
-	<a href="<?= site_url('admin/app/user manager') ?>" title="Users Manager">
+	<a href="<?= site_url('admin/app/user manager') ?>" title="Users Manager" target="_blank" >
     	<img src="<?= base_url() ?>images/admin/users.png" alt="" title="" />
 	</a>
 </div>
