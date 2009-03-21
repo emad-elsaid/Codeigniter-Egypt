@@ -7,9 +7,7 @@
 	"perm":"$CI->vunsy->user->is_root()",
 	"pages":{
 		"Information":"info"
-		,"Add levels":"addlvl"
 		,"View levels":"viewlvl"
-		,"Add users":"addusr"
 		,"View users":"viewusr"
 	},
 	"index":"Information",
@@ -17,6 +15,6 @@
 	"css_files":[],
 	"js_files":[],
 	
-	"show_toolbar":true,
+	"show_toolbar":false,
 	"show_title":true
 }

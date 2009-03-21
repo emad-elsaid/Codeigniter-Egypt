@@ -156,7 +156,7 @@ class Vunsy {
 	{
 		$js_t = '';
 		foreach( $this->js as $item )
-			$js_t .= "	<script type=\"text/javascript\" src=\"".$item."\" ></script>\n";
+			$js_t .= "\n\t<script type=\"text/javascript\" src=\"".$item."\" ></script>";
 			
 		return $js_t;
 	}

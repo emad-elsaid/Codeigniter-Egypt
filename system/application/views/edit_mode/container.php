@@ -28,5 +28,5 @@ add_dojo('dijit.Menu');
 		</div>
 	</div>
 </button>
-<?= $text ?>
 </div>
+<?= $text ?>

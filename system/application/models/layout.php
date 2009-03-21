@@ -158,38 +158,33 @@ EOT;
 	 * section
 	 * you must pass objects to the function
 	 * **************************************/
-	function children($section='',$cell='')
+	function children($section='' , $cell='' )
 	{
 		
 		// getting the section path to the main index page
-		if( ! empty($section) )
+		if( isset($section) )
 			$par_sec = $section->get_parents();
 		
 		// selecting all the content of that parent
-		$sql_stat = sprintf(
-			"SELECT * FROM `content`
-			WHERE `parent_content`=%s",$this->id );
+		$sql_stat = "SELECT * FROM `content` WHERE `parent_content`= {$this->id}";
 			
 		// filter the objects to the requested cell
-		if( ! empty($cell) )
-			$sql_stat .= sprintf(" AND `cell`=%s",$cell );
-			
+		if( isset($cell) )
+			$sql_stat .= " AND `cell`=$cell";
 			
 		/***************************************
 		 *  filter the objects to the requested section
 		 * and all the parent sections that the content requested to be 
 		 * shared in the sub sections ordered in ascending with sort field
 		 * **************************************/
-		if( ! empty($section) )
+		if( isset($section) )
 		{
-			$sql_stat .= sprintf(" AND 
+			$sql_stat .= " AND 
 			(
-				(`parent_section`=%s)", $section->id );
+				(`parent_section`={$section->id})";
 				if( count($par_sec) >0 )
 					$sql_stat .= sprintf(" OR (`section` IN (%s) AND `childs`=%s)", implode(',',$par_sec), intval(TRUE));
-				$sql_stat = $sql_stat . sprintf("
-			 ) ORDER BY `sort` ASC");
-		
+				$sql_stat .= ") ORDER BY `sort` ASC";
 		}
 		// submit the query
 		$children = new Content();

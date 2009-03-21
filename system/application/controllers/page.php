@@ -77,9 +77,9 @@ class Page extends Controller
 		 * before page + CSS + JS + head + body + after page
 		 * *******************************************************/
 		// Rendering the page 
-		$OUTPUT  = $before_page_text;
-		$OUTPUT .= doctype( $this->config->item('doctype') );
-		$OUTPUT .= "<html xmlns=\"http://www.w3.org/1999/xhtml\" >"
+		echo		   $before_page_text
+					   . doctype( $this->config->item('doctype') )
+					   . "<html xmlns=\"http://www.w3.org/1999/xhtml\" >"
 					   ."\n<head>"
 					   ."\n\t<title>"
 					  .$this->config->item('site_name')
@@ -99,8 +99,7 @@ class Page extends Controller
 					  . $page_body_text
 					  . "\n</body>"
 					  . "\n</html>"
-					  . $after_page_text;
-		echo $OUTPUT;	
+					  . $after_page_text;	
 	}
 	
 }

@@ -125,7 +125,7 @@ EOT;
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = "<input type=\"text\" dojoType=\"dijit.form.DateTextBox\" id=\"$ID\" name=\"$ID\" value=\"$value\" $attr >";
+		$text = "<input type=\"text\" dojoType=\"dijit.form.DateTextBox\" name=\"$ID\" value=\"$value\" $attr >";
 		return $text;
 	}
 	
@@ -140,7 +140,7 @@ EOT;
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = "<input type=\"text\" dojoType=\"dijit.form.TimeTextBox\" id=\"$ID\" name=\"$ID\" value=\"$value\" $attr >";
+		$text = "<input type=\"text\" dojoType=\"dijit.form.TimeTextBox\" name=\"$ID\" value=\"$value\" $attr >";
 		return $text;
 	}
 	
@@ -154,7 +154,7 @@ EOT;
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = "<input type=\"text\" dojoType=\"dijit.form.TextBox\" id=\"$ID\" name=\"$ID\" value=\"$value\" $attr >";
+		$text = "<input type=\"text\" dojoType=\"dijit.form.TextBox\" name=\"$ID\" value=\"$value\" $attr >";
 		return $text;
 	}
 	
@@ -168,7 +168,7 @@ EOT;
   
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = "<button dojoType=\"dijit.form.Button\" id=\"$ID\" name=\"$ID\" $attr >$value</button>";
+		$text = "<button dojoType=\"dijit.form.Button\" name=\"$ID\" $attr >$value</button>";
 		return $text;
 	}
 	
@@ -204,7 +204,7 @@ EOT;
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = "<input type=\"password\" dojoType=\"dijit.form.TextBox\" id=\"$ID\" name=\"$ID\" value=\"$value\" $attr >";
+		$text = "<input type=\"password\" dojoType=\"dijit.form.TextBox\" name=\"$ID\" value=\"$value\" $attr >";
 		return $text;
 	}
 	
@@ -219,7 +219,7 @@ EOT;
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = "<input type=\"text\" dojoType=\"dijit.form.NumberSpinner\" id=\"$ID\" name=\"$ID\" value=\"$value\" $attr >";
+		$text = "<input type=\"text\" dojoType=\"dijit.form.NumberSpinner\"name=\"$ID\" value=\"$value\" $attr >";
 		return $text;
 	}
 	
@@ -235,7 +235,7 @@ EOT;
 		$attr = $this->_attributes_to_string( $attr );
 		
 		$text = 
-		"<textarea  dojoType=\"dijit.form.Textarea\" id=\"$ID\" name=\"$ID\" $attr >$value</textarea>";
+		"<textarea  dojoType=\"dijit.form.Textarea\" name=\"$ID\" $attr >$value</textarea>";
 		return $text;
 	}
 	
@@ -258,7 +258,7 @@ EOT;
 		$attr = $this->_attributes_to_string( $attr );
 		
 		$text = 
-		"<div  dojoType=\"dijit.Editor\" id=\"$ID\" name=\"$ID\" $attr  >
+		"<div  dojoType=\"dijit.Editor\" name=\"$ID\" $attr  >
 		$value
 		</div>";
 		return $text;
@@ -266,6 +266,7 @@ EOT;
 	
 	/*******************************************
 	 * a dropdown menu using dojo
+	 * @param: options[ 'Label'=>'value' ]
 	 *******************************************/
 	function dropdown( $ID='', $value='', $options=array(), $attr=array() )
 	{

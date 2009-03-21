@@ -41,13 +41,12 @@ class Section extends DataMapper {
 		
 	}
 	
-	function delete_with_sub( $object= '' )
+	function delete_with_sub( )
 	{
-		if(empty($object))
-		{
 			// getting the subsections
 			$c = new Section();
-			$c->get_where_parent_section( $this->id );
+			$c->where( 'parent_section', $this->id );
+			$c->get();
 			// delete all subsections relations
 			$c->delete_all();
 			// delete all children
@@ -67,7 +66,6 @@ class Section extends DataMapper {
 				$item->sort--;
 				$item->save();
 			}
-		}
 		
 		//delete this section
 		parent::delete($object);
@@ -118,16 +116,35 @@ class Section extends DataMapper {
 				}
 				
 			}
-			// save relation to the section
-			$this->save($object);
-			
-			//save relation to the parent
-			$parent->save($object);
 			
 			//save the object itself
 			$object->save();
 			
 		}
+	}
+	
+	function attach_section( $section='' )
+	{
+			// check if that place it took
+			$cont = new Section();
+			$cont->where( 'parent_section', $this->id );//same section
+			$cont->where( 'sort',$section->sort );//greater sort
+			$cont->get();//get them to process
+			
+			if( $cont->exists() )
+			{
+				$cont->where('parent_section',$this->id);//same section
+				$cont->where('sort >=',$section->sort);//greater sort
+				$cont->get();//get them to process
+				foreach( $cont->all as $item )
+				{
+					$item->sort++;
+					$item->save();
+				}
+				
+			}
+			
+			$section->save();
 	}
 	
 	function deattach( $object='' )
@@ -143,6 +160,26 @@ class Section extends DataMapper {
 		$cont->where( 'parent_content',$object->parent_content );//same parent
 		$cont->where( 'cell',$object->cell );// same cell
 		$cont->where( 'sort >',$object->sort );//greater sort
+		$cont->get();//get them to process
+		foreach( $cont->all as $item )
+		{
+			$item->sort--;
+			$item->save();
+		}
+			
+	}
+	
+	function deattach_section( $section='' )
+	{	
+		//=========================
+		//normalize the  sort numbers
+		//=========================
+		$cont = new Section();
+		// we have to push all the content up to fill that hole
+		// these content must me in the same section,parent,cell
+		// and have sort nubmer greater than that content
+		$cont->where( 'parent_section',$section->parent_section );//same section
+		$cont->where( 'sort >',$section->sort );//greater sort
 		$cont->get();//get them to process
 		foreach( $cont->all as $item )
 		{

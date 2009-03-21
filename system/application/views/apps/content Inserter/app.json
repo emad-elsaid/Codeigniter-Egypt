@@ -1,5 +1,5 @@
 {
-	"name":"Application",
+	"name":"Content Inserter",
 	"ver":"1.0",
 	"author":"Blaze Boy",
 	"website":"http:\/\/blazeeboy.wordpress.com",
@@ -14,6 +14,6 @@
 	"css_files":[],
 	"js_files":[],
 	
-	"show_toolbar":false,
+	"show_toolbar":true,
 	"show_title":true
 }

@@ -323,6 +323,7 @@ class app {
 	{
 		$t = '';
 		$CI =& get_instance();
+		if( ! isset($CI->gui) ) $CI->load->library( 'gui' );
 		foreach( $this->error_msg as $item )
 			$t .= $CI->gui->error( $item );
 		
