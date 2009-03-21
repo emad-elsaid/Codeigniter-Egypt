@@ -160,4 +160,4 @@ if( is_object( $Plugin_Data ) AND isset( $Plugin_Data->info) AND is_object($Plug
 $Plugin_Form_Data[""] = 
 $Plugin_Form .= $ci->gui->form( '#', $Plugin_Form_Data, array("id"=>"info_form"));
 //===============================================
-echo $ci->gui->accordion( array("Basic Data"=>$Basic_Form, "Plugin Data"=>$Plugin_Form ) );
+echo $ci->gui->accordion( array("Basic Data"=>$Basic_Form, "Plugin Data"=>$Plugin_Form ) ,'',array('height'=>'500px') );

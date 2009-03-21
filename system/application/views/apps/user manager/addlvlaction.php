@@ -10,5 +10,5 @@ else
 	$l->name = $ci->input->post( 'name' );
 	$l->level = $ci->input->post( 'level' );
 	$l->save();
-	$ci->app->add_info( " level added successfully" );
+	redirect( $ci->app->app_url('View levels'));
 }

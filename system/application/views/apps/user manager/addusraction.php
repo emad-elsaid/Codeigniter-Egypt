@@ -15,5 +15,5 @@ else
 	$u->email = $ci->input->post('email');
 	$u->level = $ci->input->post( 'level' );
 	$u->save();
-	$ci->app->add_info( "User added please return to the view page or add another user" );
+	redirect( $ci->app->app_url('View users'));
 }

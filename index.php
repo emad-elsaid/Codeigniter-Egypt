@@ -47,8 +47,9 @@
 | END OF USER CONFIGURABLE SETTINGS
 |===============================================================
 */
-// vunsy defined constant
+// vunsy defined constants
 define('APP', $system_folder.'/'.$application_folder.'/');
+define('PATH', realpath(dirname(__FILE__)).'/' );
 
 /*
 |---------------------------------------------------------------

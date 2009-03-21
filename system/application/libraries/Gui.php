@@ -37,34 +37,52 @@ class Gui {
 	 * File chooser using the fsbrowser, use it with CAUTION
 	 * it makes an dojo textinput linked with a jquery fsbrowser
 	 *******************************************/
-	function file( $ID='',$value='', $attr=array(), $param=array())
+	function file( $ID='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
 		
-		return $this->textbox( $ID, $value, $attr );
-		/*add_js( "jquery/jquery.js");
-		add_dojo( "dijit.form.TextBox" );
+		//adding the nessecery javascripts and CSSs
+		add_js( "jquery/jquery.js");
+		add_js( "jquery/fileTree/jqueryFileTree.js" );
+		add_js( "jquery/easing.js" );
+		add_css( "jquery/fileTree/jqueryFileTree.css" );
+		add_css( "jquery/theme/ui.all.css");
+		add_dojo( "dijit.Dialog" );
 		
-		$value = form_prep( $value );
+		// adding the styles if not there
 		$attr = $this->_attributes_to_string( $attr );
-		$param = $this->_params_to_js( $param );
-		define( 'BASE_URL', base_url() );
-		include( 'jquery/sfbrowser/init.php' );
-
-		$text = "\n<input type=\"text\" 
-		dojoType=\"dijit.form.TextBox\"
-		id=\"$ID\" 
-		name=\"$ID\" 
-		onclick=\"
-			$.sfb({select:function(ofile){
-				ofile[0].file = ofile[0].file.split( '//')[1];
-				ofile[0].file = ofile[0].file.replace( $.sfbrowser.defaults.base, '' );
-				document.getElementById('$ID').value=ofile[0].file;
-			}
-			$param
-			}
-			);\"
-		value=\"$value\" $attr >";
-		return $text;*/
+		if( !isset($style['width']) ) $style['width'] ='200px';
+		if( !isset($style['height']) ) $style['height'] = '300px';
+		if(!isset($style['overflow']) ) $style['overflow'] = 'auto';
+		$style = $this->_array_to_style( $style );
+		
+		//preparing the paramters
+		if(!isset($param['root'])) $param['root'] =  PATH;
+		else $param['root'] =  PATH.$param['root'];
+		if( ! is_dir( $param['root'] ) ) $param['root'] = str_replace( '/','\\',$param['root'] );
+		$root = $param['root'];
+		$script = base_url()."jquery/fileTree/connectors/jqueryFileTree.php";
+		$param = $this->_params_to_js($param);
+		
+		//the output is here
+		$root = addslashes( $root );
+		$t = $this->textbox( $ID, $value, array('onclick'=>"dijit.byId('{$ID}dlg').show();") );
+		return <<<EOT
+		$t
+		<div id="{$ID}dlg" dojoType="dijit.Dialog" title="Choose a file" >
+			<div class="ui-helper-reset cui-widget ui-widget-content" id="{$ID}DIV" style="$style" ></div>
+		</div>
+		<script language="javascript" >
+		$(document).ready( function() {
+		//$('#{$ID}DIV').hide();
+    	$('#{$ID}DIV').fileTree({script:'$script' $param }, 
+		function(file) {
+			file = file.split( '{$root}')[1];
+        	dijit.byId('$ID').setValue( file );
+			dijit.byId('{$ID}dlg').hide();
+    	});
+		});
+		</script>
+EOT;
 	}
 	
 	/*******************************************
@@ -73,24 +91,26 @@ class Gui {
 	function color( $ID='',$value='', $attr=array() )
 	{
 		add_dojo( "dojox.widget.ColorPicker" );
-
 		add_dojo( "dijit.Dialog" );
 		add_dojo( "dijit.form.TextBox" );
-
+		add_js( "jquery/jquery.js" );
 		add_css( "dojo/dojox/widget/ColorPicker/ColorPicker.css" );
 		
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = "
-		<input type=\"text\" id=\"$ID\" name=\"$ID\" dojoType=\"dijit.form.TextBox\" onclick=\"dijit.byId('{$ID}dlg').show()\" value=\"$value\" $attr >
-		<div id=\"{$ID}dlg\" dojoType=\"dijit.Dialog\" >
-		<div  dojoType=\"dojox.widget.ColorPicker\"
-		showHsv=\"false\"
-  		showRgb=\"false\"  
-		 onclick=\"document.getElementById('{$ID}').value=this.value\">
-		</div></div>";
-		  
+		$text = <<< EOT
+		<input type="text" id="$ID" name="$ID" dojoType="dijit.form.TextBox" onclick="dijit.byId('{$ID}dlg').show()" value="$value" $attr >
+		<span id="{$ID}box" class="ui.helper.reset ui-corner-all" style="width:20px;height:20px;background-color:$value" >&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		<div id="{$ID}dlg" dojoType="dijit.Dialog" title="Choose a color" >
+		<div  dojoType="dojox.widget.ColorPicker"
+		showHsv="false"
+  		showRgb="false" 
+		hexCode="$value"
+		liveUpdate="true"
+		 onChange="dijit.byId('{$ID}').setValue(this.value);$('#{$ID}box').css('background-color',this.value);" class="ui.helper.clearfix" >
+		</div></div>
+EOT;
 		 return $text;
 	}
 	
@@ -473,10 +493,10 @@ EOT;
 
 		foreach ($param as $key => $val)
 		{
-			if( $val[0]=='[' and $val[strlen($val)-1] )
-				$att .= ', ' . $key . ': ' . str_replace('"','\"',$val) .' ';
+			if( $val[0]=='[' and $val[strlen($val)-1]==']' )
+				$att .= ', ' . $key . ': ' . addslashes(str_replace('"','\"',$val)) .' ';
 			else
-				$att .= ', ' . $key . ':\'' . str_replace('"','\"',$val) . '\' ';
+				$att .= ', ' . $key . ':\'' . addslashes(str_replace('"','\"',$val)) . '\' ';
 		}
 
 		return $att;
