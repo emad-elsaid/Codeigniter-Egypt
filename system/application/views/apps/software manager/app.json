@@ -1,0 +1,18 @@
+{
+	"name":"Software manager",
+	"ver":"1.0",
+	"author":"Blaze Boy",
+	"website":"http:\/\/blazeeboy.wordpress.com",
+	
+	"perm":"$CI->vunsy->user->is_root()",
+	"pages":{
+		"Browser":"browse"
+	},
+	"index":"Browse",
+	
+	"css_files":[],
+	"js_files":[],
+	
+	"show_toolbar":false,
+	"show_title":true
+}
