@@ -4,7 +4,7 @@
 	"author":"Blaze Boy",
 	"website":"http:\/\/blazeeboy.wordpress.com",
 	
-	"perm":"$CI->vunsy->user->is_root()",
+	"perm":"$CI->vunsy->edit_mode()",
 	"pages":{
 		"index":"chooser"
 		,"Data Editor":"data"
@@ -14,6 +14,6 @@
 	"css_files":[],
 	"js_files":[],
 	
-	"show_toolbar":true,
+	"show_toolbar":false,
 	"show_title":true
 }

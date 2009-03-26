@@ -37,7 +37,7 @@ else
 	}
 
 	echo $ci->gui->grid(
-			array('id'=>'ID','level'=>'Level','name'=>'Name','email'=>'Email','d'=>'Delete','e'=>'Edit')
+			array('id'=>'ID','level'=>'Level','name'=>'Name','email'=>'Email','lastenter'=>'Last enter','d'=>'Delete','e'=>'Edit')
 			,$l->all);
 	
 }

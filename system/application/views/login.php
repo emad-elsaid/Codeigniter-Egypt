@@ -13,8 +13,10 @@
 	$(document).ready(function(){
     	$("#dialog").dialog(
 			{  closeOnEscape: false ,
-				draggable: false ,
+				draggable: true ,
 				modal: true ,
+				height: 350 ,
+				width: 350 ,
 				resizable: false,
 				buttons: {
 					Ok: function(){
@@ -23,12 +25,11 @@
 					}
 			});
   	});
-
 	</script>
 </head>
 
 <body style="font-size: 12px" >
-		<div id="dialog" title="Dialog Title" >
+		<div id="dialog" title="Login Dialog" >
 			<p>
 			<?php if( $this->vunsy->user->logged() ){ ?>
 			<div class="ui-state-highlight" >
@@ -39,9 +40,11 @@
 			
 			<form method="POST" action="<?= site_url('login') ?>" id="login" >
 				
-			<table>
+			<table align="center" >
 				<tr>
-					<img src="<?= base_url() ?>images/admin/logo.png" align="center" >
+					<td colspan="2" align="center" >
+					<img src="<?= base_url() ?>images/admin/logo.png" >
+					</td>
 				</tr>
 				<tr>
 					<td><label>User name</label></td>

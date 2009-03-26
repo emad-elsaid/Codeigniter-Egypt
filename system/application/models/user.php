@@ -1,4 +1,13 @@
 <?php
+/**
+ * user class
+ *
+ * @package	Vunsy
+ * @subpackage	Vunsy
+ * @category	model file
+ * @author	Emad Elsaid
+ * @link	http://github.com/blazeeboy/vunsy
+ */
 class User extends DataMapper {
 	var $table = 'user';
 	
@@ -76,8 +85,12 @@ class User extends DataMapper {
 		if( $this->exists() )
 		{
 			$result = TRUE;
+			$CI->session->set_userdata('mode', 'edit');
 			$CI->session->set_userdata('id', $this->id);
 			$CI->session->set_userdata('level', $this->level);
+			$this->lastenter = $this->curenter;
+			$this->curenter = $CI->input->ip_address();
+			$this->save();
 		}
 		else 
 		{
@@ -106,6 +119,8 @@ class User extends DataMapper {
 		$CI->session->set_userdata('id', 0);
 		$CI->session->set_userdata('level', 0);
 		$CI->session->set_userdata('mode', 'view');
+		$this->lastenter = $this->curenter;
+		$this->save();
 	}
 	
 	function set_password( $password="" )

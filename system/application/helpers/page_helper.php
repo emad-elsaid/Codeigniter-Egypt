@@ -1,5 +1,15 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * page helper functions
+ * to add javascripts ans css links 
+ * to the page header
+ *
+ * @package	Vunsy
+ * @subpackage	Vunsy
+ * @category	helper file
+ * @author	Emad Elsaid
+ * @link	http://github.com/blazeeboy/vunsy
+ */
 if ( ! function_exists('add_js')){
 	function add_js( $script = '' )
 	{

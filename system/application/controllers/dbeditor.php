@@ -5,7 +5,7 @@ class Dbeditor extends Controller {
 	function Dbeditor()
 	{
 		parent::Controller();
-		$this->load->scaffolding('content');
+		$this->load->scaffolding('user');
 	}
 	
 }

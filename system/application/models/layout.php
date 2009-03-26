@@ -1,4 +1,13 @@
 <?php
+/**
+ * layout class
+ *
+ * @package	Vunsy
+ * @subpackage	Vunsy
+ * @category	model file
+ * @author	Emad Elsaid
+ * @link	http://github.com/blazeeboy/vunsy
+ */
 class Layout extends Content {
 	
 	//var $has_many = array('content');
@@ -38,7 +47,7 @@ class Layout extends Content {
 		$bText = <<<EOT
 		 <span>Insert</span>
 	<script type="dojo/method" event="onClick" args="evt">
-		open("$link");
+		open("$link","","height=500,width=500");
 	</script>
 EOT;
 		return $ci->gui->button( "", $bText, 
@@ -75,7 +84,7 @@ EOT;
 			$c_children = $this->children( $CI->vunsy->get_section(), $i );
 			
 			$cell_text = '';
-			if( $CI->vunsy->edit_mode() AND count($c_children)==0 )
+			if( $CI->vunsy->edit_mode() AND count($c_children)==0 AND $this->can_addin() )
 				$cell_text = $this->add_button($i,0); // +++ buttons +++ in start of every cell
 				
 			// rendering the cell content
@@ -84,8 +93,6 @@ EOT;
 			{
 				$sort_num++;
 				$cell_text .= $item->render();
-				/*if( $CI->vunsy->edit_mode())
-					$cell_text .= $this->add_button($i, $sort_num);// +++ buttons +++ after every widget*/
 			}
 			
 			// put the cell text in it's place in the layout text array
@@ -93,9 +100,6 @@ EOT;
 			 * we have to put all the content in a container not the empty cell
 			 * the page was disply even the empty cell plus button in a container
 			 * */
-			/*if( $CI->vunsy->edit_mode())
-				$layout_content[ $i ] = $CI->load->view('edit_mode/container',array('text'=>$cell_text),TRUE);
-			else*/
 				$layout_content[ $i ] = $cell_text;
 		}
 		
@@ -125,11 +129,6 @@ EOT;
 		/* i comented that block and i'll make the parent class display all 
 		 * the layoutsand widgets in a container
 		 */
-		/*if( $CI->vunsy->edit_mode())
-				$text = $CI->load->view('edit_mode/container',array('text'=>$text),TRUE);
-		else
-				$text = $cell_text;*/
-		
 		return parent::render($text);
 	}
 	
@@ -160,16 +159,15 @@ EOT;
 	 * **************************************/
 	function children($section='' , $cell='' )
 	{
-		
 		// getting the section path to the main index page
-		if( isset($section) )
+		if( ! empty($section) )
 			$par_sec = $section->get_parents();
 		
 		// selecting all the content of that parent
 		$sql_stat = "SELECT * FROM `content` WHERE `parent_content`= {$this->id}";
 			
 		// filter the objects to the requested cell
-		if( isset($cell) )
+		if( isset($cell) AND $cell!='' )
 			$sql_stat .= " AND `cell`=$cell";
 			
 		/***************************************
@@ -177,13 +175,13 @@ EOT;
 		 * and all the parent sections that the content requested to be 
 		 * shared in the sub sections ordered in ascending with sort field
 		 * **************************************/
-		if( isset($section) )
+		if( ! empty($section) )
 		{
 			$sql_stat .= " AND 
 			(
 				(`parent_section`={$section->id})";
 				if( count($par_sec) >0 )
-					$sql_stat .= sprintf(" OR (`section` IN (%s) AND `childs`=%s)", implode(',',$par_sec), intval(TRUE));
+					$sql_stat .= sprintf(" OR (`parent_section` IN (%s) AND `subsection`=%s)", implode(',',$par_sec), intval(TRUE));
 				$sql_stat .= ") ORDER BY `sort` ASC";
 		}
 		// submit the query
@@ -201,6 +199,11 @@ EOT;
 		{
 				// making the content object with the type
 				$temp = new $item->type();
+				/*// if wrong type will make a generic content object
+				// i added that cuz error raised if i included
+				// a widget not in a folder
+				if( ! isset($temp) ) $temp = new Content();*/
+				
 				$temp->get_by_id( $item->id );
 				array_push( $final_c, $temp);
 		}

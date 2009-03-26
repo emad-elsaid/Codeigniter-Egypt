@@ -1,5 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * Vunsy main Class
+ *
+ * @package	Vunsy
+ * @subpackage	Vunsy
+ * @category	library file
+ * @author	Emad Elsaid
+ * @link	http://github.com/blazeeboy/vunsy
+ */
 class Vunsy {
 	
 	var $js = array();
@@ -37,6 +45,18 @@ class Vunsy {
 	/* function of checking site mode
 	 * 
 	 * */
+	function mode($mode='')
+	{
+		if( empty($mode) )
+			return $this->mode;
+		else
+		{
+			$CI =& get_instance();
+			$CI->session->set_userdata( 'mode', $mode );
+			$this->mode = $mode ;
+		}
+			
+	}
 	function edit_mode()
 	{
 		return ($this->mode=='edit')? TRUE:FALSE;
@@ -56,7 +76,7 @@ class Vunsy {
 			if( ! isset($CI->uri) )
 				$CI->load->library('URI');
 			$sec = new Section();
-			$sec->get_by_id($CI->uri->rsegment(1));
+			$sec->get_by_id($CI->uri->segment(1));
 			if( ! $sec->exists())
 			{
 				$sec->get();

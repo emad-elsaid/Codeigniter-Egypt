@@ -1,4 +1,13 @@
 <?php
+/**
+ * widget class
+ *
+ * @package	Vunsy
+ * @subpackage	Vunsy
+ * @category	model file
+ * @author	Emad Elsaid
+ * @link	http://github.com/blazeeboy/vunsy
+ */
 class Widget extends Content{
 		
 	function Widget()

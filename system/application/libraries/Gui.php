@@ -1,5 +1,13 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * gui class
+ *
+ * @package	Vunsy
+ * @subpackage	Vunsy
+ * @category	library file
+ * @author	Emad Elsaid
+ * @link	http://github.com/blazeeboy/vunsy
+ */
 class Gui {
 	
 	function Gui()
@@ -37,7 +45,7 @@ class Gui {
 	 * File chooser using the fsbrowser, use it with CAUTION
 	 * it makes an dojo textinput linked with a jquery fsbrowser
 	 *******************************************/
-	function file( $ID='',$value='', $attr=array(), $param=array(), $style=array() )
+	function activeTree( $connector='', $ID='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
 		
 		//adding the nessecery javascripts and CSSs
@@ -60,15 +68,20 @@ class Gui {
 		else $param['root'] =  PATH.$param['root'];
 		if( ! is_dir( $param['root'] ) ) $param['root'] = str_replace( '/','\\',$param['root'] );
 		$root = $param['root'];
-		$script = base_url()."jquery/fileTree/connectors/jqueryFileTree.php";
+		$script = base_url().$connector;
 		$param = $this->_params_to_js($param);
 		
 		//the output is here
 		$root = addslashes( $root );
-		$t = $this->textbox( $ID, $value, array('onclick'=>"dijit.byId('{$ID}dlg').show();") );
+		$t = $this->textbox( $ID, $value, 
+				array(
+					'onclick'=>"dijit.byId('{$ID}dlg').show();"
+					,'id' => $ID
+				)
+		);
 		return <<<EOT
 		$t
-		<div id="{$ID}dlg" dojoType="dijit.Dialog" title="Choose a file" >
+		<div id="{$ID}dlg" dojoType="dijit.Dialog" title="Choose an Item" >
 			<div class="ui-helper-reset cui-widget ui-widget-content" id="{$ID}DIV" style="$style" ></div>
 		</div>
 		<script language="javascript" >
@@ -85,6 +98,23 @@ class Gui {
 EOT;
 	}
 	
+	function file( $ID='',$value='', $attr=array(), $param=array(), $style=array() ){
+		return $this->activeTree("jquery/fileTree/jqueryFileTree.php", $ID, $value,$attr,$param,$style);
+	}
+	
+	function model( $ID='',$value='', $attr=array(), $param=array(), $style=array() ){
+		$param['root'] = 'system/application/models/';
+		return $this->activeTree("jquery/fileTree/jqueryFileTree.php", $ID, $value,$attr,$param,$style);
+	}
+	
+	function folder( $ID='',$value='', $attr=array(), $param=array(), $style=array() ){
+		return $this->activeTree("jquery/fileTree/jqueryDirTree.php", $ID, $value,$attr,$param,$style);
+	}
+	
+	function app( $ID='',$value='', $attr=array(), $param=array(), $style=array() ){
+		$param['root'] = 'system/application/views/apps/';
+		return $this->activeTree("jquery/fileTree/jqueryDirTree.php", $ID, $value,$attr,$param,$style);
+	}
 	/*******************************************
 	 * a color chooser field linked with a dojo color picker dialog
 	 *******************************************/
@@ -369,11 +399,15 @@ EOT;
 		$text .= "
 	</tr>
 	</thead>
-	<tbody class=\"\">";
-
+	<tbody>";
+		$even = TRUE;
 		foreach( $body as $item )
 		{
-			$text .= "\n\t\t<tr>";
+			$even = !$even;
+			if( $even )
+				$text .= "\n\t\t<tr style=\"background-color:white\">";
+			else
+				$text .= "\n\t\t<tr>";
 			foreach( $headers as $key=>$value )
 			{
 				$text .= (is_object($item))? "<td>{$item->$key}</td>":"<td>{$item[$key]}</td>";
@@ -386,6 +420,17 @@ EOT;
 </table>";
 
 		return $text;
+	}
+	
+	function titlepane( $title='', $body='', $attr=array() )
+	{
+		add_dojo( 'dijit.TitlePane' );
+		$attr = $this->_attributes_to_string( $attr );
+		return <<<EOT
+		<div dojoType="dijit.TitlePane" title="$title" $attr >
+			$body
+		</div>
+EOT;
 	}
 	
 	/*******************************************

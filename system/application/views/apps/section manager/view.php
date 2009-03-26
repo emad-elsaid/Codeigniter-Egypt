@@ -7,7 +7,7 @@ $sections = new Section();
 foreach( $sections->all as $item )
 {
 	$item->e = anchor( 'Edit', $ci->app->app_url( 'edit' ) );
-	$item->d = anchor( 'Delete', $ci->app->app_url( 'edit' ) );
+	$item->d = anchor( 'Delete', $ci->app->app_url( 'delete' ) );
 	
 }
 
@@ -23,8 +23,6 @@ function add( $id, $sort , $text='+' )
 					,array(
 							'Name :'=>$ci->gui->textbox( 'name' )
 							,'view'=>$ci->gui->textarea( 'view' )
-							,'add'=>$ci->gui->textarea( 'add' )
-							,'edit'=>$ci->gui->textarea( 'edit' )
 							,''=>$ci->gui->button( '', 'Submit', array('type'=>'submit') )
 					)
 					,''
@@ -71,4 +69,5 @@ function printS( $id )
 	return $output;
 	}
 
+// start to print sections from index page with ID = 1
 echo printS( 1 );

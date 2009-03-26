@@ -52,18 +52,24 @@ dijit.byId('basic_form').submit();
 </script>
 EOT;
 
-$button = $ci->gui->button( '','Add Content'.$script );
+if( $edit === FALSE )
+	$button = $ci->gui->button( '','Add Content'.$script );
+else
+	$button = $ci->gui->button( '','Edit Content'.$script );
 
 if( $edit === FALSE )
 {
+	$p_cont = new Content();
+	$p_cont->get_by_id( $hidden['parent_content'] );
+	
 	$Basic_Form = 	$ci->gui->form(
 		$ci->app->app_url('addaction')
 		,array(
 		"Show in subsections : " => $ci->gui->checkbox('subsection')
-		,"View permissions : " => $ci->gui->textarea('view')
-		,"Add in permissions : " => $ci->gui->textarea('addin')
-		,"Edit permissions : " => $ci->gui->textarea('edit')
-		,"Delete permissions : " => $ci->gui->textarea('del')
+		,"View permissions : " => $ci->gui->textarea('view', $p_cont->view)
+		,"Add in permissions : " => $ci->gui->textarea('addin', $p_cont->addin)
+		,"Edit permissions : " => $ci->gui->textarea('edit', $p_cont->edit)
+		,"Delete permissions : " => $ci->gui->textarea('del', $p_cont->del)
 		,"" => $button
 		)
 		,array( 'id'=>'basic_form' )
@@ -87,10 +93,22 @@ else
 	);
 }
 //===============================================
-/*OUR JSON OBJECT WILL BE
- * object(
- * 	filed1 = object( type, default, info = object(key1=value1,key2=value2...etc) )
- * )
+/*OUR JSON OBJECT LIKE THAT
+ 
+{
+	"info":{
+		"text":{
+			"type":"editor"
+			,"default":"default text"
+		}
+		,"title":{
+			"type":"textbox"
+		}
+		,"titlecolor":{
+			"type":"color"
+		}
+	}
+}
  * */
 
 $Plugin_Data = $ci->load->view( $hidden['path'], array( "mode"=>"config" ), TRUE );
@@ -131,6 +149,15 @@ if( is_object( $Plugin_Data ) AND isset( $Plugin_Data->info) AND is_object($Plug
 			case "file":
 				$current_field = $ci->gui->file( $key, $cVal );
 				break;
+			case "folder":
+				$current_field = $ci->gui->folder( $key, $cVal );
+				break;
+			case "model":
+				$current_field = $ci->gui->model( $key, $cVal );
+				break;
+			case "app":
+				$current_field = $ci->gui->app( $key, $cVal );
+				break;
 			case "number":
 				$current_field = $ci->gui->number( $key, $cVal );
 				break;
@@ -149,15 +176,12 @@ if( is_object( $Plugin_Data ) AND isset( $Plugin_Data->info) AND is_object($Plug
 				break;				
 		}
 		
-		if( isset( $value->tooltip ) )
-			$current_field .= $ci->gui->tooltip( $key, $value->tooltip );
-			
 		$Plugin_Form_Data[$key] = $current_field;
 		
 	}
 }
 
-$Plugin_Form_Data[""] = 
+$Plugin_Form_Data[""] = "&nbsp";
 $Plugin_Form .= $ci->gui->form( '#', $Plugin_Form_Data, array("id"=>"info_form"));
 //===============================================
-echo $ci->gui->accordion( array("Basic Data"=>$Basic_Form, "Plugin Data"=>$Plugin_Form ) ,'',array('height'=>'500px') );
+echo $ci->gui->accordion( array("Basic Data"=>$Basic_Form, "Plugin Data"=>$Plugin_Form ) ,'',array('height'=>'75%') );

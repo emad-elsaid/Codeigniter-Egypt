@@ -1,5 +1,13 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * Vunsy database Objects
+ *
+ * @package	Vunsy
+ * @subpackage	Vunsy
+ * @category	Config file
+ * @author	Emad Elsaid
+ * @link	http://github.com/blazeeboy/vunsy
+ */
 $config['objects'] = array(
 	'content' => array(
 		'parent_content' => array( 'type'=>'BIGINT','null'=>TRUE ),
@@ -12,7 +20,6 @@ $config['objects'] = array(
 		'addin' => array( 'type'=>'LONGTEXT','null'=>TRUE),
 		'edit' => array( 'type'=>'LONGTEXT','null'=>TRUE),
 		'del' => array( 'type'=>'LONGTEXT','null'=>TRUE),
-		'by' => array( 'type'=>'INT','null'=>TRUE ),
 		'type' => array( 'type'=>'VARCHAR', 'constraint'=>30,'null'=>TRUE ),
 		'info' => array( 'type'=>'LONGTEXT','null'=>TRUE)
 	) ,
@@ -22,9 +29,7 @@ $config['objects'] = array(
 		'parent_section' => array( 'type'=>'BIGINT','null'=>TRUE ),
 		'name' => array( 'type'=>'VARCHAR', 'constraint'=>100,'null'=>TRUE) ,
 		'sort' => array( 'type'=>'INT','null'=>TRUE ),
-		'view' => array( 'type'=>'LONGTEXT','null'=>TRUE),
-		'add' => array( 'type'=>'LONGTEXT','null'=>TRUE),
-		'edit' => array( 'type'=>'LONGTEXT','null'=>TRUE)
+		'view' => array( 'type'=>'LONGTEXT','null'=>TRUE)
 	) ,
 
 

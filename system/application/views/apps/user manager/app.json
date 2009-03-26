@@ -15,6 +15,6 @@
 	"css_files":[],
 	"js_files":[],
 	
-	"show_toolbar":false,
+	"show_toolbar":true,
 	"show_title":true
 }

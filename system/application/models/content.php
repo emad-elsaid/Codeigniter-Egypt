@@ -1,4 +1,13 @@
 <?php
+/**
+ * content class
+ *
+ * @package	Vunsy
+ * @subpackage	Vunsy
+ * @category	model file
+ * @author	Emad Elsaid
+ * @link	http://github.com/blazeeboy/vunsy
+ */
 class Content extends DataMapper {
 	var $table = 'content';
 	
@@ -53,6 +62,9 @@ class Content extends DataMapper {
 							,'id'=>$this->id
 							,'cell'=>$this->cell
 							,'sort'=>$this->sort
+							,'can_delete'=>$this->can_delete()
+							,'can_addin'=>$this->can_addin()
+							,'can_edit'=>$this->can_edit()
 						)
 						, TRUE);
 		}

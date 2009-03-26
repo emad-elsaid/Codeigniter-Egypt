@@ -1,4 +1,13 @@
 <?php 
+/**
+ * remote access controller
+ *
+ * @package	Vunsy
+ * @subpackage	Vunsy
+ * @category	controller file
+ * @author	Emad Elsaid
+ * @link	http://github.com/blazeeboy/vunsy
+ */
 class Remote extends Controller {
 	function Remote(){
 		parent::Controller();

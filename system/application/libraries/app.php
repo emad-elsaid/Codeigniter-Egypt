@@ -1,5 +1,13 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * application class
+ *
+ * @package	Vunsy
+ * @subpackage	Vunsy
+ * @category	library file
+ * @author	Emad Elsaid
+ * @link	http://github.com/blazeeboy/vunsy
+ */
 class app {
 	
 	// application information

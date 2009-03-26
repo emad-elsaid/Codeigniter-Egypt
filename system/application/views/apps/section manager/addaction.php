@@ -7,8 +7,6 @@ $s->parent_section = $ci->input->post( 'parent_section' );
 $s->name = $ci->input->post( 'name' );
 $s->sort = $ci->input->post( 'sort' );
 $s->view = $ci->input->post( 'view' );
-$s->add = $ci->input->post( 'add' );
-$s->edit = $ci->input->post( 'edit' );
 
 $p = new Section();
 $p->get_by_id( $s->parent_section );

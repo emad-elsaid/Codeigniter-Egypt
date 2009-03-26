@@ -1,8 +1,12 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-/*Site config variables
- * config the site name
- * and site style
+/**
+ * Vunsy config file
+ *
+ * @package	Vunsy
+ * @subpackage	Vunsy
+ * @category	Config file
+ * @author	Emad Elsaid
+ * @link	http://github.com/blazeeboy/vunsy
  */
 $config["site_name"] = "siteName";
 $config["doctype"] = "XHTML 1.0 Strict";
@@ -12,7 +16,7 @@ $config["charset"] = "utf-8";
  * site autoloading css style sheets
  * and javascript files that autoloads in every page
  */
-$config["dojoStyle"] = "soria";
+$config["dojoStyle"] = "nihilo";
 $config["css"] = array();
 $config["js"] = array();
 

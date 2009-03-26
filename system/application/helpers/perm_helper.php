@@ -1,5 +1,13 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * permission helper functions
+ *
+ * @package	Vunsy
+ * @subpackage	Vunsy
+ * @category	helper file
+ * @author	Emad Elsaid
+ * @link	http://github.com/blazeeboy/vunsy
+ */
 if ( ! function_exists('perm_chck')){
 	
 	function perm_chck($perms=''){

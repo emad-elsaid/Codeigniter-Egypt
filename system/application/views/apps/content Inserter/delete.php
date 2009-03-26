@@ -8,14 +8,21 @@ $c->get_by_id( $id );
 
 if( $c->exists() )
 {
-	if( $c->type = 'layout' )
+	if( $c->type == 'layout' )
 	{
 		$c = new Layout();
 		$c->get_by_id( $id );
 	}
 
-	$c->delete();
-	$ci->app->add_info('Content deleted');
+	if( $c->can_delete() )
+	{
+		$c->delete();
+		$ci->app->add_info('Content deleted');
+	}
+	else
+	{
+		$ci->app->add_error( 'permission denied! please check your root adminstrator' );
+	}
 }
 else
 {
