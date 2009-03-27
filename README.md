@@ -26,6 +26,7 @@ built on it some applications accessible by a task bar like facebook one
 			vunsy/system/application/config/config.php
 			vunsy/system/application/config/database.php
 			vunsy/system/application/config/vunsy_config.php
+			vunsy/kfm/configuration.php
 			
 * 3- to install database : 
 	vunsyURL/index.php/install
