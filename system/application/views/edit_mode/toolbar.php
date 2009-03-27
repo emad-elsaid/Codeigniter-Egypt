@@ -1,12 +1,13 @@
 <?php
 $ci =& get_instance();
+add_js('dojo/dojo/dojo.js');
 add_js( 'jquery/jquery.js' );
 add_js( 'jquery/jqDock.js' );
 add_js( 'jquery/aqFloater.js' );
 ?>
 <script type="text/javascript" >
 $("document").ready( function(){
-	$("#adminToolBar").aqFloater({attach: 'n', duration: .3, opacity: 1});
+	$("#adminToolBar").aqFloater({attach: 'n', duration: 0.3, opacity: 0.9});
 	$("#adminToolBarIcons").jqDock({align:'top',duration:100});
 }
 );
@@ -38,7 +39,7 @@ $("document").ready( function(){
 			});
 		}
 	</script>
-	<a href="javascript: admin_editmode_toolbar()" target="_blank" >
+	<a href="javascript:admin_editmode_toolbar()" >
     	<img src="<?= base_url() ?>images/admin/editmode.png" title="Editmode changer" />
 	</a>
 	<a href="<?= site_url('logout') ?>" >

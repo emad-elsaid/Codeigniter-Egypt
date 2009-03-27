@@ -64,6 +64,7 @@ if ( ! function_exists('add_dojo')){
 			
 			if(! in_array($req, $CI->vunsy->dojo))
 				array_push( $CI->vunsy->dojo, $req );
+				
 		}
 	}
 }

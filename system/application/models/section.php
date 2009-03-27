@@ -308,7 +308,7 @@ class Section extends DataMapper {
 <html xmlns="http://www.w3.org/1999/xhtml" >
 	<head>
 	<title>{$CI->config->item('site_name')} {$this->name}</title>
-	<meta http-equiv=\"content-type\" content=\"text/html;charset={$CI->config->item('charset')}" />
+	<meta http-equiv="content-type" content="text/html;charset={$CI->config->item('charset')}" />
 	<meta name="generator" content="VUNSY system" />
 {$CI->vunsy->css_text()}
 {$CI->vunsy->js_text()}

@@ -174,6 +174,20 @@ class Vunsy {
 	
 	function js_text()
 	{
+		// unset dojo if included
+		if( in_array(base_url().'dojo/dojo/dojo.js',$this->js) && 
+			count($this->dojo)>0 )
+		{
+			for($i=0; $i<count($this->js); $i++ )
+			{
+				if( $this->js[$i]==(base_url().'dojo/dojo/dojo.js') )
+				{
+					$this->js[$i] = '';
+					break;
+				}
+			}
+		}
+		
 		$js_t = '';
 		foreach( $this->js as $item )
 			$js_t .= "\n\t<script type=\"text/javascript\" src=\"".$item."\" ></script>";
@@ -190,6 +204,19 @@ class Vunsy {
 			
 		
 		// make the text even if there isn't any requirements
+		// unset dojo if included cuz it makes trouble if included twice
+		if( in_array(base_url().'dojo/dojo/dojo.js',$this->js) )
+		{
+			for($i=0; $i<count($this->js); $i++ )
+			{
+				if( $this->js[$i]==(base_url().'dojo/dojo/dojo.js') )
+				{
+					$this->js[$i] = '';
+					break;
+				}
+			}
+		}
+		
 		$text = "\n\t".link_tag( "dojo/dijit/themes/{$this->dojoStyle}/{$this->dojoStyle}.css" );
 		$text .= 
 		"\n\t<script type=\"text/javascript\" src=\"".base_url()."dojo/dojo/dojo.js\"
