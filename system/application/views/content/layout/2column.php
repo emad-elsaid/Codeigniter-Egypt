@@ -1,6 +1,8 @@
 <?php if($mode=='config') echo 2;// number of cells
-else{ ?>
-<table width="100%" border="1">
+else{
+add_css( 'jquery/theme/ui.all.css' );
+?>
+<table width="100%" class="ui.helper.reset" >
 	  <tr>
 		  <td>
 		  	<?= $cell[0] ?>

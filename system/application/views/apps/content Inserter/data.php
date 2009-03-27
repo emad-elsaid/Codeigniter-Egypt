@@ -111,7 +111,7 @@ else
 }
  * */
 
-$Plugin_Data = $ci->load->view( $hidden['path'], array( "mode"=>"config" ), TRUE );
+$Plugin_Data = $ci->load->view( 'content/'.$hidden['path'], array( "mode"=>"config" ), TRUE );
 $Plugin_Data = json_decode( $Plugin_Data );
 $Plugin_Form_Data = array();
 $Plugin_Form = "";
