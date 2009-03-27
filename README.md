@@ -1,6 +1,13 @@
 Vunsy system
 =====================
 is a PHP program that built on codeIgniter and Jquery 
+[program built on]
+---
+* CodeIgniter PHP framework
+* Datamapper
+* Dojo+Dijit+Dojox
+* Jquery
+* KFM file browser
 
 [The idea]
 ---

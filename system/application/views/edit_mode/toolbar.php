@@ -13,6 +13,9 @@ $("document").ready( function(){
 </script>
 <div id="adminToolBar" style="align:center">
 <div id='adminToolBarIcons'style="align:center">
+	<a href="<?= base_url() ?>kfm" target="_blank" >
+    	<img src="<?= base_url() ?>images/admin/kfm.png" title="Software manager" />
+	</a>
 	<a href="<?= site_url('admin/app/user manager') ?>" target="_blank" >
     	<img src="<?= base_url() ?>images/admin/users.png" title="Users manager" />
 	</a>
