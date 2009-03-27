@@ -11,7 +11,7 @@ $CI->load->library('gui');
 echo $CI->gui->form(
 		 $CI->app->app_url('Data Editor'), 
 		array(
-				"Choose a content"=>$CI->gui->file("path", "", "", array('root'=>'system/application/views/') )
+				"Choose a content"=>$CI->gui->file("path", "", "", array('root'=>'system/application/views/content/') )
 				,""=> $CI->gui->button( "", "Add that content", array("type"=>"submit") )
 		)
 		,''

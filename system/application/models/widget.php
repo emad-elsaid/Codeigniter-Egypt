@@ -20,7 +20,7 @@ class Widget extends Content{
 		if( !empty($this->path) )
 		{
 			$text = $this->load->view(
-							$this->path,
+							'content/'.$this->path,
 							array(
 									'id'=> $this->id
 									,'info'=>json_decode($this->info)

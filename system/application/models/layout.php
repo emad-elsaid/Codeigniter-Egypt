@@ -27,7 +27,7 @@ class Layout extends Content {
 	function cells()
 	{
 		if( $this->path !='' )
-			$c = $this->load->view($this->path,array('mode'=>'config'),TRUE);
+			$c = $this->load->view('content/'.$this->path,array('mode'=>'config'),TRUE);
 		else
 			$c = 1;
 			
@@ -110,7 +110,7 @@ EOT;
 		if( $this->path != '' )
 		{
 			$text = $this->load->view( 
-								$this->path,
+								'content/'.$this->path,
 								array(
 										'id'=>$this->id,
 										'cell'=> $layout_content,
