@@ -28,7 +28,7 @@ $kfm_db_type = 'sqlite';
 
 // the following options should only be filled if you are not using sqlite/sqlitepdo as the database
 $kfm_db_prefix   = '';
-$kfm_db_host     = 'localhost';
+$kfm_db_host     = '';
 $kfm_db_name     = 'kfm';
 $kfm_db_username = '';
 $kfm_db_password = '';

@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+include( 'config.php' );
 /*
 | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
@@ -37,11 +38,11 @@
 $active_group = "default";
 $active_record = TRUE;
 
-$db['default']['hostname'] = "localhost";
-$db['default']['username'] = "root";
-$db['default']['password'] = "toor";
-$db['default']['database'] = "vunsy";
-$db['default']['dbdriver'] = "mysql";
+$db['default']['hostname'] = $db_hostname;
+$db['default']['username'] = $db_username;
+$db['default']['password'] = $db_password;
+$db['default']['database'] = $db_database;
+$db['default']['dbdriver'] = $db_dbdriver;
 $db['default']['dbprefix'] = "";
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;

@@ -23,6 +23,9 @@ built on it some applications accessible by a task bar like facebook one
 ---
 * 1- copy the vunsy folder to your web folder
 * 2- files needed to be configured 
+			vunsy/config.php
+			
+	if you want to make more configuration modify
 			vunsy/system/application/config/config.php
 			vunsy/system/application/config/database.php
 			vunsy/system/application/config/vunsy_config.php

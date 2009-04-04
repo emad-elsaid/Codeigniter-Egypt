@@ -1,5 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+include( 'config.php' );
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -11,7 +11,7 @@
 |	http://example.com/
 |
 */
-$config['base_url']	= "http://localhost/b/vunsy/";
+$config['base_url']	= $config_base_url;
 
 /*
 |--------------------------------------------------------------------------

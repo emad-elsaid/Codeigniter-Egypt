@@ -8,7 +8,9 @@
  * @author	Emad Elsaid
  * @link	http://github.com/blazeeboy/vunsy
  */
-$config["site_name"] = "siteName";
+include( 'config.php' );
+
+$config["site_name"] = $config_site_name;
 $config["doctype"] = "XHTML 1.0 Strict";
 $config["charset"] = "utf-8";
 
@@ -26,5 +28,5 @@ $config["js"] = array();
  * all components ignores privilages when 
  * the current logged user is the root
  */
-$config["root"] = "root";
-$config["root_password"] = "toor";
+$config["root"] = $config_root;
+$config["root_password"] = $config_root_password;
