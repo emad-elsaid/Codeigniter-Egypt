@@ -10,8 +10,6 @@
  */
 class Layout extends Content {
 	
-	//var $has_many = array('content');
-	
 	function Layout()
 	{
 		parent::Content();

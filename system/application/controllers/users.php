@@ -26,7 +26,7 @@ class Users extends Controller {
 				) == TRUE
 			 )
 			{
-			redirect( );
+			redirect();
 			}
 		}
 		

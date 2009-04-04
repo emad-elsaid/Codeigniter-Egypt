@@ -39,16 +39,6 @@ class Content extends DataMapper {
 		$sec->deattach( $this );
 	}
 	
-	/*function save( $object = '')
-	{
-		if( empty($object) )
-		{
-			$this->type = get_class( $this );
-		}
-		
-		return parent::save( $object );
-	}*/
-	
 	function render( $text='' ){
 		
 		$CI =& get_instance();
