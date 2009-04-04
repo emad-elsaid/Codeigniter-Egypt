@@ -50,3 +50,9 @@ built on it some applications accessible by a task bar like facebook one
 	password: toor
 * you can change it from:
 	vunsy/system/application/config/vunsy_config.php
+-----------------------------------------------------------------
+[ How to help us ]
+---
+* contact me and tell you want to help on github
+* watch that repo to tell me that you are intersted [ click the watch button ]
+* fork that repo [ click the fork button ]
