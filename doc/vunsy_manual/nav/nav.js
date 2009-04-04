@@ -35,6 +35,7 @@ function create_menu(basepath)
 		'<h3>General Topics</h3>' +
 		'<ul>' +
 			'<li><a href="'+base+'components.html">Vunsy components</a></li>' +
+			'<li><a href="'+base+'section_general.html">Sections idea</a></li>' +
 		'</ul>' +
 		
 		'</td><td class="td_sep" valign="top">' +

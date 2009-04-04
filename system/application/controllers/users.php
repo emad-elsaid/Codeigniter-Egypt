@@ -36,7 +36,7 @@ class Users extends Controller {
 	function logout()
 	{
 		$this->vunsy->user->logout();
-		redirect( index_page() );
+		redirect();
 	}
 	
 }
