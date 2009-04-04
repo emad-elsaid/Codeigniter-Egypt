@@ -198,12 +198,11 @@ EOT;
 		foreach($children->all as $item )
 		{
 				// making the content object with the type
-				$temp = new $item->type();
-				/*// if wrong type will make a generic content object
-				// i added that cuz error raised if i included
-				// a widget not in a folder
-				if( ! isset($temp) ) $temp = new Content();*/
-				
+				if( class_exists( $item->type) )
+					$temp = new $item->type();
+				else
+					$temp = new Content();
+									
 				$temp->get_by_id( $item->id );
 				array_push( $final_c, $temp);
 		}

@@ -8,7 +8,7 @@
  * @author	Emad Elsaid
  * @link	http://github.com/blazeeboy/vunsy
  */
-class Remote extends Controller {
+/*class Remote extends Controller {
 	function Remote(){
 		parent::Controller();
 		$perm = $this->vunsy->edit_mode();
@@ -22,7 +22,7 @@ class Remote extends Controller {
 	 * @function : the function member you want to execute
 	 * @param : a JSON text with the paramters
 	 */
-	function model()
+/*	function model()
 	{
 		
 		//getting all the paramters
@@ -63,5 +63,6 @@ class Remote extends Controller {
 			if( isset( $result ) )
 				return json_encode( $result );
 		}*/
-	}
+	/*}
 }
+*/

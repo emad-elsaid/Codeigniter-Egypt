@@ -35,24 +35,39 @@ function create_menu(basepath)
 		'<h3>General Topics</h3>' +
 		'<ul>' +
 			'<li><a href="'+base+'components.html">Vunsy components</a></li>' +
-			'<li><a href="'+base+'section_general.html">Sections idea</a></li>' +
+			'<li><a href="'+base+'section_general.html">Sections Idea</a></li>' +
+			'<li><a href="'+base+'applications_general.html">Applications Idea</a></li>' +
+			'<li><a href="'+base+'layout_general.html">Layout Idea</a></li>' +
+			'<li><a href="'+base+'widget_general.html">Widget Idea</a></li>' +
 		'</ul>' +
 		
 		'</td><td class="td_sep" valign="top">' +
 
 				
-		'<h3>Class Reference</h3>' +
+		'<h3>Library Reference</h3>' +
 		'<ul>' +
-		'<li><a href="'+base+'libraries/benchmark.html">Benchmarking Class</a></li>' +
+		'<li><a href="'+base+'libraries/app_library.html">Application library</a></li>' +
+		'<li><a href="'+base+'libraries/gui_library.html">GUI library</a></li>' +
+		'<li><a href="'+base+'libraries/vunsy_library.html">Vunsy library</a></li>' +
+		'</ul>' +
+		
+		'<h3>Helper Reference</h3>' +
+		'<ul>' +
+		'<li><a href="'+base+'libraries/perm_helper.html">Permissions helper</a></li>' +
+		'<li><a href="'+base+'libraries/page_helper.html">Page helper</a></li>' +
+		'</ul>' +
+		
+		'<h3>Model Reference</h3>' +
+		'<ul>' +
+		'<li><a href="'+base+'libraries/content_model.html">Content model</a></li>' +
+		'<li><a href="'+base+'libraries/layout_model.html">Layout model</a></li>' +
+		'<li><a href="'+base+'libraries/widget_model.html">Widget model</a></li>' +
+		'<li><a href="'+base+'libraries/section_model.html">Section model</a></li>' +
+		'<li><a href="'+base+'libraries/user_model.html">User model</a></li>' +
+		'<li><a href="'+base+'libraries/userlevel_model.html">User level model</a></li>' +
 		'</ul>' +
 
 		'</td><td class="td_sep" valign="top">' +
-
-		'<h3>Helper Reference</h3>' +
-		'<ul>' +
-		'<li><a href="'+base+'helpers/array_helper.html">Array Helper</a></li>' +
-		'</ul>' +	
-
 
 		'<h3>Additional Resources</h3>' +
 		'<ul>' +
