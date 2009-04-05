@@ -3,7 +3,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Vunsy User Guide : PAGETITLE</title>
+<title>Vunsy User Guide : Application library</title>
 
 <style type='text/css' media='all'>@import url('userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='userguide.css' />
@@ -28,7 +28,7 @@
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>PAGETITLE</h1></td>
+<td><h1>Application library</h1></td>
 <td id="breadcrumb_right"></td>
 </tr>
 </table>
@@ -42,7 +42,7 @@
 <td id="breadcrumb">
 <a href="http://blazeeboy.github.com/vunsy">Vunsy Home</a> &nbsp;&#8250;&nbsp;
 <a href="index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-PAGETITLE
+Application library
 </td>
 <td id="searchbox"></td>
 </tr>
@@ -55,8 +55,80 @@ PAGETITLE
 <!-- START CONTENT -->
 <div id="content">
 
-<h1>PAGETITLE</h1>
-
+<h1>Application library</h1>
+app library is autoloaded when an application is running with a line like that
+<textarea class="textarea" style="width:100%" cols="50" rows="3" >
+$config = array( 'name'=>$appname,'page'=>$page );
+$this->load->library( 'app',$config);
+</textarea>
+here is the ref of function and properties
+<textarea class="textarea" style="width:100%" cols="50" rows="30" >
+	// application information
+	var $name ='';
+	var $ver = '';
+	var $author = '';
+	var $website = '';
+	
+	// application run permissions
+	var $perm = '';
+	
+	// pages and sections of the application
+	var $pages = array();
+	var $index = '';
+	var $page = '';
+	
+	var $info_msg = array();
+	var $error_msg = array();
+	// application view specifications
+	var $show_toolbar = TRUE;
+	var $show_title = TRUE;
+	var $show_statusbar = TRUE;
+	
+	// application URLs and folders
+	
+	/* like http://localhost/system/application/views/apps/appname/
+	 * to include images and javascript and css files 
+	 * from your app folder
+	 */
+	var $full_url = '';
+	
+	/*like apps/appname/
+	 * used to include view files
+	 */
+	var $view_folder ='';
+	
+	/* like: http://localhost/index.php/app/appname/
+	 * used for links to another page in the app.
+	 */
+	var $url = '';
+	
+	/* like system/application/views/apps/appname/
+	 * path from the root to the app folder
+	 */
+	var $ci_folder = '';
+	
+	/* like H:\serverfolder\ci\system\application\views\apps\appname\
+	 * used to open files and write files in the application
+	 */
+	var $full_folder = '';
+</textarea>
+functions of the app library
+<textarea class="textarea" style="width:100%" cols="50" rows="15" >
+ load_app( $name='', $page='' ) --> load application 
+ render() --> returns the application page HTML
+ add_css( $path="", $local=FALSE ) --> add a css file to header
+ add_js( $path="", $local=FALSE  ) --> add a js file to header
+ add_dojo( $path="" ) --> add a dojo requirement
+ css_text() --> the css header text
+ js_text() --> the js header text
+ dojo_text() --> the dojo header text
+ can_view() --> if the user can view that application or not
+ app_url( $p='' ) --> return a url to a page in the application
+ add_info( $text='' ) ->add info to top of the page
+ add_error( $text='' ) --> add error text to the top of page
+ info_text() -->the HTML text of infos
+ error_text() --> the HTML text or errors
+</textarea>
 </div>
 <!-- END CONTENT -->
 

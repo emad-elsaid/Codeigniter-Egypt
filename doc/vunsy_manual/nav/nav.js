@@ -46,25 +46,25 @@ function create_menu(basepath)
 				
 		'<h3>Library Reference</h3>' +
 		'<ul>' +
-		'<li><a href="'+base+'libraries/app_library.html">Application library</a></li>' +
-		'<li><a href="'+base+'libraries/gui_library.html">GUI library</a></li>' +
-		'<li><a href="'+base+'libraries/vunsy_library.html">Vunsy library</a></li>' +
+		'<li><a href="'+base+'app_library.html">Application library</a></li>' +
+		'<li><a href="'+base+'gui_library.html">GUI library</a></li>' +
+		'<li><a href="'+base+'vunsy_library.html">Vunsy library</a></li>' +
 		'</ul>' +
 		
 		'<h3>Helper Reference</h3>' +
 		'<ul>' +
-		'<li><a href="'+base+'libraries/perm_helper.html">Permissions helper</a></li>' +
-		'<li><a href="'+base+'libraries/page_helper.html">Page helper</a></li>' +
+		'<li><a href="'+base+'perm_helper.html">Permissions helper</a></li>' +
+		'<li><a href="'+base+'page_helper.html">Page helper</a></li>' +
 		'</ul>' +
 		
 		'<h3>Model Reference</h3>' +
 		'<ul>' +
-		'<li><a href="'+base+'libraries/content_model.html">Content model</a></li>' +
-		'<li><a href="'+base+'libraries/layout_model.html">Layout model</a></li>' +
-		'<li><a href="'+base+'libraries/widget_model.html">Widget model</a></li>' +
-		'<li><a href="'+base+'libraries/section_model.html">Section model</a></li>' +
-		'<li><a href="'+base+'libraries/user_model.html">User model</a></li>' +
-		'<li><a href="'+base+'libraries/userlevel_model.html">User level model</a></li>' +
+		'<li><a href="'+base+'content_model.html">Content model</a></li>' +
+		'<li><a href="'+base+'layout_model.html">Layout model</a></li>' +
+		'<li><a href="'+base+'widget_model.html">Widget model</a></li>' +
+		'<li><a href="'+base+'section_model.html">Section model</a></li>' +
+		'<li><a href="'+base+'user_model.html">User model</a></li>' +
+		'<li><a href="'+base+'userlevel_model.html">User level model</a></li>' +
 		'</ul>' +
 
 		'</td><td class="td_sep" valign="top">' +

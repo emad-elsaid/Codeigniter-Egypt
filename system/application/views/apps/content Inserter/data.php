@@ -167,11 +167,11 @@ if( is_object( $Plugin_Data ) AND isset( $Plugin_Data->info) AND is_object($Plug
 			case "time":
 				$current_field = $ci->gui->time( $key, $cVal );
 				break;
-			case "dropdown":
-				$current_field = $ci->gui->dropdown( $key, $cVal );
-				break;
 			case "checkbox":
-				$current_field = $ci->gui->dropdown( $key, $key, $cVal,
+				$current_field = $ci->gui->checkbox( $key,$key, $cVal );
+				break;
+			case "dropdown":
+				$current_field = $ci->gui->dropdown( $key, $cVal,
 												@$value->options );
 				break;				
 		}
