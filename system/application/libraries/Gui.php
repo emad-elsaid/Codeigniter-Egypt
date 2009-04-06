@@ -98,20 +98,24 @@ class Gui {
 EOT;
 	}
 	
-	function file( $ID='',$value='', $attr=array(), $param=array(), $style=array() ){
+	function file( $ID='',$value='', $attr=array(), $param=array(), $style=array() )
+	{
 		return $this->activeTree("jquery/fileTree/jqueryFileTree.php", $ID, $value,$attr,$param,$style);
 	}
 	
-	function model( $ID='',$value='', $attr=array(), $param=array(), $style=array() ){
+	function model( $ID='',$value='', $attr=array(), $param=array(), $style=array() )
+	{
 		$param['root'] = 'system/application/models/';
 		return $this->activeTree("jquery/fileTree/jqueryFileTree.php", $ID, $value,$attr,$param,$style);
 	}
 	
-	function folder( $ID='',$value='', $attr=array(), $param=array(), $style=array() ){
+	function folder( $ID='',$value='', $attr=array(), $param=array(), $style=array() )
+	{
 		return $this->activeTree("jquery/fileTree/jqueryDirTree.php", $ID, $value,$attr,$param,$style);
 	}
 	
-	function app( $ID='',$value='', $attr=array(), $param=array(), $style=array() ){
+	function app( $ID='',$value='', $attr=array(), $param=array(), $style=array() )
+	{
 		$param['root'] = 'system/application/views/apps/';
 		return $this->activeTree("jquery/fileTree/jqueryDirTree.php", $ID, $value,$attr,$param,$style);
 	}
