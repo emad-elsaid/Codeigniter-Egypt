@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit._LayoutWidget &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dijit" href="../contents.html" />
+    <link rel="next" title="DojoX" href="../../dojox/contents.html" />
+    <link rel="prev" title="More TabContainer Examples" href="TabContainer-examples.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="../../dojox/contents.html" title="DojoX"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="TabContainer-examples.html" title="More TabContainer Examples"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit._LayoutWidget</a><ul>
+<li><a class="reference" href="#properties-to-set">Properties to Set</a><ul>
+<li><a class="reference" href="#this-containernode">this.containerNode</a></li>
+<li><a class="reference" href="#baseclass">baseClass</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#methods-to-implement">Methods To Implement</a><ul>
+<li><a class="reference" href="#layout">layout()</a></li>
+<li><a class="reference" href="#setupchild">_setupChild()</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#lifecycle">Lifecycle</a><ul>
+<li><a class="reference" href="#addchild">addChild()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="TabContainer-examples.html"
+                                  title="previous chapter">More TabContainer Examples</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../../dojox/contents.html"
+                                  title="next chapter">DojoX</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dijit/layout/_LayoutWidget.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-layoutwidget">
+<span id="dijit-layout-layoutwidget"></span><h1><a class="toc-backref" href="#id1">dijit._LayoutWidget<a class="headerlink" href="#dijit-layoutwidget" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed, Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">finished</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">?&#8211;</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dijit-layoutwidget" id="id1" name="id1">dijit._LayoutWidget</a><ul>
+<li><a class="reference" href="#properties-to-set" id="id2" name="id2">Properties to Set</a></li>
+<li><a class="reference" href="#methods-to-implement" id="id3" name="id3">Methods To Implement</a></li>
+<li><a class="reference" href="#lifecycle" id="id4" name="id4">Lifecycle</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Typically layout widgets inherit from the dijit.layout._LayoutWidget base class. This implements addChild(), removeChild(), startup(), and resize().</p>
+<p>The widget is responsible for implementing some callback methods and setting some properties though:</p>
+<div class="section" id="properties-to-set">
+<h2><a class="toc-backref" href="#id2">Properties to Set<a class="headerlink" href="#properties-to-set" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="this-containernode">
+<h3>this.containerNode<a class="headerlink" href="#this-containernode" title="Permalink to this headline">¶</a></h3>
+<p>The widget must have a containerNode property (typically declared in the template, dojoAttachPoint=&#8221;containerNode&#8221;).
+All the child widgets will be put under here.</p>
+</div>
+<div class="section" id="baseclass">
+<h3>baseClass<a class="headerlink" href="#baseclass" title="Permalink to this headline">¶</a></h3>
+<p>Like other widgets, you should define baseClass to be the CSS class name associated with the widget, for example &#8220;dijitTabContainer&#8221;.</p>
+</div>
+</div>
+<div class="section" id="methods-to-implement">
+<h2><a class="toc-backref" href="#id3">Methods To Implement<a class="headerlink" href="#methods-to-implement" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="layout">
+<h3>layout()<a class="headerlink" href="#layout" title="Permalink to this headline">¶</a></h3>
+<p>When the widget is started or resized, layout() is called. layout()&#8217;s job is to arrange the contents of the widget according to it&#8217;s [new] size. For example, BorderContainer will set the size of the center pane to whatever space is left over after placing the top, bottom, left and right panes. layout() can (and should) reference this._contentBox to get the size available for laying out it&#8217;s children.</p>
+</div>
+<div class="section" id="setupchild">
+<h3>_setupChild()<a class="headerlink" href="#setupchild" title="Permalink to this headline">¶</a></h3>
+<p>addChild() is <em>not</em> called for widgets that are in the original markup. For example, addChild() is not called for the ContentPanes
+in the markup below:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.layout.TabContainer&quot;</span> <span class="na">id=</span><span class="s">&quot;tc&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.layout.ContentPane&quot;</span> <span class="na">title=</span><span class="s">...</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.layout.ContentPane&quot;</span> <span class="na">title=</span><span class="s">...</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>However, addChild() is called when children are added programatically, like:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dijit</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;tc&quot;</span><span class="p">).</span><span class="nx">addChild</span><span class="p">(</span> <span class="k">new</span> <span class="nx">dijit</span><span class="p">.</span><span class="nx">layout</span><span class="p">.</span><span class="nx">ContentPane</span><span class="p">()</span> <span class="p">);</span>
+</pre></div>
+</div>
+<p>To bridge this gap and do processing common to both initial children and added children, there's a method called _setupChild().
+_setupChild() is useful for tasks like in TabContainer where it sets up a tab label for each child.</p>
+</div>
+</div>
+<div class="section" id="lifecycle">
+<h2><a class="toc-backref" href="#id4">Lifecycle<a class="headerlink" href="#lifecycle" title="Permalink to this headline">¶</a></a></h2>
+<dl class="docutils">
+<dt>The lifecycle of layout widgets is particularly complex because they</dt>
+<dd><ul class="first last simple">
+<li>do sizing in javascript</li>
+<li>are hierarchical: there's a relationship between parent and children widgets.</li>
+</ul>
+</dd>
+</dl>
+<p>At the time that postCreate() etc is called, the child widgets do not yet exist, and also the widget may not be connected to the document yet, so neither sizing nor parent/child related processing can be done. Thus, some/most setup has to occur in startup().</p>
+<p><em>Lifecycle:</em></p>
+<blockquote>
+<ol class="arabic simple">
+<li>properties are mixed in</li>
+<li>postMixInProperties() is called</li>
+<li>the widget's DOM is setup from the template</li>
+<li>postCreate() is called</li>
+<li>widget's children are initialized</li>
+<li>widget.domNode into the document's DOM tree (by the user)</li>
+<li>user calls startup()</li>
+<li>layout() is called (widget should position it's children correctly, and do other initialization that depends on calls to marginBox() etc here)</li>
+</ol>
+</blockquote>
+<p>See also the lifecycle of a standard widget in <a class="reference" href="../_Widget.html#dijit-widget"><em>dijit._Widget</em></a>.</p>
+<div class="section" id="addchild">
+<h3>addChild()<a class="headerlink" href="#addchild" title="Permalink to this headline">¶</a></h3>
+<p>Children can be added to a layout widget before or after it's been started (via the startup() call on it, or an ancestor in it's hierarchy).
+Thus, addChild() and removeChild() must work before or after the widget has been started.
+They can reference the this._started field to detect this state.</p>
+<p>The distinction is important. Consider SplitContainer's lifecycle:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>initial children may be specified in markup</li>
+<li>or if programatic creation, addChild() is called for each (initial child)</li>
+<li>up to this point no sizing processing has been done</li>
+<li>SplitContainer domNode is added to the document</li>
+<li>startup() is called</li>
+<li>SplitContainer sizes all it's children, to fit in the available space.</li>
+</ol>
+</blockquote>
+<p>Note that split container only did sizing once, thus avoiding an n^2 computation that would occur if it processed the initial children one by one, recalculating sizes each time.</p>
+<p>However:</p>
+<blockquote>
+<ol class="arabic simple" start="7">
+<li>user calls addChild() or removeChild()</li>
+<li>SplitContainer resizes existing children to make room for new child</li>
+</ol>
+</blockquote>
+<p>When children are added or removed after startup(), SplitContainer must immediately do sizing.</p>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

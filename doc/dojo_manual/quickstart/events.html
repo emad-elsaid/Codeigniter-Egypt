@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>JavaScript events and Dojo &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Quickstart" href="contents.html" />
+    <link rel="next" title="Getting started with some simple steps" href="gettingstarted.html" />
+    <link rel="prev" title="DOM Utilities" href="dom.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="gettingstarted.html" title="Getting started with some simple steps"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="dom.html" title="DOM Utilities"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Quickstart</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">JavaScript events and Dojo</a><ul>
+<li><a class="reference" href="#simple-connections">Simple Connections</a><ul>
+<li><a class="reference" href="#how-does-it-work">How does it work?</a></li>
+<li><a class="reference" href="#syntax">Syntax</a></li>
+<li><a class="reference" href="#example-code-for-reference">Example Code for Reference</a></li>
+<li><a class="reference" href="#connecting-to-a-dom-event">Connecting to a DOM Event</a></li>
+<li><a class="reference" href="#events-available-for-connection">Events available for Connection</a></li>
+<li><a class="reference" href="#connecting-to-mousewheel-events">Connecting to MouseWheel events</a></li>
+<li><a class="reference" href="#connecting-functions-to-one-another">Connecting Functions to One Another</a></li>
+<li><a class="reference" href="#disconnecting">Disconnecting</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#the-event-object">The Event Object</a><ul>
+<li><a class="reference" href="#using-a-dojo-event-object">Using a Dojo Event Object</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#page-load-and-unload">Page Load and Unload</a></li>
+<li><a class="reference" href="#topic-based-events">Topic Based Events</a><ul>
+<li><a class="reference" href="#id1">How does it work?</a></li>
+<li><a class="reference" href="#id2">Example Code for Reference</a></li>
+<li><a class="reference" href="#subscribing-and-publishing-topics">Subscribing and Publishing Topics</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#events-with-dijit">Events with Dijit</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="dom.html"
+                                  title="previous chapter">DOM Utilities</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="gettingstarted.html"
+                                  title="next chapter">Getting started with some simple steps</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/quickstart/events.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="javascript-events-and-dojo">
+<span id="quickstart-events"></span><h1><a class="toc-backref" href="#id3">JavaScript events and Dojo<a class="headerlink" href="#javascript-events-and-dojo" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Matt Bowen, Peter Higgins, Nikolai Onken</td>
+</tr>
+<tr class="field"><th class="field-name">Developers:</th><td class="field-body">?-</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V?</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#javascript-events-and-dojo" id="id3" name="id3">JavaScript events and Dojo</a><ul>
+<li><a class="reference" href="#simple-connections" id="id4" name="id4">Simple Connections</a></li>
+<li><a class="reference" href="#the-event-object" id="id5" name="id5">The Event Object</a></li>
+<li><a class="reference" href="#page-load-and-unload" id="id6" name="id6">Page Load and Unload</a></li>
+<li><a class="reference" href="#topic-based-events" id="id7" name="id7">Topic Based Events</a></li>
+<li><a class="reference" href="#events-with-dijit" id="id8" name="id8">Events with Dijit</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Dojo&#8217;s event system offers a refreshing alternative to the normal JavaScript events. With Dojo, you connect functions to one another, creating a link that calls one function when another fires.</p>
+<p>This means that you can connect a function of your own to:</p>
+<ul class="simple">
+<li>a DOM event, such as when a link is clicked</li>
+<li>an event of an object, such as an animation starting or stopping;</li>
+<li>a function call of your own, such as bar();</li>
+<li>a topic, which acts as a queue that other objects can publish objects to.</li>
+</ul>
+<p>Your connected function is called when the event occurs. With simple events, when it calls your function, dojo passes your function a normalized event object, so that it can respond correctly, responding to keystrokes or stopping default behavior. With topics, Dojo passes any subscribed functions the object that was published. Dojo happily abstracts away all of the difficulty of cross-browser event systems, offering programmers a coherent event system that acts consistently across browsers.</p>
+<p>Dojo&#8217;s event system is flexible and gives you a few options for connecting your functions. In the core package, you have both simple events (which use a signal and slot system, similar to Qt&#8217;s) and topics. In this section, you&#8217;ll learn the following:</p>
+<ul class="simple">
+<li>how to connect functions to one another with <a class="reference" href="../dojo/connect.html#dojo-connect"><em>dojo.connect</em></a></li>
+<li>what comes with an event object</li>
+<li>how to connect functions with topics and even publish your own objects to the topic</li>
+<li>how to enjoy event-based programming</li>
+</ul>
+<div class="section" id="simple-connections">
+<h2><a class="toc-backref" href="#id4">Simple Connections<a class="headerlink" href="#simple-connections" title="Permalink to this headline">¶</a></a></h2>
+<p>Dojo provides a pair of functions to handle many of your event-handling needs: <tt class="docutils literal"><span class="pre">dojo.connect</span></tt> and <tt class="docutils literal"><span class="pre">dojo.disconnect</span></tt>. With <a class="reference" href="../dojo/connect.html#dojo-connect"><em>dojo.connect</em></a>, you can link one function to fire when another does, handling DOM events and custom functions with a single mechanism. Additionally, <a class="reference" href="../dojo/connect.html#dojo-connect"><em>dojo.connect</em></a> allows you to connect as many functions to an event as necessary. With <a class="reference" href="../dojo/disconnect.html#dojo-disconnect"><em>dojo.disconnect</em></a>, you can cancel a connection, assuming you&#8217;ve kept some reference to it.</p>
+<div class="section" id="how-does-it-work">
+<h3>How does it work?<a class="headerlink" href="#how-does-it-work" title="Permalink to this headline">¶</a></h3>
+<p>Imagine that you&#8217;re hungry and have decided to cook a pizza in your oven. The pizza will take 17 minutes, so you set a timer. You have better things to do than sit around your kitchen hanging out by the timer though, so you get your brother and tell him, &#8220;When you hear the oven timer, take the pizza out of the oven and bring me a slice.&#8221; Your brother can only keep track of one thing at a time, and you don&#8217;t want your house to burn down, so you tell your sister, &#8220;When you hear the over timer, turn off the oven.&#8221; Because you&#8217;re a little worried that your dirty oven might start to smoke, you tell them both, &#8220;If you hear the smoke alarm, come get me and then go outside.&#8221; After you get your pizza, you tell your brother and sister that they don&#8217;t have to worry about the oven alarm now and that they can go play until you call for them again. You then set the oven alarm to wake you up from a nap.</p>
+<p>In this example, your siblings are functions. Your telling them to respond to certain events, such as &#8220;onPizzaDone&#8221; and &#8220;onHouseOnFire&#8221; performs the same function as <a class="reference" href="../dojo/connect.html#dojo-connect"><em>dojo.connect</em></a> - it sets up your siblings (functions) to listen for an event and perform their tasks when they receive notice. The various alarms are similar to event objects; they inform your siblings of important details about the situation (such as what is beeping). Telling your siblings that they don&#8217;t need to worry about the oven alarm anymore is similar to <a class="reference" href="../dojo/disconnect.html#dojo-disconnect"><em>dojo.disconnect</em></a>; the next time the oven alarm goes off, it means that you need to wake up, and you don&#8217;t want your brother hunting for a pizza needlessly, so you&#8217;ve told him to stop listening to that event.</p>
+</div>
+<div class="section" id="syntax">
+<h3>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference" href="../dojo/connect.html#dojo-connect"><em>dojo.connect</em></a> takes a variety of forms of arguments, depending on how you are planning to use it. This section will cover those various forms, based on use cases for them. You can think of it as a more in-depth version of the overview from the introdction provided in <a class="reference" href="dojo-basics.html#quickstart-dojo-basics"><em>Functions Used Everywhere</em></a>.</p>
+<p>dojo.connect has the following signature (acceptable types in square brackets):</p>
+<div class="highlight-javascript"><pre>handle = dojo.connect(Scope of Event [object or null], Event [string], Context of Linked Method [string or null], Linked Method [string or function], Don't Fix Flag [boolean])</pre>
+</div>
+<p>All of the options for calling <tt class="docutils literal"><span class="pre">dojo.connect</span></tt> are explored further below.</p>
+</div>
+<div class="section" id="example-code-for-reference">
+<h3>Example Code for Reference<a class="headerlink" href="#example-code-for-reference" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes, it is easier to see an example first:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Dojo Events are Great<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;dojo/dojo.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+     <span class="k">function</span> <span class="nx">foo</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="s2">&quot;A click upon your houses!&quot;</span><span class="p">);</span> <span class="p">}</span>
+     <span class="k">function</span> <span class="nx">globalGuy</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="s2">&quot;Global Guy fired!&quot;</span><span class="p">);</span> <span class="p">}</span>
+     <span class="k">var</span> <span class="nx">someObject</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">bar</span><span class="o">:</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="s2">&quot;Bar fired!&quot;</span><span class="p">);</span> <span class="k">return</span> <span class="mi">7</span><span class="o">;</span> <span class="p">}</span><span class="o">,</span>
+        <span class="nx">baz</span><span class="o">:</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="s2">&quot;Baz fired!&quot;</span><span class="p">);</span> <span class="k">return</span> <span class="mi">14</span><span class="o">;</span> <span class="p">}</span>
+     <span class="p">}</span>
+
+     <span class="k">var</span> <span class="nx">anotherObject</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="nx">afterBaz</span><span class="o">:</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="s2">&quot;afterBaz fired!&quot;</span><span class="p">);</span> <span class="p">}</span>
+     <span class="p">}</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+     <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">id=</span><span class="s">&quot;firstLink&quot;</span> <span class="na">href=</span><span class="s">&quot;http://dojotoolkit.org/&quot;</span><span class="nt">&gt;</span>Dojo<span class="nt">&lt;/a&gt;</span> is an excellent tool kit.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="connecting-to-a-dom-event">
+<h3>Connecting to a DOM Event<a class="headerlink" href="#connecting-to-a-dom-event" title="Permalink to this headline">¶</a></h3>
+<p>To connect a function to a DOM event with Dojo, you first need to get the node that you want to connect to. Here, I'll use the venerable
+<a class="reference" href="../dojo/byId.html#dojo-byid"><em>dojo.byId</em></a>.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">firstLinkNode</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;firstLink&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Now, to fire foo when a user clicks <tt class="docutils literal"><span class="pre">#firstLink</span></tt>, and I have the node, so I just need to use dojo.connect for the heavy lifting:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">firstLinkConnections</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="nx">firstLinkConnections</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">firstLinkNode</span><span class="o">,</span> <span class="s1">&#39;onclick&#39;</span><span class="o">,</span> <span class="nx">foo</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>In this example, I passed <tt class="docutils literal"><span class="pre">dojo.connect</span></tt> the object I want my function to listen to (in this case, a DOM node), the name of the function that should trigger my function's call (in this case, the &quot;onclick&quot; event), and the name of my function. Note that I keep a reference to the connection by setting firstLinkConnections[0] to the return value of <tt class="docutils literal"><span class="pre">dojo.connect</span></tt>. This will allow me to disconnect the listener later, if I desire. Now, when a user clicks &quot;Dojo,&quot; a message appears in the log Because my function is global in scope, I can pass it directly to connect. The following, however, are equivalent:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">firstLinkConnections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">firstLinkNode</span><span class="o">,</span> <span class="s1">&#39;onclick&#39;</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="nx">foo</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>and</strong></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">firstLinkConnections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">firstLinkNode</span><span class="o">,</span> <span class="s1">&#39;onclick&#39;</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Now, if I also want to connect someObject.bar() to #firstLink, we can do that too:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">firstLinkConnections</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">firstLinkNode</span><span class="o">,</span> <span class="s1">&#39;onclick&#39;</span><span class="o">,</span> <span class="nx">someObject</span><span class="o">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Because I've used Dojo's event handling, I can connect an arbitrary number of functions to fire on an event.</p>
+<p>To stop listening to all the registered event handlers stored in <tt class="docutils literal"><span class="pre">firstLinkConnections</span></tt>, pass the values in the Array to <a class="reference" href="../dojo/disconnect.html#dojo-disconnect"><em>dojo.disconnect</em></a></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">firstLinkConnections</span><span class="o">,</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><em>note:</em> Notice the lack of () on dojo.disconnect. Here, we've passed <tt class="docutils literal"><span class="pre">forEach</span></tt> a function <em>reference</em>, which will be called forEach value in the Array.</p>
+</div>
+<div class="section" id="events-available-for-connection">
+<h3>Events available for Connection<a class="headerlink" href="#events-available-for-connection" title="Permalink to this headline">¶</a></h3>
+<p>Using dojo.connect on Dom Events is only the beginning or the power contained within. As a convenience, here is a quick list of normalized Dom Events</p>
+<ul class="simple">
+<li>onclick - the user clicked a node</li>
+<li>onfocus - a node received focus</li>
+<li>onblur - a node was 'blurred', or otherwise lost focus</li>
+<li>onchange - an input value was changed</li>
+<li>onkeypress -</li>
+<li>onkeydown - fired when the user presses a key</li>
+<li>onkeyup - fired when the user releases a key</li>
+<li>onmouseover - a node was hovered (<em>warning:</em> may fire more than you'd like because of bubbling)</li>
+<li>onmouseout - a node was un-hovered</li>
+<li>onmouseenter - a normalized version of onmouseover that <em>wont</em> fire more than you'd like (only on first enter)</li>
+<li>onmouseleave - a normalized version of onmouseout that <em>wont</em> fire more than you'd like (only once when leaving)</li>
+<li>onsubmit - a form has been submitted</li>
+</ul>
+<p><tt class="docutils literal"><span class="pre">TODOC:</span> <span class="pre">more?</span></tt></p>
+<p><em>A note about the event names:</em> Event names now are lower case, except in special cases (e.g., some Mozilla DOM events). Dojo will add &quot;on&quot; to your event name if you leave it off (e.g., 'click' and 'onclick' are the same thing to dojo). This differs from <strong>Widget Events</strong> in the sense Dijit uses mixedCase event names, to avoid potential conflicts.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c">// connect to domEvent &quot;onclick&quot;</span>
+<span class="k">var</span> <span class="nx">node</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">);</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">node</span><span class="o">,</span> <span class="s2">&quot;onclick&quot;</span><span class="o">,</span> <span class="k">function</span><span class="p">(){</span>
+
+<span class="p">});</span>
+<span class="c">// connect to dijit event &quot;onClick&quot;</span>
+<span class="k">var</span> <span class="nx">widget</span> <span class="o">=</span> <span class="nx">dijit</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">);</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">widget</span><span class="o">,</span> <span class="s2">&quot;onClick&quot;</span><span class="o">,</span> <span class="k">function</span><span class="p">(){</span>
+
+<span class="p">});</span>
+<span class="c">// and finally, connect to the domEvent &quot;onclick&quot; as it bubbles to our widget&#39;s domNode</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">widget</span><span class="p">.</span><span class="nx">domNode</span><span class="o">,</span> <span class="s2">&quot;onclick&quot;</span><span class="o">,</span> <span class="k">function</span><span class="p">(){</span>
+    <span class="c">// if dojo.byId(&quot;foo&quot;) is inside this widget, both these functions will run</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>The big difference being dojo.byId versus dijit.byId -- dojo.connect can connect to any function, method, or event. using dijit.byId, we're passed a reference to the Widget, and are connecting to it's pre-fabricated 'onClick' stub.</p>
+<p><strong>A note about return values:</strong> Any value returned by a function called by <tt class="docutils literal"><span class="pre">dojo.connect</span></tt> will be lost.</p>
+</div>
+<div class="section" id="connecting-to-mousewheel-events">
+<h3>Connecting to MouseWheel events<a class="headerlink" href="#connecting-to-mousewheel-events" title="Permalink to this headline">¶</a></h3>
+<p>One event not mentioned above, though entirely useful: onmousewheel (okay, it's two events, which is the reason for pointing this out ... )
+All Mozilla based browsers use <tt class="docutils literal"><span class="pre">DOMMouseScroll</span></tt>, and the rest <tt class="docutils literal"><span class="pre">onmousewheel</span></tt> ... You can quickly connect to whichever is needed using Dojo's <a class="reference" href="browser-sniffing.html#quickstart-browser-sniffing"><em>isSomething</em></a> variables:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">node</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;foobar&quot;</span><span class="p">);</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">node</span><span class="o">,</span> <span class="p">(</span><span class="o">!</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">isMozilla</span> <span class="o">?</span> <span class="s2">&quot;onmousewheel&quot;</span> <span class="o">:</span> <span class="s2">&quot;DOMMouseScroll&quot;</span><span class="p">)</span><span class="o">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+   <span class="c">// except the direction is REVERSED, and the event isn&#39;t normalized! one more line to normalize that:</span>
+   <span class="k">var</span> <span class="nx">scroll</span> <span class="o">=</span> <span class="nx">e</span><span class="p">[(</span><span class="o">!</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">isMozilla</span> <span class="o">?</span> <span class="s2">&quot;wheelDelta&quot;</span> <span class="o">:</span> <span class="s2">&quot;detail&quot;</span><span class="p">)]</span> <span class="o">*</span> <span class="p">(</span><span class="o">!</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">isMozilla</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">scroll</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Here we've fixed the event based on the Event Object provided, and are returning a number greater than 1 for scrolling up, and a negative value for scrolling down.</p>
+</div>
+<div class="section" id="connecting-functions-to-one-another">
+<h3>Connecting Functions to One Another<a class="headerlink" href="#connecting-functions-to-one-another" title="Permalink to this headline">¶</a></h3>
+<p>Connecting functions to one another is even simpler than connecting them to DOM events; because you already have a reference to the function, you don't need to do any byId or query work. To have anotherObject.afterBaz fire after someObject.baz fires, use the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">objectConnections</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="nx">objectConnections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">someObject</span><span class="o">,</span> <span class="s2">&quot;baz&quot;</span><span class="o">,</span> <span class="nx">anotherObject</span><span class="o">,</span> <span class="s2">&quot;afterBaz&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In the above code, the first argument is the context of &quot;baz,&quot; the second argument is the event (in this case, when baz fires), the third argument is the context of your listener function, and the fourth argument is the listener function itself. Connecting two global functions is even easier:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">objectConnections</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">foo</span><span class="o">,</span> <span class="nx">globalGuy</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Now, whenever foo is called, globalGuy will also fire. As you might expect, connecting a method to a global function, or vice versa, is logical and simple:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">objectConnections</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">foo</span><span class="o">,</span> <span class="nx">anotherObject</span><span class="o">,</span> <span class="s2">&quot;afterBaz&quot;</span><span class="p">);</span>
+<span class="nx">objectConnections</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">someObject</span><span class="o">,</span> <span class="s2">&quot;baz&quot;</span><span class="o">,</span> <span class="nx">globalGuy</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="disconnecting">
+<h3>Disconnecting<a class="headerlink" href="#disconnecting" title="Permalink to this headline">¶</a></h3>
+<p>To disconnect listeners from events, you simply pass the connection handle (the return value of <tt class="docutils literal"><span class="pre">dojo.connect</span></tt> to <tt class="docutils literal"><span class="pre">dojo.disconnect</span></tt>. To disconnect globalGuy from someObject.baz, I use the following code:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">(</span><span class="nx">objectConnections</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>Or, by using <a class="reference" href="../dojo/forEach.html#dojo-foreach"><em>dojo.forEach</em></a>, passing dojo.disconnect as a function reference as illustrated earlier:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">objectConnections</span><span class="o">,</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-event-object">
+<h2><a class="toc-backref" href="#id5">The Event Object<a class="headerlink" href="#the-event-object" title="Permalink to this headline">¶</a></a></h2>
+<p>When you connect a function to a DOM event with &lt;cite&gt;dojo.connect&lt;/cite&gt;, Dojo passes your function a <strong>normalized</strong> event object. This means that, regardless of the client's browser, you can count on a set of standard attributes about the event and a set of methods to manipulate the event.</p>
+<p>Assume that your function has been called by dojo.connect and takes an argument named &lt;em&gt;event&lt;/em&gt;, like:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;node&quot;</span><span class="p">)</span><span class="o">,</span> <span class="s2">&quot;onclick&quot;</span><span class="o">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+   <span class="c">// the var &#39;event&#39; is available, and is the normalized object</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Dojo provides the following attributes with an event object:</p>
+<ul class="simple">
+<li>event.target - the element that generated the event</li>
+<li>event.currentTarget - the current target</li>
+<li>event.layerX - the &lt;em&gt;x&lt;/em&gt; coordinate, relative to the <tt class="docutils literal"><span class="pre">event.currentTarget</span></tt></li>
+<li>event.layerY - the &lt;em&gt;y&lt;/em&gt; coordinate, relative to the <tt class="docutils literal"><span class="pre">event.currentTarget</span></tt></li>
+<li>event.pageX - the &lt;em&gt;x&lt;/em&gt; coordinate, relative to the view port</li>
+<li>event.pageY - the &lt;em&gt;y&lt;/em&gt; coordinate, relative to the view port</li>
+<li>event.relatedTarget - For <tt class="docutils literal"><span class="pre">onmouseover</span></tt> and <tt class="docutils literal"><span class="pre">onmouseout</span></tt>, the object that the mouse pointer is moving to or out of</li>
+<li>event.charCode - For keypress events, the character code of the key pressed</li>
+<li>event.keyCode - for keypress events, handles special keys like ENTER and spacebar.</li>
+<li>event.charOrCode - a normalized version of charCode and keyCode, which can be used for direct comparison for alpha keys and special keys together. (added in 1.1)</li>
+</ul>
+<p>Dojo normalizes the following methods with an event object:</p>
+<ul class="simple">
+<li>event.preventDefault &amp;mdash; prevent an event's default behavior (e.g., a link from loading a new page)</li>
+<li>event.stopPropagation &amp;mdash; prevent an event from triggering a parent node's event</li>
+</ul>
+<p>Additionally, <em>dojo.stopEvent(event)</em> will prevent both default behavior any any propagation (bubbling) of an event.</p>
+<div class="section" id="using-a-dojo-event-object">
+<h3>Using a Dojo Event Object<a class="headerlink" href="#using-a-dojo-event-object" title="Permalink to this headline">¶</a></h3>
+<p>In the example code, we have two functions that are connected to two different events. Echo sends the key code of any key typed in the text input field to the console. It does so by using the <tt class="docutils literal"><span class="pre">charCode</span></tt> property of the normalized event object. Foo is connected to the #link and cause it to send &quot;The link was clicked&quot; to the console instead of changing the browser's location; by using the preventDefault method of the normalized event object, connections to change the default behavior of DOM objects.</p>
+<p>Now, imagine that you want to detect for the down arrow key in the text box. To do this, we just need to attach a new event listener to the text box and check to see if each keycode is the keycode for the down arrow. And how do you know what the keycode for the down arrow is, you may ask? Well, Dojo provides constants for every non-alpha-numeric key (see: <a class="reference" href="../dojo/keys.html#dojo-keys"><em>Key code constants</em></a>). In our case, we are interested in dojo.keys.DOWN_ARROW. So, assuming that you want to just log when the down arrow is pressed, the following code should do the job:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">interactiveNode</span><span class="o">,</span> <span class="s1">&#39;onkeypress&#39;</span><span class="o">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">key</span> <span class="o">=</span> <span class="nx">evt</span><span class="p">.</span><span class="nx">keyCode</span><span class="o">;</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">key</span> <span class="o">==</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">keys</span><span class="p">.</span><span class="nx">DOWN_ARROW</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">console</span><span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="s2">&quot;The user pressed the down arrow!&quot;</span><span class="p">);</span>
+      <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Using the new charOrCode, you can get a keys value directly with no need for checking null on the other:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">someInput</span><span class="o">,</span> <span class="s2">&quot;onkeypress&quot;</span><span class="o">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+    <span class="nx">switch</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">charOrCode</span><span class="p">){</span>
+       <span class="nx">case</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">keys</span><span class="p">.</span><span class="nx">ENTER</span> <span class="o">:</span> <span class="nx">submitForm</span><span class="p">();</span> <span class="k">break</span><span class="o">;</span>
+       <span class="nx">default</span><span class="o">:</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;you typed: &#39;</span><span class="o">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">charOrCode</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p><em>note:</em> We've used <tt class="docutils literal"><span class="pre">event</span></tt>, <tt class="docutils literal"><span class="pre">evt</span></tt>, and <tt class="docutils literal"><span class="pre">e</span></tt> for our event name in the callback function. You can name it whatever you like, it is the same object either way.</p>
+</div>
+</div>
+<div class="section" id="page-load-and-unload">
+<h2><a class="toc-backref" href="#id6">Page Load and Unload<a class="headerlink" href="#page-load-and-unload" title="Permalink to this headline">¶</a></a></h2>
+<p><tt class="docutils literal"><span class="pre">TODOC</span></tt></p>
+</div>
+<div class="section" id="topic-based-events">
+<h2><a class="toc-backref" href="#id7">Topic Based Events<a class="headerlink" href="#topic-based-events" title="Permalink to this headline">¶</a></a></h2>
+<p>In addition to the simple event system created by &lt;cite&gt;dojo.connect&lt;/cite&gt;, dojo offers support for anonymous publication and subscription of objects, via &lt;cite&gt;dojo.publish&lt;/cite&gt; and &lt;cite&gt;dojo.subcribe&lt;/cite&gt;. These methods allow a function to broadcast objects to any other function that has subscribed. This is dojo's topic system, and it makes it very easy to allow separate components to communicate without explicit knowledge of one another's internals.</p>
+<p>There are three functions that you need to understand to use dojo's topic system: &lt;cite&gt;dojo.publish&lt;/cite&gt;, &lt;cite&gt;dojo.subscribe&lt;/cite&gt;, and &lt;cite&gt;dojo.unsubscribe&lt;/cite&gt; &lt;cite&gt;Dojo.publish&lt;/cite&gt; calls any functions that are connected to the topic via &lt;cite&gt;dojo.subscribe&lt;/cite&gt;, passing to those subscribed functions arguments that are published (see syntax for details). As one might expect, &lt;cite&gt;dojo.unsubscribe&lt;/cite&gt; will cause a previously subscribed function to no longer be called when &lt;cite&gt;dojo.publish&lt;/cite&gt; is called in the future</p>
+<div class="section" id="id1">
+<h3>How does it work?<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Imagine that you run a running a conference, and there will be updates throughout the day. You could collect contact information for everyone at the beginning of the day, along with each person's interests. However, this would be a lot of logistical work. Instead, you decide to use your facility's Public Address System. When there is an update to the schedule, you announce &quot;This is an update to the schedule: the Dojo training is full and we have added yet a third time slot for it tomorrow.&quot; When there is meal information, you announce &quot;This is an update about food: we will be serving free ice cream in the main hall in five minutes.&quot; This way, anyone interested in your information can pay attention to any updates that could change their behavior. You don't need to know who is subscribing, and they don't need to fill out a bunch of paper work &amp;mdash; it's a win-win.</p>
+</div>
+<div class="section" id="id2">
+<h3>Example Code for Reference<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">function</span> <span class="nx">globalGuy</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="s2">&quot;Global Guy fired with arg &quot;</span> <span class="o">+</span> <span class="nx">arg</span><span class="p">);</span> <span class="p">}</span>
+  <span class="k">var</span> <span class="nx">someObject</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">bar</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">first</span><span class="o">,</span> <span class="nx">second</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="s2">&quot;Bar fired with first of &quot;</span><span class="o">+</span><span class="nx">first</span><span class="o">+</span><span class="s2">&quot; and second of &quot;</span><span class="o">+</span><span class="nx">second</span><span class="p">);</span> <span class="k">return</span> <span class="mi">7</span><span class="o">;</span> <span class="p">}</span><span class="o">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="subscribing-and-publishing-topics">
+<h3>Subscribing and Publishing Topics<a class="headerlink" href="#subscribing-and-publishing-topics" title="Permalink to this headline">¶</a></h3>
+<p>To connect globalGuy to the topic &quot;globalEvents&quot; and someObject.bar to &quot;fullNames&quot;, you simply use <tt class="docutils literal"><span class="pre">dojo.subscribe</span></tt>, as follows:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">topics</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="nx">topics</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s2">&quot;globalEvents&quot;</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="nx">globalGuy</span><span class="p">);</span>
+<span class="nx">topics</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s2">&quot;fullNames&quot;</span><span class="o">,</span> <span class="nx">someObject</span><span class="o">,</span> <span class="nx">bar</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note that the following alternative form would also work:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">topics</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="nx">topics</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s2">&quot;globalEvents&quot;</span><span class="o">,</span> <span class="nx">globalGuy</span><span class="p">);</span>
+<span class="nx">topics</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s2">&quot;fullNames&quot;</span><span class="o">,</span> <span class="nx">someObject</span><span class="o">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To publish information to both of these topics, you pass <tt class="docutils literal"><span class="pre">dojo.publish</span></tt> the topic names and arrays of the arguments that you want to pass to subscribed functions, as follows</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s2">&quot;globalEvents&quot;</span><span class="o">,</span> <span class="p">[</span><span class="s2">&quot;data from an interesting source&quot;</span><span class="p">]);</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s2">&quot;fullNames&quot;</span><span class="o">,</span> <span class="p">[</span><span class="s2">&quot;Alex&quot;</span><span class="o">,</span> <span class="s2">&quot;Russell&quot;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>To disconnect someObject.bar from its topic, you use <tt class="docutils literal"><span class="pre">dojo.unsubscribe</span></tt>, just as you would <tt class="docutils literal"><span class="pre">dojo.disconnect</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">unsubscribe</span><span class="p">(</span><span class="nx">topics</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="events-with-dijit">
+<h2><a class="toc-backref" href="#id8">Events with Dijit<a class="headerlink" href="#events-with-dijit" title="Permalink to this headline">¶</a></a></h2>
+<p><tt class="docutils literal"><span class="pre">TODOC</span></tt></p>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

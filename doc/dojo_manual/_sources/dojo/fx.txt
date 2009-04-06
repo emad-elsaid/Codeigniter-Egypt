@@ -1,0 +1,36 @@
+.. _dojo/fx:
+
+dojo.fx
+=======
+
+:Status: Draft
+:Version: 1.0
+:Authors: Peter Higgins, Nikolai Onken, Marcus Reimann
+:Developers: Bryan Forbes, Peter Higgins, Eugene Lazutkin, Bill Keese, Adam Peller, Alex Russell, Dylan Schiemann, sjmiles
+:Available: since V?
+
+.. contents::
+    :depth: 2
+
+Dojo provides a host of animation functionality in both :ref:`Dojo Base <dojo/_base/fx>` and as Extensions, available in :ref:`dojox.fx <dojox/fx>`.
+
+
+========
+Features
+========
+
+* :ref:`dojo.fx.wipeIn <dojo/fx/wipeIn>`
+
+  To wipe in a node
+
+========
+See also
+========
+
+* :ref:`dojo._base.fx <dojo/_base/fx>`
+
+  Basic animation functions in Dojo Base
+
+* :ref:`dojox.fx <dojox/fx>`
+
+  More advanced animation functions in dojox.fx

@@ -1,0 +1,18 @@
+.. _dojo/fx/wipeIn:
+
+dojo.fx.wipeIn
+==============
+
+:Status: Draft
+:Version: 1.2
+
+.. contents::
+    :depth: 3
+
+Examples
+--------
+
+More examples
+-------------
+
+:ref:`More specific examples <dojo/fx/wipeIn-examples>` and use cases are available.

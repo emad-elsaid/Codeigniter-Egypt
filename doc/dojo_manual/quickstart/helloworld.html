@@ -1,0 +1,679 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Hello, World! &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Quickstart" href="contents.html" />
+    <link rel="next" title="Getting started" href="index.html" />
+    <link rel="prev" title="Getting started with some simple steps" href="gettingstarted.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="index.html" title="Getting started"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="gettingstarted.html" title="Getting started with some simple steps"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Quickstart</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">Hello, World!</a><ul>
+<li><a class="reference" href="#requirements">Requirements</a></li>
+<li><a class="reference" href="#setting-up-dojo">Setting Up Dojo</a></li>
+<li><a class="reference" href="#getting-started">Getting Started</a></li>
+<li><a class="reference" href="#creating-a-button-widget">Creating a Button Widget</a></li>
+<li><a class="reference" href="#connecting-an-event-to-the-widget">Connecting an Event to the Widget</a></li>
+<li><a class="reference" href="#reading-data-from-the-server">Reading Data from the Server</a></li>
+<li><a class="reference" href="#sending-data-to-the-server-using-get">Sending Data to the Server Using GET</a><ul>
+<li><a class="reference" href="#using-a-php-server">Using a PHP Server</a></li>
+<li><a class="reference" href="#using-an-asp-server">Using an ASP Server</a></li>
+<li><a class="reference" href="#using-a-coldfusion-server">Using a ColdFusion Server</a></li>
+<li><a class="reference" href="#using-a-java-server-jsp">Using a Java Server (JSP)</a></li>
+<li><a class="reference" href="#using-a-perl-server">Using a Perl Server</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#sending-data-to-the-server-using-post">Sending Data to the Server Using POST</a><ul>
+<li><a class="reference" href="#id1">Using a PHP Server</a></li>
+<li><a class="reference" href="#id2">Using an ASP Server</a></li>
+<li><a class="reference" href="#id3">Using a ColdFusion Server</a></li>
+<li><a class="reference" href="#id4">Using a Java Server (JSP)</a></li>
+<li><a class="reference" href="#id5">Using a Perl Server</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#finding-more-resources">Finding more resources</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="gettingstarted.html"
+                                  title="previous chapter">Getting started with some simple steps</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="next chapter">Getting started</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/quickstart/helloworld.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="hello-world">
+<span id="quickstart-helloworld"></span><h1>Hello, World!<a class="headerlink" href="#hello-world" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.2</td>
+</tr>
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">JChimene</td>
+</tr>
+</tbody>
+</table>
+<p>The purpose of this tutorial is to provide a starting point for users who are new to Dojo. Whilst every effort is made to introduce as much as possible about Dojo, it is impossible to include more of the detailed information since to do so would be counterproductive and confusing to new users. For more information on the concepts introduced here, please see the links to other resources at the end of this document (Finding More Resources).</p>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>Obviously, you need Dojo first!  You can get the latest stable build from <a class="reference" href="http://download.dojotoolkit.org">dojotoolkit.org</a>.  Next you need a web server.  Whether it&#8217;s hosted offsite or onsite, on Linux or Windows or Mac ... matters naught.  The Dojo JavaScript library is simply pulled from your web server to the browser as needed.  However, the AJAX examples in this document require a server-side scripting language like PHP or ASP.</p>
+<p>The Dojo and Dijit code, which runs on the client browser, is certified to run on IE 6 and 7, Firefox 2, and Safari.</p>
+</div>
+<div class="section" id="setting-up-dojo">
+<h2>Setting Up Dojo<a class="headerlink" href="#setting-up-dojo" title="Permalink to this headline">¶</a></h2>
+<p>First, you should create a directory on the web server.  We&#8217;ll call ours HelloWorldTutorial.  Then create a directory called dojoroot underneath it.  Finally, use your favorite unzipping tool to unzip Dojo into /HelloWorldTutorial/dojoroot.  It&#8217;ll look like this when you&#8217;re done:</p>
+<img alt="server directory structure" src="../_images/debugging9.png" />
+</div>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>Once we have setup the directory and file structure for the tutorial, we will need to setup the JavaScript component of our HTML page. Have a look at the code below:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Dojo: Hello World!<span class="nt">&lt;/title&gt;</span>
+
+  <span class="c">&lt;!-- SECTION 1 --&gt;</span>
+  <span class="nt">&lt;style </span><span class="na">type=</span><span class="s">&quot;text/css&quot;</span><span class="nt">&gt;</span>
+      <span class="k">@import</span> <span class="s2">&quot;dojoroot/dijit/themes/tundra/tundra.css&quot;</span><span class="p">;</span>
+      <span class="k">@import</span> <span class="s2">&quot;dojoroot/dojo/resources/dojo.css&quot;</span>
+  <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;dojoroot/dojo/dojo.js&quot;</span>
+    <span class="na">djConfig=</span><span class="s">&quot;parseOnLoad: true&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body</span> <span class="na">class=</span><span class="s">&quot;tundra&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>As it can be seen above, the page is a just a standard HTML skeleton with three things:</p>
+<ol class="arabic simple">
+<li>A couple of CSS style sheets. The one marked Tundra is the <em>theme</em> we will use from Dijit for this example.  There are other themes available.</li>
+</ol>
+</div>
+<div class="section" id="creating-a-button-widget">
+<h2>Creating a Button Widget<a class="headerlink" href="#creating-a-button-widget" title="Permalink to this headline">¶</a></h2>
+<p>Ok, now for the exciting part! In this example we're going to create a Button widget with the text 'Hello World!'. In the case of the Button widget, three visual states (mouseOut, mouseOver, and mouseDown) are available which means that we are able to enhance the user's experience somewhat.</p>
+<p>The first step in creating the widget is telling Dojo to load the appropriate modules. In the header, add another section (hereafter referred to as section 2) below section 1 as follows:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5</pre></td><td class="code"><div class="highlight"><pre>  <span class="c">&lt;!-- SECTION 2 --&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+     <span class="c">// Load Dojo&#39;s code relating to the Button widget</span>
+     <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dijit.form.Button&quot;</span><span class="p">);</span>
+  <span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>The dojo.require line instructs Dojo to load the Button widget. If you were to omit this line, the markup code for the button would not be evaluated by Dojo upon loading, resulting in a plain HTML button instead of what you expect.</p>
+<p>After making the changes, insert the following code into the body section of the HTML:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre>1</pre></td><td class="code"><div class="highlight"><pre>  <span class="nt">&lt;button</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.form.Button&quot;</span> <span class="na">id=</span><span class="s">&quot;helloButton&quot;</span><span class="nt">&gt;</span>Hello World!<span class="nt">&lt;/button&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>The key attribute of this HTML element to notice is the dojoType attribute. The dojoType attribute is responsible for instructing Dojo on how to process the element when the page is loading. In this case we've used a button element for the button though we could have used an input element - Dojo will work with either as long as the dojoType attribute is present. It is worth noting that if we did use an input element, we would have to specify the button's text by using adding a caption attribute that contained the desired text.</p>
+</div>
+<div class="section" id="connecting-an-event-to-the-widget">
+<h2>Connecting an Event to the Widget<a class="headerlink" href="#connecting-an-event-to-the-widget" title="Permalink to this headline">¶</a></h2>
+<p>A button is all well and good, but what about getting it to do something when it's clicked? We could just specify an onClick event handler for the button, but there's another, more efficient way - the Dojo event system!</p>
+<p>The easiest way to attach an event to a button is through a script tag.  But not just any script tag ... this one has a type of dojo/method, like this:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5
+6</pre></td><td class="code"><div class="highlight"><pre>  <span class="nt">&lt;button</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.form.Button&quot;</span> <span class="na">id=</span><span class="s">&quot;helloButton&quot;</span><span class="nt">&gt;</span>
+      Hello World!
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;dojo/method&quot;</span> <span class="na">event=</span><span class="s">&quot;onClick&quot;</span><span class="nt">&gt;</span>
+         <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;You pressed the button&#39;</span><span class="p">);</span>
+      <span class="nt">&lt;/script&gt;</span>
+  <span class="nt">&lt;/button&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Pretty simple, eh?  Putting the script inside the tag body makes a good deal of sense.  And you can harness the full power of DOM Level 2 events inside the script.  That means you can detect SHIFT and CTRL keys, get all sorts of event properties, and bubble events up through the HTML tree.  If you've ever used Level 2 events, you know how IE and Firefox use different syntax.  In Dojo, the same functions work in any supported browser.  That's powerful stuff!</p>
+</div>
+<div class="section" id="reading-data-from-the-server">
+<h2>Reading Data from the Server<a class="headerlink" href="#reading-data-from-the-server" title="Permalink to this headline">¶</a></h2>
+<p>Having an alert pop up when we press the button is great, but what if we want to retrieve some data from the server? Again, Dojo comes to the rescue with an easy method of accomplishing this - dojo.xhrGet. For easy reference, the code for this section is available as HelloWorld-Section5.html and response.txt in the attachments section.</p>
+<p>To get started, we first need a callback function to handle the data to be returned from the server. Insert the following code into the header:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;script&gt;</span>
+     <span class="k">function</span> <span class="nx">helloCallback</span><span class="p">(</span><span class="nx">data</span><span class="o">,</span><span class="nx">ioArgs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+     <span class="p">}</span>
+     <span class="k">function</span> <span class="nx">helloError</span><span class="p">(</span><span class="nx">data</span><span class="o">,</span> <span class="nx">ioArgs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Error when retrieving data from the server!&#39;</span><span class="p">);</span>
+     <span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>The two arguments to the functions (data, and ioArgs) are important - don't leave any of them out! The first argument (data) contains the data sent back from the server, whilst the second argument contains a Dojo I/O Bind object.  Only the first concerns us right now.</p>
+<p>The next step is to link the click of the button to the server request. To do this, modify the following code:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3</pre></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;dojo/method&quot;</span> <span class="na">event=</span><span class="s">&quot;onClick&quot;</span><span class="nt">&gt;</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;You pressed the button&#39;</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>To this:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;dojo/method&quot;</span> <span class="na">event=</span><span class="s">&quot;onClick&quot;</span><span class="nt">&gt;</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">xhrGet</span><span class="p">({</span>
+      <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;response.txt&#39;</span><span class="o">,</span>
+      <span class="nx">load</span><span class="o">:</span> <span class="nx">helloCallback</span><span class="o">,</span>
+      <span class="nx">error</span><span class="o">:</span> <span class="nx">helloError</span>
+ <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>The above code basically tells Dojo to query the URL specified by url and to use the function specified by handler to process the response from the server.</p>
+<p>Finally, we need to create another file in the same directory as HelloWorld.html called response.txt. In this file, place the text 'Welcome to the Dojo Hello World Tutorial'.</p>
+<p>Now, when the button is clicked, a JavaScript alert should display the text from the response.txt file. Dojo-Easy!</p>
+<p>Next, we'll look at doing something meaningful with that server request.</p>
+</div>
+<div class="section" id="sending-data-to-the-server-using-get">
+<h2>Sending Data to the Server Using GET<a class="headerlink" href="#sending-data-to-the-server-using-get" title="Permalink to this headline">¶</a></h2>
+<p>It's all well and good retrieving static data from the server, but it is hardly a widely used situation in real life. So, instead of simply requesting data from the server we also will send it some information for it to process. In this section, we'll use the GET method whilst in the next section we'll use the POST method. For easy reference, the code for this section is available as HelloWorld-Section6.html in the attachments section. Server side code is also available as HelloWorldResponseGET.&lt;type&gt; where type is ASP ('.asp'), PHP ('.php'), ColdFusion ('.cfm'), or Java ('.jsp').</p>
+<p>Firstly, in the markup section of the HelloWorld.html file (i.e. the body section), we need to add another element - an input element. So, change the code in this section from:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;button</span> <span class="na">dojoType=</span><span class="s">&quot;Button&quot;</span> <span class="na">widgetId=</span><span class="s">&quot;helloButton&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;dojo/method&quot;</span> <span class="na">event=</span><span class="s">&quot;onClick&quot;</span><span class="nt">&gt;</span>
+  <span class="nx">dojo</span><span class="p">.</span><span class="nx">xhrGet</span><span class="p">({</span>
+      <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;response.txt&#39;</span><span class="o">,</span>
+      <span class="nx">load</span><span class="o">:</span> <span class="nx">helloCallback</span><span class="o">,</span>
+      <span class="nx">error</span><span class="o">:</span> <span class="nx">helloError</span>
+  <span class="p">});</span>
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/button&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>to:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td class="code"><div class="highlight"><pre>   <span class="nt">&lt;button</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.form.Button&quot;</span> <span class="na">id=</span><span class="s">&quot;helloButton&quot;</span><span class="nt">&gt;</span>
+      Hello World!
+      <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;dojo/method&quot;</span> <span class="na">event=</span><span class="s">&quot;onClick&quot;</span><span class="nt">&gt;</span>
+      <span class="nx">dojo</span><span class="p">.</span><span class="nx">xhrGet</span><span class="p">({</span>
+         <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;HelloWorldResponseGET.php&#39;</span><span class="o">,</span>
+         <span class="nx">load</span><span class="o">:</span> <span class="nx">helloCallback</span><span class="o">,</span>
+         <span class="nx">error</span><span class="o">:</span> <span class="nx">helloError</span><span class="o">,</span>
+         <span class="nx">content</span><span class="o">:</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">value</span> <span class="p">}</span>
+      <span class="p">});</span>
+      <span class="nt">&lt;/script&gt;</span>
+   <span class="nt">&lt;/button&gt;</span>
+   Please enter your name: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Before we go any further - it is important to mention that the url property in the dojo.xhrGet function call must be set to the file that is appropriate to your environment. If you are using an ASP server then the value must read 'HelloWorldResponseGET.asp' instead of 'HelloWorldResponseGET.php' Likewise, if you are using a ColdFusion server then the value must read 'HelloWorldResponseGET.cfm' instead of 'HelloWorldResponseGET.php'. Finally, if you are using a Java server (JSP) then the value must read 'HelloWorldResponseGET.jsp' instead of 'HelloWorldResponseGET.php', or if you are using a Perl server then the value must read 'HelloWorldResponseGET.pl' instead of 'HelloWorldResponseGET.pl'. The code for these files is in the sections below, and is also available as attachments to this tutorial.</p>
+<p>In the code above, you will notice that there is a new property that has been passed to the dojo.xhrGet function. This property - content - allows the programmer to send arbitary values to the server as parameters. In this case, since we are using the default method of dojo.io.bind which is GET, the server side script will have the value of the textbox available to it as a the GET parameter 'name'. It is worth mentioning that if the script expected the parameter under a different name (such as 'myName'), we would simply change the content property to be (note the change of 'name' to 'myName' on the left of the assignment operator ':'):&lt;/p&gt;</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre>1</pre></td><td class="code"><div class="highlight"><pre>  content: {myName: dojo.byId(&#39;name&#39;).value }
+</pre></div>
+</td></tr></table></div>
+<p>Since we've not used it before, it is also worth noting the call dojo.byId('name').value. Quite simply, this call is a shortcut for the standard document.getElementById(..) function.</p>
+<p>Finally, if you enter your name into the text box and you click the 'Hello World' button, an alert box should appear with the message 'Hello &lt;name&gt;, welcome to the world of Dojo!' where &lt;name&gt; is the name you entered into the text box.</p>
+<p>Here are the server side scripts.  A few of them are downloadable at the bottom of this page (the website content management system doesn't allow .jsp or .cfm files).</p>
+<div class="section" id="using-a-php-server">
+<h3>Using a PHP Server<a class="headerlink" href="#using-a-php-server" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="cp">/*</span>
+<span class="cp">* HelloWorldResponseGET.php</span>
+<span class="cp">* --------</span>
+<span class="cp">*</span>
+<span class="cp">* Print the name that is passed in the</span>
+<span class="cp">* &#39;name&#39; $_GET parameter in a sentence</span>
+<span class="cp">*/</span>
+
+<span class="cp">header(&#39;Content-type: text/plain&#39;);</span>
+<span class="cp">print &quot;Hello {$_GET[&#39;name&#39;]}, welcome to the world of Dojo!\n&quot;;</span>
+<span class="cp">?&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="using-an-asp-server">
+<h3>Using an ASP Server<a class="headerlink" href="#using-an-asp-server" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-html"><pre>&lt;%
+'
+' HelloWorldResponseGET.asp
+' --------
+'
+' Print the name that is passed in the
+' 'name' GET parameter in a sentence
+'
+
+response.ContentType="text/plain"
+response.write("Hello " &amp; request.querystring("name") &amp; ", welcome to the world of Dojo!\n")
+%&gt;</pre>
+</div>
+</div>
+<div class="section" id="using-a-coldfusion-server">
+<h3>Using a ColdFusion Server<a class="headerlink" href="#using-a-coldfusion-server" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td class="code"><div class="highlight"><pre><span class="c">&lt;!---</span>
+<span class="c">/*</span>
+<span class="c">* HelloWorldResponseGET.cfm</span>
+<span class="c">* --------</span>
+<span class="c">*</span>
+<span class="c">* Print the name that is passed in the</span>
+<span class="c">* &#39;name&#39; GET parameter in a sentence</span>
+<span class="c">*/</span>
+<span class="c">---&gt;</span>
+<span class="nt">&lt;cfsetting</span> <span class="na">showDebugOutput=</span><span class="s">&quot;No&quot;</span><span class="nt">&gt;</span>
+Hello, #url.name#, welcome to the world of Dojo!
+<span class="nt">&lt;/cfsetting&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="using-a-java-server-jsp">
+<h3>Using a Java Server (JSP)<a class="headerlink" href="#using-a-java-server-jsp" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-html"><pre>&lt;%
+/*
+' HelloWorldResponseGET.jsp
+' --------
+'
+' Print the name that is passed in the
+' 'name' GET parameter in a sentence
+*/
+
+response.setContentType("text/plain");
+%&gt;
+Hello &lt;%= request.getParameter("name") %&gt; , welcome to the world of Dojo!</pre>
+</div>
+</div>
+<div class="section" id="using-a-perl-server">
+<h3>Using a Perl Server<a class="headerlink" href="#using-a-perl-server" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></td><td class="code"><div class="highlight"><pre>#!/usr/bin/perl
+#
+#  &#39; HelloWorldResponseGET.pl
+#  &#39; --------
+#  &#39;
+#  &#39; Print the name that is passed in the
+#  &#39; &#39;name&#39; GET parameter in a sentence
+#
+use strict;
+use CGI;
+my $cgi = CGI::new();
+print $cgi-&gt;header(-type =&gt; &quot;text/html; charset=utf-8&quot;);
+print &quot;Hello &quot; . $cgi-&gt;param(&#39;name&#39;) . &quot;, welcome to the world of Dojo!\n&quot;;
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="sending-data-to-the-server-using-post">
+<h2>Sending Data to the Server Using POST<a class="headerlink" href="#sending-data-to-the-server-using-post" title="Permalink to this headline">¶</a></h2>
+<p>Using GET data is all well and good, but sometimes you want to use Dojo to improve the user's experience when using a traditional HTML form. As usual, Dojo has a very nice way of making this easier. Again, the code for these files is in the sections below, and are also available as attachments to this tutorial. Additionally, as with the last section, you will need to change the 'url' property to point to the file that is appropriate to your environment.</p>
+<p>First, we need to change the markup in the body of HelloWorld.html from:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre>1</pre></td><td class="code"><div class="highlight"><pre>  Please enter your name: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">id=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>to:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3</pre></td><td class="code"><div class="highlight"><pre>  <span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;myForm&quot;</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span><span class="nt">&gt;</span>
+    Please enter your name: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/form&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Next we need to change the dojo/method:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;dojo/method&quot;</span> <span class="na">event=</span><span class="s">&quot;onClick&quot;</span><span class="nt">&gt;</span>
+      <span class="nx">dojo</span><span class="p">.</span><span class="nx">xhrGet</span><span class="p">({</span>
+         <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;HelloWorldResponseGET.php&#39;</span><span class="o">,</span>
+         <span class="nx">load</span><span class="o">:</span> <span class="nx">helloCallback</span><span class="o">,</span>
+         <span class="nx">error</span><span class="o">:</span> <span class="nx">helloError</span><span class="o">,</span>
+         <span class="nx">content</span><span class="o">:</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">).</span><span class="nx">value</span> <span class="p">}</span>
+      <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>to:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></td><td class="code"><div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;dojo/method&quot;</span> <span class="na">event=</span><span class="s">&quot;onClick&quot;</span><span class="nt">&gt;</span>
+ <span class="c">// Don&#39;t forget to replace the value for &#39;url&#39; with</span>
+ <span class="c">// the value of appropriate file for your server</span>
+<span class="c">// (i.e. &#39;HelloWorldResponsePOST.asp&#39;) for an ASP server</span>
+  <span class="nx">dojo</span><span class="p">.</span><span class="nx">xhrPost</span><span class="p">({</span>
+      <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;HelloWorldResponsePOST.php&#39;</span><span class="o">,</span>
+      <span class="nx">load</span><span class="o">:</span> <span class="nx">helloCallback</span><span class="o">,</span>
+      <span class="nx">error</span><span class="o">:</span> <span class="nx">helloError</span><span class="o">,</span>
+      <span class="nx">form</span><span class="o">:</span> <span class="s1">&#39;myForm&#39;</span>
+ <span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>As can be seen from the code above, we've changed dojo.xhrGet to dojo.xhrPost.  We removed the 'content' property and replaced it with a new property 'form'. This basically informs the dojo.xhrPost function that it needs to use the form 'myForm' as the source for the data in the call.</p>
+<p>As with the last section, entering your name and clicking 'Hello World!' should yield a message such as 'Hello &lt;name&gt;, welcome to the world of Dojo!' where &lt;name&gt; is the name you entered into the text box.</p>
+<div class="section" id="id1">
+<h3>Using a PHP Server<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td class="code"><div class="highlight"><pre><span class="cp">&lt;?php</span>
+<span class="cp">/*</span>
+<span class="cp">* HelloWorldResponsePOST.php</span>
+<span class="cp">* --------</span>
+<span class="cp">*</span>
+<span class="cp">* Print the name that is passed in the</span>
+<span class="cp">* &#39;name&#39; $_POST parameter in a sentence</span>
+<span class="cp">*/</span>
+
+<span class="cp">header(&#39;Content-type: text/plain&#39;);</span>
+<span class="cp">print &quot;Hello {$_POST[&#39;name&#39;]}, welcome to the world of Dojo!\n&quot;;</span>
+<span class="cp">?&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id2">
+<h3>Using an ASP Server<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-html"><pre>&lt;%
+'
+' HelloWorldResponsePOST.asp
+' --------
+'
+' Print the name that is passed in the
+' 'name' $_POST parameter in a sentence
+'
+
+response.ContentType="text/plain"
+response.write("Hello " &amp; request.form("name") &amp; ", welcome to the world of Dojo!\n")
+%&gt;</pre>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Using a ColdFusion Server<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td class="code"><div class="highlight"><pre><span class="c">&lt;!---</span>
+<span class="c">/*</span>
+<span class="c">* HelloWorldResponsePOST.cfm</span>
+<span class="c">* --------</span>
+<span class="c">*</span>
+<span class="c">* Print the name that is passed in the</span>
+<span class="c">* &#39;name&#39; POST parameter in a sentence</span>
+<span class="c">*/</span>
+<span class="c">---&gt;</span>
+<span class="nt">&lt;cfsetting</span> <span class="na">showDebugOutput=</span><span class="s">&quot;No&quot;</span><span class="nt">&gt;</span>
+Hello, #form.name#, welcome to the world of Dojo!
+<span class="nt">&lt;/cfsetting&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id4">
+<h3>Using a Java Server (JSP)<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-html"><pre>&lt;%
+/*
+' HelloWorldResponsePOST.jsp
+' --------
+'
+' Print the name that is passed in the
+' 'name' POST parameter in a sentence
+*/
+
+response.setContentType("text/plain");
+%&gt;
+Hello &lt;%= request.getParameter("name") %&gt; , welcome to the world of Dojo!</pre>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>Using a Perl Server<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></td><td class="code"><div class="highlight"><pre>#!/usr/bin/perl
+#
+#  &#39; HelloWorldResponsePOST.pl
+#  &#39; --------
+#  &#39;
+#  &#39; Print the name that is passed in the
+#  &#39; &#39;name&#39; POST parameter in a sentence
+#
+use strict;
+use CGI;
+my $cgi = CGI::new();
+print $cgi-&gt;header(-type =&gt; &quot;text/html; charset=utf-8&quot;);
+print &quot;Hello &quot; . $cgi-&gt;param(&#39;name&#39;) . &quot;, welcome to the world of Dojo!\n&quot;;
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="finding-more-resources">
+<h2>Finding more resources<a class="headerlink" href="#finding-more-resources" title="Permalink to this headline">¶</a></h2>
+<p>I hope you've enjoyed this tutorial and found it informative. No doubt though, you will need more information on Dojo and how it and it's widgets work. Below is a list of links that will point you in the right direction.</p>
+<ol class="arabic simple">
+<li><a class="reference" href="http://dojotoolkit.org/docs/">The documentation page for Dojo</a> with links to all documentation.</li>
+</ol>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.form.Slider &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dijit" href="../contents.html" />
+    <link rel="next" title="dijit.form.TextBox" href="TextBox.html" />
+    <link rel="prev" title="dijit.form.SimpleTextarea" href="SimpleTextarea.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="TextBox.html" title="dijit.form.TextBox"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="SimpleTextarea.html" title="dijit.form.SimpleTextarea"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.form.Slider</a><ul>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#programmatic-example-of-a-horizontal-slider">Programmatic example of a horizontal slider</a></li>
+<li><a class="reference" href="#programmatic-example-of-a-vertical-slider">Programmatic example of a vertical slider</a></li>
+<li><a class="reference" href="#declarative-markup-example-with-discrete-values">Declarative markup example with discrete values</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#accessibility">Accessibility</a><ul>
+<li><a class="reference" href="#keyboard">Keyboard</a></li>
+<li><a class="reference" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="SimpleTextarea.html"
+                                  title="previous chapter">dijit.form.SimpleTextarea</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="TextBox.html"
+                                  title="next chapter">dijit.form.TextBox</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dijit/form/Slider.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-form-slider">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dijit.form.Slider<a class="headerlink" href="#dijit-form-slider" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Becky Gibson, Doug Hays, Nikolai Onken</td>
+</tr>
+<tr class="field"><th class="field-name">Developers:</th><td class="field-body">?-</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V?</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dijit-form-slider" id="id2" name="id2">dijit.form.Slider</a><ul>
+<li><a class="reference" href="#examples" id="id3" name="id3">Examples</a></li>
+<li><a class="reference" href="#accessibility" id="id4" name="id4">Accessibility</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>A <strong>dijit.form.HorizontalSlider</strong> or <strong>dijit.form.VerticalSlider</strong> is a scale with a handle you can drag up/down or left/right to select a value.</p>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id3">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="programmatic-example-of-a-horizontal-slider">
+<h3>Programmatic example of a horizontal slider<a class="headerlink" href="#programmatic-example-of-a-horizontal-slider" title="Permalink to this headline">¶</a></h3>
+<p>One way you could show the user the value of your Slider is to create a textbox that the Slider fills when the user moves the Slider. The following code fills in a simple textbox called horizontalSliderValue.</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+  dojo.require(&quot;dijit.form.Slider&quot;);
+  dojo.require(&quot;dijit.form.TextBox&quot;); // this we only include to make the textinput look prettier
+
+  dojo.addOnLoad(function(){
+
+    var slider = new dijit.form.HorizontalSlider({
+      name: &quot;slider&quot;,
+      value: 5,
+      minimum: -10,
+      maximum: 10,
+      intermediateChanges: true,
+      style: &quot;width:300px;&quot;,
+      onChange: function(value){
+        dojo.byId(&quot;sliderValue&quot;).value = value;
+      }
+    }, &quot;slider&quot;);
+  });
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;slider&quot;&gt;&lt;/div&gt;
+&lt;p&gt;&lt;input type=&quot;text&quot; id=&quot;sliderValue&quot; dojoType=&quot;dijit.form.TextBox&quot; /&gt;&lt;/p&gt;</pre></div></div></div>
+<div class="section" id="programmatic-example-of-a-vertical-slider">
+<h3>Programmatic example of a vertical slider<a class="headerlink" href="#programmatic-example-of-a-vertical-slider" title="Permalink to this headline">¶</a></h3>
+<p>The similar example but with a vertical slider and a simple rule (tick marks) created programmatically.</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+  dojo.require(&quot;dijit.form.Slider&quot;);
+  dojo.require(&quot;dijit.form.TextBox&quot;); // this we only include to make the textinput look prettier
+
+  dojo.addOnLoad(function(){
+    var vertical = dojo.byId(&quot;vertical&quot;);
+    var rulesNode = document.createElement('div');
+    vertical.appendChild(rulesNode);
+    var sliderRules = new dijit.form.VerticalRule({
+        count:11,
+        style:&quot;width:5px;&quot;
+    }, rulesNode);
+    var slider = new dijit.form.VerticalSlider({
+      name: &quot;vertical&quot;,
+      value: 6,
+      minimum: -10,
+      maximum: 10,
+      intermediateChanges: true,
+      style: &quot;height:300px;&quot;
+    }, vertical);
+  });
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;vertical&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="declarative-markup-example-with-discrete-values">
+<h3>Declarative markup example with discrete values<a class="headerlink" href="#declarative-markup-example-with-discrete-values" title="Permalink to this headline">¶</a></h3>
+<p>And here we create a slider declaratively. Note that we set the value of the &#8220;discreteValues&#8221; attribute to 11, meaning that the slider will have 11 focus points.  This example also shows the end buttons removed.</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+  dojo.require(&quot;dijit.form.Slider&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;horizontalSlider&quot; dojoType=&quot;dijit.form.HorizontalSlider&quot;
+    value=&quot;6&quot; minimum=&quot;-10&quot; maximum=&quot;10&quot; discreteValues=&quot;11&quot;
+    intermediateChanges=&quot;true&quot;
+    showButtons=&quot;false&quot; style=&quot;width:400px;&quot;&gt;
+  &lt;ol dojoType=&quot;dijit.form.HorizontalRuleLabels&quot; container=&quot;topDecoration&quot;
+      style=&quot;height:1.5em;font-size:75%;color:gray;&quot;&gt;
+    &lt;li&gt; &lt;/li&gt;
+    &lt;li&gt;20%&lt;/li&gt;
+    &lt;li&gt;40%&lt;/li&gt;
+    &lt;li&gt;60%&lt;/li&gt;
+    &lt;li&gt;80%&lt;/li&gt;
+    &lt;li&gt; &lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;div dojoType=&quot;dijit.form.HorizontalRule&quot; container=&quot;bottomDecoration&quot;
+    count=11 style=&quot;height:5px;&quot;&gt;&lt;/div&gt;
+  &lt;ol dojoType=&quot;dijit.form.HorizontalRuleLabels&quot; container=&quot;bottomDecoration&quot;
+      style=&quot;height:1em;font-size:75%;color:gray;&quot;&gt;
+    &lt;li&gt;0%&lt;/li&gt;
+    &lt;li&gt;50%&lt;/li&gt;
+    &lt;li&gt;100%&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</pre></div></div></div>
+</div>
+<div class="section" id="accessibility">
+<h2><a class="toc-backref" href="#id4">Accessibility<a class="headerlink" href="#accessibility" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="keyboard">
+<h3>Keyboard<a class="headerlink" href="#keyboard" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Action</strong></td>
+<td><strong>Key</strong></td>
+</tr>
+<tr><td>Interact with the slider</td>
+<td>The slider handle is in the tab order of the page.
+Press tab key to set focus to the slider handle.</td>
+</tr>
+<tr><td>Increase slider value by single increment</td>
+<td>With focus on slider handle press right or up arrow.</td>
+</tr>
+<tr><td>Decrease slider value by single increment</td>
+<td>With focus on slider handle press left or down arrow.</td>
+</tr>
+<tr><td>Increase slider value by multiple increments</td>
+<td>With focus on slider handle press PageUp. The amount of
+increment is determined by the pageIncrement parameter.</td>
+</tr>
+<tr><td>Decrease slider value by multiple increments</td>
+<td>With focus on slider handle press PageDown. The amount
+of decrement is determined by the pageIncrement parameter.</td>
+</tr>
+<tr><td>Set slider to minimum value</td>
+<td>With focus on slider handle press Home.</td>
+</tr>
+<tr><td>Set slider to mmaximum value</td>
+<td>With focus on slider handle press End.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="known-issues">
+<h3>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h3>
+<p>Currently the text labels of a slider are not spoken by screen readers. Firefox 3 provides the infrastructure necessary for spoken text labels so the slider will be updated to support them in a future Dojo release. Developers should take care when using text labels since a screen reader user will hear only a numeric interpretation.</p>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

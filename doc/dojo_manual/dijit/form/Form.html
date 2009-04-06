@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.form.Form &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dijit" href="../contents.html" />
+    <link rel="next" title="dijit.form.MultiSelect" href="MultiSelect.html" />
+    <link rel="prev" title="dijit.form.FilteringSelect" href="FilteringSelect.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="MultiSelect.html" title="dijit.form.MultiSelect"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="FilteringSelect.html" title="dijit.form.FilteringSelect"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.form.Form</a><ul>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#declarative-example">Declarative example</a></li>
+<li><a class="reference" href="#preparing-and-validating-a-form-for-xhr-requests">Preparing and validating a form for XHR requests</a></li>
+<li><a class="reference" href="#using-native-form-elements">Using native form elements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="FilteringSelect.html"
+                                  title="previous chapter">dijit.form.FilteringSelect</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="MultiSelect.html"
+                                  title="next chapter">dijit.form.MultiSelect</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dijit/form/Form.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-form-form">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dijit.form.Form<a class="headerlink" href="#dijit-form-form" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V?</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dijit-form-form" id="id2" name="id2">dijit.form.Form</a><ul>
+<li><a class="reference" href="#examples" id="id3" name="id3">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><strong>dijit.form.Form</strong> is the dijit equivalent of the &lt;form&gt; node, and it provides various methods for serializing/deserializing form data, and checking whether or not a form is valid.</p>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id3">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="declarative-example">
+<h3>Declarative example<a class="headerlink" href="#declarative-example" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+    dojo.require(&quot;dijit.form.Form&quot;);
+    dojo.require(&quot;dijit.form.Button&quot;);
+    dojo.require(&quot;dijit.form.ValidationTextBox&quot;);
+    dojo.require(&quot;dijit.form.DateTextBox&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.form.Form&quot; id=&quot;myForm&quot; jsId=&quot;myForm&quot;
+encType=&quot;multipart/form-data&quot; action=&quot;&quot; method=&quot;&quot;&gt;
+    &lt;script type=&quot;dojo/method&quot; event=&quot;onReset&quot;&gt;
+        return confirm('Press OK to reset widget values');
+    &lt;/script&gt;
+
+    &lt;script type=&quot;dojo/method&quot; event=&quot;onSubmit&quot;&gt;
+        console.debug('Attempting to submit form w/values:\n',
+            dojo.toJson(this.getValues(), true));
+        if(this.validate()){
+            return confirm('Form is valid, press OK to submit');
+        } else {
+            alert('Form contains invalid data.  Please correct first');
+            return false;
+        }
+        return true;
+    &lt;/script&gt;
+
+    &lt;script type=&quot;dojo/method&quot; event=&quot;onReset&quot;&gt;
+        return confirm('reset Form?');
+    &lt;/script&gt;
+
+    &lt;table style=&quot;border: 1px solid #9f9f9f;&quot; cellspacing=&quot;10&quot;&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;label for=&quot;name&quot;&gt;Name:
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; required=&quot;true&quot; dojoType=&quot;dijit.form.ValidationTextBox&quot;/&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;label for=&quot;dob&quot;&gt;Date of birth:
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;input type=&quot;text&quot; id=&quot;dob&quot; name=&quot;dob&quot; dojoType=&quot;dijit.form.DateTextBox&quot;/&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+
+    &lt;button dojoType=&quot;dijit.form.Button&quot; onClick=&quot;console.log(myForm.getValues())&quot;&gt;Get Values from form!&lt;/button&gt;
+    &lt;button dojoType=&quot;dijit.form.Button&quot; type=&quot;submit&quot; name=&quot;submitButton&quot; value=&quot;Submit&quot;&gt;Submit&lt;/button&gt;
+    &lt;button dojoType=&quot;dijit.form.Button&quot; type=&quot;reset&quot;&gt;Reset&lt;/button&gt;
+&lt;/div&gt;</pre></div></div><p>Note that it&#8217;s using a &lt;div&gt; node instead of the obvious choice of a &lt;form&gt; node because of some <a class="reference" href="http://bugs.dojotoolkit.org/ticket/8424">IE issues</a></p>
+</div>
+<div class="section" id="preparing-and-validating-a-form-for-xhr-requests">
+<h3>Preparing and validating a form for XHR requests<a class="headerlink" href="#preparing-and-validating-a-form-for-xhr-requests" title="Permalink to this headline">¶</a></h3>
+<p>To validate a form you use the <cite>isValid()</cite> function. Lets take at a simple example using a declaratively created form:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+    dojo.require(&quot;dijit.form.Form&quot;);
+    dojo.require(&quot;dijit.form.Button&quot;);
+    dojo.require(&quot;dijit.form.ValidationTextBox&quot;);
+    dojo.require(&quot;dijit.form.DateTextBox&quot;);
+
+    dojo.addOnLoad(function(){
+        var myForm = dijit.byId(&quot;myFormTwo&quot;);
+        dojo.connect(myForm, &quot;onSubmit&quot;, function(e){
+            e.preventDefault();
+            if (myForm.isValid()){
+                alert(&quot;Ready to submit data: &quot;+dojo.toJson(myForm.attr(&quot;value&quot;)) );
+            }
+        });
+    });
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.form.Form&quot; id=&quot;myFormTwo&quot; jsId=&quot;myFormTwo&quot;
+encType=&quot;multipart/form-data&quot; action=&quot;&quot; method=&quot;&quot;&gt;
+    &lt;table style=&quot;border: 1px solid #9f9f9f;&quot; cellspacing=&quot;10&quot;&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;label for=&quot;name&quot;&gt;Name:
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;input type=&quot;text&quot; name=&quot;name&quot; required=&quot;true&quot; dojoType=&quot;dijit.form.ValidationTextBox&quot;/&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;label for=&quot;dob&quot;&gt;Date of birth:
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;input type=&quot;text&quot; name=&quot;dob&quot; dojoType=&quot;dijit.form.DateTextBox&quot;/&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+
+    &lt;button dojoType=&quot;dijit.form.Button&quot; onClick=&quot;console.log(myFormTwo.attr(&quot;value&quot;))&quot;&gt;Get Values from form!&lt;/button&gt;
+    &lt;button dojoType=&quot;dijit.form.Button&quot; type=&quot;submit&quot; name=&quot;submitButtonTwo&quot; value=&quot;Submit&quot;&gt;Submit&lt;/button&gt;
+    &lt;button dojoType=&quot;dijit.form.Button&quot; type=&quot;reset&quot;&gt;Reset&lt;/button&gt;
+&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="using-native-form-elements">
+<h3>Using native form elements<a class="headerlink" href="#using-native-form-elements" title="Permalink to this headline">¶</a></h3>
+<p>dijit.form.Form can also handle any type of naive form element, though you have to do validation yourself</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+    dojo.require(&quot;dijit.form.Form&quot;);
+    dojo.require(&quot;dijit.form.Button&quot;);
+    dojo.require(&quot;dijit.form.ValidationTextBox&quot;);
+    dojo.require(&quot;dijit.form.DateTextBox&quot;);
+
+    dojo.addOnLoad(function(){
+        var myForm = dijit.byId(&quot;myFormThree&quot;);
+        dojo.connect(myForm, &quot;onSubmit&quot;, function(e){
+            e.preventDefault();
+            alert(&quot;Ready to submit data: &quot;+dojo.toJson(myForm.attr(&quot;value&quot;)) );
+        });
+    });
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.form.Form&quot; id=&quot;myFormThree&quot; jsId=&quot;myFormThree&quot;
+encType=&quot;multipart/form-data&quot; action=&quot;&quot; method=&quot;&quot;&gt;
+    &lt;table style=&quot;border: 1px solid #9f9f9f;&quot; cellspacing=&quot;10&quot;&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;label for=&quot;name&quot;&gt;Name:
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;input type=&quot;text&quot; name=&quot;name&quot; required=&quot;true&quot; dojoType=&quot;dijit.form.ValidationTextBox&quot;/&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;label for=&quot;dob&quot;&gt;Date of birth:
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;input type=&quot;text&quot; name=&quot;dob&quot; dojoType=&quot;dijit.form.DateTextBox&quot; /&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                &lt;label for=&quot;dob&quot;&gt;Order
+            &lt;/td&gt;
+            &lt;td&gt;
+                &lt;input type=&quot;radio&quot; name=&quot;order&quot; value=&quot;Food&quot;&gt; Food
+                &lt;input type=&quot;radio&quot; name=&quot;order&quot; value=&quot;Drinks&quot; checked&gt; Drinks
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+
+    &lt;button dojoType=&quot;dijit.form.Button&quot; onClick=&quot;console.log(myFormThree.attr(&quot;value&quot;))&quot;&gt;Get Values from form!&lt;/button&gt;
+    &lt;button dojoType=&quot;dijit.form.Button&quot; type=&quot;submit&quot; name=&quot;submitButtonThree&quot; value=&quot;Submit&quot;&gt;Submit&lt;/button&gt;
+    &lt;button dojoType=&quot;dijit.form.Button&quot; type=&quot;reset&quot;&gt;Reset&lt;/button&gt;
+&lt;/div&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.data.CssClassStore &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.data.CssRuleStore" href="CssRuleStore.html" />
+    <link rel="prev" title="dojox.data.CouchDBRestStore" href="CouchDBRestStore.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="CssRuleStore.html" title="dojox.data.CssRuleStore"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="CouchDBRestStore.html" title="dojox.data.CouchDBRestStore"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.data.CssClassStore</a><ul>
+<li><a class="reference" href="#api-support">API Support</a></li>
+<li><a class="reference" href="#constructor-parameters">Constructor Parameters</a></li>
+<li><a class="reference" href="#item-attributes">Item Attributes</a></li>
+<li><a class="reference" href="#query-syntax">Query Syntax</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#programmatic-construction-of-a-combobox-to-browse-rules">Programmatic construction of a ComboBox to browse rules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="CouchDBRestStore.html"
+                                  title="previous chapter">dojox.data.CouchDBRestStore</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="CssRuleStore.html"
+                                  title="next chapter">dojox.data.CssRuleStore</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/data/CssClassStore.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-data-cssclassstore">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.data.CssClassStore<a class="headerlink" href="#dojox-data-cssclassstore" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed, Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.2</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-data-cssclassstore" id="id2" name="id2">dojox.data.CssClassStore</a><ul>
+<li><a class="reference" href="#api-support" id="id3" name="id3">API Support</a></li>
+<li><a class="reference" href="#constructor-parameters" id="id4" name="id4">Constructor Parameters</a></li>
+<li><a class="reference" href="#item-attributes" id="id5" name="id5">Item Attributes</a></li>
+<li><a class="reference" href="#query-syntax" id="id6" name="id6">Query Syntax</a></li>
+<li><a class="reference" href="#examples" id="id7" name="id7">Examples</a><ul>
+<li><a class="reference" href="#programmatic-construction-of-a-combobox-to-browse-rules" id="id8" name="id8">Programmatic construction of a ComboBox to browse rules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>CssClassStore is a read interface based on the CssRuleStore. Items represent the individual classes present in the stylesheets loaded in the current page. In other words, compared to the results of a query on the CssRuleStore, the CssClassStore generates items that may be represented by a single item in the rule store (if several classes are mentioned in a single selector) OR may occur multiple times in the rule store (for a class that&#8217;s mentioned in several selectors). Since the class store is based upon (extends) the rule store, it takes the same constructor parameters and operates very similarly. The single biggest difference is the support for the Identity API in the CssClassStore. The identity of an individual item is the same as it&#8217;s &#8216;class&#8217; attribute, which is the class name, including the &#8216;.&#8217; that is used to denote a class in a CSS selector.</p>
+<div class="section" id="api-support">
+<h2><a class="toc-backref" href="#id3">API Support<a class="headerlink" href="#api-support" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li>dojo.data.api.Read</li>
+<li>dojo.data.api.Identity</li>
+</ul>
+</div>
+<div class="section" id="constructor-parameters">
+<h2><a class="toc-backref" href="#id4">Constructor Parameters<a class="headerlink" href="#constructor-parameters" title="Permalink to this headline">¶</a></a></h2>
+<p>The constructor for CssClassStore allows for one optional parameter.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="81%" />
+<col width="11%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Name</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Type</strong></td>
+</tr>
+<tr><td>context</td>
+<td>An array of strings, each being a pattern to match on the paths of loaded stylesheets, indicating
+which rules to index.</td>
+<td>Array</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="item-attributes">
+<h2><a class="toc-backref" href="#id5">Item Attributes<a class="headerlink" href="#item-attributes" title="Permalink to this headline">¶</a></a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>class</td>
+<td>The class name, including the &#8216;.&#8217;</td>
+</tr>
+<tr><td>classSans</td>
+<td>The class name, without the &#8216;.&#8217;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="query-syntax">
+<h2><a class="toc-backref" href="#id6">Query Syntax<a class="headerlink" href="#query-syntax" title="Permalink to this headline">¶</a></a></h2>
+<p>The query syntax is identical to <a class="reference" href="../../dojo/data/ItemFileReadStore.html#dojo-data-itemfilereadstore"><em>dojo.data.ItemFileReadStore</em></a>. Please refer to it for the format of the queries.</p>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id7">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="programmatic-construction-of-a-combobox-to-browse-rules">
+<h3><a class="toc-backref" href="#id8">Programmatic construction of a ComboBox to browse rules<a class="headerlink" href="#programmatic-construction-of-a-combobox-to-browse-rules" title="Permalink to this headline">¶</a></a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.CssClassStore&quot;);
+  dojo.require(&quot;dijit.form.ComboBox&quot;);
+
+  function init() {
+    var classStore = new dojox.data.CssClassStore({'context': ['dijit/themes/nihilo/nihilo.css']});
+    var classCombo = new dijit.form.ComboBox({'store': classStore, 'searchAttr': 'classSans'}, dojo.byId('classCombo'));
+  }
+  dojo.addOnLoad(init);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;b&gt;Combo lookup of classes(scoped to nihilo.css)&lt;/b&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;div id=&quot;classCombo&quot;&gt;&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

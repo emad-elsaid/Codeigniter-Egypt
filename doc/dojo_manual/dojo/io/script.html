@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.io.script &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dojo" href="../contents.html" />
+    <link rel="next" title="dojo.isAlien" href="../isAlien.html" />
+    <link rel="prev" title="dojo.io.frame" href="iframe.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="../isAlien.html" title="dojo.isAlien"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="iframe.html" title="dojo.io.frame"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dojo</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.io.script</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#jsonp">JSONP</a></li>
+<li><a class="reference" href="#limitations">Limitations</a></li>
+<li><a class="reference" href="#usage">Usage</a><ul>
+<li><a class="reference" href="#dojo-io-script-get-supported-object-properties">dojo.io.script.get() supported object properties</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#example-1-dojo-io-scriot-call-to-fetch-data-from-the-google-search-api-jsonp">Example 1: dojo.io.scriot call to fetch data from the Google Search API (JSONP)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="iframe.html"
+                                  title="previous chapter">dojo.io.frame</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../isAlien.html"
+                                  title="next chapter">dojo.isAlien</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojo/io/script.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-io-script">
+<span id="dojo-io-script"></span><h1><a class="toc-backref" href="#id2">dojox.io.script<a class="headerlink" href="#dojox-io-script" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed, Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V0.9</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-io-script" id="id2" name="id2">dojox.io.script</a><ul>
+<li><a class="reference" href="#introduction" id="id3" name="id3">Introduction</a></li>
+<li><a class="reference" href="#jsonp" id="id4" name="id4">JSONP</a></li>
+<li><a class="reference" href="#limitations" id="id5" name="id5">Limitations</a></li>
+<li><a class="reference" href="#usage" id="id6" name="id6">Usage</a></li>
+<li><a class="reference" href="#examples" id="id7" name="id7">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>This is an alternate IO mechanism to <a class="reference" href="../xhrGet.html#dojo-xhrget"><em>dojo.xhrGet</em></a> that has the capability of doing cross-site data access.  It accomplishes this feat by doing an IO call via a dynamically inserted &lt;SCRIPT&gt; tag into your web page.</p>
+</div>
+<div class="section" id="jsonp">
+<h2><a class="toc-backref" href="#id4">JSONP<a class="headerlink" href="#jsonp" title="Permalink to this headline">¶</a></a></h2>
+<p>Aside from being able to do cross-site data access, this implementation provides support for <a class="reference" href="http://en.wikipedia.org/wiki/JSON#JSONP">JSONP</a> which is a way callback names can be added to a script return and executed appropriately.  Not all services that provide script-tag data formats support JSONP, but many do and it makes it very flexible.</p>
+</div>
+<div class="section" id="limitations">
+<h2><a class="toc-backref" href="#id5">Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li>The dojo.io.script package can only make requests that are effectively &#8216;GET&#8217; style requests with query parameters.  It does not support any other HTTP verb, such as POST, PUT, and DELETE.</li>
+<li>Since dojo.io.script relies on dynamic script tags, it cannot be done in a synchronous fashion (unlike dojo.xhrGet).  Therefore, any usage of this function must be async aware and async safe.</li>
+</ul>
+</div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id6">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<p>To make an IO call using a script tag (for instance, for cross-domain JSONP calls), dojo.require(&#8220;dojo.io.script&#8221;), and use:</p>
+<ul class="simple">
+<li>dojo.io.script.get() with a JavaScript Object parameter.  The JavaScript object supports the following properties:</li>
+</ul>
+<div class="section" id="dojo-io-script-get-supported-object-properties">
+<h3>dojo.io.script.get() supported object properties<a class="headerlink" href="#dojo-io-script-get-supported-object-properties" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>url</strong></td>
+<td>The URL to request data from.</td>
+</tr>
+<tr><td><strong>callbackParamName</strong></td>
+<td>The URL parameter name that indicates the JSONP callback string. For instance, when using Yahoo JSONP calls it is
+normally callbackParamName: &#8220;c&#8221;.</td>
+</tr>
+<tr><td><strong>checkString</strong></td>
+<td>A string of JavaScript that when evaluated like so: &#8220;typeof(&#8221; + checkString + &#8220;) != &#8216;undefined&#8217;&#8221; being true means that
+the script fetched has been loaded. Do not use this if doing a JSONP type of call (use callbackParamName instead).</td>
+</tr>
+<tr><td><strong>preventCache</strong></td>
+<td><p class="first">A boolean value that tells dojo.xhrGet to append a unique query parameter to each request.  The purpose of this
+parameter is to keep the browser from caching the results.  While it is generally good practice to let the server tell
+your browser how to cache and when to clear, sometimes it is necessary to force the browser to not cache.</p>
+<p class="last"><strong>This parameter is optional</strong></p>
+</td>
+</tr>
+<tr><td><strong>content</strong></td>
+<td><p class="first">A JavaScript object of name/string value pairs.  These items are converted to query parameters and passed on as part of
+the url.  Example request made by the browser:  &lt;url&gt;?key1=value1&amp;key2=value2&amp;key3=value3..</p>
+<p class="last"><strong>This parameter is optional</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> &#8220;handleAs&#8221; is NOT applicable to dojo.io.script.get() calls, since it is implied by the usage of &#8220;callbackParamName&#8221; (response will be a JSONP call returning JSON) or &#8220;checkString&#8221; (response is pure JavaScript defined in the body of the script that was attached).</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id7">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="example-1-dojo-io-scriot-call-to-fetch-data-from-the-google-search-api-jsonp">
+<h3>Example 1: dojo.io.scriot call to fetch data from the Google Search API (JSONP)<a class="headerlink" href="#example-1-dojo-io-scriot-call-to-fetch-data-from-the-google-search-api-jsonp" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+ dojo.require(&quot;dojo.io.script&quot;);
+
+  function searchGoogle() {
+    //Look up the node we'll stick the text under.
+    var targetNode = dojo.byId(&quot;results&quot;);
+
+    //The parameters to pass to xhrGet, the url, how to handle it, and the callbacks.
+    var jsonpArgs = {
+      url: &quot;http://ajax.googleapis.com/ajax/services/search/web&quot;,
+      callbackParamName: &quot;callback&quot;,
+      content: {
+        v: &quot;1.0&quot;,
+        q: &quot;dojo toolkit&quot;
+      },
+      load: function(data){
+        //Set the data from the search into the viewbox in nicely formatted JSON
+        targetNode.innerHTML = &quot;&lt;pre&gt;&quot; + dojo.toJson(data, true) + &quot;&lt;/pre&gt;&quot;;
+      },
+      error: function(error){
+        targetNode.innerHTML = &quot;An unexpected error occurred: &quot; + error;
+      }
+    };
+    dojo.io.script.get(jsonpArgs);
+  }
+  dojo.addOnLoad(searchGoogle);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;b&gt;Google Search Results for 'dojo toolkit' (In JSON):&lt;/b&gt;
+&lt;div id=&quot;results&quot; style=&quot;height: 200px;&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

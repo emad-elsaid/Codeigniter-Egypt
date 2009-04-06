@@ -1,0 +1,497 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojo.data.api.Write &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Dojo" href="../../contents.html" />
+    <link rel="next" title="dojo.date" href="../../date.html" />
+    <link rel="prev" title="dojo.data Read API" href="Read.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../../_static/dojo/dijit/themes/dijit.css";
+@import "../../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="../../date.html" title="dojo.date"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="Read.html" title="dojo.data Read API"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../../contents.html" accesskey="U">Dojo</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojo.data.api.Write</a><ul>
+<li><a class="reference" href="#write-api-requirements">Write API requirements</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#simple-attribute-modification-and-save">Simple attribute modification and save</a></li>
+<li><a class="reference" href="#simple-emit-of-all-modified-items">Simple emit of all modified items</a></li>
+<li><a class="reference" href="#further-examples">Further examples</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#the-complete-api">The complete API</a><ul>
+<li><a class="reference" href="#newitem">newItem</a></li>
+<li><a class="reference" href="#deleteitem">deleteItem</a></li>
+<li><a class="reference" href="#setvalue">setValue</a></li>
+<li><a class="reference" href="#setvalues">setValues</a></li>
+<li><a class="reference" href="#unsetattribute">unsetAttribute</a></li>
+<li><a class="reference" href="#save">save</a></li>
+<li><a class="reference" href="#revert">revert</a></li>
+<li><a class="reference" href="#isdirty">isDirty</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="Read.html"
+                                  title="previous chapter">dojo.data Read API</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../../date.html"
+                                  title="next chapter">dojo.date</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../../_sources/dojo/data/api/Write.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo-data-api-write">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojo.data.api.Write<a class="headerlink" href="#dojo-data-api-write" title="Permalink to this headline">¶</a></a></h1>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo-data-api-write" id="id2" name="id2">dojo.data.api.Write</a><ul>
+<li><a class="reference" href="#write-api-requirements" id="id3" name="id3">Write API requirements</a></li>
+<li><a class="reference" href="#examples" id="id4" name="id4">Examples</a><ul>
+<li><a class="reference" href="#simple-attribute-modification-and-save" id="id5" name="id5">Simple attribute modification and save</a></li>
+<li><a class="reference" href="#simple-emit-of-all-modified-items" id="id6" name="id6">Simple emit of all modified items</a></li>
+<li><a class="reference" href="#further-examples" id="id7" name="id7">Further examples</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#the-complete-api" id="id8" name="id8">The complete API</a><ul>
+<li><a class="reference" href="#newitem" id="id9" name="id9">newItem</a></li>
+<li><a class="reference" href="#deleteitem" id="id10" name="id10">deleteItem</a></li>
+<li><a class="reference" href="#setvalue" id="id11" name="id11">setValue</a></li>
+<li><a class="reference" href="#setvalues" id="id12" name="id12">setValues</a></li>
+<li><a class="reference" href="#unsetattribute" id="id13" name="id13">unsetAttribute</a></li>
+<li><a class="reference" href="#save" id="id14" name="id14">save</a></li>
+<li><a class="reference" href="#revert" id="id15" name="id15">revert</a></li>
+<li><a class="reference" href="#isdirty" id="id16" name="id16">isDirty</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Some datastores provide the ability to create new items and save those items back to a service, in addition to simply reading items from a service. Stores with this capability will implement the Write API, which provides standard functions for creating new items, modifing existing items, and deleting existing items. Review the following examples, guidelines, and complete API documentation for further information on the Write API.</p>
+<p>This feature defines the API for implementing:</p>
+<ul class="simple">
+<li>Creating a new item</li>
+<li>Deleting an item.</li>
+<li>Updating an item.</li>
+<li>Saving a series creates, deletes, and updates.</li>
+<li>Reverting a series of creates, deletes, and updates.</li>
+<li>Determining if an item has been modified and not yet saved.</li>
+</ul>
+<div class="section" id="write-api-requirements">
+<h2><a class="toc-backref" href="#id3">Write API requirements<a class="headerlink" href="#write-api-requirements" title="Permalink to this headline">¶</a></a></h2>
+<p>The following list provides the requirements for the Write API that implementors of a datastore must do:</p>
+<ul>
+<li><p class="first">Datastores that implement the Write interface act as a two-phase intermediary between the client and the ultimate provider or service that handles the data. This allows for the batching of operations, such as creating a set of new items and then saving them all back to the persistent store with one function call.</p>
+</li>
+<li><p class="first">The save API is defined as asynchronous. This is because most datastores will be talking to a server and not all I/O methods for server communication can perform synchronous operations.</p>
+</li>
+<li><p class="first">Datastores track all newItem, deleteItem, and setAttribute calls on items so that the store can both save the items to the persistent store in one chunk and have the ability to revert out all the current changes and return to a pristine (unmodified) data set.</p>
+</li>
+<li><p class="first">Revert should only revert the store items on the client side back to the point the last save was called.</p>
+</li>
+<li><p class="first">Datastores, in their Save function, account for any copying of items and generation of save format required by the back end service before it enters into the asynchronous I/O with the server. This is to avoid any contention issues with modifications that are occurring while the datastore is is waiting for the server I/O to complete.</p>
+</li>
+<li><p class="first">The parameter to newItem is a keywordArgs object. For ease of interoperability, this parameter should be constructed as a JavaScrpt object with attribute names and values that match the conceptual structure of the attribute list the item would return. For example, if the source store is an XML backed store, a call to create a new XML Element in that store with attributes foo, bar, and bit, should look like this:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c">//The store will handle constructing the actual DOMElement with the appropriate DOM attributes.</span>
+<span class="nx">store</span><span class="p">.</span><span class="nx">newItem</span><span class="p">({</span><span class="nx">foo</span><span class="o">:</span> <span class="s2">&quot;fooValue&quot;</span><span class="o">,</span> <span class="nx">bar</span><span class="o">:</span> <span class="s2">&quot;barValue&quot;</span><span class="o">,</span> <span class="nx">bit</span><span class="o">:</span> <span class="s2">&quot;bitValue&quot;</span><span class="p">});</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Items returned from store.newItem() are valid items. In other words, store.isItem(item) returns true.</p>
+</li>
+<li><p class="first">Items returned from store.newItem() are dirty items until the next save. In other words, store.isDirty(item) returns true.</p>
+</li>
+<li><p class="first">Items deleted by store.deleteItem() are no longer valid items. In other words, store.isItem(item) returns false unless store.revert() is called and the delete is undone.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id4">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<p>The following sections provide examples of the Read API in use, as described by each example heading:</p>
+<div class="section" id="simple-attribute-modification-and-save">
+<h3><a class="toc-backref" href="#id5">Simple attribute modification and save<a class="headerlink" href="#simple-attribute-modification-and-save" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c">//Instantiate some write implementing store.</span>
+<span class="k">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">some</span><span class="p">.</span><span class="nx">DataWriteStore</span><span class="p">();</span>
+
+<span class="c">//Set our load completed hander up...</span>
+<span class="k">var</span> <span class="nx">onCompleteFetch</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">items</span><span class="o">,</span> <span class="nx">request</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c">//Define the save callbacks to use</span>
+  <span class="k">var</span> <span class="nx">onSave</span> <span class="o">=</span> <span class="k">function</span><span class="p">(){</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Save done.&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">var</span> <span class="nx">onSaveError</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Error occurred: &quot;</span> <span class="o">+</span> <span class="nx">error</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="c">// Process the items and update attribute &#39;foo&#39;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+    <span class="nx">store</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">item</span><span class="o">,</span> <span class="s2">&quot;foo&quot;</span><span class="o">,</span> <span class="p">(</span><span class="s2">&quot;bar&quot;</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="c">// If the store has modified items (it should), call save with the handlers above.</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">store</span><span class="p">.</span><span class="nx">isDirty</span><span class="p">()){</span>
+    <span class="nx">store</span><span class="p">.</span><span class="nx">save</span><span class="p">({</span><span class="nx">onComplete</span><span class="o">:</span> <span class="nx">onSave</span><span class="o">,</span> <span class="nx">onError</span><span class="o">:</span> <span class="nx">onSaveError</span><span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c">//Define a fetch error handler, just in case.</span>
+<span class="k">var</span> <span class="nx">onFetchError</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">error</span><span class="o">,</span> <span class="nx">request</span><span class="p">){</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Fetch failed.  &quot;</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c">// Fetch some data...  All items with a foo attribute, any value.</span>
+<span class="nx">store</span><span class="p">.</span><span class="nx">fetch</span><span class="p">({</span><span class="nx">query</span><span class="o">:</span> <span class="p">{</span><span class="nx">foo</span><span class="o">:</span><span class="s2">&quot;*&quot;</span><span class="p">}</span><span class="o">,</span> <span class="nx">onComplete</span><span class="o">:</span> <span class="nx">onCompleteFetch</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="simple-emit-of-all-modified-items">
+<h3><a class="toc-backref" href="#id6">Simple emit of all modified items<a class="headerlink" href="#simple-emit-of-all-modified-items" title="Permalink to this headline">¶</a></a></h3>
+<p>This example shows how to get all modified items before a save has been called.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="nx">some</span><span class="p">.</span><span class="nx">DataWriteStore</span><span class="p">();</span>
+<span class="c">//Set our load completed hander up...</span>
+<span class="k">var</span> <span class="nx">onCompleteFetch</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">items</span><span class="o">,</span> <span class="nx">request</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c">// Process the items test for modification</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nx">int</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">();</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">store</span><span class="p">.</span><span class="nx">isDirty</span><span class="p">(</span><span class="nx">item</span><span class="p">){</span>
+      <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Item with label: &quot;</span> <span class="o">+</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getLabel</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; is dirty.&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c">//Define a fetch error handler, just in case.</span>
+<span class="k">var</span> <span class="nx">onFetchError</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">error</span><span class="o">,</span> <span class="nx">request</span><span class="p">){</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Fetch failed.  &quot;</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c">// Fetch some data...  All items, in fact (no query should return everything)</span>
+<span class="nx">store</span><span class="p">.</span><span class="nx">fetch</span><span class="p">({</span><span class="nx">onComplete</span><span class="o">:</span> <span class="nx">onCompleteFetch</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="further-examples">
+<h3><a class="toc-backref" href="#id7">Further examples<a class="headerlink" href="#further-examples" title="Permalink to this headline">¶</a></a></h3>
+<p>Further examples of the API usage are covered in the Using Datastores section. Refer to it for examples on paging, sorting, selecting, and so forth.</p>
+</div>
+</div>
+<div class="section" id="the-complete-api">
+<h2><a class="toc-backref" href="#id8">The complete API<a class="headerlink" href="#the-complete-api" title="Permalink to this headline">¶</a></a></h2>
+<p>For convenience, the complete Write Feature is defined below.</p>
+<div class="section" id="newitem">
+<h3><a class="toc-backref" href="#id9">newItem<a class="headerlink" href="#newitem" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">newItem</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/* Object? */</span> <span class="nx">keywordArgs</span><span class="o">,</span> <span class="c">/*Object?*/</span> <span class="nx">parentInfo</span><span class="p">){</span>
+  <span class="c">//   summary:</span>
+  <span class="c">//        Returns a newly created item.  Sets the attributes of the new</span>
+  <span class="c">//        item based on the *keywordArgs* provided.  In general, the attribute</span>
+  <span class="c">//        names in the keywords become the attributes in the new item and as for</span>
+  <span class="c">//        the attribute values in keywordArgs, they become the values of the attributes</span>
+  <span class="c">//        in the new item.  In addition, for stores that support hierarchical item</span>
+  <span class="c">//        creation, an optional second parameter is accepted that defines what item is the parent</span>
+  <span class="c">//        of the new item and what attribute of that item should the new item be assigned to.</span>
+  <span class="c">//        In general, this will assume that the attribute targetted is multi-valued and a new item</span>
+  <span class="c">//        is appended onto the list of values for that attribute.</span>
+  <span class="c">//</span>
+  <span class="c">//    keywordArgs:</span>
+  <span class="c">//        A javascript object defining the initial content of the item as a set of JavaScript &#39;property name: value&#39; pairs.</span>
+  <span class="c">//    parentInfo:</span>
+  <span class="c">//        An optional javascript object defining what item is the parent of this item (in a hierarchical store.  Not all stores do hierarchical items),</span>
+  <span class="c">//        and what attribute of that parent to assign the new item to.  If this is present, and the attribute specified</span>
+  <span class="c">//        is a multi-valued attribute, it will append this item into the array of values for that attribute.  The structure</span>
+  <span class="c">//        of the object is as follows:</span>
+  <span class="c">//        {</span>
+  <span class="c">//            parent: someItem,</span>
+  <span class="c">//            attribute: &quot;attribute-name-string&quot;</span>
+  <span class="c">//        }</span>
+  <span class="c">//</span>
+  <span class="c">//    exceptions:</span>
+  <span class="c">//        Throws an exception if *keywordArgs* is a string or a number or</span>
+  <span class="c">//        anything other than a simple anonymous object.</span>
+  <span class="c">//        Throws an exception if the item in parentInfo is not an item from the store</span>
+  <span class="c">//        or if the attribute isn&#39;t an attribute name string.</span>
+  <span class="c">//    examples:</span>
+  <span class="c">//        var kermit = store.newItem({name: &quot;Kermit&quot;, color:[blue, green]});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deleteitem">
+<h3><a class="toc-backref" href="#id10">deleteItem<a class="headerlink" href="#deleteitem" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">deleteItem</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/* item */</span> <span class="nx">item</span><span class="p">)</span>
+  <span class="c">//    summary:</span>
+  <span class="c">//        Deletes an item from the store.</span>
+  <span class="c">//</span>
+  <span class="c">//    item:</span>
+  <span class="c">//        The item to delete.</span>
+  <span class="c">//</span>
+  <span class="c">//    exceptions:</span>
+  <span class="c">//        Throws an exception if the argument *item* is not an item</span>
+  <span class="c">//        (if store.isItem(item) returns false).</span>
+  <span class="c">//    examples:</span>
+  <span class="c">//        var success = store.deleteItem(kermit);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setvalue">
+<h3><a class="toc-backref" href="#id11">setValue<a class="headerlink" href="#setvalue" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">setValue</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/* item */</span> <span class="nx">item</span><span class="o">,</span> <span class="c">/* string */</span> <span class="nx">attribute</span><span class="o">,</span> <span class="c">/* almost anything */</span> <span class="nx">value</span><span class="p">)</span>
+  <span class="c">//    summary:</span>
+  <span class="c">//        Sets the value of an attribute on an item.</span>
+  <span class="c">//        Replaces any previous value or values.</span>
+  <span class="c">//</span>
+  <span class="c">//    item:</span>
+  <span class="c">//        The item to modify.</span>
+  <span class="c">//    attribute:</span>
+  <span class="c">//        The attribute of the item to change represented as a string name.</span>
+  <span class="c">//    value:</span>
+  <span class="c">//        The value to assign to the item.</span>
+  <span class="c">//</span>
+  <span class="c">//    exceptions:</span>
+  <span class="c">//        Throws an exception if *item* is not an item, or if *attribute*</span>
+  <span class="c">//        is neither an attribute object or a string.</span>
+  <span class="c">//        Throws an exception if *value* is undefined.</span>
+  <span class="c">//    examples:</span>
+  <span class="c">//        var success = store.set(kermit, &quot;color&quot;, &quot;green&quot;);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setvalues">
+<h3><a class="toc-backref" href="#id12">setValues<a class="headerlink" href="#setvalues" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">setValues</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/* item */</span> <span class="nx">item</span><span class="o">,</span> <span class="c">/* string */</span> <span class="nx">attribute</span><span class="o">,</span> <span class="c">/* array */</span> <span class="nx">values</span><span class="p">)</span>
+  <span class="c">//    summary:</span>
+  <span class="c">//        Adds each value in the *values* array as a value of the given</span>
+  <span class="c">//        attribute on the given item.</span>
+  <span class="c">//        Replaces any previous value or values.</span>
+  <span class="c">//        Calling store.setValues(x, y, []) (with *values* as an empty array) has</span>
+  <span class="c">//        the same effect as calling store.unsetAttribute(x, y).</span>
+  <span class="c">//</span>
+  <span class="c">//    item:</span>
+  <span class="c">//        The item to modify.</span>
+  <span class="c">//    attribute:</span>
+  <span class="c">//        The attribute of the item to change represented as a string name.</span>
+  <span class="c">//    values:</span>
+  <span class="c">//        An array of values to assign to the attribute..</span>
+  <span class="c">//</span>
+  <span class="c">//    exceptions:</span>
+  <span class="c">//        Throws an exception if *values* is not an array, if *item* is not an</span>
+  <span class="c">//        item, or if *attribute* is neither an attribute object or a string.</span>
+  <span class="c">//    examples:</span>
+  <span class="c">//        var success = store.setValues(kermit, &quot;color&quot;, [&quot;green&quot;, &quot;aqua&quot;]);</span>
+  <span class="c">//        success = store.setValues(kermit, &quot;color&quot;, []);</span>
+  <span class="c">//        if (success) {assert(!store.hasAttribute(kermit, &quot;color&quot;));}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="unsetattribute">
+<h3><a class="toc-backref" href="#id13">unsetAttribute<a class="headerlink" href="#unsetattribute" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">unsetAttribute</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span>    <span class="c">/* item */</span> <span class="nx">item</span><span class="o">,</span> <span class="c">/* string */</span> <span class="nx">attribute</span><span class="p">)</span>
+  <span class="c">//    summary:</span>
+  <span class="c">//        Deletes all the values of an attribute on an item.</span>
+  <span class="c">//</span>
+  <span class="c">//    item:</span>
+  <span class="c">//        The item to modify.</span>
+  <span class="c">//    attribute:</span>
+  <span class="c">//        The attribute of the item to unset represented as a string.</span>
+  <span class="c">//</span>
+  <span class="c">//    exceptions:</span>
+  <span class="c">//        Throws an exception if *item* is not an item, or if *attribute*</span>
+  <span class="c">//        is neither an attribute object or a string.</span>
+  <span class="c">//    examples:</span>
+  <span class="c">//        var success = store.unsetAttribute(kermit, &quot;color&quot;);</span>
+  <span class="c">//        if (success) {assert(!store.hasAttribute(kermit, &quot;color&quot;));}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="save">
+<h3><a class="toc-backref" href="#id14">save<a class="headerlink" href="#save" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">save</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/* object */</span> <span class="nx">keywordArgs</span><span class="p">)</span>
+  <span class="c">//    summary:</span>
+  <span class="c">//        Saves to the server all the changes that have been made locally.</span>
+  <span class="c">//        The save operation may take some time and is generally performed</span>
+  <span class="c">//        in an asynchronous fashion.  The outcome of the save action is</span>
+  <span class="c">//        is passed into the set of supported callbacks for the save.</span>
+  <span class="c">//</span>
+  <span class="c">//    keywordArgs:</span>
+  <span class="c">//        {</span>
+  <span class="c">//            onComplete: function</span>
+  <span class="c">//            onError: function</span>
+  <span class="c">//            scope: object</span>
+  <span class="c">//        }</span>
+  <span class="c">//</span>
+  <span class="c">//    The *onComplete* parameter.</span>
+  <span class="c">//        function();</span>
+  <span class="c">//</span>
+  <span class="c">//        If an onComplete callback function is provided, the callback function</span>
+  <span class="c">//        will be called just once, after the save has completed.  No parameters</span>
+  <span class="c">//        are generally passed to the onComplete.</span>
+  <span class="c">//</span>
+  <span class="c">//    The *onError* parameter.</span>
+  <span class="c">//        function(errorData);</span>
+  <span class="c">//</span>
+  <span class="c">//        If an onError callback function is provided, the callback function</span>
+  <span class="c">//        will be called if there is any sort of error while attempting to</span>
+  <span class="c">//        execute the save.  The onError function will be based one parameter, the</span>
+  <span class="c">//        error.</span>
+  <span class="c">//</span>
+  <span class="c">//    The *scope* parameter.</span>
+  <span class="c">//        If a scope object is provided, all of the callback function (</span>
+  <span class="c">//        onComplete, onError, etc) will be invoked in the context of the scope</span>
+  <span class="c">//        object.  In the body of the callback function, the value of the &quot;this&quot;</span>
+  <span class="c">//        keyword will be the scope object.   If no scope object is provided,</span>
+  <span class="c">//        the callback functions will be called in the context of dojo.global.</span>
+  <span class="c">//        For example, onComplete.call(scope) vs.</span>
+  <span class="c">//        onComplete.call(dojo.global)</span>
+  <span class="c">//</span>
+  <span class="c">//    returns:</span>
+  <span class="c">//        Nothing.  Since the saves are generally asynchronous, there is</span>
+  <span class="c">//        no need to return anything.  All results are passed via callbacks.</span>
+  <span class="c">//    examples:</span>
+  <span class="c">//        store.save({onComplete: onSave});</span>
+  <span class="c">//        store.save({scope: fooObj, onComplete: onSave, onError: saveFailed});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="revert">
+<h3><a class="toc-backref" href="#id15">revert<a class="headerlink" href="#revert" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">revert</span><span class="o">:</span> <span class="k">function</span><span class="p">()</span>
+  <span class="c">//    summary:</span>
+  <span class="c">//        Discards any unsaved changes.</span>
+  <span class="c">//    description:</span>
+  <span class="c">//        Discards any unsaved changes.</span>
+  <span class="c">//</span>
+  <span class="c">//    examples:</span>
+  <span class="c">//        var success = store.revert();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="isdirty">
+<h3><a class="toc-backref" href="#id16">isDirty<a class="headerlink" href="#isdirty" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">isDirty</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/* item? */</span> <span class="nx">item</span><span class="p">)</span>
+  <span class="c">//    summary:</span>
+  <span class="c">//        Given an item, isDirty() returns true if the item has been modified</span>
+  <span class="c">//        since the last save().  If isDirty() is called with no *item* argument,</span>
+  <span class="c">//        then this method returns true if any item has been modified since</span>
+  <span class="c">//        the last save().</span>
+  <span class="c">//</span>
+  <span class="c">//    item:</span>
+  <span class="c">//        The item to check.</span>
+  <span class="c">//</span>
+  <span class="c">//    exceptions:</span>
+  <span class="c">//        Throws an exception if isDirty() is passed an argument and the</span>
+  <span class="c">//        argument is not an item.</span>
+  <span class="c">//    examples:</span>
+  <span class="c">//        var trueOrFalse = store.isDirty(kermit); // true if kermit is dirty</span>
+  <span class="c">//        var trueOrFalse = store.isDirty();       // true if any item is dirty</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.widget.RollingList &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.widget.Standby" href="Standby.html" />
+    <link rel="prev" title="dojox.widget.Roller" href="Roller.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="Standby.html" title="dojox.widget.Standby"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="Roller.html" title="dojox.widget.Roller"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.widget.RollingList</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#usage">Usage</a></li>
+<li><a class="reference" href="#panes">Panes</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#a-simple-rolling-list-pulling-data-from-a-read-store">A simple rolling list pulling data from a read store</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="Roller.html"
+                                  title="previous chapter">dojox.widget.Roller</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="Standby.html"
+                                  title="next chapter">dojox.widget.Standby</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/widget/RollingList.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-widget-rollinglist">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.widget.RollingList<a class="headerlink" href="#dojox-widget-rollinglist" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.2</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Nathan Toone</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.3</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-widget-rollinglist" id="id2" name="id2">dojox.widget.RollingList</a></li>
+</ul>
+</div>
+<p>A rolling list that can be tied to a data store with children</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The rolling list provides a structured scrolling view into a data store and its children.  It is similar to how many pane-based file browsing widgets behave.</p>
+<p>Since the rolling list leverages dijit.Menu, it is mostly accessible.  However, full accessibility testing has not yet been performed on this widget.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>Creating a rolling list is very simple - at the very minimum, just requiring a valid dojo.data.api.Read datastore.  It also supports the dojo.data.api.Notification api - so changes to the store will be reflected in the rolling widget.</p>
+<dl class="docutils">
+<dt>Other options that you may find useful:</dt>
+<dd><ul class="first last simple">
+<li><strong>onChange</strong> function will get fired when the value of the widget changes</li>
+<li><strong>store</strong> the store to get data from</li>
+<li><strong>query</strong> the query to use when fetching data</li>
+<li><strong>queryOptions</strong> any query options you want to pass on as well when fetching</li>
+<li><strong>childrenAttrs</strong> an array of attributes to use as &#8220;children&#8221; nodes</li>
+<li><strong>parentAttr</strong> an optional attribute to use as a pointer to the parent of a node.  If this is not specified, then the parent will be determined by finding the first element whose children attribute contains the node in question.</li>
+<li><tt class="docutils literal"><span class="pre">New</span> <span class="pre">in</span> <span class="pre">1.3</span></tt> <strong>preloadItems</strong> either a boolean (true/false) or a number indicating the number of items that we are willing to preload.  This exists to make it easier to load items with large numbers of children lazily.</li>
+<li><tt class="docutils literal"><span class="pre">New</span> <span class="pre">in</span> <span class="pre">1.3</span></tt> <strong>executeOnDblClick</strong> set to true (the default) to call onExecute() when the user double-clicks an item.  Set to false if your popup will call onExecute() on its own.</li>
+<li><tt class="docutils literal"><span class="pre">New</span> <span class="pre">in</span> <span class="pre">1.3</span></tt> <strong>showButtons</strong> set to true to show &#8220;OK&#8221; and &#8220;Cancel&#8221; button that call onExecute and onCancel, respectively (default false)</li>
+<li><tt class="docutils literal"><span class="pre">New</span> <span class="pre">in</span> <span class="pre">1.3</span></tt> <strong>okButtonLabel</strong> and <strong>cancelButtonLabel</strong> set to a string you want the ok (or cancel) button to use.  By default, the localized &#8220;OK&#8221; and &#8220;Cancel&#8221; strings will be used.</li>
+<li><tt class="docutils literal"><span class="pre">New</span> <span class="pre">in</span> <span class="pre">1.3</span></tt> <strong>minPaneWidth</strong> the minimum width (in pixels) that each pane must be.  The panes are expanded to be this width if they are any narrower than it</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="panes">
+<h2>Panes<a class="headerlink" href="#panes" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">TODOC</span></tt> You can extend the rolling list by creating different panes.  All panes must extend dojox.widget._RollingListPane.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-simple-rolling-list-pulling-data-from-a-read-store">
+<h3>A simple rolling list pulling data from a read store<a class="headerlink" href="#a-simple-rolling-list-pulling-data-from-a-read-store" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojo.data.ItemFileWriteStore&quot;);
+  dojo.require(&quot;dojox.widget.RollingList&quot;);
+
+  dojo.declare(&quot;dojox.widget.RollingStore&quot;, dojo.data.ItemFileWriteStore, {
+      getLabel: function(item){
+          return this.inherited(arguments) + &quot; (&quot; + this.getValue(item, &quot;type&quot;) + &quot;)&quot;;
+      }
+  });
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojox.widget.RollingStore&quot; jsId=&quot;continentStore&quot;
+    url=&quot;/_static/dojo/dijit/tests/_data/countries.json&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dojox.widget.RollingList&quot; jsId=&quot;myList&quot; id=&quot;myList&quot; store=&quot;continentStore&quot;
+    query=&quot;{type:'continent'}&quot; style=&quot;height:150px;&quot;&gt;&lt;/div&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  &#64;import &quot;/_static/dojo/dojox/widget/RollingList/RollingList.css&quot;;
+&lt;/style&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

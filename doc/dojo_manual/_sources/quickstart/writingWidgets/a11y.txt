@@ -1,0 +1,215 @@
+.. _quickstart/writingWidgets/a11y:
+
+Creating Accessible Widgets
+===========================
+
+:Status: Contributed
+:Version: 1.2
+:Author: Becky Gibson
+
+.. contents::
+  :depth: 3
+
+Device Independence
+-------------------
+
+Device Independent behavior means more than just supporting the keyboard. Where ever possible use the most generic event handler available. For example, consider a widget where the down arrow key selects an element in the widget.  The selection needs to be distinguished with a specific style.  Rather than modifying the style of the element when processing the down arrow key event, focus the item from the down arrow key event handler and change the style via a focus event handler. This way, if focus is set from a means other than the keyboard such as a voice input system, the styling is properly set and does not depend solely on keyboard actions. 
+
+Determining Keyboard Behavior
+-----------------------------
+
+When implementing keyboard navigation, the ideal solution is to mimic the behavior of the operating system.  For example, the right and left arrow keys are used to expand and collapse nodes in a Windows tree control and the up and down arrow keys move between nodes in the control.   Unfortunately it is not always possible to mimic the operating system or browser behavior because the widgets may not be able to capture the necessary keys. A group of industry representatives are working to create a style guide to describe the navigation and behaviors of Web widgets. When completed, this Style Guide will be provided to open source and dijit plans to implement the recommendations.  Eventually, the Style Guide will attempt to normalize the differences between operating systems and provide a generalized solution for Web components 
+
+Within all widgets interaction with both the keyboard and the mouse is important – users may switch between using the mouse and using the keyboard at any time. A widget author can not assume only keyboard or only mouse interaction. Thus, the widget component will generally need to store information about the current item with focus.  This can also be useful when the keyboard event handler is placed on an owning object in the component hierarchy rather than the actual element generating the event – for example on the table element rather than on each td element.   Even though the event handler provides information on exactly what element generated the event, it is often necessary or easier to use the stored point of reference. In addition, the point of regard is often needed in order to update the style on the element losing focus before updating the new item irregardless or whether the mouse or the keyboard generated the event that results in a focus change.
+
+In order to support mouse click and standard enter key and space key press to activate a widget, dijit provides an ondijitclick event.  This will trap the onclick event as well as either the onkeypress or onkeydown events (depending upon the browser) for space and enter key and call the handler specified.  Thus, the basic action to activate a widget can be handled within one handler function rather than each widget having to check for the press of enter or space as well as a mouse click.  
+
+Here is an example of using widget connect to handle the ondijitclick event on the focusNode of the widget:
+
+.. code-block :: javascript
+
+  this.connect(this.focusNode, "ondijitclick", "_dijitClick");
+
+The ondijitclick event can also be specified in the template via the dojoAttachEvent mechanism:
+
+.. code-block :: javascript
+
+  <span class="dijit dijitReset dijitLeft dijitInline"
+	dojoAttachEvent="ondijitclick:_onButtonClick,onmouseenter:_onMouse,onmouseleave:_onMouse">
+
+Trapping Key Events
+-------------------
+
+When implementing keyboard navigation, first determine where in the hierarchy to trap the key events. It is generally best to trap the key events at as high a level as possible and use the event object to determine that actual source of the event and perform the necessary action.  This method prevents having to add a key handler to each individual element thus conserving the amount of markup to be generated.  However, there may be cases where the event needs to be trapped at the level of each individual element. The actual source of the event is needed in order to determine how to process the keystroke received.
+
+Once the component handles an event, it will usually stop that event from being propagated to other elements.   For example, if the down arrow key is captured and moves focus to the next item in a tree control, the event should not propagate up to the browser where it might be interpreted as a command to scroll the page.  Use the dojo.stopEvent(event) method to stop the event.
+
+In order to assist with key event handling, a generic onkeypress event has been added to Dojo to normalize key events. The appropriate key event, either onkeydown or onkeypress, will be used depending upon the browser.  The key codes have been normalized as well. See dojo.keys class in dojo._base.event.js. Add the dojo onkeypress event into the widget template or via scripting using one of the event connection apis.
+
+Tabindex and Focus
+------------------
+
+When navigating via the keyboard is it essential that the element that is navigated to receives focus.   The focus should NOT be simulated via CSS - call the focus() method on the element.  Styling can be used to enhance the visual focus or selection but should not replace actually setting focus on an element.  A screen reader will only speak information about the element when it receives focus. Screen magnifiers rely on focus to move the zoomed viewport on the screen.
+
+Use the tabindex value to provide direct or programmatic keyboard focus to an element. See the tabindex chart in the :ref:`Device Independence section of Dijit Accessibility Strategy <dijit-a11y-strategy>`
+
+When adding support for keyboard navigation, consider the widget as a component.  The tab key can be used to navigate from component to component on a page and then the arrow and other keys should be used to navigate within the component.   Only one element in a given component should have a tabindex equal to zero at any one time.  This allows the user to navigate into and set focus within in the component using the tab key.  Then, trap the onkey events and use the arrow keys to navigate within the elements of the component. All of the elements within the component which can receive focus must have a tabindex equal to -1. When an element is programmatically given focus, its tabindex value is changed from -1 to 0 and the tabindex of the previous element with focus will be changed from 0 to -1. This will insure that only one element within the component is in the tab order of the page and that the element with tabindex = 0 is the most recently focused element in the component.
+
+For example, when creating a tree control, each tree item is represented by an element.  The first tree item in the control will be given a tabindex of 0.   All of the other elements which represent tree items and can receive focus programmatically will have a tabindex value of -1. An onkeypress handler will trap the keyboard events for the tree control.  When a tree item element is given focus via element.focus(), the element’s tabindex will be changed from -1 to 0. and it will be put into the tab order. Now if the user moves focus out of the tree control (either via a mouse click or by tabbing to the next component on the page), when the user sets focus back into the tree control using the tab key, the last focused tree item, which was given a tabindex of 0, will receive focus.  
+
+Add ARIA information
+--------------------
+
+The Accessible Rich Internet Applications Roadmap is being developed by the `W3C Web Accessibility Initiative (WAI) Protocols and Formats working group <http://www.w3.org/WAI/PF/>`_. The group is creating specifications for role and state information which can be added to markup to provide semantic information about user interface components. The browsers will translate this role and state information into the accessibility api for the platform in use. Currently Firefox 2 and later versions support this additional semantic information on the Windows platform where it converts the information into the Microsoft Active Accessibility (MSAA) api. When recent versions of the Window-Eyes (6.1) and JAWS (8 or 9) screen readers are used with Firefox, this additional information is spoken to the user.  Opera has support for ARIA beginning with version 9.5 and Internet Explorer 8 will support ARIA as well. Webkit is also adding keyboard and ARIA support.
+
+Some HTML elements such as links and form elements have well defined roles and behaviors. Interactive controls created from generic elements can now also be identified with roles and states. When an element receives focus the role and state information provided by the developer will be made available to assistive technologies. For example, as a screen reader traverses through a dijit tree control using the arrow keys, as each tree item receives focus the title of the tree item will be spoken as well as its expanded or collapsed state if it has children. Likewise, a dijit checkbox created using <div> and <span> tags can be identified as a checkbox and its checked or unchecked state can be reported. When creating a new Dojo widget, the role of the widget must be identified and the state of the widget must be set and updated as it changes.
+
+As of October, 2008, the ARIA specifications are nearing W3C Last Call status; however the nearly complete specification has been implemented in Firefox 3.0. The public drafts of the specifications can be found at `http://www.w3.org/wai/pf <http://www.w3.org/wai/pf>`_
+
+- `Roadmap for Accessible Rich Internet Applications (WAI-ARIA Roadmap) <http://www.w3.org/WAI/PF/aria-roadmap/>`_
+- `Accessible Rich Internet Applications (WAI-ARIA) Version 1.0 <http://www.w3.org/WAI/PF/aria/>`_
+- `WAI-ARIA Primer <http://www.w3.org/WAI/PF/aria-primer/>`_
+- `WAI-ARIA Best Practices <http://www.w3.org/WAI/PF/aria-practices/>`_
+
+Additional ARIA resources:
+
+- `Accessible Rich Internet Applications <http://developer.mozilla.org/en/Accessible_DHTML>`_ in the Mozilla Developer Center provides additional information about ARIA and includes examples of ARIA widgets as well as a table of roles and states supported in current versions of Firefox. 
+- Illinois Center for Information Technology Accessibility provides a set of `ARIA Examples <http://test.cita.uiuc.edu/aria/index.php>`_
+- `FREE-ARIA  <http://groups.google.com/group/free-aria>`_ is a google group "for people who want to help provide free tools and resources for the advancement of WAI-ARI".
+- `Code Talks <http://wiki.codetalks.org/wiki/index.php/Main_Page>`_ wiki for discussing ARIA and accessible Web 2.0 widgets
+
+Assigning Roles
+~~~~~~~~~~~~~~~
+
+Use the tabindex to provide keyboard focus or to allow programmatic focus to an object. By adding a tabindex to an element, the element will now be included in the accessibility hierarchy of the Firefox browser. Information about elements in the accessibility hierarchy will be provided to assistive technologies. If you use a tabindex attribute on a <DIV>, <SPAN>, <IMG> or any element which has no natural role of its own then you need to provide a role. In Firefox 3 <div> elements are added into the hierarchy even if they do not have a tabindex attribute. If you are using a div as a container element it will need a role="presentation" to remove it from the accessibility hierarchy.  Any element that can receive focus must have a role, either implied, such as input elements and anchors, or specified via a role attribute. For things with an implied role such as input fields and anchors, you can use tabindex=”-1” to remove them from the tab order. You can also specify a different role for elements which already have an implied role.
+
+The role and states are added to Dojo widgets within the widget template or via the dijit.wai APIs as described in the :ref:`Dijit A11y Resources <dijit-a11y-resources>`
+
+Providing Hierarchical Information
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In order for Firefox to determine the correct parent child relationships between objects, and to communicate this via an accessibility API to assistive technologies, it is best to create components in a hierarchical fashion. For example, when creating a menubar it is best to have the components that make up the menus and menuitems of the menubar be children of the menubar. Likewise, menuitems should be children of the owning menus. This hierarchy allows Firefox to provide menu information to the assistive technologies, and for a screen reader to speak more information about the menu such as, “menu open, File, item 1 of 5” when the user opens a menu. Here is a simple pseudo code example demonstrating a hierarchical layout of elements for a menu control. This exmaple only shows the addition of role attributes and does not represent a complete menu widget. (Note: Attributes are not quoted in pseudo-code examples to help improve the readability):
+
+.. code-block :: javascript
+
+  <div role="menubar">
+    <div role="menuitem">A</div>
+      <div role="menu">
+         <div role="menuitem">A.1</div>
+         <div role="menuitem">A.2</div>
+      </div>
+      <div role="menuitem">B</div>
+      <div role="menu">
+        <div role="menuitem">B.1</div>
+        <div role="menuitem">B.2</div>
+        <div role="menu">
+          <div role="menuitem">B.2.1</div>
+        </div>
+      </div>
+  </div>
+
+It may not always be practical to create items via HTML in a hierarchical fashion. In that case the group role can help to associate the items properly. This is illustrated in the following simple pseudo code example of a tree hierarchy.
+
+.. code-block :: javascript
+
+  <div role="tree"> 
+    <div role="treeitem">Top </div>
+    <div role="group">
+      <div role="treeitem">1</div>
+      <div role="group">
+        <div role="treeitem">1.1 </div>
+        <div role="treeitem">1.2</div>
+        <div role="treeitem">1.3</div>
+        <div role="group">
+          <div role="treeitem">1.3.1</div>
+          <div role="treeitem">1.3.2</div>
+          <div role="treeitem">1.3.3</div>
+          <div role="treeitem">1.3.4</div>
+       </div>
+       <div role="treeitem">1.4</div>
+     </div>
+     <div role="treeitem">2</div>
+     <div role="treeitem">3</div>
+     <div role="group">
+       <div role="treeitem">3.1</div>
+       <div role="treeitem">">3.2</div>
+     </div>
+  </div>
+  </div>
+
+The tree items at the same level in the hierarchy are grouped together within an element identified with role=group. With this organization, the assistive technologies can be provided with the information about what level and item number a particular treeitem represents. For example, in the above tree example, with focus on item 1.3.3 a screen reader might speak, “one dot three dot three item three of four, level four” or something similar.
+
+Other items included in the hierarchy may not be essential to the component. These items can be marked with a role of presentation to eliminate them from consideration when determining information about the component.
+
+Using the Presentation Role
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+While it is preferable to use CSS for layout, tables are still used to quickly and easily arrange elements on a page. This is especially true of existing widgets which were originally created to work in older browsers. Putting information in tables can easily confuse the hierarchy of the component. If tables must be used, they can be marked with a role of presentation to eliminate them from the hierarchy. Here is a pseudo code example where the presentation role was used on tables within a tree component:
+
+ .. code-block :: javascript
+
+  <div role="tree">
+      <table role="presentation">
+            <tr><td><div role="treeitem">Top</div></td></tr>
+      </table>
+      <div role="group">
+            <table role="presentation">
+                  <tr><td><span role="treeitem">1</span></td></tr>
+            </table>
+            <div role="group">
+                  <table role="presentation">
+                        <tr><td><span role="treeitem">1.1</span></td></tr>
+                  </table>
+                  <table role="presentation">
+                        <tr><td><span role="treeitem">1.2</span></td></tr>
+                  </table>
+            </div>
+            <table role="presentation">
+                  <tr><td><span role="treeitem">2</span></td></tr>
+            </table>
+      </div>
+  </div>
+
+Since the table is only used for layout it is identified with a role of presentation to remove if from the accessibility hierarchy so that information about the table is not provided to assistive technology. Other elements may need to be removed from the accessibility hierarchy as well. For example, when creating a DHTML checkbox, an image may be contained within a span element that is marked with a role of checkbox and an appropriate state of checked equals true or false. The image which represents the checkbox is contained within the span and should not contain any alt text since the role and state are managed by the surrounding span. Images are considered important elements and are normally included with the accessibility hierarchy of the browser. In order to ignore this image in the accessibility hierarchy, it is marked with a role of presentation. Here is a generic HTML representation:
+
+ .. code-block :: javascript
+
+  <span role="checkbox" checked="true">
+    <img src="checked.gif" role="presentation">
+  </span>
+
+And, as mentioned previously, Firefox 3 now puts all div elements into the accessibility hierarchy, so if the div is being used for layout purposes or has no other specific role, it should be marked with role=presentation.
+
+Assigning States as of 1.0 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In addition to identifying the role of a widget, the state of the widget must be identified and updated. The initial state can be set within the widget template or via scripting when the widget is created. As the state changes during user interaction with the widget, the state must be updated using the dijit.xxxWaiState apis:
+
+.. code-block :: javascript
+
+  dijit.hasWaiState(/*Element*/ elem, /*String*/ state);
+  dijit.getWaiState(/*Element*/ elem, /*String*/ state);
+  dijit.setWaiState(/*Element*/ elem, /*String*/ state, /*String*/ value);
+  dijit.removeWaiState:(/*Element*/ elem, /*String*/ state);
+
+It is important to update the state information as it changes so assistive technology users can be made aware of the change. For example, when a treeitem is expanded, the state for the element that has been assigned role="treeitem", must be set to expanded=true. Likewise, when a treeitem is collapsed, the state for the element with the role="treeitem" must be updated to expanded=false. Be aware that some of the boolean states imply more than just a dual state. For the state attributes checked, selected and expanded a value of false indicates that the widget is capable of being checked, selected or expanded while no attribute indicates that the element is not capable of that state. For example, a tree node with children will have either a state of expanded=true or expanded=false depending upon whether the child nodes are visible or not. An end node, with no children will have no expanded state value set.
+
+Generally only items which have a role can have a state value. The role may be explicitly set by the author such as a treeitem or may be implicitly defined such as a form element or link. Items which have been added into the accessibility hierarchy via a tabindex attribute may also have properties such as desribedby, labelledby, required, invalid and others.
+
+Assigning ARIA States in 0.9
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block :: javascript
+
+  dijit.wai.setAttr(/*DomNode*/node, /*String*/ ns, /*String*/ attr, /*String|Boolean*/value);
+  dijit.wai.getAttr(/*DomNode*/node, /*String*/ ns, /*String*/ attr, /*String|Boolean*/value);
+  dijit.wai.RemoveAttr(/*DomNode*/node, /*String*/ ns, /*String*/ attr, /*String|Boolean*/value);
+
+The ns value passed into these functions is either “waiState” or “waiRole”. The dijit.wai functions above are wrappers to the DOM apis to set, get and remove attributes. In browsers where namespaces are supported the setAttributeNS, getAttributeNS, and removeAttributeNS, apis are called. In other browsers the setAttribute, getAttribute and removeAttribute apis are called and the namespace is simulated. The namespace information is stored in the dijit.wai class.
+
+Accommodating Low Vision
+------------------------
+
+Whenever a CSS background image is used to convey information there must be a text alternative available to display when images are turned off in the browser.  Images may be turned off by the user via a browser setting or when Windows high contrast mode is turned on. See the :ref:`Support High Contrast/Images off <dijit-a11y-strategy>` section of Dijit A11y Strategy for how to create the text alternatives in the widget template and use CSS dijit-a11y rules to make them visible in high contrast mode.
+
+To make certain that users can adjust the font size on the page never use a px value for font-size.  Instead use ems or % which will scale properly. If the widget uses any img elements, make certain the image has an appropriate alt text value. If the image is decorative only and does not convey meaning the alt text value will be "" (empty).   If the image conveys meaning and is important to understanding the use of the widget it must have a descriptiion specified via the alt attribute.  

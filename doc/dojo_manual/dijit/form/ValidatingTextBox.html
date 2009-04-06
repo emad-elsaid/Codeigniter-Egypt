@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.form.ValidationTextBox &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dijit" href="../contents.html" />
+    <link rel="next" title="dijit.form.ValidationTextBox" href="ValidationTextbox.html" />
+    <link rel="prev" title="dijit.form.ToggleButton" href="ToggleButton.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="ValidationTextbox.html" title="dijit.form.ValidationTextBox"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="ToggleButton.html" title="dijit.form.ToggleButton"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="ToggleButton.html"
+                                  title="previous chapter">dijit.form.ToggleButton</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="ValidationTextbox.html"
+                                  title="next chapter">dijit.form.ValidationTextBox</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dijit/form/ValidatingTextBox.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-form-validationtextbox">
+<span id="dijit-form-validatingtextbox"></span><h1>dijit.form.ValidationTextBox<a class="headerlink" href="#dijit-form-validationtextbox" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">CraigRiecke</td>
+</tr>
+</tbody>
+</table>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+dojo.require(&quot;dijit.form.ValidationTextBox&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;input type=&quot;text&quot; name=&quot;phone&quot; id=&quot;phone&quot; value=&quot;someTestString&quot;
+        dojoType=&quot;dijit.form.ValidationTextBox&quot;
+        regExp=&quot;[\w]+&quot;
+        required=&quot;true&quot;
+        invalidMessage=&quot;Invalid Non-Space Text.&quot; /&gt;
+&lt;label for=&quot;phone&quot;&gt;Phone number, no spaces&lt;/label&gt;
+&lt;br/&gt;
+&lt;input type=&quot;text&quot; name=&quot;zip&quot; value=&quot;00000&quot;
+        dojoType=&quot;dijit.form.ValidationTextBox&quot;
+        regExp=&quot;\d{5}&quot;
+        required=&quot;true&quot;
+        invalidMessage=&quot;Invalid zip code.&quot; /&gt;
+&lt;label for=&quot;zip&quot;&gt;Also 5-Digit U.S. Zipcode only&lt;/label&gt;
+&lt;br/&gt;
+&lt;input type=&quot;text&quot; name=&quot;zip&quot; value=&quot;00000&quot; id=&quot;zip2&quot;
+        dojoType=&quot;dijit.form.ValidationTextBox&quot;
+        regExpGen=&quot;after5&quot;
+        required=&quot;true&quot;
+        invalidMessage=&quot;Zip codes after 5, county name before then.&quot; /&gt;
+&lt;label for=&quot;zip2&quot;&gt;Also 5-Digit U.S. Zipcode only&lt;/label&gt;
+&lt;br/&gt;</pre></div></div></div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

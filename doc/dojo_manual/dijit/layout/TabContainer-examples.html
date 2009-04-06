@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>More TabContainer Examples &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dijit" href="../contents.html" />
+    <link rel="next" title="dijit._LayoutWidget" href="_LayoutWidget.html" />
+    <link rel="prev" title="dijit.layout.TabContainer" href="TabContainer.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="_LayoutWidget.html" title="dijit._LayoutWidget"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="TabContainer.html" title="dijit.layout.TabContainer"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">More TabContainer Examples</a><ul>
+<li><a class="reference" href="#tab-strip">Tab Strip</a></li>
+<li><a class="reference" href="#right-tabs">Right Tabs</a></li>
+<li><a class="reference" href="#left-tabs">Left Tabs</a></li>
+<li><a class="reference" href="#bottom-tabs">Bottom Tabs</a></li>
+<li><a class="reference" href="#programmatic-example">Programmatic Example</a></li>
+<li><a class="reference" href="#nested-tabs">Nested tabs</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="TabContainer.html"
+                                  title="previous chapter">dijit.layout.TabContainer</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="_LayoutWidget.html"
+                                  title="next chapter">dijit._LayoutWidget</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dijit/layout/TabContainer-examples.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="more-tabcontainer-examples">
+<span id="dijit-layout-tabcontainer-examples"></span><h1>More TabContainer Examples<a class="headerlink" href="#more-tabcontainer-examples" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.2</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="tab-strip">
+<h2>Tab Strip<a class="headerlink" href="#tab-strip" title="Permalink to this headline">¶</a></h2>
+<p>This is a plain TabContainer with three tabs, fixed height and a tab strip. The tabstrip is especially useful when the TabContainer is child of a BorderContainer.</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+dojo.require(&quot;dijit.layout.TabContainer&quot;);
+dojo.require(&quot;dijit.layout.ContentPane&quot;);
+&lt;/script&gt;</pre></div><p>The html is very simple</p>
+<div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.layout.TabContainer&quot; style=&quot;width: 400px; height: 100px;&quot; tabStrip=&quot;true&quot;&gt;
+  &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My first tab&quot; selected=&quot;true&quot;&gt;
+    Lorem ipsum and all around...
+  &lt;/div&gt;
+  &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My second tab&quot;&gt;
+    Lorem ipsum and all around - second...
+  &lt;/div&gt;
+  &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My last tab&quot;&gt;
+    Lorem ipsum and all around - last...
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div></div><p>The doLayout attribute currently only works for top tabs, left/bottom/right tabs don&#8217;t support it. You can set a tab strip on every tab type though. Following a few examples with left/bottom/right tabs using tabStrip here and there.</p>
+</div>
+<div class="section" id="right-tabs">
+<h2>Right Tabs<a class="headerlink" href="#right-tabs" title="Permalink to this headline">¶</a></h2>
+<p>Tabs at the right, no strip</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+dojo.require(&quot;dijit.layout.TabContainer&quot;);
+dojo.require(&quot;dijit.layout.ContentPane&quot;);
+&lt;/script&gt;</pre></div><p>notice the tabPosition attribute</p>
+<div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.layout.TabContainer&quot; style=&quot;width: 400px; height: 100px;&quot; tabPosition=&quot;right-h&quot;&gt;
+  &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My first tab&quot; selected=&quot;true&quot;&gt;
+    Lorem ipsum and all around...
+  &lt;/div&gt;
+  &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My second tab&quot;&gt;
+    Lorem ipsum and all around - second...
+  &lt;/div&gt;
+  &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My last tab&quot;&gt;
+    Lorem ipsum and all around - last...
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="left-tabs">
+<h2>Left Tabs<a class="headerlink" href="#left-tabs" title="Permalink to this headline">¶</a></h2>
+<p>Tabs at the left, with a strip</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+dojo.require(&quot;dijit.layout.TabContainer&quot;);
+dojo.require(&quot;dijit.layout.ContentPane&quot;);
+&lt;/script&gt;</pre></div><p>notice the tabPosition attribute</p>
+<div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.layout.TabContainer&quot; style=&quot;width: 400px; height: 100px;&quot; tabPosition=&quot;left-h&quot; tabStrip=&quot;true&quot;&gt;
+  &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My first tab&quot; selected=&quot;true&quot;&gt;
+    Lorem ipsum and all around...
+  &lt;/div&gt;
+  &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My second tab&quot;&gt;
+    Lorem ipsum and all around - second...
+  &lt;/div&gt;
+  &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My last tab&quot;&gt;
+    Lorem ipsum and all around - last...
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="bottom-tabs">
+<h2>Bottom Tabs<a class="headerlink" href="#bottom-tabs" title="Permalink to this headline">¶</a></h2>
+<p>Tabs at the bottom,with a strip</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+dojo.require(&quot;dijit.layout.TabContainer&quot;);
+dojo.require(&quot;dijit.layout.ContentPane&quot;);
+&lt;/script&gt;</pre></div><p>notice the tabPosition attribute</p>
+<div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.layout.TabContainer&quot; style=&quot;width: 400px; height: 100px;&quot; tabPosition=&quot;bottom&quot; tabStrip=&quot;true&quot;&gt;
+  &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My first tab&quot; selected=&quot;true&quot;&gt;
+    Lorem ipsum and all around...
+  &lt;/div&gt;
+  &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My second tab&quot;&gt;
+    Lorem ipsum and all around - second...
+  &lt;/div&gt;
+  &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My last tab&quot;&gt;
+    Lorem ipsum and all around - last...
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div></div><p>One technique to allow validation, and still use the parser would be to simply decorate the node with a dojoType attribute (after onLoad) and parse the parent node. For ease, we&#8217;ll store the class name for our inner widgets in a rel=&#8221;&#8221; attribute.</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+dojo.require(&quot;dijit.layout.TabContainer&quot;);
+dojo.require(&quot;dijit.layout.ContentPane&quot;);
+dojo.require(&quot;dojo.parser&quot;);
+dojo.addOnLoad(function(){
+    dojo.query(&quot;div[rel]&quot;).forEach(function(n){
+        var className = dojo.attr(n,&quot;rel&quot;);
+        // now set it
+        dojo.attr(n, &quot;dojoType&quot;, className);
+    });
+    dojo.parser.parse(&quot;progtabwrapper&quot;);
+});
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;progtabwrapper&quot;&gt;
+&lt;div rel=&quot;dijit.layout.TabContainer&quot; style=&quot;width: 400px; height: 100px;&quot;&gt;
+  &lt;div rel=&quot;dijit.layout.ContentPane&quot; title=&quot;My first tab&quot;&gt;
+    Lorem ipsum and all around...
+  &lt;/div&gt;
+  &lt;div rel=&quot;dijit.layout.ContentPane&quot; title=&quot;My second tab&quot;&gt;
+    Lorem ipsum and all around - second...
+  &lt;/div&gt;
+  &lt;div rel=&quot;dijit.layout.ContentPane&quot; title=&quot;My last tab&quot;&gt;
+    Lorem ipsum and all around - last...
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="programmatic-example">
+<h2>Programmatic Example<a class="headerlink" href="#programmatic-example" title="Permalink to this headline">¶</a></h2>
+<p>Here&#8217;s an example that parses existing DOM and creates tabs,
+similar to what the parser does:</p>
+<div dojoType="docs.widget.CompoundViewer"><p>As a simple example, we&#8217;ll use <a class="reference" href="../../dojo/query.html#dojo-query"><em>dojo.query</em></a> to find and create the ContentPanes used in the TabContainer</p>
+<div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+dojo.require(&quot;dijit.layout.TabContainer&quot;);
+dojo.require(&quot;dijit.layout.ContentPane&quot;);
+dojo.addOnLoad(function(){
+    dojo.query(&quot;.tc1cp&quot;).forEach(function(n){
+        new dijit.layout.ContentPane({
+            // just pass a title: attribute, this, we're stealing from the node
+            title: dojo.attr(n,&quot;title&quot;)
+        }, n);
+    });
+    var tc = new dijit.layout.TabContainer({
+        style: dojo.attr(&quot;tc1-prog&quot;, &quot;style&quot;)
+    },&quot;tc1-prog&quot;);
+    tc.startup();
+});
+&lt;/script&gt;</pre></div><p>The html is very simple</p>
+<div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;tc1-prog&quot; style=&quot;width: 400px; height: 100px;&quot;&gt;
+  &lt;div class=&quot;tc1cp&quot; title=&quot;My first tab&quot;&gt;
+    Lorem ipsum and all around...
+  &lt;/div&gt;
+  &lt;div class=&quot;tc1cp&quot; title=&quot;My second tab&quot;&gt;
+    Lorem ipsum and all around - second...
+  &lt;/div&gt;
+  &lt;div class=&quot;tc1cp&quot; title=&quot;My last tab&quot;&gt;
+    Lorem ipsum and all around - last...
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="nested-tabs">
+<h2>Nested tabs<a class="headerlink" href="#nested-tabs" title="Permalink to this headline">¶</a></h2>
+<p>Often sites will have two levels of tabs.  This is supported by using two TabContainer widgets.   Remember that although a TabContainer&#8217;s children are often ContentPanes, they can be any layout widget, including another TabContainer:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+dojo.require(&quot;dijit.layout.TabContainer&quot;);
+dojo.require(&quot;dijit.layout.ContentPane&quot;);
+&lt;/script&gt;</pre></div><p>The html is very simple</p>
+<div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.layout.TabContainer&quot; style=&quot;width: 400px; height: 100px;&quot;&gt;
+  &lt;div dojoType=&quot;dijit.layout.TabContainer&quot; title=&quot;Tab 1&quot; nested=&quot;true&quot;&gt;
+    &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My first inner tab&quot; selected=&quot;true&quot;&gt;
+      Lorem ipsum and all around...
+    &lt;/div&gt;
+    &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My second inner tab&quot;&gt;
+      Lorem ipsum and all around - second...
+    &lt;/div&gt;
+    &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My last inner tab&quot;&gt;
+      Lorem ipsum and all around - last...
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div dojoType=&quot;dijit.layout.TabContainer&quot; title=&quot;Tab 2&quot; nested=&quot;true&quot;&gt;
+    &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My first inner tab&quot; selected=&quot;true&quot;&gt;
+      Lorem ipsum and all around...
+    &lt;/div&gt;
+    &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My second inner tab&quot;&gt;
+      Lorem ipsum and all around - second...
+    &lt;/div&gt;
+    &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My last inner tab&quot;&gt;
+      Lorem ipsum and all around - last...
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div></div><p>When you have nested tabs you should set the nested parameter to true, to make the formatting distinctive from the outer TabContainer.</p>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

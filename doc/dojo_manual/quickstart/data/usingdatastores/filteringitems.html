@@ -1,0 +1,497 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Selecting (Filtering) items &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Quickstart" href="../../contents.html" />
+    <link rel="next" title="Hierarchical data and access through dojo.data" href="lazyloading.html" />
+    <link rel="prev" title="Selecting single items" href="fetchsingle.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../../_static/dojo/dijit/themes/dijit.css";
+@import "../../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="lazyloading.html" title="Hierarchical data and access through dojo.data"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="fetchsingle.html" title="Selecting single items"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../../contents.html" accesskey="U">Quickstart</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">Selecting (Filtering) items</a><ul>
+<li><a class="reference" href="#querying">Querying</a></li>
+<li><a class="reference" href="#case-sensitivity-and-other-modifiers">Case sensitivity and other modifiers</a></li>
+<li><a class="reference" href="#flexible-store-syntax">Flexible store syntax</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#query-for-all-spices-basic-query">Query for all Spices  (Basic query)</a></li>
+<li><a class="reference" href="#query-for-all-food-in-aisles-starting-with-c">Query for all food in aisles starting with C</a></li>
+<li><a class="reference" href="#enter-your-own-query-for-name-and-aisle">Enter your own query for name and aisle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="fetchsingle.html"
+                                  title="previous chapter">Selecting single items</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="lazyloading.html"
+                                  title="next chapter">Hierarchical data and access through dojo.data</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../../_sources/quickstart/data/usingdatastores/filteringitems.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="selecting-filtering-items">
+<span id="quickstart-data-usingdatastores-filteringitems"></span><h1><a class="toc-backref" href="#id1">Selecting (Filtering) items<a class="headerlink" href="#selecting-filtering-items" title="Permalink to this headline">¶</a></a></h1>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#selecting-filtering-items" id="id1" name="id1">Selecting (Filtering) items</a><ul>
+<li><a class="reference" href="#querying" id="id2" name="id2">Querying</a></li>
+<li><a class="reference" href="#case-sensitivity-and-other-modifiers" id="id3" name="id3">Case sensitivity and other modifiers</a></li>
+<li><a class="reference" href="#flexible-store-syntax" id="id4" name="id4">Flexible store syntax</a></li>
+<li><a class="reference" href="#examples" id="id5" name="id5">Examples</a><ul>
+<li><a class="reference" href="#query-for-all-spices-basic-query" id="id6" name="id6">Query for all Spices  (Basic query)</a></li>
+<li><a class="reference" href="#query-for-all-food-in-aisles-starting-with-c" id="id7" name="id7">Query for all food in aisles starting with C</a></li>
+<li><a class="reference" href="#enter-your-own-query-for-name-and-aisle" id="id8" name="id8">Enter your own query for name and aisle</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="querying">
+<h2><a class="toc-backref" href="#id2">Querying<a class="headerlink" href="#querying" title="Permalink to this headline">¶</a></a></h2>
+<p>There are many times when you might not want an entire item list. Though you could fetch the entire list, and loop through to select elements, dojo.data&#8217;s API definition has facilities to do the tough work for you.</p>
+<p>Selecting subsets of items requires a query. A query can be anything from a String to a JavaScript object that has attributes which look a lot like the attributes of the data store. In the case of a JavaScript object it&#8217;s a kind of query-by-example. Most datastores in dojo and dojox implement their query function this way, so it will be used for this example. Just be aware it is possible for a datastore to provide alternate query syntaxes, such as a straight string.</p>
+<p>In any event, on to what querying is all about:</p>
+<p>Given a dataset like:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">identifier</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span><span class="o">,</span>
+  <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Adobo&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Mexican&#39;</span><span class="o">,</span> <span class="nx">price</span><span class="o">:</span> <span class="mf">3.01</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Balsamic vinegar&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Condiments&#39;</span><span class="o">,</span> <span class="nx">price</span><span class="o">:</span> <span class="mf">4.01</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Basil&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Spices&#39;</span><span class="o">,</span> <span class="nx">price</span><span class="o">:</span> <span class="mf">3.59</span>  <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Bay leaf&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Spices&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">2.01</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Beef Bouillon Granules&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Soup&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">5.01</span>  <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Vinegar&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Condiments&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">1.99</span>  <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;White cooking wine&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Condiments&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">2.01</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Worcestershire Sauce&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Condiments&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">3.99</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;white pepper&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Spices&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">1.01</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Black Pepper&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Spices&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">1.01</span> <span class="p">}</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+<p>There are times it would be useful to only work with a subset of those items. For example, maybe you want to locate things only found in the spices aisle. In other words, you want to find all items that match:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s2">&quot;Spice&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>And you don't care what the other attributes are. For dojo.data.ItemFileReadStore (and dojo.data.itemFileWriteStore), the query query syntax is  just a subset match. And in fact, the above code example is your desired query to pass to the <em>fetch()</em>. Now, that's great, but what it you wanted to query a bit more loosely, say find all items that are in aisles that start with the letter S. Can you do that?   With dojo.data, yes you can. Since the query is data store defined, query syntaxes can use wildcards and the like. Please read the note below for further details:</p>
+<blockquote>
+<p><strong>Note:</strong> Each type of data store can have its own query syntax. With JsonItemStore, you can use wildcards: * to mean any characters. and ? to mean one character. This notation will be familiar to you if you've worked with Perl, Java, UNIX shell regular expressions, or even old BATCH scripts. And in general, the dojo.data community would highly recommend that all stores try to follow this method of specifying the query for consistency. Even datastores that are backed by an SQL database should be able to handle such character matching, because * maps to %, and ? maps to _ in SQL syntax.</p>
+<p>So, for dojo.data.ItemFileReadStore, if you wanted to find all items in aisles starting with <em>Condiment</em>, the query is simply:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s2">&quot;Condiment*&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>For dojo.data.ItemFileReadStore, multiple attributes assume an &quot;and&quot; between the terms. So a query like the following one will match spices with the word pepper inside them, but not &quot;green peppers&quot; in the vegetable aisle:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;*pepper*&quot;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s2">&quot;Spices&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+</blockquote>
+<p>Once we have constructed the query, we pass it to fetch() along with the other parameters as shown in the following example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">itemStore</span> <span class="p">.</span><span class="nx">fetch</span><span class="p">({</span>
+  <span class="nx">query</span><span class="o">:</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;*pepper*&quot;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s2">&quot;Spices&quot;</span> <span class="p">}</span><span class="o">,</span>
+  <span class="nx">onComplete</span><span class="o">:</span>
+  <span class="p">...</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="case-sensitivity-and-other-modifiers">
+<h2><a class="toc-backref" href="#id3">Case sensitivity and other modifiers<a class="headerlink" href="#case-sensitivity-and-other-modifiers" title="Permalink to this headline">¶</a></a></h2>
+<p>That's great, but what if I don't care about case sensitivity?  Dojo.data also provides a method for augmenting the query with options through the use of the queryOptions object. By default, dojo.data only defines two options that datastores should honor. They are <em>ignoreCase</em> and <em>deep</em>, and both are boolean valued. The ignoreCase option tells the datastore to compare the attributes for matches, but do so case-insensitively. The <em>deep</em> option only applies to stores which represent hierarchical data, and it instructs the search to search all child items (as well as all root items), for a match. So, if we take the above example and say we want to just ignore case so we get 'Black Pepper' and 'white pepper' as matches, the fetch call becomes:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">itemStore</span> <span class="p">.</span><span class="nx">fetch</span><span class="p">({</span>
+  <span class="nx">query</span><span class="o">:</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;*pepper*&quot;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s2">&quot;Spices&quot;</span> <span class="p">}</span><span class="o">,</span>
+  <span class="nx">queryOptions</span><span class="o">:</span> <span class="p">{</span> <span class="nx">ignoreCase</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span><span class="o">,</span>
+  <span class="nx">onComplete</span><span class="o">:</span>
+  <span class="p">...</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>So,in general, any option that would affect the behavior of a query, such as making it case insensitive or doing a deep scan where it scans a hierarchy of items instead of just the top level items (the deep:true option), in a store belongs in the queryOptions argument.</p>
+</div>
+<div class="section" id="flexible-store-syntax">
+<h2><a class="toc-backref" href="#id4">Flexible store syntax<a class="headerlink" href="#flexible-store-syntax" title="Permalink to this headline">¶</a></a></h2>
+<p>Why isn't it just SQL for a query?  Why can each store potentially define their own query syntax?  The simple and short answer to this question is that not all datastores are backed directly by a database that handles SQL. An immediate example is ItemFileReadStore, which just uses a structured JSON list for its data, so its query looks like structured JSON. Other examples would be datastores that wrap on top of services like Flickr and Delicious, because neither of those take SQL as the syntax for their services.</p>
+<p>Therefore, the dojo.data API defines basic guidelines and syntax stores that can be easily mapped to a service (for example, attribute names can map directly to parameters in a query string). The same is true for an SQL backed datastore. The attributes become substitutions in a prepared statement that the stores use (when they pass back the query to the server) and a simple common pattern matching syntax, the * and ?, which also map easily across a wide variety of datasource query syntax.</p>
+<blockquote>
+<strong>Note:</strong> dojo.data recommends that stores generally use the dojo.data.ItemFileReadStore syntax, because it is fairly generic, works well in javascript, and can be mapped into other native syntaxes easily. Nearly all, if not all, datastores provided in the dojox.data module use the exact same syntax and will under the covers map it to the native syntaxes needed by the back-end services that provide the data store query and return (for remove data stores), and in-memory datastores, such as dojo.data.ItemFileReadStore work well with the structured JavaScript format.</blockquote>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id5">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<p>This section covers some basic query examples to familiarize users with the general expected flow for using queries.</p>
+<div class="section" id="query-for-all-spices-basic-query">
+<h3><a class="toc-backref" href="#id6">Query for all Spices  (Basic query)<a class="headerlink" href="#query-for-all-spices-basic-query" title="Permalink to this headline">¶</a></a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.form.Button&quot;);
+
+  var storeData = { identifier: 'name',
+    items: [
+      { name: 'Adobo', aisle: 'Mexican', price: 3.01 },
+      { name: 'Balsamic vinegar', aisle: 'Condiments', price: 4.01 },
+      { name: 'Basil', aisle: 'Spices', price: 3.59  },
+      { name: 'Bay leaf', aisle: 'Spices',  price: 2.01 },
+      { name: 'Beef Bouillon Granules', aisle: 'Soup',  price: 5.01 },
+      { name: 'Vinegar', aisle: 'Condiments',  price: 1.99  },
+      { name: 'White cooking wine', aisle: 'Condiments',  price: 2.01 },
+      { name: 'Worcestershire Sauce', aisle: 'Condiments',  price: 3.99 },
+      { name: 'white pepper', aisle: 'Spices',  price: 1.01 },
+      { name: 'Black Pepper', aisle: 'Spices',  price: 1.01 }
+    ]};
+
+    //This function performs some basic dojo initialization. In this case it connects the button
+    //onClick to a function which invokes the fetch(). The fetch function queries for all items
+    //and provides callbacks to use for completion of data retrieval or reporting of errors.
+    function init () {
+       //Function to perform a fetch on the datastore when a button is clicked
+       function getSpices () {
+
+         //Callback to perform an action when the data items are starting to be returned:
+         function clearOldList(size, request) {
+           var list = dojo.byId(&quot;list&quot;);
+           if (list) {
+             while (list.firstChild) {
+               list.removeChild(list.firstChild);
+             }
+           }
+         }
+
+         //Callback for processing a returned list of items.
+         function gotItems(items, request) {
+           var list = dojo.byId(&quot;list&quot;);
+           if (list) {
+             var i;
+             for (i = 0; i &lt; items.length; i++) {
+               var item = items[i];
+               list.appendChild(document.createTextNode(foodStore.getValue(item, &quot;name&quot;)));
+               list.appendChild(document.createElement(&quot;br&quot;));
+             }
+           }
+         }
+
+         //Callback for if the lookup fails.
+         function fetchFailed(error, request) {
+            alert(&quot;lookup failed.&quot;);
+         }
+
+         //Fetch the data.
+         foodStore.fetch({query: { aisle: &quot;Spices&quot;}, onBegin: clearOldList, onComplete: gotItems, onError: fetchFailed});
+
+       }
+       //Link the click event of the button to driving the fetch.
+       dojo.connect(button, &quot;onClick&quot;, getSpices);
+    }
+    //Set the init function to run when dojo loading and page parsing has completed.
+    dojo.addOnLoad(init);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojo.data.ItemFileReadStore&quot; data=&quot;storeData&quot; jsId=&quot;foodStore&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.Button&quot; jsId=&quot;button&quot;&gt;Click to find the spices!&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;span id=&quot;list&quot;&gt;
+&lt;/span&gt;</pre></div></div></div>
+<div class="section" id="query-for-all-food-in-aisles-starting-with-c">
+<h3><a class="toc-backref" href="#id7">Query for all food in aisles starting with C<a class="headerlink" href="#query-for-all-food-in-aisles-starting-with-c" title="Permalink to this headline">¶</a></a></h3>
+<p><em>Basic query with wildcard</em></p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.form.Button&quot;);
+
+  var storeData2 = { identifier: 'name',
+    items: [
+      { name: 'Adobo', aisle: 'Mexican', price: 3.01 },
+      { name: 'Balsamic vinegar', aisle: 'Condiments', price: 4.01 },
+      { name: 'Basil', aisle: 'Spices', price: 3.59  },
+      { name: 'Bay leaf', aisle: 'Spices',  price: 2.01 },
+      { name: 'Beef Bouillon Granules', aisle: 'Soup',  price: 5.01 },
+      { name: 'Vinegar', aisle: 'Condiments',  price: 1.99  },
+      { name: 'White cooking wine', aisle: 'Condiments',  price: 2.01 },
+      { name: 'Worcestershire Sauce', aisle: 'Condiments',  price: 3.99 },
+      { name: 'white pepper', aisle: 'Spices',  price: 1.01 },
+      { name: 'Black Pepper', aisle: 'Spices',  price: 1.01 }
+    ]};
+
+    //This function performs some basic dojo initialization. In this case it connects the button
+    //onClick to a function which invokes the fetch(). The fetch function queries for all items
+    //and provides callbacks to use for completion of data retrieval or reporting of errors.
+    function init2 () {
+       //Function to perform a fetch on the datastore when a button is clicked
+       function getCAisle () {
+
+         //Callback to perform an action when the data items are starting to be returned:
+         function clearOldList(size, request) {
+           var list = dojo.byId(&quot;list2&quot;);
+           if (list) {
+             while (list.firstChild) {
+               list.removeChild(list.firstChild);
+             }
+           }
+         }
+
+         //Callback for processing a returned list of items.
+         function gotItems(items, request) {
+           var list = dojo.byId(&quot;list2&quot;);
+           if (list) {
+             var i;
+             for (i = 0; i &lt; items.length; i++) {
+               var item = items[i];
+               list.appendChild(document.createTextNode(foodStore2.getValue(item, &quot;name&quot;)));
+               list.appendChild(document.createElement(&quot;br&quot;));
+             }
+           }
+         }
+
+         //Callback for if the lookup fails.
+         function fetchFailed(error, request) {
+            alert(&quot;lookup failed.&quot;);
+            alert(error);
+         }
+
+         //Fetch the data.
+         foodStore2.fetch({query: { aisle: &quot;C*&quot;}, onBegin: clearOldList, onComplete: gotItems, onError: fetchFailed});
+
+       }
+       //Link the click event of the button to driving the fetch.
+       dojo.connect(button2, &quot;onClick&quot;, getCAisle );
+    }
+    //Set the init function to run when dojo loading and page parsing has completed.
+    dojo.addOnLoad(init2);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojo.data.ItemFileReadStore&quot; data=&quot;storeData2&quot; jsId=&quot;foodStore2&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.Button&quot; jsId=&quot;button2&quot;&gt;Click to find the items in an aisle starting with C!&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;span id=&quot;list2&quot;&gt;
+&lt;/span&gt;</pre></div></div></div>
+<div class="section" id="enter-your-own-query-for-name-and-aisle">
+<h3><a class="toc-backref" href="#id8">Enter your own query for name and aisle<a class="headerlink" href="#enter-your-own-query-for-name-and-aisle" title="Permalink to this headline">¶</a></a></h3>
+<p><em>Wildcards * and ? are supported by the dojo.data.ItemFileReadStore:</em></p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.form.Button&quot;);
+  dojo.require(&quot;dijit.form.TextBox&quot;);
+  dojo.require(&quot;dijit.form.CheckBox&quot;);
+
+  var storeData3 = { identifier: 'name',
+    items: [
+      { name: 'Adobo', aisle: 'Mexican', price: 3.01 },
+      { name: 'Balsamic vinegar', aisle: 'Condiments', price: 4.01 },
+      { name: 'Basil', aisle: 'Spices', price: 3.59  },
+      { name: 'Bay leaf', aisle: 'Spices',  price: 2.01 },
+      { name: 'Beef Bouillon Granules', aisle: 'Soup',  price: 5.01 },
+      { name: 'Vinegar', aisle: 'Condiments',  price: 1.99  },
+      { name: 'White cooking wine', aisle: 'Condiments',  price: 2.01 },
+      { name: 'Worcestershire Sauce', aisle: 'Condiments',  price: 3.99 },
+      { name: 'white pepper', aisle: 'Spices',  price: 1.01 },
+      { name: 'Black Pepper', aisle: 'Spices',  price: 1.01 }
+    ]};
+
+    //This function performs some basic dojo initialization. In this case it connects the button
+    //onClick to a function which invokes the fetch(). The fetch function queries for all items
+    //and provides callbacks to use for completion of data retrieval or reporting of errors.
+    function init3 () {
+       //Function to perform a fetch on the datastore when a button is clicked
+       function search() {
+         var queryObj = {};
+
+         //Build up the query from the input boxes.
+         var name = nameBox.getValue();
+         if ( name &amp;&amp; dojo.trim(name) !== &quot;&quot; ) {
+           queryObj[&quot;name&quot;] = name;
+         }
+         var aisle = aisleBox.getValue();
+         if ( aisle &amp;&amp; dojo.trim(aisle) !== &quot;&quot; ) {
+           queryObj[&quot;aisle&quot;] = aisle;
+         }
+
+         var qNode = dojo.byId(&quot;query&quot;);
+         if (qNode ) {
+           qNode.innerHTML = dojo.toJson(queryObj);
+         }
+
+
+         //Build up query options, if any.
+         var queryOptionsObj = {};
+
+         if ( checkBox.getValue()) {
+           queryOptionsObj[&quot;ignoreCase&quot;] = true;
+         }
+
+         var qoNode = dojo.byId(&quot;queryOptions&quot;);
+         if (qoNode ) {
+           qoNode.innerHTML = dojo.toJson(queryOptionsObj);
+         }
+
+         //Callback to perform an action when the data items are starting to be returned:
+         function clearOldList(size, request) {
+           var list = dojo.byId(&quot;list3&quot;);
+           if (list) {
+             while (list.firstChild) {
+               list.removeChild(list.firstChild);
+             }
+           }
+         }
+
+         //Callback for processing a returned list of items.
+         function gotItems(items, request) {
+           var list = dojo.byId(&quot;list3&quot;);
+           if (list) {
+             var i;
+             for (i = 0; i &lt; items.length; i++) {
+               var item = items[i];
+               list.appendChild(document.createTextNode(foodStore3.getValue(item, &quot;name&quot;)));
+               list.appendChild(document.createElement(&quot;br&quot;));
+             }
+           }
+         }
+
+         //Callback for if the lookup fails.
+         function fetchFailed(error, request) {
+            alert(&quot;lookup failed.&quot;);
+            alert(error);
+         }
+
+         //Fetch the data.
+         foodStore3.fetch({query: queryObj, queryOptions: queryOptionsObj, onBegin: clearOldList, onComplete: gotItems, onError: fetchFailed});
+
+       }
+       //Link the click event of the button to driving the fetch.
+       dojo.connect(button3, &quot;onClick&quot;, search);
+    }
+    //Set the init function to run when dojo loading and page parsing has completed.
+    dojo.addOnLoad(init3);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;b&gt;Name:  &lt;/b&gt;&lt;input dojoType=&quot;dijit.form.TextBox&quot; jsId=&quot;nameBox&quot; value=&quot;*&quot;&gt;&lt;/input&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Aisle: &lt;/b&gt;&lt;input dojoType=&quot;dijit.form.TextBox&quot; jsId=&quot;aisleBox&quot; value=&quot;*&quot;&gt;&lt;/input&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Case Insensitive: &lt;/b&gt;&lt;div dojoType=&quot;dijit.form.CheckBox&quot; checked=&quot;false&quot; jsId=&quot;checkBox&quot;&gt;&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;div dojoType=&quot;dojo.data.ItemFileReadStore&quot; data=&quot;storeData3&quot; jsId=&quot;foodStore3&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.Button&quot; jsId=&quot;button3&quot;&gt;Click to search!&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Query used: &lt;/b&gt;&lt;span id=&quot;query&quot;&gt;&lt;/span&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Query Options used: &lt;/b&gt;&lt;span id=&quot;queryOptions&quot;&gt;&lt;/span&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Items located:&lt;/b&gt;
+&lt;br&gt;
+&lt;span id=&quot;list3&quot;&gt;
+&lt;/span&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

@@ -1,0 +1,435 @@
+.. _dojo/index:
+
+Dojo
+====
+
+:Status: Draft
+:Version: 1.0
+:Available: since version 0.9
+
+.. contents::
+   :depth: 2
+
+Dojo is divided into two parts: ``dojo.js``, and the rest of Dojo Core. Typically, if a function or Class exists within the dojo namespace directly (eg: ``dojo.require()``, ``dojo.addOnLoad()``) it is provided directly by ``dojo.js``. If the function or Class exists beneath the dojo namespace (eg: ``dojo.dnd.Mover``), you will need to require the appropriate module (eg: ``dojo.require("dojo.dnd.Mover");``)
+
+These pages cover both cases, and indicate how they are provided.
+
+dojo.js
+-------
+
+Dojo Base is the functionality you get by just including dojo.js or dojo.xd.js in your page.
+
+* :ref:`dojo._base <dojo/base>`
+
+  * :ref:`dojo._base._loader <dojo/base/loader>`
+
+    Dojo's Bootstrap
+
+    * :ref:`djConfig <djConfig>`
+
+      Configuring Dojo with djConfig
+
+    * :ref:`dojo.addOnLoad <dojo/addOnLoad>`
+
+      Call functions after the DOM has finished loading and widgets declared in markup have been instantiated
+
+    * :ref:`dojo.addOnUnload <dojo/addOnUnload>`
+
+      Call functions when the page unloads
+
+    * :ref:`dojo.addOnWindowUnload <dojo/addOnWindowUnload>`
+
+      Call functions when window.onunload fires
+
+    * :ref:`dojo.attr <dojo/attr>`
+
+      Modifying DOM node attributes
+
+    * :ref:`dojo.deprecated <dojo/deprecated>`
+
+      Log a debug message to indicate that a behavior has been deprecated
+
+    * :ref:`dojo.exists <dojo/exists>`
+
+      Determine if an object supports a given method
+
+    * :ref:`dojo.getObject <dojo/getObject>`
+
+      Get a property from a dot-separated string, such as "A.B.C"
+
+    * :ref:`dojo.global <dojo/global>`
+
+      Alias for the global scope
+
+    * :ref:`dojo.mixin <dojo/mixin>`
+
+      Multiple inheritance
+
+    * :ref:`dojo.place <dojo/place>`
+
+      Place DOM nodes relative to others
+
+    * :ref:`dojo.registerModulePath <dojo/registerModulePath>`
+
+      Maps module name to a path
+
+    * :ref:`dojo.require <dojo/require>`
+
+      Loads a Javascript module from the appropriate URI
+
+    * :ref:`dojo.setObject <dojo/setObject>`
+
+      Set a property from a dot-separated string, such as "A.B.C"
+
+    * :ref:`dojo.version <dojo/version>`
+
+      The current version number of Dojo
+
+    * :ref:`dojo.windowUnloaded <dojo/windowUnloaded>`
+
+      Signal fired by impending window destruction
+
+  * :ref:`dojo._base.array <dojo/_base/array>`
+
+    Array utilities.
+    Details on dojo.every, dojo.filter, dojo.forEach, dojo.indexOf, dojo.lastIndexOf, dojo.map, and dojo.some.
+
+    * :ref:`dojo.forEach <dojo/forEach>`
+
+      Invokes a callback function for every item in array
+
+    * :ref:`dojo.map <dojo/map>`
+
+      Applies a callback to each element of arr and returns an Array with the results
+
+  * :ref:`dojo._base.Color <dojo/_base/Color>`
+
+    Functions for setting Colors
+
+  * :ref:`dojo._base.connect <dojo/_base/connect>`
+
+    Functions for connecting methods to events and to subscribe and publish events
+
+    * :ref:`dojo.connect <dojo/connect>`
+
+      Connects events to methods
+
+    * :ref:`dojo.disconnect <dojo/disconnect>`
+
+      Disconnects methods from linked topics
+
+    * :ref:`dojo.subscribe <dojo/subscribe>`
+
+      Linked a listener to a named topic
+
+    * :ref:`dojo.unsubscribe <dojo/unsubscribe>`
+
+      Remove a topic listener
+
+    * :ref:`dojo.publish <dojo/publish>`
+
+      Publish an event to all subscribers of a topic
+
+    * :ref:`dojo.connectPublisher <dojo/connectPublisher>`
+
+      Ensure that everytime an event is called, a message is published on the topic.
+
+  * :ref:`dojo._base.declare <dojo/_base/declare>`
+
+    Defining Classes
+
+    * :ref:`dojo.declare <dojo/declare>`
+
+      Creates a constructor using a compact notation for inheritance and prototype extension
+
+  * :ref:`dojo._base.Deferred <dojo/_base/Deferred>`
+
+    Managing Callbacks
+
+    * :ref:`dojo.Deferred <dojo/Deferred>`
+
+      Communication between threads
+
+  * :ref:`dojo._base.event <dojo/_base/event>`
+
+    DOM Events
+
+  * :ref:`dojo._base.fx <dojo/_base/fx>`
+
+    Dojo animation effects
+
+    * :ref:`dojo.animateProperty <dojo/animateProperty>`
+
+      A very useful method for animating CSS properties
+
+  * :ref:`dojo._base.html <dojo/_base/html>`
+
+    Basic DOM handling functions
+
+    * :ref:`dojo.byId <dojo/byId>`
+
+      Select a DOM node by 'id'
+
+    * :ref:`dojo.style <dojo/style>`
+
+      A getter/setter for styles on a DOM node
+
+    * :ref:`dojo.coords <dojo/coords>`
+
+      Getter for the coordinates (relative to parent and absolute) of a dom node.
+
+    * :ref:`dojo.marginBox <dojo/marginBox>`
+
+      Getter/setter for the margin-box of node
+
+    * :ref:`dojo.contentBox <dojo/contentBox>`
+
+      Getter/setter for the content-box of node
+
+  * :ref:`dojo._base.json <dojo/_base/json>`
+
+    JSON helpers
+
+    * :ref:`dojo.fromJson <dojo/fromJson>`
+
+      Parses a JSON string to return a JavaScript object
+
+    * :ref:`dojo.toJson <dojo/toJson>`
+
+      Returns a JSON serialization of an object
+
+  * :ref:`dojo._base.lang <dojo/_base/lang>`
+
+    Support for Polymorphism
+
+    * :ref:`dojo.hitch <dojo/hitch>`
+
+      Function that generates a wrapper function that ensures a function that will only ever execute in a defined scope.
+
+    * :ref:`dojo.isString <dojo/isString>`
+
+      Checks if the parameter is a String
+
+    * :ref:`dojo.isArray <dojo/isArray>`
+
+      Checks if the parameter is an Array
+
+    * :ref:`dojo.isFunction <dojo/isFunction>`
+
+      Checks if the parameter is a Function
+
+    * :ref:`dojo.isObject <dojo/isObject>`
+
+      Checks if the parameter is an Object
+
+    * :ref:`dojo.isArrayLike <dojo/isArrayLike>`
+
+      Checks if the parameter is like an Array
+
+    * :ref:`dojo.isAlien <dojo/isAlien>`
+
+      Checks if the parameter is a built-in function
+
+  * :ref:`dojo._base.NodeList <dojo/_base/NodeList>`
+
+    Syntactic sugar for chaining, common iteration operations, animation, and node manipulation
+
+    * :ref:`dojo.NodeList <dojo/NodeList>`
+
+      A class to handle a list of DOM nodes
+
+  * :ref:`dojo._base.query <dojo/_base/query>`
+
+    A relatively full-featured CSS3 query library
+
+    * :ref:`dojo.query <dojo/query>`
+
+      The swiss army knife of DOM node manipulation in Dojo
+
+  * :ref:`dojo._base.window <dojo/_base/window>`
+
+    Functions for dealing with the document-wide DOM and context related stuff
+
+    * :ref:`dojo.doc <dojo/doc>`
+
+      Alias for the current document
+
+    * :ref:`dojo.body <dojo/body>`
+
+      Return the body element of the document
+
+    * :ref:`dojo.setContext <dojo/setContext>`
+
+      Changes the behavior of many core Dojo functions that deal with namespace and DOM lookup
+
+    * :ref:`dojo.withGlobal <dojo/withGlobal>`
+
+      Call callback with globalObject as dojo.global and globalObject.document as dojo.doc
+
+    * :ref:`dojo.withDoc <dojo/withDoc>`
+
+      Call callback with documentObject as dojo.doc
+
+  * :ref:`dojo._base.xhr <dojo/_base/xhr>`
+
+    AJAX I/O transports and utility methods
+
+    * :ref:`dojo.formToJson <dojo/formToJson>`
+    * :ref:`dojo.formToObject <dojo/formToObject>`
+    * :ref:`dojo.formToQuery <dojo/formToQuery>`
+    * :ref:`dojo.objectToQuery <dojo/objectToQuery>`
+    * :ref:`dojo.queryToObject <dojo/queryToObject>`
+    * :ref:`dojo.xhrDelete <dojo/xhrDelete>`
+    * :ref:`dojo.xhrGet <dojo/xhrGet>`
+    * :ref:`dojo.xhrPost <dojo/xhrPost>`
+    * :ref:`dojo.xhrPut <dojo/xhrPut>`
+    * :ref:`dojo.rawXhrPost <dojo/rawXhrPost>`
+    * :ref:`dojo.rawXhrPut <dojo/rawXhrPut>`
+
+Dojo Core
+---------
+
+* :ref:`dojo.AdapterRegistry <dojo/AdapterRegistry>`
+
+  A registry to make contextual calling/searching easier
+
+* :ref:`dojo.back <dojo/back>`
+
+  Browser history management resources (Back button functionality)
+
+* :ref:`dojo.behavior <dojo/behavior>`
+
+  Utility for unobtrusive/progressive event binding, DOM traversal, and manipulation
+
+* :ref:`dojo.cldr <dojo/cldr>`
+
+  A Common Locale Data Repository (CLDR) implementation
+
+* :ref:`dojo.colors <dojo/colors>`
+
+  CSS color manipulation functions
+
+* :ref:`dojo.cookie <dojo/cookie>`
+
+  Simple HTTP cookie manipulation
+
+* :ref:`dojo.currency <dojo/currency>`
+
+  Localized formatting and parsing routines for currency data
+
+* :ref:`dojo.data <dojo/data>`
+
+  A uniform data access layer
+
+  * :ref:`dojo.data.api <dojo/data/api>`
+  * :ref:`dojo.data.api.Read <dojo/data/api/Read>`
+  * :ref:`dojo.data.api.Write <dojo/data/api/Write>`
+  * :ref:`dojo.data.api.Identity <dojo/data/api/Identity>`
+  * :ref:`dojo.data.api.Notification <dojo/data/api/Notification>`
+  * :ref:`dojo.data.ItemFileReadStore <dojo/data/ItemFileReadStore>`
+  * :ref:`dojo.data.ItemFileWriteStore <dojo/data/ItemFileWriteStore>`
+
+* :ref:`dojo.date <dojo/date>`
+
+  Date manipulation utilities
+
+  * :ref:`dojo.date.locale.format <dojo/date/locale/format>`
+
+* :ref:`dojo.DeferredList <dojo/DeferredList>`
+
+  Event handling for a group of Deferred objects
+
+* :ref:`dojo.dnd <dojo/dnd>`
+
+  Drag and Drop
+
+  * :ref:`dojo.dnd.Moveable <dojo/dnd/Moveable>`
+
+* :ref:`dojo.fx <dojo/fx>`
+
+  Effects library on top of Base animations
+
+* :ref:`dojo.gears <dojo/gears>`
+
+  Google Gears
+
+* :ref:`dojo.html <dojo/html>`
+
+  Inserting contents in HTML nodes
+
+* :ref:`dojo.i18n <dojo/i18n>`
+
+  Utility classes to enable loading of resources for internationalization
+
+* :ref:`dojo.io <dojo/io>`
+
+  Additional AJAX I/O transports
+
+  * :ref:`dojo.io.iframe <dojo/io/iframe>`
+
+    Sends an AJAX I/O call using an IFrame
+
+  * :ref:`dojo.io.script <dojo/io/script>`
+
+    Sends a JSONP request using a script tag
+
+* :ref:`dojo.jaxer <dojo/jaxer>`
+
+* :ref:`dojo.NodeList-fx <dojo/NodeList-fx>`
+
+  Adds dojo.fx animation support to dojo.query()
+
+* :ref:`dojo.NodeList-html <dojo/NodeList-html>`
+
+  Adds a chainable html method to dojo.query()
+
+* :ref:`dojo.number <dojo/number>`
+
+  Localized formatting and parsing methods for number data
+
+* :ref:`dojo.parser <dojo/parser>`
+
+  The Dom/Widget parsing package
+
+* :ref:`dojo.regexp <dojo/regexp>`
+
+  Regular expressions and Builder resources
+
+* :ref:`dojo.robot <dojo/robot>`
+
+  experimental module for DOH users
+
+* :ref:`dojo.robotx <dojo/robotx>`
+
+  experimental module for DOH users
+
+* :ref:`dojo.rpc <dojo/rpc>`
+
+  Communicate via Remote Procedure Calls (RPC) with Backend Servers
+
+  * :ref:`dojo.rpc.JsonpService <dojo/rpc/JsonpService>`
+
+    Generic JSONP service
+
+  * :ref:`dojo.rpc.JsonService <dojo/rpc/JsonService>`
+
+    JSON RPC service
+
+  * :ref:`dojo.rpc.RpcService <dojo/rpc/RpcService>`
+
+    RPC service class
+
+* :ref:`dojo.string <dojo/string>`
+
+  String utilities for Dojo
+
+See also
+--------
+
+* :ref:`Dijit <dijit/index>`
+
+  The widget system layered on top of Dojo
+
+* :ref:`DojoX <dojox/index>`
+
+  An area for development of extensions to the Dojo toolkit

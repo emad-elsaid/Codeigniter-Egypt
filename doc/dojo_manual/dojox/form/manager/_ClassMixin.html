@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.form.manager._ClassMixin &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../../index.html" />
+    <link rel="up" title="DojoX" href="../../contents.html" />
+    <link rel="next" title="dojox.form.manager._DisplayMixin" href="_DisplayMixin.html" />
+    <link rel="prev" title="dojox.form.ValidationTextarea" href="../ValidationTextarea.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../../_static/dojo/dijit/themes/dijit.css";
+@import "../../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="_DisplayMixin.html" title="dojox.form.manager._DisplayMixin"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="../ValidationTextarea.html" title="dojox.form.ValidationTextarea"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.form.manager._ClassMixin</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#methods-and-properties">Methods and properties</a><ul>
+<li><a class="reference" href="#gatherclassstate">gatherClassState</a></li>
+<li><a class="reference" href="#addclass">addClass</a></li>
+<li><a class="reference" href="#removeclass">removeClass</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#tips">Tips</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="../ValidationTextarea.html"
+                                  title="previous chapter">dojox.form.ValidationTextarea</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="_DisplayMixin.html"
+                                  title="next chapter">dojox.form.manager._DisplayMixin</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../../_sources/dojox/form/manager/_ClassMixin.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-form-manager-classmixin">
+<span id="id1"></span><h1><a class="toc-backref" href="#id4">dojox.form.manager._ClassMixin<a class="headerlink" href="#dojox-form-manager-classmixin" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.3 (trunk)</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Eugene Lazutkin</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since 1.3</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-form-manager-classmixin" id="id4" name="id4">dojox.form.manager._ClassMixin</a><ul>
+<li><a class="reference" href="#introduction" id="id5" name="id5">Introduction</a></li>
+<li><a class="reference" href="#methods-and-properties" id="id6" name="id6">Methods and properties</a><ul>
+<li><a class="reference" href="#gatherclassstate" id="id7" name="id7">gatherClassState</a></li>
+<li><a class="reference" href="#addclass" id="id8" name="id8">addClass</a></li>
+<li><a class="reference" href="#removeclass" id="id9" name="id9">removeClass</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#tips" id="id10" name="id10">Tips</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id5">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>This class is the component of the form manager. It should be used together with <a class="reference" href="_Mixin.html#dojox-form-manager-mixin"><em>_Mixin</em></a>.</p>
+<p>The mixin provides commonly used methods to add/remove a CSS class, or detect its presence. It operates only on form nodes and attached nodes (see <a class="reference" href="../Manager.html#dojox-form-manager"><em>controlled elements</em></a> for more classification details).</p>
+</div>
+<div class="section" id="methods-and-properties">
+<h2><a class="toc-backref" href="#id6">Methods and properties<a class="headerlink" href="#methods-and-properties" title="Permalink to this headline">¶</a></a></h2>
+<p>This section describes all public methods and properties of <em>dojox.form.manager._ClassMixin</em> class.</p>
+<div class="section" id="gatherclassstate">
+<h3><a class="toc-backref" href="#id7">gatherClassState<a class="headerlink" href="#gatherclassstate" title="Permalink to this headline">¶</a></a></h3>
+<p>This method collects the presence of the specified CSS class in a dictionary object as Boolean values (<a href="#id2" name="id3"><span class="problematic" id="id3">``</span></a>true`:ref:` means the CSS class is present). It is loosely modeled after <a class="reference" href="dojox/form/manager/_EnableMixin#gatherenablestate">EnableMixin&#8217;s gatherFromValues()</a>.</p>
+<p>There are three ways to use this method:</p>
+<ol class="arabic simple">
+<li>Call it with the CSS class name and the array of names (represented by strings):</li>
+</ol>
+<blockquote>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;firstName&quot;</span><span class="o">,</span> <span class="s2">&quot;lastName&quot;</span><span class="p">]</span><span class="o">,</span> <span class="nx">cssClass</span> <span class="o">=</span> <span class="s2">&quot;marker&quot;</span>
+<span class="k">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">fm</span><span class="p">.</span><span class="nx">gatherClassState</span><span class="p">(</span><span class="nx">cssClass</span><span class="o">,</span> <span class="nx">names</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Only supplied names will be inspected for the presence of <tt class="docutils literal"><span class="pre">cssClass</span></tt>.</p>
+</blockquote>
+<ol class="arabic simple" start="2">
+<li>Call it with the CSS class name and a dictionary (an object). Only keys will be used, values will be ignored:</li>
+</ol>
+<blockquote>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">names</span> <span class="o">=</span> <span class="p">{</span><span class="nx">firstName</span><span class="o">:</span> <span class="mi">1</span><span class="o">,</span> <span class="nx">lastName</span><span class="o">:</span> <span class="mi">1</span><span class="p">}</span><span class="o">,</span> <span class="nx">cssClass</span> <span class="o">=</span> <span class="s2">&quot;marker&quot;</span><span class="o">;</span>
+<span class="k">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">fm</span><span class="p">.</span><span class="nx">gatherClassState</span><span class="p">(</span><span class="nx">cssClass</span><span class="o">,</span> <span class="nx">names</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Only supplied names will be inspected for the presence of <tt class="docutils literal"><span class="pre">cssClass</span></tt>.</p>
+<p>This form is especially useful when we already collected values, and want to check them for a presence of a certain CSS class:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;firstName&quot;</span><span class="o">,</span> <span class="s2">&quot;lastName&quot;</span><span class="p">]</span><span class="o">,</span> <span class="nx">cssClass</span> <span class="o">=</span> <span class="s2">&quot;marker&quot;</span><span class="o">;</span>
+<span class="k">var</span> <span class="nx">values</span> <span class="o">=</span> <span class="nx">fm</span><span class="p">.</span><span class="nx">gatherFormValues</span><span class="p">(</span><span class="nx">names</span><span class="p">);</span>
+<span class="c">// later in the code</span>
+<span class="k">var</span> <span class="nx">state</span>  <span class="o">=</span> <span class="nx">fm</span><span class="p">.</span><span class="nx">gatherClassState</span><span class="p">(</span><span class="nx">cssClass</span><span class="o">,</span> <span class="nx">values</span><span class="p">);</span>
+</pre></div>
+</div>
+</blockquote>
+<ol class="arabic simple" start="3">
+<li>The second parameter is <tt class="docutils literal"><span class="pre">null</span></tt>, or <tt class="docutils literal"><span class="pre">undefined</span></tt>, or missing. In this case all known form elements will be inspected:</li>
+</ol>
+<blockquote>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">cssClass</span> <span class="o">=</span> <span class="s2">&quot;marker&quot;</span><span class="o">;</span>
+<span class="k">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">fm</span><span class="p">.</span><span class="nx">gatherClassState</span><span class="p">(</span><span class="nx">cssClass</span><span class="p">);</span>
+</pre></div>
+</div>
+</blockquote>
+</div>
+<div class="section" id="addclass">
+<h3><a class="toc-backref" href="#id8">addClass<a class="headerlink" href="#addclass" title="Permalink to this headline">¶</a></a></h3>
+<p>This method works exactly like <a class="reference" href="#gatherclassstate">gatherClassState</a> but instead of collecting the presence information it assigns a CSS class to listed elements. It always returns the form manager widget for easy chaining.</p>
+<p>Example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c">// highlight firstName, use red background for lastName,</span>
+<span class="c">// place black border around all elements:</span>
+<span class="nx">fm</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;hilite&quot;</span><span class="o">,</span> <span class="p">[</span><span class="s2">&quot;firstName&quot;</span><span class="p">]).</span>
+   <span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;redBg&quot;</span><span class="o">,</span>  <span class="p">{</span><span class="nx">lastName</span><span class="o">:</span> <span class="mi">1</span><span class="p">}).</span>
+   <span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;blackBorder&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="removeclass">
+<h3><a class="toc-backref" href="#id9">removeClass<a class="headerlink" href="#removeclass" title="Permalink to this headline">¶</a></a></h3>
+<p>This method works exactly like <a class="reference" href="#addclass">addClass</a> but instead of adding a class it removes the specified class from listed elements.</p>
+<p>Example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c">// undo the previous example:</span>
+<span class="nx">fm</span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;hilite&quot;</span><span class="o">,</span> <span class="p">[</span><span class="s2">&quot;firstName&quot;</span><span class="p">]).</span>
+   <span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;redBg&quot;</span><span class="o">,</span>  <span class="p">{</span><span class="nx">lastName</span><span class="o">:</span> <span class="mi">1</span><span class="p">}).</span>
+   <span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;blackBorder&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="tips">
+<h2><a class="toc-backref" href="#id10">Tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></a></h2>
+<p>Note that the dictionary form of <a class="reference" href="#addclass">addClass</a> and <a class="reference" href="#removeclass">removeClass</a> methods always ignores values. While there is a way to collect the presence of a class, there is no direct way to reflect it back. If you want to do that you can use <a class="reference" href="_Mixin.html#dojox-form-manager-mixin"><em>inspect()</em></a> method of <a class="reference" href="_Mixin.html#dojox-form-manager-mixin"><em>_Mixin</em></a>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c">// make the inspector function</span>
+<span class="k">var</span> <span class="nx">reflectClass</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">cssClass</span><span class="p">){</span>
+  <span class="c">// we use this approach for a closure to hide our CSS class</span>
+  <span class="k">return</span> <span class="nx">dojox</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">manager</span><span class="p">.</span><span class="nx">actionAdapter</span><span class="p">(</span><span class="k">function</span><span class="p">(</span><span class="nx">name</span><span class="o">,</span> <span class="nx">node</span><span class="o">,</span> <span class="nx">value</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">value</span><span class="p">){</span>
+      <span class="nx">dojo</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="nx">node</span><span class="o">,</span> <span class="nx">cssClass</span><span class="p">);</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+      <span class="nx">dojo</span><span class="p">.</span><span class="nx">removeClass</span><span class="p">(</span><span class="nx">node</span><span class="o">,</span> <span class="nx">cssClass</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+<span class="c">// collect the presence of the &quot;marker&quot; class</span>
+<span class="k">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">fm</span><span class="p">.</span><span class="nx">gatherClassState</span><span class="p">(</span><span class="s2">&quot;marker&quot;</span><span class="p">);</span>
+
+<span class="c">// reflect it back</span>
+<span class="nx">fm</span><span class="p">.</span><span class="nx">inspect</span><span class="p">(</span><span class="nx">reflectClass</span><span class="p">(</span><span class="s2">&quot;marker&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

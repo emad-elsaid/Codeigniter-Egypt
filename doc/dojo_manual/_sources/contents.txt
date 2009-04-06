@@ -1,0 +1,75 @@
+.. _contents:
+
+Dojo documentation contents
+===========================
+
+Quickstart
+----------
+.. toctree::
+    :maxdepth: 3
+    
+    quickstart/contents
+
+Dojo
+----
+.. toctree::
+    :maxdepth: 3
+
+    dojo/contents
+
+Dijit
+-----
+
+.. toctree::
+    :maxdepth: 3
+
+    dijit/contents
+
+Dojox
+-----
+.. toctree::
+    :maxdepth: 3
+
+    dojox/contents
+
+Dojoc
+-----
+
+.. toctree::
+    :maxdepth: 3
+
+    The dojoc namespace <dojoc/index>
+
+Dojo Styleguides
+----------------
+
+.. toctree::
+    :maxdepth: 3
+
+    styleguides/css
+
+Utilities
+---------
+
+.. toctree::
+    :maxdepth: 3
+
+    build/contents
+    util/doctools
+    shrinksafe/index
+
+Miscellaneous
+-------------
+
+.. toctree::
+    :maxdepth: 3
+
+    about/index
+    bookmigration
+    community
+    hosted_dojo
+    howto
+    internals
+    manual
+    thank-you
+    todo

@@ -1,0 +1,98 @@
+.. _dojox/widget:
+
+dojox.widget
+============
+
+:Status: Draft
+:Version: 1.0
+:Authors: Peter Higgins, Nikolai Onken, Marcus Reimann, Josh Trutwin, Benjamin Schell, Shane O'Sullivan
+:Developers: Shane O'Sullivan, Peter Higgins, Nathan Toone, Karl Tiedt, Alex Russell, Nikolai Onken, Adam Peller, Benjamin Schell
+:Available: since V?
+
+.. contents::
+    :depth: 2
+
+This is a collection of standalone widgets for use in your website. Each individual widget is independent of the others, and carries it's own level of completeness, stability, and documentation, and don't typically fall into any other classification of use, like :ref:`dojox.form <dojox/form>` or :ref:`dojox.layout <dojox/layout>`
+
+
+=================
+Available Widgets
+=================
+
+Here is an up to date list of dojox.widget components. Note: Some of these are newly added, and appear in different versions of Dojo, so may simply be unavailable in older versions:
+
+* :ref:`dojox.widget.AnalogGauge <dojox/widget/AnalogGauge>`
+
+  A circular gauge with a variety of indicators, used to display numerical data
+
+* :ref:`dojox.widget.BarGauge <dojox/widget/BarGauge>`
+
+  A horizontal bar gauge with a few indicators, used to display numerical data
+
+* :ref:`dojox.widget.Calendar <dojox/widget/Calendar>`
+
+  An extended dijit._Calendar
+
+* :ref:`dojox.widget.CalendarFx <dojox/widget/CalendarFx>`
+
+  An extended dijit._Calendar with FX
+
+* :ref:`dojox.widget.ColorPicker <dojox/widget/ColorPicker>`
+
+  A HSV Color Picker, similar to PhotoShop
+
+* :ref:`dojox.widget.Dialog <dojox/widget/Dialog>`
+
+  An extension to :ref:`dijit.Dialog <dijit/Dialog>`
+
+* :ref:`dojox.widget.DocTester <dojox/widget/DocTester>`
+
+  A widget to run DocTests inside an HTML page
+
+* :ref:`dojox.widget.FilePicker <dojox/widget/FilePicker>`
+
+  A specialized version of RollingList that handles file informatione
+
+* :ref:`dojox.widget.FisheyeList <dojox/widget/FisheyeList>`
+
+  A OSX-style Fisheye Menu
+
+* :ref:`dojox.widget.FisheyeLite <dojox/widget/FisheyeLite>`
+
+  A more robust Fisheye Widget, which fish-eyes' any CSS property
+
+* :ref:`dojox.widget.Iterator <dojox/widget/Iterator>`
+
+  A basic array and data store iterator class
+
+* :ref:`dojox.widget.Loader <dojox/widget/Loader>`
+
+  A small experimental Ajax Activity indicator
+
+* :ref:`dojox.widget.Pager <dojox/widget/Pager>`
+
+  A :ref:`dojo.data <dojo/data>` powered Pager Widget, displaying a few items in a horizontal or vertical UI
+
+* :ref:`dojox.widget.PlaceholderMenuItem <dojox/widget/PlaceholderMenuItem>`
+
+  A menu item that can be used as a placeholder.
+
+* :ref:`dojox.widget.Roller <dojox/widget/Roller>`
+
+  An unobtrusive "roller", displaying one message from a list in a loop
+
+* :ref:`dojox.widget.RollingList <dojox/widget/RollingList>`
+
+  A rolling list that can be tied to a data store with children
+
+* :ref:`dojox.widget.SortList <dojox/widget/SortList>`
+
+  A small sortable unordered-list
+
+* :ref:`dojox.widget.Toaster <dojox/widget/Toaster>`
+
+  A message display system, showing warnings, errors and other messages unobtrusively
+
+* :ref:`dojox.widget.Wizard <dojox/widget/Wizard>`
+
+  A simple widget providing a step-by-step wizard like UI

@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.data.ClientFilter &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.data.CouchDBRestStore" href="CouchDBRestStore.html" />
+    <link rel="prev" title="dojox.data.AtomReadStore" href="AtomReadStore.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="CouchDBRestStore.html" title="dojox.data.CouchDBRestStore"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="AtomReadStore.html" title="dojox.data.AtomReadStore"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.data.ClientFilter</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#usage">Usage</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#making-an-updatable-result-set-data-store">Making an updatable-result-set data store</a></li>
+<li><a class="reference" href="#using-the-clientfilter-with-a-data-store">Using the ClientFilter with a data store</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="AtomReadStore.html"
+                                  title="previous chapter">dojox.data.AtomReadStore</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="CouchDBRestStore.html"
+                                  title="next chapter">dojox.data.CouchDBRestStore</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/data/ClientFilter.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-data-clientfilter">
+<span id="id1"></span><h1><a class="toc-backref" href="#id3">dojox.data.ClientFilter<a class="headerlink" href="#dojox-data-clientfilter" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Marcus Reimann, Kris Zyp</td>
+</tr>
+<tr class="field"><th class="field-name">Developers:</th><td class="field-body">Kris Zyp</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.2</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-data-clientfilter" id="id3" name="id3">dojox.data.ClientFilter</a><ul>
+<li><a class="reference" href="#introduction" id="id4" name="id4">Introduction</a></li>
+<li><a class="reference" href="#usage" id="id5" name="id5">Usage</a></li>
+<li><a class="reference" href="#examples" id="id6" name="id6">Examples</a></li>
+<li><a class="reference" href="#see-also" id="id7" name="id7">See also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>An abstract data store module for adding updateable result set functionality to an existing data store class.</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id4">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>This is an abstract class that data stores can extend to add updateable result set functionality as well as client side querying capabilities. This enables widgets to be aware of how active results change in response to the modifications/notifications.</p>
+</div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id5">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<p>To update a result set after a notification (onNew, onSet, and onDelete), widgets can call the <strong>updateResultSet</strong> method. Widgets can use the updated result sets to determine how to react to notifications, and how to update their displayed results based on changes.</p>
+<p>This module will use the best available information to update result sets, using query attribute objects to determine if items are in a result set, and using the sort arrays to maintain sort information. However, queries can be opaque strings, and this module can not update results by itself in this case. In this situations, data stores can provide a <strong>isUpdateable(request)</strong> function and <strong>matchesQuery(item, request)</strong> function. If a data store can handle a query, it can return true from isUpdateable and if an item matches a query, it can return true from matchesQuery.</p>
+<p>Here is a definition of isUpdateable and matchesQuery:</p>
+<dl class="docutils">
+<dt>isUpdateable(request)</dt>
+<dd>request is the keywords arguments as is passed to the fetch function.</dd>
+<dt>matchesQuery(item, request)</dt>
+<dd>item is the item to test, and request is the value arguments object for the fetch function.</dd>
+</dl>
+<p>You can define a property on this object instance &#8220;<strong>cacheByDefault</strong>&#8221; to a value of true that will cause all queries to be cached by default unless the cache queryOption is explicitly set to false. This can be defined in the constructor options for ServiceStore/JsonRestStore and subtypes.</p>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id6">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="making-an-updatable-result-set-data-store">
+<h3>Making an updatable-result-set data store<a class="headerlink" href="#making-an-updatable-result-set-data-store" title="Permalink to this headline">¶</a></h3>
+<p>To make a updatable-result-set data store from an existing data store:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5
+6</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">declare</span><span class="p">(</span><span class="s2">&quot;dojox.data.MyUpdatableDataStore&quot;</span><span class="o">,</span>
+    <span class="nx">dojox</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">MyDataStore</span><span class="o">,</span>
+    <span class="c">// subclass ClientFilter if available:</span>
+    <span class="nx">dojox</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">ClientFilter</span><span class="p">]</span><span class="o">,</span>
+    <span class="p">{}</span>
+<span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="using-the-clientfilter-with-a-data-store">
+<h3>Using the ClientFilter with a data store<a class="headerlink" href="#using-the-clientfilter-with-a-data-store" title="Permalink to this headline">¶</a></h3>
+<p>To use the ClientFilter with a data store which offers optional support of ClientFilter (like dojox.data.ServiceStore and dojox.data.JsonRestStore), it's important to observe the correct sequence:</p>
+<ol class="arabic">
+<li><p class="first">include dojox.data.ClientFilter</p>
+</li>
+<li><p class="first">include the data store</p>
+</li>
+<li><p class="first">set queryOptions:{cache:true} in the request</p>
+<p>or use a Widget with a option to cache each request (for example the Grid with the queryOptions attribute:</p>
+<p>&lt;table queryOptions=&quot;{cache:true}&quot; dojoType=&quot;dojox.grid.DataGrid&quot; ...)</p>
+</li>
+</ol>
+<p>The important note is that you must load ClientFilter before you dojo.require a store.</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td class="code"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+  <span class="c">// first include ClientFilter:</span>
+  <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;dojox.data.ClientFilter&#39;</span><span class="p">);</span>
+  <span class="c">// now include the data store:</span>
+  <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dojox.data.JsonRestStore&quot;</span><span class="p">);</span>
+
+  <span class="c">// ... later:</span>
+  <span class="c">// set queryOptions:{cache:true} in the request:</span>
+<span class="o">&lt;/</span><span class="nx">script</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id7">See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<ul>
+<li><p class="first"><a class="reference" href="http://bugs.dojotoolkit.org/ticket/7743">#7743</a></p>
+<p>Some further explanations which should be included into this documentation page</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

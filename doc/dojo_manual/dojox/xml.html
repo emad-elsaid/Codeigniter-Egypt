@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.xml &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="DojoX" href="contents.html" />
+    <link rel="next" title="dojox.xmpp" href="xmpp.html" />
+    <link rel="prev" title="dojox.wire" href="wire.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="xmpp.html" title="dojox.xmpp"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="wire.html" title="dojox.wire"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.xml</a><ul>
+<li><a class="reference" href="#generic-xml-text-to-dom-parser-and-xml-dom-utility-functions">Generic XML Text to DOM parser and XML DOM utility functions</a><ul>
+<li><a class="reference" href="#example-1-generic-xml-dom-parser-and-utilities">Example 1: Generic XML DOM Parser and utilities</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#generic-xml-dom-to-js-object-tree-parser">Generic XML DOM to JS Object tree parser</a><ul>
+<li><a class="reference" href="#example-2-generic-xml-dom-to-js-object-parser">Example 2: Generic XML DOM to JS Object parser</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="wire.html"
+                                  title="previous chapter">dojox.wire</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="xmpp.html"
+                                  title="next chapter">dojox.xmpp</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dojox/xml.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-xml">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.xml<a class="headerlink" href="#dojox-xml" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">beta</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Tom Trenka, Jared Jurkiewicz</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-xml" id="id2" name="id2">dojox.xml</a><ul>
+<li><a class="reference" href="#generic-xml-text-to-dom-parser-and-xml-dom-utility-functions" id="id3" name="id3">Generic XML Text to DOM parser and XML DOM utility functions</a></li>
+<li><a class="reference" href="#generic-xml-dom-to-js-object-tree-parser" id="id4" name="id4">Generic XML DOM to JS Object tree parser</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The goal of DojoX XML Utilities is provide differing XML utilities for use in various places in a consolodated package to eliminate code duplication.  Currently this includes a native JS DomParser that converts XML to a JS object tree.  It also includes several general utility XML functions, such as a function to construct new XML Doms in a browser independent fashion, produce XML text from an XML DOM, and do things such as getting all the text content under a node in a browser agnostic way.</p>
+<div class="section" id="generic-xml-text-to-dom-parser-and-xml-dom-utility-functions">
+<h2><a class="toc-backref" href="#id3">Generic XML Text to DOM parser and XML DOM utility functions<a class="headerlink" href="#generic-xml-text-to-dom-parser-and-xml-dom-utility-functions" title="Permalink to this headline">¶</a></a></h2>
+<p>The dojox.xml.parser utility library contains numerous functions for working with XML text and XML dom.  The functions it provides are listed below:</p>
+<ul class="simple">
+<li>XML Text to XML DOM parser ( dojox.xml.parser.parse(someXMLText) )</li>
+<li>XML DOM to XML Text parser ( dojox.xml.parser.innerXML(someDOM) )</li>
+<li>Getting and setting text content on a node: ( dojox.xml.parser.textContent(node, &#8220;optional text to set&#8221;) )</li>
+</ul>
+<div class="section" id="example-1-generic-xml-dom-parser-and-utilities">
+<h3>Example 1: Generic XML DOM Parser and utilities<a class="headerlink" href="#example-1-generic-xml-dom-parser-and-utilities" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.xml.parser&quot;);
+
+  function init() {
+     //Parse text and generate an XML DOM
+     var xml = &quot;&lt;tnode&gt;&lt;node&gt;Some Text&lt;/node&gt;&lt;node&gt;Some Other Text&lt;/node&gt;&lt;/tnode&gt;&quot;;
+     var dom = dojox.xml.parser.parse(xml);
+
+     //Walk DOM and attach into the display how many child nodes were parsed out.
+     var ap = dojo.byId(&quot;xmlContent&quot;);
+     var docNode = dom.documentElement;
+     ap.appendChild(document.createTextNode(&quot;Document contains: &quot; + docNode.childNodes.length + &quot; elements&quot;));
+     ap.appendChild(document.createElement(&quot;br&quot;));
+     ap.appendChild(document.createElement(&quot;br&quot;));
+
+     //Write text content into the display.
+     for (var i = 0; i &lt; docNode.childNodes.length; i++) {
+       ap.appendChild(document.createTextNode(&quot;Element: [&quot; + i + &quot;] contains text: &quot; + dojox.xml.parser.textContent(docNode.childNodes[i])));
+       ap.appendChild(document.createElement(&quot;br&quot;));
+     }
+
+     //Write out the XML text obtained from converting the DOM back.
+     ap.appendChild(document.createElement(&quot;br&quot;));
+     ap.appendChild(document.createTextNode(&quot;Document XML: &quot; + dojox.xml.parser.innerXML(docNode)));
+     ap.appendChild(document.createElement(&quot;br&quot;));
+     ap.appendChild(document.createElement(&quot;br&quot;));
+  }
+  dojo.addOnLoad(init);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;xmlContent&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+</div>
+<div class="section" id="generic-xml-dom-to-js-object-tree-parser">
+<h2><a class="toc-backref" href="#id4">Generic XML DOM to JS Object tree parser<a class="headerlink" href="#generic-xml-dom-to-js-object-tree-parser" title="Permalink to this headline">¶</a></a></h2>
+<p>The second helper class is the dojox.xml.DomParser.   This utility function will parse an XML text string into a JS Object tree that is structured similarly to the XML dom.  This is done completely with regular expressions and avoids any usage of browser parsers.  It is very efficient.</p>
+<div class="section" id="example-2-generic-xml-dom-to-js-object-parser">
+<h3>Example 2: Generic XML DOM to JS Object parser<a class="headerlink" href="#example-2-generic-xml-dom-to-js-object-parser" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.xml.DomParser&quot;);
+
+  function init() {
+     //Parse text and generate an JS DOM
+     var xml = &quot;&lt;tnode&gt;&lt;node&gt;Some Text&lt;/node&gt;&lt;node&gt;Some Other Text&lt;/node&gt;&lt;/tnode&gt;&quot;;
+     var jsdom = dojox.xml.DomParser.parse(xml);
+
+     console.debug(jsdom);
+  }
+  dojo.addOnLoad(init);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>Look in the console for debug statements showing the constructed JS DOM like structure.</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

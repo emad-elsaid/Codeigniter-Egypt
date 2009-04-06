@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.data.OpenSearchStore &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.data.OpmlStore" href="OpmlStore.html" />
+    <link rel="prev" title="dojox.data.KeyValueStore" href="KeyValueStore.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="OpmlStore.html" title="dojox.data.OpmlStore"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="KeyValueStore.html" title="dojox.data.KeyValueStore"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.data.OpenSearchStore</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a><ul>
+<li><a class="reference" href="#supported-opensearch-return-formats">Supported OpenSearch Return Formats</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#limitations">Limitations</a></li>
+<li><a class="reference" href="#supported-apis">Supported APIs</a></li>
+<li><a class="reference" href="#constructor-parameters">Constructor Parameters</a><ul>
+<li><a class="reference" href="#attribute-list">Attribute List</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#query-syntax">Query Syntax</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#example-1-programmatic-instantiation-and-querying-through-opensearch">Example 1: Programmatic instantiation and querying through OpenSearch</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="KeyValueStore.html"
+                                  title="previous chapter">dojox.data.KeyValueStore</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="OpmlStore.html"
+                                  title="next chapter">dojox.data.OpmlStore</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/data/OpenSearchStore.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-data-opensearchstore">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.data.OpenSearchStore<a class="headerlink" href="#dojox-data-opensearchstore" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Benjamin Schell</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.3</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-data-opensearchstore" id="id2" name="id2">dojox.data.OpenSearchStore</a><ul>
+<li><a class="reference" href="#introduction" id="id3" name="id3">Introduction</a></li>
+<li><a class="reference" href="#limitations" id="id4" name="id4">Limitations</a></li>
+<li><a class="reference" href="#supported-apis" id="id5" name="id5">Supported APIs</a></li>
+<li><a class="reference" href="#constructor-parameters" id="id6" name="id6">Constructor Parameters</a></li>
+<li><a class="reference" href="#query-syntax" id="id7" name="id7">Query Syntax</a></li>
+<li><a class="reference" href="#examples" id="id8" name="id8">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>A store implementing the dojo.data.Read API for talking to OpenSearch based search providing services.  For specific information on the concepts of dojo.data and its APIs please refer to the <a class="reference" href="../../dojo/data/api.html#dojo-data-api"><em>API documentation</em></a>.</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>This store takes in the OpenSearch Descriptor and uses that to configure how a search query is issued.  It can also take the search results and present them as data store formatted items for a wide variety of return formarts for OpenSearch results.  For more information on the general concepts behind OpenSearch, please refer to <a class="reference" href="http://www.opensearch.org/Home">OpenSearch project</a>.</p>
+<div class="section" id="supported-opensearch-return-formats">
+<h3>Supported OpenSearch Return Formats<a class="headerlink" href="#supported-opensearch-return-formats" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>ATOM</li>
+<li>RSS</li>
+<li>XML</li>
+</ul>
+</div>
+</div>
+<div class="section" id="limitations">
+<h2><a class="toc-backref" href="#id4">Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li>This store uses dojo.xhrGet and other xhr functions to fetch the OpenSearch descriptor and make search queries.  Therefore, the OpenSearchStore is limited by the brower &#8216;same domain&#8217; policy for xhr requests.  Therefore, to make OpenSearch calls to providers that reside on servers other than the one that provided the HTML file that instantiated the OpenSearchStore, a proxy must be used.</li>
+<li>The OpenSearchStore does not currently support HTML return formats.  The reason for this is an open issue with dojo.query and searching by ID.  The bug the OpenSearchStore is blocked on can be found <a class="reference" href="http://trac.dojotoolkit.org/ticket/4425">here</a>.</li>
+</ul>
+</div>
+<div class="section" id="supported-apis">
+<h2><a class="toc-backref" href="#id5">Supported APIs<a class="headerlink" href="#supported-apis" title="Permalink to this headline">¶</a></a></h2>
+<p>The following dojo.data APIs are implemented by OpenSearchStore:</p>
+<ul class="simple">
+<li><a class="reference" href="../../dojo/data/api/Read.html#dojo-data-api-read"><em>dojo.data.api.Read</em></a></li>
+</ul>
+</div>
+<div class="section" id="constructor-parameters">
+<h2><a class="toc-backref" href="#id6">Constructor Parameters<a class="headerlink" href="#constructor-parameters" title="Permalink to this headline">¶</a></a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="10%" />
+<col width="70%" />
+<col width="8%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Parameter</strong></td>
+<td><strong>Required</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Since</strong></td>
+</tr>
+<tr><td>url</td>
+<td>Yes</td>
+<td>This parameter specifies the URL from which to load the OSD (OpenSearch Descriptor) document
+from.  This is required as the OSD file contains all the information required to configure the
+store to issue queries.</td>
+<td>1.3</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="attribute-list">
+<h3>Attribute List<a class="headerlink" href="#attribute-list" title="Permalink to this headline">¶</a></h3>
+<p>An OpenSearch search result is a simplistic data item.  It contains very few attributes that are accessible.  Please refer to the table below for what current attributes are accessible via the getValue(s) functions of the dojo.data.Read API</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="73%" />
+<col width="16%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Attribute</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Type</strong></td>
+</tr>
+<tr><td>content</td>
+<td>The content/text returned for the search result</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="query-syntax">
+<h2><a class="toc-backref" href="#id7">Query Syntax<a class="headerlink" href="#query-syntax" title="Permalink to this headline">¶</a></a></h2>
+<p>The fetch method query syntax for OpenSearchStore is limited to what the OpenSearch specification allows, which is a single parameter called &#8216;searchTerms&#8217;.  The OpenSearchStore expects this parameter to be part of the query arguement of its fetch object as a name/value key set in JavaScript object.  For an example, see below:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">fetchArgs</span> <span class="o">=</span> <span class="p">{</span><span class="nx">query</span><span class="o">:</span> <span class="p">{</span> <span class="nx">searchTerms</span><span class="o">:</span> <span class="s2">&quot;Some random terms&quot;</span><span class="p">}</span><span class="o">,</span> <span class="nx">onComplete</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">items</span><span class="p">)</span> <span class="p">{</span> <span class="c">/* do something */</span><span class="p">});</span>
+<span class="nx">openSearchStore</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">fetchArgs</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id8">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="example-1-programmatic-instantiation-and-querying-through-opensearch">
+<h3>Example 1: Programmatic instantiation and querying through OpenSearch<a class="headerlink" href="#example-1-programmatic-instantiation-and-querying-through-opensearch" title="Permalink to this headline">¶</a></h3>
+<p><em>Note that this makes use of a pseudo-proxy to handle dealing with xhr limitations.  This proxy is not intended for commercial use, it is only used here to facilitate showing working examples.</em></p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.OpenSearchStore&quot;);
+  dojo.require(&quot;dijit.form.Button&quot;);
+  dojo.require(&quot;dijit.form.TextBox&quot;);
+
+  //This function performs some basic dojo initialization and will do the fetch calling for this example
+  function initSimple () {
+    var openSearchStore = new dojox.data.OpenSearchStore({url:&quot;/_static/dojo/dojox/data/demos/openSearchProxy.php?osd=true&amp;url=http://intertwingly.net/search/&quot;});
+
+    dojo.connect(dijit.byId(&quot;simpleFetchButton&quot;), &quot;onClick&quot;, function() {
+      function gotResults(items, request) {
+        if(items){
+          //Got the items, lets attach in the search results.
+          var list = dojo.byId(&quot;list&quot;);
+          list.innerHTML = &quot;&quot;;
+          for(i = 0; i &lt; items.length; i++){
+            var e = items[i];
+
+            //Build some divs to contain and style the contents a bit...
+            var content = dojo.doc.createElement(&quot;div&quot;);
+            var cDiv = dojo.doc.createElement(&quot;div&quot;);
+            var tDiv = dojo.doc.createElement(&quot;div&quot;);
+            list.appendChild(cDiv);
+
+            cDiv.appendChild(tDiv);
+            cDiv.appendChild(content);
+
+            //Put a border around the content container.
+            dojo.style(cDiv, &quot;borderStyle&quot;, &quot;solid&quot;);
+            dojo.style(cDiv, &quot;borderWidth&quot;, &quot;1px&quot;);
+            dojo.style(cDiv, &quot;borderColor&quot;, &quot;darkgreen&quot;);
+            dojo.style(cDiv, &quot;width&quot;, &quot;100%&quot;);
+
+            //Style a 'title bar'.
+            dojo.style(tDiv, &quot;backgroundColor&quot;, &quot;darkgreen&quot;);
+            dojo.style(tDiv, &quot;color&quot;, &quot;white&quot;);
+            dojo.style(tDiv, &quot;width&quot;, &quot;100%&quot;);
+            tDiv.innerHTML = &quot;Search result: [&quot; + i + &quot;]&quot;;
+
+            content.innerHTML = openSearchStore.getValue(e, &quot;content&quot;);
+            list.appendChild(dojo.doc.createElement(&quot;br&quot;));
+            list.appendChild(dojo.doc.createElement(&quot;br&quot;));
+          }
+        }
+      }
+      function err(e) {
+        console.debug(e);
+      }
+      openSearchStore.fetch({query: {searchTerms: dijit.byId(&quot;searchBox&quot;).attr(&quot;value&quot;)}, onComplete: gotResults, onError: err});
+    });
+  }
+  //Set the init function to run when dojo loading and page parsing has completed.
+  dojo.addOnLoad(initSimple);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;input id=&quot;searchBox&quot; type=&quot;text&quot; dojoType=&quot;dijit.form.TextBox&quot; value=&quot;dojo&quot;&gt;&lt;/input&gt;
+&lt;div dojoType=&quot;dijit.form.Button&quot; id=&quot;simpleFetchButton&quot;&gt;Click me to search the Interwingly Blog Service&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;div id=&quot;list&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

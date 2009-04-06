@@ -1,0 +1,321 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojo.isFunction &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dojo" href="contents.html" />
+    <link rel="next" title="dojo.isObject" href="isObject.html" />
+    <link rel="prev" title="dojo.isArrayLike" href="isArrayLike.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="isObject.html" title="dojo.isObject"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="isArrayLike.html" title="dojo.isArrayLike"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dojo</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojo.isFunction</a><ul>
+<li><a class="reference" href="#usage">Usage</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#test-against-isfunction">Test against isFunction()</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="isArrayLike.html"
+                                  title="previous chapter">dojo.isArrayLike</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="isObject.html"
+                                  title="next chapter">dojo.isObject</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dojo/isFunction.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo-isfunction">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojo.isFunction<a class="headerlink" href="#dojo-isfunction" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V0.9</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo-isfunction" id="id2" name="id2">dojo.isFunction</a><ul>
+<li><a class="reference" href="#usage" id="id3" name="id3">Usage</a></li>
+<li><a class="reference" href="#examples" id="id4" name="id4">Examples</a></li>
+<li><a class="reference" href="#see-also" id="id5" name="id5">See also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Checks if the parameter is a Function.</p>
+<p>As with all dojo._base components, these functions are included within Dojo Base. You get this functionality by just including dojo.js or dojo.xd.js in your page.</p>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id3">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4</pre></td><td class="code"><div class="highlight"><pre> <span class="k">var</span> <span class="nx">ref</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">a</span><span class="o">,</span><span class="nx">b</span><span class="p">){</span> <span class="k">return</span> <span class="nx">a</span> <span class="p">};</span>
+ <span class="k">if</span><span class="p">(</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">isFunction</span><span class="p">(</span><span class="nx">ref</span><span class="p">)){</span>
+   <span class="nx">ref</span><span class="p">();</span>
+ <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>This also works with classes created by <a class="reference" href="declare.html#dojo-declare"><em>dojo.declare</em></a></p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">declare</span><span class="p">(</span><span class="s2">&quot;Thing&quot;</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="p">{</span> <span class="nx">constructor</span><span class="o">:</span> <span class="k">function</span><span class="p">(){</span> <span class="p">});</span>
+<span class="k">var</span> <span class="nx">ref</span> <span class="o">=</span> <span class="nx">Thing</span><span class="o">;</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">isFunction</span><span class="p">(</span><span class="nx">ref</span><span class="p">)){</span>
+   <span class="k">var</span> <span class="nx">mine</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ref</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>A common pattern is to have a a string version of a fully declared class. You can use dojo.isFunction to tell if you need to convert it to a function or not:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><div class="highlight"><pre><span class="c">// some dynamic class to use:</span>
+<span class="k">var</span> <span class="nx">thing</span> <span class="o">=</span> <span class="s2">&quot;dijit.Dialog&quot;</span><span class="o">;</span>
+<span class="c">// check it out first:</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">isFunction</span><span class="p">(</span><span class="nx">thing</span><span class="p">)){</span>
+  <span class="nx">thing</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">getObject</span><span class="p">(</span><span class="nx">thing</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">var</span> <span class="nx">dialog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">thing</span><span class="p">({</span> <span class="nx">title</span><span class="o">:</span><span class="s2">&quot;bar&quot;</span> <span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>One could use <a class="reference" href="isString.html#dojo-isstring"><em>dojo.isString</em></a> for a similar check.</p>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id4">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="test-against-isfunction">
+<h3>Test against isFunction()<a class="headerlink" href="#test-against-isfunction" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+    .style1 { background: #f1f1f1; padding: 10px; }
+&lt;/style&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dijit.form.Button&quot;);
+
+    // test variable t:
+    var t;
+
+    function testIt() {
+        // resultDiv is the spanning DIV around the result:
+        var resultDiv = dojo.byId('resultDiv');
+
+        // Here comes the test:
+        // Is t a Function?
+        if (dojo.isFunction(t)) {
+            // dojooo: t is a function!
+            dojo.attr(resultDiv, &quot;innerHTML&quot;,
+                &quot;Yes, good choice: 't' is a function.&lt;br /&gt;Try another button.&quot;);
+
+            // Change the backgroundColor:
+            dojo.style(resultDiv, {
+                &quot;backgroundColor&quot;: &quot;#a4e672&quot;,
+                &quot;color&quot;: &quot;black&quot;
+            });
+        } else {
+            // no chance, this can't be an array:
+            dojo.attr(resultDiv, &quot;innerHTML&quot;,
+                &quot;No chance: 't' can't be a function with such a value &quot;
+                 + &quot;('t' seems to be a &quot; + typeof t + &quot;).&lt;br /&gt;&quot;
+                 + &quot;Try another button.&quot;);
+
+            // Change the backgroundColor:
+            dojo.style(resultDiv, {
+                &quot;backgroundColor&quot;: &quot;#e67272&quot;,
+                &quot;color&quot;: &quot;white&quot;
+            });
+        }
+    }
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div style=&quot;height: 100px;&quot;&gt;
+    &lt;button dojoType=&quot;dijit.form.Button&quot;&gt;
+        t = 1000;
+        &lt;script type=&quot;dojo/method&quot; event=&quot;onClick&quot; args=&quot;evt&quot;&gt;
+            // Set t:
+            t = 1000;
+
+            // Test the type of t:
+            testIt();
+        &lt;/script&gt;
+    &lt;/button&gt;
+    &lt;button dojoType=&quot;dijit.form.Button&quot;&gt;
+        t = &quot;text&quot;;
+        &lt;script type=&quot;dojo/method&quot; event=&quot;onClick&quot; args=&quot;evt&quot;&gt;
+            // Set t:
+            t = &quot;text&quot;;
+
+            // Test the type of t:
+            testIt();
+        &lt;/script&gt;
+    &lt;/button&gt;
+    &lt;button dojoType=&quot;dijit.form.Button&quot;&gt;
+        t = [1, 2, 3];
+        &lt;script type=&quot;dojo/method&quot; event=&quot;onClick&quot; args=&quot;evt&quot;&gt;
+            // Set t:
+            t = [1, 2, 3];
+
+            // Test the type of t:
+            testIt();
+        &lt;/script&gt;
+    &lt;/button&gt;
+    &lt;button dojoType=&quot;dijit.form.Button&quot;&gt;
+        t = { &quot;property&quot;: 'value' };
+        &lt;script type=&quot;dojo/method&quot; event=&quot;onClick&quot; args=&quot;evt&quot;&gt;
+            // Set t:
+            t = { &quot;property&quot;: 'value' };
+
+            // Test the type of t:
+            testIt();
+        &lt;/script&gt;
+    &lt;/button&gt;
+    &lt;button dojoType=&quot;dijit.form.Button&quot;&gt;
+        t = function(a, b){ return a };
+        &lt;script type=&quot;dojo/method&quot; event=&quot;onClick&quot; args=&quot;evt&quot;&gt;
+            // Set t:
+            t = function(a, b){ return a } ;
+
+            // Test the type of t:
+            testIt();
+        &lt;/script&gt;
+    &lt;/button&gt;
+
+    &lt;div id=&quot;resultDiv&quot; class=&quot;style1&quot;&gt;
+        Click on a button, to test the associated value.
+    &lt;/div&gt;
+&lt;/div&gt;</pre></div></div></div>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id5">See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li><a class="reference" href="getObject.html#dojo-getobject"><em>dojo.getObject</em></a> - Returns the property of an object from a dot-separated string such as &quot;A.B.C&quot;</li>
+<li><a class="reference" href="isString.html#dojo-isstring"><em>dojo.isString</em></a> - Checks if the parameter is a String</li>
+<li><a class="reference" href="isArray.html#dojo-isarray"><em>dojo.isArray</em></a> - Checks if the parameter is an Array</li>
+<li><a class="reference" href="isObject.html#dojo-isobject"><em>dojo.isObject</em></a> - Checks if the parameter is an Object</li>
+<li><a class="reference" href="isArrayLike.html#dojo-isarraylike"><em>dojo.isArrayLike</em></a> - Checks if the parameter is like an Array</li>
+<li><a class="reference" href="isAlien.html#dojo-isalien"><em>dojo.isAlien</em></a> - Checks if the parameter is a built-in function</li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

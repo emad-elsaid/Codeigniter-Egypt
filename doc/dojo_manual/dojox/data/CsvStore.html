@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.data.CsvStore &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.data.FileStore" href="FileStore.html" />
+    <link rel="prev" title="dojox.data.CssRuleStore" href="CssRuleStore.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="FileStore.html" title="dojox.data.FileStore"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="CssRuleStore.html" title="dojox.data.CssRuleStore"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.data.CsvStore</a><ul>
+<li><a class="reference" href="#constructor-params">Constructor Params</a></li>
+<li><a class="reference" href="#query-syntax">Query Syntax</a></li>
+<li><a class="reference" href="#query-options">Query Options</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#connecting-csvstore-to-dijit-form-combobox">Connecting CsvStore to dijit.form.ComboBox</a></li>
+<li><a class="reference" href="#connecting-csvstore-to-dojox-grid-datagrid">Connecting CsvStore to dojox.grid.DataGrid</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="CssRuleStore.html"
+                                  title="previous chapter">dojox.data.CssRuleStore</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="FileStore.html"
+                                  title="next chapter">dojox.data.FileStore</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/data/CsvStore.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-data-csvstore">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.data.CsvStore<a class="headerlink" href="#dojox-data-csvstore" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed, Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Jared Jurkiewicz</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.0</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-data-csvstore" id="id2" name="id2">dojox.data.CsvStore</a><ul>
+<li><a class="reference" href="#constructor-params" id="id3" name="id3">Constructor Params</a></li>
+<li><a class="reference" href="#query-syntax" id="id4" name="id4">Query Syntax</a></li>
+<li><a class="reference" href="#query-options" id="id5" name="id5">Query Options</a></li>
+<li><a class="reference" href="#examples" id="id6" name="id6">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>CsvStore is a simple read-only store provided by Dojo and contained in the DojoX project. CsvStore is a read interface that works with <a class="reference" href="http://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> formated data files. The CSV file format is commonly known to folks who work regularly with spread sheet data. Like ItemFileReadStore, CsvStore reads the contents from an http endpoint or a JavaScript Data object that contains CSV formatted data. The following is an example of a CSV data source:</p>
+<div class="highlight-python"><pre>Title, Year, Producer
+City of God, 2002, Katia Lund
+Rain,, Christine Jeffs
+2001: A Space Odyssey, , Stanley Kubrick
+"This is a ""fake"" movie title", 1957, Sidney Lumet
+Alien, 1979   , Ridley Scott
+"The Sequel to ""Dances With Wolves.""", 1982, Ridley Scott
+"Caine Mutiny, The", 1954, "Dymtryk ""the King"", Edward"</pre>
+</div>
+<p>Note that in the above data, the first row is always assumed to be the column names. Those are what get assigned as the attribute names for the CSV items. Each row in the CSV data is treated as a single item.</p>
+<p>The following dojo.data APIs are implemented by CsvStore</p>
+<ul class="simple">
+<li><a class="reference" href="../../dojo/data/api/Read.html#dojo-data-api-read"><em>dojo.data.api.Read</em></a></li>
+<li><a class="reference" href="../../dojo/data/api/Identity.html#dojo-data-api-identity"><em>dojo.data.api.Identity</em></a></li>
+</ul>
+<div class="section" id="constructor-params">
+<h2><a class="toc-backref" href="#id3">Constructor Params<a class="headerlink" href="#constructor-params" title="Permalink to this headline">¶</a></a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="10%" />
+<col width="70%" />
+<col width="8%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Parameter</strong></td>
+<td><strong>Required</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Since</strong></td>
+</tr>
+<tr><td>url</td>
+<td>No</td>
+<td>This optional parameter specifies what URL from which to load the Csv data Note
+that this URL is only loaded one time, as this is an in-memory data store.</td>
+<td>1.0</td>
+</tr>
+<tr><td>data</td>
+<td>No</td>
+<td>A JavaScript String of Csv formatted data to use to populate the store. This parameter can be
+used instead of <em>url</em>. when you wish to load data differently then modify it to fit the expected
+Csv format.</td>
+<td>1.0</td>
+</tr>
+<tr><td>label</td>
+<td>No</td>
+<td>A string that identifies which column to treat as the human-readable label. It must match one of
+the column labels in the file for it to be effective.</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="query-syntax">
+<h2><a class="toc-backref" href="#id4">Query Syntax<a class="headerlink" href="#query-syntax" title="Permalink to this headline">¶</a></a></h2>
+<p>The query syntax used by dojox.data.CsvStore is identical to the query syntax used by <a class="reference" href="../../dojo/data/ItemFileReadStore.html#dojo-data-itemfilereadstore"><em>dojo.data.ItemFileReadStore</em></a></p>
+</div>
+<div class="section" id="query-options">
+<h2><a class="toc-backref" href="#id5">Query Options<a class="headerlink" href="#query-options" title="Permalink to this headline">¶</a></a></h2>
+<p>Dojo.data defines support for a 'queryOptions' modifier object that affects the behavior of the query. The two defined options listed by the API are <em>ignoreCase</em> and <em>deep</em>. CsvStore supports these options. The affect of these options on a query is defined below.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Option</strong></td>
+<td><strong>Result</strong></td>
+</tr>
+<tr><td>ignoreCase</td>
+<td>The default is <strong>false</strong>. When set to true, the match on attributes is done in a case-insensitive fashion. This means
+with ignoreCase: true, a query of A* would match <em>Apple</em> and <em>acorn</em></td>
+</tr>
+<tr><td>deep</td>
+<td>Ignored. Csv formatted data does not not support hierarchical data.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id6">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="connecting-csvstore-to-dijit-form-combobox">
+<h3>Connecting CsvStore to dijit.form.ComboBox<a class="headerlink" href="#connecting-csvstore-to-dijit-form-combobox" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.CsvStore&quot;);
+  dojo.require(&quot;dijit.form.ComboBox&quot;);
+
+  var storeData =   &quot;firstname,lastname,age\n&quot; +
+                    &quot;John, Doe, 21\n&quot; +
+                    &quot;Jane, Doe, 22\n&quot; +
+                    &quot;Richard, Smith, 43\n&quot; +
+                    &quot;Sally, Smith, 49\n&quot; +
+                    &quot;Lian, Zu, 23\n&quot; +
+                    &quot;Ichiro, Kagetsume, 23\n&quot;+
+                    &quot;Umeko, Tsuguri, 18\n&quot; +
+                    &quot;Alptraum, Reisender, 25\n&quot; +
+                    &quot;Thomas, Winthrope, 14\n&quot;;
+
+  var personStore = new dojox.data.CsvStore({data: storeData});
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.form.ComboBox&quot; store=&quot;personStore&quot; searchAttr=&quot;firstname&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="connecting-csvstore-to-dojox-grid-datagrid">
+<h3>Connecting CsvStore to dojox.grid.DataGrid<a class="headerlink" href="#connecting-csvstore-to-dojox-grid-datagrid" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.grid.DataGrid&quot;);
+  dojo.require(&quot;dojox.data.CsvStore&quot;);
+
+  var peopleData =  &quot;firstname,lastname,age\n&quot; +
+                    &quot;John, Doe, 21\n&quot; +
+                    &quot;Jane, Doe, 22\n&quot; +
+                    &quot;Richard, Smith, 43\n&quot; +
+                    &quot;Sally, Smith, 49\n&quot; +
+                    &quot;Lian, Zu, 23\n&quot; +
+                    &quot;Ichiro, Kagetsume, 23\n&quot;+
+                    &quot;Umeko, Tsuguri, 18\n&quot; +
+                    &quot;Alptraum, Reisender, 25\n&quot; +
+                    &quot;Thomas, Winthrope, 14\n&quot;;
+
+  var personStoreForGrid= new dojox.data.CsvStore({data: peopleData});
+
+  var layoutPeople = [
+    [
+      { field: &quot;firstname&quot;, name: &quot;First Name&quot;, width: 10 },
+      { field: &quot;lastname&quot;, name: &quot;Last Name&quot;, width: 10 },
+      { field: &quot;age&quot;, name: &quot;Age&quot;, width: 'auto' }
+    ]
+  ];
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div style=&quot;width: 400px; height: 300px;&quot;&gt;
+  &lt;div id=&quot;grid&quot;
+    dojoType=&quot;dojox.grid.DataGrid&quot;
+    store=&quot;personStoreForGrid&quot;
+    structure=&quot;layoutPeople&quot;
+    query=&quot;{}&quot;
+    rowsPerPage=&quot;40&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/Grid.css&quot;;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/nihiloGrid.css&quot;;
+
+  .dojoxGrid table {
+    margin: 0;
+  }
+&lt;/style&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

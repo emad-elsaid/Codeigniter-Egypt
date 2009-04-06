@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.ProgressBar &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dijit" href="contents.html" />
+    <link rel="next" title="dijit.TitlePane" href="TitlePane.html" />
+    <link rel="prev" title="dijit.Menu" href="Menu.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="TitlePane.html" title="dijit.TitlePane"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="Menu.html" title="dijit.Menu"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.ProgressBar</a><ul>
+<li><a class="reference" href="#examples">Examples</a></li>
+<li><a class="reference" href="#accessibility">Accessibility</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="Menu.html"
+                                  title="previous chapter">dijit.Menu</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="TitlePane.html"
+                                  title="next chapter">dijit.TitlePane</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dijit/ProgressBar.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-progressbar">
+<span id="id1"></span><h1>dijit.ProgressBar<a class="headerlink" href="#dijit-progressbar" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.2</td>
+</tr>
+</tbody>
+</table>
+<p>A ProgressBar gives dynamic feedback on the progress of a long-running operation. The progress can be updated by JavaScript function calls. This method works best for long-running JavaScript operations, or a series of JavaScript XHR calls to the server.</p>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+   dojo.require(&quot;dijit.ProgressBar&quot;);
+   dojo.require(&quot;dojo.parser&quot;);
+
+   function download(){
+       // Split up bar into 7% segments
+       numParts = Math.floor(100/7);
+       jsProgress.update({ maximum: numParts, progress:0 });
+       for (var i=0; i&lt;=numParts; i++){
+           // This plays update({progress:0}) at 1nn milliseconds,
+           // update({progress:1}) at 2nn milliseconds, etc.
+           setTimeout(
+              &quot;jsProgress.update({ progress: &quot; + i + &quot; })&quot;,
+              (i+1)*100 + Math.floor(Math.random()*100)
+           );
+       }
+   }
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.ProgressBar&quot; style=&quot;width:300px&quot;
+     jsId=&quot;jsProgress&quot; id=&quot;downloadProgress&quot;&gt;&lt;/div&gt;
+
+&lt;br /&gt;&lt;input type=&quot;button&quot; value=&quot;Go!&quot; onclick=&quot;download();&quot; /&gt;</pre></div></div></div>
+<div class="section" id="accessibility">
+<h2>Accessibility<a class="headerlink" href="#accessibility" title="Permalink to this headline">¶</a></h2>
+<p>The progress bar is made accessible by providing a solid border around the visual progress indicator. This border is visible in high contrast mode as well as when images are turned off.</p>
+<p>The internalProgress div is assigned the ARIA role of progressbar The valuenow attribute is updated as the progress is updated. In releases prior to 1.0 no valuemin and valuemax values are provided since the valuenow attribute may be a string provided by the Web developer. In 1.0 and later releases The ARIA valuenow property is set to the ProgressBar&#8217;s progress value. The valuemin and valuemax properties are set to 0 and the ProgressBar&#8217;s maximum, respectively.</p>
+<p>Note: The hot key for the Window-Eyes screen reader to speak progress bar information is ctrl-ins-b. JAWS provides the hot key ins-tab for announcing progress bar name and status. JAWS also has a setting to select the frequency of progress bar announcements. Go to the Configuration Manager, Select Set Options, then User Options and select the desired announcement frequency.</p>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

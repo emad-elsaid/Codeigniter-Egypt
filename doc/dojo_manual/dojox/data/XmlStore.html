@@ -1,0 +1,497 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.data.XmlStore &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.data.dom" href="dom.html" />
+    <link rel="prev" title="dojox.data.WikipediaStore" href="WikipediaStore.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="dom.html" title="dojox.data.dom"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="WikipediaStore.html" title="dojox.data.WikipediaStore"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.data.XmlStore</a><ul>
+<li><a class="reference" href="#supported-apis">Supported APIs</a></li>
+<li><a class="reference" href="#example-xml-input">Example XML Input</a></li>
+<li><a class="reference" href="#constructor-parameters">Constructor Parameters</a></li>
+<li><a class="reference" href="#user-provided-function-over-rides">User-provided function over-rides</a></li>
+<li><a class="reference" href="#query-syntax">Query Syntax</a></li>
+<li><a class="reference" href="#query-options">Query Options</a></li>
+<li><a class="reference" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference" href="#query-for-all-books-that-start-with-isbn-a9b57">Query for all books that start with ISBN: A9B57</a></li>
+<li><a class="reference" href="#query-for-all-books-that-start-with-isbn-a9b57-case-insensitively">Query for all books that start with ISBN: A9B57 Case insensitively</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#functional-usage-examples">Functional Usage Examples</a><ul>
+<li><a class="reference" href="#searching-node-attributes">Searching node attributes</a></li>
+<li><a class="reference" href="#connecting-xmlstore-to-dijit-form-combobox">Connecting XmlStore to dijit.form.ComboBox</a></li>
+<li><a class="reference" href="#connecting-xmlstore-to-dojox-grid-datagrid">Connecting XmlStore to dojox.grid.DataGrid</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="WikipediaStore.html"
+                                  title="previous chapter">dojox.data.WikipediaStore</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="dom.html"
+                                  title="next chapter">dojox.data.dom</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/data/XmlStore.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-data-xmlstore">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.data.XmlStore<a class="headerlink" href="#dojox-data-xmlstore" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed, Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Jared Jurkiewicz</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.0</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-data-xmlstore" id="id2" name="id2">dojox.data.XmlStore</a><ul>
+<li><a class="reference" href="#supported-apis" id="id3" name="id3">Supported APIs</a></li>
+<li><a class="reference" href="#example-xml-input" id="id4" name="id4">Example XML Input</a></li>
+<li><a class="reference" href="#constructor-parameters" id="id5" name="id5">Constructor Parameters</a></li>
+<li><a class="reference" href="#user-provided-function-over-rides" id="id6" name="id6">User-provided function over-rides</a></li>
+<li><a class="reference" href="#query-syntax" id="id7" name="id7">Query Syntax</a></li>
+<li><a class="reference" href="#query-options" id="id8" name="id8">Query Options</a></li>
+<li><a class="reference" href="#usage-examples" id="id9" name="id9">Usage Examples</a><ul>
+<li><a class="reference" href="#query-for-all-books-that-start-with-isbn-a9b57" id="id10" name="id10">Query for all books that start with ISBN: A9B57</a></li>
+<li><a class="reference" href="#query-for-all-books-that-start-with-isbn-a9b57-case-insensitively" id="id11" name="id11">Query for all books that start with ISBN: A9B57 Case insensitively</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#functional-usage-examples" id="id12" name="id12">Functional Usage Examples</a><ul>
+<li><a class="reference" href="#searching-node-attributes" id="id13" name="id13">Searching node attributes</a></li>
+<li><a class="reference" href="#connecting-xmlstore-to-dijit-form-combobox" id="id14" name="id14">Connecting XmlStore to dijit.form.ComboBox</a></li>
+<li><a class="reference" href="#connecting-xmlstore-to-dojox-grid-datagrid" id="id15" name="id15">Connecting XmlStore to dojox.grid.DataGrid</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>XmlStore is a store provided by Dojo that is contained in the DojoX project. XmlStore is a read and write interface to basic XML data. XML is a common data interchange format and a store that can work with fairly generic XML documents is useful. The store is designed so that you can over-ride certain functions to get specific behaviors to occur when performing reads and saves.</p>
+<div class="section" id="supported-apis">
+<h2><a class="toc-backref" href="#id3">Supported APIs<a class="headerlink" href="#supported-apis" title="Permalink to this headline">¶</a></a></h2>
+<p>The following dojo.data APIs are implemented by XmlStore</p>
+<ul class="simple">
+<li><a class="reference" href="../../dojo/data/api/Read.html#dojo-data-api-read"><em>dojo.data.api.Read</em></a></li>
+<li><a class="reference" href="../../dojo/data/api/Write.html#dojo-data-api-write"><em>dojo.data.api.Write</em></a></li>
+<li><a class="reference" href="../../dojo/data/api/Identity.html#dojo-data-api-identity"><em>dojo.data.api.Identity</em></a><ul>
+<li><strong>New for dojo 1.3!</strong>  Identity API has been implemented.  The store wil return xpath for an item, or it will return the value of a key attribute you specified.  Specifying keyAttribute is not needed for client-side query and filtering case, but it is required for server-side query handling and update.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="example-xml-input">
+<h2><a class="toc-backref" href="#id4">Example XML Input<a class="headerlink" href="#example-xml-input" title="Permalink to this headline">¶</a></a></h2>
+<p>The store is designed so that it can read generic XML and present back nodes as dojo.data items.  The following is an example of an XML document that this store can read:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+&lt;books&gt;
+      &lt;book&gt;
+              &lt;isbn&gt;1&lt;/isbn&gt;
+              &lt;title&gt;Title of 1&lt;/title&gt;
+              &lt;author&gt;Author of 1&lt;/author&gt;
+      &lt;/book&gt;
+      &lt;book&gt;
+              &lt;isbn&gt;2&lt;/isbn&gt;
+              &lt;title&gt;Title of 2&lt;/title&gt;
+              &lt;author&gt;Author of 2&lt;/author&gt;
+      &lt;/book&gt;
+      &lt;book&gt;
+              &lt;isbn&gt;3&lt;/isbn&gt;
+              &lt;title&gt;Title of 3&lt;/title&gt;
+              &lt;author&gt;Author of 3&lt;/author&gt;
+      &lt;/book&gt;
+      &lt;book&gt;
+              &lt;isbn&gt;4&lt;/isbn&gt;
+              &lt;title&gt;Title of 4&lt;/title&gt;
+              &lt;author&gt;Author of 4&lt;/author&gt;
+      &lt;/book&gt;
+      &lt;book&gt;
+              &lt;isbn&gt;5&lt;/isbn&gt;
+              &lt;title&gt;Title of 5&lt;/title&gt;
+              &lt;author&gt;Author of 5&lt;/author&gt;
+      &lt;/book&gt;
+      &lt;book&gt;
+              &lt;isbn&gt;6&lt;/isbn&gt;
+              &lt;title&gt;Title of 6&lt;/title&gt;
+              &lt;author&gt;Author of 6&lt;/author&gt;
+      &lt;/book&gt;
+      ...
+&lt;/books&gt;</pre>
+</div>
+</div>
+<div class="section" id="constructor-parameters">
+<h2><a class="toc-backref" href="#id5">Constructor Parameters<a class="headerlink" href="#constructor-parameters" title="Permalink to this headline">¶</a></a></h2>
+<p>The constructor for XmlStore takes the following possible parameters in its keyword arguments:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Parameter</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr><td>url</td>
+<td>The URL from which to load the XML file containing the data. This URL is also the end point used for
+posting data base in a save. This is optional.</td>
+</tr>
+<tr><td>sendQuery</td>
+<td><p class="first">Boolean option whether or not to send the query to a server for processing. The default is false.</p>
+<dl class="last docutils">
+<dt>false</dt>
+<dd>It is assumed the server sends back the entire store dataset and the filtering and sorting must
+occur on the client side.</dd>
+<dt>true</dt>
+<dd>It is assumed the server is handling the filtering and is only sending back XML nodes that match the
+query. No filtering occurs clientside.</dd>
+</dl>
+</td>
+</tr>
+<tr><td>rootItem</td>
+<td>A tag name for root items. This is optional. If it is not provided, then the XmlStore assumes the tags
+under the root element of the document are the root items.</td>
+</tr>
+<tr><td>keyAttribute</td>
+<td>An attribute name for a key or an identity. This is optional unless server-side query handling is used.</td>
+</tr>
+<tr><td>attributeMap</td>
+<td>An anonymous object that contains properties for attribute mapping, for example
+{&quot;tag_name.item_attribute_name&quot;: &quot;&#64;xml_attribute_name&quot;, ...}.   This is optional. This is done so that
+attributes which are actual XML tag attributes (and not sub-tags of an XML tag), can be referenced.</td>
+</tr>
+<tr><td>label</td>
+<td>The attribute of an item to use for the return of getLabel(). This is optional.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="user-provided-function-over-rides">
+<h2><a class="toc-backref" href="#id6">User-provided function over-rides<a class="headerlink" href="#user-provided-function-over-rides" title="Permalink to this headline">¶</a></a></h2>
+<p>The following functions can be over-ridden to alter save behavior, as described:</p>
+<dl class="docutils">
+<dt>_getPostUrl(item)</dt>
+<dd>Function that can be over-ridden to alter the way the store POSTs new items to the service. Note that this follows the REST convention in which an HTTP POST is a creation of a new resource.</dd>
+<dt>_getPutUrl(item)</dt>
+<dd>Function that can be over-ridden to alter the way the store PUTs updated items to the service. Note that this follows the REST convention in which an HTTP PUT is an update of an existing resource.</dd>
+<dt>_getDeleteUrl(item)</dt>
+<dd>Function that can be over-ridden to alter the way the store sends a DELETE item to the service. Note that this follows the REST convention in which an HTTP DELETE is used to remove a resource.</dd>
+</dl>
+</div>
+<div class="section" id="query-syntax">
+<h2><a class="toc-backref" href="#id7">Query Syntax<a class="headerlink" href="#query-syntax" title="Permalink to this headline">¶</a></a></h2>
+<p>The fetch method query syntax for XmlStore is simple and straightforward. It allows for a list of attributes to match against in an AND fashion, just like <a class="reference" href="../../dojo/data/ItemFileReadStore.html#dojo-data-itemfilereadstore"><em>dojo.data.ItemFileReadStore</em></a>. For example, the following query object will locate all items that have attributes of those names that match both of those values:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="n">foo</span><span class="p">:</span><span class="s">&quot;bar&quot;</span><span class="p">,</span> <span class="n">bit</span><span class="p">:</span><span class="s">&quot;bite&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that XmlStore supports the use of wild cards (multi-character * and single character ?) in its attribute value matching.
+Examples</p>
+<p>To find all items with attribute foo that start with bar, the query would be:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="n">foo</span><span class="p">:</span><span class="s">&quot;bar*&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>To find all items with attribute foo the value of which ends with ar and ignoring only the first character, the query would be:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span> <span class="n">foo</span><span class="p">:</span><span class="s">&quot;?ar&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>NOTE:</strong> Other stores should follow the same query definition semantics for consistency.</p>
+</div>
+<div class="section" id="query-options">
+<h2><a class="toc-backref" href="#id8">Query Options<a class="headerlink" href="#query-options" title="Permalink to this headline">¶</a></a></h2>
+<p>Dojo.data defines support for a 'queryOptions' modifier object that affects the behavior of the query. The two defined options listed by the API are <em>ignoreCase</em> and <em>deep</em>. dojox.data.XmlStore supports these options. The affect of these options on a query is defined below.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Option</strong></td>
+<td><strong>Result</strong></td>
+</tr>
+<tr><td>ignoreCase</td>
+<td>The default is <strong>false</strong>. When set to true, the match on attributes is done in a case-insensitive fashion. This means
+with ignoreCase: true, a query of A* would match <em>Apple</em> and <em>acorn</em></td>
+</tr>
+<tr><td>deep</td>
+<td>This option affects searching when the structure passed to ItemFileReadStore has hierarchy. For an example of that,
+refer to <em>Item Structure Example: Items with Hierarchy</em>. the default value for this option is false, which means the
+query is only applied against root items in the tree of data items. If it is set to true, then the query is applied to
+root items and <em>all</em> child data items. Think of it as a recursive search.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="usage-examples">
+<h2><a class="toc-backref" href="#id9">Usage Examples<a class="headerlink" href="#usage-examples" title="Permalink to this headline">¶</a></a></h2>
+<p>For these examples, we'll assume a data source as defined by the example data format in this page.</p>
+<div class="section" id="query-for-all-books-that-start-with-isbn-a9b57">
+<h3><a class="toc-backref" href="#id10">Query for all books that start with ISBN: A9B57<a class="headerlink" href="#query-for-all-books-that-start-with-isbn-a9b57" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojox</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">XmlStore</span><span class="p">({</span><span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;books.xml&quot;</span><span class="o">,</span> <span class="nx">rootItem</span><span class="o">:</span> <span class="s2">&quot;book&quot;</span><span class="p">});</span>
+<span class="k">var</span> <span class="nx">gotBooks</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">items</span><span class="o">,</span> <span class="nx">request</span><span class="p">){</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Located book: &quot;</span> <span class="o">+</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">item</span><span class="o">,</span> <span class="s2">&quot;title&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">store</span><span class="p">.</span><span class="nx">fetch</span><span class="p">({</span><span class="nx">query</span><span class="o">:</span> <span class="p">{</span><span class="nx">isbn</span><span class="o">:</span><span class="s2">&quot;A9B57*&quot;</span><span class="p">}</span><span class="o">,</span> <span class="nx">onComplete</span><span class="o">:</span> <span class="nx">gotBooks</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="query-for-all-books-that-start-with-isbn-a9b57-case-insensitively">
+<h3><a class="toc-backref" href="#id11">Query for all books that start with ISBN: A9B57 Case insensitively<a class="headerlink" href="#query-for-all-books-that-start-with-isbn-a9b57-case-insensitively" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojox</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">XmlStore</span><span class="p">({</span><span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;books.xml&quot;</span><span class="o">,</span> <span class="nx">rootItem</span><span class="o">:</span> <span class="s2">&quot;book&quot;</span><span class="p">});</span>
+<span class="k">var</span> <span class="nx">gotBooks</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">items</span><span class="o">,</span> <span class="nx">request</span><span class="p">){</span>
+  <span class="k">for</span> <span class="p">(</span><span class="k">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Located book: &quot;</span> <span class="o">+</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">item</span><span class="o">,</span> <span class="s2">&quot;title&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">store</span><span class="p">.</span><span class="nx">fetch</span><span class="p">({</span><span class="nx">query</span><span class="o">:</span> <span class="p">{</span><span class="nx">isbn</span><span class="o">:</span><span class="s2">&quot;a9b57*&quot;</span><span class="p">}</span><span class="o">,</span> <span class="nx">queryOptions</span><span class="o">:</span> <span class="p">{</span><span class="nx">ignoreCase</span><span class="o">:</span> <span class="kc">true</span><span class="p">}</span><span class="o">,</span> <span class="nx">onComplete</span><span class="o">:</span> <span class="nx">gotBooks</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="functional-usage-examples">
+<h2><a class="toc-backref" href="#id12">Functional Usage Examples<a class="headerlink" href="#functional-usage-examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="searching-node-attributes">
+<h3><a class="toc-backref" href="#id13">Searching node attributes<a class="headerlink" href="#searching-node-attributes" title="Permalink to this headline">¶</a></a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.XmlStore&quot;);
+  dojo.require(&quot;dijit.form.Button&quot;);
+  dojo.require(&quot;dijit.form.TextBox&quot;);
+  dojo.require(&quot;dijit.form.CheckBox&quot;);
+
+    //This function performs some basic dojo initialization. In this case it connects the button
+    //onClick to a function which invokes the fetch(). The fetch function queries for all items
+    //and provides callbacks to use for completion of data retrieval or reporting of errors.
+    function init3 () {
+       //Function to perform a fetch on the datastore when a button is clicked
+       function search() {
+         var queryObj = {};
+
+         //Build up the query from the input boxes.
+         var isbn = isbnBox.getValue();
+         if ( isbn &amp;&amp; dojo.trim(isbn) !== &quot;&quot; ) {
+           queryObj[&quot;isbn&quot;] = isbn;
+         }
+
+         var qNode = dojo.byId(&quot;query&quot;);
+         if (qNode ) {
+           qNode.innerHTML = dojo.toJson(queryObj);
+         }
+
+
+         //Callback to perform an action when the data items are starting to be returned:
+         function clearOldList(size, request) {
+           var list = dojo.byId(&quot;list3&quot;);
+           if (list) {
+             while (list.firstChild) {
+               list.removeChild(list.firstChild);
+             }
+           }
+         }
+
+         //Callback for processing a returned list of items.
+         function gotItems(items, request) {
+           var list = dojo.byId(&quot;list3&quot;);
+           if (list) {
+             var i;
+             for (i = 0; i &lt; items.length; i++) {
+               var item = items[i];
+               list.appendChild(document.createTextNode(&quot;ISBN: &quot; + bookStore.getValue(item, &quot;isbn&quot;) + &quot; TITLE:&quot; + bookStore.getValue(item, &quot;title&quot;)));
+               list.appendChild(document.createElement(&quot;br&quot;));
+             }
+           }
+         }
+
+         //Callback for if the lookup fails.
+         function fetchFailed(error, request) {
+            alert(&quot;lookup failed.&quot;);
+            alert(error);
+         }
+
+         //Fetch the data.
+         bookStore.fetch({query: queryObj, onBegin: clearOldList, onComplete: gotItems, onError: fetchFailed});
+
+       }
+       //Link the click event of the button to driving the fetch.
+       dojo.connect(button3, &quot;onClick&quot;, search);
+    }
+    //Set the init function to run when dojo loading and page parsing has completed.
+    dojo.addOnLoad(init3);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;b&gt;ISBN:  &lt;/b&gt;&lt;input dojoType=&quot;dijit.form.TextBox&quot; jsId=&quot;isbnBox&quot; value=&quot;*&quot;&gt;&lt;/input&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;div dojoType=&quot;dojox.data.XmlStore&quot; jsId=&quot;bookStore&quot; url=&quot;/_static/dojo/dojox/data/tests/stores/books.xml&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.Button&quot; jsId=&quot;button3&quot;&gt;Click to search!&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Query used: &lt;/b&gt;&lt;span id=&quot;query&quot;&gt;&lt;/span
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Books located:&lt;/b&gt;
+&lt;br&gt;
+&lt;span id=&quot;list3&quot;&gt;
+&lt;/span&gt;</pre></div></div></div>
+<div class="section" id="connecting-xmlstore-to-dijit-form-combobox">
+<h3><a class="toc-backref" href="#id14">Connecting XmlStore to dijit.form.ComboBox<a class="headerlink" href="#connecting-xmlstore-to-dijit-form-combobox" title="Permalink to this headline">¶</a></a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.XmlStore&quot;);
+  dojo.require(&quot;dijit.form.ComboBox&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojox.data.XmlStore&quot; url=&quot;/_static/dojo/dojox/data/tests/stores/books.xml&quot; jsId=&quot;bookStore2&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.ComboBox&quot; store=&quot;bookStore2&quot; searchAttr=&quot;title&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="connecting-xmlstore-to-dojox-grid-datagrid">
+<h3><a class="toc-backref" href="#id15">Connecting XmlStore to dojox.grid.DataGrid<a class="headerlink" href="#connecting-xmlstore-to-dojox-grid-datagrid" title="Permalink to this headline">¶</a></a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.grid.DataGrid&quot;);
+  dojo.require(&quot;dojox.data.XmlStore&quot;);
+
+  var layoutBooks = [
+    [
+      { field: &quot;isbn&quot;, name: &quot;ISBN&quot;, width: 10 },
+      { field: &quot;author&quot;, name: &quot;Author&quot;, width: 10 },
+      { field: &quot;title&quot;, name: &quot;Title&quot;, width: 'auto' }
+    ]
+  ];
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojox.data.XmlStore&quot; url=&quot;/_static/dojo/dojox/data/tests/stores/books.xml&quot; jsId=&quot;bookStore3&quot; label=&quot;title&quot;&gt;&lt;/div&gt;
+
+&lt;div id=&quot;grid&quot; style=&quot;width: 400px; height: 300px;&quot;
+  dojoType=&quot;dojox.grid.DataGrid&quot;
+  store=&quot;bookStore3&quot;
+  structure=&quot;layoutBooks&quot;
+  query=&quot;{}&quot;
+  rowsPerPage=&quot;40&quot;&gt;
+&lt;/div&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/Grid.css&quot;;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/nihiloGrid.css&quot;;
+
+  .dojoxGrid table {
+    margin: 0;
+  }
+&lt;/style&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.form.MultiSelect &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dijit" href="../contents.html" />
+    <link rel="next" title="dijit.form.NumberSpinner" href="NumberSpinner.html" />
+    <link rel="prev" title="dijit.form.Form" href="Form.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="NumberSpinner.html" title="dijit.form.NumberSpinner"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="Form.html" title="dijit.form.Form"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.form.MultiSelect</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#declarative-example">Declarative example</a></li>
+<li><a class="reference" href="#programmatic-example">Programmatic example</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#accessibility">Accessibility</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="Form.html"
+                                  title="previous chapter">dijit.form.Form</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="NumberSpinner.html"
+                                  title="next chapter">dijit.form.NumberSpinner</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dijit/form/MultiSelect.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-form-multiselect">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dijit.form.MultiSelect<a class="headerlink" href="#dijit-form-multiselect" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Doug Hays, Steve Peart</td>
+</tr>
+<tr class="field"><th class="field-name">Developers:</th><td class="field-body">Doug Hays, Peter Higgins, Bill Keese, Nathan Toone</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V?</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dijit-form-multiselect" id="id2" name="id2">dijit.form.MultiSelect</a><ul>
+<li><a class="reference" href="#introduction" id="id3" name="id3">Introduction</a></li>
+<li><a class="reference" href="#examples" id="id4" name="id4">Examples</a></li>
+<li><a class="reference" href="#accessibility" id="id5" name="id5">Accessibility</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The MultiSelect widget allows the selection of multiple items.</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>The MultiSelect widget is an exact replacement for the native SELECT element and was created to provide a thin widget wrapper that was necessary to interact with the Form widget, and to provide the ability to select multiple items which is not available in the FilteringSelect widget.  Like SELECT, you provide a list of acceptable value pairs consisting of text to be displayed and the hidden text value to be submitted with a FORM. Unlike FilteringSelect, the user cannot freely type text.</p>
+<p>On FORM submit, the selected item&#8217;s hidden text values of a non-disabled MultiSelect widget are submitted using a native SELECT element if the <em>name</em> attribute was specified at widget creation time.</p>
+<p>MultiSelect widgets are not dojo.data-enabled. This means that the data must be embedded as OPTION tags, children of the parent SELECT element.  However, it is possible to create the OPTION tags dynamically at runtime.</p>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id4">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="declarative-example">
+<h3>Declarative example<a class="headerlink" href="#declarative-example" title="Permalink to this headline">¶</a></h3>
+<p>MultiSelect widgets always use a native SELECT tag and have child OPTION tags to describe selection choices, e.g. the OPTION&#8217;s <em>value</em> attribute is used as the submit value and the OPTION&#8217;s child text node is used as the displayed value. The OPTION&#8217;s child text node is used as the displayed value and the OPTION&#8217;s <em>value</em> attribute is used as the hidden submit value. To set the default value when using OPTION tags, specify the <em>selected</em> attribute on 1 of the child OPTION tags.</p>
+<p><strong>Note:</strong> If you are using the declarative example and want to manually specify &#8216;selected&#8217; or &#8216;selected=&#8221;selected&#8221;&#8217; on multiple &lt;options&gt; to have multiple selected on the initial load, you&#8217;ll need to add the multiple=&#8221;true&#8221; attribute to your native &lt;select&gt; element.  Eg. &lt;select dojoType=&#8221;dijit.form.MultiSelect&#8221; multiple=&#8221;true&#8221;...</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+  dojo.require(&quot;dijit.form.MultiSelect&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;select dojoType=&quot;dijit.form.MultiSelect&quot; id=&quot;fruit&quot; name=&quot;fruit&quot; size=&quot;4&quot;&gt;
+  &lt;option value=&quot;AP&quot;&gt;Apples&lt;/option&gt;
+  &lt;option value=&quot;OR&quot;&gt;Oranges&lt;/option&gt;
+  &lt;option value=&quot;PE&quot; selected&gt;Pears&lt;/option&gt;
+&lt;/select&gt;</pre></div></div></div>
+<div class="section" id="programmatic-example">
+<h3>Programmatic example<a class="headerlink" href="#programmatic-example" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dijit.form.MultiSelect&quot;);
+    dojo.addOnLoad(function(){
+            var sel = dojo.byId('dynamic');
+            var n = 0;
+            for(var i in dijit){
+                    var c = dojo.doc.createElement('option');
+                    c.innerHTML = i;
+                    c.value = n++;
+                    sel.appendChild(c);
+            }
+            new dijit.form.MultiSelect({ name: 'dynamic' }, sel);
+    });
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;select id=&quot;dynamic&quot;&gt;&lt;/select&gt;
+&lt;p&gt;&lt;button onClick=&quot;alert(dijit.byId('dynamic').attr('value'))&quot;&gt;Get value&lt;/button&gt;&lt;/p&gt;</pre></div></div></div>
+</div>
+<div class="section" id="accessibility">
+<h2><a class="toc-backref" href="#id5">Accessibility<a class="headerlink" href="#accessibility" title="Permalink to this headline">¶</a></a></h2>
+<p>The MultiSelect widget uses native HTML controls.</p>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

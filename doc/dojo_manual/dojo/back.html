@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojo.back &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dojo" href="contents.html" />
+    <link rel="next" title="dojo._base" href="base.html" />
+    <link rel="prev" title="dojo.attr" href="attr.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="base.html" title="dojo._base"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="attr.html" title="dojo.attr"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dojo</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojo.back</a><ul>
+<li><a class="reference" href="#usage">Usage</a><ul>
+<li><a class="reference" href="#initialization">Initialization</a></li>
+<li><a class="reference" href="#register-a-state-object">Register a state object</a></li>
+<li><a class="reference" href="#change-the-url-in-the-location-bar">Change the URL in the location bar</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="attr.html"
+                                  title="previous chapter">dojo.attr</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="base.html"
+                                  title="next chapter">dojo._base</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dojo/back.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo-back">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojo.back<a class="headerlink" href="#dojo-back" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed, Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo-back" id="id2" name="id2">dojo.back</a><ul>
+<li><a class="reference" href="#usage" id="id3" name="id3">Usage</a></li>
+<li><a class="reference" href="#examples" id="id4" name="id4">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>dojo.back allows to update the browser history, so that it&#8217;s possible to use the Back- and Forward-buttons of a Browser without leaving the web application.</p>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id3">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="initialization">
+<h3>Initialization<a class="headerlink" href="#initialization" title="Permalink to this headline">¶</a></h3>
+<p>To use dojo.back:</p>
+<ol class="arabic">
+<li><p class="first">Add the appropriate require statement:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dojo.back&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Register the initial state of the page by calling:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">back</span><span class="p">.</span><span class="nx">setInitialState</span><span class="p">(</span><span class="nx">state</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This state object will be called when the user clicks Back all the way back to the start of the web application. If the user clicks Back once more, they will go back in the browser to wherever they were before loading the web application.</p>
+<p>The state object should have the following functions defined:</p>
+<ul class="simple">
+<li>For receiving Back notifications: back(), backButton() or handle(type), where type will either be the string &quot;back&quot; or &quot;forward&quot;.</li>
+<li>For receiving Forward notifications: forward(), forwardButton() or handle(type), where type will either be the string &quot;back&quot; or &quot;forward&quot;.</li>
+</ul>
+<p>Example of a very simple state object:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">back</span><span class="o">:</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Back was clicked!&quot;</span><span class="p">);</span> <span class="p">}</span><span class="o">,</span>
+    <span class="nx">forward</span><span class="o">:</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;Forward was clicked!&quot;</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Call dojo.back.init(); inside a script tag that is inside the &lt;body&gt; tag:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">back</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span><span class="o">&lt;/</span><span class="nx">script</span><span class="o">&gt;</span>
+  <span class="p">(</span><span class="nx">rest</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">body</span> <span class="nx">here</span><span class="p">)</span>
+<span class="o">&lt;/</span><span class="nx">body</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="register-a-state-object">
+<h3>Register a state object<a class="headerlink" href="#register-a-state-object" title="Permalink to this headline">¶</a></h3>
+<p>To register a state object that represents the result of a user action, use the following call:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">back</span><span class="p">.</span><span class="nx">addToHistory</span><span class="p">(</span><span class="nx">state</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="change-the-url-in-the-location-bar">
+<h3>Change the URL in the location bar<a class="headerlink" href="#change-the-url-in-the-location-bar" title="Permalink to this headline">¶</a></h3>
+<p>To change the URL in the browser's location bar, include a <strong>changeUrl</strong> property on the state object.</p>
+<ul class="simple">
+<li>If this property is set to true, dojo.back will generate a unique value for the fragment identifier.</li>
+<li>If it is set to any other value (except undefined, null, 0 or empty string), then that value will be used as the fragment identifier.</li>
+</ul>
+<p>This will allow users to bookmark the page.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id4">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<p>TODO</p>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

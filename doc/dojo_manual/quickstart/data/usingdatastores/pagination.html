@@ -1,0 +1,328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Paging Data &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Quickstart" href="../../contents.html" />
+    <link rel="next" title="A Simple Data Source" href="simple.html" />
+    <link rel="prev" title="Hierarchical data and access through dojo.data" href="lazyloading.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../../_static/dojo/dijit/themes/dijit.css";
+@import "../../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="simple.html" title="A Simple Data Source"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="lazyloading.html" title="Hierarchical data and access through dojo.data"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../../contents.html" accesskey="U">Quickstart</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">Paging Data</a><ul>
+<li><a class="reference" href="#pagination-general-flow">Pagination general flow</a></li>
+<li><a class="reference" href="#functional-examples">Functional Examples</a><ul>
+<li><a class="reference" href="#paging-over-items">Paging over items</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="lazyloading.html"
+                                  title="previous chapter">Hierarchical data and access through dojo.data</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="simple.html"
+                                  title="next chapter">A Simple Data Source</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../../_sources/quickstart/data/usingdatastores/pagination.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="paging-data">
+<span id="quickstart-data-usingdatastores-pagination"></span><h1><a class="toc-backref" href="#id1">Paging Data<a class="headerlink" href="#paging-data" title="Permalink to this headline">¶</a></a></h1>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#paging-data" id="id1" name="id1">Paging Data</a><ul>
+<li><a class="reference" href="#pagination-general-flow" id="id2" name="id2">Pagination general flow</a></li>
+<li><a class="reference" href="#functional-examples" id="id3" name="id3">Functional Examples</a><ul>
+<li><a class="reference" href="#paging-over-items" id="id4" name="id4">Paging over items</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>As shown in the other datastore sections, the fetch method of the Read API can query across and return sets of items in a variety of ways. However, there is generally only so much space on a display to list all the data returned. Certainly, an application could implement its own custom display logic for just displaying subsets of the data, but that would be inefficient because the application would have had to load all the data in the first place. And, if the data set is huge, it could severely increase the memory usage of the browser. Therefore, dojo.data provides a mechanism by which the store itself can do the paging for you. When you use the paging options of fetch, all that is returned in the callbacks for fetch is the page of data you wanted, no more. This allows the application to deal with data in small chunks, the parts currently visible to you.</p>
+<p>The paging mechanism is used by specifying a start parameter in the fetch arguments. The start parameter says where, in the full list of items, to start returning items. The index 0 is the first item in the collection. The second argument you specify is the count argument. This option tells dojo.data how many items, starting at start, to return in a request. If start isn&#8217;t specified, it is assumed to be 0. If count isn&#8217;t specified, it is assumed to return all the items starting at start until it reaches the end of the collection. With this mechanism, you can implement simple paging easily.</p>
+<div class="section" id="pagination-general-flow">
+<h2><a class="toc-backref" href="#id2">Pagination general flow<a class="headerlink" href="#pagination-general-flow" title="Permalink to this headline">¶</a></a></h2>
+<p>To demonstrate the paging function, we&#8217;ll assume an ItemFileReadStore with the following datasource:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">identifier</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span><span class="o">,</span>
+  <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Adobo&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Mexican&#39;</span><span class="o">,</span> <span class="nx">price</span><span class="o">:</span> <span class="mf">3.01</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Balsamic vinegar&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Condiments&#39;</span><span class="o">,</span> <span class="nx">price</span><span class="o">:</span> <span class="mf">4.01</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Basil&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Spices&#39;</span><span class="o">,</span> <span class="nx">price</span><span class="o">:</span> <span class="mf">3.59</span>  <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Bay leaf&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Spices&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">2.01</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Beef Bouillon Granules&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Soup&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">5.01</span>  <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Vinegar&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Condiments&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">1.99</span>  <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;White cooking wine&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Condiments&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">2.01</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Worcestershire Sauce&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Condiments&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">3.99</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;white pepper&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Spices&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">1.01</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Black Pepper&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Spices&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">1.01</span> <span class="p">}</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+<p>The following example code fragment shows the general flow with Pagination:</p>
+<p><em>The sample returns 2 items per page</em></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">ItemFileReadStore</span><span class="p">({</span><span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;pantryStore.json&quot;</span> <span class="p">});</span>
+
+<span class="k">var</span> <span class="nx">pageSize</span> <span class="o">=</span> <span class="mi">2</span><span class="o">;</span>
+<span class="k">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="k">var</span> <span class="nx">outOfItems</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+
+<span class="c">//Define a function that will be connected to a &#39;next&#39; button</span>
+<span class="k">var</span> <span class="nx">onNext</span> <span class="o">=</span> <span class="k">function</span><span class="p">(){</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">outOfItems</span><span class="p">){</span>
+  <span class="nx">request</span><span class="p">.</span><span class="nx">start</span> <span class="o">+=</span> <span class="nx">pageSize</span><span class="o">;</span>
+    <span class="nx">store</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c">//Connect this function to the onClick event of the &#39;next&#39; button</span>
+<span class="c">//Done through dojo.connect() generally.</span>
+
+<span class="c">//Define a function will be connected to a &#39;previous&#39; button.</span>
+<span class="k">var</span> <span class="nx">onPrevious</span> <span class="o">=</span> <span class="k">function</span><span class="p">(){</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">start</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">){</span>
+    <span class="nx">request</span><span class="p">.</span><span class="nx">start</span> <span class="o">-=</span> <span class="nx">pageSize</span><span class="o">;</span>
+      <span class="nx">store</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">request</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+
+<span class="c">//Connect this function to the onClick event of the &#39;previous&#39; button</span>
+<span class="c">//Done through dojo.connect() generally.</span>
+
+<span class="c">//Define how we handle the items when we get it</span>
+<span class="k">var</span> <span class="nx">itemsLoaded</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">items</span><span class="o">,</span> <span class="nx">request</span><span class="p">){</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">items</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="nx">pageSize</span><span class="p">){</span>
+    <span class="c">//We have found all the items and are at the end of our set.</span>
+    <span class="nx">outOfItems</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="nx">outOfItems</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+  <span class="p">}</span>
+  <span class="c">//Display the items in a table through the use of store.getValue() on the items and attributes desired.</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="c">//Do the initial request. Without a query, it should just select all items. The start and count limit the number returned.</span>
+<span class="nx">request</span> <span class="o">=</span> <span class="nx">store</span><span class="p">.</span><span class="nx">fetch</span><span class="p">({</span><span class="nx">onComplete</span><span class="o">:</span> <span class="nx">itemsLoaded</span><span class="o">,</span> <span class="nx">start</span><span class="o">:</span> <span class="mi">0</span><span class="o">,</span> <span class="nx">count</span><span class="o">:</span> <span class="nx">pageSize</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="functional-examples">
+<h2><a class="toc-backref" href="#id3">Functional Examples<a class="headerlink" href="#functional-examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="paging-over-items">
+<h3><a class="toc-backref" href="#id4">Paging over items<a class="headerlink" href="#paging-over-items" title="Permalink to this headline">¶</a></a></h3>
+<p><em>The sample returns 2 items per page</em></p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.form.Button&quot;);
+
+  var storeData = { identifier: 'name',
+    items: [
+      { name: 'Adobo', aisle: 'Mexican', price: 3.01 },
+      { name: 'Balsamic vinegar', aisle: 'Condiments', price: 4.01 },
+      { name: 'Basil', aisle: 'Spices', price: 3.59  },
+      { name: 'Bay leaf', aisle: 'Spices',  price: 2.01 },
+      { name: 'Beef Bouillon Granules', aisle: 'Soup',  price: 5.01 },
+      { name: 'Vinegar', aisle: 'Condiments',  price: 1.99  },
+      { name: 'White cooking wine', aisle: 'Condiments',  price: 2.01 },
+      { name: 'Worcestershire Sauce', aisle: 'Condiments',  price: 3.99 },
+      { name: 'pepper', aisle: 'Spices',  price: 1.01  }
+    ]};
+
+    //This function performs some basic dojo initialization. In this case it connects the button
+    //onClick to a function which invokes *fetch()*es. The fetch function queries for only a subset
+    //and provides callbacks to use for completion of data retrieval or reporting of errors.
+    function init () {
+
+       //These are some lage controls used to know when to disable forward/previous buttons.
+       var totalItems = 0;   //How many total items should we expect.
+       var request = null;   //Our request object we're using to hold the positions and the callbacks.
+       var currentStart = 0; //Current index into the pages.
+       currentCount = 2;     //Current size of the page.
+
+       //Callback to perform an action when the data items are starting to be returned:
+       function clearOldList(size, request) {
+         var list = dojo.byId(&quot;list&quot;);
+         if (list) {
+           while (list.firstChild) {
+             list.removeChild(list.firstChild);
+           }
+         }
+         //Save off the total size. We need it to determine when to ignore the buttons.
+         totalItems = size;
+       }
+
+       //Callback for processing a returned list of items.
+       function gotItems(items, request) {
+         //Save off the current page info being displayed.
+         currentStart = request.start;
+         currentCount = request.count;
+         var list = dojo.byId(&quot;list&quot;);
+         if (list) {
+           var i;
+           for (i = 0; i &lt; items.length; i++) {
+             var item = items[i];
+             list.appendChild(document.createTextNode(foodStore.getValue(item, &quot;name&quot;)));
+             list.appendChild(document.createElement(&quot;br&quot;));
+           }
+         }
+       }
+
+       //Callback for if the lookup fails.
+       function fetchFailed(error, request) {
+         alert(&quot;lookup failed.&quot;);
+       }
+
+       //Button event to page forward.
+       function nextPage() {
+         //If we haven't hit the end of the pages yet, allow for requesting another.
+         if ((currentStart + currentCount) &lt; totalItems ) {
+           request.start += currentCount;
+           request = foodStore.fetch(request);
+         }
+       }
+
+       //Button event to page back;
+       function previousPage() {
+         //If we haven't hit the beginning of the pages yet, allow for another shift backwards.
+         if (currentStart &gt; 0) {
+           request.start -= currentCount;
+           request = foodStore.fetch(request);
+         }
+       }
+
+       //Fetch the data.
+       request = foodStore.fetch({onBegin: clearOldList, onComplete: gotItems, onError: fetchFailed, start: currentStart, count: currentCount });
+
+       //Link the click event of the button to driving the fetch.
+       dojo.connect(forward, &quot;onClick&quot;, nextPage);
+       dojo.connect(back, &quot;onClick&quot;, previousPage);
+    }
+    //Set the init function to run when dojo loading and page parsing has completed.
+    dojo.addOnLoad(init);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojo.data.ItemFileReadStore&quot; data=&quot;storeData&quot; jsId=&quot;foodStore&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.Button&quot; jsId=&quot;forward&quot;&gt;Click me for the next page!&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.Button&quot; jsId=&quot;back&quot;&gt;Click me for the previous page!&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;The current page of (up to) 2 grocery items:&lt;/b&gt;
+&lt;br&gt;
+&lt;span id=&quot;list&quot;&gt;
+&lt;/span&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

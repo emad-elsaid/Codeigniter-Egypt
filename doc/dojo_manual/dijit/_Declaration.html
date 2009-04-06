@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.Declaration &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.Declaration</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#usage">Usage</a><ul>
+<li><a class="reference" href="#methods-dojoattachpoint-and-dojoattachevent">Methods, dojoAttachPoint, and dojoAttachEvent</a></li>
+<li><a class="reference" href="#extending-other-widgets">Extending Other Widgets</a></li>
+<li><a class="reference" href="#dojo-connect">dojo/connect</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#notes">Notes</a></li>
+</ul>
+</li>
+</ul>
+
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dijit/_Declaration.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-declaration">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dijit.Declaration<a class="headerlink" href="#dijit-declaration" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Bill Keese</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.2</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dijit-declaration" id="id2" name="id2">dijit.Declaration</a><ul>
+<li><a class="reference" href="#introduction" id="id3" name="id3">Introduction</a></li>
+<li><a class="reference" href="#usage" id="id4" name="id4">Usage</a></li>
+<li><a class="reference" href="#notes" id="id5" name="id5">Notes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Declares a widget from markup.</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>Just as there are two ways to create a widget instances - declarative and programmatic - so there are two ways to declare a Dijit class (i.e., a type of widget). As you might guess, the declarative way is slightly easier.</p>
+</div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id4">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<p>To declare your class declaratively, use dijit.Declaration. Uhhhh, OK, too many &#8220;declare&#8221;s in that sentence. It&#8217;s easier to show than to tell.</p>
+<p>Here&#8217;s an example defining a widget called Employee, and then creating two of those Employee widgets:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+        dojo.require(&quot;dijit.Declaration&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.Declaration&quot; widgetClass=&quot;Employee&quot; defaults=&quot;{ empid: 123, name: '' }&quot;&gt;
+        &lt;span&gt;${name}&lt;/span&gt;
+        &lt;a href=&quot;update.php?id=${empid}&quot;&gt;update&lt;/a&gt;
+        &lt;a href=&quot;delete.php?id=${empid}&quot;&gt;delete&lt;/a&gt;
+&lt;/div&gt;
+&lt;div dojoType=&quot;Employee&quot; empid=&quot;100&quot; name=&quot;Alan Allen&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;Employee&quot; empid=&quot;101&quot; name=&quot;Bob Brown&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;Employee&quot; empid=&quot;102&quot; name=&quot;Cathy Cameron&quot;&gt;&lt;/div&gt;</pre></div></div><p>Note that it&#8217;s defining two widget parameters:</p>
+<blockquote>
+<ul class="simple">
+<li>empid: Number</li>
+<li>name: String</li>
+</ul>
+</blockquote>
+<p>And then it&#8217;s defining a template</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;span&gt;</span>${name}<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;update.php?id=${empid}&quot;</span><span class="nt">&gt;</span>update<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;delete.php?id=${empid}&quot;</span><span class="nt">&gt;</span>delete<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+</div>
+<p>And finally that it's using the widget parameters name and empid in the template, as the substitution variables ${name} and ${empid}.</p>
+<p>Dijit.Declaration turns this markup into a templated widget class.</p>
+<p>The code doesn't display anything itself, so it's best to place it right after the BODY tag before any displayable code.</p>
+<div class="section" id="methods-dojoattachpoint-and-dojoattachevent">
+<h3>Methods, dojoAttachPoint, and dojoAttachEvent<a class="headerlink" href="#methods-dojoattachpoint-and-dojoattachevent" title="Permalink to this headline">¶</a></h3>
+<p>The example below defines a widget named &quot;HideButton&quot; that will hide itself when clicked, and then creates two HideButtons:</p>
+<div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.Declaration&quot; widgetClass=&quot;HideButton&quot;&gt;
+        XXX&lt;button dojoAttachEvent=&quot;onclick: myClickHandler&quot; dojoAttachPoint=&quot;containerNode&quot;&gt;&lt;/button&gt;XXX
+        &lt;script type='dojo/method' event='myClickHandler'&gt;
+                this.domNode.style.display=&quot;none&quot;;
+        &lt;/script&gt;
+&lt;/div&gt;
+&lt;button dojoType=&quot;HideButton&quot;&gt;Click to hide&lt;/button&gt;
+&lt;button dojoType=&quot;HideButton&quot;&gt;Click to hide #2&lt;/button&gt;</pre></div><p>A few things to note here:</p>
+<blockquote>
+<ul class="simple">
+<li>using the &lt;script type='dojo/method'&gt; tag, you can define methods in the widget</li>
+<li>dojoAttachEvent and dojoAttachPoint work the same as in <a class="reference" href="_Templated.html#dijit-templated"><em>dijit._Templated</em></a></li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="extending-other-widgets">
+<h3>Extending Other Widgets<a class="headerlink" href="#extending-other-widgets" title="Permalink to this headline">¶</a></h3>
+<p>Often dijit.Declaration is used to define a widget as an extension of another widget, changing the behavior.</p>
+<p>HideButton2 extends HideButton (above) and changes the template (but keeps the onclick handler).  Here we define HideButton2 and then create two HideButton2's:</p>
+<div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;span dojoType=&quot;dijit.Declaration&quot; widgetClass=&quot;HideButton2&quot; mixins=&quot;HideButton&quot;&gt;
+        YYY&lt;button dojoAttachEvent=&quot;onclick: myClickHandler&quot; dojoAttachPoint=&quot;containerNode&quot;&gt;&lt;/button&gt;YYY
+&lt;/span&gt;
+&lt;button dojoType=&quot;HideButton2&quot;&gt;Hide me extended&lt;/button&gt;
+&lt;button dojoType=&quot;HideButton2&quot;&gt;Hide me extended #2&lt;/button&gt;</pre></div><p>The mixins attribute tells which classes you widget will be based on. You can include more than one class here - each separated by commas. The first class is not technically a mixin - it's the parent class of this new widget.</p>
+</div>
+<div class="section" id="dojo-connect">
+<h3>dojo/connect<a class="headerlink" href="#dojo-connect" title="Permalink to this headline">¶</a></h3>
+<p>As an alternate to &lt;script type=&quot;dojo/method&quot;&gt;, you can use &lt;script type=&quot;dojo/connect&quot;&gt;.   The latter will additional code rather than overriding an already defined method.</p>
+<p>However, you can get the same effect using &lt;script type=&quot;dojo/method&quot;&gt; and calling this.inherited(arguments).</p>
+<p>An example of dojo/connect is:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.Declaration&quot;</span> <span class="na">widgetClass=</span><span class="s">&quot;simpleConnectedWidget&quot;</span> <span class="nt">&gt;</span>
+   Just a plain ol&#39; piece of text
+   <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;dojo/connect&quot;</span> <span class="na">event=</span><span class="s">&quot;dblclick&quot;</span><span class="nt">&gt;</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">debug</span><span class="p">(</span><span class="s2">&quot;Ouch!  I&#39;ve been double-clicked&quot;</span><span class="p">);</span>
+   <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>Every widget declared with class simpleConnectedWidget will have the handler connected to it.</p>
+<p>Note that dojo/connect is not suitable for methods that need to return a value.</p>
+</div>
+</div>
+<div class="section" id="notes">
+<h2><a class="toc-backref" href="#id5">Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li>widgetsInTemplate is automatically set to true, so any widgets you place in the template will be automatically filled in.</li>
+<li>If you do not specify mixin, the widget class will be a subclass of <a class="reference" href="_Widget.html#dijit-widget"><em>dijit._Widget</em></a> and mix in <a class="reference" href="_Templated.html#dijit-templated"><em>dijit._Templated</em></a>. If you specify mixin, the first class listed must be a subclass of <a class="reference" href="_Widget.html#dijit-widget"><em>dijit._Widget</em></a>. At least one of the mixins should itself mixin <a class="reference" href="_Templated.html#dijit-templated"><em>dijit._Templated</em></a>, or you should supply <a class="reference" href="_Templated.html#dijit-templated"><em>dijit._Templated</em></a> yourself as a mixin.</li>
+<li>Only one extension point implementation of preamble.</li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.form &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dijit" href="contents.html" />
+    <link rel="next" title="dijit.form.Button" href="form/Button.html" />
+    <link rel="prev" title="dijit.tree.ForestStoreModel" href="tree/ForestStoreModel.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="form/Button.html" title="dijit.form.Button"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="tree/ForestStoreModel.html" title="dijit.tree.ForestStoreModel"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.form</a><ul>
+<li><a class="reference" href="#available-form-widgets">Available Form Widgets</a><ul>
+<li><a class="reference" href="#buttons">Buttons</a></li>
+<li><a class="reference" href="#input-widgets">Input widgets</a></li>
+<li><a class="reference" href="#textarea">TextArea</a></li>
+<li><a class="reference" href="#select-widgets">Select widgets</a></li>
+<li><a class="reference" href="#miscellaneous">Miscellaneous</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#form-validation">Form validation</a><ul>
+<li><a class="reference" href="#color-change">Color change</a></li>
+<li><a class="reference" href="#validation-tooltips">Validation Tooltips</a></li>
+<li><a class="reference" href="#prevent-form-submission">Prevent form submission</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#use-dijit-form-controls-all-over">Use Dijit Form Controls All Over!</a></li>
+<li><a class="reference" href="#mapped-form-controls">Mapped Form Controls</a></li>
+<li><a class="reference" href="#styling-of-form-controls">Styling of Form Controls</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="tree/ForestStoreModel.html"
+                                  title="previous chapter">dijit.tree.ForestStoreModel</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="form/Button.html"
+                                  title="next chapter">dijit.form.Button</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dijit/form.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-form">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dijit.form<a class="headerlink" href="#dijit-form" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Doug Hays, Bill Keese, Nikolai Onken, Marcus Reimann, Craig Riecke</td>
+</tr>
+<tr class="field"><th class="field-name">Developers:</th><td class="field-body">multiple developers</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V0.9</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dijit-form" id="id2" name="id2">dijit.form</a><ul>
+<li><a class="reference" href="#available-form-widgets" id="id3" name="id3">Available Form Widgets</a></li>
+<li><a class="reference" href="#form-validation" id="id4" name="id4">Form validation</a></li>
+<li><a class="reference" href="#use-dijit-form-controls-all-over" id="id5" name="id5">Use Dijit Form Controls All Over!</a></li>
+<li><a class="reference" href="#mapped-form-controls" id="id6" name="id6">Mapped Form Controls</a></li>
+<li><a class="reference" href="#styling-of-form-controls" id="id7" name="id7">Styling of Form Controls</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The dijit.form package contains &#8220;form widgets&#8221;. What&#8217;s a form widget? It roughly means a widget that appear inside a form, but technically we think of it as &#8220;anything that has a value&#8221;.</p>
+<p>The widgets can be used in a FORM tag, in a <a class="reference" href="form/Form.html#dijit-form-form"><em>dijit.form.Form</em></a> widget, or outside of a form.</p>
+<p>Note not to confuse the dijit.form module with the dijit.form.Form widget.</p>
+<div class="section" id="available-form-widgets">
+<h2><a class="toc-backref" href="#id3">Available Form Widgets<a class="headerlink" href="#available-form-widgets" title="Permalink to this headline">¶</a></a></h2>
+<p>The dijit.form widgets are:</p>
+<div class="section" id="buttons">
+<h3>Buttons<a class="headerlink" href="#buttons" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><a class="reference" href="form/Button.html#dijit-form-button"><em>dijit.form.Button</em></a></p>
+<p>A representation of a normal &lt;button&gt; or &lt;input type=&#8221;submit/reset/button&#8221; /&gt;</p>
+</li>
+<li><p class="first"><a class="reference" href="form/DropDownButton.html#dijit-form-dropdownbutton"><em>dijit.form.DropDownButton</em></a></p>
+<p>A button which displays a menu or some other popup when you press it</p>
+</li>
+<li><p class="first"><a class="reference" href="form/ComboButton.html#dijit-form-combobutton"><em>dijit.form.ComboButton</em></a></p>
+<p>A button with an arrow to show a drop down (often a menu)</p>
+</li>
+<li><p class="first"><a class="reference" href="form/ToggleButton.html#dijit-form-togglebutton"><em>dijit.form.ToggleButton</em></a></p>
+<p>A cross between a Button and a Checkbox widget</p>
+</li>
+</ul>
+</div>
+<div class="section" id="input-widgets">
+<h3>Input widgets<a class="headerlink" href="#input-widgets" title="Permalink to this headline">¶</a></h3>
+<p>All Widgets, that are similar to &lt;input&gt;:</p>
+<ul>
+<li><p class="first"><a class="reference" href="form/CurrencyTextBox.html#dijit-form-currencytextbox"><em>dijit.form.CurrencyTextBox</em></a></p>
+<p>A specialized input widget for monetary values, much like the currency type in spreadsheet programs</p>
+</li>
+<li><p class="first"><a class="reference" href="form/DateTextBox.html#dijit-form-datetextbox"><em>dijit.form.DateTextBox</em></a></p>
+<p>An easy-to-use date entry control which allows either typing or choosing a date from any calendar widget</p>
+</li>
+<li><p class="first"><a class="reference" href="form/NumberSpinner.html#dijit-form-numberspinner"><em>dijit.form.NumberSpinner</em></a></p>
+<p>A input widget which restricts input to numeric input and offers down and up arrow buttons to &#8220;spin&#8221; the number up and down</p>
+</li>
+<li><p class="first"><a class="reference" href="form/NumberTextBox.html#dijit-form-numbertextbox"><em>dijit.form.NumberTextBox</em></a></p>
+<p>A input widget which restricts input to numeric input</p>
+</li>
+<li><p class="first"><a class="reference" href="form/TextBox.html#dijit-form-textbox"><em>dijit.form.TextBox</em></a></p>
+<p>A basic &lt;input type=&#8221;text&#8221;&gt;-style form control</p>
+</li>
+<li><p class="first"><a class="reference" href="form/TimeTextBox.html#dijit-form-timetextbox"><em>dijit.form.TimeTextBox</em></a></p>
+<p>A time input control which allows either typing or choosing a time from any time-picker widget</p>
+</li>
+<li><p class="first"><a class="reference" href="form/ValidationTextbox.html#dijit-form-validationtextbox"><em>dijit.form.ValidationTextBox</em></a></p>
+</li>
+</ul>
+</div>
+<div class="section" id="textarea">
+<h3>TextArea<a class="headerlink" href="#textarea" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><a class="reference" href="form/SimpleTextarea.html#dijit-form-simpletextarea"><em>dijit.form.SimpleTextarea</em></a></p>
+<p>A simple wrapper of &lt;textarea&gt;; equivalent functionality</p>
+</li>
+<li><p class="first"><a class="reference" href="form/Textarea.html#dijit-form-textarea"><em>dijit.form.Textarea</em></a></p>
+<p>An auto expanding/contracting &lt;textarea&gt;</p>
+</li>
+</ul>
+</div>
+<div class="section" id="select-widgets">
+<h3>Select widgets<a class="headerlink" href="#select-widgets" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><a class="reference" href="form/ComboBox.html#dijit-form-combobox"><em>dijit.form.ComboBox</em></a></p>
+<p>This is often called &#8220;auto complete&#8221; and perhaps should be listed in the &#8220;Input widgets&#8221; section above since it allows the user to type any value and just gives suggested completions</p>
+</li>
+<li><p class="first"><a class="reference" href="form/MultiSelect.html#dijit-form-multiselect"><em>dijit.form.MultiSelect</em></a></p>
+<p>The MultiSelect widget allows the selection of multiple items</p>
+</li>
+<li><p class="first"><a class="reference" href="form/FilteringSelect.html#dijit-form-filteringselect"><em>dijit.form.FilteringSelect</em></a></p>
+<p>Similar to a &lt;select&gt; but with type-ahead filtering of the drop down list</p>
+</li>
+</ul>
+<p>There are also some select widgets in the <a class="reference" href="../dojox/form.html#dojox-form"><em>dojox.form</em></a> project.</p>
+</div>
+<div class="section" id="miscellaneous">
+<h3>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><a class="reference" href="form/Form.html#dijit-form-form"><em>dijit.form.Form</em></a></p>
+<p>Corresponds to a &lt;form&gt; itself; wraps other widgets</p>
+</li>
+<li><p class="first"><a class="reference" href="form/Slider.html#dijit-form-slider"><em>dijit.form.Slider</em></a></p>
+<p>A scale with a handle you can drag up/down or left/right to select a value</p>
+</li>
+<li><p class="first"><a class="reference" href="form/CheckBox.html#dijit-form-checkbox"><em>dijit.form.CheckBox</em></a></p>
+<p>Nearly the same as an HTML checkbox, but with fancy styling</p>
+</li>
+<li><p class="first"><a class="reference" href="form/RadioButton.html#dijit-form-radiobutton"><em>dijit.form.RadioButton</em></a></p>
+<p>To select one choice from a list</p>
+</li>
+</ul>
+<p>There are also some notable widgets in <a class="reference" href="../dojox/form.html#dojox-form"><em>dojox.form</em></a> and <a class="reference" href="../dojox/widget.html#dojox-widget"><em>dojox.widget</em></a> that complement the dijit.form pieces and will probably be incorporated into dijit eventually.</p>
+</div>
+</div>
+<div class="section" id="form-validation">
+<h2><a class="toc-backref" href="#id4">Form validation<a class="headerlink" href="#form-validation" title="Permalink to this headline">¶</a></a></h2>
+<p>There are three parts to form validation:</p>
+<ul class="simple">
+<li>color change / icon: fields turn yellow and display an icon when they have an invalid value, or when a required field is empty</li>
+<li>validation tooltips</li>
+<li>prevention of form submit: using the <a class="reference" href="form/Form.html#dijit-form-form"><em>dijit.form.Form</em></a> widget you can prevent form submission if any of the fields are invalid</li>
+</ul>
+<div class="section" id="color-change">
+<h3>Color change<a class="headerlink" href="#color-change" title="Permalink to this headline">¶</a></h3>
+<p>The input-type form widgets (including ComboBox and FilteringSelect, but excluding Textarea) turn yellow and display an icon when the value is invalid, or a required field is blank.</p>
+<p>In general the color change is deferred until the field is blurred. I.e. the field won&#8217;t turn yellow while the user is typing because the value they have is incomplete. However, the field will still turn yellow instantly if the value the user is typing isn&#8217;t valid (and can&#8217;t be made valid by typing more characters). This change should provide good feedback to users.</p>
+<p>For number fields, the field will also turn yellow instantly if the user has entered a value that is out of range (like 1000 for a field with max=999), assuming that the value can&#8217;t be made in range by typing more characters (ex: &#8220;1&#8221; in a field with a min of 1000).</p>
+</div>
+<div class="section" id="validation-tooltips">
+<h3>Validation Tooltips<a class="headerlink" href="#validation-tooltips" title="Permalink to this headline">¶</a></h3>
+<p>You can define the following types of tooltip prompts for the input type form widgets (same list as above):</p>
+<blockquote>
+<ul class="simple">
+<li>promptMessage: hint message on focus/mouse over of an empty field.  Note that this is not recommended from a Ux perspective as it might make the user think they&#8217;ve done something wrong.</li>
+<li>invalidMessage: when the value is invalid.</li>
+<li>missingMessage: when a required value is missing</li>
+<li>rangeMessage: when the value is outside a min/max range</li>
+</ul>
+</blockquote>
+<p>If you don&#8217;t define a message then dijit uses built-in generic messages, except for the promptMessage, which just isn&#8217;t displayed.</p>
+<p>The validation tooltips are only displayed while the field is focused (and after dijit has decided that there is indeed an error, see above section).</p>
+</div>
+<div class="section" id="prevent-form-submission">
+<h3>Prevent form submission<a class="headerlink" href="#prevent-form-submission" title="Permalink to this headline">¶</a></h3>
+<p>Using the <a class="reference" href="form/Form.html#dijit-form-form"><em>dijit.form.Form</em></a> widget you can prevent form submission if any of the fields are invalid.  Dijit provides hooks so you can either disable the submit button, or popup an error message when the user tries to submit, or even focus on the invalid field.</p>
+</div>
+</div>
+<div class="section" id="use-dijit-form-controls-all-over">
+<h2><a class="toc-backref" href="#id5">Use Dijit Form Controls All Over!<a class="headerlink" href="#use-dijit-form-controls-all-over" title="Permalink to this headline">¶</a></a></h2>
+<p>Because they&#8217;re easy to mix and match, novice Dojo users often combine Dijit form controls with plain ol&#8217; HTML controls.  That&#8217;s not good for several reasons:</p>
+<ul class="simple">
+<li>The Dijit form controls follow the Dijit Theme but plain HTML controls will not.  They will stick out like a sore thumb amongst other nicely-colored widgets.</li>
+<li>dijit.form.Form and derived controls like Dialog can only deal with dijit.form widgets.</li>
+</ul>
+<p>Never fear.  For every HTML control, there&#8217;s a Dijit equivalent that does the same thing, and obeys most of the HTML attributes.</p>
+<ul class="simple">
+<li>&lt;input type=&#8221;text&#8221;&gt; becomes dojoType=&#8221;dijit.form.TextBox&#8221;, dojoType=&#8221;dijit.form.ValidationTextBox&#8221;, dojoType=&#8221;dijit.form.NumberTextBox&#8221;, etc.</li>
+<li>&lt;input type=&#8221;checkbox&#8221;&gt; becomes dojoType=&#8221;dijit.form.Checkbox&#8221;</li>
+<li>&lt;textarea&gt; becomes dojoType=&#8221;dijit.form.Textarea&#8221; or dojoType=&#8221;dijit.form.SimpleTextArea&#8221;</li>
+<li>&lt;select&gt; becomes dojoType=&#8221;dijit.FilteringSelect&#8221;</li>
+<li>&lt;input type=&#8221;radio&#8221;&gt; becomes dojoType=&#8221;dijit.form.RadioButton&#8221;</li>
+<li>&lt;button&gt; (or &lt;input type=&#8221;submit&#8221;&gt; etc.) becomes dojotype=&#8221;dijit.form.Button&#8221;</li>
+</ul>
+</div>
+<div class="section" id="mapped-form-controls">
+<span id="mapped"></span><h2><a class="toc-backref" href="#id6">Mapped Form Controls<a class="headerlink" href="#mapped-form-controls" title="Permalink to this headline">¶</a></a></h2>
+<p>Many of the form controls have a concept of &#8220;displayed value&#8221; vs. &#8220;serialized value&#8221; (aka the &#8220;real value&#8221;), which is the value passed to the server on form submit.  For example, a NumberSpinner may be declared like</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">dijit.form.NumberSpinner</span> <span class="na">value=</span><span class="s">&quot;1000&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>(note the &quot;value&quot; keyword).  But when it's displayed in America it looks like &quot;1,000&quot; (with the comma).   And if they user types in &quot;1,234,567&quot;, it gets sent back to the server as &quot;123456789&quot;.</p>
+<p>This is handled internally by having two &lt;input&gt; fields in the widget:</p>
+<img alt="../_images/MappedTextBox.gif" src="../_images/MappedTextBox.gif" />
+<p>The upshot of this is that Dijit handles localization issues on the client, the server doesn't have to worry about it (except of course for translating the boilerplate text on the page, like the label for the above control).</p>
+</div>
+<div class="section" id="styling-of-form-controls">
+<h2><a class="toc-backref" href="#id7">Styling of Form Controls<a class="headerlink" href="#styling-of-form-controls" title="Permalink to this headline">¶</a></a></h2>
+<p>To style any of the form controls, the first thing to do is to look at the template of the form control, for example, Button.html:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;dijit dijitReset dijitLeft dijitInline&quot;</span>
+      <span class="na">dojoAttachEvent=</span><span class="s">&quot;ondijitclick:_onButtonClick,onmouseenter:_onMouse,onmouseleave:_onMouse,onmousedown:_onMouse&quot;</span>
+      <span class="nt">&gt;&lt;span</span> <span class="na">class=</span><span class="s">&quot;dijitReset dijitRight dijitInline&quot;</span>
+              <span class="nt">&gt;&lt;span</span> <span class="na">class=</span><span class="s">&quot;dijitReset dijitInline dijitButtonNode&quot;</span>
+                      <span class="nt">&gt;&lt;button</span> <span class="na">class=</span><span class="s">&quot;dijitReset dijitStretch dijitButtonContents&quot;</span>
+                              <span class="na">dojoAttachPoint=</span><span class="s">&quot;titleNode,focusNode&quot;</span>
+                              <span class="na">name=</span><span class="s">&quot;${name}&quot;</span> <span class="na">type=</span><span class="s">&quot;${type}&quot;</span> <span class="na">value=</span><span class="s">&quot;${value}&quot;</span> <span class="na">waiRole=</span><span class="s">&quot;button&quot;</span> <span class="na">waiState=</span><span class="s">&quot;labelledby-${id}_label&quot;</span>
+                              <span class="nt">&gt;&lt;span</span> <span class="na">class=</span><span class="s">&quot;dijitReset dijitInline&quot;</span> <span class="na">dojoAttachPoint=</span><span class="s">&quot;iconNode&quot;</span>
+                                      <span class="nt">&gt;&lt;span</span> <span class="na">class=</span><span class="s">&quot;dijitReset dijitToggleButtonIconChar&quot;</span><span class="nt">&gt;</span><span class="ni">&amp;#10003;</span><span class="nt">&lt;/span</span>
+<span class="nt">                              &gt;&lt;/span</span>
+<span class="nt">                              &gt;&lt;span</span> <span class="na">class=</span><span class="s">&quot;dijitReset dijitInline dijitButtonText&quot;</span>
+                                      <span class="na">id=</span><span class="s">&quot;${id}_label&quot;</span>
+                                      <span class="na">dojoAttachPoint=</span><span class="s">&quot;containerNode&quot;</span>
+                              <span class="nt">&gt;&lt;/span</span>
+<span class="nt">                      &gt;&lt;/button</span>
+<span class="nt">              &gt;&lt;/span</span>
+<span class="nt">      &gt;&lt;/span</span>
+<span class="nt">&gt;&lt;/span&gt;</span>
+</pre></div>
+</div>
+<p>And then to look in firebug to see it in action.</p>
+<p>The template, however, does not tell the whole story.  Each form widget (and many other widgets too) have something called a &quot;baseClass&quot;, which is applied to the root node of the widget.   In Button's case, the baseClass is called &quot;dijitButton&quot;.  Also, depending on the <em>state</em> of the widget, additional classes are applied to the widget's DOM node.  The additional classes are a combination of baseClass and various keywords:</p>
+<blockquote>
+<ul class="simple">
+<li>Focused</li>
+<li>Active  (when pressing the button)</li>
+<li>Hover   (when hovering over the button)</li>
+<li>Checked (for toggle-type widgets like CheckBox)</li>
+<li>Selected (button for currently selected pane/tab)</li>
+<li>Disabled</li>
+<li>ReadOnly</li>
+</ul>
+</blockquote>
+<p>For example, a dormant button will have the class:</p>
+<blockquote>
+<ul class="simple">
+<li>dijitButton</li>
+</ul>
+</blockquote>
+<p>When the user hovers over it, the classes will become:</p>
+<blockquote>
+<ul class="simple">
+<li>dijitButton</li>
+<li>dijitButtonHover</li>
+</ul>
+</blockquote>
+<p>There are also combination classes that are applied.  For example, if a user focuses and hovers over a button, the classes become:</p>
+<blockquote>
+<ul class="simple">
+<li>dijitButton</li>
+<li>dijitButtonHover</li>
+<li>dijitButtonFocused</li>
+<li>dijitButtonFocusedHover</li>
+</ul>
+</blockquote>
+<p>Using the classes defined on the DOM node you can affect the styling of any sub-nodes within the widget.   For example:</p>
+<div class="highlight-css"><div class="highlight"><pre><span class="nc">.dijitButtonFocused</span> <span class="nc">.dijitButtonContents</span> <span class="p">{</span>
+     <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

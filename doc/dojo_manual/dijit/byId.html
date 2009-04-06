@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.byId &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.byId</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#usage">Usage</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#example-1-locating-a-widget-by-its-id">Example 1: Locating a widget by its ID</a></li>
+<li><a class="reference" href="#example-2-locating-a-widget-by-its-id-and-accessing-its-dom-node-main-dom-rendering-element">Example 2: Locating a widget by its id and accessing its DOM node (main DOM rendering element)</a></li>
+<li><a class="reference" href="#example-3-comparing-dojo-byid-and-dijit-byid">Example 3: Comparing dojo.byId and dijit.byId</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dijit/byId.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-byid">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dijit.byId<a class="headerlink" href="#dijit-byid" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Bill Keese</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V0.9</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dijit-byid" id="id2" name="id2">dijit.byId</a><ul>
+<li><a class="reference" href="#introduction" id="id3" name="id3">Introduction</a></li>
+<li><a class="reference" href="#usage" id="id4" name="id4">Usage</a></li>
+<li><a class="reference" href="#examples" id="id5" name="id5">Examples</a></li>
+<li><a class="reference" href="#see-also" id="id6" name="id6">See also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>dijit.byId is a function for looking up a specific widget by its assigned name (id).  This function is similar to <a class="reference" href="../dojo/byId.html#dojo-byid"><em>dojo.byId</em></a> but whereas dojo.byId returns DOMNodes, dijit.byId returns a JavaScript object that is the instance of the widget.</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>dijit.byId and dojo.byId are often confused, particularly by first time users.  This function should be used when you wish to obtain a direct handle the the JavaScript object instance of your widget and access functions of that widget.</p>
+</div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id4">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<p>Usage of this function is trivial.  Simply call it with a string of the id for the widget you wish to obtain the handle of.  The return value will either be the JavaScript object instance that represents the widget or null/undefined if it is not found in the widget registry.</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3</pre></td><td class="code"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+  <span class="k">var</span> <span class="nx">myWidget</span> <span class="o">=</span> <span class="nx">dijit</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;myWidget&quot;</span><span class="p">);</span>
+<span class="o">&lt;/</span><span class="nx">script</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id5">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="example-1-locating-a-widget-by-its-id">
+<h3>Example 1: Locating a widget by its ID<a class="headerlink" href="#example-1-locating-a-widget-by-its-id" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dijit.form.TextBox&quot;);
+
+  function findWidget () {
+    //Locate the JS object.
+    var widget = dijit.byId(&quot;myTextBox&quot;);
+    if(widget){
+      //Find my output node and write out I found my textbox and got its value.
+      dojo.byId(&quot;textNode&quot;).innerHTML = &quot;Found my text box.  It has value: [&quot; + widget.attr(&quot;value&quot;) + &quot;]&quot;;
+    }else{
+      //Find my output node and write out I couldn't find the widget.
+      dojo.byId(&quot;textNode&quot;).innerHTML = &quot;Could not locate my text box widget!&quot;;
+    }
+  }
+  dojo.addOnLoad(findWidget);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;input id=&quot;myTextBox&quot; dojoType=&quot;dijit.form.TextBox&quot; type=&quot;text&quot; value=&quot;Default Value&quot;&gt;&lt;/input&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;div id=&quot;textNode&quot; style=&quot;background-color: lightgray&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="example-2-locating-a-widget-by-its-id-and-accessing-its-dom-node-main-dom-rendering-element">
+<h3>Example 2: Locating a widget by its id and accessing its DOM node (main DOM rendering element)<a class="headerlink" href="#example-2-locating-a-widget-by-its-id-and-accessing-its-dom-node-main-dom-rendering-element" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dijit.form.TextBox&quot;);
+
+  function findWidgetDOM () {
+    //Locate the JS object.
+    var widget = dijit.byId(&quot;myTextBox2&quot;);
+    if(widget){
+      //Get its DOM node:
+      var dNode = widget.domNode;
+
+      //Find my output node and write out I found my textbox and got its value + what type of DOM node is its primary node.
+      dojo.byId(&quot;textNode2&quot;).innerHTML = &quot;Found my text box.  It has value: [&quot; + widget.attr(&quot;value&quot;) + &quot;] and its primary DOM node tag name is: [&quot; + dNode.tagName + &quot;]&quot;;
+    }else{
+      //Find my output node and write out I couldn't find the widget.
+      dojo.byId(&quot;textNode2&quot;).innerHTML = &quot;Could not locate my text box widget!&quot;;
+    }
+  }
+  dojo.addOnLoad(findWidgetDOM);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;input id=&quot;myTextBox2&quot; dojoType=&quot;dijit.form.TextBox&quot; type=&quot;text&quot; value=&quot;Default Value&quot;&gt;&lt;/input&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;div id=&quot;textNode2&quot; style=&quot;background-color: lightgray&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="example-3-comparing-dojo-byid-and-dijit-byid">
+<h3>Example 3: Comparing dojo.byId and dijit.byId<a class="headerlink" href="#example-3-comparing-dojo-byid-and-dijit-byid" title="Permalink to this headline">¶</a></h3>
+<p><em>This example shows how the output of each is different.</em></p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dijit.form.TextBox&quot;);
+
+  function compareDojoDijitById() {
+    //Locate the JS object.
+    var dibiWidget = dijit.byId(&quot;myTextBox3&quot;);
+    var dobiWidget = dojo.byId(&quot;myTextBox3&quot;);
+    var dibiDOM = dijit.byId(&quot;textNode3&quot;);
+    var dobiDOM = dojo.byId(&quot;textNode3&quot;);
+
+
+    dojo.byId(&quot;textNode3&quot;).innerHTML = &quot;dijit.byId for widget id returned: &quot; + dibiWidget + &quot;&lt;br&gt;&quot; +
+                                      &quot;dojo.byId for widget id returned: &quot; + dobiWidget + &quot;&lt;br&gt;&quot; +
+                                      &quot;dijit.byId for dom id returned: &quot; + dibiDOM + &quot;&lt;br&gt;&quot; +
+                                      &quot;dojo.byId for dom id returned: &quot; + dobiDOM + &quot;&lt;br&gt;&quot;;
+  }
+  dojo.addOnLoad(compareDojoDijitById);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;input id=&quot;myTextBox3&quot; dojoType=&quot;dijit.form.TextBox&quot; type=&quot;text&quot; value=&quot;Default Value&quot;&gt;&lt;/input&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;div id=&quot;textNode3&quot; style=&quot;background-color: lightgray&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id6">See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li><a class="reference" href="../dojo/byId.html#dojo-byid"><em>dojo.byId</em></a></li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

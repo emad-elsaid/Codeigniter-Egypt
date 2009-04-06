@@ -1,0 +1,52 @@
+Dijit
+=====
+
+Widgets
+-------
+
+.. toctree::
+    :maxdepth: 2
+
+    About Dijit <info>
+    dijit._Templated <_Templated>
+    dijit._Widget <_Widget>
+    Dijit Themes <../dijit-themes>
+    a11y  <../dijit-a11y>
+    a11y Strategy <../dijit-a11y-strategy>
+    a11y Resources <../dijit-a11y-resources>
+    Creating Accessible Widgets <../quickstart/writingWidgets/a11y>
+    Testing for Accessibility <../quickstart/writingWidgets/a11yTesting>
+    a11y Requirements <../dijit-a11y-req>
+    a11y Statement <../dijit-a11y-statement>
+    dijit.Calendar <Calendar>
+    dijit.ColorPalette <ColorPalette>
+    dijit.Dialog <Dialog>
+    dijit.Editor <Editor>
+    dijit.InlineEditBox <InlineEditBox>
+    dijit.Menu <Menu>
+    dijit.ProgressBar <ProgressBar>
+    dijit.TitlePane <TitlePane>
+    dijit.Tooltip <Tooltip>
+    dijit.TooltipDialog <TooltipDialog>
+    dijit.Tree <Tree>
+    Model <tree/Model>
+    TreeStoreModel <tree/TreeStoreModel>
+    ForestStoreModel <tree/ForestStoreModel>
+
+Form handling
+-------------
+
+.. toctree::
+    :maxdepth: 2
+    :glob:
+
+    form**
+
+Layout
+------
+
+.. toctree::
+    :maxdepth: 2
+    :glob:
+
+    layout**

@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.json.ref &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.json.schema" href="schema.html" />
+    <link rel="prev" title="dojox.json.query" href="query.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="schema.html" title="dojox.json.schema"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="query.html" title="dojox.json.query"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.json.ref</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#features">Features</a></li>
+<li><a class="reference" href="#usage">Usage</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="query.html"
+                                  title="previous chapter">dojox.json.query</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="schema.html"
+                                  title="next chapter">dojox.json.schema</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/json/ref.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-json-ref">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.json.ref<a class="headerlink" href="#dojox-json-ref" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Kris Zyp</td>
+</tr>
+<tr class="field"><th class="field-name">Developers:</th><td class="field-body">Kris Zyp</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.2</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-json-ref" id="id2" name="id2">dojox.json.ref</a><ul>
+<li><a class="reference" href="#introduction" id="id3" name="id3">Introduction</a></li>
+<li><a class="reference" href="#features" id="id4" name="id4">Features</a></li>
+<li><a class="reference" href="#usage" id="id5" name="id5">Usage</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><strong>dojox.json.ref</strong> implements JSON Referencing to provide serialization, deserialization, and indexing of complex object graphs with circular, multiple, cross-message, cross-store, and cross-site referencing.</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>JSON Referencing provides for id-based, path-based, and combined referencing. With id-based referencing, JSON objects self-identify themselves with an identity property (&#8220;id&#8221; by default). Objects can then be referred to by id. A JSON references is a JSON object with a property $ref with a value indicating the target. This is an example of id-based JSON referencing:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="s2">&quot;Kris Zyp&quot;</span><span class="o">,</span>
+  <span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="s2">&quot;kriszyp&quot;</span><span class="o">,</span>
+  <span class="s2">&quot;children&quot;</span><span class="o">:</span><span class="p">[{</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="s2">&quot;jennikazyp&quot;</span><span class="o">,</span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="s2">&quot;Jennika Zyp&quot;</span><span class="p">}]</span><span class="o">,</span>
+  <span class="s2">&quot;spouse&quot;</span><span class="o">:</span><span class="p">{</span>
+      <span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="s2">&quot;Nicole Zyp&quot;</span><span class="o">,</span>
+      <span class="s2">&quot;spouse&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;$ref&quot;</span><span class="o">:</span><span class="s2">&quot;kriszyp&quot;</span><span class="p">}</span><span class="o">,</span>
+      <span class="s2">&quot;children&quot;</span><span class="o">:</span><span class="p">[{</span><span class="s2">&quot;$ref&quot;</span><span class="o">:</span><span class="s2">&quot;jennikazyp&quot;</span><span class="p">}]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Path-based referencing works by specifying a JSON value by it's location within the object structure. With path-based referencing the # symbol should be used to denote the root of the current object structure and to separate. A path reference consists of dot delimited property names or array index numbers. dojox.json.ref also supports $ and <em>this</em> to reference the root. With path-based referencing, any JSON value may be referenced, not just objects. For example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="s2">&quot;Kris Zyp&quot;</span><span class="o">,</span>
+  <span class="s2">&quot;children&quot;</span><span class="o">:</span><span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="s2">&quot;Jennika Zyp&quot;</span><span class="p">}</span><span class="o">,</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="s2">&quot;Korban Zyp&quot;</span><span class="p">}]</span><span class="o">,</span>
+  <span class="s2">&quot;spouse&quot;</span><span class="o">:</span><span class="p">{</span>
+      <span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="s2">&quot;Nicole Zyp&quot;</span><span class="o">,</span>
+      <span class="s2">&quot;spouse&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;$ref&quot;</span><span class="o">:</span><span class="s2">&quot;#&quot;</span><span class="p">}</span><span class="o">,</span>
+      <span class="s2">&quot;children&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;$ref&quot;</span><span class="o">:</span><span class="s2">&quot;#children&quot;</span><span class="p">}</span>
+  <span class="p">}</span><span class="o">,</span>
+  <span class="s2">&quot;oldestChild&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;$ref&quot;</span><span class="o">:</span><span class="s2">&quot;#children.0&quot;</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Id and path-based referencing can also be combined; a path can be postpended to an id reference. The # separates the id from the path portion and the path operates on the object referred by the id. For example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="s2">&quot;Kris Zyp&quot;</span><span class="o">,</span>
+  <span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="s2">&quot;kriszyp&quot;</span><span class="o">,</span>
+  <span class="s2">&quot;children&quot;</span><span class="o">:</span><span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="s2">&quot;Jennika Zyp&quot;</span><span class="p">}]</span><span class="o">,</span>
+  <span class="s2">&quot;friends&quot;</span><span class="o">:</span><span class="p">[{</span><span class="s2">&quot;$ref&quot;</span><span class="o">:</span><span class="s2">&quot;jesse#spouse&quot;</span><span class="p">}]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><a class="reference" href="http://www.sitepen.com/blog/2008/06/17/json-referencing-in-dojo/">This tutorial</a> provides more in-depth overview of dojox.json.ref. dojox.json.ref is used by the JsonRestStore for reference resolution and indexing.</p>
+</div>
+<div class="section" id="features">
+<h2><a class="toc-backref" href="#id4">Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></a></h2>
+<ol class="arabic simple">
+<li>Circular referencing, multiple referencing, cross-message referencing, and cross-site referencing in JSON.</li>
+<li>Utilizes the standard relative URL scheme as the basis for referencing.</li>
+<li>Id-based, path-based, and combined referencing is supported</li>
+<li>Useful exceptions when parsing fails</li>
+</ol>
+</div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id5">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<p>The basic usage of dojox.json.ref to serialize an object is:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">myJsonString</span> <span class="o">=</span> <span class="nx">dojox</span><span class="p">.</span><span class="nx">json</span><span class="p">.</span><span class="nx">ref</span><span class="p">.</span><span class="nx">toJson</span><span class="p">(</span><span class="nx">myObject</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To deserialize an object:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">myObject</span> <span class="o">=</span> <span class="nx">dojox</span><span class="p">.</span><span class="nx">json</span><span class="p">.</span><span class="nx">ref</span><span class="p">.</span><span class="nx">fromJson</span><span class="p">(</span><span class="nx">myJsonString</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

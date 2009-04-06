@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.Tooltip &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dijit" href="contents.html" />
+    <link rel="next" title="dijit.TooltipDialog" href="TooltipDialog.html" />
+    <link rel="prev" title="dijit.TitlePane" href="TitlePane.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="TooltipDialog.html" title="dijit.TooltipDialog"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="TitlePane.html" title="dijit.TitlePane"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.Tooltip</a></li>
+<li><a class="reference" href="#tooltip-positioning">Tooltip Positioning</a></li>
+<li><a class="reference" href="#accessibility">Accessibility</a><ul>
+<li><a class="reference" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="TitlePane.html"
+                                  title="previous chapter">dijit.TitlePane</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="TooltipDialog.html"
+                                  title="next chapter">dijit.TooltipDialog</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dijit/Tooltip.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-tooltip">
+<span id="id1"></span><h1>dijit.Tooltip<a class="headerlink" href="#dijit-tooltip" title="Permalink to this headline">¶</a></h1>
+<p>Tooltip is similar to the title=&#8221;&#8221; attribute in regular HTML, but is much more flexible. You can control the display timing, and specify arbitrary (rich-text) HTML for the tooltip contents.</p>
+<p>Note that if you want your tooltip to contain a form or something that the user clicks on / focuses on, you should use the <cite>dijit.TooltipDialog &lt;dijit/TooltipDialog&gt;_</cite> instead.</p>
+<p>Here&#8217;s a tooltip created programatically:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+   dojo.require(&quot;dijit.Tooltip&quot;);
+   dojo.addOnLoad(function(){
+      new dijit.Tooltip({
+          connectId: [&quot;wordOfTheDay2&quot;],
+          label: &quot;a &lt;i&gt;disposition&lt;/i&gt; to bear injuries patiently : &lt;b&gt;forbearance&lt;/b&gt;&quot;
+      });
+   });
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;span id=&quot;wordOfTheDay2&quot;&gt;Longanimity&lt;/span&gt;</pre></div></div><p>&#8216;&#8217;Note that connectId is an array, since it can contain multiple nodes to connect to.&#8217;&#8216;</p>
+<p>And here&#8217;s the same tooltip created from markup:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+   dojo.require(&quot;dijit.Tooltip&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.Tooltip&quot; connectId=&quot;wordOfTheDay&quot;&gt;
+    a &lt;i&gt;disposition&lt;/i&gt; to bear injuries patiently : &lt;b&gt;forbearance&lt;/b&gt;
+ &lt;/div&gt;
+ &lt;span id=&quot;wordOfTheDay&quot;&gt;Longanimity&lt;/span&gt;</pre></div></div></div>
+<div class="section" id="tooltip-positioning">
+<h1>Tooltip Positioning<a class="headerlink" href="#tooltip-positioning" title="Permalink to this headline">¶</a></h1>
+<p>By default, dijit tries to find a place to display the tooltip to the left or the right of the target element.
+You can control the search path for positions via a global setting like:</p>
+<p>dijit.Tooltip.defaultPosition = [&#8220;above&#8221;, &#8220;below&#8221;];</p>
+</div>
+<div class="section" id="accessibility">
+<h1>Accessibility<a class="headerlink" href="#accessibility" title="Permalink to this headline">¶</a></h1>
+<p>Tooltips are displayed when the associated item receives focus or a mouseover event. Be careful when assigning tooltips to arbitrary elements such as spans of text which may not receive keyboard focus because users of assistive technology or keyboard only users will not benefit from the tooltip. If the tooltip information is important, make certain that the item which triggers display of the tooltip can receive focus via the keyboard. This can be accomplished by adding a tabindex=&#8221;0&#8221; attribute onto the trigger element to put it into the tab order of the page.</p>
+<div class="section" id="known-issues">
+<h2>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h2>
+<p>When using Firefox 2 with JAWS 9, the tooltip text is spoken twice. This has been fixed in Firefox 3.</p>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

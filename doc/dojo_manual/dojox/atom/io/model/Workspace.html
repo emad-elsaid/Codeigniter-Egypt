@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.atom.io.model.Workspace &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../../../index.html" />
+    <link rel="up" title="DojoX" href="../../../contents.html" />
+    <link rel="next" title="dojox.av" href="../../../av.html" />
+    <link rel="prev" title="dojox.atom.io.model.Service" href="Service.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../../../_static/dojo/dijit/themes/dijit.css";
+@import "../../../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="../../../av.html" title="dojox.av"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="Service.html" title="dojox.atom.io.model.Service"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../../../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.atom.io.model.Workspace</a><ul>
+<li><a class="reference" href="#public-properties-and-their-types">Public properties (and their types):</a></li>
+<li><a class="reference" href="#public-functions-and-their-return-types">Public functions (and their return types):</a></li>
+<li><a class="reference" href="#see-also">See Also:</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="Service.html"
+                                  title="previous chapter">dojox.atom.io.model.Service</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../../../av.html"
+                                  title="next chapter">dojox.av</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../../../_sources/dojox/atom/io/model/Workspace.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-atom-io-model-workspace">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.atom.io.model.Workspace<a class="headerlink" href="#dojox-atom-io-model-workspace" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Benjamin Schell</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.3</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-atom-io-model-workspace" id="id2" name="id2">dojox.atom.io.model.Workspace</a><ul>
+<li><a class="reference" href="#public-properties-and-their-types" id="id3" name="id3">Public properties (and their types):</a></li>
+<li><a class="reference" href="#public-functions-and-their-return-types" id="id4" name="id4">Public functions (and their return types):</a></li>
+<li><a class="reference" href="#see-also" id="id5" name="id5">See Also:</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>An Atom workspace element is a part of an Atom Service document, as defined by the Atom Publishing Protocol specification, and is for organization in the service document.</p>
+<div class="section" id="public-properties-and-their-types">
+<h2><a class="toc-backref" href="#id3">Public properties (and their types):<a class="headerlink" href="#public-properties-and-their-types" title="Permalink to this headline">¶</a></a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="12%" />
+<col width="67%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Type</strong></td>
+<td><strong>Property</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr><td>String</td>
+<td>title</td>
+<td>The title of this workspace</td>
+</tr>
+<tr><td>Array</td>
+<td>collections</td>
+<td>The collections housed by this workspace</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="public-functions-and-their-return-types">
+<h2><a class="toc-backref" href="#id4">Public functions (and their return types):<a class="headerlink" href="#public-functions-and-their-return-types" title="Permalink to this headline">¶</a></a></h2>
+<p>Below are all the functions implemented by this model class.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="40%" />
+<col width="46%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Return Type</strong></td>
+<td><strong>Function</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr><td>undefined</td>
+<td>buildFromDom(DOMNode)</td>
+<td>Builds this Service from a given DOMNode.</td>
+</tr>
+<tr><td>String</td>
+<td>toString()</td>
+<td>Return the XML representation of the Service</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id5">See Also:<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li><a class="reference" href="../model.html#dojox-atom-io-model"><em>dojox.atom.io.model</em></a></li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

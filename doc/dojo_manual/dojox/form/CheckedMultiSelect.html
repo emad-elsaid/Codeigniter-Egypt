@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.form.CheckedMultiSelect &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.form.DateTextBox" href="DateTextBox.html" />
+    <link rel="prev" title="dojox.form.BusyButton" href="BusyButton.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="DateTextBox.html" title="dojox.form.DateTextBox"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="BusyButton.html" title="dojox.form.BusyButton"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.form.CheckedMultiSelect</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#usage">Usage</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#a-simple-checkedmultiselect">A simple CheckedMultiSelect</a></li>
+<li><a class="reference" href="#a-radio-based-checkedmultiselect">A radio-based CheckedMultiSelect</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="BusyButton.html"
+                                  title="previous chapter">dojox.form.BusyButton</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="DateTextBox.html"
+                                  title="next chapter">dojox.form.DateTextBox</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/form/CheckedMultiSelect.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-form-checkedmultiselect">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.form.CheckedMultiSelect<a class="headerlink" href="#dojox-form-checkedmultiselect" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.2</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Nathan Toone</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.2</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-form-checkedmultiselect" id="id2" name="id2">dojox.form.CheckedMultiSelect</a><ul>
+<li><a class="reference" href="#introduction" id="id3" name="id3">Introduction</a></li>
+<li><a class="reference" href="#usage" id="id4" name="id4">Usage</a></li>
+<li><a class="reference" href="#examples" id="id5" name="id5">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>A multi-select widget (similar to html select with multiple=true) that uses check boxes.</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>This widget provides a more user-friendly mechanism for multi-selects (HTML select tags with multiple=true).</p>
+</div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id4">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<p>The CheckedMultiSelect is designed to replace existing HTML select elements with minimal effort.  You can also create them programmatically.</p>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id5">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="a-simple-checkedmultiselect">
+<h3>A simple CheckedMultiSelect<a class="headerlink" href="#a-simple-checkedmultiselect" title="Permalink to this headline">¶</a></h3>
+<p>This example shows a simple CheckedMultiSelect widget - converted from a select tag.</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.form.CheckedMultiSelect&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;select multiple=&quot;true&quot; name=&quot;multiselect&quot; dojoType=&quot;dojox.form.CheckedMultiSelect&quot;&gt;
+      &lt;option value=&quot;TN&quot;&gt;Tennessee&lt;/option&gt;
+      &lt;option value=&quot;VA&quot; selected=&quot;selected&quot;&gt;Virginia&lt;/option&gt;
+      &lt;option value=&quot;WA&quot; selected=&quot;selected&quot;&gt;Washington&lt;/option&gt;
+      &lt;option value=&quot;FL&quot;&gt;Florida&lt;/option&gt;
+      &lt;option value=&quot;CA&quot;&gt;California&lt;/option&gt;
+ &lt;/select&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  &#64;import &quot;/_static/dojo/dojox/form/resources/CheckedMultiSelect.css&quot;;
+&lt;/style&gt;</pre></div></div></div>
+<div class="section" id="a-radio-based-checkedmultiselect">
+<h3>A radio-based CheckedMultiSelect<a class="headerlink" href="#a-radio-based-checkedmultiselect" title="Permalink to this headline">¶</a></h3>
+<p>By not specifying &#8220;multiple=true&#8221; in your widget, you will create a widget using radio buttons instead of check boxes.</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.form.CheckedMultiSelect&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;select jsId=&quot;ss1&quot; name=&quot;ss1&quot; dojoType=&quot;dojox.form.CheckedMultiSelect&quot;&gt;
+      &lt;option value=&quot;TN&quot;&gt;Tennessee&lt;/option&gt;
+      &lt;option value=&quot;VA&quot; selected=&quot;selected&quot;&gt;Virginia&lt;/option&gt;
+      &lt;option value=&quot;WA&quot;&gt;Washington&lt;/option&gt;
+      &lt;option value=&quot;FL&quot;&gt;Florida&lt;/option&gt;
+      &lt;option value=&quot;CA&quot;&gt;California&lt;/option&gt;
+&lt;/select&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  &#64;import &quot;/_static/dojo/dojox/form/resources/CheckedMultiSelect.css&quot;;
+&lt;/style&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

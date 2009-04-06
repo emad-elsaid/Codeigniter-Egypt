@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.Dialog &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dijit" href="contents.html" />
+    <link rel="next" title="dijit.Editor" href="Editor.html" />
+    <link rel="prev" title="dijit.ColorPalette" href="ColorPalette.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="Editor.html" title="dijit.Editor"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="ColorPalette.html" title="dijit.ColorPalette"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.Dialog</a><ul>
+<li><a class="reference" href="#usage">Usage</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#dialog-via-markup">Dialog via markup</a></li>
+<li><a class="reference" href="#dialog-programmatically">Dialog programmatically</a></li>
+<li><a class="reference" href="#coloring-the-underlay">Coloring the Underlay</a></li>
+<li><a class="reference" href="#confirming-dialog-contents">Confirming Dialog Contents</a></li>
+<li><a class="reference" href="#sizing-the-dialog">Sizing the Dialog</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#accessibility">Accessibility</a><ul>
+<li><a class="reference" href="#keyboard">Keyboard</a><ul>
+<li><a class="reference" href="#keyboard-navigation-in-release-1-1-and-later">Keyboard Navigation in Release 1.1 and later</a></li>
+<li><a class="reference" href="#keyboard-navigation-previous-to-release-1-1">Keyboard Navigation Previous to Release 1.1</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#known-issues">Known Issues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="ColorPalette.html"
+                                  title="previous chapter">dijit.ColorPalette</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="Editor.html"
+                                  title="next chapter">dijit.Editor</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dijit/Dialog.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-dialog">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dijit.Dialog<a class="headerlink" href="#dijit-dialog" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V?</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dijit-dialog" id="id2" name="id2">dijit.Dialog</a><ul>
+<li><a class="reference" href="#usage" id="id3" name="id3">Usage</a></li>
+<li><a class="reference" href="#examples" id="id4" name="id4">Examples</a></li>
+<li><a class="reference" href="#accessibility" id="id5" name="id5">Accessibility</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Dijit&#8217;s modal Dialog Box simulates a regular GUI dialog box. The contents can be arbitrary HTML, but are most often a form or a short paragraph. The user can close the dialog box without acting by clicking on the X button in the top-right corner.</p>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id3">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<p>The Dialog and underlay append themselves to the <tt class="docutils literal"><span class="pre">&lt;body&gt;</span></tt> element, which requires you apply your theme className there (as no other elements parent the Dialog.domNode). You need <tt class="docutils literal"><span class="pre">&lt;body</span> <span class="pre">class=&quot;tundra&quot;&gt;</span></tt> (or some other applicable theme name) in order for the Dialog to be styled.</p>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id4">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="dialog-via-markup">
+<h3>Dialog via markup<a class="headerlink" href="#dialog-via-markup" title="Permalink to this headline">¶</a></h3>
+<p>The first example creates a Dialog via markup from an existing DOM node:</p>
+<div dojoType="docs.widget.CompoundViewer"><p>A dialog created via markup. First let&#8217;s write up some simple HTML code because you need to define the place where your Dialog sdhould be created.</p>
+<div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;dialogOne&quot; dojoType=&quot;dijit.Dialog&quot; title=&quot;My Dialog Title&quot;&gt;
+    &lt;div dojoType=&quot;dijit.layout.TabContainer&quot; style=&quot;width: 200px; height: 300px;&quot;&gt;
+        &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;foo&quot;&gt;Content of Tab &quot;foo&quot;&lt;/div&gt;
+        &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;boo&quot;&gt;Hi, I'm Tab &quot;boo&quot;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;When pressing this button the dialog will popup:&lt;/p&gt;
+&lt;button id=&quot;buttonOne&quot; dojoType=&quot;dijit.form.Button&quot;&gt;Show me!
+    &lt;script type=&quot;dojo/method&quot; event=&quot;onClick&quot; args=&quot;evt&quot;&gt;
+        // Show the Dialog:
+        dijit.byId(&quot;dialogOne&quot;).show();
+    &lt;/script&gt;
+&lt;/button&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="The javascript, put this wherever you want the dialog creation to happen" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dijit.form.Button&quot;);
+    dojo.require(&quot;dijit.Dialog&quot;);
+    dojo.require(&quot;dijit.layout.TabContainer&quot;);
+    dojo.require(&quot;dijit.layout.ContentPane&quot;);
+&lt;/script&gt;</pre></div></div><p>Note that dialog&#8217;s source markup can be hidden via specifying style=&#8221;display: none&#8221;, to prevent it from flashing on the screen during page load.  However, hiding the dialog indirectly via a class won&#8217;t work (in that the dialog will remain invisible even when it&#8217;s supposed to be displayed).</p>
+</div>
+<div class="section" id="dialog-programmatically">
+<h3>Dialog programmatically<a class="headerlink" href="#dialog-programmatically" title="Permalink to this headline">¶</a></h3>
+<p>Now lets create a dialog programmatically, and change the dialog&#8217;s content dynamically</p>
+<div dojoType="docs.widget.CompoundViewer"><p>A programmatically created dialog with no content. First lets write up some simple HTML code because you need to define the place where your Dialog dhould be created.</p>
+<div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;p&gt;When pressing this button the dialog will popup. Notice this time there is no DOM node with content for the dialog:&lt;/p&gt;
+&lt;button id=&quot;buttonTwo&quot; dojoType=&quot;dijit.form.Button&quot; onClick=&quot;showDialogTwo();&quot;&gt;Show me!&lt;/button&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="The javascript, put this wherever you want the dialog creation to happen" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dijit.form.Button&quot;);
+    dojo.require(&quot;dijit.Dialog&quot;);
+
+    var secondDlg;
+    dojo.addOnLoad(function(){
+        // create the dialog:
+        secondDlg = new dijit.Dialog({
+            title: &quot;Programatic Dialog Creation&quot;,
+            style: &quot;width: 300px&quot;
+        });
+    });
+    function showDialogTwo(){
+        // set the content of the dialog:
+        secondDlg.attr(&quot;content&quot;, &quot;Hey, I wasn't there before, I was added at &quot; + new Date() + &quot;!&quot;);
+        secondDlg.show();
+    }
+&lt;/script&gt;</pre></div></div></div>
+<div class="section" id="coloring-the-underlay">
+<h3>Coloring the Underlay<a class="headerlink" href="#coloring-the-underlay" title="Permalink to this headline">¶</a></h3>
+<p>If you wish to alter the default color for the underlay, you do so in CSS. The underlay receives an ID to match the Dialog, suffixed with :ref:<tt class="docutils literal"><span class="pre">underlay</span></tt>, which you can define a css class for:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;style type=&quot;text/css&quot;&gt;
+    #dialogColor_underlay {
+        background-color:green;
+    }
+&lt;/style&gt;
+
+&lt;div id=&quot;dialogColor&quot; title=&quot;Colorful&quot; dojoType=&quot;dijit.Dialog&quot;&gt;
+     My background color is Green
+&lt;/div&gt;
+
+&lt;p&gt;When pressing this button the dialog will popup:&lt;/p&gt;
+&lt;button id=&quot;button4&quot; dojoType=&quot;dijit.form.Button&quot;&gt;Show me!&lt;/button&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dijit.form.Button&quot;);
+    dojo.require(&quot;dijit.Dialog&quot;);
+
+    dojo.addOnLoad(function(){
+        // create the dialog:
+        var dialogColor = dijit.byId(&quot;dialogColor&quot;);
+
+        // connect t the button so we display the dialog onclick:
+        dojo.connect(dijit.byId(&quot;button4&quot;), &quot;onClick&quot;, dialogColor, &quot;show&quot;);
+    });
+&lt;/script&gt;</pre></div></div></div>
+<div class="section" id="confirming-dialog-contents">
+<h3>Confirming Dialog Contents<a class="headerlink" href="#confirming-dialog-contents" title="Permalink to this headline">¶</a></h3>
+<p>This example shows a Dialog containing form data.  You can get the form data as a javascript object by calling attr(&#8216;values&#8217;) on the dialog.</p>
+<p>To prevent the user from dismissing the dialog if there are errors in the form, add an onSubmit handler to your submit button:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.Dialog&quot; id=&quot;formDialog&quot; title=&quot;Form Dialog&quot;
+    execute=&quot;alert('submitted w/args:\n' + dojo.toJson(arguments[0], true));&quot;&gt;
+    &lt;table&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;label for=&quot;name&quot;&gt;Name: &lt;/label&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input dojoType=dijit.form.TextBox type=&quot;text&quot; name=&quot;name&quot; id=&quot;name&quot;&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;label for=&quot;loc&quot;&gt;Location: &lt;/label&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input dojoType=dijit.form.TextBox type=&quot;text&quot; name=&quot;loc&quot; id=&quot;loc&quot;&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;label for=&quot;date&quot;&gt;Start date: &lt;/label&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input dojoType=dijit.form.DateTextBox type=&quot;text&quot; name=&quot;sdate&quot; id=&quot;sdate&quot;&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;label for=&quot;date&quot;&gt;End date: &lt;/label&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input dojoType=dijit.form.DateTextBox type=&quot;text&quot; name=&quot;edate&quot; id=&quot;edate&quot;&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;label for=&quot;date&quot;&gt;Time: &lt;/label&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input dojoType=dijit.form.TimeTextBox type=&quot;text&quot; name=&quot;time&quot; id=&quot;time&quot;&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;&lt;label for=&quot;desc&quot;&gt;Description: &lt;/label&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;input dojoType=dijit.form.TextBox type=&quot;text&quot; name=&quot;desc&quot; id=&quot;desc&quot;&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td colspan=&quot;2&quot; align=&quot;center&quot;&gt;
+                &lt;button dojoType=dijit.form.Button type=&quot;submit&quot;
+                    onSubmit=&quot;return checkData();&quot;&gt;OK&lt;/button&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;When pressing this button the dialog will popup:&lt;/p&gt;
+&lt;button id=&quot;buttonThree&quot; dojoType=&quot;dijit.form.Button&quot;&gt;Show me!&lt;/button&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="The javascript, put this wherever you want the dialog creation to happen" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dijit.form.Button&quot;);
+    dojo.require(&quot;dijit.Dialog&quot;);
+    dojo.require(&quot;dijit.form.TextBox&quot;);
+    dojo.require(&quot;dijit.form.DateTextBox&quot;);
+    dojo.require(&quot;dijit.form.TimeTextBox&quot;);
+
+    dojo.addOnLoad(function(){
+        formDlg = dijit.byId(&quot;formDialog&quot;);
+        // connect to the button so we display the dialog on click:
+        dojo.connect(dijit.byId(&quot;buttonThree&quot;), &quot;onClick&quot;, formDlg, &quot;show&quot;);
+    });
+
+    function checkData(){
+        var data = formDlg.attr('value');
+        console.log(data);
+        if(data.sdate &gt; data.edate){
+            alert(&quot;Start date must be before end date&quot;);
+            return false;
+        }else{
+            return true;
+        }
+    }
+&lt;/script&gt;</pre></div></div></div>
+<div class="section" id="sizing-the-dialog">
+<h3>Sizing the Dialog<a class="headerlink" href="#sizing-the-dialog" title="Permalink to this headline">¶</a></h3>
+<p>A dialog by default sizes itself according to it&#8217;s content, just like a plain &lt;div&gt;.
+If you want a scrollbar on a dialog, then you need to add width/height to a div <em>inside</em> the dialog, like this:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dijit.form.Button&quot;);
+    dojo.require(&quot;dijit.Dialog&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;sized&quot; dojoType=&quot;dijit.Dialog&quot; title=&quot;My scrolling dialog&quot;&gt;
+    &lt;div style=&quot;width: 200px; height: 100px; overflow: auto;&quot;&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+            semper sagittis velit. Cras in mi. Duis porta mauris ut ligula. Proin
+            porta rutrum lacus. Etiam consequat scelerisque quam. Nulla facilisi.
+            Maecenas luctus venenatis nulla. In sit amet dui non mi semper iaculis.
+            Sed molestie tortor at ipsum. Morbi dictum rutrum magna. Sed vitae
+            risus.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;When pressing this button the dialog will popup (with a scrollbar):&lt;/p&gt;
+&lt;button dojoType=&quot;dijit.form.Button&quot; onClick=&quot;dijit.byId('sized').show();&quot;&gt;Show me!&lt;/button&gt;</pre></div></div></div>
+</div>
+<div class="section" id="accessibility">
+<h2><a class="toc-backref" href="#id5">Accessibility<a class="headerlink" href="#accessibility" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="keyboard">
+<h3>Keyboard<a class="headerlink" href="#keyboard" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="51%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Action</th>
+<th class="head">Key</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Navigate to next focusable element in the dialog</td>
+<td>tab</td>
+</tr>
+<tr><td>Navigate to previous focusable element in the dialog</td>
+<td>shift-tab</td>
+</tr>
+<tr><td>Close the dialog</td>
+<td>escape</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="keyboard-navigation-in-release-1-1-and-later">
+<h4>Keyboard Navigation in Release 1.1 and later<a class="headerlink" href="#keyboard-navigation-in-release-1-1-and-later" title="Permalink to this headline">¶</a></h4>
+<p>When a dialog is opened focus goes to the first focusable element within the dialog. The first focusable element may be an element which appears in the tab order by default such as a form field or link, an element with a tabindex attribute value of 0 or an element with a tabindex value greater than 0. Elements with a tabindex value greater than 0 will appear in the tab order before elements with a tabindex of 0 or those in the tab order by default. If the dialog does not contain a focusable item, focus will be set to the dialog container element when the dialog is opened. The same focus behavior has been implemented for tooltip dialog</p>
+<p>When focus is in a dialog, pressing the tab key will move focus forward to each focusable element within the dialog. When focus reaches the last focusable element in the dialog, pressing tab will cycle focus back to the first focusable item. Pressing shift-tab will move focus backwards through focusable elements within the dialog. When the first focusable item is reached, pressing shift-tab will move focus to the last focusable item in the dialog.</p>
+</div>
+<div class="section" id="keyboard-navigation-previous-to-release-1-1">
+<h4>Keyboard Navigation Previous to Release 1.1<a class="headerlink" href="#keyboard-navigation-previous-to-release-1-1" title="Permalink to this headline">¶</a></h4>
+<p>When a dialog is opened focus goes to the title section of the dialog. This was implemented to provide screen reader support to speak the title of the dialog when it is opened. Likewise, when a tooltip dialog is opened, focus is placed on the container of the tooltip dialog. In future versions of the dialog and tooltip dialog widgets, focus will go to the first item in the dialog or tooltip dialog.</p>
+<p>When focus is in a dialog, pressing the tab key will move focus forward to each focusable element within the dialog. When focus reaches the last focusable element in the dialog, pressing tab will cycle focus back to the dialog title. Pressing shift-tab will move focus backwards through focusable elements within the dialog until the dialog title is reached. If focus has previous cycled forward through all of the elements, pressing shift-tab with focus on the dialog title will move focus to the last element in the dialog. If focus has not previously been cycled through all of the focusable elements in the dialog using the tab key, pressing shift-tab with focus on the dialog title will leave focus in the title. The same focus cycling applies to the tooltip dialog as well with focus being set to the tooltip dialog container since there is no dialog title.</p>
+</div>
+</div>
+<div class="section" id="known-issues">
+<h3>Known Issues<a class="headerlink" href="#known-issues" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>On Windows, In Firefox 2, when in High Contrast mode, the dialog with display correctly, but the underlying page will not be seen.</li>
+<li>Dialogs with an input type=file as the only focusable element will not work with the keyboard. This is because input type=file
+elements require   two tab stops - one in the textbox and the other on the &#8220;Browse&#8221; button. Rather than clutter the dialog box
+widget with code to special case for this one condition, dialog boxes with an input type=file as the only focusable element are not supported.</li>
+<li>Dialogs with an input type=file element as the first focusable element in Firefox (and there are additional focusable elements).
+Programmatically setting focus to an input type=file element behaves oddly in Firefox. In this case the focus is set onto the
+textbox field and then immediately moved onto the browse button of the input type=file field. This causes problems in Firefox
+when setting focus to an input type=file element as the first element as a dialog. For this reason, in Firefox if the first
+focusable item in a dialog is an input type=file, focus will be set onto the dialog container rather than the input element.
+For these reasons it is recommended that input type=file elements not be added as the only or first focusable item within a dialog in Firefox.</li>
+<li>Even though the dialog is marked with the proper ARIA role of dialog, JAWS 9 does not speak &#8220;dialog&#8221; when the dialog is opened.
+In Firefox 2 even though the focus is on the first focusable item in the dialog, the information about that item is also not spoken.
+Thus, it is important that the instructions or label for a trigger element that opens a dialog to indicate via text that a dialog will
+be opened. In Firefox 3 with JAWS 9 the dialog is also not announced but the information about the item in the dialog which gets focus is spoken. The issue has been fixed in JAWS 10 with Firefox 3.</li>
+<li>There are focus issues when the dialog is created via an href. Due to timing issues focus may not be properly set nor properly trapped
+in the dialog. For accessibility reasons, dialogs created via href are not recommended. This issue will be addressed in a future release.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

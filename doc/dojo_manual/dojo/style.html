@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojo.style &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dojo" href="contents.html" />
+    <link rel="next" title="dojo.subscribe" href="subscribe.html" />
+    <link rel="prev" title="dojo.setObject" href="setObject.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="subscribe.html" title="dojo.subscribe"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="setObject.html" title="dojo.setObject"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dojo</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojo.style</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#usage">Usage</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#get-the-style-of-a-dom-node">Get the style of a DOM node</a></li>
+<li><a class="reference" href="#get-a-single-style-property-of-a-dom-node">Get a single style property of a DOM node</a></li>
+<li><a class="reference" href="#set-a-style-property">Set a style property</a></li>
+<li><a class="reference" href="#set-multiple-style-properties-at-once">Set multiple style properties at once</a></li>
+<li><a class="reference" href="#use-dojo-style-with-a-list-of-nodes">Use dojo.style() with a list of nodes</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#tips">Tips</a></li>
+<li><a class="reference" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="setObject.html"
+                                  title="previous chapter">dojo.setObject</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="subscribe.html"
+                                  title="next chapter">dojo.subscribe</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dojo/style.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo-style">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojo.style<a class="headerlink" href="#dojo-style" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V?</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo-style" id="id2" name="id2">dojo.style</a><ul>
+<li><a class="reference" href="#introduction" id="id3" name="id3">Introduction</a></li>
+<li><a class="reference" href="#usage" id="id4" name="id4">Usage</a></li>
+<li><a class="reference" href="#examples" id="id5" name="id5">Examples</a></li>
+<li><a class="reference" href="#tips" id="id6" name="id6">Tips</a></li>
+<li><a class="reference" href="#see-also" id="id7" name="id7">See also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>A getter/setter for styles on a DOM node.</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>Accesses styles on a node. If 2 arguments are passed, acts as a getter. If 3 arguments are passed, acts as a setter.</p>
+<p>See the Tips section below for caveats on getting style information, like when using a compound style value (like background or border), and getting node dimensions.</p>
+</div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id4">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3</pre></td><td class="code"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+  <span class="nx">dojo</span><span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="nx">node</span><span class="o">,</span> <span class="nx">style</span><span class="o">,</span> <span class="nx">value</span><span class="p">);</span>
+<span class="o">&lt;/</span><span class="nx">script</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<dl class="docutils">
+<dt>node</dt>
+<dd>id or reference of the DOM node to get/set style for</dd>
+<dt>style</dt>
+<dd>the style property to set in DOM-accessor format (&quot;borderWidth&quot;, not &quot;border-width&quot;) or an object with key/value pairs suitable for setting each property.</dd>
+<dt>value</dt>
+<dd>If passed, sets value on the node for style, handling cross-browser concerns.  When setting a pixel value, be sure to include &quot;px&quot; in the value. For instance, top: &quot;200px&quot;. Otherwise, in some cases, some browsers will not apply the style.</dd>
+</dl>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id5">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="get-the-style-of-a-dom-node">
+<h3>Get the style of a DOM node<a class="headerlink" href="#get-the-style-of-a-dom-node" title="Permalink to this headline">¶</a></h3>
+<p>Passing only an ID or node returns the computed style object of the node:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+    .style1 { color: red; padding: 10px; border: 1px red solid; }
+    #poorboy_styles li { display:inline; }
+    #poorboy_styles li .prop { color: blue; }
+&lt;/style&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dijit.form.Button&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;poorboy&quot; class=&quot;style1&quot;&gt;Don't look at me - I'm just a poor DOM node.&lt;/div&gt;
+&lt;ul id=&quot;poorboy_styles&quot;&gt;&lt;/ul&gt;
+
+&lt;div dojoType=&quot;dijit.form.Button&quot;&gt;
+    get the current style
+    &lt;script type=&quot;dojo/method&quot; event=&quot;onClick&quot; args=&quot;evt&quot;&gt;
+        // Get the style from DOM node &quot;poorboy&quot;:
+        var s = dojo.style(&quot;poorboy&quot;);
+        for(var i in s){
+            var n = dojo.doc.createElement('li');
+            n.innerHTML = i + &quot; = &lt;span class='prop'&gt;&quot; + s[i] + &quot;&lt;/span&gt;, &quot;;
+            dojo.place(n, &quot;poorboy_styles&quot;, &quot;last&quot;);
+        }
+    &lt;/script&gt;
+&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="get-a-single-style-property-of-a-dom-node">
+<h3>Get a single style property of a DOM node<a class="headerlink" href="#get-a-single-style-property-of-a-dom-node" title="Permalink to this headline">¶</a></h3>
+<p>Passing a node and a style property returns the current normalized, computed value for that property:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+    .style2 { color: blue; padding: 10px; border: 1px blue solid; }
+&lt;/style&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dijit.form.Button&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;poorboy2&quot; class=&quot;style2&quot;&gt;I will tell you anything...&lt;/div&gt;
+
+&lt;div dojoType=&quot;dijit.form.Button&quot;&gt;
+    give me the color
+    &lt;script type=&quot;dojo/method&quot; event=&quot;onClick&quot; args=&quot;evt&quot;&gt;
+        // Get the color property from DOM node &quot;poorboy2&quot;:
+        alert(dojo.style(&quot;poorboy&quot;, &quot;color&quot;));
+    &lt;/script&gt;
+&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="set-a-style-property">
+<h3>Set a style property<a class="headerlink" href="#set-a-style-property" title="Permalink to this headline">¶</a></h3>
+<p>Passing a node, a style property, and a value changes the current display of the node and returns the new computed value:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+    .style3 { color: green; padding: 10px; border: 1px green solid; }
+&lt;/style&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dijit.form.Button&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;poorboy3&quot; class=&quot;style3&quot;&gt;I don't like this green&lt;/div&gt;
+
+&lt;div dojoType=&quot;dijit.form.Button&quot;&gt;
+    give me another color
+    &lt;script type=&quot;dojo/method&quot; event=&quot;onClick&quot; args=&quot;evt&quot;&gt;
+        // Set the color 'red' to DOM node &quot;poorboy3&quot;:
+        dojo.style(&quot;poorboy3&quot;, &quot;color&quot;, &quot;red&quot;);
+    &lt;/script&gt;
+&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="set-multiple-style-properties-at-once">
+<h3>Set multiple style properties at once<a class="headerlink" href="#set-multiple-style-properties-at-once" title="Permalink to this headline">¶</a></h3>
+<p>Passing a node, an object-style style property sets each of the values in turn and returns the computed style object of the node:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+    .style4 { color: black; padding: 10px; border: 1px black solid; }
+    .nib { font-size: 4.2em; }
+&lt;/style&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dijit.form.Button&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;poorboy4&quot; class=&quot;style4&quot;&gt;&lt;span class=&quot;nib&quot;&gt;NIB&lt;/span&gt;&lt;br/&gt;NODE IN BLACK&lt;/div&gt;
+
+&lt;div dojoType=&quot;dijit.form.Button&quot;&gt;
+    set multiple style properties
+    &lt;script type=&quot;dojo/method&quot; event=&quot;onClick&quot; args=&quot;evt&quot;&gt;
+        // Set the color to 'white', background-color to &quot;black&quot;, padding to &quot;20px&quot; to DOM node &quot;poorboy4&quot;:
+        dojo.style(&quot;poorboy4&quot;, {
+            &quot;backgroundColor&quot;: &quot;black&quot;,
+            &quot;color&quot;: &quot;white&quot;,
+            &quot;padding&quot;: &quot;20px&quot;
+        });
+    &lt;/script&gt;
+&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="use-dojo-style-with-a-list-of-nodes">
+<h3>Use dojo.style() with a list of nodes<a class="headerlink" href="#use-dojo-style-with-a-list-of-nodes" title="Permalink to this headline">¶</a></h3>
+<p>dojo.NodeList implements .style() using the same syntax, omitting the &quot;node&quot; parameter, calling dojo.style() on every element of the list.</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+    .style5 { color: black; padding: 10px; border: 1px black solid; }
+    .sweet { color: #FF8C8C; }
+&lt;/style&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dijit.form.Button&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;poorboy5&quot; class=&quot;style5&quot;&gt;
+    &lt;p&gt;The different faces of dojo.style():&lt;/p&gt;
+    &lt;ul&gt;
+        &lt;li class=&quot;sweet&quot;&gt;dojo.style(node);&lt;/li&gt;
+        &lt;li class=&quot;sweet&quot;&gt;dojo.style(node, property);&lt;/li&gt;
+        &lt;li class=&quot;sweet&quot;&gt;dojo.style(node, property, value);&lt;/li&gt;
+        &lt;li class=&quot;sweet&quot;&gt;dojo.style(node, object);&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div dojoType=&quot;dijit.form.Button&quot;&gt;
+    change the style for each point
+    &lt;script type=&quot;dojo/method&quot; event=&quot;onClick&quot; args=&quot;evt&quot;&gt;
+        // Set the color to 'red', opacity to 0.5, border to &quot;3px solid black&quot; to DOM node &quot;poorboy4&quot;:
+        dojo.query(&quot;.sweet&quot;).style({
+            &quot;backgroundColor&quot;: &quot;#B822B0&quot;,
+            &quot;color&quot;: &quot;#FFFF00&quot;
+        });
+    &lt;/script&gt;
+&lt;/div&gt;</pre></div></div></div>
+</div>
+<div class="section" id="tips">
+<h2><a class="toc-backref" href="#id6">Tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></a></h2>
+<ul>
+<li><p class="first">If the CSS style property is hyphenated, the JavaScript property is camelCased.</p>
+<p>for example: &quot;font-size&quot; becomes &quot;fontSize&quot;, and so on</p>
+</li>
+<li><p class="first">You will get a &quot;TypeError: n is null&quot;, if you call dojo.style() on a non existent DOM node. It's more safe to use dojo.query(&quot;#a&quot;).style(&quot;b&quot;,&quot;c&quot;);</p>
+</li>
+<li><p class="first">dojo.style uses getComputedStyle to get the style value, so the value will be a calculated value, not just the immediate node.style value.</p>
+</li>
+<li><p class="first">Getting the value for a compound style value (like background or border): you need to ask for specific properties, like bottomBorderWidth. Getting the &quot;background&quot; compound value is not reflected in the way you might think when using getComputedStyle.</p>
+</li>
+<li><p class="first">For getting a node's dimensions, use <a class="reference" href="marginBox.html#dojo-marginbox"><em>dojo.marginBox</em></a> or <a class="reference" href="contentBox.html#dojo-contentbox"><em>dojo.contentBox</em></a>: the .width and .style properties are not accurate from getComputedStyle.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id7">See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<ul>
+<li><p class="first"><a class="reference" href="http://dojocampus.org/content/2008/04/01/dojos-got-style/">Dojo’s got style</a></p>
+<p>dojo.style() tutorial from Peter Higgins</p>
+</li>
+<li><p class="first"><a class="reference" href="query.html#dojo-query"><em>dojo.query</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="NodeList.html#dojo-nodelist"><em>dojo.NodeList</em></a></p>
+</li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

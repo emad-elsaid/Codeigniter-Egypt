@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojo.data.api.Identity &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Dojo" href="../../contents.html" />
+    <link rel="next" title="Notification API" href="Notification.html" />
+    <link rel="prev" title="dojo.data.api.Read" href="../api.Read.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../../_static/dojo/dijit/themes/dijit.css";
+@import "../../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="Notification.html" title="Notification API"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="../api.Read.html" title="dojo.data.api.Read"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../../contents.html" accesskey="U">Dojo</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojo.data.api.Identity</a><ul>
+<li><a class="reference" href="#identity-api-requirements">Identity API Requirements</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#basic-lookup-of-an-item-by-identity">Basic lookup of an item by identity</a></li>
+<li><a class="reference" href="#obtaining-the-value-of-an-item-s-identity">Obtaining the value of an item&#8217;s identity</a></li>
+<li><a class="reference" href="#obtaining-the-list-of-attributes-that-comprise-the-identity-of-an-item">Obtaining the list of attributes that comprise the identity of an item</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#the-complete-identity-api">The Complete Identity API</a><ul>
+<li><a class="reference" href="#getidentity">getIdentity</a></li>
+<li><a class="reference" href="#getidentityattributes">getIdentityAttributes</a></li>
+<li><a class="reference" href="#fetchitembyidentity">fetchItemByIdentity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="../api.Read.html"
+                                  title="previous chapter">dojo.data.api.Read</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="Notification.html"
+                                  title="next chapter">Notification API</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../../_sources/dojo/data/api/Identity.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo-data-api-identity">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojo.data.api.Identity<a class="headerlink" href="#dojo-data-api-identity" title="Permalink to this headline">¶</a></a></h1>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo-data-api-identity" id="id2" name="id2">dojo.data.api.Identity</a><ul>
+<li><a class="reference" href="#identity-api-requirements" id="id3" name="id3">Identity API Requirements</a></li>
+<li><a class="reference" href="#examples" id="id4" name="id4">Examples</a><ul>
+<li><a class="reference" href="#basic-lookup-of-an-item-by-identity" id="id5" name="id5">Basic lookup of an item by identity</a></li>
+<li><a class="reference" href="#obtaining-the-value-of-an-item-s-identity" id="id6" name="id6">Obtaining the value of an item&#8217;s identity</a></li>
+<li><a class="reference" href="#obtaining-the-list-of-attributes-that-comprise-the-identity-of-an-item" id="id7" name="id7">Obtaining the list of attributes that comprise the identity of an item</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#the-complete-identity-api" id="id8" name="id8">The Complete Identity API</a><ul>
+<li><a class="reference" href="#getidentity" id="id9" name="id9">getIdentity</a></li>
+<li><a class="reference" href="#getidentityattributes" id="id10" name="id10">getIdentityAttributes</a></li>
+<li><a class="reference" href="#fetchitembyidentity" id="id11" name="id11">fetchItemByIdentity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The dojo.data.api.Identity interface defines the set of APIs that are implemented by a datastore if a data source provides a method by which to uniquely identify each item. This API then allows users of that datastore to request a specific item without searching for an item that matches specific attributes. Review the following examples, guidelines, and complete API documentation for futher information on the Identity API.</p>
+<div class="section" id="identity-api-requirements">
+<h2><a class="toc-backref" href="#id3">Identity API Requirements<a class="headerlink" href="#identity-api-requirements" title="Permalink to this headline">¶</a></a></h2>
+<p>The following list provides the requirements for the Identity API:</p>
+<ul class="simple">
+<li>The identifiers must always be an object that can be converted to a string using the toString() JavaScript API.
+Note: This does not keep identities from being compound keys; they just must be able to be represented in a string fashion.</li>
+<li>Stores that implement the Identity API may expose the identity as a publicly accessible attribute on the item, or they may implement the identity as a private attribute.</li>
+<li>Stores that expose the identity of the store as a public attribute (or set of attributes), must return the attribute(s) identifier(s) from the getIdentityAttributes() method. If they are not exposed as public attributes, then the getIdentityAttributes() method must return a null value.</li>
+<li>All identifier values must be unique and address only one item within the store.</li>
+<li>The store&#8217;s getFeatures() function will return, as part of its associative map, a property with the key name of dojo.data.api.Identity. The value of the property can be anything reasonable, such as the boolean value true, the name of the attribute that represents the identity, an array of attributes, or even an object. By the mere presence of this key in the map, the store declares that it implements this API.</li>
+<li>Identities should be treated as immutable. Many widgets use the identity for caching purposes, so changing its value will break those widgets.</li>
+</ul>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id4">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<p>For all of the examples in the following sections, assume that there is a simple ItemFileReadStore instantiation from the following data in the countries.json file:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">identifier</span><span class="o">:</span> <span class="s1">&#39;abbr&#39;</span><span class="o">,</span>
+  <span class="k">label</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span><span class="o">,</span>
+  <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="nx">abbr</span><span class="o">:</span><span class="s1">&#39;ec&#39;</span><span class="o">,</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Ecuador&#39;</span><span class="o">,</span>           <span class="nx">capital</span><span class="o">:</span><span class="s1">&#39;Quito&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">abbr</span><span class="o">:</span><span class="s1">&#39;eg&#39;</span><span class="o">,</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Egypt&#39;</span><span class="o">,</span>             <span class="nx">capital</span><span class="o">:</span><span class="s1">&#39;Cairo&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">abbr</span><span class="o">:</span><span class="s1">&#39;sv&#39;</span><span class="o">,</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;El Salvador&#39;</span><span class="o">,</span>       <span class="nx">capital</span><span class="o">:</span><span class="s1">&#39;San Salvador&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">abbr</span><span class="o">:</span><span class="s1">&#39;gq&#39;</span><span class="o">,</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Equatorial Guinea&#39;</span><span class="o">,</span> <span class="nx">capital</span><span class="o">:</span><span class="s1">&#39;Malabo&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">abbr</span><span class="o">:</span><span class="s1">&#39;er&#39;</span><span class="o">,</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Eritrea&#39;</span><span class="o">,</span>           <span class="nx">capital</span><span class="o">:</span><span class="s1">&#39;Asmara&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">abbr</span><span class="o">:</span><span class="s1">&#39;ee&#39;</span><span class="o">,</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Estonia&#39;</span><span class="o">,</span>           <span class="nx">capital</span><span class="o">:</span><span class="s1">&#39;Tallinn&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">abbr</span><span class="o">:</span><span class="s1">&#39;et&#39;</span><span class="o">,</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Ethiopia&#39;</span><span class="o">,</span>          <span class="nx">capital</span><span class="o">:</span><span class="s1">&#39;Addis Ababa&#39;</span> <span class="p">}</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+<div class="section" id="basic-lookup-of-an-item-by-identity">
+<h3><a class="toc-backref" href="#id5">Basic lookup of an item by identity<a class="headerlink" href="#basic-lookup-of-an-item-by-identity" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">itemStore</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">ItemFileReadStore</span><span class="p">({</span><span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;countries.json&#39;</span><span class="p">});</span>
+
+<span class="k">function</span> <span class="nx">failed</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c">//Do something with the provided error.</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nx">gotItem</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">itemStore</span><span class="p">.</span><span class="nx">isItem</span><span class="p">(</span><span class="nx">item</span><span class="p">)){</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">itemStore</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">item</span><span class="o">,</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="o">===</span> <span class="s2">&quot;El Salvador&quot;</span><span class="p">)){</span>
+      <span class="nx">failed</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;The item loaded does not have the attribute value for attribute [name] expected.&quot;</span><span class="p">));</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+      <span class="c">//Do something with it.</span>
+    <span class="p">}</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="c">//This should never occur.</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Unable to locate the item with identity [sv]&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c">//Invoke the lookup. This is an async call as it may have to call back to a server to get data.</span>
+<span class="nx">itemStore</span><span class="p">.</span><span class="nx">fetchItemByIdentity</span><span class="p">({</span><span class="nx">identity</span><span class="o">:</span> <span class="s2">&quot;sv&quot;</span><span class="o">,</span> <span class="nx">onItem</span><span class="o">:</span> <span class="nx">gotItem</span><span class="o">,</span> <span class="nx">onError</span><span class="o">:</span> <span class="nx">failed</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="obtaining-the-value-of-an-item-s-identity">
+<h3><a class="toc-backref" href="#id6">Obtaining the value of an item's identity<a class="headerlink" href="#obtaining-the-value-of-an-item-s-identity" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">itemStore</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">ItemFileReadStore</span><span class="p">({</span><span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;countries.json&#39;</span><span class="p">});</span>
+
+<span class="k">function</span> <span class="nx">onError</span><span class="p">(</span><span class="nx">error</span><span class="o">,</span> <span class="nx">request</span><span class="p">){</span>
+  <span class="c">//Do something with the provided error.</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nx">onComplete</span><span class="p">(</span><span class="nx">items</span><span class="o">,</span> <span class="nx">request</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">items</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">1</span><span class="p">){</span>
+    <span class="k">var</span> <span class="nx">identifier</span> <span class="o">=</span> <span class="nx">itemStore</span><span class="p">.</span><span class="nx">getIdentity</span><span class="p">(</span><span class="nx">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">identifier</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nx">identifier</span> <span class="o">===</span> <span class="s2">&quot;er&quot;</span><span class="p">){</span>
+      <span class="c">//Do something with the located identity.</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+      <span class="nx">onError</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;The identifier returned does not match what was expected.&quot;</span><span class="p">)</span><span class="o">,</span> <span class="nx">request</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="nx">onError</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;Too many matches found.&quot;</span><span class="p">)</span><span class="o">,</span> <span class="nx">request</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c">//Search the store and find the item with the name Eritrea</span>
+<span class="nx">itemStore</span><span class="p">.</span><span class="nx">fetch</span><span class="p">({</span><span class="nx">query</span><span class="o">:</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Eritrea&quot;</span><span class="p">}</span><span class="o">,</span> <span class="nx">onComplete</span><span class="o">:</span> <span class="nx">onComplete</span><span class="o">,</span> <span class="nx">onError</span><span class="o">:</span> <span class="nx">onError</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="obtaining-the-list-of-attributes-that-comprise-the-identity-of-an-item">
+<h3><a class="toc-backref" href="#id7">Obtaining the list of attributes that comprise the identity of an item<a class="headerlink" href="#obtaining-the-list-of-attributes-that-comprise-the-identity-of-an-item" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">itemStore</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">ItemFileReadStore</span><span class="p">({</span><span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;countries.json&#39;</span><span class="p">});</span>
+
+<span class="k">function</span> <span class="nx">failed</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c">//Do something with the provided error.</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nx">gotItem</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">itemStore</span><span class="p">.</span><span class="nx">isItem</span><span class="p">(</span><span class="nx">item</span><span class="p">)){</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="nx">itemStore</span> <span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">item</span><span class="o">,</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="o">===</span> <span class="s2">&quot;El Salvador&quot;</span><span class="p">)){</span>
+      <span class="nx">failed</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;The item loaded does not have the attribute value for attribute [name] expected.&quot;</span><span class="p">));</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+      <span class="k">var</span> <span class="nx">identityAttributes</span> <span class="o">=</span> <span class="nx">itemStore</span><span class="p">.</span><span class="nx">getIdentityAttributes</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">identityAttributes</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">){</span>
+        <span class="k">for</span><span class="p">(</span><span class="k">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">identityAttributes</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+          <span class="k">var</span> <span class="nx">identifier</span> <span class="o">=</span> <span class="nx">identityAttributes</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+          <span class="c">//Do something with &#39;identifier&#39;.</span>
+        <span class="p">}</span>
+      <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="nx">failed</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;Unable to locate the list of attributes comprising the identity.&quot;</span><span class="p">));</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="c">//This should never occur.</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;Unable to locate the item with identity [sv]&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c">//Invoke the lookup. This is an async call as it may have to call back to a server to get data.</span>
+<span class="nx">itemStore</span><span class="p">.</span><span class="nx">fetchItemByIdentity</span><span class="p">({</span><span class="nx">identity</span><span class="o">:</span> <span class="s2">&quot;sv&quot;</span><span class="o">,</span> <span class="nx">onItem</span><span class="o">:</span> <span class="nx">gotItem</span><span class="o">,</span> <span class="nx">onError</span><span class="o">:</span> <span class="nx">failed</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-complete-identity-api">
+<h2><a class="toc-backref" href="#id8">The Complete Identity API<a class="headerlink" href="#the-complete-identity-api" title="Permalink to this headline">¶</a></a></h2>
+<p>For convenience, the following Identity API was taken directly from dojo/data/api/Identity.js and provided below:</p>
+<div class="section" id="getidentity">
+<h3><a class="toc-backref" href="#id9">getIdentity<a class="headerlink" href="#getidentity" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">getIdentity</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/* item */</span> <span class="nx">item</span><span class="p">)</span>
+  <span class="c">//    summary:</span>
+  <span class="c">//        Returns a unique identifier for an item. The return value will be</span>
+  <span class="c">//        either a string or something that has a toString() method.</span>
+  <span class="c">//    item:</span>
+  <span class="c">//        The item from the store from which to obtain its identifier.</span>
+  <span class="c">//    exceptions:</span>
+  <span class="c">//        Conforming implementations may throw an exception or return null if</span>
+  <span class="c">//        item is not an item.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getidentityattributes">
+<h3><a class="toc-backref" href="#id10">getIdentityAttributes<a class="headerlink" href="#getidentityattributes" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">getIdentityAttributes</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/* item */</span> <span class="nx">item</span><span class="p">)</span>
+  <span class="c">//    summary:</span>
+  <span class="c">//        Returns an array of attribute names that are used to generate the identity.</span>
+  <span class="c">//        For most stores, this is a single attribute, but for some complex stores</span>
+  <span class="c">//        such as RDB backed stores that use compound (multi-attribute) identifiers</span>
+  <span class="c">//        it can be more than one. If the identity is not composed of attributes</span>
+  <span class="c">//        on the item, it will return null. This function is intended to identify</span>
+  <span class="c">//        the attributes that comprise the identity so that so that during a render</span>
+  <span class="c">//        of all attributes, the UI can hide the the identity information if it</span>
+  <span class="c">//        chooses.</span>
+  <span class="c">//    item:</span>
+  <span class="c">//        The item from the store from which to obtain the array of public attributes that</span>
+  <span class="c">//        compose the identifier, if any.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fetchitembyidentity">
+<h3><a class="toc-backref" href="#id11">fetchItemByIdentity<a class="headerlink" href="#fetchitembyidentity" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">fetchItemByIdentity</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/* object */</span> <span class="nx">keywordArgs</span><span class="p">){</span>
+  <span class="c">//    summary:</span>
+  <span class="c">//        Given the identity of an item, this method returns the item that has</span>
+  <span class="c">//        that identity through the onItem callback. Conforming implementations</span>
+  <span class="c">//        should return null if there is no item with the given identity.</span>
+  <span class="c">//        Implementations of fetchItemByIdentity() may sometimes return an item</span>
+  <span class="c">//        from a local cache and may sometimes fetch an item from a remote server,</span>
+  <span class="c">//</span>
+  <span class="c">//    keywordArgs:</span>
+  <span class="c">//        An anonymous object that defines the item to locate and callbacks to invoke when the</span>
+  <span class="c">//        item has been located and load has completed. The format of the object is as follows:</span>
+  <span class="c">//        {</span>
+  <span class="c">//            identity: string|object,</span>
+  <span class="c">//            onItem: Function,</span>
+  <span class="c">//            onError: Function,</span>
+  <span class="c">//            scope: object</span>
+  <span class="c">//        }</span>
+  <span class="c">//    The *identity* parameter.</span>
+  <span class="c">//        The identity parameter is the identity of the item you wish to locate and load</span>
+  <span class="c">//        This attribute is required. It should be a string or an object that toString()</span>
+  <span class="c">//        can be called on.</span>
+  <span class="c">//</span>
+  <span class="c">//    The *onItem* parameter.</span>
+  <span class="c">//        Function(item)</span>
+  <span class="c">//        The onItem parameter is the callback to invoke when the item has been loaded. It takes only one</span>
+  <span class="c">//        parameter, the item located, or null if none found.</span>
+  <span class="c">//</span>
+  <span class="c">//    The *onError* parameter.</span>
+  <span class="c">//        Function(error)</span>
+  <span class="c">//        The onError parameter is the callback to invoke when the item load encountered an error. It takes only one</span>
+  <span class="c">//        parameter, the error object</span>
+  <span class="c">//</span>
+  <span class="c">//    The *scope* parameter.</span>
+  <span class="c">//        If a scope object is provided, all of the callback functions (onItem,</span>
+  <span class="c">//        onError, etc) will be invoked in the context of the scope object.</span>
+  <span class="c">//        In the body of the callback function, the value of the &quot;this&quot;</span>
+  <span class="c">//        keyword will be the scope object. If no scope object is provided,</span>
+  <span class="c">//        the callback functions will be called in the context of dojo.global.</span>
+  <span class="c">//        For example, onItem.call(scope, item, request) vs.</span>
+  <span class="c">//        onItem.call(dojo.global, item, request)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

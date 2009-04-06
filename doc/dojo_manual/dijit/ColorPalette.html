@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.ColorPalette &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dijit" href="contents.html" />
+    <link rel="next" title="dijit.Dialog" href="Dialog.html" />
+    <link rel="prev" title="dijit.Calendar" href="Calendar.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="Dialog.html" title="dijit.Dialog"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="Calendar.html" title="dijit.Calendar"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.ColorPalette</a><ul>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#default-color-palette">Default color palette</a></li>
+<li><a class="reference" href="#small-color-palette">Small color palette</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#accessibility">Accessibility</a><ul>
+<li><a class="reference" href="#keyboard">Keyboard</a></li>
+<li><a class="reference" href="#screen-reader">Screen Reader</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="Calendar.html"
+                                  title="previous chapter">dijit.Calendar</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="Dialog.html"
+                                  title="next chapter">dijit.Dialog</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dijit/ColorPalette.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-colorpalette">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dijit.ColorPalette<a class="headerlink" href="#dijit-colorpalette" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Bill Keese, Nikolai Onken</td>
+</tr>
+<tr class="field"><th class="field-name">Developers:</th><td class="field-body">?-</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V?</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dijit-colorpalette" id="id2" name="id2">dijit.ColorPalette</a><ul>
+<li><a class="reference" href="#examples" id="id3" name="id3">Examples</a></li>
+<li><a class="reference" href="#accessibility" id="id4" name="id4">Accessibility</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>dijit.ColorPalette is a great little tool which provides a color picker for you to use in your application.</p>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id3">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="default-color-palette">
+<h3>Default color palette<a class="headerlink" href="#default-color-palette" title="Permalink to this headline">¶</a></h3>
+<p>Default color palette, created programatically:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+   dojo.require(&quot;dijit.ColorPalette&quot;);
+   dojo.addOnLoad(function(){
+     var myPalette = new dijit.ColorPalette({
+       palette: &quot;7x10&quot;,
+       onChange: function(val){ alert(val); }
+     }, &quot;placeHolder&quot; );
+   });
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;span id=&quot;placeHolder&quot;&gt;this will be replaced&lt;/span&gt;</pre></div></div></div>
+<div class="section" id="small-color-palette">
+<h3>Small color palette<a class="headerlink" href="#small-color-palette" title="Permalink to this headline">¶</a></h3>
+<p>Small color palette, created declaratively:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+  dojo.require(&quot;dijit.ColorPalette&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.ColorPalette&quot; onChange=&quot;alert(this.value);&quot; palette=&quot;3x4&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+</div>
+<div class="section" id="accessibility">
+<h2><a class="toc-backref" href="#id4">Accessibility<a class="headerlink" href="#accessibility" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="keyboard">
+<h3>Keyboard<a class="headerlink" href="#keyboard" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Action</th>
+<th class="head">Key</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Navigate colors</td>
+<td>Arrow keys</td>
+</tr>
+<tr><td>Pick a color</td>
+<td>Spacebar or enter</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="screen-reader">
+<h3>Screen Reader<a class="headerlink" href="#screen-reader" title="Permalink to this headline">¶</a></h3>
+<p>Screen readers will read the name of each color as it is highlighted. For example, &#8220;white&#8221;, &#8220;seashell&#8221;, &#8220;cornsilk&#8221;, and so on.</p>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

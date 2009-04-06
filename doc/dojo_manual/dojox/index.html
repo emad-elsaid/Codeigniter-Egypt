@@ -1,0 +1,565 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>DojoX &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="DojoX" href="contents.html" />
+    <link rel="next" title="DojoX - Dojo Extensions and Experiments" href="info.html" />
+    <link rel="prev" title="dojox.image.ThumbnailPicker" href="image/ThumbnailPicker.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="info.html" title="DojoX - Dojo Extensions and Experiments"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="image/ThumbnailPicker.html" title="dojox.image.ThumbnailPicker"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="image/ThumbnailPicker.html"
+                                  title="previous chapter">dojox.image.ThumbnailPicker</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="info.html"
+                                  title="next chapter">DojoX - Dojo Extensions and Experiments</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dojox/index.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox">
+<span id="dojox-index"></span><h1>DojoX<a class="headerlink" href="#dojox" title="Permalink to this headline">¶</a></h1>
+<p>DojoX is an area for development of extensions to the Dojo toolkit. It is a repository for more stable and mature extensions and also acts as an incubator for experimental code, a testbed for additions to the main toolkit. Unlike Dojo and Dijit, DojoX is managed by subprojects, each of which has at least one module, a sponsor and a mission statement.</p>
+<ul class="simple">
+<li><a class="reference" href="info.html#dojox-info"><em>About DojoX</em></a></li>
+</ul>
+<p>These sections cover the available projects shipped with the Dojo Toolkit:</p>
+<ul>
+<li><p class="first"><a class="reference" href="analytics.html#dojox-analytics"><em>dojox.analytics</em></a></p>
+<ul class="simple">
+<li><a class="reference" href="analytics/Urchin.html#dojox-analytics-urchin"><em>dojox.analytics.Urchin</em></a></li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="av.html#dojox-av"><em>dojox.av</em></a></p>
+<p>Brings audio and video capabilities to the Open Web</p>
+<ul>
+<li><p class="first"><a class="reference" href="av/FLAudio.html#dojox-av-flaudio"><em>dojox.av.FLAudio</em></a></p>
+<p>Provides the ability of implementing MP3 sounds into your dojo applications</p>
+</li>
+<li><p class="first"><a class="reference" href="av/FLVideo.html#dojox-av-flvideo"><em>dojox.av.FLVideo</em></a></p>
+<p>Provides the ability to play Flash movie files (FLVs) within the dojo environment</p>
+</li>
+<li><p class="first"><a class="reference" href="av/widget.html#dojox-av-widget"><em>dojox.av.widget</em></a></p>
+<p>Provides base player control widgets for building a media player</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="charting.html#dojox-charting"><em>dojox.charting</em></a></p>
+<p>Amazing charting library</p>
+</li>
+<li><p class="first"><a class="reference" href="collections.html#dojox-collections"><em>dojox.collections</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="color.html#dojox-color"><em>dojox.color</em></a></p>
+<p>Extends dojo.color/dojo.Color and adds advanced color model/matching functionality</p>
+<ul>
+<li><p class="first"><a class="reference" href="color/Palette.html#dojox-color-palette"><em>dojox.color.Palette</em></a></p>
+<p>A color palette generator and handler (used extensively in <a class="reference" href="charting.html#dojox-charting"><em>dojox.charting</em></a></p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="cometd.html#dojox-cometd"><em>dojox.cometd</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="data.html#dojox-data"><em>dojox.data</em></a></p>
+<p>Additional data stores and data store helpers</p>
+<ul>
+<li><p class="first"><a class="reference" href="data/AndOrReadStore.html#dojox-data-andorreadstore"><em>dojox.data.AndOrReadStore</em></a></p>
+<p>A clone of <a class="reference" href="../dojo/data/ItemFileReadStore.html#dojo-data-itemfilereadstore"><em>dojo.data.ItemFileReadStore</em></a>, which supports more complex queries than the simple AND format property matching</p>
+</li>
+<li><p class="first"><a class="reference" href="data/AndOrWriteStore.html#dojox-data-andorwritestore"><em>dojox.data.AndOrWriteStore</em></a></p>
+<p>A clone of <a class="reference" href="../dojo/data/ItemFileWriteStore.html#dojo-data-itemfilewritestore"><em>dojo.data.ItemFileWriteStore</em></a>, which supports more complex queries than the simple AND format property matching</p>
+</li>
+<li><p class="first"><a class="reference" href="data/AtomReadStore.html#dojox-data-atomreadstore"><em>dojox.data.AtomReadStore</em></a></p>
+<p>A store designed to provide read-only access to Atom XML documents</p>
+</li>
+<li><p class="first"><a class="reference" href="data/ClientFilter.html#dojox-data-clientfilter"><em>dojox.data.ClientFilter</em></a></p>
+<p>An abstract data store module for adding updateable result set functionality to an existing data store class</p>
+</li>
+<li><p class="first"><a class="reference" href="data/CouchDBRestStore.html#dojox-data-couchdbreststore"><em>dojox.data.CouchDBRestStore</em></a></p>
+<p>An extension of <a class="reference" href="data/JsonRestStore.html#dojox-data-jsonreststore"><em>dojox.data.JsonRestStore</em></a> to handle CouchDB&#8217;s idiosyncrasies, special features, and deviations from standard HTTP Rest</p>
+</li>
+<li><p class="first"><a class="reference" href="data/CssClassStore.html#dojox-data-cssclassstore"><em>dojox.data.CssClassStore</em></a></p>
+<p>A read interface based on the <a class="reference" href="data/CssRuleStore.html#dojox-data-cssrulestore"><em>dojox.data.CssRuleStore</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="data/CssRuleStore.html#dojox-data-cssrulestore"><em>dojox.data.CssRuleStore</em></a></p>
+<p>A read interface to the CSS rules loaded in the current page</p>
+</li>
+<li><p class="first"><a class="reference" href="data/CsvStore.html#dojox-data-csvstore"><em>dojox.data.CsvStore</em></a></p>
+<p>A read interface that works with CSV formated data files</p>
+</li>
+<li><p class="first"><a class="reference" href="data/FileStore.html#dojox-data-filestore"><em>dojox.data.FileStore</em></a></p>
+<p>A lightweight data store implementation for accessing details about a remote FileSystem</p>
+</li>
+<li><p class="first"><a class="reference" href="data/FlickrRestStore.html#dojox-data-flickrreststore"><em>dojox.data.FlickrRestStore</em></a></p>
+<p>Provides access to the Flickr photo sharing site&#8217;s REST API</p>
+</li>
+<li><p class="first"><a class="reference" href="data/FlickrStore.html#dojox-data-flickrstore"><em>dojox.data.FlickrStore</em></a></p>
+<p>A wrapper to the public photo feed of the Flickr service</p>
+</li>
+<li><p class="first"><a class="reference" href="data/GoogleFeedStore.html#dojox-data-googlefeedstore"><em>dojox.data.GoogleFeedStore</em></a></p>
+<p>A Google AJAX API powered data store for retrieving RSS and Atom feeds from Google</p>
+</li>
+<li><p class="first"><a class="reference" href="data/GoogleSearchStore.html#dojox-data-googlesearchstore"><em>dojox.data.GoogleSearchStore</em></a></p>
+<p>Several data stores to interface Google&#8217;s AJAX search services:</p>
+<ul>
+<li><p class="first"><em>dojox.data.GoogleWebSearchStore</em></p>
+<p>A data store for retrieving search results from Google</p>
+</li>
+<li><p class="first"><em>dojox.data.GoogleBlogSearchStore</em></p>
+<p>A data store for retrieving search results from Google Blogs</p>
+</li>
+<li><p class="first"><em>dojox.data.GoogleLocalSearchStore</em></p>
+<p>A data store for retrieving search results from Google Location Search</p>
+</li>
+<li><p class="first"><em>dojox.data.GoogleVideoSearchStore</em></p>
+<p>A data store for retrieving search results from Google Video</p>
+</li>
+<li><p class="first"><em>dojox.data.GoogleNewsSearchStore</em></p>
+<p>A data store for retrieving search results from Google News</p>
+</li>
+<li><p class="first"><em>dojox.data.GoogleBookSearchStore</em></p>
+<p>A data store for retrieving search results from Google Book</p>
+</li>
+<li><p class="first"><em>dojox.data.GoogleImageSearchStore</em></p>
+<p>A data store for retrieving search results from Google Image</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="data/HtmlStore.html#dojox-data-htmlstore"><em>dojox.data.HtmlStore</em></a></p>
+<p>An enhanced replacement for <a class="reference" href="data/HtmlTableStore.html#dojox-data-htmltablestore"><em>dojox.data.HtmlTableStore</em></a> to work with HTML tables, lists, and collections of DIV and SPAN tags.</p>
+</li>
+<li><p class="first"><a class="reference" href="data/HtmlTableStore.html#dojox-data-htmltablestore"><em>dojox.data.HtmlTableStore</em></a> (<em>deprecated</em>)</p>
+<p>A read interface to work with HTML tables</p>
+</li>
+<li><p class="first"><a class="reference" href="data/jsonPathStore.html#dojox-data-jsonpathstore"><em>dojox.data.jsonPathStore</em></a></p>
+<p>A local (in memory) store which can attach a dojo.data interface to each javascript object and uses jsonPath as the query language</p>
+</li>
+<li><p class="first"><a class="reference" href="data/JsonRestStore.html#dojox-data-jsonreststore"><em>dojox.data.JsonRestStore</em></a></p>
+<p>A lightweight data store implementation of a RESTful client</p>
+</li>
+<li><p class="first"><a class="reference" href="data/KeyValueStore.html#dojox-data-keyvaluestore"><em>dojox.data.KeyValueStore</em></a></p>
+<p>An interface for reading property style files (key/value pairs)</p>
+</li>
+<li><p class="first"><a class="reference" href="data/OpmlStore.html#dojox-data-opmlstore"><em>dojox.data.OpmlStore</em></a></p>
+<p>A read-only store to work with Opml formatted XML files</p>
+</li>
+<li><p class="first"><a class="reference" href="data/PersevereStore.html#dojox-data-perseverestore"><em>dojox.data.PersevereStore</em></a></p>
+<p>An extension of <a class="reference" href="data/JsonRestStore.html#dojox-data-jsonreststore"><em>dojox.data.JsonRestStore</em></a> to handle Persevere&#8217;s special features</p>
+</li>
+<li><p class="first"><em>dojox.data.PicasaStore</em></p>
+<p>A data store interface to one of the basic services of the Picasa service, the public photo feed</p>
+</li>
+<li><p class="first"><a class="reference" href="data/QueryReadStore.html#dojox-data-queryreadstore"><em>dojox.data.QueryReadStore</em></a></p>
+<p>A read-only store, which makes a request to the server for each sorting or query in order to work with big datasets</p>
+</li>
+<li><p class="first"><a class="reference" href="data/S3Store.html#dojox-data-s3store"><em>dojox.data.S3Store</em></a></p>
+<p>An extension of <a class="reference" href="data/JsonRestStore.html#dojox-data-jsonreststore"><em>dojox.data.JsonRestStore</em></a> to handle Amazon&#8217;s S3 service using JSON data</p>
+</li>
+<li><p class="first"><a class="reference" href="data/ServiceStore.html#dojox-data-servicestore"><em>dojox.data.ServiceStore</em></a></p>
+<p>ServiceStore and it&#8217;s subclasses are a generalized dojo.data implementation for any webservice</p>
+</li>
+<li><p class="first"><em>dojox.data.SnapLogicStore</em></p>
+<p>A data store interface to use the SnapLogic framework</p>
+</li>
+<li><p class="first"><a class="reference" href="data/WikipediaStore.html#dojox-data-wikipediastore"><em>dojox.data.WikipediaStore</em></a></p>
+<p>An extension of <a class="reference" href="data/ServiceStore.html#dojox-data-servicestore"><em>dojox.data.ServiceStore</em></a> to use Wikipedia&#8217;s search service</p>
+</li>
+<li><p class="first"><a class="reference" href="data/XmlStore.html#dojox-data-xmlstore"><em>dojox.data.XmlStore</em></a></p>
+<p>A read and write interface to basic XML data</p>
+</li>
+<li><p class="first"><a class="reference" href="data/dom.html#dojox-data-dom"><em>dojox.data.dom</em></a></p>
+<p>A set of DOM manipulation functions</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><em>dojox.date</em></p>
+</li>
+<li><p class="first"><a class="reference" href="dtl.html#dojox-dtl"><em>dojox.dtl</em></a></p>
+</li>
+<li><p class="first"><em>dojox.editor</em></p>
+</li>
+<li><p class="first"><a class="reference" href="embed.html#dojox-embed"><em>dojox.embed</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="encoding.html#dojox-encoding"><em>dojox.encoding</em></a></p>
+<p>All sorts of string encoding algorithms, including compression, crypto and more.</p>
+</li>
+<li><p class="first"><em>dojox.flash</em></p>
+</li>
+<li><p class="first"><a class="reference" href="form.html#dojox-form"><em>dojox.form</em></a></p>
+<p>Additional form-related widgets beyond <a class="reference" href="../dijit/form.html#dijit-form"><em>dijit.form</em></a> functionality</p>
+<ul>
+<li><p class="first"><a class="reference" href="form/BusyButton.html#dojox-form-busybutton"><em>dojox.form.BusyButton</em></a></p>
+<p>A new Button with progresss indicator built in, for indicating processing after you press the button</p>
+</li>
+<li><p class="first">dojox.form.CheckedMultiSelect</p>
+<p>description?</p>
+</li>
+<li><p class="first">dojox.form.DateTextBox</p>
+<p>description?</p>
+</li>
+<li><p class="first">dojox.form.DropDownSelect</p>
+<p>description?</p>
+</li>
+<li><p class="first">dojox.form.DropDownStack</p>
+<p>description?</p>
+</li>
+<li><p class="first">dojox.form.FileInput (base, Auto, and Blind)</p>
+<p>description?</p>
+</li>
+<li><p class="first"><a class="reference" href="form/FilePickerTextBox.html#dojox-form-filepickertextbox"><em>dojox.form.FilePickerTextBox</em></a></p>
+<p>A dijit._FormWidget that adds a dojox.widget.FilePicker to a text box as a dropdown</p>
+</li>
+<li><p class="first"><a class="reference" href="form/FileUploader.html#dojox-form-fileuploader"><em>dojox.form.FileUploader</em></a></p>
+<p>A new multi-file uploader that shows progress as the files are uploading</p>
+</li>
+<li><p class="first"><a class="reference" href="form/Manager.html#dojox-form-manager"><em>dojox.form.manager (the package)</em></a></p>
+<p>A collection of mixins to manage complex event-driven dynamic forms</p>
+<ul>
+<li><p class="first"><a class="reference" href="form/Manager.html#dojox-form-manager"><em>dojox.form.Manager (the widget)</em></a></p>
+<p>A simple widget based on <a class="reference" href="form/Manager.html#dojox-form-manager"><em>dojox.form.manager</em></a> package.</p>
+</li>
+</ul>
+</li>
+<li><p class="first">dojox.form.MultiComboBox</p>
+<p>description?</p>
+</li>
+<li><p class="first">dojox.form.PasswordValidator</p>
+<p>description?</p>
+</li>
+<li><p class="first">dojox.form.RadioStack</p>
+<p>description?</p>
+</li>
+<li><p class="first">dojox.form.RangeSliders</p>
+<p>description?</p>
+</li>
+<li><p class="first">dojox.form.Rating</p>
+<p>description?</p>
+</li>
+<li><p class="first">dojox.form.TimeSpinner</p>
+<p>description?</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="fx.html#dojox-fx"><em>dojox.fx</em></a></p>
+<ul class="simple">
+<li><a class="reference" href="fx/wipeTo.html#dojox-fx-wipeto"><em>dojox.fx.wipeTo</em></a></li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="gfx.html#dojox-gfx"><em>dojox.gfx</em></a></p>
+</li>
+<li><p class="first"><em>dojox.gfx3d</em></p>
+</li>
+<li><p class="first"><a class="reference" href="grid.html#dojox-grid"><em>dojox.grid</em></a></p>
+<p>A visual grid/table much like a spreadsheet</p>
+</li>
+<li><p class="first"><em>dojox.help</em></p>
+</li>
+<li><p class="first"><a class="reference" href="highlight.html#dojox-highlight"><em>dojox.highlight</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="html.html#dojox-html"><em>dojox.html</em></a></p>
+<p>Additional HTML helper functions</p>
+<ul>
+<li><p class="first"><em>dojox.html.set</em></p>
+<p>A generic content setter, including adding new stylesheets and evaluating scripts (was part of ContentPane loaders, now separated for generic usage)</p>
+</li>
+<li><p class="first"><em>dojox.html.metrics</em></p>
+<p>Translate CSS values to pixel values, calculate scrollbar sizes and font resizes</p>
+</li>
+<li><p class="first"><em>dojox.html.styles</em></p>
+<p>Insert, remove and toggle CSS rules as well as search document for style sheets</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="image.html#dojox-image"><em>dojox.image</em></a></p>
+<p>Provides a number of image-related widgets</p>
+<ul>
+<li><p class="first"><a class="reference" href="image/Badge.html#dojox-image-badge"><em>dojox.image.Badge</em></a></p>
+<p>Attach images or background images, and let them loop</p>
+</li>
+<li><p class="first"><a class="reference" href="image/FlickrBadge.html#dojox-image-flickrbadge"><em>dojox.image.FlickrBadge</em></a></p>
+<p>An extension on dojox.image.Badge, using Flickr as a data provider</p>
+</li>
+<li><p class="first"><a class="reference" href="image/Gallery.html#dojox-image-gallery"><em>dojox.image.Gallery</em></a></p>
+<p>A combination of a SlideShow and ThumbnailPicker</p>
+</li>
+<li><p class="first"><a class="reference" href="image/Lightbox.html#dojox-image-lightbox"><em>dojox.image.Lightbox</em></a></p>
+<p>A widget which shows a single image (or groups of images) in a Dialog</p>
+</li>
+<li><p class="first"><a class="reference" href="image/Magnifier.html#dojox-image-magnifier"><em>dojox.image.Magnifier</em></a></p>
+<p>A dojox.gfx-based version of the <a class="reference" href="image/MagnifierLite.html#dojox-image-magnifierlite"><em>MagnifierLite</em></a> widget</p>
+</li>
+<li><p class="first"><a class="reference" href="image/MagnifierLite.html#dojox-image-magnifierlite"><em>dojox.image.MagnifierLite</em></a></p>
+<p>A simple hover behavior for images, showing a zoomed version of a size image</p>
+</li>
+<li><p class="first"><a class="reference" href="image/SlideShow.html#dojox-image-slideshow"><em>dojox.image.SlideShow</em></a></p>
+<p>A slideshow of images</p>
+</li>
+<li><p class="first"><a class="reference" href="image/ThumbnailPicker.html#dojox-image-thumbnailpicker"><em>dojox.image.ThumbnailPicker</em></a></p>
+<p>A dojo.data-powered ThumbnailPicker</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="io.html#dojox-io"><em>dojox.io</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="json.html#dojox-json"><em>dojox.json</em></a></p>
+</li>
+<li><p class="first"><em>dojox.jsonPath</em></p>
+</li>
+<li><p class="first"><em>dojox.lang</em></p>
+</li>
+<li><p class="first"><a class="reference" href="layout.html#dojox-layout"><em>dojox.layout</em></a></p>
+<p>Experimental and additional extensions to <a class="reference" href="../dijit/layout.html#dijit-layout"><em>Dijit Layout</em></a> Widgets</p>
+<ul>
+<li><p class="first"><a class="reference" href="layout/ContentPane.html#dojox-layout-contentpane"><em>dojox.layout.ContentPane</em></a></p>
+<p>An extension to dijit.layout.ContentPane providing script execution, among other things</p>
+</li>
+<li><p class="first"><a class="reference" href="layout/DragPane.html#dojox-layout-dragpane"><em>dojox.layout.DragPane</em></a></p>
+<p>Provides drag-based scrolling for divs with overflow</p>
+</li>
+<li><p class="first"><a class="reference" href="layout/ExpandoPane.html#dojox-layout-expandopane"><em>dojox.layout.ExpandoPane</em></a></p>
+<p>A self-collapsing widget for use in a <a class="reference" href="../dijit/layout/BorderContainer.html#dijit-layout-bordercontainer"><em>BorderContainer</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="layout/FloatingPane.html#dojox-layout-floatingpane"><em>dojox.layout.FloatingPane</em></a></p>
+<p>An experimental floating window</p>
+</li>
+<li><p class="first"><a class="reference" href="layout/GridContainer.html#dojox-layout-gridcontainer"><em>dojox.layout.GridContainer</em></a></p>
+<p>A panel-like layout mechanism, allowing Drag and Drop between regions</p>
+</li>
+<li><p class="first"><a class="reference" href="layout/RadioGroup.html#dojox-layout-radiogroup"><em>dojox.layout.RadioGroup</em></a></p>
+<p>A variety of <a class="reference" href="../dijit/layout/StackContainer.html#dijit-layout-stackcontainer"><em>StackContainer</em></a> enhancements providing animated transitions</p>
+</li>
+<li><p class="first"><a class="reference" href="layout/ResizeHandle.html#dojox-layout-resizehandle"><em>dojox.layout.ResizeHandle</em></a></p>
+<p>A small widget to provide resizing of a parent node</p>
+</li>
+<li><p class="first"><a class="reference" href="layout/RotatorContainer.html#dojox-layout-rotatorcontainer"><em>dojox.layout.RotatorContainer</em></a></p>
+<p>An extended StackContainer suited for presentational purposes</p>
+</li>
+<li><p class="first"><a class="reference" href="layout/ScrollPane.html#dojox-layout-scrollpane"><em>dojox.layout.ScrollPane</em></a></p>
+<p>An interesting UI, scrolling an overflowed div based on mouse position, either vertical or horizontal</p>
+</li>
+<li><p class="first"><a class="reference" href="layout/ToggleSplitter.html#dojox-layout-togglesplitter"><em>dojox.layout.ToggleSplitter</em></a></p>
+<p>A custom Splitter for use in a BorderContainer, providing a lightweight way to collapse the associated child</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><em>dojox.math</em></p>
+</li>
+<li><p class="first"><a class="reference" href="off.html#dojox-off"><em>dojox.off</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="presentation.html#dojox-presentation"><em>dojox.presentation</em></a></p>
+</li>
+<li><p class="first"><em>dojox.resources</em></p>
+</li>
+<li><p class="first"><a class="reference" href="robot.html#dojox-robot"><em>dojox.robot</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="rpc.html#dojox-rpc"><em>dojox.rpc</em></a></p>
+<p>Extended classes to communicate via Remote Procedure Calls (RPC) with Backend Servers</p>
+<ul class="simple">
+<li><a class="reference" href="rpc/SMDLibrary.html#dojox-rpc-smdlibrary"><em>dojox.rpc.SMDLibrary</em></a></li>
+<li><em>dojox.rpc.Client</em></li>
+<li><em>dojox.rpc.JsonRest</em></li>
+<li><em>dojox.rpc.JsonRPC</em></li>
+<li><em>dojox.rpc.LocalStorageRest</em></li>
+<li><a class="reference" href="rpc/OfflineRest.html#dojox-rpc-offlinerest"><em>dojox.rpc.OfflineRest</em></a></li>
+<li><em>dojox.rpc.ProxiedPath</em></li>
+<li><a class="reference" href="rpc/Rest.html#dojox-rpc-rest"><em>dojox.rpc.Rest</em></a></li>
+<li><a class="reference" href="rpc/Service.html#dojox-rpc-service"><em>dojox.rpc.Service</em></a></li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="secure.html#dojox-secure"><em>dojox.secure</em></a></p>
+</li>
+<li><p class="first"><em>dojox.sql</em></p>
+</li>
+<li><p class="first"><em>dojox.storage</em></p>
+</li>
+<li><p class="first"><a class="reference" href="string.html#dojox-string"><em>dojox.string</em></a></p>
+</li>
+<li><p class="first"><em>dojox.testing</em></p>
+</li>
+<li><p class="first"><a class="reference" href="timing.html#dojox-timing"><em>dojox.timing</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="uuid.html#dojox-uuid"><em>dojox.uuid</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="validate.html#dojox-validate"><em>dojox.validate</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="widget.html#dojox-widget"><em>dojox.widget</em></a></p>
+<ul>
+<li><p class="first"><a class="reference" href="widget/AnalogGauge.html#dojox-widget-analoggauge"><em>dojox.widget.AnalogGauge</em></a></p>
+<p>A circular gauge with a variety of indicators, used to display numerical data</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/BarGauge.html#dojox-widget-bargauge"><em>dojox.widget.BarGauge</em></a></p>
+<p>A horizontal bar gauge with a few indicators, used to display numerical data</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/Calendar.html#dojox-widget-calendar"><em>dojox.widget.Calendar</em></a></p>
+<p>An extended dijit._Calendar</p>
+</li>
+<li><p class="first"><em>dojox.widget.CalendarFx</em></p>
+<p>An extended dijit._Calendar with FX</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/ColorPicker.html#dojox-widget-colorpicker"><em>dojox.widget.ColorPicker</em></a></p>
+<p>A HSV Color Picker, similar to PhotoShop</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/Dialog.html#dojox-widget-dialog"><em>dojox.widget.Dialog</em></a></p>
+<p>An extension to <em>dijit.Dialog</em> which provides additional sizing options, animations, and styling</p>
+</li>
+<li><p class="first"><em>dojox.widget.DocTester</em></p>
+<p>A widget to run DocTests inside an HTML page</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/FilePicker.html#dojox-widget-filepicker"><em>dojox.widget.FilePicker</em></a></p>
+<p>A specialized version of RollingList that handles file informatione</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/FisheyeList.html#dojox-widget-fisheyelist"><em>dojox.widget.FisheyeList</em></a></p>
+<p>A OSX-style Fisheye Menu</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/FisheyeLite.html#dojox-widget-fisheyelite"><em>dojox.widget.FisheyeLite</em></a></p>
+<p>A more robust Fisheye Widget, which fish-eyes&#8217; any CSS property</p>
+</li>
+<li><p class="first"><em>dojox.widget.Iterator</em></p>
+<p>A basic array and data store iterator class</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/Loader.html#dojox-widget-loader"><em>dojox.widget.Loader</em></a></p>
+<p>A small experimental Ajax Activity indicator (deprecated, will be moved to dojo-c)</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/Pager.html#dojox-widget-pager"><em>dojox.widget.Pager</em></a></p>
+<p>A <a class="reference" href="../dojo/data.html#dojo-data"><em>dojo.data</em></a> powered Pager Widget, displaying a few items in a horizontal or vertical UI</p>
+</li>
+<li><p class="first"><em>dojox.widget.PlaceholderMenuItem</em></p>
+<p>A menu item that can be used as a placeholder.</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/Roller.html#dojox-widget-roller"><em>dojox.widget.Roller</em></a></p>
+<p>An unobtrusive &#8220;roller&#8221;, displaying one message from a list in a loop</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/RollingList.html#dojox-widget-rollinglist"><em>dojox.widget.RollingList</em></a></p>
+<p>A rolling list that can be tied to a data store with children</p>
+</li>
+<li><p class="first"><em>dojox.widget.SortList</em></p>
+<p>A small sortable unordered-list</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/Standby.html#dojox-widget-standby"><em>dojox.widget.Standby</em></a></p>
+<p>A small widget that can be used to mark sections of a page as busy, processing, unavailable, etc.</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/Toaster.html#dojox-widget-toaster"><em>dojox.widget.Toaster</em></a></p>
+<p>A message display system, showing warnings, errors and other messages unobtrusively</p>
+</li>
+<li><p class="first"><em>dojox.widget.Wizard</em></p>
+<p>A simple widget providing a step-by-step wizard like UI</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="wire.html#dojox-wire"><em>dojox.wire</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="xml.html#dojox-xml"><em>dojox.xml</em></a></p>
+</li>
+<li><p class="first"><a class="reference" href="xmpp.html#dojox-xmpp"><em>dojox.xmpp</em></a></p>
+</li>
+</ul>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

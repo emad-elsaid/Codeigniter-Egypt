@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Template &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Quickstart" href="../contents.html" />
+    <link rel="next" title="Widgets inside the Template" href="widgetsInTemplate.html" />
+    <link rel="prev" title="Dropdowns and Popups" href="popups.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="widgetsInTemplate.html" title="Widgets inside the Template"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="popups.html" title="Dropdowns and Popups"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Quickstart</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">The Template</a><ul>
+<li><a class="reference" href="#dojoattachpoint">dojoAttachPoint</a></li>
+<li><a class="reference" href="#dojoattachevent">dojoAttachEvent</a></li>
+<li><a class="reference" href="#a-template-for-imageaccordion">A Template for ImageAccordion</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="popups.html"
+                                  title="previous chapter">Dropdowns and Popups</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="widgetsInTemplate.html"
+                                  title="next chapter">Widgets inside the Template</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/quickstart/writingWidgets/templates.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <p id="quickstart-writingwidgets-templates">TODO: REMOVE THIS PAGE, IT&#8217;S DOCUMENTED DIRECTLY IN <a class="reference" href="../writingWidgets.html#quickstart-writingwidgets"><em>Writing widgets</em></a>.</p>
+<div class="section" id="the-template">
+<h1>The Template<a class="headerlink" href="#the-template" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed, Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Often, you&#8217;ll find a widget that does almost exactly what you want, but not quite. The last thing you would want to do is hack the source code. Good thing you don&#8217;t have to, because the same widget construction techniques apply to both creating and extending widgets. So first, let&#8217;s start by extending an existing stable widget: the AccordionContainer and AccordionPane. In the default implementation that Dojo provides for these widgets, the pane titles can only be text, but suppose you want images there as well.</p>
+<p>Most Dijit components revolve around a template. A template looks like a macro, and can perform simple substitutions of ${...} variables and substitutions of DOM nodes.</p>
+<p>To see how the template language works, let&#8217;s look at a standard Accordion Container instance:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.layout.AccordionContainer&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.layout.AccordionPane&quot;</span> <span class="na">title=</span><span class="s">&quot;pane 1&quot;</span><span class="nt">&gt;</span>
+      Text of Pane 1
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.layout.AccordionPane&quot;</span> <span class="na">title=</span><span class="s">&quot;pane 2&quot;</span><span class="nt">&gt;</span>
+      Text of Pane 2
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>The DOM that ends up in memory and on the screen is quite different; however, when you [View Source] your browser shows the HTML above, and Firebug shows the actual DOM used by the AccordionPane:</p>
+<img alt="../../_images/simple_accordion_firebug.png" src="../../_images/simple_accordion_firebug.png" />
+<p>Dojo replaces the simple nodes of our example with groups of HTML elements. That's one of the jobs of the dijit._Templated. It consults the widget's template to construct this group. Where's the template kept? For AccordionPane, you can find it in the source version of Dojo at dijit/layout/templates/AccordionPane.html:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#39;dijitAccordionPane&#39;</span>
+      <span class="nt">&gt;&lt;div</span> <span class="na">dojoAttachPoint=</span><span class="s">&#39;titleNode,focusNode&#39;</span> <span class="na">dojoAttachEvent=</span><span class="s">&#39;ondijitclick:_onTitleClick,onkeypress:_onKeyPress&#39;</span>
+              <span class="na">class=</span><span class="s">&#39;dijitAccordionTitle&#39;</span> <span class="na">wairole=</span><span class="s">&quot;tab&quot;</span>
+              <span class="nt">&gt;&lt;div</span> <span class="na">class=</span><span class="s">&#39;dijitAccordionArrow&#39;</span><span class="nt">&gt;&lt;/div</span>
+<span class="nt">              &gt;&lt;div</span> <span class="na">class=</span><span class="s">&#39;arrowTextUp&#39;</span> <span class="na">waiRole=</span><span class="s">&quot;presentation&quot;</span><span class="nt">&gt;</span>▲<span class="nt">&lt;/div</span>
+<span class="nt">              &gt;&lt;div</span> <span class="na">class=</span><span class="s">&#39;arrowTextDown&#39;</span> <span class="na">waiRole=</span><span class="s">&quot;presentation&quot;</span><span class="nt">&gt;</span>▼<span class="nt">&lt;/div</span>
+<span class="nt">              &gt;&lt;span</span> <span class="na">dojoAttachPoint=</span><span class="s">&#39;titleTextNode&#39;</span><span class="nt">&gt;</span>${title}<span class="nt">&lt;/span&gt;&lt;/div</span>
+<span class="nt">      &gt;&lt;div&gt;&lt;div</span> <span class="na">dojoAttachPoint=</span><span class="s">&#39;containerNode&#39;</span> <span class="na">style=</span><span class="s">&#39;overflow: hidden; height: 1px; display: none&#39;</span>
+              <span class="na">dojoAttachEvent=</span><span class="s">&#39;onkeypress:_onKeyPress&#39;</span>
+              <span class="na">class=</span><span class="s">&#39;dijitAccordionBody&#39;</span> <span class="na">waiRole=</span><span class="s">&quot;tabpanel&quot;</span>
+      <span class="nt">&gt;&lt;/div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>That's a lot of HTML to replace the one DIV tag. Mostly this looks like standard HTML with lots of CSS class markers to fill in the styling. That makes the theme system work well. But looking more closely, there are a few attributes and constructs are not standard HTML - these are related to Dojo's template language elements. In particular:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>${title}</dt>
+<dd><p class="first last">is replaced with the title=&quot;...&quot; attribute sent to the widget</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dojoAttachPoint=&quot;titleNode,focusNode&quot;</dt>
+<dd><p class="first last">This sets properties in the widget called titleNode and focusNode which point to that DOM node.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dojoAttachPoint='containerNode':</dt>
+<dd><p class="first last">containerNode is a special attachPoint; all the innerHTML from inside the source HTML (&quot;Text of pane 1&quot;) gets copied into here, and widgets instantiated recursively.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>dojoAttachEvent='onkeypress:_onKeyPress':</dt>
+<dd><p class="first last">Connects an event to an event handler at that node.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="dojoattachpoint">
+<h2>dojoAttachPoint<a class="headerlink" href="#dojoattachpoint" title="Permalink to this headline">¶</a></h2>
+<p>In the JavaScript of a widget, you often might wish to refer to some of its html template's dom nodes directly. For example in the Accordion widget, the js might want to access the nodes for the title, the title's text, the container or accordion pane, and so on.</p>
+<p>You might think the widget author could just use ids in the html template, and then dojo.byId() in the widget's js. But if she does, then if two or more widget instances are created, they'll all have the same ids! Obviously code will blow up then.</p>
+<p>Instead, you the widget author do the following:</p>
+<ol class="arabic simple">
+<li>In your widget's js, you use (without declaring them) variables for these nodes. For example, the Accordion widget uses variables named: titleNode, titleTextNode, and so on.</li>
+<li>In your widget template's html, for every node that these variables are supposed to correspond to (eg point to), you add the attribute: dojoAttachPoint=&quot;yourVariableNameHere&quot;.</li>
+</ol>
+<p>So if you look at the first code sample above with dojoAttachPoint, the values of those attributes are all js variables (undeclared) that are used in the Accordion widget's js code.</p>
+<p>The reason the variables are undeclared is that when the code in _Templated scans the html in step 1, and it finds the variables in the dojoAttachPoint attribute, it adds those variables to your widget class, dynamically.</p>
+</div>
+<div class="section" id="dojoattachevent">
+<h2>dojoAttachEvent<a class="headerlink" href="#dojoattachevent" title="Permalink to this headline">¶</a></h2>
+<p>Let's say you've written a widget, and when the user clicks on it, something happens. What you want is for the programmer using the widget to be able to either <em>change</em> what happens, or have something happen in addition, without having to edit your widget.</p>
+<p>To see how to do this, let's see how dijit.form.Button does it for clicking. Note that we need to distinguish between DOM events, which happen on DOM elements; and widget events, which fire when things happen in the widget. (To make this clearer: DOM onclick might fire on elements in your widget, but you would only want the widget's onClick (Note: camelCase!) to fire when your widget is an &quot;enabled&quot; state.)</p>
+<ol class="arabic simple">
+<li>In your template html, on the html elements you want to have fire DOM events, add the attribute dojoAttachEvent as follows. Here's some of the dijit Button's Button.html (with ... where I've left stuff out):</li>
+</ol>
+<div class="highlight-html"><pre>&lt;div class="dijit dijitReset dijitLeft dijitInline"
+       dojoAttachEvent="ondijitclick:_onButtonClick,onmouseenter:_onMouse,onmouseleave:_onMouse,onmousedown:_onMouse"
+ ...</pre>
+</div>
+<p>The onclick refers to the DOM event on this div. The _onButtonClick refers to a plain old js method in Button.js. By plain old js method, I mean it's not a DOM event handler. It's plain old js, written by some dijit programmer.</p>
+<ol class="arabic simple" start="2">
+<li>In your widget's js file, define the plain old js method in dojoAttachEvent, as well as an &quot;extension point&quot; method for your programmer to override.</li>
+</ol>
+<p>In Button.js you'll find:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">_onButtonClick</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span> <span class="c">/*Event*/</span> <span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">...</span><span class="c">// Trust me, _onClick calls this._onClick</span>
+<span class="p">}</span><span class="o">,</span>
+<span class="nx">_onClick</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span> <span class="c">/*Event*/</span> <span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">onClick</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+<span class="p">}</span><span class="o">,</span>
+<span class="nx">onClick</span><span class="o">:</span> <span class="p">{</span> <span class="c">// nothing here: the extension point!</span>
+ <span class="o">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here's what's going on. In step 1, all onClick events are redirected to the Button widget's plain old js method _onButtonClick. This in turn calls plain old _onClick, which does stuff, which then calls plain old js method onClick.</p>
+<p>_onButtonClick does stuff that must always happen (and calls _onClick()).</p>
+<p>_onClick does stuff that must always happen (and calls onClick()).</p>
+<p>onClick does nothing! It's empty!</p>
+<p>Why? Because it is here that the programmer using the widget can add their own function, for some custom action that should happen every time the DOM event onclick fires.</p>
+<p>Step 3 shows how the widget user can add their custom function, without having to edit the widget.  (TODO: move to different page?)</p>
+<ol class="arabic simple" start="3">
+<li>In some html page that is using (dojo.require-ing) the dijit Button widget, the user writes this:</li>
+</ol>
+<div class="highlight-html"><pre>&lt;div dojoType="dijit.form.Button"&gt;
+  &lt;script type="dojo/method" event="onClick" args="evt"&gt;
+    alert('Woohoo! I'm using the extension point "onClick"!!');
+  &lt;/script&gt;
+&lt;/div&gt;</pre>
+</div>
+<p>Now, whenever someone in the browser clicks on the widget (ok, specifically inside it's top-level div in this case), _onButtonClick and _onClick will execute, but so will the extra alert() statement.</p>
+<p>3a. What if you don't want to override the extension point, but want it to execute and then have something custom execute? Just use type=&quot;dojo/connect&quot; instead of type=&quot;dojo/method&quot;.</p>
+<p>Closing words:</p>
+<ol class="arabic simple">
+<li>Despite the name of the attribute &quot;event&quot;, as in event=&quot;onClick&quot;, it's value is not a DOM event. Remember: onClick is just a plain old js method. (Dojo is misleading here).</li>
+<li>How can you find the plain old js methods to override or &quot;connect&quot; to (in the dojo sense of dojo.connect)? Well, that can be painful. First, you have to look inside the widget. Or inside its ancestors/superclasses. Or theirs. Or theirs. Not fun. Second, they aren't named consistenly. Sometimes _ means private, sometimes it means protected. (TODO: move to separate page?)</li>
+</ol>
+</div>
+<div class="section" id="a-template-for-imageaccordion">
+<h2>A Template for ImageAccordion<a class="headerlink" href="#a-template-for-imageaccordion" title="Permalink to this headline">¶</a></h2>
+<p>ImageAccordion only needs a few small changes to the AccordionPane template. All of the rest of the code for AccordionPane can be reused. So here is our new template:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&#39;dijitAccordionPane&#39;</span>
+      <span class="nt">&gt;&lt;div</span> <span class="na">dojoAttachPoint=</span><span class="s">&#39;titleNode,focusNode&#39;</span>
+                <span class="na">dojoAttachEvent=</span><span class="s">&#39;ondijitclick:_onTitleClick,onkeypress:_onKeyPress&#39;</span>
+              <span class="na">class=</span><span class="s">&#39;dojocAccordionTitle&#39;</span> <span class="na">wairole=</span><span class="s">&quot;tab&quot;</span>
+              <span class="nt">&gt;&lt;div</span> <span class="na">class=</span><span class="s">&#39;dijitAccordionArrow&#39;</span><span class="nt">&gt;&lt;/div</span>
+<span class="nt">              &gt;&lt;div</span> <span class="na">class=</span><span class="s">&#39;arrowTextUp&#39;</span> <span class="na">waiRole=</span><span class="s">&quot;presentation&quot;</span><span class="nt">&gt;</span>▲<span class="nt">&lt;/div</span>
+<span class="nt">              &gt;&lt;div</span> <span class="na">class=</span><span class="s">&#39;arrowTextDown&#39;</span> <span class="na">waiRole=</span><span class="s">&quot;presentation&quot;</span><span class="nt">&gt;</span>▼<span class="nt">&lt;/div</span>
+<span class="nt">              &gt;&lt;span</span> <span class="na">dojoAttachPoint=</span><span class="s">&#39;titleTextNode&#39;</span><span class="nt">&gt;&lt;img</span> <span class="na">alt=</span><span class="s">&quot;${title}&quot;</span> <span class="na">src=</span><span class="s">&quot;${src}&quot;</span>
+      <span class="nt">&gt;&lt;/span&gt;&lt;/div</span>
+<span class="nt">      &gt;&lt;div&gt;&lt;div</span> <span class="na">dojoAttachPoint=</span><span class="s">&#39;containerNode&#39;</span>
+                         <span class="na">style=</span><span class="s">&#39;overflow: hidden; height: 1px; display: none&#39;</span>
+              <span class="na">dojoAttachEvent=</span><span class="s">&#39;onkeypress:_onKeyPress&#39;</span>
+              <span class="na">class=</span><span class="s">&#39;dojocImageAccordionBody&#39;</span> <span class="na">waiRole=</span><span class="s">&quot;tabpanel&quot;</span>
+      <span class="nt">&gt;&lt;/div&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>What's with the &gt; signs on different lines? That ensures extra whitespace is not included in the actual generated HTML. It makes the template slightly less readable, but pays big dividends in performance.</p>
+<p>There are only a few changes from the original AccordionPane:</p>
+<ol class="arabic simple">
+<li>The most important change is the replacement of ${text} with &lt;img&gt;. This means the ImageAccordion must be sent an additional attribute - src - with the URL for the image.</li>
+<li>The titleNode now has the CSS class &quot;dojocAccordionTitle&quot;</li>
+<li>The containerNode now has the CSS class &quot;dojocImageAccordionBody&quot;</li>
+</ol>
+<p>So now we have the heart of our new widget. Let's <a class="reference" href="dijitDeclaration.html#quickstart-writingwidgets-dijitdeclaration"><em>pop the template in and make things happen</em></a>.</p>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

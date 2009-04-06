@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.form.ToggleButton &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dijit" href="../contents.html" />
+    <link rel="next" title="dijit.form.ValidationTextBox" href="ValidatingTextBox.html" />
+    <link rel="prev" title="dijit.form.TimeTextBox" href="TimeTextBox.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="ValidatingTextBox.html" title="dijit.form.ValidationTextBox"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="TimeTextBox.html" title="dijit.form.TimeTextBox"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.form.ToggleButton</a><ul>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#programmatic-example">Programmatic example</a></li>
+<li><a class="reference" href="#declarative-example">Declarative example</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#accessibility">Accessibility</a><ul>
+<li><a class="reference" href="#keyboard">Keyboard</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="TimeTextBox.html"
+                                  title="previous chapter">dijit.form.TimeTextBox</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="ValidatingTextBox.html"
+                                  title="next chapter">dijit.form.ValidationTextBox</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dijit/form/ToggleButton.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-form-togglebutton">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dijit.form.ToggleButton<a class="headerlink" href="#dijit-form-togglebutton" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Doug Hays</td>
+</tr>
+<tr class="field"><th class="field-name">Developers:</th><td class="field-body">?-</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V?</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dijit-form-togglebutton" id="id2" name="id2">dijit.form.ToggleButton</a><ul>
+<li><a class="reference" href="#examples" id="id3" name="id3">Examples</a></li>
+<li><a class="reference" href="#accessibility" id="id4" name="id4">Accessibility</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>ToggleButton widgets are a cross between <a class="reference" href="Button.html#dijit-form-button"><em>Button</em></a> and <a class="reference" href="CheckBox.html#dijit-form-checkbox"><em>Checkbox</em></a> widgets. They are created like Button widgets, but like CheckBox widgets, they maintain a <em>checked</em> boolean attribute (settable/gettable) that toggles on each click action. Unlike CheckBox widgets however, ToggleButton widgets do not submit any value on FORM submit. They are used solely for client-side processing where the user can toggle between 2 states before performing some additional action. The CSS class &#8220;dijitToggleButtonChecked&#8221; is appended to the widget&#8217;s outermost DOM node when the <em>checked</em> attribute is true to allow for custom styling.</p>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id3">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="programmatic-example">
+<h3>Programmatic example<a class="headerlink" href="#programmatic-example" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s create a ToggleButton widget programatically, initially unchecked:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+dojo.require(&quot;dijit.form.Button&quot;);
+dojo.addOnLoad(function(){
+  new dijit.form.ToggleButton({
+    showLabel: true,
+    checked: false,
+    onChange: function(val){this.attr('label',val)},
+    label: &quot;false&quot;
+  }, &quot;programmatic&quot;);
+});
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;button id=&quot;programmatic&quot;&gt;&lt;button&gt;</pre></div></div></div>
+<div class="section" id="declarative-example">
+<h3>Declarative example<a class="headerlink" href="#declarative-example" title="Permalink to this headline">¶</a></h3>
+<p>Now let&#8217;s create a ToggleButton widget with HTML markup, initially checked:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dijit.form.Button&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;button dojoType=&quot;dijit.form.ToggleButton&quot; checked iconClass=&quot;dijitCheckBoxIcon&quot;&gt;
+    Toggle me
+&lt;/button&gt;</pre></div></div></div>
+</div>
+<div class="section" id="accessibility">
+<h2><a class="toc-backref" href="#id4">Accessibility<a class="headerlink" href="#accessibility" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="keyboard">
+<h3>Keyboard<a class="headerlink" href="#keyboard" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="62%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Action</strong></td>
+<td><strong>Key</strong></td>
+</tr>
+<tr><td>Navigate to a ToggleButton</td>
+<td>Tab</td>
+</tr>
+<tr><td>Toggle checked state</td>
+<td>Spacebar</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

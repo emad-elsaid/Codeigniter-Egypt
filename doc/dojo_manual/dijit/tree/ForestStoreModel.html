@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.tree.ForestStoreModel &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dijit" href="../contents.html" />
+    <link rel="next" title="dijit.form" href="../form.html" />
+    <link rel="prev" title="dijit.tree.TreeStoreModel" href="TreeStoreModel.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="../form.html" title="dijit.form"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="TreeStoreModel.html" title="dijit.tree.TreeStoreModel"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.tree.ForestStoreModel</a><ul>
+<li><a class="reference" href="#monitoring-changes-to-items">Monitoring changes to items</a></li>
+<li><a class="reference" href="#moving-items-to-from-the-root-node">Moving items to/from the root node</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="TreeStoreModel.html"
+                                  title="previous chapter">dijit.tree.TreeStoreModel</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../form.html"
+                                  title="next chapter">dijit.form</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dijit/tree/ForestStoreModel.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-tree-foreststoremodel">
+<span id="id1"></span><h1>dijit.tree.ForestStoreModel<a class="headerlink" href="#dijit-tree-foreststoremodel" title="Permalink to this headline">¶</a></h1>
+<p>The ForestStoreModel connects a data store with multiple &#8220;root&#8221; items to a <a class="reference" href="../Tree.html#dijit-tree"><em>dijit.Tree</em></a>.</p>
+<p>An example might be a geographical database; there are multiple continents but no &#8216;&#8217;single&#8217;&#8217; top level item called &#8220;world&#8221;.</p>
+<p>Since Tree demands a single top level item, ForestStoreModel creates a fake item whose children are determined
+by a query specified to the ForestStoreModel constructor.</p>
+<p>Here&#8217;s an example of a declarative initialization for a TreeStoreModel and for the data store that it connects to:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">&quot;dojo.data.ItemFileReadStore&quot;</span> <span class="na">jsId=</span><span class="s">&quot;continentStore&quot;</span>
+        <span class="na">url=</span><span class="s">&quot;_data/countries.json&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.tree.ForestStoreModel&quot;</span> <span class="na">jsId=</span><span class="s">&quot;continentModel&quot;</span>
+        <span class="na">store=</span><span class="s">&quot;continentStore&quot;</span> <span class="na">query=</span><span class="s">&quot;{type:&#39;continent&#39;}&quot;</span>
+        <span class="na">rootId=</span><span class="s">&quot;continentRoot&quot;</span> <span class="na">rootLabel=</span><span class="s">&quot;Continents&quot;</span> <span class="na">childrenAttrs=</span><span class="s">&quot;children&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>A few things to note here:</p>
+<blockquote>
+<ul class="simple">
+<li>The query returns multiple items</li>
+<li>There's a single fake root item created with the label &quot;The World&quot;.  The Tree will display that root item unless showRoot=false is specified.  (However, even if Tree doesn't display it, it still exists.)</li>
+</ul>
+</blockquote>
+<div class="section" id="monitoring-changes-to-items">
+<h2>Monitoring changes to items<a class="headerlink" href="#monitoring-changes-to-items" title="Permalink to this headline">¶</a></h2>
+<p>Note that ForestStoreModel is inherently complex because it's difficult to tell when the children of the top level (fake) item have changed.  For example:</p>
+<blockquote>
+<ul class="simple">
+<li>a new continent is added to the data store</li>
+<li>a new country is added to the data store</li>
+</ul>
+</blockquote>
+<p>ForestStoreModel has no way of knowing that the continent affects the top level node but the country doesn't.   The user needs to define the onNewItem() method, or otherwise ForestStoreModel will take the pessimistic inefficient approach.</p>
+<p>For example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">model</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dijit</span><span class="p">.</span><span class="nx">tree</span><span class="p">.</span><span class="nx">ForestStoreModel</span><span class="p">({</span>
+        <span class="nx">store</span><span class="o">:</span> <span class="nx">continentStore</span><span class="o">,</span>
+        <span class="nx">query</span><span class="o">:</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;continent&#39;</span><span class="p">}</span><span class="o">,</span>
+        <span class="nx">rootLabel</span><span class="o">:</span> <span class="s2">&quot;The World&quot;</span><span class="o">,</span>
+        <span class="nx">onNewItem</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">item</span><span class="o">,</span> <span class="nx">parentInfo</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">item</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;continent&#39;</span><span class="p">){</span>
+                        <span class="k">this</span><span class="p">.</span><span class="nx">_requeryTop</span><span class="p">();</span>
+                <span class="p">}</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">inherited</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+        <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="moving-items-to-from-the-root-node">
+<h2>Moving items to/from the root node<a class="headerlink" href="#moving-items-to-from-the-root-node" title="Permalink to this headline">¶</a></h2>
+<p>It's also complicated because users need to define what to do when an element is dropped on to the root of the tree, or dragged from the root of the tree and dropped onto a sub-node.   You may want to, for example, change the item so that the &quot;topLevel&quot; attribute is set/unset.   It depends on the structure of the data store what the appropriate action is.   The developer should override onAddToRoot() and onLeaveRoot().</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">onAddToRoot</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/* item */</span> <span class="nx">item</span><span class="p">){</span>
+      <span class="c">// summary</span>
+      <span class="c">//            Called when item added to root of tree; user must override</span>
+      <span class="c">//            to modify the item so that it matches the query for top level items</span>
+      <span class="c">// example</span>
+      <span class="c">//      |     store.setValue(item, &quot;root&quot;, true);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="o">,</span> <span class="s2">&quot;: item &quot;</span><span class="o">,</span> <span class="nx">item</span><span class="o">,</span> <span class="s2">&quot; added to root&quot;</span><span class="p">);</span>
+<span class="p">}</span><span class="o">,</span>
+<span class="nx">onLeaveRoot</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/* item */</span> <span class="nx">item</span><span class="p">){</span>
+      <span class="c">// summary</span>
+      <span class="c">//            Called when item removed from root of tree; user must override</span>
+      <span class="c">//            to modify the item so it doesn&#39;t match the query for top level items</span>
+      <span class="c">// example</span>
+      <span class="c">//      |    store.unsetAttribute(item, &quot;root&quot;);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="o">,</span> <span class="s2">&quot;: item &quot;</span><span class="o">,</span> <span class="nx">item</span><span class="o">,</span> <span class="s2">&quot; removed from root&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

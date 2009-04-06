@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.color.Palette &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.cometd" href="../cometd.html" />
+    <link rel="prev" title="dojox.color" href="../color.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="../cometd.html" title="dojox.cometd"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="../color.html" title="dojox.color"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="../color.html"
+                                  title="previous chapter">dojox.color</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../cometd.html"
+                                  title="next chapter">dojox.cometd</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/color/Palette.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-color-palette">
+<span id="id1"></span><h1>dojox.color.Palette<a class="headerlink" href="#dojox-color-palette" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Tom Trenka</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">Dojo Toolkit 1.1+</td>
+</tr>
+</tbody>
+</table>
+<p>The Palette is a constructor that allows to create a 5-color palette either from a
+single base color and a color theory, or a set of passed colors.  In addition to
+generating a color palette, it can also <em>transform</em> the colors in that palette,
+similar to the way one can transform graphics using dojox.gfx.</p>
+<p>Within DojoX, the Palette is used extensively within the <a class="reference" href="../charting.html#dojox-charting"><em>dojox.charting</em></a>
+project for themes.</p>
+<p>To create a Palette based on a set of colors, simply pass them into the constructor:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojox</span><span class="p">.</span><span class="nx">color</span><span class="p">.</span><span class="nx">Palette</span><span class="p">(</span><span class="s2">&quot;#f1c4d2&quot;</span><span class="p">);</span>
+<span class="k">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojox</span><span class="p">.</span><span class="nx">color</span><span class="p">.</span><span class="nx">Palette</span><span class="p">([</span> <span class="nx">c1</span><span class="o">,</span> <span class="nx">c2</span><span class="o">,</span> <span class="nx">c3</span><span class="o">,</span> <span class="nx">c4</span><span class="o">,</span> <span class="nx">c5</span> <span class="p">]);</span>
+<span class="k">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojox</span><span class="p">.</span><span class="nx">color</span><span class="p">.</span><span class="nx">Palette</span><span class="p">(</span><span class="nx">myColor</span><span class="p">);</span>  <span class="c">// instanceof dojo.Color</span>
+<span class="k">var</span> <span class="nx">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojox</span><span class="p">.</span><span class="nx">color</span><span class="p">.</span><span class="nx">Palette</span><span class="p">(</span><span class="nx">p</span><span class="p">);</span>       <span class="c">// clone the last palette</span>
+</pre></div>
+</td></tr></table></div>
+<p>To access the colors in the palette, simply iterate through the <tt class="docutils literal"><span class="pre">.colors</span></tt> property:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">dojox</span><span class="p">.</span><span class="nx">color</span><span class="p">.</span><span class="nx">Palette</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="s2">&quot;#789abc&quot;</span><span class="o">,</span> <span class="s2">&quot;splitComplimentary&quot;</span><span class="p">);</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">colors</span><span class="o">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span>
+    <span class="c">// do something with each dojo.Color object</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>To perform a <em>translation</em> on a palette, pass a keyword arguments object to the <tt class="docutils literal"><span class="pre">transform</span></tt>
+method of the palette.  The keyword arguments object takes the form of:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5
+6</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">use</span><span class="o">:</span> <span class="s2">&quot;rgb&quot;</span> <span class="o">||</span> <span class="s2">&quot;rgba&quot;</span> <span class="o">||</span> <span class="s2">&quot;hsl&quot;</span> <span class="o">||</span> <span class="s2">&quot;hsv&quot;</span> <span class="o">||</span> <span class="s2">&quot;cmy&quot;</span> <span class="o">||</span> <span class="s2">&quot;cmyk&quot;</span><span class="o">,</span>
+    <span class="nx">dr</span><span class="o">,</span> <span class="nx">dg</span><span class="o">,</span> <span class="nx">db</span><span class="o">,</span> <span class="nx">da</span><span class="o">,</span>
+    <span class="nx">dc</span><span class="o">,</span> <span class="nx">dm</span><span class="o">,</span> <span class="nx">dy</span><span class="o">,</span> <span class="nx">dk</span><span class="o">,</span>
+    <span class="nx">dh</span><span class="o">,</span> <span class="nx">ds</span><span class="o">,</span> <span class="nx">dl</span><span class="o">,</span> <span class="nx">dv</span>
+<span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+<p>All keywords are optional, including the <tt class="docutils literal"><span class="pre">use</span></tt> keyword--though you'll probably want to pass it
+anyways.</p>
+<p>The <em>use</em> keyword specifies which color model you are using for the transform.  If you don't pass it,
+<tt class="docutils literal"><span class="pre">transform</span></tt> will attempt to &quot;best guess&quot; the model based on the passed parameters.</p>
+<p>The parameters beginning with <strong>d</strong> all specify the change to the particular attribute of the color
+model in question.  For example, to increase the hue on all colors in a palette, you'd do this:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">transformed</span> <span class="o">=</span> <span class="nx">myPalette</span><span class="p">.</span><span class="nx">transform</span><span class="p">({</span>
+    <span class="nx">use</span><span class="o">:</span> <span class="s2">&quot;hsv&quot;</span><span class="o">,</span>
+    <span class="nx">dh</span><span class="o">:</span> <span class="mi">20</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>This will shift all colors in the palette using the HSV model (Hue/Saturation/Value), and add 20 degrees
+to the hue angle of the color in question.  Note that the <tt class="docutils literal"><span class="pre">.transform</span></tt> method returns a new instance
+of dojox.color.Palette, and leaves the original alone.</p>
+<p>In addition, all Palettes can be cloned using the <tt class="docutils literal"><span class="pre">.clone</span></tt> method:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">cloned</span> <span class="o">=</span> <span class="nx">myPalette</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+</pre></div>
+</td></tr></table></div>
+<p>If you would like to generate a palette using a specific color theory, you can do so through the &quot;static&quot;
+<tt class="docutils literal"><span class="pre">generate</span></tt> method, implemented directory on <tt class="docutils literal"><span class="pre">dojox.color.Palette</span></tt>.  For example, if you want to generate
+a palette based on complimentary color theory:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">dojox</span><span class="p">.</span><span class="nx">color</span><span class="p">.</span><span class="nx">Palette</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="s2">&quot;#a245f9&quot;</span><span class="o">,</span> <span class="s2">&quot;complimentary&quot;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>Available color theory models (based on the color rules at <a class="reference" href="http://kuler.adobe.com">Adobe Kuler</a>) are:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">analogous</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">monochromatic</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">triadic</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">complimentary</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">splitComplimentary</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">compound</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">shades</span></tt></li>
+</ul>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Creating Accessible Widgets &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dijit" href="../../dijit/contents.html" />
+    <link rel="next" title="Testing Widgets for Accessibility" href="a11yTesting.html" />
+    <link rel="prev" title="Dijit Accessibility Resources" href="../../dijit-a11y-resources.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="a11yTesting.html" title="Testing Widgets for Accessibility"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="../../dijit-a11y-resources.html" title="Dijit Accessibility Resources"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../../dijit/contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">Creating Accessible Widgets</a><ul>
+<li><a class="reference" href="#device-independence">Device Independence</a></li>
+<li><a class="reference" href="#determining-keyboard-behavior">Determining Keyboard Behavior</a></li>
+<li><a class="reference" href="#trapping-key-events">Trapping Key Events</a></li>
+<li><a class="reference" href="#tabindex-and-focus">Tabindex and Focus</a></li>
+<li><a class="reference" href="#add-aria-information">Add ARIA information</a><ul>
+<li><a class="reference" href="#assigning-roles">Assigning Roles</a></li>
+<li><a class="reference" href="#providing-hierarchical-information">Providing Hierarchical Information</a></li>
+<li><a class="reference" href="#using-the-presentation-role">Using the Presentation Role</a></li>
+<li><a class="reference" href="#assigning-states-as-of-1-0">Assigning States as of 1.0</a></li>
+<li><a class="reference" href="#assigning-aria-states-in-0-9">Assigning ARIA States in 0.9</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#accommodating-low-vision">Accommodating Low Vision</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="../../dijit-a11y-resources.html"
+                                  title="previous chapter">Dijit Accessibility Resources</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="a11yTesting.html"
+                                  title="next chapter">Testing Widgets for Accessibility</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/quickstart/writingWidgets/a11y.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="creating-accessible-widgets">
+<span id="quickstart-writingwidgets-a11y"></span><h1><a class="toc-backref" href="#id1">Creating Accessible Widgets<a class="headerlink" href="#creating-accessible-widgets" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.2</td>
+</tr>
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Becky Gibson</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#creating-accessible-widgets" id="id1" name="id1">Creating Accessible Widgets</a><ul>
+<li><a class="reference" href="#device-independence" id="id2" name="id2">Device Independence</a></li>
+<li><a class="reference" href="#determining-keyboard-behavior" id="id3" name="id3">Determining Keyboard Behavior</a></li>
+<li><a class="reference" href="#trapping-key-events" id="id4" name="id4">Trapping Key Events</a></li>
+<li><a class="reference" href="#tabindex-and-focus" id="id5" name="id5">Tabindex and Focus</a></li>
+<li><a class="reference" href="#add-aria-information" id="id6" name="id6">Add ARIA information</a><ul>
+<li><a class="reference" href="#assigning-roles" id="id7" name="id7">Assigning Roles</a></li>
+<li><a class="reference" href="#providing-hierarchical-information" id="id8" name="id8">Providing Hierarchical Information</a></li>
+<li><a class="reference" href="#using-the-presentation-role" id="id9" name="id9">Using the Presentation Role</a></li>
+<li><a class="reference" href="#assigning-states-as-of-1-0" id="id10" name="id10">Assigning States as of 1.0</a></li>
+<li><a class="reference" href="#assigning-aria-states-in-0-9" id="id11" name="id11">Assigning ARIA States in 0.9</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#accommodating-low-vision" id="id12" name="id12">Accommodating Low Vision</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="device-independence">
+<h2><a class="toc-backref" href="#id2">Device Independence<a class="headerlink" href="#device-independence" title="Permalink to this headline">¶</a></a></h2>
+<p>Device Independent behavior means more than just supporting the keyboard. Where ever possible use the most generic event handler available. For example, consider a widget where the down arrow key selects an element in the widget.  The selection needs to be distinguished with a specific style.  Rather than modifying the style of the element when processing the down arrow key event, focus the item from the down arrow key event handler and change the style via a focus event handler. This way, if focus is set from a means other than the keyboard such as a voice input system, the styling is properly set and does not depend solely on keyboard actions.</p>
+</div>
+<div class="section" id="determining-keyboard-behavior">
+<h2><a class="toc-backref" href="#id3">Determining Keyboard Behavior<a class="headerlink" href="#determining-keyboard-behavior" title="Permalink to this headline">¶</a></a></h2>
+<p>When implementing keyboard navigation, the ideal solution is to mimic the behavior of the operating system.  For example, the right and left arrow keys are used to expand and collapse nodes in a Windows tree control and the up and down arrow keys move between nodes in the control.   Unfortunately it is not always possible to mimic the operating system or browser behavior because the widgets may not be able to capture the necessary keys. A group of industry representatives are working to create a style guide to describe the navigation and behaviors of Web widgets. When completed, this Style Guide will be provided to open source and dijit plans to implement the recommendations.  Eventually, the Style Guide will attempt to normalize the differences between operating systems and provide a generalized solution for Web components</p>
+<p>Within all widgets interaction with both the keyboard and the mouse is important – users may switch between using the mouse and using the keyboard at any time. A widget author can not assume only keyboard or only mouse interaction. Thus, the widget component will generally need to store information about the current item with focus.  This can also be useful when the keyboard event handler is placed on an owning object in the component hierarchy rather than the actual element generating the event – for example on the table element rather than on each td element.   Even though the event handler provides information on exactly what element generated the event, it is often necessary or easier to use the stored point of reference. In addition, the point of regard is often needed in order to update the style on the element losing focus before updating the new item irregardless or whether the mouse or the keyboard generated the event that results in a focus change.</p>
+<p>In order to support mouse click and standard enter key and space key press to activate a widget, dijit provides an ondijitclick event.  This will trap the onclick event as well as either the onkeypress or onkeydown events (depending upon the browser) for space and enter key and call the handler specified.  Thus, the basic action to activate a widget can be handled within one handler function rather than each widget having to check for the press of enter or space as well as a mouse click.</p>
+<p>Here is an example of using widget connect to handle the ondijitclick event on the focusNode of the widget:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">this</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">focusNode</span><span class="o">,</span> <span class="s2">&quot;ondijitclick&quot;</span><span class="o">,</span> <span class="s2">&quot;_dijitClick&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The ondijitclick event can also be specified in the template via the dojoAttachEvent mechanism:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">span</span> <span class="nx">class</span><span class="o">=</span><span class="s2">&quot;dijit dijitReset dijitLeft dijitInline&quot;</span>
+      <span class="nx">dojoAttachEvent</span><span class="o">=</span><span class="s2">&quot;ondijitclick:_onButtonClick,onmouseenter:_onMouse,onmouseleave:_onMouse&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="trapping-key-events">
+<h2><a class="toc-backref" href="#id4">Trapping Key Events<a class="headerlink" href="#trapping-key-events" title="Permalink to this headline">¶</a></a></h2>
+<p>When implementing keyboard navigation, first determine where in the hierarchy to trap the key events. It is generally best to trap the key events at as high a level as possible and use the event object to determine that actual source of the event and perform the necessary action.  This method prevents having to add a key handler to each individual element thus conserving the amount of markup to be generated.  However, there may be cases where the event needs to be trapped at the level of each individual element. The actual source of the event is needed in order to determine how to process the keystroke received.</p>
+<p>Once the component handles an event, it will usually stop that event from being propagated to other elements.   For example, if the down arrow key is captured and moves focus to the next item in a tree control, the event should not propagate up to the browser where it might be interpreted as a command to scroll the page.  Use the dojo.stopEvent(event) method to stop the event.</p>
+<p>In order to assist with key event handling, a generic onkeypress event has been added to Dojo to normalize key events. The appropriate key event, either onkeydown or onkeypress, will be used depending upon the browser.  The key codes have been normalized as well. See dojo.keys class in dojo._base.event.js. Add the dojo onkeypress event into the widget template or via scripting using one of the event connection apis.</p>
+</div>
+<div class="section" id="tabindex-and-focus">
+<h2><a class="toc-backref" href="#id5">Tabindex and Focus<a class="headerlink" href="#tabindex-and-focus" title="Permalink to this headline">¶</a></a></h2>
+<p>When navigating via the keyboard is it essential that the element that is navigated to receives focus.   The focus should NOT be simulated via CSS - call the focus() method on the element.  Styling can be used to enhance the visual focus or selection but should not replace actually setting focus on an element.  A screen reader will only speak information about the element when it receives focus. Screen magnifiers rely on focus to move the zoomed viewport on the screen.</p>
+<p>Use the tabindex value to provide direct or programmatic keyboard focus to an element. See the tabindex chart in the <a class="reference" href="../../dijit-a11y-strategy.html#dijit-a11y-strategy"><em>Device Independence section of Dijit Accessibility Strategy</em></a></p>
+<p>When adding support for keyboard navigation, consider the widget as a component.  The tab key can be used to navigate from component to component on a page and then the arrow and other keys should be used to navigate within the component.   Only one element in a given component should have a tabindex equal to zero at any one time.  This allows the user to navigate into and set focus within in the component using the tab key.  Then, trap the onkey events and use the arrow keys to navigate within the elements of the component. All of the elements within the component which can receive focus must have a tabindex equal to -1. When an element is programmatically given focus, its tabindex value is changed from -1 to 0 and the tabindex of the previous element with focus will be changed from 0 to -1. This will insure that only one element within the component is in the tab order of the page and that the element with tabindex = 0 is the most recently focused element in the component.</p>
+<p>For example, when creating a tree control, each tree item is represented by an element.  The first tree item in the control will be given a tabindex of 0.   All of the other elements which represent tree items and can receive focus programmatically will have a tabindex value of -1. An onkeypress handler will trap the keyboard events for the tree control.  When a tree item element is given focus via element.focus(), the element’s tabindex will be changed from -1 to 0. and it will be put into the tab order. Now if the user moves focus out of the tree control (either via a mouse click or by tabbing to the next component on the page), when the user sets focus back into the tree control using the tab key, the last focused tree item, which was given a tabindex of 0, will receive focus.</p>
+</div>
+<div class="section" id="add-aria-information">
+<h2><a class="toc-backref" href="#id6">Add ARIA information<a class="headerlink" href="#add-aria-information" title="Permalink to this headline">¶</a></a></h2>
+<p>The Accessible Rich Internet Applications Roadmap is being developed by the <a class="reference" href="http://www.w3.org/WAI/PF/">W3C Web Accessibility Initiative (WAI) Protocols and Formats working group</a>. The group is creating specifications for role and state information which can be added to markup to provide semantic information about user interface components. The browsers will translate this role and state information into the accessibility api for the platform in use. Currently Firefox 2 and later versions support this additional semantic information on the Windows platform where it converts the information into the Microsoft Active Accessibility (MSAA) api. When recent versions of the Window-Eyes (6.1) and JAWS (8 or 9) screen readers are used with Firefox, this additional information is spoken to the user.  Opera has support for ARIA beginning with version 9.5 and Internet Explorer 8 will support ARIA as well. Webkit is also adding keyboard and ARIA support.</p>
+<p>Some HTML elements such as links and form elements have well defined roles and behaviors. Interactive controls created from generic elements can now also be identified with roles and states. When an element receives focus the role and state information provided by the developer will be made available to assistive technologies. For example, as a screen reader traverses through a dijit tree control using the arrow keys, as each tree item receives focus the title of the tree item will be spoken as well as its expanded or collapsed state if it has children. Likewise, a dijit checkbox created using &lt;div&gt; and &lt;span&gt; tags can be identified as a checkbox and its checked or unchecked state can be reported. When creating a new Dojo widget, the role of the widget must be identified and the state of the widget must be set and updated as it changes.</p>
+<p>As of October, 2008, the ARIA specifications are nearing W3C Last Call status; however the nearly complete specification has been implemented in Firefox 3.0. The public drafts of the specifications can be found at <a class="reference" href="http://www.w3.org/wai/pf">http://www.w3.org/wai/pf</a></p>
+<ul class="simple">
+<li><a class="reference" href="http://www.w3.org/WAI/PF/aria-roadmap/">Roadmap for Accessible Rich Internet Applications (WAI-ARIA Roadmap)</a></li>
+<li><a class="reference" href="http://www.w3.org/WAI/PF/aria/">Accessible Rich Internet Applications (WAI-ARIA) Version 1.0</a></li>
+<li><a class="reference" href="http://www.w3.org/WAI/PF/aria-primer/">WAI-ARIA Primer</a></li>
+<li><a class="reference" href="http://www.w3.org/WAI/PF/aria-practices/">WAI-ARIA Best Practices</a></li>
+</ul>
+<p>Additional ARIA resources:</p>
+<ul class="simple">
+<li><a class="reference" href="http://developer.mozilla.org/en/Accessible_DHTML">Accessible Rich Internet Applications</a> in the Mozilla Developer Center provides additional information about ARIA and includes examples of ARIA widgets as well as a table of roles and states supported in current versions of Firefox.</li>
+<li>Illinois Center for Information Technology Accessibility provides a set of <a class="reference" href="http://test.cita.uiuc.edu/aria/index.php">ARIA Examples</a></li>
+<li><a class="reference" href="http://groups.google.com/group/free-aria">FREE-ARIA</a> is a google group &quot;for people who want to help provide free tools and resources for the advancement of WAI-ARI&quot;.</li>
+<li><a class="reference" href="http://wiki.codetalks.org/wiki/index.php/Main_Page">Code Talks</a> wiki for discussing ARIA and accessible Web 2.0 widgets</li>
+</ul>
+<div class="section" id="assigning-roles">
+<h3><a class="toc-backref" href="#id7">Assigning Roles<a class="headerlink" href="#assigning-roles" title="Permalink to this headline">¶</a></a></h3>
+<p>Use the tabindex to provide keyboard focus or to allow programmatic focus to an object. By adding a tabindex to an element, the element will now be included in the accessibility hierarchy of the Firefox browser. Information about elements in the accessibility hierarchy will be provided to assistive technologies. If you use a tabindex attribute on a &lt;DIV&gt;, &lt;SPAN&gt;, &lt;IMG&gt; or any element which has no natural role of its own then you need to provide a role. In Firefox 3 &lt;div&gt; elements are added into the hierarchy even if they do not have a tabindex attribute. If you are using a div as a container element it will need a role=&quot;presentation&quot; to remove it from the accessibility hierarchy.  Any element that can receive focus must have a role, either implied, such as input elements and anchors, or specified via a role attribute. For things with an implied role such as input fields and anchors, you can use tabindex=”-1” to remove them from the tab order. You can also specify a different role for elements which already have an implied role.</p>
+<p>The role and states are added to Dojo widgets within the widget template or via the dijit.wai APIs as described in the <a class="reference" href="../../dijit-a11y-resources.html#dijit-a11y-resources"><em>Dijit A11y Resources</em></a></p>
+</div>
+<div class="section" id="providing-hierarchical-information">
+<h3><a class="toc-backref" href="#id8">Providing Hierarchical Information<a class="headerlink" href="#providing-hierarchical-information" title="Permalink to this headline">¶</a></a></h3>
+<p>In order for Firefox to determine the correct parent child relationships between objects, and to communicate this via an accessibility API to assistive technologies, it is best to create components in a hierarchical fashion. For example, when creating a menubar it is best to have the components that make up the menus and menuitems of the menubar be children of the menubar. Likewise, menuitems should be children of the owning menus. This hierarchy allows Firefox to provide menu information to the assistive technologies, and for a screen reader to speak more information about the menu such as, “menu open, File, item 1 of 5” when the user opens a menu. Here is a simple pseudo code example demonstrating a hierarchical layout of elements for a menu control. This exmaple only shows the addition of role attributes and does not represent a complete menu widget. (Note: Attributes are not quoted in pseudo-code examples to help improve the readability):</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;menubar&quot;</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;menuitem&quot;</span><span class="o">&gt;</span><span class="nx">A</span><span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;menu&quot;</span><span class="o">&gt;</span>
+       <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;menuitem&quot;</span><span class="o">&gt;</span><span class="nx">A</span><span class="p">.</span><span class="mi">1</span><span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+       <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;menuitem&quot;</span><span class="o">&gt;</span><span class="nx">A</span><span class="p">.</span><span class="mi">2</span><span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;menuitem&quot;</span><span class="o">&gt;</span><span class="nx">B</span><span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;menu&quot;</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;menuitem&quot;</span><span class="o">&gt;</span><span class="nx">B</span><span class="p">.</span><span class="mi">1</span><span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;menuitem&quot;</span><span class="o">&gt;</span><span class="nx">B</span><span class="p">.</span><span class="mi">2</span><span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;menu&quot;</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;menuitem&quot;</span><span class="o">&gt;</span><span class="nx">B</span><span class="p">.</span><span class="mf">2.1</span><span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>It may not always be practical to create items via HTML in a hierarchical fashion. In that case the group role can help to associate the items properly. This is illustrated in the following simple pseudo code example of a tree hierarchy.</p>
+<div class="highlight-javascript"><pre>&lt;div role="tree"&gt;
+  &lt;div role="treeitem"&gt;Top &lt;/div&gt;
+  &lt;div role="group"&gt;
+    &lt;div role="treeitem"&gt;1&lt;/div&gt;
+    &lt;div role="group"&gt;
+      &lt;div role="treeitem"&gt;1.1 &lt;/div&gt;
+      &lt;div role="treeitem"&gt;1.2&lt;/div&gt;
+      &lt;div role="treeitem"&gt;1.3&lt;/div&gt;
+      &lt;div role="group"&gt;
+        &lt;div role="treeitem"&gt;1.3.1&lt;/div&gt;
+        &lt;div role="treeitem"&gt;1.3.2&lt;/div&gt;
+        &lt;div role="treeitem"&gt;1.3.3&lt;/div&gt;
+        &lt;div role="treeitem"&gt;1.3.4&lt;/div&gt;
+     &lt;/div&gt;
+     &lt;div role="treeitem"&gt;1.4&lt;/div&gt;
+   &lt;/div&gt;
+   &lt;div role="treeitem"&gt;2&lt;/div&gt;
+   &lt;div role="treeitem"&gt;3&lt;/div&gt;
+   &lt;div role="group"&gt;
+     &lt;div role="treeitem"&gt;3.1&lt;/div&gt;
+     &lt;div role="treeitem"&gt;"&gt;3.2&lt;/div&gt;
+   &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</pre>
+</div>
+<p>The tree items at the same level in the hierarchy are grouped together within an element identified with role=group. With this organization, the assistive technologies can be provided with the information about what level and item number a particular treeitem represents. For example, in the above tree example, with focus on item 1.3.3 a screen reader might speak, “one dot three dot three item three of four, level four” or something similar.</p>
+<p>Other items included in the hierarchy may not be essential to the component. These items can be marked with a role of presentation to eliminate them from consideration when determining information about the component.</p>
+</div>
+<div class="section" id="using-the-presentation-role">
+<h3><a class="toc-backref" href="#id9">Using the Presentation Role<a class="headerlink" href="#using-the-presentation-role" title="Permalink to this headline">¶</a></a></h3>
+<p>While it is preferable to use CSS for layout, tables are still used to quickly and easily arrange elements on a page. This is especially true of existing widgets which were originally created to work in older browsers. Putting information in tables can easily confuse the hierarchy of the component. If tables must be used, they can be marked with a role of presentation to eliminate them from the hierarchy. Here is a pseudo code example where the presentation role was used on tables within a tree component:</p>
+<blockquote>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;tree&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">table</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;presentation&quot;</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">tr</span><span class="o">&gt;&lt;</span><span class="nx">td</span><span class="o">&gt;&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;treeitem&quot;</span><span class="o">&gt;</span><span class="nx">Top</span><span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;&lt;/</span><span class="nx">td</span><span class="o">&gt;&lt;/</span><span class="nx">tr</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="nx">table</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">table</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;presentation&quot;</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">tr</span><span class="o">&gt;&lt;</span><span class="nx">td</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;treeitem&quot;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;&lt;/</span><span class="nx">td</span><span class="o">&gt;&lt;/</span><span class="nx">tr</span><span class="o">&gt;</span>
+          <span class="o">&lt;/</span><span class="nx">table</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">table</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;presentation&quot;</span><span class="o">&gt;</span>
+                      <span class="o">&lt;</span><span class="nx">tr</span><span class="o">&gt;&lt;</span><span class="nx">td</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;treeitem&quot;</span><span class="o">&gt;</span><span class="mf">1.1</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;&lt;/</span><span class="nx">td</span><span class="o">&gt;&lt;/</span><span class="nx">tr</span><span class="o">&gt;</span>
+                <span class="o">&lt;/</span><span class="nx">table</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">table</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;presentation&quot;</span><span class="o">&gt;</span>
+                      <span class="o">&lt;</span><span class="nx">tr</span><span class="o">&gt;&lt;</span><span class="nx">td</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;treeitem&quot;</span><span class="o">&gt;</span><span class="mf">1.2</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;&lt;/</span><span class="nx">td</span><span class="o">&gt;&lt;/</span><span class="nx">tr</span><span class="o">&gt;</span>
+                <span class="o">&lt;/</span><span class="nx">table</span><span class="o">&gt;</span>
+          <span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">table</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;presentation&quot;</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">tr</span><span class="o">&gt;&lt;</span><span class="nx">td</span><span class="o">&gt;&lt;</span><span class="nx">span</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;treeitem&quot;</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;&lt;/</span><span class="nx">td</span><span class="o">&gt;&lt;/</span><span class="nx">tr</span><span class="o">&gt;</span>
+          <span class="o">&lt;/</span><span class="nx">table</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="nx">div</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</blockquote>
+<p>Since the table is only used for layout it is identified with a role of presentation to remove if from the accessibility hierarchy so that information about the table is not provided to assistive technology. Other elements may need to be removed from the accessibility hierarchy as well. For example, when creating a DHTML checkbox, an image may be contained within a span element that is marked with a role of checkbox and an appropriate state of checked equals true or false. The image which represents the checkbox is contained within the span and should not contain any alt text since the role and state are managed by the surrounding span. Images are considered important elements and are normally included with the accessibility hierarchy of the browser. In order to ignore this image in the accessibility hierarchy, it is marked with a role of presentation. Here is a generic HTML representation:</p>
+<blockquote>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">span</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;checkbox&quot;</span> <span class="nx">checked</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;checked.gif&quot;</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;presentation&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</blockquote>
+<p>And, as mentioned previously, Firefox 3 now puts all div elements into the accessibility hierarchy, so if the div is being used for layout purposes or has no other specific role, it should be marked with role=presentation.</p>
+</div>
+<div class="section" id="assigning-states-as-of-1-0">
+<h3><a class="toc-backref" href="#id10">Assigning States as of 1.0<a class="headerlink" href="#assigning-states-as-of-1-0" title="Permalink to this headline">¶</a></a></h3>
+<p>In addition to identifying the role of a widget, the state of the widget must be identified and updated. The initial state can be set within the widget template or via scripting when the widget is created. As the state changes during user interaction with the widget, the state must be updated using the dijit.xxxWaiState apis:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dijit</span><span class="p">.</span><span class="nx">hasWaiState</span><span class="p">(</span><span class="c">/*Element*/</span> <span class="nx">elem</span><span class="o">,</span> <span class="c">/*String*/</span> <span class="nx">state</span><span class="p">);</span>
+<span class="nx">dijit</span><span class="p">.</span><span class="nx">getWaiState</span><span class="p">(</span><span class="c">/*Element*/</span> <span class="nx">elem</span><span class="o">,</span> <span class="c">/*String*/</span> <span class="nx">state</span><span class="p">);</span>
+<span class="nx">dijit</span><span class="p">.</span><span class="nx">setWaiState</span><span class="p">(</span><span class="c">/*Element*/</span> <span class="nx">elem</span><span class="o">,</span> <span class="c">/*String*/</span> <span class="nx">state</span><span class="o">,</span> <span class="c">/*String*/</span> <span class="nx">value</span><span class="p">);</span>
+<span class="nx">dijit</span><span class="p">.</span><span class="nx">removeWaiState</span><span class="o">:</span><span class="p">(</span><span class="c">/*Element*/</span> <span class="nx">elem</span><span class="o">,</span> <span class="c">/*String*/</span> <span class="nx">state</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>It is important to update the state information as it changes so assistive technology users can be made aware of the change. For example, when a treeitem is expanded, the state for the element that has been assigned role=&quot;treeitem&quot;, must be set to expanded=true. Likewise, when a treeitem is collapsed, the state for the element with the role=&quot;treeitem&quot; must be updated to expanded=false. Be aware that some of the boolean states imply more than just a dual state. For the state attributes checked, selected and expanded a value of false indicates that the widget is capable of being checked, selected or expanded while no attribute indicates that the element is not capable of that state. For example, a tree node with children will have either a state of expanded=true or expanded=false depending upon whether the child nodes are visible or not. An end node, with no children will have no expanded state value set.</p>
+<p>Generally only items which have a role can have a state value. The role may be explicitly set by the author such as a treeitem or may be implicitly defined such as a form element or link. Items which have been added into the accessibility hierarchy via a tabindex attribute may also have properties such as desribedby, labelledby, required, invalid and others.</p>
+</div>
+<div class="section" id="assigning-aria-states-in-0-9">
+<h3><a class="toc-backref" href="#id11">Assigning ARIA States in 0.9<a class="headerlink" href="#assigning-aria-states-in-0-9" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dijit</span><span class="p">.</span><span class="nx">wai</span><span class="p">.</span><span class="nx">setAttr</span><span class="p">(</span><span class="c">/*DomNode*/</span><span class="nx">node</span><span class="o">,</span> <span class="c">/*String*/</span> <span class="nx">ns</span><span class="o">,</span> <span class="c">/*String*/</span> <span class="nx">attr</span><span class="o">,</span> <span class="c">/*String|Boolean*/</span><span class="nx">value</span><span class="p">);</span>
+<span class="nx">dijit</span><span class="p">.</span><span class="nx">wai</span><span class="p">.</span><span class="nx">getAttr</span><span class="p">(</span><span class="c">/*DomNode*/</span><span class="nx">node</span><span class="o">,</span> <span class="c">/*String*/</span> <span class="nx">ns</span><span class="o">,</span> <span class="c">/*String*/</span> <span class="nx">attr</span><span class="o">,</span> <span class="c">/*String|Boolean*/</span><span class="nx">value</span><span class="p">);</span>
+<span class="nx">dijit</span><span class="p">.</span><span class="nx">wai</span><span class="p">.</span><span class="nx">RemoveAttr</span><span class="p">(</span><span class="c">/*DomNode*/</span><span class="nx">node</span><span class="o">,</span> <span class="c">/*String*/</span> <span class="nx">ns</span><span class="o">,</span> <span class="c">/*String*/</span> <span class="nx">attr</span><span class="o">,</span> <span class="c">/*String|Boolean*/</span><span class="nx">value</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The ns value passed into these functions is either “waiState” or “waiRole”. The dijit.wai functions above are wrappers to the DOM apis to set, get and remove attributes. In browsers where namespaces are supported the setAttributeNS, getAttributeNS, and removeAttributeNS, apis are called. In other browsers the setAttribute, getAttribute and removeAttribute apis are called and the namespace is simulated. The namespace information is stored in the dijit.wai class.</p>
+</div>
+</div>
+<div class="section" id="accommodating-low-vision">
+<h2><a class="toc-backref" href="#id12">Accommodating Low Vision<a class="headerlink" href="#accommodating-low-vision" title="Permalink to this headline">¶</a></a></h2>
+<p>Whenever a CSS background image is used to convey information there must be a text alternative available to display when images are turned off in the browser.  Images may be turned off by the user via a browser setting or when Windows high contrast mode is turned on. See the <a class="reference" href="../../dijit-a11y-strategy.html#dijit-a11y-strategy"><em>Support High Contrast/Images off</em></a> section of Dijit A11y Strategy for how to create the text alternatives in the widget template and use CSS dijit-a11y rules to make them visible in high contrast mode.</p>
+<p>To make certain that users can adjust the font size on the page never use a px value for font-size.  Instead use ems or % which will scale properly. If the widget uses any img elements, make certain the image has an appropriate alt text value. If the image is decorative only and does not convey meaning the alt text value will be &quot;&quot; (empty).   If the image conveys meaning and is important to understanding the use of the widget it must have a descriptiion specified via the alt attribute.</p>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

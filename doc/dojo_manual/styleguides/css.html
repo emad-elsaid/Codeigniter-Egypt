@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>CSS Styleguide &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="next" title="Dojo Build" href="../build/contents.html" />
+    <link rel="prev" title="DojoC" href="../dojoc/index.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="../build/contents.html" title="Dojo Build"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="../dojoc/index.html" title="DojoC"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">CSS Styleguide</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a><ul>
+<li><a class="reference" href="#baseclass">baseClass</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#layout">Layout</a><ul>
+<li><a class="reference" href="#nesting">Nesting</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#form-widget-states">Form Widget States</a></li>
+<li><a class="reference" href="#buttons-inside-of-widgets">Buttons inside of widgets</a></li>
+<li><a class="reference" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="../dojoc/index.html"
+                                  title="previous chapter">DojoC</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../build/contents.html"
+                                  title="next chapter">Dojo Build</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/styleguides/css.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="css-styleguide">
+<span id="styleguides-css"></span><h1><a class="toc-backref" href="#id1">CSS Styleguide<a class="headerlink" href="#css-styleguide" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#css-styleguide" id="id1" name="id1">CSS Styleguide</a><ul>
+<li><a class="reference" href="#introduction" id="id2" name="id2">Introduction</a></li>
+<li><a class="reference" href="#layout" id="id3" name="id3">Layout</a></li>
+<li><a class="reference" href="#form-widget-states" id="id4" name="id4">Form Widget States</a></li>
+<li><a class="reference" href="#buttons-inside-of-widgets" id="id5" name="id5">Buttons inside of widgets</a></li>
+<li><a class="reference" href="#see-also" id="id6" name="id6">See also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This styleguide will give you in depth information on how Dojo and Dijits CSS Classes are used, and how you can create your own themes.</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id2">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>Dijit comes with a very powerful theming system.</p>
+<div class="section" id="baseclass">
+<h3>baseClass<a class="headerlink" href="#baseclass" title="Permalink to this headline">¶</a></h3>
+<p>All dijit widgets have a baseClass atttribute which can be specified (overridden) as an initialization parameter.  For example,</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">dijit.layout.TabContainer</span> <span class="na">baseClass=</span><span class="s">myTabContainer</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<p>This lets the designer completely override the style of the widget because none of the CSS rules in dijit.css, tundra.css etc. are applied, since the patterns reference .dijitTabContainer.</p>
+</div>
+</div>
+<div class="section" id="layout">
+<h2><a class="toc-backref" href="#id3">Layout<a class="headerlink" href="#layout" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="nesting">
+<h3>Nesting<a class="headerlink" href="#nesting" title="Permalink to this headline">¶</a></h3>
+<p>Layout widgets set special classes on their children.   For example, when having a BorderContainer with a ContentPane inside, the ContentPane will have <cite>dijitBorderContainer-dijitContentPane</cite> set on its domNode, in addition to dijitContentPane.</p>
+<p>This allows special styling for children, specifically doing things like adding borders on ContentPanes inside of BorderContainers.</p>
+<p>Note that BorderContainer expects the panes it contains to have borders; the draggable splitters between the panes don't have borders, although visually it seems that way (due to the borders on the panes).</p>
+<p>TODO: in the future BorderContainer will also set a dijitBorderContainer-child class on all its children.</p>
+</div>
+</div>
+<div class="section" id="form-widget-states">
+<h2><a class="toc-backref" href="#id4">Form Widget States<a class="headerlink" href="#form-widget-states" title="Permalink to this headline">¶</a></a></h2>
+<p>A form widget like spinner will have various classes applied to its domNode depending on its state.  For example:</p>
+<blockquote>
+<ul class="simple">
+<li>dijitSpinner</li>
+<li>dijitSpinnerDisabled</li>
+<li>dijitSpinnerHover  (mouse is over it)</li>
+<li>dijitSpinnerFocused</li>
+</ul>
+</blockquote>
+<p>It even has combinations of those for special styling needs, like:</p>
+<blockquote>
+<ul class="simple">
+<li>dijitSpinnerFocusedHover  (TODO: check this)</li>
+</ul>
+</blockquote>
+<p>Button type-widgets have an active state when they are being depressed:</p>
+<blockquote>
+<ul class="simple">
+<li>dijitComboButtonActive</li>
+</ul>
+</blockquote>
+<p>Note that we don't use :hover and :active since on IE they only work on &lt;button&gt; and &lt;a&gt; nodes.</p>
+</div>
+<div class="section" id="buttons-inside-of-widgets">
+<h2><a class="toc-backref" href="#id5">Buttons inside of widgets<a class="headerlink" href="#buttons-inside-of-widgets" title="Permalink to this headline">¶</a></a></h2>
+<p>When looking at a numberspinner you will see two buttons at the right of the numberspinner.</p>
+<p>In the current code, clicking one of the buttons will change the class of the NumberSpinner domNode itself, to something like .dijitNumberSpinnerUpArrowActive.</p>
+<p>However, we plan to change this so it just sets a class on the button node itself.</p>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id6">See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li><a class="reference" href="http://dojotoolkit.org/book/dijit-functional-spec/dijit-styling-theming">http://dojotoolkit.org/book/dijit-functional-spec/dijit-styling-theming</a></li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Browser Sniffing &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Quickstart" href="contents.html" />
+    <link rel="next" title="Cross-Domain Dojo" href="cross-domain.html" />
+    <link rel="prev" title="Backbuttons and Dojo" href="back.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="cross-domain.html" title="Cross-Domain Dojo"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="back.html" title="Backbuttons and Dojo"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Quickstart</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">Browser Sniffing</a><ul>
+<li><a class="reference" href="#examples">Examples</a></li>
+<li><a class="reference" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="back.html"
+                                  title="previous chapter">Backbuttons and Dojo</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="cross-domain.html"
+                                  title="next chapter">Cross-Domain Dojo</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/quickstart/browser-sniffing.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="browser-sniffing">
+<span id="quickstart-browser-sniffing"></span><h1><a class="toc-backref" href="#id1">Browser Sniffing<a class="headerlink" href="#browser-sniffing" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Peter Higgins, Ben Lowery</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#browser-sniffing" id="id1" name="id1">Browser Sniffing</a><ul>
+<li><a class="reference" href="#examples" id="id2" name="id2">Examples</a></li>
+<li><a class="reference" href="#see-also" id="id3" name="id3">See also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>You should try to use capability detection (<a class="reference" href="http://dev.opera.com/articles/view/using-capability-detection/">http://dev.opera.com/articles/view/using-capability-detection/</a>) when possible. When that is not an option, Dojo provides a number of <tt class="docutils literal"><span class="pre">is</span></tt> variables for browser detection, defined at runtime based on the users current browser.</p>
+<ul class="simple">
+<li>dojo.isIE</li>
+<li>dojo.isMozilla</li>
+<li>dojo.isFF</li>
+<li>dojo.isOpera</li>
+<li>dojo.isSafari</li>
+<li>dojo.isKhtml</li>
+<li>dojo.isAIR - true if running within the Adobe AIR enviroment</li>
+<li>dojo.isQuirks - is the browser in Quirks-Mode</li>
+<li>dojo.isBrowser (not typically needed when only targeting browsers)</li>
+</ul>
+<p>For Dojo 1.3, the following were added:</p>
+<ul class="simple">
+<li>dojo.isWebKit</li>
+<li>dojo.isChrome</li>
+</ul>
+<p>Each variable is only defined if the specified browser is being used. For example, if you&#8217;re using Internet Explorer, only dojo.isIE is defined; all the other variables are undefined. The variable holds the browser version number as a Number, so you can easily perform version checks. Additionally, since undefined always evaluates as false in if statements, you can use code like this to check for a certain browser version:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></td><td class="code"><div class="highlight"><pre><span class="k">if</span><span class="p">(</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">isIE</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">){</span> <span class="c">// only IE6 and below</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="p">(</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">isFF</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">){</span> <span class="c">// only Firefox 2.x and lower</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="p">(</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">isIE</span> <span class="o">==</span> <span class="mi">7</span><span class="p">){</span> <span class="c">// only IE7</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id2">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<p>Here's a live sample to show how it works:</p>
+<div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+function makeFancyAnswer(who){
+  if(dojo[&quot;is&quot; + who]){
+    return &quot;Yes, it's version &quot; + dojo[&quot;is&quot; + who];
+  }else{
+    return &quot;No&quot;;
+  }
+}
+
+function makeAtLeastAnswer(who, version) {
+  var answer = (dojo[&quot;is&quot; + who] &gt;= version) ? &quot;Yes&quot; : &quot;No&quot;;
+  dojo.byId(&quot;isAtLeast&quot; + who + version).innerHTML = answer;
+}
+
+dojo.addOnLoad(function(){
+  dojo.forEach([&quot;IE&quot;, &quot;Mozilla&quot;, &quot;FF&quot;, &quot;Opera&quot;, &quot;WebKit&quot;, &quot;Chrome&quot;],
+               function(n) {
+                 dojo.byId(&quot;answerIs&quot; + n).innerHTML = makeFancyAnswer(n);
+               });
+  makeAtLeastAnswer(&quot;IE&quot;, 7);
+  makeAtLeastAnswer(&quot;FF&quot;, 3);
+  makeAtLeastAnswer(&quot;Opera&quot;, 9);
+
+});
+&lt;/script&gt;
+&lt;dl&gt;
+  &lt;dt&gt;Is this Internet Explorer?&lt;/dt&gt;
+  &lt;dd id=&quot;answerIsIE&quot;&gt;&lt;/dd&gt;
+  &lt;dt&gt;Is this Firefox?&lt;/dt&gt;
+  &lt;dd id=&quot;answerIsFF&quot;&gt;&lt;/dd&gt;
+  &lt;dt&gt;Is this Mozilla?&lt;/dt&gt;
+  &lt;dd id=&quot;answerIsMozilla&quot;&gt;&lt;/dd&gt;
+  &lt;dt&gt;Is this Opera?&lt;/dt&gt;
+  &lt;dd id=&quot;answerIsOpera&quot;&gt;&lt;/dd&gt;
+  &lt;dt&gt;Is this WebKit? (Dojo 1.3)&lt;/dt&gt;
+  &lt;dd id=&quot;answerIsWebKit&quot;&gt;&lt;/dd&gt;
+  &lt;dt&gt;Is this Chrome? (Dojo 1.3)&lt;/dt&gt;
+  &lt;dd id=&quot;answerIsChrome&quot;&gt;&lt;/dd&gt;
+&lt;/dl&gt;
+&lt;dl&gt;
+  &lt;dt&gt;Is this at least IE 7?&lt;/dt&gt;
+  &lt;dd id=&quot;isAtLeastIE7&quot;&gt;&lt;/dd&gt;
+  &lt;dt&gt;Is this at least Firefox 3?&lt;/dt&gt;
+  &lt;dd id=&quot;isAtLeastFF3&quot;&gt;&lt;/dd&gt;
+  &lt;dt&gt;Is this at least Opera 9?&lt;/dt&gt;
+  &lt;dd id=&quot;isAtLeastOpera9&quot;&gt;&lt;/dd&gt;
+&lt;/dl&gt;</pre></div></div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id3">See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li><a class="reference" href="../dojo/base/loader.html#dojo-base-loader"><em>dojo._base.loader, the bootstrap module and home of the discussed variables</em></a></li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

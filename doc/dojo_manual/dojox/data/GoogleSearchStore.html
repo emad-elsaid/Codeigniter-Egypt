@@ -1,0 +1,714 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.data.GoogleSearchStore &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.data.HtmlStore" href="HtmlStore.html" />
+    <link rel="prev" title="dojox.data.GoogleFeedStore" href="GoogleFeedStore.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="HtmlStore.html" title="dojox.data.HtmlStore"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="GoogleFeedStore.html" title="dojox.data.GoogleFeedStore"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.data.GoogleSearchStore</a><ul>
+<li><a class="reference" href="#api-support">API Support</a></li>
+<li><a class="reference" href="#constructor-params">Constructor Params</a></li>
+<li><a class="reference" href="#item-attributes">Item Attributes</a><ul>
+<li><a class="reference" href="#id2">dojox.data.GoogleSearchStore</a></li>
+<li><a class="reference" href="#dojox-data-googlewebsearchstore">dojox.data.GoogleWebSearchStore</a></li>
+<li><a class="reference" href="#dojox-data-googleblogsearchstore">dojox.data.GoogleBlogSearchStore</a></li>
+<li><a class="reference" href="#dojox-data-googlelocalsearchstore">dojox.data.GoogleLocalSearchStore</a></li>
+<li><a class="reference" href="#dojox-data-googlevideosearchstore">dojox.data.GoogleVideoSearchStore</a></li>
+<li><a class="reference" href="#dojox-data-googlenewssearchstore">dojox.data.GoogleNewsSearchStore</a></li>
+<li><a class="reference" href="#dojox-data-googlebooksearchstore">dojox.data.GoogleBookSearchStore</a></li>
+<li><a class="reference" href="#dojox-data-googleimagesearchstore">dojox.data.GoogleImageSearchStore</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#query-syntax">Query Syntax</a><ul>
+<li><a class="reference" href="#query-example">Query Example</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#example-usage">Example Usage</a><ul>
+<li><a class="reference" href="#searching-multiple-google-services-at-once">Searching multiple Google services at once</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="GoogleFeedStore.html"
+                                  title="previous chapter">dojox.data.GoogleFeedStore</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="HtmlStore.html"
+                                  title="next chapter">dojox.data.HtmlStore</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/data/GoogleSearchStore.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-data-googlesearchstore">
+<span id="id1"></span><h1><a class="toc-backref" href="#id3">dojox.data.GoogleSearchStore<a class="headerlink" href="#dojox-data-googlesearchstore" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed, Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Shane O&#8217;Sullivan</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.2</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-data-googlesearchstore" id="id3" name="id3">dojox.data.GoogleSearchStore</a><ul>
+<li><a class="reference" href="#api-support" id="id4" name="id4">API Support</a></li>
+<li><a class="reference" href="#constructor-params" id="id5" name="id5">Constructor Params</a></li>
+<li><a class="reference" href="#item-attributes" id="id6" name="id6">Item Attributes</a><ul>
+<li><a class="reference" href="#id2" id="id7" name="id7">dojox.data.GoogleSearchStore</a></li>
+<li><a class="reference" href="#dojox-data-googlewebsearchstore" id="id8" name="id8">dojox.data.GoogleWebSearchStore</a></li>
+<li><a class="reference" href="#dojox-data-googleblogsearchstore" id="id9" name="id9">dojox.data.GoogleBlogSearchStore</a></li>
+<li><a class="reference" href="#dojox-data-googlelocalsearchstore" id="id10" name="id10">dojox.data.GoogleLocalSearchStore</a></li>
+<li><a class="reference" href="#dojox-data-googlevideosearchstore" id="id11" name="id11">dojox.data.GoogleVideoSearchStore</a></li>
+<li><a class="reference" href="#dojox-data-googlenewssearchstore" id="id12" name="id12">dojox.data.GoogleNewsSearchStore</a></li>
+<li><a class="reference" href="#dojox-data-googlebooksearchstore" id="id13" name="id13">dojox.data.GoogleBookSearchStore</a></li>
+<li><a class="reference" href="#dojox-data-googleimagesearchstore" id="id14" name="id14">dojox.data.GoogleImageSearchStore</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#query-syntax" id="id15" name="id15">Query Syntax</a><ul>
+<li><a class="reference" href="#query-example" id="id16" name="id16">Query Example</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#example-usage" id="id17" name="id17">Example Usage</a><ul>
+<li><a class="reference" href="#searching-multiple-google-services-at-once" id="id18" name="id18">Searching multiple Google services at once</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The GoogleSearchStore is actually a collection of stores designed to work with Google&#8217;s Ajax search services. GoogleSearchStore is the base class  that all subclasses of GoogleSearchStore extend from. It provides all the basics of working with Google&#8217;s search API in a dojo.data compliant implementation. The following stores are avaialble for use after dojo.require() is used to load dojox.data.GoogleSearchStore:</p>
+<ul class="simple">
+<li><strong>dojox.data.GoogleSearchStore</strong> - The basic search store that all more fine-grained searches inherit from. This store defaults to querying Google&#8217;s Web-search Ajax calls.</li>
+<li><strong>dojox.data.GoogleWebSearchStore</strong> - A store configured to search specifically against Google&#8217;s Web search Ajax calls.</li>
+<li><strong>dojox.data.GoogleBlogSearchStore</strong> - A store configured to search specifically against Google&#8217;s Blog (Web log) search Ajax calls.</li>
+<li><strong>dojox.data.GoogleLocalSearchStore</strong> - A store configured to search specifically against Google&#8217;s Location related search Ajax calls.</li>
+<li><strong>dojox.data.GoogleVideoSearchStore</strong> - A store configured to search specifically against Google&#8217;s Video search Ajax calls.</li>
+<li><strong>dojox.data.GoogleBookSearchStore</strong> - A store configured to search specifically against Google&#8217;s Book search Ajax calls.</li>
+<li><strong>dojox.data.GoogleImageSearchStore</strong> - A store configured to search specifically against Google&#8217;s Image search Ajax calls.</li>
+</ul>
+<p><strong>Note:</strong>  These stores make use of Google&#8217;s <a class="reference" href="http://code.google.com/apis/ajaxsearch/">AJAX search services.</a>. In order to use them in your web-sites, please make sure to read <a class="reference" href="http://code.google.com/apis/ajaxsearch/terms.html">Google&#8217;s terms and conditions</a> and agree to them before using these stores.</p>
+<div class="section" id="api-support">
+<h2><a class="toc-backref" href="#id4">API Support<a class="headerlink" href="#api-support" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li><a class="reference" href="../../dojo/data/api/Read.html#dojo-data-api-read"><em>dojo.data.api.Read</em></a></li>
+</ul>
+</div>
+<div class="section" id="constructor-params">
+<h2><a class="toc-backref" href="#id5">Constructor Params<a class="headerlink" href="#constructor-params" title="Permalink to this headline">¶</a></a></h2>
+<p>The following parameters are supported by all Google store implementations.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="72%" />
+<col width="18%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>name</strong></td>
+<td><strong>description</strong></td>
+<td><strong>type</strong></td>
+</tr>
+<tr><td>label</td>
+<td>The attribute of the search returns to use as the item&#8217;s label. Defaults to
+titleNoFormatting.</td>
+<td>string</td>
+</tr>
+<tr><td>key</td>
+<td>Your Google API key (optional)</td>
+<td>string</td>
+</tr>
+<tr><td>lang</td>
+<td>The language locale to use. Defaults to the browser locale.</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="item-attributes">
+<h2><a class="toc-backref" href="#id6">Item Attributes<a class="headerlink" href="#item-attributes" title="Permalink to this headline">¶</a></a></h2>
+<p>Depending on which of the search stores you instantiate, the supported list of item attributes changes. This is because each search service exposes different information, since each type of search by its nature deems specific information the key information to return. Below you will find a list of expected attribute names for each search service and what they are:</p>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id7">dojox.data.GoogleSearchStore<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Attribute</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr><td>url</td>
+<td>The URL for the item returned by the search</td>
+</tr>
+<tr><td>unescapedUrl</td>
+<td>The URL for the item, without URL escaping. This is often more readable.</td>
+</tr>
+<tr><td>visibleUrl</td>
+<td>The URL with no protocol specified.</td>
+</tr>
+<tr><td>cacheUrl</td>
+<td>The URL to the copy of the document cached by Google</td>
+</tr>
+<tr><td>title</td>
+<td>The page title in HTML format.</td>
+</tr>
+<tr><td>titleNoFormatting</td>
+<td>The page title in plain text</td>
+</tr>
+<tr><td>content</td>
+<td>A snippet of information about the page.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dojox-data-googlewebsearchstore">
+<h3><a class="toc-backref" href="#id8">dojox.data.GoogleWebSearchStore<a class="headerlink" href="#dojox-data-googlewebsearchstore" title="Permalink to this headline">¶</a></a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Attribute</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr><td>title</td>
+<td>The page title in HTML format.</td>
+</tr>
+<tr><td>titleNoFormatting</td>
+<td>The page title in plain text</td>
+</tr>
+<tr><td>content</td>
+<td>A snippet of information about the page.</td>
+</tr>
+<tr><td>blogUrl</td>
+<td>The URL for the blog</td>
+</tr>
+<tr><td>postUrl</td>
+<td>The URL for the single blog post</td>
+</tr>
+<tr><td>visibleUrl</td>
+<td>The URL with no protocol specified.</td>
+</tr>
+<tr><td>cacheUrl</td>
+<td>The URL to the copy of the document cached by Google</td>
+</tr>
+<tr><td>author</td>
+<td>The author of the blog post</td>
+</tr>
+<tr><td>publishedDate</td>
+<td>The published date, in RFC-822 format</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dojox-data-googleblogsearchstore">
+<h3><a class="toc-backref" href="#id9">dojox.data.GoogleBlogSearchStore<a class="headerlink" href="#dojox-data-googleblogsearchstore" title="Permalink to this headline">¶</a></a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Attribute</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr><td>url</td>
+<td>The URL for the item returned by the search</td>
+</tr>
+<tr><td>unescapedUrl</td>
+<td>The URL for the item, without URL escaping. This is often more readable.</td>
+</tr>
+<tr><td>visibleUrl</td>
+<td>The URL with no protocol specified.</td>
+</tr>
+<tr><td>cacheUrl</td>
+<td>The URL to the copy of the document cached by Google</td>
+</tr>
+<tr><td>title</td>
+<td>The page title in HTML format.</td>
+</tr>
+<tr><td>titleNoFormatting</td>
+<td>The page title in plain text</td>
+</tr>
+<tr><td>content</td>
+<td>A snippet of information about the page.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dojox-data-googlelocalsearchstore">
+<h3><a class="toc-backref" href="#id10">dojox.data.GoogleLocalSearchStore<a class="headerlink" href="#dojox-data-googlelocalsearchstore" title="Permalink to this headline">¶</a></a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Attribute</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr><td>title</td>
+<td>The page title in HTML format.</td>
+</tr>
+<tr><td>titleNoFormatting</td>
+<td>The page title in plain text</td>
+</tr>
+<tr><td>content</td>
+<td>A snippet of information about the page.</td>
+</tr>
+<tr><td>url</td>
+<td>The URL for the item returned by the search</td>
+</tr>
+<tr><td>lat</td>
+<td>The latitude of the item in question.</td>
+</tr>
+<tr><td>lng</td>
+<td>The longitude of the item in question.</td>
+</tr>
+<tr><td>streetAddress</td>
+<td>The street address of the item</td>
+</tr>
+<tr><td>city</td>
+<td>The city of the item</td>
+</tr>
+<tr><td>region</td>
+<td>The region of the item</td>
+</tr>
+<tr><td>country</td>
+<td>The country of the item</td>
+</tr>
+<tr><td>phoneNumbers</td>
+<td>The phone numbers associated with this address. Can be one or more.</td>
+</tr>
+<tr><td>ddUrl</td>
+<td>A URL that can be used to provide driving directions from the center of the search results to this search results</td>
+</tr>
+<tr><td>ddUrlToHere</td>
+<td>A URL that can be used to provide driving directions from this search result to a user specified location.</td>
+</tr>
+<tr><td>staticMapUrl</td>
+<td>Link to the map for the item.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dojox-data-googlevideosearchstore">
+<h3><a class="toc-backref" href="#id11">dojox.data.GoogleVideoSearchStore<a class="headerlink" href="#dojox-data-googlevideosearchstore" title="Permalink to this headline">¶</a></a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Attribute</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr><td>title</td>
+<td>The page title in HTML format.</td>
+</tr>
+<tr><td>titleNoFormatting</td>
+<td>The page title in plain text</td>
+</tr>
+<tr><td>content</td>
+<td>A snippet of information about the page.</td>
+</tr>
+<tr><td>url</td>
+<td>The URL for the item returned by the search</td>
+</tr>
+<tr><td>published</td>
+<td>The published date, in RFC-822 format.</td>
+</tr>
+<tr><td>publisher</td>
+<td>The name of the publisher.</td>
+</tr>
+<tr><td>duration</td>
+<td>The approximate duration, in seconds, of the video.</td>
+</tr>
+<tr><td>tbWidth</td>
+<td>The width in pixels of the video.</td>
+</tr>
+<tr><td>tbHeight</td>
+<td>The height in pixels of the video</td>
+</tr>
+<tr><td>tbUrl</td>
+<td>The URL to a thumbnail representation of the video.</td>
+</tr>
+<tr><td>playUrl</td>
+<td>If present, supplies the url of the flash version of the video that can be played inline on your page. To play this video
+simply create and &lt;embed&gt; element on your page using this value as the src attribute and using application/x-shockwave-flash
+as the type attribute. If you want the video to play right away, make sure to append &amp;autoPlay=true to the url.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dojox-data-googlenewssearchstore">
+<h3><a class="toc-backref" href="#id12">dojox.data.GoogleNewsSearchStore<a class="headerlink" href="#dojox-data-googlenewssearchstore" title="Permalink to this headline">¶</a></a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Attribute</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr><td>title</td>
+<td>The page title in HTML format.</td>
+</tr>
+<tr><td>titleNoFormatting</td>
+<td>The page title in plain text</td>
+</tr>
+<tr><td>content</td>
+<td>A snippet of information about the page.</td>
+</tr>
+<tr><td>url</td>
+<td>The URL for the item returned by the search</td>
+</tr>
+<tr><td>unescapedUrl</td>
+<td>The URL for the item, without URL escaping. This is often more readable.</td>
+</tr>
+<tr><td>publisher</td>
+<td>The name of the publisher.</td>
+</tr>
+<tr><td>clusterUrl</td>
+<td>A URL pointing to a page listing related stories.</td>
+</tr>
+<tr><td>location</td>
+<td>The location of the news story.</td>
+</tr>
+<tr><td>relatedStories</td>
+<td>An optional array of objects specifying related stories. Each object has the following subset of properties:
+&#8220;title&#8221;, &#8220;titleNoFormatting&#8221;, &#8220;url&#8221;, &#8220;unescapedUrl&#8221;, &#8220;publisher&#8221;, &#8220;location&#8221;, &#8220;publishedDate&#8221;.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dojox-data-googlebooksearchstore">
+<h3><a class="toc-backref" href="#id13">dojox.data.GoogleBookSearchStore<a class="headerlink" href="#dojox-data-googlebooksearchstore" title="Permalink to this headline">¶</a></a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Attribute</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr><td>title</td>
+<td>The book title in HTML format.</td>
+</tr>
+<tr><td>titleNoFormatting</td>
+<td>The book title in plain text</td>
+</tr>
+<tr><td>authors</td>
+<td>An array of authors</td>
+</tr>
+<tr><td>url</td>
+<td>The URL for the item returned by the search</td>
+</tr>
+<tr><td>unescapedUrl</td>
+<td>The URL for the item, without URL escaping. This is often more readable.</td>
+</tr>
+<tr><td>bookId</td>
+<td>An identifier for the book, usually an ISBN.</td>
+</tr>
+<tr><td>pageCount</td>
+<td>The number of pages in the book.</td>
+</tr>
+<tr><td>publishedYear</td>
+<td>The year of publication.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dojox-data-googleimagesearchstore">
+<h3><a class="toc-backref" href="#id14">dojox.data.GoogleImageSearchStore<a class="headerlink" href="#dojox-data-googleimagesearchstore" title="Permalink to this headline">¶</a></a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Attribute</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr><td>title</td>
+<td>The book title in HTML format.</td>
+</tr>
+<tr><td>titleNoFormatting</td>
+<td>The book title in plain text</td>
+</tr>
+<tr><td>url</td>
+<td>The URL for the item returned by the search</td>
+</tr>
+<tr><td>tbUrl</td>
+<td>The URL for the image thumbnail</td>
+</tr>
+<tr><td>visibleUrl</td>
+<td>A shortened version of the URL associated with the result, stripped of a protocol and path.</td>
+</tr>
+<tr><td>originalContextUrl</td>
+<td>The URL of the page containing the image.</td>
+</tr>
+<tr><td>width</td>
+<td>The width of the image in pixels.</td>
+</tr>
+<tr><td>height</td>
+<td>The height of the image in pixels.</td>
+</tr>
+<tr><td>tbWidth</td>
+<td>The width of the thumbnail in pixels.</td>
+</tr>
+<tr><td>tbHeight</td>
+<td>The height of the thumbnail in pixels.</td>
+</tr>
+<tr><td>content</td>
+<td>A snippet of information about the image, in HTML format</td>
+</tr>
+<tr><td>contentNoFormatting</td>
+<td>A snippet of information about the image, in plain text.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="query-syntax">
+<h2><a class="toc-backref" href="#id15">Query Syntax<a class="headerlink" href="#query-syntax" title="Permalink to this headline">¶</a></a></h2>
+<p>The query syntax for all stores is simple. It takes a single object with the attribute &#8216;text&#8217;, where the value is what text to search for.</p>
+<div class="section" id="query-example">
+<h3><a class="toc-backref" href="#id16">Query Example<a class="headerlink" href="#query-example" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;text&quot;</span> <span class="o">:</span> <span class="s2">&quot;Find me&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="example-usage">
+<h2><a class="toc-backref" href="#id17">Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></a></h2>
+<p>The following example shows wiring Various GoogleSearchStores to dojox.data.DataGrids. You can type in a search string in the search box and hit search. The datagrids will then be populated with the results of the searches.</p>
+<div class="section" id="searching-multiple-google-services-at-once">
+<h3><a class="toc-backref" href="#id18">Searching multiple Google services at once<a class="headerlink" href="#searching-multiple-google-services-at-once" title="Permalink to this headline">¶</a></a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dijit.form.Button&quot;);
+  dojo.require(&quot;dijit.form.TextBox&quot;);
+  dojo.require(&quot;dijit.layout.TabContainer&quot;);
+  dojo.require(&quot;dijit.layout.ContentPane&quot;);
+  dojo.require(&quot;dojox.data.GoogleSearchStore&quot;);
+  dojo.require(&quot;dojox.grid.DataGrid&quot;);
+
+  function hrefFormatter(value) {
+    value = unescape(value);
+    return &quot;&lt;a href=\&quot;&quot; + value + &quot;\&quot; target=\&quot;_blank\&quot;&gt;Link&lt;/a&gt;&quot;;
+  };
+
+  var layoutResults = [
+    [
+      { field: &quot;title&quot;, name: &quot;Title&quot;, width: 20 },
+      { field: &quot;url&quot;, name: &quot;URL&quot;, width: 5, formatter: hrefFormatter},
+      { field: &quot;content&quot;, name: &quot;Content&quot;, width: 'auto' }
+    ]
+  ];
+
+  function init() {
+     //Link button to search, where search text is drawn from the input box.
+
+     //Had to resize the grids on selection of tabs, otherwise they wouldn't always display.
+     function resizeGrids() {
+       dijit.byId(&quot;webGrid&quot;).resize();
+       dijit.byId(&quot;newsGrid&quot;).resize();
+       dijit.byId(&quot;imageGrid&quot;).resize();
+     }
+     dojo.connect(dijit.byId(&quot;tabSearch&quot;), &quot;selectChild&quot;, resizeGrids);
+
+     function search() {
+        var text = dijit.byId(&quot;searchText&quot;).getValue();
+        text = dojo.trim(text);
+        if (text !== &quot;&quot; ) {
+          var query = { text: text };
+          dijit.byId(&quot;webGrid&quot;).setQuery(query);
+          dijit.byId(&quot;newsGrid&quot;).setQuery(query);
+          dijit.byId(&quot;imageGrid&quot;).setQuery(query);
+        }
+     }
+     dojo.connect(dijit.byId(&quot;searchButton&quot;), &quot;onClick&quot;, search);
+  }
+  dojo.addOnLoad(init);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;b&gt;Input search text:&lt;/b&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;div dojoType=&quot;dijit.form.TextBox&quot; width=&quot;50&quot; id=&quot;searchText&quot; value=&quot;Dojo&quot;&gt;&lt;/div&gt;
+&lt;br&gt;
+&lt;div dojoType=&quot;dijit.form.Button&quot; id=&quot;searchButton&quot;&gt;Search!&lt;/div&gt;
+&lt;div dojoType=&quot;dojox.data.GoogleWebSearchStore&quot; jsId=&quot;webStore&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dojox.data.GoogleImageSearchStore&quot; jsId=&quot;imageStore&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dojox.data.GoogleNewsSearchStore&quot; jsId=&quot;newsStore&quot;&gt;&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;div dojoType=&quot;dijit.layout.TabContainer&quot; style=&quot;width: 800px; height: 350px;&quot; id=&quot;tabSearch&quot;&gt;
+  &lt;div id=&quot;tab1&quot; title=&quot;GoogleWebSearchStore&quot; dojoType=&quot;dijit.layout.ContentPane&quot;&gt;
+    &lt;div id=&quot;webGrid&quot;
+      style=&quot;width: 750px; height: 300px;&quot;
+      dojoType=&quot;dojox.grid.DataGrid&quot;
+      store=&quot;webStore&quot;
+      structure=&quot;layoutResults&quot;
+      query=&quot;{text:'Dojo'}&quot;
+      rowsPerPage=&quot;40&quot;&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;tab2&quot; title=&quot;GoogleImageSearchStore&quot; dojoType=&quot;dijit.layout.ContentPane&quot;&gt;
+    &lt;div style=&quot;width: 750px; height: 300px;&quot;&gt;
+      &lt;div id=&quot;imageGrid&quot;
+        dojoType=&quot;dojox.grid.DataGrid&quot;
+        store=&quot;imageStore&quot;
+        structure=&quot;layoutResults&quot;
+        query=&quot;{text:'Dojo'}&quot;
+        rowsPerPage=&quot;40&quot;&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;tab3&quot; title=&quot;GoogleNewsSearchStore&quot; dojoType=&quot;dijit.layout.ContentPane&quot;&gt;
+    &lt;div id=&quot;newsGrid&quot;
+      style=&quot;width: 750px; height: 300px;&quot;
+      dojoType=&quot;dojox.grid.DataGrid&quot;
+      store=&quot;newsStore&quot;
+      structure=&quot;layoutResults&quot;
+      query=&quot;{text:'Dojo'}&quot;
+      rowsPerPage=&quot;40&quot;&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/Grid.css&quot;;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/nihiloGrid.css&quot;;
+
+  .dojoxGrid table {
+    margin: 0;
+  }
+&lt;/style&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

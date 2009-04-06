@@ -1,0 +1,467 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Hierarchical data and access through dojo.data &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Quickstart" href="../../contents.html" />
+    <link rel="next" title="Paging Data" href="pagination.html" />
+    <link rel="prev" title="Selecting (Filtering) items" href="filteringitems.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../../_static/dojo/dijit/themes/dijit.css";
+@import "../../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="pagination.html" title="Paging Data"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="filteringitems.html" title="Selecting (Filtering) items"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../../contents.html" accesskey="U">Quickstart</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">Hierarchical data and access through dojo.data</a><ul>
+<li><a class="reference" href="#hierarchical-data">Hierarchical data</a></li>
+<li><a class="reference" href="#hierarchical-data-examples">Hierarchical data examples</a><ul>
+<li><a class="reference" href="#functional-example-1-dijit-tree-displaying-hierarchical-data-in-a-data-store">Functional Example 1:  dijit.Tree displaying hierarchical data in a data store</a></li>
+<li><a class="reference" href="#example-2-a-hierarchical-format-without-references">Example 2:  A hierarchical format without references</a></li>
+<li><a class="reference" href="#functional-example-2-dijit-tree-displaying-hierarchical-data-in-a-data-store">Functional Example 2:  dijit.Tree displaying hierarchical data in a data store</a></li>
+<li><a class="reference" href="#sample-code-detecting-child-items">Sample code:  Detecting child items</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#lazy-loading">Lazy-Loading</a><ul>
+<li><a class="reference" href="#sample-code-detecting-child-items-and-lazy-loading-items-on-demand">Sample code:  Detecting child items and lazy-loading items on demand</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="filteringitems.html"
+                                  title="previous chapter">Selecting (Filtering) items</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="pagination.html"
+                                  title="next chapter">Paging Data</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../../_sources/quickstart/data/usingdatastores/lazyloading.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="hierarchical-data-and-access-through-dojo-data">
+<span id="quickstart-data-usingdatastores-lazyloading"></span><h1><a class="toc-backref" href="#id1">Hierarchical data and access through dojo.data<a class="headerlink" href="#hierarchical-data-and-access-through-dojo-data" title="Permalink to this headline">¶</a></a></h1>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#hierarchical-data-and-access-through-dojo-data" id="id1" name="id1">Hierarchical data and access through dojo.data</a><ul>
+<li><a class="reference" href="#hierarchical-data" id="id2" name="id2">Hierarchical data</a></li>
+<li><a class="reference" href="#hierarchical-data-examples" id="id3" name="id3">Hierarchical data examples</a><ul>
+<li><a class="reference" href="#functional-example-1-dijit-tree-displaying-hierarchical-data-in-a-data-store" id="id4" name="id4">Functional Example 1:  dijit.Tree displaying hierarchical data in a data store</a></li>
+<li><a class="reference" href="#example-2-a-hierarchical-format-without-references" id="id5" name="id5">Example 2:  A hierarchical format without references</a></li>
+<li><a class="reference" href="#functional-example-2-dijit-tree-displaying-hierarchical-data-in-a-data-store" id="id6" name="id6">Functional Example 2:  dijit.Tree displaying hierarchical data in a data store</a></li>
+<li><a class="reference" href="#sample-code-detecting-child-items" id="id7" name="id7">Sample code:  Detecting child items</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#lazy-loading" id="id8" name="id8">Lazy-Loading</a><ul>
+<li><a class="reference" href="#sample-code-detecting-child-items-and-lazy-loading-items-on-demand" id="id9" name="id9">Sample code:  Detecting child items and lazy-loading items on demand</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="hierarchical-data">
+<h2><a class="toc-backref" href="#id2">Hierarchical data<a class="headerlink" href="#hierarchical-data" title="Permalink to this headline">¶</a></a></h2>
+<p>One of the design goals of dojo.data was to handle the concept of hierarchical items.  What that means is that an item may have references to, or contain, other items.  The end result when viewed graphically is a Tree instead of a flat list.  So, this leads to the questions of how do you determine if there is hierarchy and how do you walk across it.  This is, in fact, quite easy to do using dojo.data.ItemFileReadStore as it supports data in hierarchical structure.</p>
+<p>Lets take a look at an example hierarchy built up with references in dojo.data.ItemFileReadStore.  Please take note that the example information on constructing a structure that shows hierarchy is specific to dojo.data.ItemFileReadStore.  The concepts of how you then walk over the hierarchy is what is general and generic to dojo.data.  The internal format used by a store is not.</p>
+<p><strong>Example data structure for ItemFileReadStore:</strong></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">identifier</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span><span class="o">,</span>
+  <span class="k">label</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span><span class="o">,</span>
+  <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Africa&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span>
+      <span class="nx">children</span><span class="o">:</span><span class="p">[{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Egypt&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Kenya&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Sudan&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Egypt&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Kenya&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span>
+      <span class="nx">children</span><span class="o">:</span><span class="p">[{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Nairobi&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Mombasa&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Nairobi&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Mombasa&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Sudan&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span>
+      <span class="nx">children</span><span class="o">:</span><span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Khartoum&#39;</span><span class="p">}</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Khartoum&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Asia&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span>
+      <span class="nx">children</span><span class="o">:</span><span class="p">[{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;China&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;India&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Russia&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Mongolia&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;China&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;India&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Russia&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Mongolia&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Australia&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;21 million&#39;</span><span class="o">,</span>
+      <span class="nx">children</span><span class="o">:</span><span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Commonwealth of Australia&#39;</span><span class="p">}}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Commonwealth of Australia&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;21 million&#39;</span><span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Europe&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span>
+      <span class="nx">children</span><span class="o">:</span><span class="p">[{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Germany&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;France&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Spain&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Italy&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Germany&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;France&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Spain&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Italy&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;North America&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span>
+      <span class="nx">children</span><span class="o">:</span><span class="p">[{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Mexico&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Canada&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;United States of America&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Mexico&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span>  <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;108 million&#39;</span><span class="o">,</span> <span class="nx">area</span><span class="o">:</span><span class="s1">&#39;1,972,550 sq km&#39;</span><span class="o">,</span>
+      <span class="nx">children</span><span class="o">:</span><span class="p">[{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Mexico City&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Guadalajara&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Mexico City&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;19 million&#39;</span><span class="o">,</span> <span class="nx">timezone</span><span class="o">:</span><span class="s1">&#39;-6 UTC&#39;</span><span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Guadalajara&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;4 million&#39;</span><span class="o">,</span> <span class="nx">timezone</span><span class="o">:</span><span class="s1">&#39;-6 UTC&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Canada&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span>  <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;33 million&#39;</span><span class="o">,</span> <span class="nx">area</span><span class="o">:</span><span class="s1">&#39;9,984,670 sq km&#39;</span><span class="o">,</span>
+      <span class="nx">children</span><span class="o">:</span><span class="p">[{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Ottawa&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Toronto&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Ottawa&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;0.9 million&#39;</span><span class="o">,</span> <span class="nx">timezone</span><span class="o">:</span><span class="s1">&#39;-5 UTC&#39;</span><span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Toronto&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;2.5 million&#39;</span><span class="o">,</span> <span class="nx">timezone</span><span class="o">:</span><span class="s1">&#39;-5 UTC&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;United States of America&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;South America&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span>
+      <span class="nx">children</span><span class="o">:</span><span class="p">[{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Brazil&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="nx">_reference</span><span class="o">:</span><span class="s1">&#39;Argentina&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Brazil&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;186 million&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Argentina&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;40 million&#39;</span> <span class="p">}</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+<p>There are two things to notice about the above structure.  The first is that yes, it is still a flat list of data items to feed to dojo.data.ItemFileReadStore.  But, as you can see, there is a special attribute, <em>_reference</em> that is used to point to another item in the list.  These references, when processed by ItemFileReadStore, will establish the relationships in the data.  This means that when you call store.getValues(item, children), the array returned is an array of the actual items pointed to.  So, if you then try to visualize it, you can see how the Tree of hierarchy is formed from the references.  Below is an example of using dijit.Tree with the above dataset to construct and display a tree.</p>
+</div>
+<div class="section" id="hierarchical-data-examples">
+<h2><a class="toc-backref" href="#id3">Hierarchical data examples<a class="headerlink" href="#hierarchical-data-examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="functional-example-1-dijit-tree-displaying-hierarchical-data-in-a-data-store">
+<h3><a class="toc-backref" href="#id4">Functional Example 1:  dijit.Tree displaying hierarchical data in a data store<a class="headerlink" href="#functional-example-1-dijit-tree-displaying-hierarchical-data-in-a-data-store" title="Permalink to this headline">¶</a></a></h3>
+<p><strong>Note:</strong> <em>The tree model selects root nodes via a query attribute.  This query attribute is directly passed to the data store as part of the fetch made to generate the list of root items.</em></p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.Tree&quot;);
+  var storeData = { identifier: 'name',
+    label: 'name',
+    items: [
+      { name:'Africa', type:'continent',
+        children:[{_reference:'Egypt'}, {_reference:'Kenya'}, {_reference:'Sudan'}] },
+      { name:'Egypt', type:'country' },
+      { name:'Kenya', type:'country',
+        children:[{_reference:'Nairobi'}, {_reference:'Mombasa'}] },
+      { name:'Nairobi', type:'city' },
+      { name:'Mombasa', type:'city' },
+      { name:'Sudan', type:'country',
+        children:{_reference:'Khartoum'} },
+      { name:'Khartoum', type:'city' },
+      { name:'Asia', type:'continent',
+        children:[{_reference:'China'}, {_reference:'India'}, {_reference:'Russia'}, {_reference:'Mongolia'}] },
+      { name:'China', type:'country' },
+      { name:'India', type:'country' },
+      { name:'Russia', type:'country' },
+      { name:'Mongolia', type:'country' },
+      { name:'Australia', type:'continent', population:'21 million',
+        children:{_reference:'Commonwealth of Australia'}},
+      { name:'Commonwealth of Australia', type:'country', population:'21 million'},
+      { name:'Europe', type:'continent',
+        children:[{_reference:'Germany'}, {_reference:'France'}, {_reference:'Spain'}, {_reference:'Italy'}] },
+      { name:'Germany', type:'country' },
+      { name:'France', type:'country' },
+      { name:'Spain', type:'country' },
+      { name:'Italy', type:'country' },
+      { name:'North America', type:'continent',
+        children:[{_reference:'Mexico'}, {_reference:'Canada'}, {_reference:'United States of America'}] },
+      { name:'Mexico', type:'country',  population:'108 million', area:'1,972,550 sq km',
+        children:[{_reference:'Mexico City'}, {_reference:'Guadalajara'}] },
+      { name:'Mexico City', type:'city', population:'19 million', timezone:'-6 UTC'},
+      { name:'Guadalajara', type:'city', population:'4 million', timezone:'-6 UTC' },
+      { name:'Canada', type:'country',  population:'33 million', area:'9,984,670 sq km',
+        children:[{_reference:'Ottawa'}, {_reference:'Toronto'}] },
+      { name:'Ottawa', type:'city', population:'0.9 million', timezone:'-5 UTC'},
+      { name:'Toronto', type:'city', population:'2.5 million', timezone:'-5 UTC' },
+      { name:'United States of America', type:'country' },
+      { name:'South America', type:'continent',
+        children:[{_reference:'Brazil'}, {_reference:'Argentina'}] },
+      { name:'Brazil', type:'country', population:'186 million' },
+      { name:'Argentina', type:'country', population:'40 million' }
+  ]};
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojo.data.ItemFileReadStore&quot; data=&quot;storeData&quot; jsId=&quot;geographyStore&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.tree.ForestStoreModel&quot; jsId=&quot;geographyModel&quot; store=&quot;geographyStore&quot; query=&quot;{type: 'continent'}&quot; rootId=&quot;Geography&quot; rootLabel=&quot;Geography&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.Tree&quot; model=&quot;geographyModel&quot;&gt;&lt;/div&gt;</pre></div></div><p>Okay, hopefully the above example helped visually display how nested items are represented.  Nested items are no more than an attribute in a datastore item that has a value that is another data store item.  There is nothing more to it than that, ultimately.  If the above example was too confusing since the hierarchy was constructed through references ... another way to demonstrate hierarchy of items can be presented with dojo.data.ItemFileReadStore.  The ItemFileReadStore also supports a basic hierarchical format instead of item references.</p>
+</div>
+<div class="section" id="example-2-a-hierarchical-format-without-references">
+<h3><a class="toc-backref" href="#id5">Example 2:  A hierarchical format without references<a class="headerlink" href="#example-2-a-hierarchical-format-without-references" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">identifier</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span><span class="o">,</span>
+  <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Africa&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span> <span class="nx">children</span><span class="o">:</span><span class="p">[</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Egypt&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Kenya&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="nx">children</span><span class="o">:</span><span class="p">[</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Nairobi&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Mombasa&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span> <span class="p">}</span> <span class="p">]</span>
+      <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Sudan&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="nx">children</span><span class="o">:</span>
+        <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Khartoum&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span> <span class="p">}</span>
+      <span class="p">}</span> <span class="p">]</span>
+    <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Asia&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span> <span class="nx">children</span><span class="o">:</span><span class="p">[</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;China&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;India&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Russia&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Mongolia&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span> <span class="p">]</span>
+    <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Australia&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;21 million&#39;</span><span class="o">,</span> <span class="nx">children</span><span class="o">:</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Commonwealth of Australia&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;21 million&#39;</span><span class="p">}</span>
+    <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Europe&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span> <span class="nx">children</span><span class="o">:</span><span class="p">[</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Germany&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;France&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Spain&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Italy&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span> <span class="p">]</span>
+    <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;North America&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span> <span class="nx">children</span><span class="o">:</span><span class="p">[</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Mexico&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span>  <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;108 million&#39;</span><span class="o">,</span> <span class="nx">area</span><span class="o">:</span><span class="s1">&#39;1,972,550 sq km&#39;</span><span class="o">,</span> <span class="nx">children</span><span class="o">:</span><span class="p">[</span>
+        <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Mexico City&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;19 million&#39;</span><span class="o">,</span> <span class="nx">timezone</span><span class="o">:</span><span class="s1">&#39;-6 UTC&#39;</span><span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Guadalajara&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;4 million&#39;</span><span class="o">,</span> <span class="nx">timezone</span><span class="o">:</span><span class="s1">&#39;-6 UTC&#39;</span> <span class="p">}</span> <span class="p">]</span>
+      <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Canada&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span>  <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;33 million&#39;</span><span class="o">,</span> <span class="nx">area</span><span class="o">:</span><span class="s1">&#39;9,984,670 sq km&#39;</span><span class="o">,</span> <span class="nx">children</span><span class="o">:</span><span class="p">[</span>
+        <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Ottawa&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;0.9 million&#39;</span><span class="o">,</span> <span class="nx">timezone</span><span class="o">:</span><span class="s1">&#39;-5 UTC&#39;</span><span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Toronto&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;2.5 million&#39;</span><span class="o">,</span> <span class="nx">timezone</span><span class="o">:</span><span class="s1">&#39;-5 UTC&#39;</span> <span class="p">}]</span>
+      <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;United States of America&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span> <span class="p">]</span>
+    <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;South America&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span> <span class="nx">children</span><span class="o">:</span><span class="p">[</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Brazil&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;186 million&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Argentina&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="nx">population</span><span class="o">:</span><span class="s1">&#39;40 million&#39;</span> <span class="p">}</span> <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="functional-example-2-dijit-tree-displaying-hierarchical-data-in-a-data-store">
+<h3><a class="toc-backref" href="#id6">Functional Example 2:  dijit.Tree displaying hierarchical data in a data store<a class="headerlink" href="#functional-example-2-dijit-tree-displaying-hierarchical-data-in-a-data-store" title="Permalink to this headline">¶</a></a></h3>
+<p><strong>Note:</strong> <em>The tree model selects root nodes via a query attribute.  This query attribute is directly passed to the data store as part of the fetch made to generate the list of root items.</em></p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.Tree&quot;);
+  var storeData2 = {
+    identifier: 'name',
+    label: 'name',
+    items: [
+      { name:'Africa', type:'continent', children:[
+        { name:'Egypt', type:'country' },
+        { name:'Kenya', type:'country', children:[
+        { name:'Nairobi', type:'city' },
+        { name:'Mombasa', type:'city' } ]
+        },
+        { name:'Sudan', type:'country', children:
+          { name:'Khartoum', type:'city' }
+        } ]
+      },
+      { name:'Asia', type:'continent', children:[
+        { name:'China', type:'country' },
+        { name:'India', type:'country' },
+        { name:'Russia', type:'country' },
+        { name:'Mongolia', type:'country' } ]
+      },
+      { name:'Australia', type:'continent', population:'21 million', children:
+        { name:'Commonwealth of Australia', type:'country', population:'21 million'}
+      },
+      { name:'Europe', type:'continent', children:[
+        { name:'Germany', type:'country' },
+        { name:'France', type:'country' },
+        { name:'Spain', type:'country' },
+        { name:'Italy', type:'country' } ]
+      },
+      { name:'North America', type:'continent', children:[
+        { name:'Mexico', type:'country',  population:'108 million', area:'1,972,550 sq km', children:[
+          { name:'Mexico City', type:'city', population:'19 million', timezone:'-6 UTC'},
+          { name:'Guadalajara', type:'city', population:'4 million', timezone:'-6 UTC' } ]
+        },
+        { name:'Canada', type:'country',  population:'33 million', area:'9,984,670 sq km', children:[
+          { name:'Ottawa', type:'city', population:'0.9 million', timezone:'-5 UTC'},
+          { name:'Toronto', type:'city', population:'2.5 million', timezone:'-5 UTC' }]
+        },
+        { name:'United States of America', type:'country' } ]
+      },
+      { name:'South America', type:'continent', children:[
+        { name:'Brazil', type:'country', population:'186 million' },
+        { name:'Argentina', type:'country', population:'40 million' } ]
+      }
+    ]
+  };
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojo.data.ItemFileReadStore&quot; data=&quot;storeData2&quot; jsId=&quot;geographyStore2&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.tree.ForestStoreModel&quot; jsId=&quot;geographyModel2&quot; store=&quot;geographyStore2&quot; query=&quot;{type: 'continent'}&quot; rootId=&quot;Geography&quot; rootLabel=&quot;Geography&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.Tree&quot; model=&quot;geographyModel2&quot;&gt;&lt;/div&gt;</pre></div></div><p>Okay, great!  Two examples showing examples of hierarchical structures using one datastore, dojo.data.ItemFileReadStore.  But, it doesn't immediately answer how you use the dojo.data APIs to walk this.  How you do it is simple, it just uses isItem() to detect if an attribute value is also considered a data item by the store.   So ... code that would walk over an item and identify sub items would look like:</p>
+</div>
+<div class="section" id="sample-code-detecting-child-items">
+<h3><a class="toc-backref" href="#id7">Sample code:  Detecting child items<a class="headerlink" href="#sample-code-detecting-child-items" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">ItemFileReadStore</span><span class="p">({</span><span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;countries.json&quot;</span><span class="p">});</span>
+
+<span class="c">//Load completed function for walking across the attributes and child items of the</span>
+<span class="c">//located items.</span>
+<span class="k">var</span> <span class="nx">gotContinents</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">items</span><span class="o">,</span> <span class="nx">request</span><span class="p">){</span>
+  <span class="c">//Cycle over all the matches.</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+
+    <span class="c">//Cycle over all the attributes.</span>
+    <span class="k">var</span> <span class="nx">attributes</span> <span class="o">=</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getAttributes</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">attributes</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">){</span>
+      <span class="c">//Assume all attributes are multi-valued and loop over the values ...</span>
+      <span class="k">var</span> <span class="nx">values</span> <span class="o">=</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getValues</span><span class="p">(</span><span class="nx">item</span><span class="o">,</span> <span class="nx">attributes</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">var</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">k</span> <span class="o">&lt;</span> <span class="nx">values</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">values</span><span class="p">[</span><span class="nx">k</span><span class="p">];</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="nx">store</span><span class="p">.</span><span class="nx">isItem</span><span class="p">(</span><span class="nx">value</span><span class="p">)){</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Located a child item with label: [&quot;</span> <span class="o">+</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getLabel</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">);</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Attribute: [&quot;</span> <span class="o">+</span> <span class="nx">attributes</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;] has value: [&quot;</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c">//Call the fetch of the toplevel continent items.</span>
+<span class="nx">store</span><span class="p">.</span><span class="nx">fetch</span><span class="p">({</span><span class="nx">query</span><span class="o">:</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;continent&quot;</span><span class="p">}</span><span class="o">,</span> <span class="nx">onComplete</span><span class="o">:</span> <span class="nx">gotContinents</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="lazy-loading">
+<h2><a class="toc-backref" href="#id8">Lazy-Loading<a class="headerlink" href="#lazy-loading" title="Permalink to this headline">¶</a></a></h2>
+<p>Okay, detecting if items contain child items looks simple; one function call to isItem().  But ... doesn't dojo.data also support lazy-loading of items to keep from having to pull down data that may never be used?  Yes, it does.  This is done through using two more functions to perform tests to see if an item is completely inflated or not, <em>isItemLoaded(item)</em> and <em>loadItem(keywordargs)</em>.  These functions provide methods for loading items that are currently only stubs and not fully inflated.  So if we wish to make the <strong>Sample One</strong>, what would it look like?  See below for an example:</p>
+<div class="section" id="sample-code-detecting-child-items-and-lazy-loading-items-on-demand">
+<h3><a class="toc-backref" href="#id9">Sample code:  Detecting child items and lazy-loading items on demand<a class="headerlink" href="#sample-code-detecting-child-items-and-lazy-loading-items-on-demand" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">ItemFileReadStore</span><span class="p">({</span><span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;countries.json&quot;</span><span class="p">});</span>
+
+<span class="c">//Load completed function for walking across the attributes and child items of the</span>
+<span class="c">//located items.</span>
+<span class="k">var</span> <span class="nx">gotContinents</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">items</span><span class="o">,</span> <span class="nx">request</span><span class="p">){</span>
+  <span class="c">//Cycle over all the matches.</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+
+    <span class="c">//Cycle over all the attributes.</span>
+    <span class="k">var</span> <span class="nx">attributes</span> <span class="o">=</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getAttributes</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">attributes</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">){</span>
+      <span class="c">//Assume all attributes are multi-valued and loop over the values ...</span>
+      <span class="k">var</span> <span class="nx">values</span> <span class="o">=</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getValues</span><span class="p">(</span><span class="nx">item</span><span class="o">,</span> <span class="nx">attributes</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">var</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">k</span> <span class="o">&lt;</span> <span class="nx">values</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">values</span><span class="p">[</span><span class="nx">k</span><span class="p">];</span>
+
+        <span class="k">if</span><span class="p">(</span><span class="nx">store</span><span class="p">.</span><span class="nx">isItem</span><span class="p">(</span><span class="nx">value</span><span class="p">)){</span>
+          <span class="c">//Test to see if the items data is fully loaded or needs to be demand-loaded in (the item in question is just a stub).</span>
+          <span class="k">if</span><span class="p">(</span><span class="nx">store</span><span class="p">.</span><span class="nx">isItemLoaded</span><span class="p">(</span><span class="nx">value</span><span class="p">)){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Located a child item with label: [&quot;</span> <span class="o">+</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getLabel</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">);</span>
+          <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="c">//Asynchronously load in the child item using the stub data to get the real data.</span>
+            <span class="k">var</span> <span class="nx">lazyLoadComplete</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">item</span><span class="p">){</span>
+              <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Lazy-Load of item complete.  Located child item with label: [&quot;</span> <span class="o">+</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getLabel</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="nx">store</span><span class="p">.</span><span class="nx">loadItem</span><span class="p">({</span><span class="nx">item</span><span class="o">:</span> <span class="nx">value</span><span class="o">,</span> <span class="nx">onItem</span><span class="o">:</span> <span class="nx">lazyLoadComplete</span><span class="p">});</span>
+          <span class="p">}</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Attribute: [&quot;</span> <span class="o">+</span> <span class="nx">attributes</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;] has value: [&quot;</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c">//Call the fetch of the toplevel continent items.</span>
+<span class="nx">store</span><span class="p">.</span><span class="nx">fetch</span><span class="p">({</span><span class="nx">query</span><span class="o">:</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;continent&quot;</span><span class="p">}</span><span class="o">,</span> <span class="nx">onComplete</span><span class="o">:</span> <span class="nx">gotContinents</span><span class="p">});</span>
+</pre></div>
+</div>
+<p>Excellent, that looks simple too.  Something to be aware of is that not all datastores support hierarchical data formats and not all support lazy-loading.  For those stores, no attribute value should return true for <em>isItem()</em> and <em>isItemLoaded(item)</em> always returns true.  So, code that is hierarchical and lazy-load aware will still work fine with those stores.</p>
+<p>Are there examples of Lazy-Loading stores in dojo?  Yes, there is.  A great example can be found at: <a class="reference" href="../../../dojox/data/FileStore.html#dojox-data-filestore"><em>dojox.data.FileStore</em></a> .  The FileStore is designed to expose a remote file system in a lazy-load manner.  The code of the FileStore is also a great template for starting developers who want to develop their own lazy-loading data stores.</p>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

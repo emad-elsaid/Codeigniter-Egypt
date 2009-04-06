@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Dojo build system: conditional exclusions &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dojo Build" href="contents.html" />
+    <link rel="next" title="Expanding dojo.provide calls" href="expand-provide.html" />
+    <link rel="prev" title="Sample Directory Layout for Builds" href="directoryLayout.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="expand-provide.html" title="Expanding dojo.provide calls"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="directoryLayout.html" title="Sample Directory Layout for Builds"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dojo Build</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">Dojo build system:  conditional exclusions</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#syntax">Syntax</a></li>
+<li><a class="reference" href="#condition">Condition</a></li>
+<li><a class="reference" href="#builder-objects">Builder Objects</a></li>
+<li><a class="reference" href="#nesting-conditional-excludes">Nesting conditional excludes</a></li>
+<li><a class="reference" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="directoryLayout.html"
+                                  title="previous chapter">Sample Directory Layout for Builds</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="expand-provide.html"
+                                  title="next chapter">Expanding dojo.provide calls</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/build/exclude.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo-build-system-conditional-exclusions">
+<span id="build-exclude"></span><h1><a class="toc-backref" href="#id1">Dojo build system:  conditional exclusions<a class="headerlink" href="#dojo-build-system-conditional-exclusions" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Scott Jenkins</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">1.0?</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo-build-system-conditional-exclusions" id="id1" name="id1">Dojo build system:  conditional exclusions</a><ul>
+<li><a class="reference" href="#introduction" id="id2" name="id2">Introduction</a></li>
+<li><a class="reference" href="#syntax" id="id3" name="id3">Syntax</a></li>
+<li><a class="reference" href="#condition" id="id4" name="id4">Condition</a></li>
+<li><a class="reference" href="#builder-objects" id="id5" name="id5">Builder Objects</a></li>
+<li><a class="reference" href="#nesting-conditional-excludes" id="id6" name="id6">Nesting conditional excludes</a></li>
+<li><a class="reference" href="#see-also" id="id7" name="id7">See also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id2">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>In very advanced situations, you may wish to have certain source code excluded from the built version of the file, based on some condition that is evaluated during the build itself.</p>
+<p>The Dojo build system permits special directives (known as pragmas) to be passed to the builder via comments within JavaScript source code  that it is processing,  The existing pramas allow the builder to conditionally include or exclude certain parts of the source file from the as-built version of the file.</p>
+<p>This is somewhat analogous to the use of <tt class="docutils literal"><span class="pre">#ifdef</span></tt> pragmas within the C pre-processor.</p>
+<p>For example, you might wish to strip a profiling module from a release build but include it in a development build.</p>
+</div>
+<div class="section" id="syntax">
+<h2><a class="toc-backref" href="#id3">Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></a></h2>
+<p>This feature is implemented by creating exclusion regions bracketed by start and end pragmas, as follows:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5</pre></td><td class="code"><div class="highlight"><pre><span class="c">//&gt;&gt;excludeStart(&quot;Tag&quot;, kwArgs.layers.length &gt; 1)</span>
+
+<span class="p">...</span> <span class="nx">code</span> <span class="nx">within</span> <span class="nx">the</span> <span class="nx">region</span> <span class="nx">here</span>
+
+<span class="c">//&gt;&gt;excludeStop(&quot;Tag&quot;)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Lines 1 and 5, beginning with <tt class="docutils literal"><span class="pre">//&gt;&gt;</span></tt> are the pramas.  The <tt class="docutils literal"><span class="pre">//</span></tt> makes the lines comments in JavaScript, so they will not cause errors.  The full <tt class="docutils literal"><span class="pre">//&gt;&gt;</span></tt> is the symbol that the builder is looking for to tell it there is a pragma.</p>
+<p>The pragmas <tt class="docutils literal"><span class="pre">startExclude</span></tt> and <tt class="docutils literal"><span class="pre">stopExclude</span></tt> work together to create the exclusion region:  the region begins with the excludeStart, and ends with the matching excludeStop pragma.</p>
+<p>The syntax of the pragma itself is equivalent to a JavaScript function call.  The parameters of the conditional inclusion pragmas are:</p>
+<p><tt class="docutils literal"><span class="pre">excludeStart(</span></tt> <em>tag</em> <tt class="docutils literal"><span class="pre">,</span> <span class="pre">``</span> <span class="pre">*condition*</span> <span class="pre">``)</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">excludeStop(</span></tt> <em>tag</em> <tt class="docutils literal"><span class="pre">)</span></tt></p>
+<p>where</p>
+<blockquote>
+<ul class="simple">
+<li><em>tag</em> is a string (usually a string literal) naming the pair.  This permits matching excludeStart and excludeStop tags to be determined.</li>
+<li><em>condition</em> is a condition indicating when the text within the exclusion region should not be included in the as-built version of the JavaScript file.  That is, if the condition evaluates to true, none of the text from the exclusion region is copied into the as-built file.</li>
+</ul>
+</blockquote>
+<p>Note:  the tag for the excludeStart pragma must be equal to the tag for the excludeStop pragma.</p>
+</div>
+<div class="section" id="condition">
+<h2><a class="toc-backref" href="#id4">Condition<a class="headerlink" href="#condition" title="Permalink to this headline">¶</a></a></h2>
+<p>The builder evaluates the condition in the excludeStart pramga <em>at build time</em> to determine whether or not to exclude the region from the as-built file.</p>
+<p>This parameter is actually JavaScript code which is evaluated by the builder at the time it encounters the pragma against the builder's own executing JavaScript context.  Therefore, the expression can access objects which exist within the builder.</p>
+<p>The object you most commonly will evaluate against is <tt class="docutils literal"><span class="pre">kwArgs</span></tt> which is where the builder stores its profile (it actually stores all of its parameters there, whether they originate in the profile, on the build command line, or from the builders' built in defaults).</p>
+</div>
+<div class="section" id="builder-objects">
+<h2><a class="toc-backref" href="#id5">Builder Objects<a class="headerlink" href="#builder-objects" title="Permalink to this headline">¶</a></a></h2>
+<p>TODOC:  Document builder objects of interest</p>
+</div>
+<div class="section" id="nesting-conditional-excludes">
+<h2><a class="toc-backref" href="#id6">Nesting conditional excludes<a class="headerlink" href="#nesting-conditional-excludes" title="Permalink to this headline">¶</a></a></h2>
+<p>It is technically possible to nest conditional excludes.  However, this is discouraged.</p>
+<p>If you do nest, the exclusion regions must be fully and properly nested.  Thus, the following would be illegal:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></td><td class="code"><div class="highlight"><pre><span class="c">//&gt;&gt;excludeStart(&quot;AAA&quot;, kwArgs.layers.length &gt; 1)</span>
+
+<span class="p">...</span>
+
+<span class="c">//&gt;&gt;excludeStart(&quot;BBB&quot;, kwArgs.layers.indexOf(&quot;dojo&quot;) == 1)</span>
+
+<span class="p">...</span>
+
+<span class="c">//&gt;&gt;excludeStop(&quot;AAA&quot;)</span>
+<span class="c">//&gt;&gt;excludeStop(&quot;BBB&quot;)</span>
+</pre></div>
+</td></tr></table></div>
+<p>because the named regions overlap.</p>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id7">See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li>Main page for the <a class="reference" href="#build-exclude"><em>build system</em></a></li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Selecting single items &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Quickstart" href="../../contents.html" />
+    <link rel="next" title="Selecting (Filtering) items" href="filteringitems.html" />
+    <link rel="prev" title="Fetching multiple items and values" href="fetchmultiple.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../../_static/dojo/dijit/themes/dijit.css";
+@import "../../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="filteringitems.html" title="Selecting (Filtering) items"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="fetchmultiple.html" title="Fetching multiple items and values"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../../contents.html" accesskey="U">Quickstart</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">Selecting single items</a><ul>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#fetch-by-identity">Fetch by Identity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="fetchmultiple.html"
+                                  title="previous chapter"><strong>Fetching multiple items and values</strong></a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="filteringitems.html"
+                                  title="next chapter">Selecting (Filtering) items</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../../_sources/quickstart/data/usingdatastores/fetchsingle.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="selecting-single-items">
+<span id="quickstart-data-usingdatastores-fetchsingle"></span><h1><a class="toc-backref" href="#id1">Selecting single items<a class="headerlink" href="#selecting-single-items" title="Permalink to this headline">¶</a></a></h1>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#selecting-single-items" id="id1" name="id1">Selecting single items</a><ul>
+<li><a class="reference" href="#examples" id="id2" name="id2">Examples</a><ul>
+<li><a class="reference" href="#fetch-by-identity" id="id3" name="id3">Fetch by Identity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>A common desire is to retrieve a single item of data and display it in some fashion. Dojo.data provides an API definition that can be implemented by DataStores to make this a simple operation. The API is called the Identity API and the definition can be found <a class="reference" href="../../../dojo/data/api/Identity.html#dojo-data-api-identity"><em>here</em></a>.</p>
+<p>For this example, we&#8217;ll assume the following simple data source:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">identifier</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span><span class="o">,</span>
+  <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Adobo&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Mexican&#39;</span><span class="o">,</span> <span class="nx">price</span><span class="o">:</span> <span class="mf">3.01</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Balsamic vinegar&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Condiments&#39;</span><span class="o">,</span> <span class="nx">price</span><span class="o">:</span> <span class="mf">4.01</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Basil&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Spices&#39;</span><span class="o">,</span> <span class="nx">price</span><span class="o">:</span> <span class="mf">3.59</span>  <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Bay leaf&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Spices&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">2.01</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Beef Bouillon Granules&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Soup&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">5.01</span>  <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Vinegar&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Condiments&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">1.99</span>  <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;White cooking wine&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Condiments&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">2.01</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Worcestershire Sauce&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Condiments&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">3.99</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;pepper&#39;</span><span class="o">,</span> <span class="nx">aisle</span><span class="o">:</span> <span class="s1">&#39;Spices&#39;</span><span class="o">,</span>  <span class="nx">price</span><span class="o">:</span> <span class="mf">1.01</span> <span class="p">}</span>
+<span class="p">]}</span>
+</pre></div>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id2">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<p>The following example will make use of APIs defined by both <a class="reference" href="../../../dojo/data/api/Read.html#dojo-data-api-read"><em>Read</em></a> and <a class="reference" href="../../../dojo/data/api/Identity.html#dojo-data-api-identity"><em>Identity</em></a>. In specific, they use:</p>
+<dl class="docutils">
+<dt><strong>Identity</strong></dt>
+<dd>fetchItemByIdentity() Fetches an item by its key value. Because the identity value of each item is unique, you are guaranteed at most one answer back.</dd>
+<dt><strong>Read</strong></dt>
+<dd>getValue() Takes an item and an attribute and returns the associated value</dd>
+</dl>
+<div class="section" id="fetch-by-identity">
+<h3><a class="toc-backref" href="#id3">Fetch by Identity<a class="headerlink" href="#fetch-by-identity" title="Permalink to this headline">¶</a></a></h3>
+<p>This example shows how to fetch items by their identity programmatically.</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.form.ComboBox&quot;);
+
+  var storeData = { identifier: 'name',
+    items: [
+      { name: 'Adobo', aisle: 'Mexican', price: 3.01 },
+      { name: 'Balsamic vinegar', aisle: 'Condiments', price: 4.01 },
+      { name: 'Basil', aisle: 'Spices', price: 3.59  },
+      { name: 'Bay leaf', aisle: 'Spices',  price: 2.01 },
+      { name: 'Beef Bouillon Granules', aisle: 'Soup',  price: 5.01 },
+      { name: 'Vinegar', aisle: 'Condiments',  price: 1.99  },
+      { name: 'White cooking wine', aisle: 'Condiments',  price: 2.01 },
+      { name: 'Worcestershire Sauce', aisle: 'Condiments',  price: 3.99 },
+      { name: 'pepper', aisle: 'Spices',  price: 1.01  }
+    ]};
+
+    //This function performs some basic dojo initialization. In this case it connects the ComboBox
+    //onChange event to a function which invokes the fetchItemByIdentity function. The fetchItemByIdentity
+    //function uses the value selected in the combobox to do a lookup on the datastore for an item with the
+    //identifier that matches the combobox value. If it gets one, the price and aisle are updated, if it
+    //does not locate one, the then the values are set to N/A and 0.00.
+    function init () {
+       //Function to perform a lookup on the datastore on each change event of the combo box.
+       function getItemFromStore () {
+          function updatePrice(item, request) {
+             var lNode = dojo.byId(&quot;aisleNode&quot;);
+             var pNode = dojo.byId(&quot;priceNode&quot;);
+             if (!item) {
+                 lNode.innerHTML = &quot;N/A.&quot;;
+                 pNode.innerHTML = &quot;0.00&quot;;
+             } else {
+                 lNode.innerHTML = foodStore.getValue(item, &quot;aisle&quot;);
+                 pNode.innerHTML = foodStore.getValue(item, &quot;price&quot;);
+             }
+          }
+          //Invoke the lookup. The callback for when the lookup succeeds is the updatePrice function
+          //defined above.
+          foodStore.fetchItemByIdentity({identity: combo.getValue(), onItem: updatePrice});
+       }
+       //Link any change events in the combo to driving the fetchItemByIdentity lookup.
+       dojo.connect(combo, &quot;onChange&quot;, getItemFromStore);
+    }
+    //Set the init function to run when dojo loading and page parsing has completed.
+    dojo.addOnLoad(init);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>Pick a grocery item: &lt;div dojoType=&quot;dojo.data.ItemFileReadStore&quot; data=&quot;storeData&quot; jsId=&quot;foodStore&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.ComboBox&quot; store=&quot;foodStore&quot; searchAttr=&quot;name&quot; jsId=&quot;combo&quot;&gt;&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;span&gt;
+  &lt;b&gt;AISLE: &lt;/b&gt;&lt;span id=&quot;aisleNode&quot;&gt;&lt;/span&gt;&lt;br&gt;
+  &lt;b&gt;PRICE: &lt;/b&gt;&lt;span id=&quot;priceNode&quot;&gt;&lt;/span&gt;&lt;br&gt;
+&lt;/span&gt;</pre></div></div><p><strong>Note:</strong> In the example, the fetchItemByIdentity makes use of a callback to pass the fetched item to. This is because by definition, dojo.data is an asynchronous API for querying of data values. This is because many Data Stores will need to go back to a server to actually look up the data and some Ajax I/O methods do not readily allow for a synchronous call. For example, script source IO cannot be done synchronously, nor can iFrame IO. They must have callbacks to operate.</p>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.form.FileUploader &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.form.Manager" href="Manager.html" />
+    <link rel="prev" title="dojox.form.FilePickerTextBox" href="FilePickerTextBox.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="Manager.html" title="dojox.form.Manager"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="FilePickerTextBox.html" title="dojox.form.FilePickerTextBox"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.form.FileUploader</a><ul>
+<li><a class="reference" href="#basic-description">Basic Description</a></li>
+<li><a class="reference" href="#advanced-parameters">Advanced Parameters</a></li>
+<li><a class="reference" href="#debugging">Debugging</a></li>
+<li><a class="reference" href="#server-side-code">Server Side Code</a></li>
+<li><a class="reference" href="#server-side-return-data">Server Side Return Data</a></li>
+<li><a class="reference" href="#demos">Demos</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="FilePickerTextBox.html"
+                                  title="previous chapter">dojox.form.FilePickerTextBox</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="Manager.html"
+                                  title="next chapter">dojox.form.Manager</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/form/FileUploader.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-form-fileuploader">
+<span id="id1"></span><h1>dojox.form.FileUploader<a class="headerlink" href="#dojox-form-fileuploader" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Up to date</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.3</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Mike Wilcox</td>
+</tr>
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Mike Wilcox</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since 1.1</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="basic-description">
+<h2>Basic Description<a class="headerlink" href="#basic-description" title="Permalink to this headline">¶</a></h2>
+<p>Handles file uploading to a server. It does <strong>NOT</strong> create a button - it transforms an existing button into an uploader. This can be used for toolbar buttons for example. Because of this, it only works programmatically, it does not work in markup. Use the other other DojoX FileInput files for markup solutions.</p>
+<p>FileUploader will detect if the correct version of Flash Player is available, and if so, a transparent SWF is laid over the top of the original (referred to as the &#8216;fake&#8217;) button. If not available, a traditional fileInput button with opacity set to zero is laid over the fake button.</p>
+<p>A basic example follows:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojox</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">FileUploader</span><span class="p">({</span>
+    <span class="nx">button</span><span class="o">:</span><span class="nx">dijit</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;myFakeButton&quot;</span><span class="p">)</span><span class="o">,</span>
+    <span class="nx">uploadUrl</span><span class="o">:</span><span class="nx">uploadUrl</span><span class="o">,</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>The example has doesn't show <em>selectMultipleFiles</em>, but it defaults to true. Setting it to false restricts the user to one file selection. Multiple files are also supported in the HTML version, although only one file can be selected at a time. But after the files are selected, they will all be uploaded at once.</p>
+<p>The <em>uploadUrl</em> property is the location of the server side script. Note that this URL needs to be relative to the SWF, not to the HTML page, nor to dojo.js. It's recommended that an absolute URL is used if possible. FlashUpload will try to &quot;normalize&quot; relative URLs and point them to the SWF.</p>
+<p>Use <em>dojo.connect</em> to connect to the <em>onChange</em>, <em>onProgress</em> and <em>onComplete</em> methods:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">uploader</span><span class="o">,</span> <span class="s2">&quot;onChange&quot;</span><span class="o">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">dataArray</span><span class="p">){</span>
+    <span class="nx">dojo</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">dataArray</span><span class="o">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+        <span class="nx">dojo</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;myTextarea&quot;</span><span class="p">).</span><span class="nx">value</span> <span class="o">+=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="o">+</span><span class="s2">&quot; &quot;</span><span class="o">+</span><span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">size</span><span class="o">*</span><span class="p">.</span><span class="mi">001</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;kb \n&quot;</span><span class="o">;</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">uploader</span><span class="o">,</span> <span class="s2">&quot;onProgress&quot;</span><span class="o">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">dataArray</span><span class="p">){</span>
+    <span class="nx">dojo</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">dataArray</span><span class="o">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+        <span class="nx">dojo</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;myTextarea&quot;</span><span class="p">).</span><span class="nx">value</span> <span class="o">+=</span> <span class="s2">&quot;onProgress: (&quot;</span><span class="o">+</span><span class="nx">data</span><span class="p">.</span><span class="nx">percent</span><span class="o">+</span><span class="s2">&quot;%) &quot;</span><span class="o">+</span><span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="o">+</span><span class="s2">&quot; \n&quot;</span><span class="o">;</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">uploader</span><span class="o">,</span> <span class="s2">&quot;onComplete&quot;</span><span class="o">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">dataArray</span><span class="p">){</span>
+    <span class="nx">dojo</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">dataArray</span><span class="o">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">d</span><span class="p">){</span>
+        <span class="nx">dojo</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;myTextarea&quot;</span><span class="p">).</span><span class="nx">value</span> <span class="o">+=</span> <span class="s2">&quot;onComplete: &quot;</span><span class="o">+</span><span class="nx">d</span><span class="p">.</span><span class="nx">file</span><span class="o">+</span><span class="s2">&quot; \n&quot;</span><span class="o">;</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>Use <em>upload</em> to initiate the upload after files have been selected. Or set <em>uploadOnChange</em> to true to initiate upload automatically after the selection.</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">dijit</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;myUploadButton&quot;</span><span class="p">)</span><span class="o">,</span> <span class="s2">&quot;onClick&quot;</span><span class="o">,</span> <span class="nx">uploader</span><span class="o">,</span> <span class="s2">&quot;upload&quot;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="advanced-parameters">
+<h2>Advanced Parameters<a class="headerlink" href="#advanced-parameters" title="Permalink to this headline">¶</a></h2>
+<p>The FileUploader has many advanced properties to handle most situations.</p>
+<p><strong>fileMask</strong>: An array, or an array of arrays. Restrict file selection to certain file types Empty array defaults to &quot;All Files&quot;. NOTE: MacType is not supported, as it does not work very well. fileMask will work on a Mac, but differently than Windows.</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">fileMask</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Images&quot;</span><span class="o">,</span> <span class="s2">&quot;*.jpg;*.jpeg;*.gif;*.png&quot;</span><span class="p">]</span>
+<span class="c">//     or</span>
+<span class="k">var</span> <span class="nx">fileMask</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">&quot;Jpeg File&quot;</span><span class="o">,</span>      <span class="s2">&quot;*.jpg;*.jpeg&quot;</span><span class="p">]</span><span class="o">,</span>
+    <span class="p">[</span><span class="s2">&quot;GIF File&quot;</span><span class="o">,</span>       <span class="s2">&quot;*.gif&quot;</span><span class="p">]</span><span class="o">,</span>
+    <span class="p">[</span><span class="s2">&quot;PNG File&quot;</span><span class="o">,</span>       <span class="s2">&quot;*.png&quot;</span><span class="p">]</span><span class="o">,</span>
+    <span class="p">[</span><span class="s2">&quot;All Images&quot;</span><span class="o">,</span>     <span class="s2">&quot;*.jpg;*.jpeg;*.gif;*.png&quot;</span><span class="p">]</span><span class="o">,</span>
+<span class="p">];</span>
+<span class="k">var</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojox</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">FileUploader</span><span class="p">({</span>
+    <span class="nx">button</span><span class="o">:</span><span class="nx">dijit</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;myFakeButton&quot;</span><span class="p">)</span><span class="o">,</span>
+    <span class="nx">uploadUrl</span><span class="o">:</span><span class="nx">uploadUrl</span><span class="o">,</span>
+    <span class="nx">fileMask</span><span class="o">:</span><span class="nx">fileMask</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>force</strong>: You can use either HTML (force=&quot;html&quot;) or Flash only, with this parameter. If force=&quot;flash&quot; and the user does not have Flash installed, they will be prompted to install the plugin. &quot;flash&quot; forces Flash Uploader. Defaults to an empty string (force=&quot;&quot;) which checks for the availability of the proper Flash player (Flash 9 or higher).</p>
+<p><strong>postData</strong>: The data that will be sent via POST to the server along with the uploaded files. This data object can bet set on instantiation, and the data will be sent to the server with each file on every upload. You can also pass postData in the upload method as an object argument which can be different with each upload.</p>
+<p><strong>htmlFieldName</strong>: The name of the field of the fileInput that the server is expecting. See &quot;Server Side Code&quot; below.</p>
+<p><strong>flashFieldName</strong>: The name of the field of the flash uploaded files that the server is expecting. See &quot;Server Side Code&quot; below.</p>
+</div>
+<div class="section" id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
+<p>Because of the complex nature of the FileUploader code (or more accurately, the hack!). It's often necessary to do some debugging to test if something is working properly. The following parameters assist with this:</p>
+<p><strong>isDebug</strong>: Unlike most Dojo code, the logging has been left in the FileUploader, but is disabled by default. isDebug=true will turn on the log messages for inspection. This also passes to the SWF which will output messages of what's happening in there.</p>
+<p><strong>devMode</strong>: Changing this parameter to true will set the opacity of the HTML upload button to 100% and remove transparency from the Flash upload button. This helps to determine of the button is being positioned correctly.</p>
+</div>
+<div class="section" id="server-side-code">
+<h2>Server Side Code<a class="headerlink" href="#server-side-code" title="Permalink to this headline">¶</a></h2>
+<p>FlashUploader comes with a working PHP file, <em>dojox/form/resources/UploadFile.php</em>, to use as a reference for how your server side code should work. UploadFile.php has two dependencies, <em>dojo/tests/resources/JSON.php</em>, which is used for converting the return data to a JSO string, and <em>dojox/form/resources/cLog.php</em> which is used to log message to a text file, placed relative to the PHP file.</p>
+<p>UploadFile.php is expecting one of three things:</p>
+<ol class="arabic simple">
+<li>A file or files from Flash</li>
+<li>A file from HTML</li>
+<li>Multiple files from HTML</li>
+</ol>
+<p>The PHP file is inspecting the header and looking for the parameters set in FileUploader: <em>htmlFieldName</em> or <em>flashFieldName</em>. Whatever you set these parameters to, they must match on the server. The current code uses &quot;flashUploadFiles&quot; as the default Flash field name. (The default field name in Flash is &quot;Filedata&quot;, which is over written to show that you can do custom field names). Therefore the server must be made aware of this parameter, as it is set on line 69: <em>$fieldName = &quot;flashUploadFiles&quot;;</em></p>
+<p>The field name for the HTML uploader works much the same way. The only difference is if you do multi-file upload with HTML, this essentially continues to add fileInputs to the form, and in doing so, appends numbers to the fileInput field names, starting with '0'. That's why one file fieldname will look like &quot;myFieldName&quot; but two files will look like [ &quot;myFieldName0&quot;, &quot;myFieldName1&quot; ] to the server side code.</p>
+</div>
+<div class="section" id="server-side-return-data">
+<h2>Server Side Return Data<a class="headerlink" href="#server-side-return-data" title="Permalink to this headline">¶</a></h2>
+<p>How the data is returned from the server is not difficult, but it is very important. If not done correctly, it can be the cause of reported errors that the &quot;onComplete&quot; is not firing in FileUploader.</p>
+<p>If <em>flashFieldName</em> is found in the headers and Flash is being used on the client side, all that is needed for return data is an object, and it can simply be returned, as at the end of a function: <em>return $data;</em>. You may also want to insert <em>exit</em> or whatever necessary to cease execution of the remainder of the code.</p>
+<p>If <em>htmlFieldName</em> is used, the code on the client side gets pretty tricky, as an iframe is necessary for the file-post, and reading back from that iframe presents problems. In order to read the iframe return data accurately cross browser, the code needs to be wrapped in a <em>&lt;textarea&gt;</em>. You can see the code for this on the very last line of UploadFiles.php.</p>
+<p>If you are having problems getting onComplete to fire, look at this code first. Often the problem is the server side code is not catching the flash field name for whatever reason (perhaps the client and server names don't match) and the code is falling to the end of the page and returning a textarea to Flash. Recently Code has been added in the SWF that checks for this, so if that is the problem, you should be notified with a console message.</p>
+</div>
+<div class="section" id="demos">
+<h2>Demos<a class="headerlink" href="#demos" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference" href="http://mwilcox.dojotoolkit.org/dtk/dojox/form/tests/test_FileUploader.html">http://mwilcox.dojotoolkit.org/dtk/dojox/form/tests/test_FileUploader.html</a></p>
+<p><a class="reference" href="http://mwilcox.dojotoolkit.org/dtk/demos/uploader/demo.html">http://mwilcox.dojotoolkit.org/dtk/demos/uploader/demo.html</a></p>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

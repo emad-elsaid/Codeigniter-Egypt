@@ -1,0 +1,76 @@
+.. _dojo/rpc:
+
+dojo.rpc
+========
+
+:Status: Draft
+:Version: 1.0
+:Project owner: ?--
+:Available: since V?
+
+.. contents::
+   :depth: 2
+
+dojo.rpc offers methods to communicate via Remote Procedure Calls (RPC) with Backend Servers.
+
+
+============
+Introduction
+============
+
+TODO: introduce the component/class/method
+
+Available Services
+------------------
+
+* :ref:`dojo.rpc.JsonpService <dojo/rpc/JsonpService>`
+
+  A Generic JSONP service
+
+* :ref:`dojo.rpc.JsonService <dojo/rpc/JsonService>`
+
+  JSON RPC service
+
+* :ref:`dojo.rpc.RpcService <dojo/rpc/RpcService>`
+
+  RPC service class
+
+
+=====
+Usage
+=====
+
+TODO: how to use the component/class/method
+
+.. code-block :: javascript
+ :linenos:
+
+ <script type="text/javascript">
+   // your code
+ </script>
+
+
+
+========
+Examples
+========
+
+Programmatic example
+--------------------
+
+TODO: example
+
+Declarative example
+-------------------
+
+TODO: example
+
+
+========
+See also
+========
+
+* :ref:`dojox.rpc <dojox/rpc>`
+* :ref:`dojox.rpc.Service <dojox/rpc/Service>`
+* :ref:`dojox.rpc.Rest <dojox/rpc/Rest>`
+* :ref:`dojox.rpc.OfflineRest <dojox/rpc/OfflineRest>`

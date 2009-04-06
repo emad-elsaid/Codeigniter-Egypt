@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojo.data.FlickrStore &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.data.GoogleFeedStore" href="GoogleFeedStore.html" />
+    <link rel="prev" title="dojox.data.FlickrRestStore" href="FlickrRestStore.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="GoogleFeedStore.html" title="dojox.data.GoogleFeedStore"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="FlickrRestStore.html" title="dojox.data.FlickrRestStore"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojo.data.FlickrStore</a><ul>
+<li><a class="reference" href="#brief-intro-to-the-flickr-api">Brief intro to the Flickr API</a><ul>
+<li><a class="reference" href="#query">Query</a></li>
+<li><a class="reference" href="#response">Response</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#flickrstore">FlickrStore</a><ul>
+<li><a class="reference" href="#constructor-parameters">Constructor Parameters</a></li>
+<li><a class="reference" href="#item-attributes">Item Attributes</a></li>
+<li><a class="reference" href="#query-syntax">Query Syntax</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#sample-1-listing-nature-pictures">Sample 1:  Listing nature pictures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="FlickrRestStore.html"
+                                  title="previous chapter">dojox.data.FlickrRestStore</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="GoogleFeedStore.html"
+                                  title="next chapter">dojox.data.GoogleFeedStore</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/data/FlickrStore.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo-data-flickrstore">
+<span id="dojox-data-flickrstore"></span><h1><a class="toc-backref" href="#id1">dojo.data.FlickrStore<a class="headerlink" href="#dojo-data-flickrstore" title="Permalink to this headline">¶</a></a></h1>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo-data-flickrstore" id="id1" name="id1">dojo.data.FlickrStore</a><ul>
+<li><a class="reference" href="#brief-intro-to-the-flickr-api" id="id2" name="id2">Brief intro to the Flickr API</a><ul>
+<li><a class="reference" href="#query" id="id3" name="id3">Query</a></li>
+<li><a class="reference" href="#response" id="id4" name="id4">Response</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#flickrstore" id="id5" name="id5">FlickrStore</a><ul>
+<li><a class="reference" href="#constructor-parameters" id="id6" name="id6">Constructor Parameters</a></li>
+<li><a class="reference" href="#item-attributes" id="id7" name="id7">Item Attributes</a></li>
+<li><a class="reference" href="#query-syntax" id="id8" name="id8">Query Syntax</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#examples" id="id9" name="id9">Examples</a><ul>
+<li><a class="reference" href="#sample-1-listing-nature-pictures" id="id10" name="id10">Sample 1:  Listing nature pictures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Dojo has several examples of browser in-memory stores, such as <a class="reference" href="../../dojo/data/ItemFileReadStore.html#dojo-data-itemfilereadstore"><em>dojo.data.ItemFileReadStore</em></a>, <a class="reference" href="CsvStore.html#dojox-data-csvstore"><em>dojox.data.CsvStore</em></a>, and <a class="reference" href="OpmlStore.html#dojox-data-opmlstore"><em>dojox.data.OpmlStore</em></a>. While these stores are useful and great examples of how data stores can be used to wrapper accessing data, they are not the only way data is served and processed. In many cases, data stores can wrapper external services. It is those services that perform the querying and filtering of data, and then provide only that as a subset back to the data store for presentation as items.</p>
+<p>FlickrStore is one such store. The purpose of FlickrStore is to wrapper the public photo feed of the Flickr service. Then by simply using the FlickrStore store, as you would any data store in Dojo, you now have access to querying the vast repository of public photos made available by others on the Web.</p>
+<p><strong>Note: While this store wraps making calls to the Flickr service, as a user, you should still verify that you agree to the terms and conditions by which you are using the public flickr photo service. Review their terms and conditions, and the API terms and conditions.</strong></p>
+<p>The Flickr service provides its data back in a wide variety of formats (for example, ATOM, RSS, and JSON) but FlickrStore only makes use of the JSON format. The following example shows a query that FlickrStore processes and the response:</p>
+<div class="section" id="brief-intro-to-the-flickr-api">
+<h2><a class="toc-backref" href="#id2">Brief intro to the Flickr API<a class="headerlink" href="#brief-intro-to-the-flickr-api" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="query">
+<h3><a class="toc-backref" href="#id3">Query<a class="headerlink" href="#query" title="Permalink to this headline">¶</a></a></h3>
+<p>Query (all pictures with tags animals, foxes, and cute):</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="o">://</span><span class="nx">api</span><span class="p">.</span><span class="nx">flickr</span><span class="p">.</span><span class="nx">com</span><span class="sr">/services/</span><span class="nx">feeds</span><span class="o">/</span><span class="nx">photos_public</span><span class="p">.</span><span class="nx">gne</span><span class="o">?</span><span class="nx">tags</span><span class="o">=</span><span class="nx">animals</span><span class="o">,</span><span class="nx">bats</span><span class="o">,</span><span class="nx">cute</span><span class="o">&amp;</span><span class="nx">format</span><span class="o">=</span><span class="nx">json</span><span class="o">&amp;</span><span class="nx">tagmode</span><span class="o">=</span><span class="nx">all</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="response">
+<h3><a class="toc-backref" href="#id4">Response<a class="headerlink" href="#response" title="Permalink to this headline">¶</a></a></h3>
+<div class="highlight-javascript"><pre>jsonFlickrFeed({
+              "title": "Photos from everyone tagged animals, foxes and cute",
+              "link": "http://www.flickr.com/photos/",
+              "description": "",
+              "modified": "2007-05-24T09:35:27Z",
+              "generator": "http://www.flickr.com/",
+              "items": [
+         {
+                      "title": "Ceramic Figures",
+                      "link": "http://www.flickr.com/photos/36362445@N00/511998141/",
+                      "media": {"m":"http://farm1.static.flickr.com/228/511998141_7b8398c3eb_m.jpg"},
+                      "date_taken": "2006-04-04T10:21:43-08:00",
+                      "description": "&lt;p&gt;&lt;a href="http://www.flickr.com/people/36362445@N00/"&gt;travellingcharl&lt;/a&gt; posted a photo:&lt;/p&gt; &lt;p&gt;&lt;a href="http://www.flickr.com/photos/36362445@N00/511998141/" title="Ceramic Figures"&gt;&lt;img src="http://farm1.static.flickr.com/228/511998141_7b8398c3eb_m.jpg" width="240" height="180" alt="Ceramic Figures" /&gt;&lt;/a&gt;&lt;/p&gt; &lt;p&gt;Ceramic figurines inside the Shinto shrine.&lt;/p&gt;",
+                      "published": "2007-05-24T09:35:27Z",
+                      "author": "nobody@flickr.com (travellingcharl)",
+                      "tags": "cute animals japan ceramic geocaching coins toyko foxes naritatbstation3"
+         },
+         {
+                      "title": "Red Fox pup",
+                      "link": "http://www.flickr.com/photos/norwick/301289990/",
+                      "media": {"m":"http://farm1.static.flickr.com/104/301289990_da7413890b_m.jpg"},
+                      "date_taken": "2005-06-09T16:17:49-08:00",
+                      "description": "&lt;p&gt;&lt;a href="http://www.flickr.com/people/norwick/"&gt;bluebird's&lt;/a&gt; posted a photo:&lt;/p&gt; &lt;p&gt;&lt;a href="http://www.flickr.com/photos/norwick/301289990/" title="Red Fox pup"&gt;&lt;img src="http://farm1.static.flickr.com/104/301289990_da7413890b_m.jpg" width="240" height="180" alt="Red Fox pup" /&gt;&lt;/a&gt;&lt;/p&gt; &lt;p&gt;Are you sure it's save to come out!&lt;/p&gt;",
+                      "published": "2006-11-19T22:14:47Z",
+                      "author": "nobody@flickr.com (bluebird's)",
+                      "tags": "wild summer canada cute nature beauty field animals landscape tiere scenery jung wilde sommer wildlife natur young feld felder adorable peaceful canadian alberta summertime prairie aussicht prairies landschaft foxes alert tier countrylife predators kanada redfox perky okotoks junger rotfuchs kanadische foxpups roterfuchs"
+         }
+      ]
+})</pre>
+</div>
+</div>
+</div>
+<div class="section" id="flickrstore">
+<h2><a class="toc-backref" href="#id5">FlickrStore<a class="headerlink" href="#flickrstore" title="Permalink to this headline">¶</a></a></h2>
+<p>FlickrStore's role is to process the query parameters passed to the dojo.data.api.Read API and generate the appropriate service URL. It then processes the response from the service and handles accessing the items returned from the query. It also provides simple attribute access to all the values.</p>
+<div class="section" id="constructor-parameters">
+<h3><a class="toc-backref" href="#id6">Constructor Parameters<a class="headerlink" href="#constructor-parameters" title="Permalink to this headline">¶</a></a></h3>
+<blockquote>
+FlickrStore does not have any constructor parameters.</blockquote>
+</div>
+<div class="section" id="item-attributes">
+<h3><a class="toc-backref" href="#id7">Item Attributes<a class="headerlink" href="#item-attributes" title="Permalink to this headline">¶</a></a></h3>
+<p>All items returned from FlickrStore have the following attributes that can be accessed using the dojo.data.api.Read API to retrieve data about the item:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>title</td>
+<td>The title of the photo.</td>
+</tr>
+<tr><td>author</td>
+<td>The person who published the photo to Flickr.</td>
+</tr>
+<tr><td>description</td>
+<td>A description of the photo. This will generally contain HTML formatted text.</td>
+</tr>
+<tr><td>dateTaken</td>
+<td>A JavaScript date object representing the date the photo was taken.</td>
+</tr>
+<tr><td>datePublished</td>
+<td>A JavaScript date object representing the date the photo was published to Flickr.</td>
+</tr>
+<tr><td>tags</td>
+<td>The tags that are assigned to this photo. flickrStore.getValue(item, &quot;tags&quot;) returns the first tag,
+flickrStore.getValues(item, &quot;tags&quot;) returns all tags.</td>
+</tr>
+<tr><td>imageUrl</td>
+<td>A URL to the full resolution photo image.</td>
+</tr>
+<tr><td>imageUrlSmall</td>
+<td>A URL to the small (icon sized) resolution photo image.</td>
+</tr>
+<tr><td>imageUrlMedium</td>
+<td>A URL to the mid resolution photo image.</td>
+</tr>
+<tr><td>link</td>
+<td>A URL linking to the Flickr page displaying the image.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="query-syntax">
+<h3><a class="toc-backref" href="#id8">Query Syntax<a class="headerlink" href="#query-syntax" title="Permalink to this headline">¶</a></a></h3>
+<p>The fetch method query syntax for FlickrStore is simple and straightforward. It allows the following attributes to be queried against:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>id</td>
+<td>Flickr userid to use to narrow the search scope. This is optional.</td>
+</tr>
+<tr><td>ids</td>
+<td>A comma separated list of IDs used to narrow search scope. This is optional.</td>
+</tr>
+<tr><td>tags</td>
+<td>A comma separated list of tags to search for matches on. This is optional.</td>
+</tr>
+<tr><td>tagmode</td>
+<td>Indicates whether all tags must match from the list or any can match from the list. Valid values are all or any and the
+default is any.</td>
+</tr>
+<tr><td>lang</td>
+<td>Specifies the language to return the results in. This is optional.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> Unlike all the other example stores, the FlickrStore store cannot do wild-card matching of the attributes. This is because the Flickr public photo feed service cannot do it. In an ideal service implementation, the Flickr service would provide a mechanism by with to pass in wild cards as part of its query parameters. Also, the Flickr public feed API limits the number of returned photos to a maximum of twenty.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id9">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="sample-1-listing-nature-pictures">
+<h3><a class="toc-backref" href="#id10">Sample 1:  Listing nature pictures<a class="headerlink" href="#sample-1-listing-nature-pictures" title="Permalink to this headline">¶</a></a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.FlickrStore&quot;);
+  dojo.require(&quot;dijit.form.Button&quot;);
+
+  //This function performs some basic dojo initialization.  In this case it connects the button
+  //onClick to a function which invokes the fetch().  The fetch function queries for all items
+  //and provides callbacks to use for completion of data retrieval or reporting of errors.
+  function init () {
+     //Function to perform a fetch on the datastore when a button is clicked
+     function getAllItems () {
+
+       //Callback to perform an action when the data items are starting to be returned:
+       function clearOldList(size, request) {
+         var list = dojo.byId(&quot;list&quot;);
+         if (list) {
+           while (list.firstChild) {
+             list.removeChild(list.firstChild);
+           }
+         }
+       }
+
+       //Callback for processing a returned list of items.
+       function gotItems(items, request) {
+         var list = dojo.byId(&quot;list&quot;);
+         if (list) {
+           var i;
+           for (i = 0; i &lt; items.length; i++) {
+             var item = items[i];
+             var image = document.createElement(&quot;img&quot;);
+             list.appendChild(image);
+             image.setAttribute(&quot;src&quot;, flickrStore.getValue(item, &quot;imageUrlMedium&quot;));
+             list.appendChild(document.createElement(&quot;br&quot;));
+           }
+         }
+       }
+
+       //Callback for if the lookup fails.
+       function fetchFailed(error, request) {
+         alert(&quot;lookup failed.&quot;);
+       }
+
+       //Fetch the images.
+       flickrStore.fetch({query:{ tags: &quot;nature&quot;}, onBegin: clearOldList, onComplete: gotItems, onError: fetchFailed});
+     }
+     //Link the click event of the button to driving the fetch.
+     dojo.connect(button, &quot;onClick&quot;, getAllItems);
+  }
+  //Set the init function to run when dojo loading and page parsing has completed.
+  dojo.addOnLoad(init);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojox.data.FlickrStore&quot; jsId=&quot;flickrStore&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.Button&quot; jsId=&quot;button&quot;&gt;Find nature pictures!&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;span id=&quot;list&quot;&gt;
+&lt;/span&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

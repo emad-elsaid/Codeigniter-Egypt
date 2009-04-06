@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.data.FileStore &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.data.FileStore: Technical/Protocol Details" href="FileStore/protocol.html" />
+    <link rel="prev" title="dojox.data.CsvStore" href="CsvStore.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="FileStore/protocol.html" title="dojox.data.FileStore: Technical/Protocol Details"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="CsvStore.html" title="dojox.data.CsvStore"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.data.FileStore</a><ul>
+<li><a class="reference" href="#features">Features</a></li>
+<li><a class="reference" href="#item-structure">Item structure</a></li>
+<li><a class="reference" href="#query-structure">Query Structure</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#simple-programmatic-usage">Simple programmatic usage</a></li>
+<li><a class="reference" href="#attaching-the-filestore-to-dijit-tree-declaratively">Attaching the FileStore to dijit.Tree declaratively</a></li>
+<li><a class="reference" href="#attaching-the-filestore-to-dijit-form-combobox-declaratively">Attaching the FileStore to dijit.form.ComboBox declaratively</a></li>
+<li><a class="reference" href="#attaching-the-filestore-to-dojox-grid-datagrid-declaratively">Attaching the FileStore to dojox.grid.DataGrid declaratively</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#technical-protocol-details">Technical/Protocol Details</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="CsvStore.html"
+                                  title="previous chapter">dojox.data.CsvStore</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="FileStore/protocol.html"
+                                  title="next chapter">dojox.data.FileStore: Technical/Protocol Details</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/data/FileStore.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-data-filestore">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.data.FileStore<a class="headerlink" href="#dojox-data-filestore" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed, Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Jared Jurkiewicz</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.2</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-data-filestore" id="id2" name="id2">dojox.data.FileStore</a><ul>
+<li><a class="reference" href="#features" id="id3" name="id3">Features</a></li>
+<li><a class="reference" href="#item-structure" id="id4" name="id4">Item structure</a></li>
+<li><a class="reference" href="#query-structure" id="id5" name="id5">Query Structure</a></li>
+<li><a class="reference" href="#examples" id="id6" name="id6">Examples</a><ul>
+<li><a class="reference" href="#simple-programmatic-usage" id="id7" name="id7">Simple programmatic usage</a></li>
+<li><a class="reference" href="#attaching-the-filestore-to-dijit-tree-declaratively" id="id8" name="id8">Attaching the FileStore to dijit.Tree declaratively</a></li>
+<li><a class="reference" href="#attaching-the-filestore-to-dijit-form-combobox-declaratively" id="id9" name="id9">Attaching the FileStore to dijit.form.ComboBox declaratively</a></li>
+<li><a class="reference" href="#attaching-the-filestore-to-dojox-grid-datagrid-declaratively" id="id10" name="id10">Attaching the FileStore to dojox.grid.DataGrid declaratively</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#technical-protocol-details" id="id11" name="id11">Technical/Protocol Details</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The dojox.data.FileStore is a lightweight javascript implementation for accessing details about a remote FileSystem. This includes being able to search the filesystem to locate file names, display path information, file sizes, if it’s a directory or not, and if a directory, what children files are contained within it. The dojox.data.FileStore is also an excellent example of how DataStores can do lazy-loading.</p>
+<p>The datastore implementation and its example PHP back-end by default do not inflate the child file objects of a DataStore file item. This allows it to quickly return information about a file without having to return everything, while at the same time providing hooks that allow for the extra information to be gathered on-demand.</p>
+<div class="section" id="features">
+<h2><a class="toc-backref" href="#id3">Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></a></h2>
+<ol class="arabic simple">
+<li>The client javascript and example server php script implement the following dojo.data APIs:<ul>
+<li><a class="reference" href="../../dojo/data/api/Read.html#dojo-data-api-read"><em>dojo.data.api.Read</em></a> and</li>
+<li><a class="reference" href="../../dojo/data/api/Identity.html#dojo-data-api-identity"><em>dojo.data.api.Identity</em></a>.</li>
+</ul>
+</li>
+<li>A deliberately simple client side implementation for use as a reference when implementing other server side stores that wish to provide lazy-loading as defined by the dojo.data.api.Read spec. The client code is deliberately small to make it easy to understand.</li>
+<li>The ability to search across a variety of attributes, such as name, path, parentDir, lastModified, etc. It also allows for matching on multiple fields, such as all files with parentDir of ‘foo’, that have filename: ‘bar*.js’.</li>
+<li>The datastore can do shallow searching (root dir only), or recursive searching (scan the entire file system for matches across the parameters).</li>
+<li>The client store can directly access information about a specific about a file through RESTlike patterns that work well with servlets that allow mapping of a context root to a servlet, and the servlet’s ability to get extra path information. It can also work with back-end services like PHP that do not provide a mechanism to do URL path based queries by converting the path into a query param, ‘path’. This is enabled by setting pathAsQueryParam  to true on the store instance.</li>
+<li>Support for all normal query options as defined by the dojo.data.api.Read specification. Deep provides recursive tree searching, ignoreCase provides the ability to ignore the case sensitivity of attributes when matching, and so on.</li>
+<li>An example implementation of the back end service in PHP. The example is documented cleanly and is less than five hundred lines of code, making it relatively easy to dissect and understand.</li>
+<li>Works directly with all current data bound widgets in dijit, including <a class="reference" href="../../dijit/Tree.html#dijit-tree"><em>dijit.Tree</em></a>, <a class="reference" href="../../dijit/form/ComboBox.html#dijit-form-combobox"><em>dijit.form.ComboBox</em></a>, and as well <a class="reference" href="../grid.html#dojox-grid"><em>dojox.grid</em></a>.</li>
+</ol>
+</div>
+<div class="section" id="item-structure">
+<h2><a class="toc-backref" href="#id4">Item structure<a class="headerlink" href="#item-structure" title="Permalink to this headline">¶</a></a></h2>
+<p>All items returned by a query to the FileStore and will generally have the following attributes accessible via FileStore.getValue(item, attribute) and FileStore.getValues(item, attribute):</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="82%" />
+<col width="8%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Attribute</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Type</strong></td>
+</tr>
+<tr><td>name</td>
+<td>The name of the file. This does not include any path information.</td>
+<td>string</td>
+</tr>
+<tr><td>path</td>
+<td>The full path to the file, including its name.
+<strong>Note:  In the context of dojo.data.api.Identity, this is the identifier</strong></td>
+<td>string</td>
+</tr>
+<tr><td>parentDir</td>
+<td>The parent directory name.</td>
+<td>string</td>
+</tr>
+<tr><td>size</td>
+<td>The size of the file, in bytes.</td>
+<td>integer</td>
+</tr>
+<tr><td>directory</td>
+<td>A Boolean value indicating if the file referenced is a directory or not.</td>
+<td>boolean</td>
+</tr>
+<tr><td>children</td>
+<td>If it is a directory, then children is an array of child files contained within the directory. By
+default these will be uninflated datastore items. Meaning isItem() returns true, but isItemLoaded()
+returns false. To load the item, it is a call to the FileStore.loadItem() api with the appropriate
+callbacks. By not inflating child files by default the store performance is greatly improved, as if you
+don’t care about its children, you don’t have to load them.  Should be accessed by the multivalue
+<em>getValues()</em> accessor.</td>
+<td>array</td>
+</tr>
+<tr><td>modified</td>
+<td>An integer indicating the last modified date.  This is the file timestamp from the system</td>
+<td>integer</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="query-structure">
+<h2><a class="toc-backref" href="#id5">Query Structure<a class="headerlink" href="#query-structure" title="Permalink to this headline">¶</a></a></h2>
+<p>The dojox.data.FileStore query structure follows that of dojo.data.ItemFileReadStore. It is an object-based query structure where the store queries for file items using patterns defined for the attributes to be matched. For example a query object of:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;foo*.txt&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>would return all files that have the name foo at the start of the name and end with the extension .txt.</p>
+<p>Please note that the store is a hierarchical store and if you wish to query the entire file system (not just the root of it), for a file name, you must set the standard dojo.data.api.Read queryOption 'deep' to the value true.</p>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id6">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<p>Using the dojox.dataFileStore is generally simple. The store takes three possible constructor options which can also be declared in markup. These options configure the store and its operating behavior. The options are defined below in a table.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="70%" />
+<col width="15%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Constructor param</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Type</strong></td>
+</tr>
+<tr><td>url</td>
+<td>The URL of the service that provides the server-side implementation that processes the queries
+returns the results. Note that because of the same origin policy of the browser, the service
+must reside in the same domain as the loaded page. To access urls outside of the domain, you
+must use a proxy. <strong>This parameter is required</strong></td>
+<td>string</td>
+</tr>
+<tr><td>pathAsQueryParam</td>
+<td><p class="first">This parameter alters the behavior of the dojo.data.api.Identity functions. By default it is
+false. When it is false, any request for the information of a single file theough a
+fetchItemByIdentity call (and internally by loadItem), the url used is restful. This means the
+url request will look like:</p>
+<p><em>http://&lt;server&gt;/&lt;service&gt;/some/file</em>.</p>
+<p>It is effectively url-pathing to represent the file.</p>
+<p>This is convenient for services implemented in a java servlet. For implementations that are
+not convenient to work this way, such as php, you would want to set the option to true. When
+is set to true, the path to the file becomes a query parameter. An example is:</p>
+<p class="last"><em>http://&lt;server&gt;/&lt;service&gt;?path=some/file</em></p>
+</td>
+<td>boolean</td>
+</tr>
+<tr><td>options</td>
+<td><p class="first">This is a comma separated list of options that dojox.data.FileStore will pass to the service as
+a JSON encoded string array. These options can be used to configure certain behaviors of the
+dojox.data.FileStore. The example PHP implementation provided in demos supports the following</p>
+<p><strong>expand</strong>: This option instructs the store to inflate all child files of a directory so that
+lazy-loading through isItemLoaded() and loadItem() is not necessary. This options is
+expensive to use and not recommended. For large file systems, using this option can generate
+huge returns. This option is not recommended for use, but is provided as convenience
+for small file systems and debug purposes.</p>
+<p><strong>showHiddenFiles</strong>: This option enables returning information about hidden files. By default
+the example implementation does not display hidden files. Note that a hidden file follows UNIX
+of starting with a '.' character.</p>
+<p class="last"><strong>dirsOnly</strong>: Only return file entries that are directories. This option is useful for
+a directory tree display.</p>
+</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<p>Some usage examples for using the service in code as well as declarative markup attaching it to a widget such as dijit.Tree, dijit.form.ComboBox, and dojox.grid.DataGrid are shown below.</p>
+<div class="section" id="simple-programmatic-usage">
+<h3><a class="toc-backref" href="#id7">Simple programmatic usage<a class="headerlink" href="#simple-programmatic-usage" title="Permalink to this headline">¶</a></a></h3>
+<p>A complete code example of querying the entire filesystem for a wildcard matched file:</p>
+<div class="highlight-python"><pre>var fileStore = new dojox.data.FileStore({url: "myService.php", pathAsQueryParam: true});
+  function searchDone(items, request){
+    if (items) {
+      var i;
+      for (i = 0; i &lt; items.length; i++) {
+        console.log("Found file: " + fileStore.getValue(items[i], "name") + " in directory: " + fileStore.getValue(items[i], "parentDir"));
+      }
+    }
+  }
+  fileStore.fetch({query: {name:"foo*.txt"}, onComplete: searchDone, queryOptions: {deep:true}});
+}</pre>
+</div>
+<p>Attaching it as the datastore for a widget works the same as it would for any widget. For example, using it to front a dijit Tree is shown below. In the following example, dijit.Tree is being rooted so that it displays the entire dojo source tree:</p>
+</div>
+<div class="section" id="attaching-the-filestore-to-dijit-tree-declaratively">
+<h3><a class="toc-backref" href="#id8">Attaching the FileStore to dijit.Tree declaratively<a class="headerlink" href="#attaching-the-filestore-to-dijit-tree-declaratively" title="Permalink to this headline">¶</a></a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dijit.Tree&quot;);
+  dojo.require(&quot;dojox.data.FileStore&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div&gt;
+  &lt;div dojoType=&quot;dojox.data.FileStore&quot; url=&quot;/_static/dojo/dojox/data/demos/stores/filestore_dojotree.php&quot; pathAsQueryParam=&quot;true&quot; jsId=&quot;dojoFiles&quot;&gt;&lt;/div&gt;
+  &lt;div dojoType=&quot;dijit.tree.ForestStoreModel&quot; jsId=&quot;fileModel&quot; store=&quot;dojoFiles&quot; query=&quot;{}&quot; rootId=&quot;DojoFiles&quot; rootLabel=&quot;Dojo Files&quot; childrenAttrs=&quot;children&quot;&gt;&lt;/div&gt;
+  &lt;div id=&quot;tree&quot; dojoType=&quot;dijit.Tree&quot; model=&quot;fileModel&quot; &gt;&lt;/div&gt;
+&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="attaching-the-filestore-to-dijit-form-combobox-declaratively">
+<h3><a class="toc-backref" href="#id9">Attaching the FileStore to dijit.form.ComboBox declaratively<a class="headerlink" href="#attaching-the-filestore-to-dijit-form-combobox-declaratively" title="Permalink to this headline">¶</a></a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dijit.form.ComboBox&quot;);
+  dojo.require(&quot;dojox.data.FileStore&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div&gt;
+  &lt;div dojoType=&quot;dojox.data.FileStore&quot; url=&quot;/_static/dojo/dojox/data/demos/stores/filestore_dojoxdata.php&quot; pathAsQueryParam=&quot;true&quot; jsId=&quot;comboStore&quot;&gt;&lt;/div&gt;
+  &lt;div dojoType=&quot;dijit.form.ComboBox&quot;  store=&quot;comboStore&quot; searchAttr=&quot;path&quot; value=&quot;./demos&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="attaching-the-filestore-to-dojox-grid-datagrid-declaratively">
+<h3><a class="toc-backref" href="#id10">Attaching the FileStore to dojox.grid.DataGrid declaratively<a class="headerlink" href="#attaching-the-filestore-to-dojox-grid-datagrid-declaratively" title="Permalink to this headline">¶</a></a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+  dojo.require(&quot;dojox.grid.DataGrid&quot;);
+  dojo.require(&quot;dojox.data.FileStore&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;span dojoType=&quot;dojox.data.FileStore&quot;
+  jsId=&quot;fileStore3&quot;
+  url=&quot;/_static/dojo/dojox/data/demos/stores/filestore_dojoxdata.php&quot;
+  pathAsQueryParam=&quot;true&quot;&gt;
+&lt;/span&gt;
+
+&lt;table dojoType=&quot;dojox.grid.DataGrid&quot;
+    store=&quot;fileStore3&quot;
+    query=&quot;{}&quot;
+    queryOptions=&quot;{deep:true}&quot;
+    sortFields=&quot;[{'attribute':'path', 'descending': false}]&quot;
+    clientSort=&quot;true&quot;
+    style=&quot;width: 400px; height: 200px;&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th width=&quot;100px&quot; field=&quot;name&quot;&gt;Filename&lt;/th&gt;
+      &lt;th width=&quot;100px&quot; field=&quot;size&quot;&gt;File Size&lt;/th&gt;
+      &lt;th width=&quot;100px&quot; field=&quot;directory&quot;&gt;Is Directory&lt;/th&gt;
+      &lt;th width=&quot;100px&quot; field=&quot;path&quot;&gt;Path&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+&lt;/table&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/Grid.css&quot;;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/nihiloGrid.css&quot;;
+
+  .dojoxGrid table {
+    margin: 0;
+  }
+&lt;/style&gt;</pre></div></div></div>
+</div>
+<div class="section" id="technical-protocol-details">
+<h2><a class="toc-backref" href="#id11">Technical/Protocol Details<a class="headerlink" href="#technical-protocol-details" title="Permalink to this headline">¶</a></a></h2>
+<p>The following section is not necessary to fully understand how to just use the existing dojox.data.FileStore back end implementation, it is intended for people who wish to implement their own back end service in another language, such as python or java.</p>
+<p><a class="reference" href="FileStore/protocol.html#dojox-data-filestore-protocol"><em>Protocol Information</em></a></p>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

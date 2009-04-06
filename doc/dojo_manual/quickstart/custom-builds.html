@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Custom Builds &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Quickstart" href="contents.html" />
+    <link rel="next" title="Datastores and Dojo" href="data.html" />
+    <link rel="prev" title="Cross-Domain Dojo" href="cross-domain.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="data.html" title="Datastores and Dojo"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="cross-domain.html" title="Cross-Domain Dojo"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Quickstart</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">Custom Builds</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a><ul>
+<li><a class="reference" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference" href="#profiles-and-command-line-parameters">Profiles and Command Line Parameters</a><ul>
+<li><a class="reference" href="#where-should-profiles-be-placed">Where should profiles be placed?</a></li>
+<li><a class="reference" href="#naming-profiles">Naming profiles</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#example-creating-a-custom-profile">Example:  Creating a Custom Profile</a></li>
+<li><a class="reference" href="#running-the-build">Running The Build</a></li>
+<li><a class="reference" href="#cross-domain-xdomain-builds">Cross Domain (XDomain) Builds</a><ul>
+<li><a class="reference" href="#benefits">Benefits</a></li>
+<li><a class="reference" href="#implications-limitations">Implications/Limitations</a></li>
+<li><a class="reference" href="#module-specific-notes">Module-specific Notes</a></li>
+<li><a class="reference" href="#doing-xdomain-builds">Doing xdomain builds</a></li>
+<li><a class="reference" href="#how-to-use-xdomain-builds-in-web-pages">How to use xdomain builds in web pages</a></li>
+<li><a class="reference" href="#xdomain-example">XDomain Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="cross-domain.html"
+                                  title="previous chapter">Cross-Domain Dojo</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="data.html"
+                                  title="next chapter">Datastores and Dojo</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/quickstart/custom-builds.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="custom-builds">
+<span id="quickstart-custom-builds"></span><h1><a class="toc-backref" href="#id1">Custom Builds<a class="headerlink" href="#custom-builds" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">James Burke</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since 1.0</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#custom-builds" id="id1" name="id1">Custom Builds</a><ul>
+<li><a class="reference" href="#introduction" id="id2" name="id2">Introduction</a><ul>
+<li><a class="reference" href="#prerequisites" id="id3" name="id3">Prerequisites</a></li>
+<li><a class="reference" href="#profiles-and-command-line-parameters" id="id4" name="id4">Profiles and Command Line Parameters</a><ul>
+<li><a class="reference" href="#where-should-profiles-be-placed" id="id5" name="id5">Where should profiles be placed?</a></li>
+<li><a class="reference" href="#naming-profiles" id="id6" name="id6">Naming profiles</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#example-creating-a-custom-profile" id="id7" name="id7">Example:  Creating a Custom Profile</a></li>
+<li><a class="reference" href="#running-the-build" id="id8" name="id8">Running The Build</a></li>
+<li><a class="reference" href="#cross-domain-xdomain-builds" id="id9" name="id9">Cross Domain (XDomain) Builds</a><ul>
+<li><a class="reference" href="#benefits" id="id10" name="id10">Benefits</a></li>
+<li><a class="reference" href="#implications-limitations" id="id11" name="id11">Implications/Limitations</a></li>
+<li><a class="reference" href="#module-specific-notes" id="id12" name="id12">Module-specific Notes</a></li>
+<li><a class="reference" href="#doing-xdomain-builds" id="id13" name="id13">Doing xdomain builds</a></li>
+<li><a class="reference" href="#how-to-use-xdomain-builds-in-web-pages" id="id14" name="id14">How to use xdomain builds in web pages</a></li>
+<li><a class="reference" href="#xdomain-example" id="id15" name="id15">XDomain Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>How to use Dojo&#8217;s custom build system to package your code for optimal runtime performance. This guide briefly covers many common usages and parameters. See the <a class="reference" href="../build/index.html#build-index"><em>full build documentation</em></a> for all the details.</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id2">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>A Dojo custom build speeds performance by doing the following:</p>
+<p>The catch?  You have to designate the modules in each layer with a &#8216;&#8217;profile&#8217;&#8216;, which is something like a Makefile or Ant script.  But that&#8217;s not too hard if you know your app well.</p>
+<p>So the input of the build system is the Dojo source tree, plus any source trees for custom stuff you wish to include ... plus the profile.  The output is a Dojo distribution tree which you can copy to your web server.  Sweet!</p>
+<div class="section" id="prerequisites">
+<h3><a class="toc-backref" href="#id3">Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></a></h3>
+<p>You need the following installed on your computer to run Dojo&#8217;s build system:</p>
+<ul class="simple">
+<li><a class="reference" href="http://java.sun.com/">Java</a> 1.4.2 or later (Java 1.5 recommended).</li>
+<li>A source build of Dojo, which you can obtain at <a class="reference" href="http://download.dojotoolkit.org/">http://download.dojotoolkit.org/</a>.  The source builds are suffixed with &#8220;-src&#8221;. If you want to download the latest code from the Subversion code repository, see the <a class="reference" href="http://dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/get-code-subversion">Using Subversion</a> page.</li>
+</ul>
+</div>
+<div class="section" id="profiles-and-command-line-parameters">
+<h3><a class="toc-backref" href="#id4">Profiles and Command Line Parameters<a class="headerlink" href="#profiles-and-command-line-parameters" title="Permalink to this headline">¶</a></a></h3>
+<p>The build system is driven by the <tt class="docutils literal"><span class="pre">build.sh</span></tt> script (or <tt class="docutils literal"><span class="pre">build.bat</span></tt> batch file for Windows based hosts), which accepts several parameters on the command line, one of which should indicate which build profile to use to drive the build.  The parameters specified on the command line and in the profile are combined to one set of parameters to drive the build.</p>
+<p>In Dojo versions 1.X CHECK FACT and later, if parameter values from the profile override parameters of the same name on the command line.  Prior to version 1.X CHECK FACT, parameters on the command line override parameters of the same name from the profile.</p>
+<div class="section" id="where-should-profiles-be-placed">
+<h4><a class="toc-backref" href="#id5">Where should profiles be placed?<a class="headerlink" href="#where-should-profiles-be-placed" title="Permalink to this headline">¶</a></a></h4>
+<p>The default directory for profiles, when you specify the profile name with the <tt class="docutils literal"><span class="pre">profile</span></tt> parameter is <tt class="docutils literal"><span class="pre">util/buildscripts/profiles</span></tt>.</p>
+<p>If you do not want your profiles to be within the Dojo directory structure (which is a best practice, so that you can use them with subsequent versions of Dojo), you can use the <tt class="docutils literal"><span class="pre">profileFile</span></tt> parameter instead to point to your profile anywhere within the file system.</p>
+</div>
+<div class="section" id="naming-profiles">
+<h4><a class="toc-backref" href="#id6">Naming profiles<a class="headerlink" href="#naming-profiles" title="Permalink to this headline">¶</a></a></h4>
+<p>Your profiles should always be files named in the format <tt class="docutils literal"><span class="pre">name.profile.js</span></tt>.   The <tt class="docutils literal"><span class="pre">profile</span></tt> parameter automatically appends <tt class="docutils literal"><span class="pre">profile.js</span></tt> to whatever string is specified to determine the actual file name.</p>
+</div>
+</div>
+<div class="section" id="example-creating-a-custom-profile">
+<h3><a class="toc-backref" href="#id7">Example:  Creating a Custom Profile<a class="headerlink" href="#example-creating-a-custom-profile" title="Permalink to this headline">¶</a></a></h3>
+<p>In this example, in the util/buildscripts/profiles directory, you will create a profile build file called foo.profile.js like this:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></td><td class="code"><div class="highlight"><pre> <span class="nx">dependencies</span> <span class="o">=</span><span class="p">{</span>
+
+   <span class="nx">layers</span><span class="o">:</span>  <span class="p">[</span>
+       <span class="p">{</span>
+       <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;mydojo.js&quot;</span><span class="o">,</span>
+       <span class="nx">dependencies</span><span class="o">:</span> <span class="p">[</span>
+           <span class="s2">&quot;dijit.Button&quot;</span><span class="o">,</span>
+           <span class="s2">&quot;dojox.wire.Wire&quot;</span><span class="o">,</span>
+           <span class="s2">&quot;dojox.wire.XmlWire&quot;</span><span class="o">,</span>
+           <span class="s2">&quot;explosive.space.Modulator&quot;</span>
+       <span class="p">]</span>
+       <span class="p">}</span>
+   <span class="p">]</span><span class="o">,</span>
+
+   <span class="nx">prefixes</span><span class="o">:</span> <span class="p">[</span>
+       <span class="p">[</span> <span class="s2">&quot;dijit&quot;</span><span class="o">,</span> <span class="s2">&quot;../dijit&quot;</span> <span class="p">]</span><span class="o">,</span>
+       <span class="p">[</span> <span class="s2">&quot;dojox&quot;</span><span class="o">,</span> <span class="s2">&quot;../dojox&quot;</span> <span class="p">]</span><span class="o">,</span>
+       <span class="p">[</span> <span class="s2">&quot;explosive&quot;</span><span class="o">,</span> <span class="s2">&quot;../../explosive&quot;</span> <span class="p">]</span>
+   <span class="p">]</span>
+
+ <span class="p">};</span>
+</pre></div>
+</td></tr></table></div>
+<p>The dependencies section within the layer lists all the modules you call ''directly''.  Any referenced modules will also be included, so you don't have to trace back the dependency tree.
+Also, Dojo base modules are an implicit dependency, so you don't need to list things like &quot;dojo.query&quot;.  (Dojo core modules, however, do need to be listed.)</p>
+<p>The modules for that layer are gathered together to make the &quot;layer&quot; file, in our example: &quot;mydojo.js&quot;.  Then you just load this layer file in your pages with a SCRIPT tag.  Easy!</p>
+<p>The prefixes section list any modules that need inclusion.  Note our &quot;explosive&quot; module, which is located away from the Dojo tree.  You need to list these if you use them, even if you don't want any modules from it in your layer file.</p>
+<p>For the 1.0+: If you choose to optimize the JS files in a prefix directory (via the optimize= build parameter), you can choose to have a custom copyright text prepended to the optimized file. To do this, specify the path to a file tha contains the copyright info as the third array item in the prefixes array. For instance:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3</pre></td><td class="code"><div class="highlight"><pre> <span class="nx">prefixes</span><span class="o">:</span> <span class="p">[</span>
+     <span class="p">[</span> <span class="s2">&quot;explosive&quot;</span><span class="o">,</span> <span class="s2">&quot;../../explosive&quot;</span><span class="o">,</span> <span class="s2">&quot;../../explosive/copyright.txt&quot;</span><span class="p">]</span>
+ <span class="p">]</span>
+</pre></div>
+</td></tr></table></div>
+<p>If no copyright is specified in this optimize case, then by default, the dojo copyright will be used.</p>
+</div>
+<div class="section" id="running-the-build">
+<h3><a class="toc-backref" href="#id8">Running The Build<a class="headerlink" href="#running-the-build" title="Permalink to this headline">¶</a></a></h3>
+<p>After specifying a profile file as shown above that statically specifies the resources you want to include, and saving it as /buildscripts/profiles/foo.profile.js, you run the Rhino interpreter on it and specify the profile name as a parameter. For example, from the buildscripts directory:</p>
+<div class="highlight-python"><pre>$ cd util/buildscripts
+$ build.sh profile=foo action=release</pre>
+</div>
+<p>On Windows PC's, substitute build.bat for build.sh.  For both platforms, you may also specify additional build options. <strong>Run build.sh with no options</strong> to see a list of all supported options. Here is a sample of the supported options:</p>
+<dl class="docutils">
+<dt>profile</dt>
+<dd>The name of the profile to use for the build. It must be the first part of the profile file name in the profiles/ directory. For instance, to use base.profile.js, specify profile=base. Default: base</dd>
+<dt>profileFile</dt>
+<dd>A file path to the the profile file. Use this if your profile is outside of the profiles directory. Do not specify the &quot;profile&quot; build option if you use &quot;profileFile&quot; Default: &quot;&quot;</dd>
+<dt>action</dt>
+<dd><p class="first">The build action(s) to run. Can be a comma-separated list, like action=clean,release. The possible build actions are: clean, release Default: &quot;help&quot;.</p>
+<p class="last">Note:  the ''release'' action automatically implies the ''clean'' action, <em>except</em> when you have used the advanced parameter ''buildLayers'' in your profile.</p>
+</dd>
+<dt>version</dt>
+<dd>The build will be stamped with this version string Default: &quot;0.0.0.dev&quot;</dd>
+<dt>localeList</dt>
+<dd>The set of locales to use when flattening i18n bundles Default: &quot;en-gb,en-us,de-de,es-es,fr-fr,it-it,pt-br,ko-kr,zh-tw,zh-cn,ja-jp&quot;</dd>
+<dt>releaseName</dt>
+<dd>The name of the release. A directory inside 'releaseDir' will be created with this name Default: &quot;dojo&quot;</dd>
+<dt>releaseDir</dt>
+<dd>The top level release directory where builds end up. The 'releaseName' directories will be placed inside this directory Default: &quot;../../release/&quot;</dd>
+<dt>loader</dt>
+<dd>The type of dojo loader to use. &quot;default&quot; or &quot;xdomain&quot; are acceptable values.&quot; defaultValue: &quot;default&quot;</dd>
+<dt>internStrings</dt>
+<dd>Turn on or off widget template/dojo.uri.cache() file interning Default: true</dd>
+<dt>optimize</dt>
+<dd><p class="first">Specifies how to optimize module files. If &quot;comments&quot; is specified, then code comments are stripped. If &quot;shrinksafe&quot; is specified, then the Dojo compressor will be used on the files, and line returns will be removed. If &quot;shrinksafe.keepLines&quot; is specified, then the Dojo compressor will be used on the files, and line returns will be preserved. If &quot;packer&quot; is specified, Then Dean Edwards' Packer will be used Default: &quot;&quot;</p>
+<p class="last">Note:  using the ''packer'' option is discouraged in most environments.  In environments where the http server supports gzip compression automatically, ''shrinksafe'' will provide better performance.  ''packer'' also does more transformations to the underlying source code.</p>
+</dd>
+<dt>layerOptimize</dt>
+<dd>Specifies how to optimize the layer files. If &quot;comments&quot; is specified, then code comments are stripped. If &quot;shrinksafe&quot; is specified, then the Dojo compressor will be used on the files, and line returns will be removed. If &quot;shrinksafe.keepLines&quot; is specified, then the Dojo compressor will be used on the layer files, and line returns will be preserved. If &quot;packer&quot; is specified, Then Dean Edwards' Packer will be used Default: &quot;shrinksafe&quot;</dd>
+<dt>copyTests</dt>
+<dd>Turn on or off copying of test files Default: true</dd>
+<dt>log</dt>
+<dd>Sets the logging verbosity. See jslib/logger.js for possible integer values Default: logger.TRACE</dd>
+<dt>xdDojoPath</dt>
+<dd>If the loader=xdomain build option is used, then the value of this option will be used for the path to Dojo modules. The dijit and dojox paths will be assumed to be sibilings of this path. The xdDojoPath should end in '/dojo' Default: &quot;&quot;</dd>
+</dl>
+</div>
+<div class="section" id="cross-domain-xdomain-builds">
+<h3><a class="toc-backref" href="#id9">Cross Domain (XDomain) Builds<a class="headerlink" href="#cross-domain-xdomain-builds" title="Permalink to this headline">¶</a></a></h3>
+<p>Doing an xdomain build allows you to load Dojo and your custom modules from another domain.</p>
+<div class="section" id="benefits">
+<h4><a class="toc-backref" href="#id10">Benefits<a class="headerlink" href="#benefits" title="Permalink to this headline">¶</a></a></h4>
+<ul class="simple">
+<li>You get more connections in MSIE, since you can load from another domain. Faster loading.</li>
+<li>You get increased cacheability/startup if many of your applications use the same installation.</li>
+<li>Resource loading does not block the rest of the page from filling in as with Dojo's normal, synchronous loading.</li>
+<li>With a local install, your ISP may charge you for all of those Dojo bits that you are serving.</li>
+</ul>
+</div>
+<div class="section" id="implications-limitations">
+<h4><a class="toc-backref" href="#id11">Implications/Limitations<a class="headerlink" href="#implications-limitations" title="Permalink to this headline">¶</a></a></h4>
+<ul class="simple">
+<li>Not all external resources can be xdomain loaded, in particular some support files that need to be loaded from the same domain as the HTML page. See module-specifc notes below.</li>
+<li><strong>Requires</strong> a &quot;xdomain&quot; build of Dojo (see below for more info on how to make a xdomain build).</li>
+<li>Asynchronous loading. You MUST use dojo.addOnLoad() to register a callback function to get notification of package loading. This can be used even after the initial page load. Just do the dojo.require()s that you need, and then call dojo.addOnLoad() with a callback function, and once those new packages are loaded (or if they are already loaded), then the callback will be called. This technique works even for the normal Dojo loader, so this is a good practice to use even when not using an xdomain build.</li>
+<li>Avoid using document.write(): Since module can load asychnously, after the page is loaded, document.write can cause problems.</li>
+</ul>
+</div>
+<div class="section" id="module-specific-notes">
+<h4><a class="toc-backref" href="#id12">Module-specific Notes<a class="headerlink" href="#module-specific-notes" title="Permalink to this headline">¶</a></a></h4>
+<p><strong>dojo.io.iframe.create(), dijit.Editor, dijit._editor.RichText</strong>: You need to save dojo/resources/blank.html to the same domain as your HTML page and set djConfig.dojoBlankHtmlUrl to the path on that domain. <strong>Note:</strong> The dijit.Editor/dijit._editor.RichText has a bug in release 1.1.0 where it was not using this djConfig parameter. It is fixed in Dojo 1.1.1 and later.</p>
+<p><strong>dojo.back</strong>: You need to save dojo/resources/blank.html to the same domain as your HTML page and set djConfig.dojoIframeHistoryUrl to the path on that domain.</p>
+<p><strong>dojox.flash.Info()</strong>: It uses document.write() which will cause problems if dojox.flash is loaded via dojo.require().</p>
+</div>
+<div class="section" id="doing-xdomain-builds">
+<h4><a class="toc-backref" href="#id13">Doing xdomain builds<a class="headerlink" href="#doing-xdomain-builds" title="Permalink to this headline">¶</a></a></h4>
+<p>Sample xdomain build command:</p>
+<div class="highlight-python"><pre>$ cd util/buildscripts
+$ build.sh profile=foo loader=xdomain xdDojoPath=http://my.server.com/path/to/buildoutputdir action=release</pre>
+</div>
+<p>xdDojoPath is optional. It just burns in the location of dojo, dijit and dojox into the built dojo.js. If you do not specify that option, then you will need to use djConfig.modulePaths/dojo.registerModulePath() in your HTML page to set the xdomain locations for dojo, dijit and dojox. For your own custom modules, you will have to set djConfig.modulePaths/dojo.registerModulePath() even if you us the xdDojoPath build option.</p>
+<p><strong>For Dojo 0.9 through 1.1.x there is a `bug about loading dojox.gfx with an xdomain build &lt;http://trac.dojotoolkit.org/ticket/4462&gt;`_.</strong>. This is fixed in Dojo 1.2. If you want to use dojox.gfx with an xdomain build of Dojo 0.9-1.1.x, there are some workarounds until the bug gets fixed:</p>
+</div>
+<div class="section" id="how-to-use-xdomain-builds-in-web-pages">
+<h4><a class="toc-backref" href="#id14">How to use xdomain builds in web pages<a class="headerlink" href="#how-to-use-xdomain-builds-in-web-pages" title="Permalink to this headline">¶</a></a></h4>
+<ul class="simple">
+<li>In <strong>djConfig</strong>, add <strong>useXDomain = true</strong>.</li>
+<li>In <strong>djConfig</strong>, add a modulePaths object that maps where to find your modules.</li>
+<li>Register a callback function to get notification of when the packages are loaded by using <strong>dojo.addOnLoad()</strong>.</li>
+<li>Optional: set a wait time in milliseconds (<strong>djConfig.xdWaitSeconds</strong>) that specifies how long the resource loader should wait for a resource to load until returning an error. Since script elements do not give information about failed or long-running requests, this timeout is used to prevent infinite waiting in the browser. An exception will be thrown to indicate a load error. The default xdWaitSeconds is 15.</li>
+</ul>
+</div>
+<div class="section" id="xdomain-example">
+<h4><a class="toc-backref" href="#id15">XDomain Example<a class="headerlink" href="#xdomain-example" title="Permalink to this headline">¶</a></a></h4>
+<p><a class="reference" href="http://jburke.dojotoolkit.org/demos/xdlocal/LocalAndXd.html">Here is an example</a> showing how to load local modules along with an xdomain-loaded dojo and dijit. You can <a class="reference" href="http://jburke.dojotoolkit.org/demos/xdlocal/xdlocal.zip">download this example</a>.</p>
+<p><tt class="docutils literal"><span class="pre">TODOC:</span> <span class="pre">everything.</span> <span class="pre">outline</span> <span class="pre">here:</span></tt></p>
+<ul class="simple">
+<li>summary</li>
+<li>requirements / setup</li>
+<li>creating a profile</li>
+<li>command line arguments</li>
+<li>special builds:
+* layers
+* css</li>
+<li>file structure</li>
+</ul>
+<p>link to full docs to cover:</p>
+<ul class="simple">
+<li>excludeStart/Stop</li>
+<li>restoreRequire</li>
+<li>layerDependencies</li>
+<li>discard</li>
+<li>.uncompressed.js</li>
+<li>customBase</li>
+<li>more...</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

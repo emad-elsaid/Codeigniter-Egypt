@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.form.DropDownSelect &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.form.DropDownStack" href="DropDownStack.html" />
+    <link rel="prev" title="dojox.form.DateTextBox" href="DateTextBox.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="DropDownStack.html" title="dojox.form.DropDownStack"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="DateTextBox.html" title="dojox.form.DateTextBox"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.form.DropDownSelect</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#usage">Usage</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#a-simple-dropdownselect">A simple DropDownSelect</a></li>
+<li><a class="reference" href="#a-styled-dropdownselect">A &#8220;styled&#8221; DropDownSelect</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="DateTextBox.html"
+                                  title="previous chapter">dojox.form.DateTextBox</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="DropDownStack.html"
+                                  title="next chapter">dojox.form.DropDownStack</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/form/DropDownSelect.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-form-dropdownselect">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.form.DropDownSelect<a class="headerlink" href="#dojox-form-dropdownselect" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.2</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Nathan Toone</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.2</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-form-dropdownselect" id="id2" name="id2">dojox.form.DropDownSelect</a><ul>
+<li><a class="reference" href="#introduction" id="id3" name="id3">Introduction</a></li>
+<li><a class="reference" href="#usage" id="id4" name="id4">Usage</a></li>
+<li><a class="reference" href="#examples" id="id5" name="id5">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>A styleable drop down select box (similar to html select element)</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>HTML Select tags are problematic when it comes to styling - they are not very styleable, not to mention nearly impossible to get a consistent cross-browser widget.  This widget aims to resolve that issue.</p>
+</div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id4">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<p>The DropDownSelect is designed to replace existing HTML select elements with minimal effort.  You can also create them programmatically.</p>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id5">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="a-simple-dropdownselect">
+<h3>A simple DropDownSelect<a class="headerlink" href="#a-simple-dropdownselect" title="Permalink to this headline">¶</a></h3>
+<p>This example shows a simple DropDownSelect widget - converted from a select tag.</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.form.DropDownSelect&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;select name=&quot;select&quot; dojoType=&quot;dojox.form.DropDownSelect&quot;&gt;
+    &lt;option value=&quot;TN&quot;&gt;Tennessee&lt;/option&gt;
+    &lt;option value=&quot;VA&quot; selected=&quot;selected&quot;&gt;Virginia&lt;/option&gt;
+    &lt;option value=&quot;WA&quot;&gt;Washington&lt;/option&gt;
+    &lt;option value=&quot;FL&quot;&gt;Florida&lt;/option&gt;
+    &lt;option value=&quot;CA&quot;&gt;California&lt;/option&gt;
+&lt;/select&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  &#64;import &quot;/_static/dojo/dojox/form/resources/DropDownSelect.css&quot;;
+&lt;/style&gt;</pre></div></div></div>
+<div class="section" id="a-styled-dropdownselect">
+<h3>A &#8220;styled&#8221; DropDownSelect<a class="headerlink" href="#a-styled-dropdownselect" title="Permalink to this headline">¶</a></h3>
+<p>When styling the entries of a DropDownSelect, you must use div and span tags, instead of select and option tags - as IE will strip out any HTML within the option tags.</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.form.DropDownSelect&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div name=&quot;select&quot; value=&quot;AK&quot; dojoType=&quot;dojox.form.DropDownSelect&quot;&gt;
+    &lt;span value=&quot;AL&quot;&gt;&lt;b&gt;Alabama&lt;/b&gt;&lt;/span&gt;
+    &lt;span value=&quot;AK&quot;&gt;&lt;font color=&quot;red&quot;&gt;A&lt;/font&gt;&lt;font color=&quot;orange&quot;&gt;l&lt;/font&gt;&lt;font color=&quot;yellow&quot;&gt;a&lt;/font&gt;&lt;font color=&quot;green&quot;&gt;s&lt;/font&gt;&lt;font color=&quot;blue&quot;&gt;k&lt;/font&gt;&lt;font color=&quot;purple&quot;&gt;a&lt;/font&gt;&lt;/span&gt;
+    &lt;span value=&quot;AZ&quot;&gt;&lt;i&gt;Arizona&lt;/i&gt;&lt;/span&gt;
+    &lt;span value=&quot;AR&quot;&gt;&lt;span class=&quot;ark&quot;&gt;Arkansas&lt;/span&gt;&lt;/span&gt;
+    &lt;span value=&quot;CA&quot;&gt;&lt;span style=&quot;font-size:25%&quot;&gt;C&lt;/span&gt;&lt;span style=&quot;font-size:50%&quot;&gt;a&lt;/span&gt;&lt;span style=&quot;font-size:75%&quot;&gt;l&lt;/span&gt;&lt;span style=&quot;font-size:90%&quot;&gt;i&lt;/span&gt;&lt;span style=&quot;font-size:100%&quot;&gt;f&lt;/span&gt;&lt;span style=&quot;font-size:125%&quot;&gt;o&lt;/span&gt;&lt;span style=&quot;font-size:133%&quot;&gt;r&lt;/span&gt;&lt;span style=&quot;font-size:150%&quot;&gt;n&lt;/span&gt;&lt;span style=&quot;font-size:175%&quot;&gt;i&lt;/span&gt;&lt;span style=&quot;font-size:200%&quot;&gt;a&lt;/span&gt;&lt;/span&gt;
+    &lt;span value=&quot;NM&quot; disabled=&quot;disabled&quot;&gt;New&lt;br&gt;&amp;nbsp;&amp;nbsp;Mexico&lt;/span&gt;
+&lt;/div&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  &#64;import &quot;/_static/dojo/dojox/form/resources/DropDownSelect.css&quot;;
+  .ark { text-decoration: underline; }
+&lt;/style&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

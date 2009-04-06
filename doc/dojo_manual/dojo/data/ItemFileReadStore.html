@@ -1,0 +1,1053 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojo.data.ItemFileReadStore &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dojo" href="../contents.html" />
+    <link rel="next" title="dojo.data.ItemFileWriteStore" href="ItemFileWriteStore.html" />
+    <link rel="prev" title="dojo.data" href="../data.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="ItemFileWriteStore.html" title="dojo.data.ItemFileWriteStore"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="../data.html" title="dojo.data"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dojo</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojo.data.ItemFileReadStore</a><ul>
+<li><a class="reference" href="#supported-apis">Supported APIs</a></li>
+<li><a class="reference" href="#constructor-parameters">Constructor Parameters</a></li>
+<li><a class="reference" href="#input-data-format">Input Data Format</a><ul>
+<li><a class="reference" href="#general-structure">General Structure</a></li>
+<li><a class="reference" href="#item-structure">Item Structure</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#item-structure-examples">Item Structure Examples</a><ul>
+<li><a class="reference" href="#items-with-references">Items with References</a></li>
+<li><a class="reference" href="#items-with-hierarchy">Items with Hierarchy</a></li>
+<li><a class="reference" href="#items-with-custom-types">Items with Custom Types</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#custom-types">Custom Types</a><ul>
+<li><a class="reference" href="#general-case-type-map">General Case Type Map</a></li>
+<li><a class="reference" href="#example-general-case-type-map-for-javascript-date-objects">Example: General Case Type Map for JavaScript Date Objects</a></li>
+<li><a class="reference" href="#simplified-form-type-map">Simplified Form Type Map</a></li>
+<li><a class="reference" href="#example-simplified-form-type-map-for-dojo-color-objects">Example: Simplified Form Type Map for dojo.Color Objects</a></li>
+<li><a class="reference" href="#functional-example-using-custom-type-maps-with-itemfilereadstore">Functional Example: Using custom type maps with ItemFileReadStore</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#custom-sorting">Custom Sorting</a></li>
+<li><a class="reference" href="#query-syntax">Query Syntax</a></li>
+<li><a class="reference" href="#query-examples">Query Examples</a><ul>
+<li><a class="reference" href="#match-items-with-multi-character-wildcard">Match items with multi-character wildcard</a></li>
+<li><a class="reference" href="#match-items-with-single-character-wildcard">Match items with single character wildcard</a></li>
+<li><a class="reference" href="#match-items-on-multiple-attributes">Match items on multiple attributes</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#query-options">Query Options</a></li>
+<li><a class="reference" href="#usage-examples">Usage Examples</a><ul>
+<li><a class="reference" href="#connecting-itemfilereadstore-to-combobox">Connecting ItemFileReadStore to ComboBox</a></li>
+<li><a class="reference" href="#searching-for-all-continents">Searching for all continents</a></li>
+<li><a class="reference" href="#doing-wildcard-searches-and-option-setting">Doing wildcard searches and option setting</a></li>
+<li><a class="reference" href="#demonstrating-custom-sorting">Demonstrating custom sorting</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#see-also">See Also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="../data.html"
+                                  title="previous chapter">dojo.data</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="ItemFileWriteStore.html"
+                                  title="next chapter">dojo.data.ItemFileWriteStore</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojo/data/ItemFileReadStore.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo-data-itemfilereadstore">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojo.data.ItemFileReadStore<a class="headerlink" href="#dojo-data-itemfilereadstore" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed, Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.2</td>
+</tr>
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Jared Jurkiewicz</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.0</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo-data-itemfilereadstore" id="id2" name="id2">dojo.data.ItemFileReadStore</a><ul>
+<li><a class="reference" href="#supported-apis" id="id3" name="id3">Supported APIs</a></li>
+<li><a class="reference" href="#constructor-parameters" id="id4" name="id4">Constructor Parameters</a></li>
+<li><a class="reference" href="#input-data-format" id="id5" name="id5">Input Data Format</a></li>
+<li><a class="reference" href="#item-structure-examples" id="id6" name="id6">Item Structure Examples</a></li>
+<li><a class="reference" href="#custom-types" id="id7" name="id7">Custom Types</a></li>
+<li><a class="reference" href="#custom-sorting" id="id8" name="id8">Custom Sorting</a></li>
+<li><a class="reference" href="#query-syntax" id="id9" name="id9">Query Syntax</a></li>
+<li><a class="reference" href="#query-examples" id="id10" name="id10">Query Examples</a></li>
+<li><a class="reference" href="#query-options" id="id11" name="id11">Query Options</a></li>
+<li><a class="reference" href="#usage-examples" id="id12" name="id12">Usage Examples</a></li>
+<li><a class="reference" href="#see-also" id="id13" name="id13">See Also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Dojo core provides an implementation of a read-only datastore, ItemFileReadStore. This store reads the JSON structured contents from an http endpoint (service or URL), or from an in-memory JavaScript object, and stores all the items in-memory for simple and quick access. ItemFileReadStore is designed to allow for flexibility in how it represents item hierarchy, references, and custom data types. It also provides options for which attribute can act as the unique identifier (for dojo.data.api.Identity), and which attribute can be used as a general label for an item. This store has an expectation that data is provided to in a specific though very flexible, format. All of the examples on this page demonstrate the general format expected.</p>
+<p><strong>Points of Consideration:</strong></p>
+<ol class="arabic simple">
+<li>The format used by ItemFileReadStore is <em>not</em> a requirement of the dojo.data API. The format it uses is designed to work well for the specific situations ItemFileReadStore is used for, which are moderately sized data sets that can be easily represented in a JavaScript Object tree.
+Again, please do not take the storage format used by ItemFileReadStore as a definitive format all data stores use; <em>it is not</em>. Other stores use different formats, such as CSV structured data, XML, Opml, HTML, raw text, etc. The point of a data store is to hide the internal structure and always expose the data through the same API.</li>
+<li>This is an in-memory store. It is not designed to operate as a remote server store and often trying to make it work with specific remote services ends up far more work than simply implementing a completely new data store that conforms to the dojo.data APIs. So, if you find it extremely complicated to modify for your needs, take a step back and look at what you&#8217;re trying to do. It may be simpler to implement the data store interface over your services.</li>
+</ol>
+<div class="section" id="supported-apis">
+<h2><a class="toc-backref" href="#id3">Supported APIs<a class="headerlink" href="#supported-apis" title="Permalink to this headline">¶</a></a></h2>
+<p>The following dojo.data APIs are implemented by ItemFileReadStore</p>
+<ul class="simple">
+<li><a class="reference" href="api/Read.html#dojo-data-api-read"><em>dojo.data.api.Read</em></a></li>
+<li><a class="reference" href="api/Identity.html#dojo-data-api-identity"><em>dojo.data.api.Identity</em></a></li>
+</ul>
+</div>
+<div class="section" id="constructor-parameters">
+<h2><a class="toc-backref" href="#id4">Constructor Parameters<a class="headerlink" href="#constructor-parameters" title="Permalink to this headline">¶</a></a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="10%" />
+<col width="70%" />
+<col width="8%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Parameter</strong></td>
+<td><strong>Required</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Since</strong></td>
+</tr>
+<tr><td>url</td>
+<td>No</td>
+<td>This optional parameter specifies what URL from which to load the structured JSON data. Note
+that this URL is only loaded one time, as this is an in-memory data store. Only when combined
+with parameters <em>clearOnClose</em> and <em>urlPreventCache</em>, is it possible to reload the store
+instance with new data.</td>
+<td>1.0</td>
+</tr>
+<tr><td>data</td>
+<td>No</td>
+<td>A structured JavaScript Object to use to populate the store. This parameter can be used instead
+of <em>url</em> when you wish to load data differently then modify it to fit the expected
+ItemFileReadStore format. This parameter is ignored if <em>url</em> is set.  The data object passed in
+is directly used <strong>and</strong> modified.  If you want to reuse a data object, make sure you copy it
+before you pass it in.</td>
+<td>1.0</td>
+</tr>
+<tr><td>typeMap</td>
+<td>No</td>
+<td>This is a JavaScript Object that defines how to deserialize custom types. For more information
+on custom types, please refer to the section in this page on them. They are effectively a way
+to control how certain values of attributes are processed.</td>
+<td>1.0</td>
+</tr>
+<tr><td>clearOnClose</td>
+<td>No</td>
+<td>This boolean parameter controls the close() behavior of the store. If set, calling close() will
+erase all items stored in the internal structures. A new call to fetch will invoke the URL
+load or reparse the data object into a new list of items.</td>
+<td>1.2</td>
+</tr>
+<tr><td>urlPreventCache</td>
+<td>No</td>
+<td>This boolean value constrols whether dojo attempts to prevent the browser caching mechanism from
+caching values loaded from a webserver. This parameter is especially useful when combined with
+<em>clearOnClose</em> to force a data reload.</td>
+<td>1.2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="input-data-format">
+<h2><a class="toc-backref" href="#id5">Input Data Format<a class="headerlink" href="#input-data-format" title="Permalink to this headline">¶</a></a></h2>
+<p>While the data exposed from a data store is agnostic and consumable by many sources in an usually interchangable way, the input data formats of a data store may vary. The ItemFileReadStore expects a specific structure to its data, as defined below:</p>
+<div class="section" id="general-structure">
+<h3>General Structure<a class="headerlink" href="#general-structure" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;label&quot;</span><span class="o">:</span> <span class="s2">&quot;some attribute&quot;</span><span class="o">,</span>   <span class="c">//Optional attribute used to indicate which attribute on an item should act as a human-readable label for display purposes.</span>
+
+
+  <span class="s2">&quot;identifier&quot;</span><span class="o">:</span> <span class="s2">&quot;some attribute&quot;</span><span class="o">,</span>  <span class="c">//Optional attribute used to indicate which attribute on an item acts as a unique identifier for that item. If it is not defined, then the ItemFileReadStore will simply number the items and use that number as a unique index to the item.</span>
+
+
+  <span class="s2">&quot;items:&quot;</span> <span class="p">[</span>  <span class="c">//The array of JavaScript objects that act as the root items of the data store</span>
+    <span class="p">{</span> <span class="c">/* Some set of name/value attributes */</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="c">/* ... */</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">...</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="item-structure">
+<h3>Item Structure<a class="headerlink" href="#item-structure" title="Permalink to this headline">¶</a></h3>
+<p>To ItemFileReadStore, any JavaScript object is treated as an item. This includes any value of an attribute that is also a JavaScript object. This allows the format to be extremely flexible in what sort of data it can represent.</p>
+<p>Aside from regular, string, boolean, integer, object, etc, types that can be assigned as attribute values, there are special structures that when detected are treated differently from regular values.</p>
+<p><strong>References:</strong></p>
+<p>The first is the the <em>_reference</em> structure. The <em>_reference</em> structure is a JavaScript Object with a single, special attribute of <em>_reference</em>. Its value should always be the identity of another item. With this structure, ItemFileReadStore can read in and set up relationships between items. An example of such a data structure is below:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;identifier&quot;</span><span class="o">:</span> <span class="s2">&quot;name&quot;</span><span class="o">,</span>
+  <span class="s2">&quot;items&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Bob&quot;</span><span class="o">,</span> <span class="s2">&quot;spouse&quot;</span><span class="o">:</span> <span class="p">{</span><span class="s2">&quot;_reference&quot;</span><span class="o">:</span><span class="s2">&quot;Sally&quot;</span><span class="p">)</span><span class="o">,</span>  <span class="s2">&quot;children&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="p">{</span> <span class="s2">&quot;_reference&quot;</span><span class="o">:</span><span class="s2">&quot;Nancy&quot;</span><span class="p">}]}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Sally&quot;</span><span class="o">,</span> <span class="s2">&quot;spouse&quot;</span><span class="o">:</span> <span class="p">{</span><span class="s2">&quot;_reference&quot;</span><span class="o">:</span><span class="s2">&quot;Bob&quot;</span><span class="p">)</span><span class="o">,</span>  <span class="s2">&quot;children&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="p">{</span> <span class="s2">&quot;_reference&quot;</span><span class="o">:</span><span class="s2">&quot;Nancy&quot;</span><span class="p">}]}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Nancy&quot;</span><span class="p">}</span><span class="o">,</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>So, by calling store.getValue(bobItem, &quot;spouse&quot;), the return will be the datastore item identified by <em>Nancy</em>.</p>
+<p><strong>Custom Types:</strong></p>
+<p>The other special structure is the custom type structure. The purpose of the custom type structure is a mechanism by which you can define JavaScript Objects that you do not which to be created and handled as a data store item. A good example of this is a JavaScript Date object. You likely do not wish it to be treated as another item, but as simply its JavaScript object. Another good example is the dojo.Color object. Again, it is unlikely you would wish this to be treated as a datastore item. So, ItemFileReadStore provides a mechanism by which these sort of objects can be represented in JSON and reconstructed back into their JavaScript equivalents. The custom type format is defined below:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;items&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Bob&quot;</span><span class="o">,</span> <span class="s2">&quot;birthdate&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;_type&quot;</span><span class="o">:</span> <span class="s2">&quot;Date&quot;</span><span class="o">,</span> <span class="s2">&quot;_value&quot;</span><span class="o">:</span> <span class="s2">&quot;1965-08-20T00:00:00Z&quot;</span><span class="p">})</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When ItemFileReadStore parses that structure, it detects the JavaScript Object value for attribute <em>birthdate</em> has the special attributes <em>_type</em> and <em>_value</em>. what it then does with this is look into the type map of the store and determines if any deserializer has been defined for the value of <em>_type</em>. If it has, it takes the value of <em>_value</em>, and calls the deserializer function with it. The return of the deserializer will be a Date() object.</p>
+</div>
+</div>
+<div class="section" id="item-structure-examples">
+<h2><a class="toc-backref" href="#id6">Item Structure Examples<a class="headerlink" href="#item-structure-examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="items-with-references">
+<h3>Items with References<a class="headerlink" href="#items-with-references" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s1">&#39;identifier&#39;</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span><span class="o">,</span>
+  <span class="s1">&#39;label&#39;</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span><span class="o">,</span>
+  <span class="s1">&#39;items&#39;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Africa&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Egypt&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Kenya&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Sudan&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Egypt&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Kenya&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Nairobi&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Mombasa&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Nairobi&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;city&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Mombasa&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;city&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Sudan&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Khartoum&#39;</span><span class="p">}</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Khartoum&#39;</span><span class="o">,</span> <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;city&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Asia&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;China&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;India&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Russia&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Mongolia&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;China&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;India&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Russia&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Mongolia&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Australia&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;21 million&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Commonwealth of Australia&#39;</span><span class="p">}}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Commonwealth of Australia&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;21 million&#39;</span><span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Europe&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Germany&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;France&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Spain&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Italy&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Germany&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;France&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Spain&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Italy&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;North America&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Mexico&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Canada&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;United States of America&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Mexico&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;108 million&#39;</span><span class="o">,</span> <span class="s1">&#39;area&#39;</span><span class="o">:</span><span class="s1">&#39;1,972,550 sq km&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Mexico City&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Guadalajara&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Mexico City&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;19 million&#39;</span><span class="o">,</span> <span class="s1">&#39;timezone&#39;</span><span class="o">:</span><span class="s1">&#39;-6 UTC&#39;</span><span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Guadalajara&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;4 million&#39;</span><span class="o">,</span> <span class="s1">&#39;timezone&#39;</span><span class="o">:</span><span class="s1">&#39;-6 UTC&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Canada&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span>  <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;33 million&#39;</span><span class="o">,</span> <span class="s1">&#39;area&#39;</span><span class="o">:</span><span class="s1">&#39;9,984,670 sq km&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Ottawa&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Toronto&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Ottawa&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;0.9 million&#39;</span><span class="o">,</span> <span class="s1">&#39;timezone&#39;</span><span class="o">:</span><span class="s1">&#39;-5 UTC&#39;</span><span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Toronto&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;2.5 million&#39;</span><span class="o">,</span> <span class="s1">&#39;timezone&#39;</span><span class="o">:</span><span class="s1">&#39;-5 UTC&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;United States of America&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;South America&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Brazil&#39;</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span><span class="s1">&#39;_reference&#39;</span><span class="o">:</span><span class="s1">&#39;Argentina&#39;</span><span class="p">}]</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Brazil&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;186 million&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Argentina&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;40 million&#39;</span> <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="items-with-hierarchy">
+<h3>Items with Hierarchy<a class="headerlink" href="#items-with-hierarchy" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s1">&#39;identifier&#39;</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span><span class="o">,</span>
+  <span class="s1">&#39;label&#39;</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span><span class="o">,</span>
+  <span class="s1">&#39;items&#39;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Africa&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span> <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Egypt&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Kenya&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[</span>
+        <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Nairobi&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;city&#39;</span> <span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Mombasa&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;city&#39;</span> <span class="p">}</span> <span class="p">]</span>
+      <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Sudan&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="s1">&#39;children&#39;</span><span class="o">:</span>
+        <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Khartoum&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;city&#39;</span> <span class="p">}</span>
+      <span class="p">}</span> <span class="p">]</span>
+    <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Asia&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span> <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;China&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;India&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Russia&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Mongolia&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span> <span class="p">]</span>
+    <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Australia&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;21 million&#39;</span><span class="o">,</span> <span class="s1">&#39;children&#39;</span><span class="o">:</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Commonwealth of Australia&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;21 million&#39;</span><span class="p">}</span>
+    <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Europe&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span> <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Germany&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;France&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Spain&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Italy&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span> <span class="p">]</span>
+    <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;North America&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span> <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Mexico&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span>  <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;108 million&#39;</span><span class="o">,</span> <span class="s1">&#39;area&#39;</span><span class="o">:</span><span class="s1">&#39;1,972,550 sq km&#39;</span><span class="o">,</span> <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[</span>
+        <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Mexico City&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;19 million&#39;</span><span class="o">,</span> <span class="s1">&#39;timezone&#39;</span><span class="o">:</span><span class="s1">&#39;-6 UTC&#39;</span><span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Guadalajara&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;4 million&#39;</span><span class="o">,</span> <span class="s1">&#39;timezone&#39;</span><span class="o">:</span><span class="s1">&#39;-6 UTC&#39;</span> <span class="p">}</span> <span class="p">]</span>
+      <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Canada&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;33 million&#39;</span><span class="o">,</span> <span class="s1">&#39;area&#39;</span><span class="o">:</span><span class="s1">&#39;9,984,670 sq km&#39;</span><span class="o">,</span> <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[</span>
+        <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Ottawa&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;0.9 million&#39;</span><span class="o">,</span> <span class="s1">&#39;timezone&#39;</span><span class="o">:</span><span class="s1">&#39;-5 UTC&#39;</span><span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Toronto&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;city&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;2.5 million&#39;</span><span class="o">,</span> <span class="s1">&#39;timezone&#39;</span><span class="o">:</span><span class="s1">&#39;-5 UTC&#39;</span> <span class="p">}]</span>
+      <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;United States of America&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span> <span class="p">}</span> <span class="p">]</span>
+    <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;South America&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;continent&#39;</span><span class="o">,</span> <span class="s1">&#39;children&#39;</span><span class="o">:</span><span class="p">[</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Brazil&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;186 million&#39;</span> <span class="p">}</span><span class="o">,</span>
+      <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Argentina&#39;</span><span class="o">,</span> <span class="s1">&#39;type&#39;</span><span class="o">:</span><span class="s1">&#39;country&#39;</span><span class="o">,</span> <span class="s1">&#39;population&#39;</span><span class="o">:</span><span class="s1">&#39;40 million&#39;</span> <span class="p">}</span> <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="items-with-custom-types">
+<h3>Items with Custom Types<a class="headerlink" href="#items-with-custom-types" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s1">&#39;identifier&#39;</span><span class="o">:</span> <span class="s1">&#39;abbr&#39;</span><span class="o">,</span>
+  <span class="s1">&#39;label&#39;</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span><span class="o">,</span>
+  <span class="s1">&#39;items&#39;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s1">&#39;abbr&#39;</span><span class="o">:</span><span class="s1">&#39;ec&#39;</span><span class="o">,</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Ecuador&#39;</span><span class="o">,</span>           <span class="s1">&#39;capital&#39;</span><span class="o">:</span><span class="s1">&#39;Quito&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;abbr&#39;</span><span class="o">:</span><span class="s1">&#39;eg&#39;</span><span class="o">,</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Egypt&#39;</span><span class="o">,</span>             <span class="s1">&#39;capital&#39;</span><span class="o">:</span><span class="s1">&#39;Cairo&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;abbr&#39;</span><span class="o">:</span><span class="s1">&#39;sv&#39;</span><span class="o">,</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;El Salvador&#39;</span><span class="o">,</span>       <span class="s1">&#39;capital&#39;</span><span class="o">:</span><span class="s1">&#39;San Salvador&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;abbr&#39;</span><span class="o">:</span><span class="s1">&#39;gq&#39;</span><span class="o">,</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Equatorial Guinea&#39;</span><span class="o">,</span> <span class="s1">&#39;capital&#39;</span><span class="o">:</span><span class="s1">&#39;Malabo&#39;</span> <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;abbr&#39;</span><span class="o">:</span><span class="s1">&#39;er&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Eritrea&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;capital&#39;</span><span class="o">:</span><span class="s1">&#39;Asmara&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;independence&#39;</span><span class="o">:</span><span class="p">{</span><span class="s1">&#39;_type&#39;</span><span class="o">:</span><span class="s1">&#39;Date&#39;</span><span class="o">,</span> <span class="s1">&#39;_value&#39;</span><span class="o">:</span><span class="s2">&quot;1993-05-24T00:00:00Z&quot;</span><span class="p">}</span>
+    <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;abbr&#39;</span><span class="o">:</span><span class="s1">&#39;ee&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Estonia&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;capital&#39;</span><span class="o">:</span><span class="s1">&#39;Tallinn&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;independence&#39;</span><span class="o">:</span><span class="p">{</span><span class="s1">&#39;_type&#39;</span><span class="o">:</span><span class="s1">&#39;Date&#39;</span><span class="o">,</span> <span class="s1">&#39;_value&#39;</span><span class="o">:</span><span class="s2">&quot;1991-08-20T00:00:00Z&quot;</span><span class="p">}</span>
+    <span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span> <span class="s1">&#39;abbr&#39;</span><span class="o">:</span><span class="s1">&#39;et&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;name&#39;</span><span class="o">:</span><span class="s1">&#39;Ethiopia&#39;</span><span class="o">,</span>
+      <span class="s1">&#39;capital&#39;</span><span class="o">:</span><span class="s1">&#39;Addis Ababa&#39;</span> <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="custom-types">
+<h2><a class="toc-backref" href="#id7">Custom Types<a class="headerlink" href="#custom-types" title="Permalink to this headline">¶</a></a></h2>
+<p>As mentioned in the Item Structure section, custom types are possible to create and use as values of attributes with this store. The caveat is, you have to tell the store, through a typeMap object, how to deserialize the cutom type value back into its object form. This is not as difficult as it first may sound. Below is the general structure information for creating a custom type map. There is a general format for all cases, and a compact format when the value can be directly used as a constructor argument.</p>
+<p><strong>Note:</strong> You can mix simplified form type maps with general case type maps in the same type map object. Therefore, you can use whatever is the easiest representation required to handle the custom object construction.</p>
+<p><strong>Note:</strong> dojo.data.ItemFileReadStore implements a custom type map for JavaScript Date already. It uses the ISO-8601 serialization format for dates to keep it consistent with other date operations in dojo. If you wish to see how ItemFileReadStore defines it, refer to the source of dojo/data/ItemFileReadStore.js. The type mapping occurs in the constructor function.</p>
+<div class="section" id="general-case-type-map">
+<h3>General Case Type Map<a class="headerlink" href="#general-case-type-map" title="Permalink to this headline">¶</a></h3>
+<p>The general case type map handles the situation where some processing on the value of an attribute must occur before it can be converted back into its Object form. This often the case where a single value cannot be used as a constructor argument.</p>
+<p><strong>General Form Type Map</strong></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type0&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="nx">constructorFunction</span><span class="p">()</span><span class="o">,</span>
+        <span class="s2">&quot;deserialize&quot;</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+  <span class="p">}</span><span class="o">,</span>
+  <span class="s2">&quot;type1&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="nx">constructorFunction</span><span class="p">()</span><span class="o">,</span>
+        <span class="s2">&quot;deserialize&quot;</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+  <span class="p">}</span><span class="o">,</span>
+  <span class="s2">&quot;type2&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="nx">constructorFunction</span><span class="p">()</span><span class="o">,</span>
+        <span class="s2">&quot;deserialize&quot;</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+  <span class="p">}</span><span class="o">,</span>
+  <span class="p">...</span>
+  <span class="s2">&quot;typeN&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="nx">constructorFunction</span><span class="p">()</span><span class="o">,</span>
+    <span class="s2">&quot;deserialize&quot;</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-general-case-type-map-for-javascript-date-objects">
+<h3>Example: General Case Type Map for JavaScript Date Objects<a class="headerlink" href="#example-general-case-type-map-for-javascript-date-objects" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;Date&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="nb">Date</span><span class="o">,</span>
+    <span class="nx">deserialize</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">value</span><span class="p">){</span>
+      <span class="k">return</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">date</span><span class="p">.</span><span class="nx">stamp</span><span class="p">.</span><span class="nx">fromISOString</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="simplified-form-type-map">
+<h3>Simplified Form Type Map<a class="headerlink" href="#simplified-form-type-map" title="Permalink to this headline">¶</a></h3>
+<p>The simplified form is more compact to write and works well when the value held by the custom type structure can be directly passed into a constructor to convert it back into its Object form. This often the case where a single value can be used as a constructor argument.</p>
+<p><strong>Simplified Form Type Map</strong></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type0&quot;</span><span class="o">:</span> <span class="nx">constructorFunction</span><span class="p">()</span><span class="o">,</span>
+  <span class="s2">&quot;type1&quot;</span><span class="o">:</span> <span class="nx">constructorFunction</span><span class="p">()</span><span class="o">,</span>
+  <span class="s2">&quot;type2&quot;</span><span class="o">:</span> <span class="nx">constructorFunction</span><span class="p">()</span><span class="o">,</span>
+  <span class="p">...</span>
+  <span class="s2">&quot;typeN&quot;</span><span class="o">:</span> <span class="nx">constructorFunction</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-simplified-form-type-map-for-dojo-color-objects">
+<h3>Example: Simplified Form Type Map for dojo.Color Objects<a class="headerlink" href="#example-simplified-form-type-map-for-dojo-color-objects" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;Color&quot;</span><span class="o">:</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">Color</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="functional-example-using-custom-type-maps-with-itemfilereadstore">
+<h3>Functional Example: Using custom type maps with ItemFileReadStore<a class="headerlink" href="#functional-example-using-custom-type-maps-with-itemfilereadstore" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.form.Button&quot;);
+
+  var colorData = { identifier: 'name',
+    identifier:'name',
+    items: [
+      { name:'DojoRed', color:{_type:'Color', _value:'red'} },
+      { name:'DojoGreen', color:{_type:'Color', _value:'green'} },
+      { name:'DojoBlue', color:{_type:'Color', _value:'blue'} }
+    ]
+  };
+
+  //This function performs some basic dojo initialization. In this case it connects the button
+  //onClick to a function which invokes the fetch(). The fetch function queries for all items
+  //and provides callbacks to use for completion of data retrieval or reporting of errors.
+  function init () {
+    var colorStore = new dojo.data.ItemFileReadStore({data: colorData, typeMap: {'Color': dojo.Color}});
+
+    //Function to perform a fetch on the datastore when a button is clicked
+    function getItems () {
+      //Callback to perform an action when the data items are starting to be returned:
+      function clearOldList(size, request) {
+        var list = dojo.byId(&quot;list&quot;);
+        if (list) {
+          while (list.firstChild) {
+            list.removeChild(list.firstChild);
+          }
+        }
+      }
+
+      //Callback for processing a single returned item.
+      function gotItem(item, request) {
+        var list = dojo.byId(&quot;list&quot;);
+        if (list) {
+          if (item) {
+            var bold = document.createElement(&quot;b&quot;);
+            bold.appendChild(document.createTextNode(&quot;Item Name: &quot;));
+            list.appendChild(bold);
+            list.appendChild(document.createTextNode(colorStore.getValue(item, &quot;name&quot;)));
+            list.appendChild(document.createElement(&quot;br&quot;));
+            list.appendChild(document.createTextNode(&quot;Attribute color is of type: &quot; + typeof colorStore.getValue(item, &quot;color&quot;)));
+            list.appendChild(document.createElement(&quot;br&quot;));
+            list.appendChild(document.createTextNode(&quot;Attribute color value is: &quot; + colorStore.getValue(item, &quot;color&quot;)));
+            list.appendChild(document.createElement(&quot;br&quot;));
+            list.appendChild(document.createTextNode(&quot;Attribute color is instance of dojo.Color? &quot; + (colorStore.getValue(item, &quot;color&quot;) instanceof dojo.Color)));
+            list.appendChild(document.createElement(&quot;br&quot;));
+            list.appendChild(document.createElement(&quot;br&quot;));
+          }
+        }
+      }
+
+      //Callback for if the lookup fails.
+      function fetchFailed(error, request) {
+         console.log(error);
+         alert(&quot;lookup failed.&quot;);
+      }
+
+      //Fetch the data.
+      colorStore.fetch({onBegin: clearOldList, onItem: gotItem, onError: fetchFailed});
+    }
+
+    //Link the click event of the button to driving the fetch.
+    dojo.connect(button, &quot;onClick&quot;, getItems);
+  }
+  //Set the init function to run when dojo loading and page parsing has completed.
+  dojo.addOnLoad(init);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.form.Button&quot; jsId=&quot;button&quot;&gt;Click me to examine items and what the color attribute is!&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;span id=&quot;list&quot;&gt;
+&lt;/span&gt;</pre></div></div></div>
+</div>
+<div class="section" id="custom-sorting">
+<h2><a class="toc-backref" href="#id8">Custom Sorting<a class="headerlink" href="#custom-sorting" title="Permalink to this headline">¶</a></a></h2>
+<p>ItemFileReadStore uses the dojo.data.util.sorter helper functions to implement item sorting. These functions provide a mechanism by which end users can customize how attributes are sorted. This is done by defining a <em>comparatorMap</em> on the store class. The comparator map maps an attribute name to some sorting function. The sorting function is expected to return 1, -1, or 0, base on whether the value for two items for the attribute was greater than, less than, or equal to, each other. An example of a custom sorter for attribute 'foo' is shown below:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">store</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">ItemFileReadStore</span><span class="p">({</span><span class="nx">data</span><span class="o">:</span> <span class="p">{</span> <span class="nx">identifier</span><span class="o">:</span> <span class="s2">&quot;uniqueId&quot;</span><span class="o">,</span>
+  <span class="nx">items</span><span class="o">:</span> <span class="p">[</span> <span class="p">{</span><span class="nx">uniqueId</span><span class="o">:</span> <span class="mi">1</span><span class="o">,</span> <span class="nx">status</span><span class="o">:</span><span class="s2">&quot;CLOSED&quot;</span><span class="p">}</span><span class="o">,</span>
+    <span class="p">{</span><span class="nx">uniqueId</span><span class="o">:</span> <span class="mi">2</span><span class="o">,</span>  <span class="nx">status</span><span class="o">:</span><span class="s2">&quot;OPEN&quot;</span><span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span><span class="nx">uniqueId</span><span class="o">:</span> <span class="mi">3</span><span class="o">,</span>  <span class="nx">status</span><span class="o">:</span><span class="s2">&quot;PENDING&quot;</span><span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span><span class="nx">uniqueId</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span>  <span class="nx">status</span><span class="o">:</span><span class="s2">&quot;BLOCKED&quot;</span><span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span><span class="nx">uniqueId</span><span class="o">:</span> <span class="mi">5</span><span class="o">,</span>  <span class="nx">status</span><span class="o">:</span><span class="s2">&quot;CLOSED&quot;</span><span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span><span class="nx">uniqueId</span><span class="o">:</span> <span class="mi">6</span><span class="o">,</span>  <span class="nx">status</span><span class="o">:</span><span class="s2">&quot;OPEN&quot;</span><span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span><span class="nx">uniqueId</span><span class="o">:</span> <span class="mi">7</span><span class="o">,</span>  <span class="nx">status</span><span class="o">:</span><span class="s2">&quot;PENDING&quot;</span><span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span><span class="nx">uniqueId</span><span class="o">:</span> <span class="mi">8</span><span class="o">,</span>  <span class="nx">status</span><span class="o">:</span><span class="s2">&quot;PENDING&quot;</span><span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span><span class="nx">uniqueId</span><span class="o">:</span> <span class="mi">10</span><span class="o">,</span> <span class="nx">status</span><span class="o">:</span><span class="s2">&quot;BLOCKED&quot;</span><span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span><span class="nx">uniqueId</span><span class="o">:</span> <span class="mi">12</span><span class="o">,</span> <span class="nx">status</span><span class="o">:</span><span class="s2">&quot;BLOCKED&quot;</span><span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span><span class="nx">uniqueId</span><span class="o">:</span> <span class="mi">11</span><span class="o">,</span> <span class="nx">status</span><span class="o">:</span><span class="s2">&quot;OPEN&quot;</span><span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span><span class="nx">uniqueId</span><span class="o">:</span> <span class="mi">9</span><span class="o">,</span>  <span class="nx">status</span><span class="o">:</span><span class="s2">&quot;CLOSED&quot;</span><span class="p">}</span>
+      <span class="p">]</span>
+<span class="p">}});</span>
+
+<span class="c">//Define the comparator function for status.</span>
+<span class="nx">store</span><span class="p">.</span><span class="nx">comparatorMap</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="nx">store</span><span class="p">.</span><span class="nx">comparatorMap</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">a</span><span class="o">,</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nx">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+  <span class="c">// We want to map these by what the priority of these items are, not by alphabetical.</span>
+  <span class="c">// So, custom comparator.</span>
+  <span class="k">var</span> <span class="nx">enumMap</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">OPEN</span><span class="o">:</span> <span class="mi">3</span><span class="o">,</span> <span class="nx">BLOCKED</span><span class="o">:</span> <span class="mi">2</span><span class="o">,</span> <span class="nx">PENDING</span><span class="o">:</span> <span class="mi">1</span><span class="o">,</span> <span class="nx">CLOSED</span><span class="o">:</span> <span class="mi">0</span><span class="p">};</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">enumMap</span><span class="p">[</span><span class="nx">a</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">enumMap</span><span class="p">[</span><span class="nx">b</span><span class="p">])</span> <span class="p">{</span>
+    <span class="nx">ret</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">enumMap</span><span class="p">[</span><span class="nx">a</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">enumMap</span><span class="p">[</span><span class="nx">b</span><span class="p">])</span> <span class="p">{</span>
+    <span class="nx">ret</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">ret</span><span class="o">;</span>
+<span class="p">};</span>
+
+<span class="k">var</span> <span class="nx">sortAttributes</span> <span class="o">=</span> <span class="p">[{</span><span class="nx">attribute</span><span class="o">:</span> <span class="s2">&quot;status&quot;</span><span class="o">,</span> <span class="nx">descending</span><span class="o">:</span> <span class="kc">true</span><span class="p">}</span><span class="o">,</span> <span class="p">{</span> <span class="nx">attribute</span><span class="o">:</span> <span class="s2">&quot;uniqueId&quot;</span><span class="o">,</span> <span class="nx">descending</span><span class="o">:</span> <span class="kc">true</span><span class="p">}];</span>
+<span class="k">function</span> <span class="nx">completed</span><span class="p">(</span><span class="nx">items</span><span class="o">,</span> <span class="nx">findResult</span><span class="p">){</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="o">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">,</span> <span class="s2">&quot;uniqueId&quot;</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Item ID: [&quot;</span> <span class="o">+</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">,</span> <span class="s2">&quot;uniqueId&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;] with status: [&quot;</span> <span class="o">+</span> <span class="nx">store</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">,</span> <span class="s2">&quot;status&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">function</span> <span class="nx">error</span><span class="p">(</span><span class="nx">errData</span><span class="o">,</span> <span class="nx">request</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Failed in sorting data.&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c">//Invoke the fetch.</span>
+<span class="nx">store</span><span class="p">.</span><span class="nx">fetch</span><span class="p">({</span><span class="nx">onComplete</span><span class="o">:</span> <span class="nx">completed</span><span class="o">,</span> <span class="nx">onError</span><span class="o">:</span> <span class="nx">error</span><span class="o">,</span> <span class="nx">sort</span><span class="o">:</span> <span class="nx">sortAttributes</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="query-syntax">
+<h2><a class="toc-backref" href="#id9">Query Syntax<a class="headerlink" href="#query-syntax" title="Permalink to this headline">¶</a></a></h2>
+<p>The fetch method query syntax for ItemFileReadStore is simple and straightforward. It allows a list of attributes to match against in an AND fashion. For example, a query object to locate all items with attribute foo that has value bar and attribute bit that has value bite, would look like</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">foo</span><span class="o">:</span><span class="s2">&quot;bar&quot;</span><span class="o">,</span> <span class="nx">bit</span><span class="o">:</span><span class="s2">&quot;bite&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Okay, easy. Now what if I want to do a fuzzy match of items?  Can this be done?   Yes. ItemFileReadStore supports wildcard matching. Specifically, it supports multi-character * and single character ? as wildcards in attribute value queries.</p>
+</div>
+<div class="section" id="query-examples">
+<h2><a class="toc-backref" href="#id10">Query Examples<a class="headerlink" href="#query-examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="match-items-with-multi-character-wildcard">
+<h3>Match items with multi-character wildcard<a class="headerlink" href="#match-items-with-multi-character-wildcard" title="Permalink to this headline">¶</a></h3>
+<p><em>Matching attribute foo that has a value starting with bar</em></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">foo</span><span class="o">:</span><span class="s2">&quot;bar*&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="match-items-with-single-character-wildcard">
+<h3>Match items with single character wildcard<a class="headerlink" href="#match-items-with-single-character-wildcard" title="Permalink to this headline">¶</a></h3>
+<p><em>Matching attribute foo the value of which ends with ar and starts with any character.</em></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">foo</span><span class="o">:</span><span class="s2">&quot;?ar&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="match-items-on-multiple-attributes">
+<h3>Match items on multiple attributes<a class="headerlink" href="#match-items-on-multiple-attributes" title="Permalink to this headline">¶</a></h3>
+<p><em>Matching multiple attributes with various wildcards.</em></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">foo</span><span class="o">:</span><span class="s2">&quot;?ar&quot;</span><span class="o">,</span> <span class="nx">bar</span><span class="o">:</span><span class="s2">&quot;bob&quot;</span><span class="o">,</span> <span class="nx">bit</span><span class="o">:</span><span class="s2">&quot;*it*&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="query-options">
+<h2><a class="toc-backref" href="#id11">Query Options<a class="headerlink" href="#query-options" title="Permalink to this headline">¶</a></a></h2>
+<p>Dojo.data defines support for a 'queryOptions' modifier object that affects the behavior of the query. The two defined options listed by the API are <em>ignoreCase</em> and <em>deep</em>. ItemFileReadStore supports these options. The affect of these options on a query is defined below.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Option</strong></td>
+<td><strong>Result</strong></td>
+</tr>
+<tr><td>ignoreCase</td>
+<td>The default is <strong>false</strong>. When set to true, the match on attributes is done in a case-insensitive fashion. This means
+with ignoreCase: true, a query of A* would match <em>Apple</em> and <em>acorn</em></td>
+</tr>
+<tr><td>deep</td>
+<td>This option affects searching when the structure passed to ItemFileReadStore has hierarchy. For an example of that,
+refer to <em>Item Structure Example: Items with Hierarchy</em>. the default value for this option is <strong>false</strong>, which means the
+query is only applied against root items in the tree of data items. If it is set to true, then the query is applied to
+root items and <em>all</em> child data items. Think of it as a recursive search.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="usage-examples">
+<h2><a class="toc-backref" href="#id12">Usage Examples<a class="headerlink" href="#usage-examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="connecting-itemfilereadstore-to-combobox">
+<h3>Connecting ItemFileReadStore to ComboBox<a class="headerlink" href="#connecting-itemfilereadstore-to-combobox" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.form.ComboBox&quot;);
+
+  var storeData2 =   { identifier: 'abbr',
+    label: 'name',
+    items: [
+      { abbr:'ec', name:'Ecuador',           capital:'Quito' },
+      { abbr:'eg', name:'Egypt',             capital:'Cairo' },
+      { abbr:'sv', name:'El Salvador',       capital:'San Salvador' },
+      { abbr:'gq', name:'Equatorial Guinea', capital:'Malabo' },
+      { abbr:'er', name:'Eritrea',           capital:'Asmara' },
+      { abbr:'ee', name:'Estonia',           capital:'Tallinn' },
+      { abbr:'et', name:'Ethiopia',          capital:'Addis Ababa' }
+  ]}
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojo.data.ItemFileReadStore&quot; data=&quot;storeData2&quot; jsId=&quot;countryStore&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.ComboBox&quot; store=&quot;countryStore&quot; searchAttr=&quot;name&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="searching-for-all-continents">
+<h3>Searching for all continents<a class="headerlink" href="#searching-for-all-continents" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.form.Button&quot;);
+
+  var geoData = {
+    'identifier': 'name',
+    'label': 'name',
+    'items': [
+      { 'name':'Africa', 'type':'continent', children:[
+        { 'name':'Egypt', 'type':'country' },
+        { 'name':'Kenya', 'type':'country', children:[
+          { 'name':'Nairobi', 'type':'city' },
+          { 'name':'Mombasa', 'type':'city' } ]
+        },
+        { 'name':'Sudan', 'type':'country', 'children':
+          { 'name':'Khartoum', 'type':'city' }
+        } ]
+      },
+      { 'name':'Asia', 'type':'continent', 'children':[
+        { 'name':'China', 'type':'country' },
+        { 'name':'India', 'type':'country' },
+        { 'name':'Russia', 'type':'country' },
+        { 'name':'Mongolia', 'type':'country' } ]
+      },
+      { 'name':'Australia', 'type':'continent', 'population':'21 million', 'children':
+        { 'name':'Commonwealth of Australia', 'type':'country', 'population':'21 million'}
+      },
+      { 'name':'Europe', 'type':'continent', 'children':[
+        { 'name':'Germany', 'type':'country' },
+        { 'name':'France', 'type':'country' },
+        { 'name':'Spain', 'type':'country' },
+        { 'name':'Italy', 'type':'country' } ]
+      },
+      { 'name':'North America', 'type':'continent', 'children':[
+        { 'name':'Mexico', 'type':'country',  'population':'108 million', 'area':'1,972,550 sq km', 'children':[
+          { 'name':'Mexico City', 'type':'city', 'population':'19 million', 'timezone':'-6 UTC'},
+          { 'name':'Guadalajara', 'type':'city', 'population':'4 million', 'timezone':'-6 UTC' } ]
+        },
+        { 'name':'Canada', 'type':'country', 'population':'33 million', 'area':'9,984,670 sq km', 'children':[
+          { 'name':'Ottawa', 'type':'city', 'population':'0.9 million', 'timezone':'-5 UTC'},
+          { 'name':'Toronto', 'type':'city', 'population':'2.5 million', 'timezone':'-5 UTC' }]
+        },
+        { 'name':'United States of America', 'type':'country' } ]
+      },
+      { 'name':'South America', 'type':'continent', children:[
+        { 'name':'Brazil', 'type':'country', 'population':'186 million' },
+        { 'name':'Argentina', 'type':'country', 'population':'40 million' } ]
+      }
+    ]
+  }
+
+  //This function performs some basic dojo initialization. In this case it connects the button
+  //onClick to a function which invokes the fetch(). The fetch function queries for all items
+  //and provides callbacks to use for completion of data retrieval or reporting of errors.
+  function init2 () {
+    //Function to perform a fetch on the datastore when a button is clicked
+    function getContinents () {
+
+      //Callback to perform an action when the data items are starting to be returned:
+      function clearOldCList(size, request) {
+        var list = dojo.byId(&quot;list2&quot;);
+        if (list) {
+          while (list.firstChild) {
+            list.removeChild(list.firstChild);
+          }
+        }
+      }
+
+      //Callback for processing a returned list of items.
+      function gotContinents(items, request) {
+        var list = dojo.byId(&quot;list2&quot;);
+        if (list) {
+          var i;
+          for (i = 0; i &lt; items.length; i++) {
+            var item = items[i];
+            list.appendChild(document.createTextNode(geoStore.getValue(item, &quot;name&quot;)));
+            list.appendChild(document.createElement(&quot;br&quot;));
+          }
+        }
+      }
+
+      //Callback for if the lookup fails.
+      function fetchFailed(error, request) {
+        alert(&quot;lookup failed.&quot;);
+        alert(error);
+      }
+
+      //Fetch the data.
+      geoStore.fetch({query: { type: &quot;continent&quot;}, onBegin: clearOldCList, onComplete: gotContinents, onError: fetchFailed, queryOptions: {deep:true}});
+    }
+    //Link the click event of the button to driving the fetch.
+    dojo.connect(button2, &quot;onClick&quot;, getContinents );
+  }
+  //Set the init function to run when dojo loading and page parsing has completed.
+  dojo.addOnLoad(init2);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojo.data.ItemFileReadStore&quot; data=&quot;geoData&quot; jsId=&quot;geoStore&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.Button&quot; jsId=&quot;button2&quot;&gt;Find continents!&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;span id=&quot;list2&quot;&gt;
+&lt;/span&gt;</pre></div></div></div>
+<div class="section" id="doing-wildcard-searches-and-option-setting">
+<h3>Doing wildcard searches and option setting<a class="headerlink" href="#doing-wildcard-searches-and-option-setting" title="Permalink to this headline">¶</a></h3>
+<p><em>Wildcards * and ? are supported by the dojo.data.ItemFileReadStore:</em></p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.form.Button&quot;);
+  dojo.require(&quot;dijit.form.TextBox&quot;);
+  dojo.require(&quot;dijit.form.CheckBox&quot;);
+
+  var storeData3 = { identifier: 'name',
+    items: [
+      { name: 'Adobo', aisle: 'Mexican', price: 3.01 },
+      { name: 'Balsamic vinegar', aisle: 'Condiments', price: 4.01 },
+      { name: 'Basil', aisle: 'Spices', price: 3.59  },
+      { name: 'Bay leaf', aisle: 'Spices',  price: 2.01 },
+      { name: 'Beef Bouillon Granules', aisle: 'Soup',  price: 5.01 },
+      { name: 'Vinegar', aisle: 'Condiments',  price: 1.99  },
+      { name: 'White cooking wine', aisle: 'Condiments',  price: 2.01 },
+      { name: 'Worcestershire Sauce', aisle: 'Condiments',  price: 3.99 },
+      { name: 'white pepper', aisle: 'Spices',  price: 1.01 },
+      { name: 'Black Pepper', aisle: 'Spices',  price: 1.01 }
+    ]};
+
+    //This function performs some basic dojo initialization. In this case it connects the button
+    //onClick to a function which invokes the fetch(). The fetch function queries for all items
+    //and provides callbacks to use for completion of data retrieval or reporting of errors.
+    function init3 () {
+       //Function to perform a fetch on the datastore when a button is clicked
+       function search() {
+         var queryObj = {};
+
+         //Build up the query from the input boxes.
+         var name = nameBox.getValue();
+         if ( name &amp;&amp; dojo.trim(name) !== &quot;&quot; ) {
+           queryObj[&quot;name&quot;] = name;
+         }
+         var aisle = aisleBox.getValue();
+         if ( aisle &amp;&amp; dojo.trim(aisle) !== &quot;&quot; ) {
+           queryObj[&quot;aisle&quot;] = aisle;
+         }
+
+         var qNode = dojo.byId(&quot;query&quot;);
+         if (qNode ) {
+           qNode.innerHTML = dojo.toJson(queryObj);
+         }
+
+
+         //Build up query options, if any.
+         var queryOptionsObj = {};
+
+         if ( checkBox.getValue()) {
+           queryOptionsObj[&quot;ignoreCase&quot;] = true;
+         }
+
+         var qoNode = dojo.byId(&quot;queryOptions&quot;);
+         if (qoNode ) {
+           qoNode.innerHTML = dojo.toJson(queryOptionsObj);
+         }
+
+         //Callback to perform an action when the data items are starting to be returned:
+         function clearOldList(size, request) {
+           var list = dojo.byId(&quot;list3&quot;);
+           if (list) {
+             while (list.firstChild) {
+               list.removeChild(list.firstChild);
+             }
+           }
+         }
+
+         //Callback for processing a returned list of items.
+         function gotItems(items, request) {
+           var list = dojo.byId(&quot;list3&quot;);
+           if (list) {
+             var i;
+             for (i = 0; i &lt; items.length; i++) {
+               var item = items[i];
+               list.appendChild(document.createTextNode(foodStore3.getValue(item, &quot;name&quot;)));
+               list.appendChild(document.createElement(&quot;br&quot;));
+             }
+           }
+         }
+
+         //Callback for if the lookup fails.
+         function fetchFailed(error, request) {
+            alert(&quot;lookup failed.&quot;);
+            alert(error);
+         }
+
+         //Fetch the data.
+         foodStore3.fetch({query: queryObj, queryOptions: queryOptionsObj, onBegin: clearOldList, onComplete: gotItems, onError: fetchFailed});
+
+       }
+       //Link the click event of the button to driving the fetch.
+       dojo.connect(button3, &quot;onClick&quot;, search);
+    }
+    //Set the init function to run when dojo loading and page parsing has completed.
+    dojo.addOnLoad(init3);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;b&gt;Name:  &lt;/b&gt;&lt;input dojoType=&quot;dijit.form.TextBox&quot; jsId=&quot;nameBox&quot; value=&quot;*&quot;&gt;&lt;/input&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Aisle: &lt;/b&gt;&lt;input dojoType=&quot;dijit.form.TextBox&quot; jsId=&quot;aisleBox&quot; value=&quot;*&quot;&gt;&lt;/input&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Case Insensitive: &lt;/b&gt;&lt;div dojoType=&quot;dijit.form.CheckBox&quot; checked=&quot;false&quot; jsId=&quot;checkBox&quot;&gt;&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;div dojoType=&quot;dojo.data.ItemFileReadStore&quot; data=&quot;storeData3&quot; jsId=&quot;foodStore3&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.Button&quot; jsId=&quot;button3&quot;&gt;Click to search!&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Query used: &lt;/b&gt;&lt;span id=&quot;query&quot;&gt;&lt;/span
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Query Options used: &lt;/b&gt;&lt;span id=&quot;queryOptions&quot;&gt;&lt;/span
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Items located:&lt;/b&gt;
+&lt;br&gt;
+&lt;span id=&quot;list3&quot;&gt;
+&lt;/span&gt;</pre></div></div></div>
+<div class="section" id="demonstrating-custom-sorting">
+<h3>Demonstrating custom sorting<a class="headerlink" href="#demonstrating-custom-sorting" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.form.Button&quot;);
+
+  var sortData = { identifier: &quot;uniqueId&quot;,
+    items: [ {uniqueId: 1, status:&quot;CLOSED&quot;},
+      {uniqueId: 2,  status:&quot;OPEN&quot;},
+      {uniqueId: 3,  status:&quot;PENDING&quot;},
+      {uniqueId: 4,  status:&quot;BLOCKED&quot;},
+      {uniqueId: 5,  status:&quot;CLOSED&quot;},
+      {uniqueId: 6,  status:&quot;OPEN&quot;},
+      {uniqueId: 7,  status:&quot;PENDING&quot;},
+      {uniqueId: 8,  status:&quot;PENDING&quot;},
+      {uniqueId: 10, status:&quot;BLOCKED&quot;},
+      {uniqueId: 12, status:&quot;BLOCKED&quot;},
+      {uniqueId: 11, status:&quot;OPEN&quot;},
+      {uniqueId: 9,  status:&quot;CLOSED&quot;}
+    ]
+  };
+
+  //This function performs some basic dojo initialization. In this case it connects the button
+  //onClick to a function which invokes the fetch(). The fetch function queries for all items
+  //and provides callbacks to use for completion of data retrieval or reporting of errors.
+  function init4 () {
+    //Define the comparator function for status.
+    sortStore.comparatorMap = {};
+    sortStore.comparatorMap[&quot;status&quot;] = function(a,b) {
+      var ret = 0;
+      // We want to map these by what the priority of these items are, not by alphabetical.
+      // So, custom comparator.
+      var enumMap = { OPEN: 3, BLOCKED: 2, PENDING: 1, CLOSED: 0};
+      if (enumMap[a] &gt; enumMap[b]) {
+        ret = 1;
+      }
+      if (enumMap[a] &lt; enumMap[b]) {
+        ret = -1;
+      }
+      return ret;
+    };
+
+    //Function to perform a fetch on the datastore when a button is clicked
+    function getItems () {
+
+      //Callback to perform an action when the data items are starting to be returned:
+      function clearOldCList(size, request) {
+        var list = dojo.byId(&quot;list4&quot;);
+        if (list) {
+          while (list.firstChild) {
+            list.removeChild(list.firstChild);
+          }
+        }
+      }
+
+      //Callback for processing a returned list of items.
+      function gotItems(items, request) {
+        var list = dojo.byId(&quot;list4&quot;);
+        if (list) {
+          var i;
+          for (i = 0; i &lt; items.length; i++) {
+            var item = items[i];
+            list.appendChild(document.createTextNode(&quot;Item ID: [&quot; + sortStore.getValue(items[i], &quot;uniqueId&quot;) + &quot;] with status: [&quot; + sortStore.getValue(items[i], &quot;status&quot;) + &quot;]&quot;));
+            list.appendChild(document.createElement(&quot;br&quot;));
+          }
+        }
+      }
+
+      //Callback for if the lookup fails.
+      function fetchFailed(error, request) {
+        alert(&quot;lookup failed.&quot;);
+        alert(error);
+      }
+
+      var sortAttributes = [{attribute: &quot;status&quot;, descending: true}, { attribute: &quot;uniqueId&quot;, descending: true}];
+      //Fetch the data.
+      sortStore.fetch({query: {}, onBegin: clearOldCList, onComplete: gotItems, onError: fetchFailed, queryOptions: {deep:true}, sort: sortAttributes});
+    }
+    //Link the click event of the button to driving the fetch.
+    dojo.connect(button4, &quot;onClick&quot;, getItems );
+  }
+  //Set the init function to run when dojo loading and page parsing has completed.
+  dojo.addOnLoad(init4);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojo.data.ItemFileReadStore&quot; data=&quot;sortData&quot; jsId=&quot;sortStore&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.Button&quot; jsId=&quot;button4&quot;&gt;Custom sort!&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;span id=&quot;list4&quot;&gt;
+&lt;/span&gt;</pre></div></div></div>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id13">See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li><a class="reference" href="http://dojocampus.org/content/2009/01/31/refeshing-an-itemfilereadstore">Refeshing an ItemFileReadStore</a> - 2009-01-31 - How do you clear out the existing Data in a store, and populate it with new Data in Dojo 1.2?</li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

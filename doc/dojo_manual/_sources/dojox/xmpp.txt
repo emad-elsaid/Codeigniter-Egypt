@@ -1,0 +1,6 @@
+.. _dojox/xmpp:
+
+dojox.xmpp
+==========
+
+``TODOC``

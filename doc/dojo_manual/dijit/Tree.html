@@ -1,0 +1,557 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.Tree &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dijit" href="contents.html" />
+    <link rel="next" title="dijit.tree.Model" href="tree/Model.html" />
+    <link rel="prev" title="dijit.TooltipDialog" href="TooltipDialog.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="tree/Model.html" title="dijit.tree.Model"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="TooltipDialog.html" title="dijit.TooltipDialog"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.Tree</a><ul>
+<li><a class="reference" href="#components-involved-in-a-tree">Components Involved In A Tree</a><ul>
+<li><a class="reference" href="#tree">Tree</a></li>
+<li><a class="reference" href="#model">Model</a></li>
+<li><a class="reference" href="#data-stores">Data Stores</a></li>
+<li><a class="reference" href="#relationship">Relationship</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#a-simple-tree-example">A Simple Tree Example</a><ul>
+<li><a class="reference" href="#a-programmatic-tree">A programmatic tree</a></li>
+<li><a class="reference" href="#a-markup-tree">A markup tree</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#icons">Icons</a></li>
+<li><a class="reference" href="#hiding-a-tree-s-root-node">Hiding a Tree&#8217;s root node</a></li>
+<li><a class="reference" href="#updating-a-tree">Updating a Tree</a></li>
+<li><a class="reference" href="#lazy-loading-a-tree">Lazy Loading A Tree</a></li>
+<li><a class="reference" href="#drag-and-drop">Drag And Drop</a><ul>
+<li><a class="reference" href="#betweenthreshold">betweenThreshold</a></li>
+<li><a class="reference" href="#behind-the-scenes">Behind the scenes</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#context-menu">Context Menu</a></li>
+<li><a class="reference" href="#styling">Styling</a><ul>
+<li><a class="reference" href="#grid-lines">Grid lines</a></li>
+<li><a class="reference" href="#hover-effect">Hover effect</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#more-examples">More examples</a></li>
+<li><a class="reference" href="#accessibility">Accessibility</a><ul>
+<li><a class="reference" href="#keyboard">Keyboard</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="TooltipDialog.html"
+                                  title="previous chapter">dijit.TooltipDialog</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="tree/Model.html"
+                                  title="next chapter">dijit.tree.Model</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dijit/Tree.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-tree">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dijit.Tree<a class="headerlink" href="#dijit-tree" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Bill Keese, Nikolai Onken, Marcus Reimann</td>
+</tr>
+<tr class="field"><th class="field-name">Developers:</th><td class="field-body">Bill Keese</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since 0.9</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dijit-tree" id="id2" name="id2">dijit.Tree</a><ul>
+<li><a class="reference" href="#components-involved-in-a-tree" id="id3" name="id3">Components Involved In A Tree</a></li>
+<li><a class="reference" href="#a-simple-tree-example" id="id4" name="id4">A Simple Tree Example</a></li>
+<li><a class="reference" href="#icons" id="id5" name="id5">Icons</a></li>
+<li><a class="reference" href="#hiding-a-tree-s-root-node" id="id6" name="id6">Hiding a Tree&#8217;s root node</a></li>
+<li><a class="reference" href="#updating-a-tree" id="id7" name="id7">Updating a Tree</a></li>
+<li><a class="reference" href="#lazy-loading-a-tree" id="id8" name="id8">Lazy Loading A Tree</a></li>
+<li><a class="reference" href="#drag-and-drop" id="id9" name="id9">Drag And Drop</a></li>
+<li><a class="reference" href="#context-menu" id="id10" name="id10">Context Menu</a></li>
+<li><a class="reference" href="#styling" id="id11" name="id11">Styling</a></li>
+<li><a class="reference" href="#more-examples" id="id12" name="id12">More examples</a></li>
+<li><a class="reference" href="#accessibility" id="id13" name="id13">Accessibility</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The trees we see in User Interfaces help sort out long, hierarchical lists. A file system is the classic example, with Windows using it in Explorer. The Dijit tree widget is like that.</p>
+<p>Dojo makes easy trees easy, and hard trees possible. In particular, you can:</p>
+<ul class="simple">
+<li>Connect your tree to any dojo.data store implementing the Identity API,  with or without a single root item, and with various ways to express parent/child relationships</li>
+<li>Nest items to an arbitrary depth ... each branch is independently expandable</li>
+<li>Apply different icons to different leaf or branch items</li>
+<li>Setup a global handler for when a user clicks or double clicks a particular nodes.</li>
+<li>Tree will automatically reflect changes made to the underlying data store (when connected to the data store through the <a class="reference" href="tree/TreeStoreModel.html#dijit-tree-treestoremodel"><em>TreeStoreModel</em></a> or <a class="reference" href="tree/ForestStoreModel.html#dijit-tree-foreststoremodel"><em>ForestStoreModel</em></a>)</li>
+<li>Allow nodes to be dragged and dropped through the familiar Dojo DnD API.</li>
+<li>Drag and drop onto the tree, which updates the data store indirectly</li>
+</ul>
+<div class="section" id="components-involved-in-a-tree">
+<h2><a class="toc-backref" href="#id3">Components Involved In A Tree<a class="headerlink" href="#components-involved-in-a-tree" title="Permalink to this headline">¶</a></a></h2>
+<p>To understand how to use a Tree, you need to be aware of three components that feed each other:</p>
+<div class="section" id="tree">
+<h3>Tree<a class="headerlink" href="#tree" title="Permalink to this headline">¶</a></h3>
+<p>The Tree widget itself is merely a view of the data.   It&#8217;s in charge of displaying the data and handling user events only.</p>
+<p>The Tree is a black-box in the sense that the developer generally won&#8217;t be dealing with individual nodes of the Tree.   Rather, there are just onClick() etc. notifications, which refer to the <em>item</em> that was clicked.   Item is usually an item in the dojo.data store that the tree is connected to.</p>
+<p>Note also that a Tree has an idea of a currently selected item, such as the currently opened folder in a mail program.</p>
+</div>
+<div class="section" id="model">
+<h3>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h3>
+<p>The real power comes in the <a class="reference" href="tree/Model.html#dijit-tree-model"><em>tree model</em></a>, which represents the hierarchical data that the tree will display.   Tree can interface to any class implementing the model API, but typically either the <a class="reference" href="tree/TreeStoreModel.html#dijit-tree-treestoremodel"><em>TreeStoreModel</em></a> or <a class="reference" href="tree/ForestStoreModel.html#dijit-tree-foreststoremodel"><em>ForestStoreModel</em></a> are used, both of which themselves interface with the powerful dojo.data API.</p>
+<p>It&#8217;s important to note that the tree is merely a &#8216;&#8217;&#8216;view&#8217;&#8216;&#8217; onto the model.  The model is in charge of tasks like connecting to the data source (often on the server), lazy loading, and notifying the tree of changes to the data.  It&#8217;s also in charge of handle drop operations, when someone drags and drops an item onto the tree.</p>
+<p>To put it another way, you cannot &#8220;delete data from the tree&#8221; or &#8220;insert data into the tree&#8221; directly, but rather you must update the model.</p>
+<p>Note also that each item in your Tree needs a different identifier (the value of the identifier has to be unique). It&#8217;s the same concept as a primary key in a database.</p>
+</div>
+<div class="section" id="data-stores">
+<h3>Data Stores<a class="headerlink" href="#data-stores" title="Permalink to this headline">¶</a></h3>
+<p>Although not required, usually the model interfaces with a dojo.data store.</p>
+<p>There can be many different types of stores, such as stores that work from XML vs. stores that work from JSON, stores that execute on the client vs. stores that pass through to the server, stores that load data as it&#8217;s needed or stores that load all the data on initialization, etc.  All the stores, though, have the same API, so they can be connected to with either <a class="reference" href="tree/TreeStoreModel.html#dijit-tree-treestoremodel"><em>TreeStoreModel</em></a> or <a class="reference" href="tree/ForestStoreModel.html#dijit-tree-foreststoremodel"><em>ForestStoreModel</em></a>, depending on whether there is a single or multiple top level item in the store.</p>
+<p>One might wonder why Tree doesn&#8217;t interface directly with a dojo.data store.   There are a number of reasons:</p>
+<blockquote>
+<ul class="simple">
+<li>The parent-child relationship of items in the store might not be expressed by a children attribute on the parent item.  For relational databases it&#8217;s the other way around, where the child points to the parent.  The dijit.tree.Model code specifies how to trace parent-child relationships for a given data store.</li>
+<li>The interface of dojo.data to load children is rather cumbersome... must call _loadItem() on each item in the children[] array, which means that any item in the store needs to know the list of id&#8217;s of it&#8217;s children at any time.  It&#8217;s more efficient to not require that, and to lookup children only when they are needed (when the user clicks the expando icon to open the node).</li>
+<li>Sometimes developers might use a custom model that doesn&#8217;t connect to a data store at all.</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="relationship">
+<h3>Relationship<a class="headerlink" href="#relationship" title="Permalink to this headline">¶</a></h3>
+<p>From the simplest point of view, the information flows like this:</p>
+<p>Data Store &#8211;&gt; Model &#8211;&gt; Tree</p>
+<p>That gets more complicated when we think about drag &amp; drop, but we&#8217;ll address that later.</p>
+</div>
+</div>
+<div class="section" id="a-simple-tree-example">
+<h2><a class="toc-backref" href="#id4">A Simple Tree Example<a class="headerlink" href="#a-simple-tree-example" title="Permalink to this headline">¶</a></a></h2>
+<p>We can display a Tree on a page by creating a data store, a model, and the Tree widget itself.</p>
+<div class="section" id="a-programmatic-tree">
+<h3>A programmatic tree<a class="headerlink" href="#a-programmatic-tree" title="Permalink to this headline">¶</a></h3>
+<p>Creating a programmatic tree is very simple:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.Tree&quot;);
+
+  dojo.addOnLoad(function(){
+    var store = new dojo.data.ItemFileReadStore({
+        url: &quot;/_static/dojo/dijit/tests/_data/countries.json&quot;
+    });
+
+    var treeModel = new dijit.tree.ForestStoreModel({
+        store: store,
+        query: {&quot;type&quot;: &quot;continent&quot;},
+        rootId: &quot;root&quot;,
+        rootLabel: &quot;Continents&quot;,
+        childrenAttrs: [&quot;children&quot;]
+    });
+
+    new dijit.Tree({
+        model: treeModel
+    }, &quot;treeOne&quot;);
+  });
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;treeOne&quot;&gt;&lt;/div&gt;</pre></div></div><p>Note that the childrenAttrs parameter to TreeStoreModel/ForestStoreModel is an array since it can list multiple attributes in the store.</p>
+</div>
+<div class="section" id="a-markup-tree">
+<h3>A markup tree<a class="headerlink" href="#a-markup-tree" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.Tree&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojo.data.ItemFileReadStore&quot; jsId=&quot;continentStore&quot;
+  url=&quot;/_static/dojo/dijit/tests/_data/countries.json&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.tree.ForestStoreModel&quot; jsId=&quot;continentModel&quot;
+  store=&quot;continentStore&quot; query=&quot;{type:'continent'}&quot;
+  rootId=&quot;continentRoot&quot; rootLabel=&quot;Continents&quot; childrenAttrs=&quot;children&quot;&gt;&lt;/div&gt;
+
+&lt;div dojoType=&quot;dijit.Tree&quot; id=&quot;mytree&quot;
+  model=&quot;continentModel&quot; openOnClick=&quot;true&quot;&gt;
+  &lt;script type=&quot;dojo/method&quot; event=&quot;onClick&quot; args=&quot;item&quot;&gt;
+    alert(&quot;Execute of node &quot; + continentStore.getLabel(item)
+        +&quot;, population=&quot; + continentStore.getValue(item, &quot;population&quot;));
+  &lt;/script&gt;
+&lt;/div&gt;</pre></div></div></div>
+</div>
+<div class="section" id="icons">
+<h2><a class="toc-backref" href="#id5">Icons<a class="headerlink" href="#icons" title="Permalink to this headline">¶</a></a></h2>
+<p>Like other dijits, the icon is expressed as a CSS class (which should load a background-image). You specify the class per item by overriding getIconClass():</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;dojo/method&quot;</span> <span class="nx">event</span><span class="o">=</span><span class="s2">&quot;getIconClass&quot;</span> <span class="nx">args</span><span class="o">=</span><span class="s2">&quot;item, opened&quot;</span><span class="o">&gt;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">item</span> <span class="o">==</span> <span class="k">this</span><span class="p">.</span><span class="nx">model</span><span class="p">.</span><span class="nx">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nx">opened</span> <span class="o">?</span> <span class="s2">&quot;customFolderOpenedIcon&quot;</span> <span class="o">:</span> <span class="s2">&quot;customFolderClosedIcon&quot;</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">myStore</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">item</span><span class="o">,</span> <span class="s2">&quot;type&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;Icon&quot;</span><span class="o">;</span>
+    <span class="p">}</span>
+<span class="o">&lt;/</span><span class="nx">script</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="hiding-a-tree-s-root-node">
+<h2><a class="toc-backref" href="#id6">Hiding a Tree's root node<a class="headerlink" href="#hiding-a-tree-s-root-node" title="Permalink to this headline">¶</a></a></h2>
+<p>There's always a single root item for a Tree, returned by the model's getRoot() method.  It might be a real item from the store (such as a tree of employees, with the CEO as the root), or it if there's no single root item in the store (like if the store lists continents but the top item, &quot;the world&quot;, is implied, the model is responsible for fabricating such a root item (from the perspective of the tree).</p>
+<p>Correspondingly, all trees have a root node, corresponding to the root &quot;item&quot; from the model.</p>
+<p>Sometimes you don't want that &quot;the world&quot; top level node to show up, especially if the Tree is inside a TitlePane/AccordionPane/etc. with the label &quot;The World&quot;. In that case you should set showRoot=false. The item still exists in the model but it's hidden on the screen:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+  dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+  dojo.require(&quot;dijit.Tree&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.Tree&quot; id=&quot;mytree2&quot;
+  model=&quot;continentModel&quot; showRoot=&quot;false&quot;&gt;
+&lt;/div&gt;</pre></div></div><p>Note that you can hide or show the root item regardless of whether that root item is fabricated or corresponds to a real item in the store.</p>
+</div>
+<div class="section" id="updating-a-tree">
+<h2><a class="toc-backref" href="#id7">Updating a Tree<a class="headerlink" href="#updating-a-tree" title="Permalink to this headline">¶</a></a></h2>
+<p>People often ask:</p>
+<blockquote>
+<ul class="simple">
+<li>how do I update a tree (adding or deleting items?</li>
+</ul>
+</blockquote>
+<p>You can't update the tree directly, but rather you need to update the model.   Usually the model is connected to a data store and in that case you need to update the data store.  Thus, you need to use a data store that allows updates (through it's official API), like <a class="reference" href="../dojo/data/ItemFileWriteStore.html#dojo-data-itemfilewritestore"><em>dojo.data.ItemFileWriteStore</em></a>.</p>
+<blockquote>
+<ul class="simple">
+<li>how do I refresh a Tree from the store?</li>
+</ul>
+</blockquote>
+<p>This isn't supported.   The store needs to notify the tree of any changes to the data.  Currently this is really only supported (out of the box) by <a class="reference" href="../dojo/data/ItemFileWriteStore.html#dojo-data-itemfilewritestore"><em>dojo.data.ItemFileWriteStore</em></a>, as setting up a client-server dojo.data source where the server notifies the client whenever the data has changed is quite complicated, and beyond the scope of dojo, which is a client-only solution.</p>
+</div>
+<div class="section" id="lazy-loading-a-tree">
+<h2><a class="toc-backref" href="#id8">Lazy Loading A Tree<a class="headerlink" href="#lazy-loading-a-tree" title="Permalink to this headline">¶</a></a></h2>
+<p>People often ask how to lazy-load a tree, but this question is really unrelated to the Tree itself.  If you use a data store that is lazy loading, such as <a class="reference" href="../dojox/data/QueryReadStore.html#dojox-data-queryreadstore"><em>dojox.data.QueryReadStore</em></a> or <a class="reference" href="../dojox/data/JsonRestStore.html#dojox-data-jsonreststore"><em>dojox.data.JsonRestStore</em></a>, then the data will be loaded lazily.</p>
+</div>
+<div class="section" id="drag-and-drop">
+<h2><a class="toc-backref" href="#id9">Drag And Drop<a class="headerlink" href="#drag-and-drop" title="Permalink to this headline">¶</a></a></h2>
+<p>Tree's support drag and drop, meaning that a user can:</p>
+<blockquote>
+<ul class="simple">
+<li>drop an item onto the tree</li>
+<li>drag an item from the tree</li>
+<li>move items within the tree</li>
+</ul>
+</blockquote>
+<p>In the first and last case (ie, when an item is dropped onto the tree), the drop is processed by the model, which in turn sends it to the data store (updating the underlying data).   Thus:</p>
+<blockquote>
+<ul class="simple">
+<li>the model must implement the pasteItem() method</li>
+<li>the store must implement the <a class="reference" href="../dojo/data/api/Write.html#dojo-data-api-write"><em>dojo.data.api.Write</em></a> interface</li>
+</ul>
+</blockquote>
+<p>In addition, to enable DnD on the Tree you must dojo.require(&quot;dijit._tree.dndSource&quot;); and the dndController=&quot;dijit._tree.dndSource&quot; parameter must be specified to the tree</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+  dojo.require(&quot;dojo.data.ItemFileWriteStore&quot;);
+  dojo.require(&quot;dijit.tree.ForestStoreModel&quot;);
+  dojo.require(&quot;dijit._tree.dndSource&quot;);
+  dojo.require(&quot;dijit.Tree&quot;);
+
+  dojo.addOnLoad(function(){
+    var store = new dojo.data.ItemFileWriteStore({
+        url: &quot;/_static/dojo/dijit/tests/_data/countries.json&quot;
+    });
+
+    var treeModel = new dijit.tree.ForestStoreModel({
+        store: store,
+        query: {&quot;type&quot;: &quot;continent&quot;},
+        rootId: &quot;root&quot;,
+        rootLabel: &quot;Continents&quot;,
+        childrenAttrs: [&quot;children&quot;]
+    });
+
+    new dijit.Tree({
+        model: treeModel,
+        dndController: &quot;dijit._tree.dndSource&quot;
+    }, &quot;treeThree&quot;);
+  });
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div id=&quot;treeThree&quot;&gt;&lt;/div&gt;</pre></div></div><p>You can also specify custom checkAcceptance() and checkItemAcceptance() to accept/reject items to the tree.   (The former function operates at the Tree level, and the latter operates per Tree node, allowing things like rejecting dropping items onto leaf nodes.)</p>
+<div class="section" id="betweenthreshold">
+<h3>betweenThreshold<a class="headerlink" href="#betweenthreshold" title="Permalink to this headline">¶</a></h3>
+<p>If between threshold is set to a positive integer value like 5 (which represents 5 pixels), then when dragging within 5px of the top or bottom of a tree node, it's interpreted as trying to make the drag source the previous or next sibling of the drop target, rather than the child of the drop target.  This is useful for when a user can control the order of the children of the child nodes:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+  dojo.require(&quot;dojo.data.ItemFileWriteStore&quot;);
+  dojo.require(&quot;dijit.tree.ForestStoreModel&quot;);
+  dojo.require(&quot;dijit._tree.dndSource&quot;);
+  dojo.require(&quot;dijit.Tree&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojo.data.ItemFileWriteStore&quot; jsId=&quot;continentStore5&quot;
+  url=&quot;/_static/dojo/dijit/tests/_data/countries.json&quot;&gt;&lt;/div&gt;
+
+&lt;div dojoType=&quot;dijit.tree.ForestStoreModel&quot; jsId=&quot;continentModel5&quot;
+  store=&quot;continentStore5&quot; query=&quot;{type:'continent'}&quot;
+  rootId=&quot;continentRoot&quot; rootLabel=&quot;Continents&quot; childrenAttrs=&quot;children&quot;&gt;&lt;/div&gt;
+
+&lt;div dojoType=&quot;dijit.Tree&quot; id=&quot;mytree5&quot;
+  dndController=&quot;dijit._tree.dndSource&quot; betweenThreshold=&quot;5&quot; showRoot=&quot;false&quot;
+  model=&quot;continentModel5&quot; openOnClick=&quot;true&quot;&gt;
+&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="behind-the-scenes">
+<h3>Behind the scenes<a class="headerlink" href="#behind-the-scenes" title="Permalink to this headline">¶</a></h3>
+<p>What happens when a user moves an item from one position in a tree to another?   It's actually quite complicated...</p>
+<ol class="arabic simple">
+<li>The Tree widget does not change it's display at all.  Rather, it notifies the model of the paste operation.</li>
+<li>The model updates the store.</li>
+<li>The store notifies the model that the data has been changed.</li>
+<li>The model notifies the tree of the change (presumably the children list of nodeA is one shorter, and the children list of nodeB has a new entry)</li>
+<li>The Tree updates it's display.</li>
+</ol>
+<p>In this way, the Tree, Model, and data store are always in sync.</p>
+</div>
+</div>
+<div class="section" id="context-menu">
+<h2><a class="toc-backref" href="#id10">Context Menu<a class="headerlink" href="#context-menu" title="Permalink to this headline">¶</a></a></h2>
+<p>Tree has no built-in support for context menus, but you can use the Menu widget in conjunction with the Tree</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+    dojo.require(&quot;dijit.Menu&quot;);
+    dojo.require(&quot;dijit.MenuItem&quot;);
+    dojo.require(&quot;dijit.tree.ForestStoreModel&quot;);
+    dojo.require(&quot;dojo.data.ItemFileReadStore&quot;);
+    dojo.require(&quot;dijit.Tree&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;ul dojoType=&quot;dijit.Menu&quot; id=&quot;tree_menu&quot; style=&quot;display: none;&quot;&gt;
+        &lt;li dojoType=&quot;dijit.MenuItem&quot; onClick=&quot;alert('Hello world');&quot;&gt;Item #1&lt;/li&gt;
+        &lt;li dojoType=&quot;dijit.MenuItem&quot;&gt;Item #2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div dojoType=&quot;dojo.data.ItemFileReadStore&quot; jsId=&quot;menuContinentStore&quot;
+     url=&quot;/_static/dojo/dijit/tests/_data/countries.json&quot;&gt;&lt;/div&gt;
+
+&lt;div dojoType=&quot;dijit.tree.ForestStoreModel&quot; jsId=&quot;menuContinentModel&quot;
+     store=&quot;menuContinentStore&quot; query=&quot;{type:'continent'}&quot;
+     rootId=&quot;continentRoot&quot; rootLabel=&quot;Continents&quot; childrenAttrs=&quot;children&quot;&gt;&lt;/div&gt;
+
+&lt;div dojoType=&quot;dijit.Tree&quot; id=&quot;menuTree&quot;
+        model=&quot;menuContinentModel&quot; showRoot=&quot;false&quot; openOnClick=&quot;true&quot;&gt;
+
+        &lt;script type=&quot;dojo/connect&quot;&gt;
+                var menu = dijit.byId(&quot;tree_menu&quot;);
+                // when we right-click anywhere on the tree, make sure we open the menu
+                menu.bindDomNode(this.domNode);
+
+                dojo.connect(menu, &quot;_openMyself&quot;, this, function(e){
+                        // get a hold of, and log out, the tree node that was the source of this open event
+                        var tn = dijit.getEnclosingWidget(e.target);
+                        console.debug(tn);
+
+                        // now inspect the data store item that backs the tree node:
+                        console.debug(tn.item);
+
+                        // contrived condition: if this tree node doesn't have any children, disable all of the menu items
+                        menu.getChildren().forEach(function(i){ i.attr('disabled', !tn.item.children); });
+
+                        // IMPLEMENT CUSTOM MENU BEHAVIOR HERE
+                });
+        &lt;/script&gt;
+&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="styling">
+<h2><a class="toc-backref" href="#id11">Styling<a class="headerlink" href="#styling" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="grid-lines">
+<h3>Grid lines<a class="headerlink" href="#grid-lines" title="Permalink to this headline">¶</a></h3>
+<p>If you don't want to display the grid lines for a Tree then simply write CSS rules to override the theme and hide the relevant background images.  The pertinent lines from tundra are:</p>
+<div class="highlight-css"><pre>.tundra .dijitTreeNode {
+  background-image : url('images/i.gif');
+  ...
+}
+
+/* left vertical line (grid) for all nodes */
+.tundra .dijitTreeIsLast {
+  background: url('images/i_half.gif') no-repeat;
+  ...
+
+.tundra .dijitTreeExpandoLeaf {
+     background-image:url(images/treeExpand_leaf.gif);
+}</pre>
+</div>
+</div>
+<div class="section" id="hover-effect">
+<h3>Hover effect<a class="headerlink" href="#hover-effect" title="Permalink to this headline">¶</a></h3>
+<p>Due to implementation details, the hover effect for tree nodes is done with a near-transparent image:</p>
+<div class="highlight-css"><div class="highlight"><pre><span class="nc">.tundra</span> <span class="nc">.dijitTreeNodeHover</span> <span class="p">{</span>
+      <span class="c">/*background-color: #f6f9fa !important;*/</span>
+      <span class="c">/* using a transparent png so that we can still see grid lines, which are (unfortunately) behind the dijitRowNode that we are hovering over */</span>
+      <span class="k">background-image</span><span class="o">:</span> <span class="sx">url(images/treeHover.png)</span><span class="p">;</span>
+      <span class="k">background-repeat</span><span class="o">:</span> <span class="k">repeat</span><span class="p">;</span>
+      <span class="k">background-color</span><span class="o">:</span> <span class="k">none</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>So in order to change the hover effect you would need to create a new image (with for example 95% transparency), and write a CSS rule to override the one above.</p>
+<p>You can also remove the hover effect altogether by just writing a CSS rule that sets background-image to none, overriding the above rule.</p>
+</div>
+</div>
+<div class="section" id="more-examples">
+<h2><a class="toc-backref" href="#id12">More examples<a class="headerlink" href="#more-examples" title="Permalink to this headline">¶</a></a></h2>
+<p>There are <a class="reference" href="Tree-examples.html#dijit-tree-examples"><em>more extensive examples</em></a> of using the tree</p>
+</div>
+<div class="section" id="accessibility">
+<h2><a class="toc-backref" href="#id13">Accessibility<a class="headerlink" href="#accessibility" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="keyboard">
+<h3>Keyboard<a class="headerlink" href="#keyboard" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="68%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Action</th>
+<th class="head">Key</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Navigate to first tree item*</td>
+<td>Tab</td>
+</tr>
+<tr><td>Navigate to the next sibling</td>
+<td>Down arrow</td>
+</tr>
+<tr><td>Navigate to the previous sibling</td>
+<td>Up arrow</td>
+</tr>
+<tr><td>Open a subtree</td>
+<td>Right arrow</td>
+</tr>
+<tr><td>Close a subtree</td>
+<td>Left arrow</td>
+</tr>
+<tr><td>Navigate to open subtree</td>
+<td>Right arrow</td>
+</tr>
+<tr><td>Navigate to parent</td>
+<td>Left arrow</td>
+</tr>
+<tr><td>Activate a tree item</td>
+<td>Enter</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>Note: The last tree item focused will be in the Tab order.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

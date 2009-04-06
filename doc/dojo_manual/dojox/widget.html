@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.widget &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="DojoX" href="contents.html" />
+    <link rel="next" title="dojox.widget.AnalogGauge" href="widget/AnalogGauge.html" />
+    <link rel="prev" title="dojox.validate" href="validate.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="widget/AnalogGauge.html" title="dojox.widget.AnalogGauge"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="validate.html" title="dojox.validate"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.widget</a><ul>
+<li><a class="reference" href="#available-widgets">Available Widgets</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="validate.html"
+                                  title="previous chapter">dojox.validate</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="widget/AnalogGauge.html"
+                                  title="next chapter">dojox.widget.AnalogGauge</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dojox/widget.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-widget">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.widget<a class="headerlink" href="#dojox-widget" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Peter Higgins, Nikolai Onken, Marcus Reimann, Josh Trutwin, Benjamin Schell, Shane O&#8217;Sullivan</td>
+</tr>
+<tr class="field"><th class="field-name">Developers:</th><td class="field-body">Shane O&#8217;Sullivan, Peter Higgins, Nathan Toone, Karl Tiedt, Alex Russell, Nikolai Onken, Adam Peller, Benjamin Schell</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V?</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-widget" id="id2" name="id2">dojox.widget</a><ul>
+<li><a class="reference" href="#available-widgets" id="id3" name="id3">Available Widgets</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This is a collection of standalone widgets for use in your website. Each individual widget is independent of the others, and carries it&#8217;s own level of completeness, stability, and documentation, and don&#8217;t typically fall into any other classification of use, like <a class="reference" href="form.html#dojox-form"><em>dojox.form</em></a> or <a class="reference" href="layout.html#dojox-layout"><em>dojox.layout</em></a></p>
+<div class="section" id="available-widgets">
+<h2><a class="toc-backref" href="#id3">Available Widgets<a class="headerlink" href="#available-widgets" title="Permalink to this headline">¶</a></a></h2>
+<p>Here is an up to date list of dojox.widget components. Note: Some of these are newly added, and appear in different versions of Dojo, so may simply be unavailable in older versions:</p>
+<ul>
+<li><p class="first"><a class="reference" href="widget/AnalogGauge.html#dojox-widget-analoggauge"><em>dojox.widget.AnalogGauge</em></a></p>
+<p>A circular gauge with a variety of indicators, used to display numerical data</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/BarGauge.html#dojox-widget-bargauge"><em>dojox.widget.BarGauge</em></a></p>
+<p>A horizontal bar gauge with a few indicators, used to display numerical data</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/Calendar.html#dojox-widget-calendar"><em>dojox.widget.Calendar</em></a></p>
+<p>An extended dijit._Calendar</p>
+</li>
+<li><p class="first"><em>dojox.widget.CalendarFx</em></p>
+<p>An extended dijit._Calendar with FX</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/ColorPicker.html#dojox-widget-colorpicker"><em>dojox.widget.ColorPicker</em></a></p>
+<p>A HSV Color Picker, similar to PhotoShop</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/Dialog.html#dojox-widget-dialog"><em>dojox.widget.Dialog</em></a></p>
+<p>An extension to <a class="reference" href="../dijit/Dialog.html#dijit-dialog"><em>dijit.Dialog</em></a></p>
+</li>
+<li><p class="first"><em>dojox.widget.DocTester</em></p>
+<p>A widget to run DocTests inside an HTML page</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/FilePicker.html#dojox-widget-filepicker"><em>dojox.widget.FilePicker</em></a></p>
+<p>A specialized version of RollingList that handles file informatione</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/FisheyeList.html#dojox-widget-fisheyelist"><em>dojox.widget.FisheyeList</em></a></p>
+<p>A OSX-style Fisheye Menu</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/FisheyeLite.html#dojox-widget-fisheyelite"><em>dojox.widget.FisheyeLite</em></a></p>
+<p>A more robust Fisheye Widget, which fish-eyes&#8217; any CSS property</p>
+</li>
+<li><p class="first"><em>dojox.widget.Iterator</em></p>
+<p>A basic array and data store iterator class</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/Loader.html#dojox-widget-loader"><em>dojox.widget.Loader</em></a></p>
+<p>A small experimental Ajax Activity indicator</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/Pager.html#dojox-widget-pager"><em>dojox.widget.Pager</em></a></p>
+<p>A <a class="reference" href="../dojo/data.html#dojo-data"><em>dojo.data</em></a> powered Pager Widget, displaying a few items in a horizontal or vertical UI</p>
+</li>
+<li><p class="first"><em>dojox.widget.PlaceholderMenuItem</em></p>
+<p>A menu item that can be used as a placeholder.</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/Roller.html#dojox-widget-roller"><em>dojox.widget.Roller</em></a></p>
+<p>An unobtrusive &#8220;roller&#8221;, displaying one message from a list in a loop</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/RollingList.html#dojox-widget-rollinglist"><em>dojox.widget.RollingList</em></a></p>
+<p>A rolling list that can be tied to a data store with children</p>
+</li>
+<li><p class="first"><em>dojox.widget.SortList</em></p>
+<p>A small sortable unordered-list</p>
+</li>
+<li><p class="first"><a class="reference" href="widget/Toaster.html#dojox-widget-toaster"><em>dojox.widget.Toaster</em></a></p>
+<p>A message display system, showing warnings, errors and other messages unobtrusively</p>
+</li>
+<li><p class="first"><em>dojox.widget.Wizard</em></p>
+<p>A simple widget providing a step-by-step wizard like UI</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

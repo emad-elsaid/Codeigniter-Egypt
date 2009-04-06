@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.form.CheckBox &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dijit" href="../contents.html" />
+    <link rel="next" title="dijit.form.ComboBox" href="ComboBox.html" />
+    <link rel="prev" title="dijit.form.Button" href="Button.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="ComboBox.html" title="dijit.form.ComboBox"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="Button.html" title="dijit.form.Button"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.form.CheckBox</a><ul>
+<li><a class="reference" href="#usage">Usage</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#programmatic-example">Programmatic example</a></li>
+<li><a class="reference" href="#declarative-example">Declarative example</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#accessibility">Accessibility</a><ul>
+<li><a class="reference" href="#keyboard">Keyboard</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="Button.html"
+                                  title="previous chapter">dijit.form.Button</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="ComboBox.html"
+                                  title="next chapter">dijit.form.ComboBox</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dijit/form/CheckBox.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-form-checkbox">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dijit.form.CheckBox<a class="headerlink" href="#dijit-form-checkbox" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Becky Gibson, Doug Hays, Bill Keese, Nikolai Onken</td>
+</tr>
+<tr class="field"><th class="field-name">Developers:</th><td class="field-body">?-</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V?</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dijit-form-checkbox" id="id2" name="id2">dijit.form.CheckBox</a><ul>
+<li><a class="reference" href="#usage" id="id3" name="id3">Usage</a></li>
+<li><a class="reference" href="#examples" id="id4" name="id4">Examples</a></li>
+<li><a class="reference" href="#accessibility" id="id5" name="id5">Accessibility</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><strong>dijit.form.CheckBox</strong> is nearly the same as an HTML checkbox, but with fancy styling.</p>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id3">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<p>CheckBox widgets in dijit are very intuitive and easy to use. Markup constructs for check boxes resemble the same as HTML but dojo provides more control and styling options than a conventional check box.</p>
+<p>Conceptually, native HTML checkboxes have 2 separate values; the first being the boolean checked state, and the second being the text value that is submitted with the containing FORM element if the checked state is true. To resolve this dichotomy, the <em>value</em> of a CheckBox widget is false when unchecked, but the text value when checked. Setting the <em>value</em> to true will check the box (but leave the submittable text string unchanged) while false will uncheck it. Setting the <em>value</em> to a text string will check the box and set the value to be submitted to the indicated text string.</p>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id4">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="programmatic-example">
+<h3>Programmatic example<a class="headerlink" href="#programmatic-example" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s create a checkbox programatically, initially unchecked:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+dojo.require(&quot;dijit.form.CheckBox&quot;);
+dojo.addOnLoad(function(){
+  var checkBox = new dijit.form.CheckBox({
+    name: &quot;checkBox&quot;,
+    value: &quot;agreed&quot;,
+    checked: false,
+    onChange: function(b){ alert('onChange called with parameter = ' + b + ', and widget value = ' + checkBox.attr('value') ); }
+  }, &quot;checkBox&quot;);
+});
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;input id=&quot;checkBox&quot;&gt; &lt;label for=&quot;checkBox&quot;&gt;I agree&lt;/label&gt;</pre></div></div></div>
+<div class="section" id="declarative-example">
+<h3>Declarative example<a class="headerlink" href="#declarative-example" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s create a checkbox with HTML markup, initially checked:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dijit.form.CheckBox&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;input id=&quot;mycheck&quot; name=&quot;mycheck&quot; dojoType=&quot;dijit.form.CheckBox&quot; value=&quot;agreed&quot; checked onChange=&quot;alert('onChange called with parameter = ' + arguments[0] + ', and widget value = ' + dijit.byId('mycheck').attr('value'))&quot;&gt; &lt;label for=&quot;mycheck&quot;&gt;I agree&lt;/label&gt;</pre></div></div></div>
+</div>
+<div class="section" id="accessibility">
+<h2><a class="toc-backref" href="#id5">Accessibility<a class="headerlink" href="#accessibility" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="keyboard">
+<h3>Keyboard<a class="headerlink" href="#keyboard" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="62%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Action</strong></td>
+<td><strong>Key</strong></td>
+</tr>
+<tr><td>Navigate to a checkbox</td>
+<td>Tab</td>
+</tr>
+<tr><td>Toggle checked state</td>
+<td>Spacebar</td>
+</tr>
+</tbody>
+</table>
+<p>Checkboxes and Radio buttons are implemented using the standard input type=checkbox and type=radio elements respectively. CSS is used to overlay the unique theme over the actual input elements. Thus, the keyboard behavior of checkboxes and radio buttons mimics the behavior in the browser.</p>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

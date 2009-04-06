@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.atom.io.Connection &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../../index.html" />
+    <link rel="up" title="DojoX" href="../../contents.html" />
+    <link rel="next" title="dojox.atom.io.model" href="model.html" />
+    <link rel="prev" title="dojox.atom" href="../../atom.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../../_static/dojo/dijit/themes/dijit.css";
+@import "../../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="model.html" title="dojox.atom.io.model"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="../../atom.html" title="dojox.atom"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.atom.io.Connection</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#limitations">Limitations</a></li>
+<li><a class="reference" href="#constructor-parameters">Constructor Parameters</a></li>
+<li><a class="reference" href="#functions">Functions</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#example-1-load-an-atom-feed">Example 1: Load an ATOM Feed</a></li>
+<li><a class="reference" href="#example-2-update-an-entry-in-a-feed">Example 2: Update an entry in a Feed</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#see-also">See Also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="../../atom.html"
+                                  title="previous chapter">dojox.atom</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="model.html"
+                                  title="next chapter">dojox.atom.io.model</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../../_sources/dojox/atom/io/Connection.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-atom-io-connection">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.atom.io.Connection<a class="headerlink" href="#dojox-atom-io-connection" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Benjamin Schell</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.3</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-atom-io-connection" id="id2" name="id2">dojox.atom.io.Connection</a><ul>
+<li><a class="reference" href="#introduction" id="id3" name="id3">Introduction</a></li>
+<li><a class="reference" href="#limitations" id="id4" name="id4">Limitations</a></li>
+<li><a class="reference" href="#constructor-parameters" id="id5" name="id5">Constructor Parameters</a></li>
+<li><a class="reference" href="#functions" id="id6" name="id6">Functions</a></li>
+<li><a class="reference" href="#examples" id="id7" name="id7">Examples</a></li>
+<li><a class="reference" href="#see-also" id="id8" name="id8">See Also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The <em>dojox.atom.io.Connection</em> module is a IO class for performing APP (ATOM Publishing Protocol) styled IO actions with a server.</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>This module simplifies performing APP by handling the configuration of all the necessary xhr parameters as well as selecting the correct xhr method for performing a particular type of ATOM action, from getting a Feed (xhrGet), to publishing a new entry (xhrPut).  This class makes use of the dojox.atom.io.model class as its backing representation of the ATOM document and elements.</p>
+</div>
+<div class="section" id="limitations">
+<h2><a class="toc-backref" href="#id4">Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></a></h2>
+<p>Since this module uses the core <em>dojo.xhr</em> functions for performing server communication, it is limited by the browser same-domain policy for xhr requests.  This means that it can only issue requests back to the server and port that served the HTML page using the API.  For accessing alternate servers, you will need to use a proxy to broker the request to the target server.</p>
+</div>
+<div class="section" id="constructor-parameters">
+<h2><a class="toc-backref" href="#id5">Constructor Parameters<a class="headerlink" href="#constructor-parameters" title="Permalink to this headline">¶</a></a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="10%" />
+<col width="70%" />
+<col width="8%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Parameter</strong></td>
+<td><strong>Required</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Since</strong></td>
+</tr>
+<tr><td>sync</td>
+<td>no</td>
+<td>This parameter configures the instance of Connection to issue its requests using the xhr &#8216;sync&#8217;
+option.  If it is set to true, then all calls will block until the data is returned.  This is
+not recommended, but available as an option.  The default is false.</td>
+<td>1.3</td>
+</tr>
+<tr><td>preventCache</td>
+<td>No</td>
+<td>This parameter tells the Connection whether or not to append a query param to the URL to prevent
+the browser from caching the results of the IO call.  The default is false.</td>
+<td>1.3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="functions">
+<h2><a class="toc-backref" href="#id6">Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="45%" />
+<col width="55%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Function</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr><td>getFeed(url, callback, errorCallback, scope)</td>
+<td>Function to load a feed from a URL</td>
+</tr>
+<tr><td>getService(url, callback, errorCallback, scope)</td>
+<td>Function to load an ATOM service document from a URL</td>
+</tr>
+<tr><td>getEntry(url, callback, errorCallback, scope)</td>
+<td>Function to load an ATOM entry from an ATOM feed</td>
+</tr>
+<tr><td>getEntry(url, callback, errorCallback, scope)</td>
+<td>Function to load an ATOM entry from an ATOM feed</td>
+</tr>
+<tr><td>updateEntry(entry, callback, errorCallback,
+retrieveUpdated, xmethod, scope)</td>
+<td>Function to update an entry via APP (PUT of a modified entry</td>
+</tr>
+<tr><td>addEntry(entry, url, callback, errorCallback,
+retrieveEntry, scope)</td>
+<td>Function to add an entry to a feed via APP (POST of a new entry)</td>
+</tr>
+<tr><td>deleteEntry(entry,callback,errorCallback,xmethod,scope)</td>
+<td>Function to delete an entry in a feed via APP (DELETE of an exisiting entry</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id7">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="example-1-load-an-atom-feed">
+<h3>Example 1: Load an ATOM Feed<a class="headerlink" href="#example-1-load-an-atom-feed" title="Permalink to this headline">¶</a></h3>
+<p><em>Note that this demonstrates that the XML document is converted into a JS object structure as shown by displaying the &#8216;feed&#8217; by converting it to JSON.  The XML form is also displayed underneath it, demonstrating toString() rebuilding the XML form for submission or whatnot.</em></p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.atom.io.model&quot;);
+  dojo.require(&quot;dojox.atom.io.Connection&quot;);
+
+  //This function performs some basic dojo initialization and will do the load calling for this example
+  function initSimpleAtom () {
+    var conn = new dojox.atom.io.Connection();
+
+    conn.getFeed(&quot;/_static/dojo/dojox/atom/tests/widget/samplefeedEdit.xml&quot;,
+      function(feed) {
+       //Emit both the XML (As reconstructed from the Feed object and as a JSON form.
+       var xml = dojo.byId(&quot;simpleAtomXml&quot;);
+       xml.innerHTML = &quot;&quot;;
+       xml.appendChild(dojo.doc.createTextNode(feed.toString()));
+
+       var json = dojo.byId(&quot;simpleAtomJson&quot;);
+       json.innerHTML = &quot;&quot;;
+       json.appendChild(dojo.doc.createTextNode(dojo.toJson(feed, true)));
+      },
+      function(err) {
+        console.debug(err);
+      }
+    );
+  }
+  //Set the init function to run when dojo loading and page parsing has completed.
+  dojo.addOnLoad(initSimpleAtom);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div style=&quot;height: 400px; overflow: auto;&quot;&gt;
+  &lt;b&gt;As JSON (To show that it is creating a JS structure)&lt;/b&gt;
+  &lt;pre id=&quot;simpleAtomJson&quot;&gt;
+  &lt;/pre&gt;
+  &lt;br&gt;
+  &lt;br&gt;
+  &lt;b&gt;As XML (Showing toString() returning the XML version)&lt;/b&gt;
+  &lt;pre id=&quot;simpleAtomXml&quot;&gt;
+  &lt;/pre&gt;
+&lt;/span&gt;</pre></div></div></div>
+<div class="section" id="example-2-update-an-entry-in-a-feed">
+<h3>Example 2: Update an entry in a Feed<a class="headerlink" href="#example-2-update-an-entry-in-a-feed" title="Permalink to this headline">¶</a></h3>
+<p><em>Note that to see the PUT, you can use firebug.  But to see the PUT contents, you will need a debugging proxy like Charles</em></p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.atom.io.model&quot;);
+  dojo.require(&quot;dojox.atom.io.Connection&quot;);
+
+  //This function performs some basic dojo initialization and will do the load calling for this example
+  function initUpdateAtom () {
+    var conn = new dojox.atom.io.Connection();
+
+    conn.getFeed(&quot;/_static/dojo/dojox/atom/tests/widget/samplefeedEdit.xml&quot;,
+      function(feed) {
+       //Emit both the XML (As reconstructed from the Feed object and as a JSON form.
+       var xml = dojo.byId(&quot;simplePristineAtomXml&quot;);
+       xml.innerHTML = &quot;&quot;;
+       xml.appendChild(dojo.doc.createTextNode(feed.toString()));
+
+       //Now get an entry for mod.
+       var entry = feed.getFirstEntry();
+
+       //Make this updateable by pointing it to the app test pho script so it can properly post.
+       entry.setEditHref(&quot;/_static/dojo/dojox/atom/tests/io/app.php&quot;);
+       entry.updated = new Date();
+       entry.setTitle('&lt;h1&gt;New Editable Title!&lt;/h1&gt;', 'xhtml');
+       conn.updateEntry(entry, function() {
+           var xml = dojo.byId(&quot;simpleModifiedAtomXml&quot;);
+           xml.innerHTML = &quot;&quot;;
+           xml.appendChild(dojo.doc.createTextNode(feed.toString()));
+         },
+         function(err){
+           console.debug(err);
+         }
+       );
+      },
+      function(err) {
+        console.debug(err);
+      }
+    );
+  }
+  //Set the init function to run when dojo loading and page parsing has completed.
+  dojo.addOnLoad(initUpdateAtom );
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div style=&quot;height: 400px; overflow: auto;&quot;&gt;
+  &lt;b&gt;XML of Feed (before change)&lt;/b&gt;
+  &lt;pre id=&quot;simplePristineAtomXml&quot;&gt;
+  &lt;/pre&gt;
+  &lt;br&gt;
+  &lt;br&gt;
+  &lt;b&gt;As XML (After modification)&lt;/b&gt;
+  &lt;pre id=&quot;simpleModifiedAtomXml&quot;&gt;
+  &lt;/pre&gt;
+&lt;/span&gt;</pre></div></div><p><strong>Note:</strong> You can see more example usage in the tests file at: dojox/atom/tests/io/module.js</p>
+</div>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id8">See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li><a class="reference" href="model.html#dojox-atom-io-model"><em>dojox.atom.io.model</em></a>: The backing model for the Feed used by this connection API.</li>
+<li><a class="reference" href="../../data/AppStore.html#dojox-data-appstore"><em>dojox.data.AppStore</em></a>: A datastore built ontop of this API.  Provides full APP support.</li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

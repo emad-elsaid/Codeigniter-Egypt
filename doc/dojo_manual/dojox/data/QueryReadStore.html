@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.data.QueryReadStore &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.data.QueryReadStore" href="QueryReadStore/example.html" />
+    <link rel="prev" title="dojox.data.PersevereStore" href="PersevereStore.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="QueryReadStore/example.html" title="dojox.data.QueryReadStore"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="PersevereStore.html" title="dojox.data.PersevereStore"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.data.QueryReadStore</a><ul>
+<li><a class="reference" href="#supported-apis">Supported APIs</a></li>
+<li><a class="reference" href="#how-it-works">How it works</a><ul>
+<li><a class="reference" href="#query-translation">Query Translation</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#server-side-implementation">Server Side implementation</a></li>
+<li><a class="reference" href="#example-client-implementation">Example Client Implementation</a></li>
+<li><a class="reference" href="#functional-examples">Functional Examples</a><ul>
+<li><a class="reference" href="#connecting-queryreadstore-to-dijit-form-combobox">Connecting QueryReadStore to dijit.form.ComboBox</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="PersevereStore.html"
+                                  title="previous chapter">dojox.data.PersevereStore</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="QueryReadStore/example.html"
+                                  title="next chapter">dojox.data.QueryReadStore</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/data/QueryReadStore.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-data-queryreadstore">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.data.QueryReadStore<a class="headerlink" href="#dojox-data-queryreadstore" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed, Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Wolfram Kriesing</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.0</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-data-queryreadstore" id="id2" name="id2">dojox.data.QueryReadStore</a><ul>
+<li><a class="reference" href="#supported-apis" id="id3" name="id3">Supported APIs</a></li>
+<li><a class="reference" href="#how-it-works" id="id4" name="id4">How it works</a></li>
+<li><a class="reference" href="#server-side-implementation" id="id5" name="id5">Server Side implementation</a></li>
+<li><a class="reference" href="#example-client-implementation" id="id6" name="id6">Example Client Implementation</a></li>
+<li><a class="reference" href="#functional-examples" id="id7" name="id7">Functional Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>QueryReadStore is very similar to ItemReadStore. They both use JSON as their exchange format. The difference is in the way they query data. ItemReadStore makes one fetch from the server, and handles all sorting and filtering in the client. That&#8217;s fine for hundreds of records, even thousands. But for hundreds of thousands of records or slow Internet connections, that&#8217;s less feasible.</p>
+<div class="section" id="supported-apis">
+<h2><a class="toc-backref" href="#id3">Supported APIs<a class="headerlink" href="#supported-apis" title="Permalink to this headline">¶</a></a></h2>
+<p>The following dojo.data APIs are implemented by QueryReadStore</p>
+<ul class="simple">
+<li><a class="reference" href="../../dojo/data/api/Read.html#dojo-data-api-read"><em>dojo.data.api.Read</em></a></li>
+<li><a class="reference" href="../../dojo/data/api/Identity.html#dojo-data-api-identity"><em>dojo.data.api.Identity</em></a> -</li>
+</ul>
+</div>
+<div class="section" id="how-it-works">
+<h2><a class="toc-backref" href="#id4">How it works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></a></h2>
+<p>QueryReadStore makes a request to the server for each sorting or query. This makes it ideal for large datasets with small windows of data, as in dijit.FilteringSelect.</p>
+<div class="section" id="query-translation">
+<h3>Query Translation<a class="headerlink" href="#query-translation" title="Permalink to this headline">¶</a></h3>
+<p>A dojo.data request follows a specific JSON format. As an example, suppose we have a FilteringSelect which looks up states. When the user presses &#8220;A&#8221;, the dojo.data request is:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="n">query</span><span class="p">:</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="s">&quot;A*&quot;</span><span class="p">},</span>
+    <span class="n">queryOptions</span><span class="p">:</span> <span class="p">{</span><span class="n">ignoreCase</span><span class="p">:</span> <span class="n">true</span><span class="p">},</span>
+    <span class="n">sort</span><span class="p">:</span> <span class="p">[{</span><span class="n">attribute</span><span class="p">:</span><span class="s">&quot;name&quot;</span><span class="p">,</span> <span class="n">descending</span><span class="p">:</span><span class="n">false</span><span class="p">}],</span>
+    <span class="n">start</span><span class="p">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="n">count</span><span class="p">:</span> <span class="mf">10</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now we want to hand this off to the server. Odds are, your server doesn't recognize incoming JSON, and asking it to do so is too restrictive. Instead, most server queries follow a REST pattern like this:</p>
+<div class="highlight-python"><pre>states.php?q=A*</pre>
+</div>
+<p>Fortunately, it's easy to translate between the two and you can quickly customize the translation by extending the class. You simply subclass QueryReadStore like this:</p>
+<div class="highlight-python"><pre>dojo.provide("custom.ComboBoxReadStore");
+
+dojo.require("dojox.data.QueryReadStore");
+
+dojo.declare("custom.ComboBoxReadStore", dojox.data.QueryReadStore, {
+  fetch:function(request) {
+    request.serverQuery = {q:request.query.name};
+    // Call superclasses' fetch
+    return this.inherited("fetch", arguments);
+  }
+});</pre>
+</div>
+<p>We can place this file into a folder &quot;custom&quot; at the same level as the dojo, dijit and dojox directories of the distribution. (See Creating Your Own Modules for a discussion and alternatives.</p>
+</div>
+</div>
+<div class="section" id="server-side-implementation">
+<h2><a class="toc-backref" href="#id5">Server Side implementation<a class="headerlink" href="#server-side-implementation" title="Permalink to this headline">¶</a></a></h2>
+<p>The server side is where all the heavy work of QueryReadStore occurs. Specifically all query matching and sorting should happen here and only the items that match the parameters should be returned to the server. To help you in development of your own remote service, dojo includes a demonstration PHP file that implements a basic version of the QueryReadStore server component. You can find this basic implementation at: <em>dojox/data/tests/stores/QueryReadStore.php</em>. The server portion hands over a portion of the states that fits the query.</p>
+<p>Your implementation could be similar to the sample php, or it could translate your queries to run against a database via SQL. That decision is entirely up to you. Another good example store to help understand how to develop server backed datastores is <a class="reference" href="FileStore.html#dojox-data-filestore"><em>dojox.data/FileStore</em></a></p>
+</div>
+<div class="section" id="example-client-implementation">
+<h2><a class="toc-backref" href="#id6">Example Client Implementation<a class="headerlink" href="#example-client-implementation" title="Permalink to this headline">¶</a></a></h2>
+<p>For a fully functional example extension of QueryReadStore, please follow this <a class="reference" href="QueryReadStore/example.html#dojox-data-queryreadstore-example"><em>link</em></a></p>
+</div>
+<div class="section" id="functional-examples">
+<h2><a class="toc-backref" href="#id7">Functional Examples<a class="headerlink" href="#functional-examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="connecting-queryreadstore-to-dijit-form-combobox">
+<h3>Connecting QueryReadStore to dijit.form.ComboBox<a class="headerlink" href="#connecting-queryreadstore-to-dijit-form-combobox" title="Permalink to this headline">¶</a></h3>
+<p><strong>Note:</strong> You can watch the xhr requests to the service through firebug.</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.QueryReadStore&quot;);
+  dojo.require(&quot;dijit.form.ComboBox&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;b&gt;Combo lookup of states through QueryReadStore&lt;/b&gt;&lt;br&gt;
+&lt;div dojoType=&quot;dojox.data.QueryReadStore&quot; url=&quot;/_static/dojo/dojox/data/tests/stores/QueryReadStore.php&quot; jsId=&quot;comboStore&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.ComboBox&quot; store=&quot;comboStore&quot; searchAttr=&quot;name&quot; pageSize=&quot;100&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

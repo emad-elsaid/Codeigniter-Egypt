@@ -1,0 +1,475 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojo.io.frame &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dojo" href="../contents.html" />
+    <link rel="next" title="dojox.io.script" href="script.html" />
+    <link rel="prev" title="Dojo" href="../index.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="script.html" title="dojox.io.script"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="../index.html" title="Dojo"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dojo</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojo.io.frame</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#usage">Usage</a><ul>
+<li><a class="reference" href="#dojo-io-iframe-supported-object-properties">dojo.io.iframe supported object properties</a></li>
+<li><a class="reference" href="#additional-information">Additional Information</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#gather-all-parameters-from-a-form">Gather all parameters from a form</a></li>
+<li><a class="reference" href="#gather-all-parameters-from-a-form-over-riding-some">Gather all parameters from a form, over-riding some</a></li>
+<li><a class="reference" href="#pass-in-parameters-manually">Pass in parameters manually</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#see-also">See Also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="../index.html"
+                                  title="previous chapter">Dojo</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="script.html"
+                                  title="next chapter">dojox.io.script</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojo/io/iframe.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo-io-frame">
+<span id="dojo-io-iframe"></span><h1><a class="toc-backref" href="#id1">dojo.io.frame<a class="headerlink" href="#dojo-io-frame" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed, Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V0.9</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo-io-frame" id="id1" name="id1">dojo.io.frame</a><ul>
+<li><a class="reference" href="#introduction" id="id2" name="id2">Introduction</a></li>
+<li><a class="reference" href="#usage" id="id3" name="id3">Usage</a></li>
+<li><a class="reference" href="#examples" id="id4" name="id4">Examples</a></li>
+<li><a class="reference" href="#see-also" id="id5" name="id5">See Also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>dojo.io.frame sends an AJAX I/O call using an IFrame (for instance, to upload files).</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id2">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>The iframe IO functions are intended to handle complex IO operations that cannot be done through a basic dojo.xhr*() call.  These situations are fairly common and include the following:</p>
+<ul class="simple">
+<li>Calling a service on a server other than the one that originated the calling page (cross-domain request).</li>
+<li>Uploading files from a form (File Input controls).  The normal XHR mechanism cannot access file data referenced by file selection tags as a security measure.  An iframe, however, can, so by proxying those calls through an iframe make it possible to still do file uploads in an asynchronous manner.</li>
+</ul>
+<p>It also retains much of the same operating semantics as dojo.xhrGet with regards to how you get the response from the service.  All results are response data is returned through callbacks.  There is a caveat to this; it requires the server to send the responese back in a very specific format, please refer to the <a class="reference" href="#dojo-io-iframe"><em>Additional Information</em></a> section.</p>
+</div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id3">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<p>Usage is similar to <a class="reference" href="../xhrGet.html#dojo-xhrget"><em>dojo.xhrGet</em></a> and <a class="reference" href="../xhrPost.html#dojo-xhrpost"><em>dojo.xhrPost</em></a>.  Please see below for information on specific properties that are accepted by the dojo.io.iframe functions and what they control.</p>
+<div class="section" id="dojo-io-iframe-supported-object-properties">
+<h3>dojo.io.iframe supported object properties<a class="headerlink" href="#dojo-io-iframe-supported-object-properties" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>url</strong></td>
+<td>The URL to make the iframe request to.  This URL can refer to servers other than the one that originated the calling page.</td>
+</tr>
+<tr><td><strong>handleAs</strong></td>
+<td><p class="first">This parameter specifies how to handle the data returned from the server.  It usually takes values of &#8216;text&#8217;, &#8216;xml&#8217;, or
+&#8216;json&#8217;.  What those values do is instruct it to try and hand the data to the asynchronous callback functions in that format.
+Naturally if you specify a format that doesn&#8217;t match what the server sends you will likely get an error.</p>
+<p>The currently supported options are:</p>
+<ul class="simple">
+<li>text (default)</li>
+<li>json</li>
+<li>xml</li>
+<li>html</li>
+<li>javascript</li>
+</ul>
+<p class="last"><strong>This parameter is optional</strong></p>
+</td>
+</tr>
+<tr><td><strong>method</strong></td>
+<td><p class="first">The HTTP method to use when sending the iframe IO request.  It can be either <strong>GET</strong> or <strong>POST</strong> with the value of POST as
+the default.</p>
+<p class="last"><strong>This parameter is optional</strong></p>
+</td>
+</tr>
+<tr><td><strong>form</strong></td>
+<td><p class="first">For posting FORM data, you can provide a either the DOM node of your form or the ID of the form.  The dojo.io.iframe call
+will convert this into proper POST format (query params or form content) and send it via the iframe</p>
+<p class="last"><strong>This parameter is optional</strong></p>
+</td>
+</tr>
+<tr><td><strong>content</strong></td>
+<td><p class="first">A JavaScript object of name/string value pairs.  These items are normally converted to query parameters and passed on as
+part of the url.  The caveat to this is if you also specify a &#8216;form&#8217; argument.  If a form  argument was also provided, then
+then the parameters of &#8216;content&#8217; are merged into the values from the form and the whole thing is send as a multi-part form
+post.</p>
+<p class="last"><strong>This parameter is optional</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="additional-information">
+<h3>Additional Information<a class="headerlink" href="#additional-information" title="Permalink to this headline">¶</a></h3>
+<p>dojo.io.iframe calls cannot be made synchronous; therefore trying to set the &#8216;sync&#8217; parameter (as shown in dojo.xhrGet()) will do nothing.</p>
+<p><strong>IMPORTANT:</strong> For all values EXCEPT html, The server response should be an HTML file with a textarea element. The response data should be inside the textarea element. Using an HTML document the only reliable, cross-browser way this transport can know when the response has loaded. For the text/html mimetype, just return a normal HTML document. NOTE: text/xml or any other XML type is NOT supported by this transport.  In other words, your services for XML, JSON, and Text formats should return the data wrapped as the following:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">textarea</span><span class="o">&gt;</span>
+      <span class="nx">payload</span>
+    <span class="o">&lt;/</span><span class="nx">textarea</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="nx">body</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="nx">html</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Other than the reason noted above about reliability (getting proper events indicating data retrieved), the choice of using textarea was because a textarea provides a fixed container that dojo can locate in the iframe DOM and extract the contents from.  And since it is a text area, it can contain JSON, XML, Text, etc.  Once the data is obtained, the usual data handlers from dojo process it and pass it back through the callbacks specified by the user.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id4">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="gather-all-parameters-from-a-form">
+<h3>Gather all parameters from a form<a class="headerlink" href="#gather-all-parameters-from-a-form" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></td><td class="code"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+  <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dojo.io.iframe&quot;</span><span class="p">);</span>
+
+  <span class="c">// gather all parameters from a form:</span>
+  <span class="nx">dojo</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+      <span class="c">// The form node, which contains the</span>
+      <span class="c">// data. We also pull the URL and METHOD from it:</span>
+      <span class="nx">form</span><span class="o">:</span> <span class="s2">&quot;myForm&quot;</span><span class="o">,</span>
+
+      <span class="c">// The used data format:</span>
+      <span class="nx">handleAs</span><span class="o">:</span> <span class="s2">&quot;json&quot;</span><span class="o">,</span>
+
+      <span class="c">// Callback on successful call:</span>
+      <span class="nx">load</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">response</span><span class="o">,</span> <span class="nx">ioArgs</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c">// do something</span>
+          <span class="c">// ...</span>
+
+          <span class="c">// return the response for succeeding callbacks</span>
+          <span class="k">return</span> <span class="nx">response</span><span class="o">;</span>
+      <span class="p">}</span>
+  <span class="p">});</span>
+<span class="o">&lt;/</span><span class="nx">script</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="gather-all-parameters-from-a-form-over-riding-some">
+<h3>Gather all parameters from a form, over-riding some<a class="headerlink" href="#gather-all-parameters-from-a-form-over-riding-some" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36</pre></td><td class="code"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+  <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dojo.io.iframe&quot;</span><span class="p">);</span>
+
+  <span class="c">// gather all parameters from a form:</span>
+  <span class="nx">dojo</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+      <span class="c">// The target URL on your webserver:</span>
+      <span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;iframeHandler.php&quot;</span><span class="o">,</span>
+
+      <span class="c">// The HTTP method to use, form specified POST:</span>
+      <span class="nx">method</span><span class="o">:</span> <span class="s2">&quot;GET&quot;</span><span class="o">,</span>
+
+      <span class="c">// The form node, which contains the</span>
+      <span class="c">// to be transfered form elements:</span>
+      <span class="nx">form</span><span class="o">:</span> <span class="s2">&quot;myForm&quot;</span><span class="o">,</span>
+
+      <span class="c">// The used data format:</span>
+      <span class="nx">handleAs</span><span class="o">:</span> <span class="s2">&quot;json&quot;</span><span class="o">,</span>
+
+      <span class="c">// Callback on successful call:</span>
+      <span class="nx">load</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">response</span><span class="o">,</span> <span class="nx">ioArgs</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c">// do something</span>
+          <span class="c">// ...</span>
+
+          <span class="c">// return the response for succeeding callbacks</span>
+          <span class="k">return</span> <span class="nx">response</span><span class="o">;</span>
+      <span class="p">}</span><span class="o">,</span>
+
+      <span class="c">// Callback on errors:</span>
+      <span class="nx">error</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">response</span><span class="o">,</span> <span class="nx">ioArgs</span><span class="p">){</span>
+          <span class="nx">debug</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+
+          <span class="c">// return the response for succeeding callbacks</span>
+          <span class="k">return</span> <span class="nx">response</span><span class="o">;</span>
+      <span class="p">}</span>
+  <span class="p">});</span>
+<span class="o">&lt;/</span><span class="nx">script</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="pass-in-parameters-manually">
+<h3>Pass in parameters manually<a class="headerlink" href="#pass-in-parameters-manually" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></td><td class="code"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+  <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dojo.io.iframe&quot;</span><span class="p">);</span>
+
+  <span class="c">// pass in all of the parameters manually:</span>
+  <span class="nx">dojo</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">iframe</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+      <span class="c">// The target URL on your webserver:</span>
+      <span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;iframeHandler.php&quot;</span><span class="o">,</span>
+
+      <span class="c">// The HTTP method to use:</span>
+      <span class="nx">method</span><span class="o">:</span> <span class="s2">&quot;GET&quot;</span><span class="o">,</span>
+
+      <span class="c">// the content to submit:</span>
+      <span class="nx">content</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">param1</span><span class="o">:</span> <span class="s2">&quot;la dee dah&quot;</span><span class="o">,</span>
+          <span class="nx">param2</span><span class="o">:</span> <span class="s2">&quot;my poor electrons!&quot;</span>
+      <span class="p">}</span><span class="o">,</span>
+
+      <span class="c">// The used data format:</span>
+      <span class="nx">handleAs</span><span class="o">:</span> <span class="s2">&quot;json&quot;</span><span class="o">,</span>
+
+      <span class="c">// Callback on successful call:</span>
+      <span class="nx">load</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">response</span><span class="o">,</span> <span class="nx">ioArgs</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c">// do something</span>
+          <span class="c">// ...</span>
+
+          <span class="c">// return the response for succeeding callbacks</span>
+          <span class="k">return</span> <span class="nx">response</span><span class="o">;</span>
+      <span class="p">}</span><span class="o">,</span>
+
+      <span class="c">// Callback on errors:</span>
+      <span class="nx">error</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">response</span><span class="o">,</span> <span class="nx">ioArgs</span><span class="p">){</span>
+          <span class="nx">debug</span><span class="p">.</span><span class="nx">dir</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+
+          <span class="c">// return the response for succeeding callbacks</span>
+          <span class="k">return</span> <span class="nx">response</span><span class="o">;</span>
+      <span class="p">}</span>
+  <span class="p">});</span>
+<span class="o">&lt;/</span><span class="nx">script</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id5">See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<p>A common use of dojo.io.iframe is for uploading files in an Ajax-like manner. There are prefabricated widgets to do this as well, some using iframe transports, some using flash 9+</p>
+<ul class="simple">
+<li><a class="reference" href="../../dojox/form/FileUploader.html#dojox-form-fileuploader"><em>File Uploader</em></a></li>
+<li><a class="reference" href="../../dojox/form/FileInput.html#dojox-form-fileinput"><em>File Input</em></a></li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

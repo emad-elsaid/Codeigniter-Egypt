@@ -1,0 +1,609 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.data.AppStore &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.data.AtomReadStore" href="AtomReadStore.html" />
+    <link rel="prev" title="dojox.data.AndOrWriteStore" href="AndOrWriteStore.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="AtomReadStore.html" title="dojox.data.AtomReadStore"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="AndOrWriteStore.html" title="dojox.data.AndOrWriteStore"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.data.AppStore</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#limitations">Limitations</a></li>
+<li><a class="reference" href="#supported-apis">Supported APIs</a></li>
+<li><a class="reference" href="#constructor-parameters">Constructor Parameters</a></li>
+<li><a class="reference" href="#input-data-format">Input Data Format</a></li>
+<li><a class="reference" href="#usage">Usage</a><ul>
+<li><a class="reference" href="#attribute-list">Attribute List</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#query-syntax">Query Syntax</a></li>
+<li><a class="reference" href="#query-examples">Query Examples</a><ul>
+<li><a class="reference" href="#match-items-with-multi-character-wildcard">Match items with multi-character wildcard</a></li>
+<li><a class="reference" href="#match-items-with-single-character-wildcard">Match items with single character wildcard</a></li>
+<li><a class="reference" href="#match-items-on-multiple-attributes">Match items on multiple attributes</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#example-1-programmatic-instantiation-and-querying-of-atom-feeds">Example 1: Programmatic instantiation and querying of ATOM Feeds.</a></li>
+<li><a class="reference" href="#example-2-programmatic-instantiation-and-querying-of-atom-feed-entry-titles">Example 2: Programmatic instantiation and querying of ATOM Feed Entry titles.</a></li>
+<li><a class="reference" href="#example-3-connecting-appstore-to-datagrid">Example 3: Connecting AppStore to DataGrid</a></li>
+<li><a class="reference" href="#example-4-write-example-changing-title-and-showing-in-datagrid">Example 4: Write example: Changing Title and showing in DataGrid</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="AndOrWriteStore.html"
+                                  title="previous chapter">dojox.data.AndOrWriteStore</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="AtomReadStore.html"
+                                  title="next chapter">dojox.data.AtomReadStore</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/data/AppStore.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-data-appstore">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.data.AppStore<a class="headerlink" href="#dojox-data-appstore" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Benjamin Schell</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.3</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-data-appstore" id="id2" name="id2">dojox.data.AppStore</a><ul>
+<li><a class="reference" href="#introduction" id="id3" name="id3">Introduction</a></li>
+<li><a class="reference" href="#limitations" id="id4" name="id4">Limitations</a></li>
+<li><a class="reference" href="#supported-apis" id="id5" name="id5">Supported APIs</a></li>
+<li><a class="reference" href="#constructor-parameters" id="id6" name="id6">Constructor Parameters</a></li>
+<li><a class="reference" href="#input-data-format" id="id7" name="id7">Input Data Format</a></li>
+<li><a class="reference" href="#usage" id="id8" name="id8">Usage</a></li>
+<li><a class="reference" href="#query-syntax" id="id9" name="id9">Query Syntax</a></li>
+<li><a class="reference" href="#query-examples" id="id10" name="id10">Query Examples</a></li>
+<li><a class="reference" href="#examples" id="id11" name="id11">Examples</a></li>
+<li><a class="reference" href="#see-also" id="id12" name="id12">See also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>A store implementing an Atom store with complete ATOM Publishing Protocol support. Allows reading and writing of ATOM formatted feeds.</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>The dojox.data.AppStore is an data store implementation of the ATOM Publishing Protocol (APP).  It makes use of the dojox.atom subproject for handling ATOM feeds and entries.</p>
+</div>
+<div class="section" id="limitations">
+<h2><a class="toc-backref" href="#id4">Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></a></h2>
+<p>The AppStore makes use of dojo.xhr to get and modify feeds and entries.  Because of this, the AppStore is limited by the browser same domain policy, where xhr can only open connections back to the server that originated the page.  If you require accessing ATOM feeds from external services, you will need to make use of a proxy.</p>
+</div>
+<div class="section" id="supported-apis">
+<h2><a class="toc-backref" href="#id5">Supported APIs<a class="headerlink" href="#supported-apis" title="Permalink to this headline">¶</a></a></h2>
+<p>The following dojo.data APIs are implemented by AppStore:</p>
+<ul class="simple">
+<li><a class="reference" href="../../dojo/data/api/Read.html#dojo-data-api-read"><em>dojo.data.api.Read</em></a></li>
+<li><a class="reference" href="../../dojo/data/api/Write.html#dojo-data-api-write"><em>dojo.data.api.Write</em></a></li>
+<li><a class="reference" href="../../dojo/data/api/Identity.html#dojo-data-api-identity"><em>dojo.data.api.Identity</em></a></li>
+</ul>
+</div>
+<div class="section" id="constructor-parameters">
+<h2><a class="toc-backref" href="#id6">Constructor Parameters<a class="headerlink" href="#constructor-parameters" title="Permalink to this headline">¶</a></a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="10%" />
+<col width="70%" />
+<col width="8%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Parameter</strong></td>
+<td><strong>Required</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Since</strong></td>
+</tr>
+<tr><td>url</td>
+<td>yes</td>
+<td>This parameter specifies what URL from which to load the ATOM feed document, and is also the
+base url used for publishing new feed entries if the feed supports it.</td>
+<td>1.3</td>
+</tr>
+<tr><td>urlPreventCache</td>
+<td>No</td>
+<td>This parameter tells the AppStore whether or not to append a query param to the URL to prevent
+the browser from caching the feed url.</td>
+<td>1.3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="input-data-format">
+<h2><a class="toc-backref" href="#id7">Input Data Format<a class="headerlink" href="#input-data-format" title="Permalink to this headline">¶</a></a></h2>
+<p>The input data format is the standard <a class="reference" href="http://en.wikipedia.org/wiki/Atom_(standard)">ATOM</a> feed format.  An example of an ATOM feed is below:</p>
+<div class="highlight-javascript"><pre> &lt;?xml version='1.0' encoding='utf-8'?&gt;
+ &lt;feed xmlns='http://www.w3.org/2005/Atom' xml:lang='en-US'&gt;
+       &lt;title&gt;Example.com&lt;/title&gt;
+       &lt;link rel="alternate" type="text/html" href="http://example.com/" hreflang="en" title="Example.com" /&gt;
+       &lt;subtitle type='text'&gt;Example.com's Sample Feed&lt;/subtitle&gt;
+       &lt;rights&gt;Copyright Example.com&lt;/rights&gt;
+       &lt;id&gt;http://example.com/samplefeed.xml&lt;/id&gt;
+       &lt;updated&gt;2007-08-07T20:00:00-05:00&lt;/updated&gt;
+       &lt;link rel="self" type="application/atom+xml" href="http://www.example.com/samplefeed.xml"/&gt;
+       &lt;entry&gt;
+               &lt;title&gt;Test Entry #1&lt;/title&gt;
+               &lt;id&gt;http://example.com/samplefeed.xml/entry/1&lt;/id&gt;
+               &lt;link rel='alternate' href='http://example.com/1.html'/&gt;
+               &lt;summary type='html'&gt;
+                       &lt;p&gt;This is a sample entry in our Atom feed.  It is simply a large paragraph in the summary.&lt;p&gt;
+                       &lt;p&gt;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras cursus. Aliquam eget metus sed leo lacinia
+                       rutrum. Nunc lacus lacus, viverra placerat, laoreet nec, placerat vel, eros. Donec nec magna id sem commodo rutrum.
+                       Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Aenean pede. Quisque vel
+                       leo. In vitae nisi. Curabitur sodales congue nibh. Maecenas ultrices ante nec ipsum. Aenean quis nibh. Aenean semper,
+                       quam vitae ullamcorper euismod, arcu leo tincidunt nunc, vel pulvinar turpis dolor a elit. Praesent nonummy nunc
+                       faucibus nibh. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus laoreet,
+                       ante auctor condimentum venenatis, magna quam varius elit, at feugiat dolor metus id quam. Etiam enim.&lt;p&gt;
+               &lt;/summary&gt;
+               &lt;author&gt;
+                       &lt;name&gt;Test User&lt;/name&gt;
+                       &lt;email&gt;test@example.com&lt;/email&gt;
+               &lt;/author&gt;
+               &lt;updated&gt;2007-08-07T04:00:00-05:00&lt;/updated&gt;
+       &lt;/entry&gt;
+       &lt;entry&gt;
+               &lt;title&gt;Test Entry #2&lt;/title&gt;
+               &lt;id&gt;http://example.com/samplefeed.xml/entry/2&lt;/id&gt;
+               &lt;link rel='alternate' href='http://example.com/2.html'/&gt;
+               &lt;summary type='text'&gt;
+                       This is a sample entry in our Atom feed.  It is simply a large paragraph in the summary. This is straight text.
+                       Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras cursus. Aliquam eget metus sed leo lacinia
+                       rutrum. Nunc lacus lacus, viverra placerat, laoreet nec, placerat vel, eros. Donec nec magna id sem commodo rutrum.
+                       Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Aenean pede. Quisque vel
+                       leo. In vitae nisi. Curabitur sodales congue nibh. Maecenas ultrices ante nec ipsum. Aenean quis nibh. Aenean semper,
+                       quam vitae ullamcorper euismod, arcu leo tincidunt nunc, vel pulvinar turpis dolor a elit. Praesent nonummy nunc
+                       faucibus nibh. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus laoreet,
+                       ante auctor condimentum venenatis, magna quam varius elit, at feugiat dolor metus id quam. Etiam enim.
+               &lt;/summary&gt;
+               &lt;author&gt;
+                       &lt;email&gt;test@example.com&lt;/email&gt;
+               &lt;/author&gt;
+               &lt;updated&gt;2007-08-07T06:00:00-05:00&lt;/updated&gt;
+       &lt;/entry&gt;
+ &lt;/feed&gt;</pre>
+</div>
+</div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id8">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<p>The AppStore conforms to the dojo.data APIs and all example usage scenarios for them apply here as well.  Please refer to the <a class="reference" href="../../dojo/data/api.html#dojo-data-api"><em>dojo.data API</em></a> page for more details.  In general, since it conforms to the dojo.data API, all data-bound widgets in dijit can connect to, and make us of, the ATOM data.  Please refer to the examples section for more usage details.</p>
+<div class="section" id="attribute-list">
+<h3>Attribute List<a class="headerlink" href="#attribute-list" title="Permalink to this headline">¶</a></h3>
+<p>An ATOM entry is comprised of attributes that define the details of the entry, such as its title, date updated, summary information, content, and so on.  Below is the table list defining what the common attributes are valid to use with the data store getValue(s) and setValue(s) functions of the data store APIs for data access.   The list is not complete, but the attributes not listed are not commonly used by feed consumers.  Certain properties return complex objects instead of strings, these are identified in the type field.  For more specific information on the structure of that complex property, see the table below the attribute list.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="73%" />
+<col width="16%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Attribute</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Type</strong></td>
+</tr>
+<tr><td>title</td>
+<td>The title of the entry.</td>
+<td>string</td>
+</tr>
+<tr><td>subtitle</td>
+<td>The sub-title of the entry.</td>
+<td>string</td>
+</tr>
+<tr><td>summary</td>
+<td>The summary of the entry.</td>
+<td>string</td>
+</tr>
+<tr><td>content</td>
+<td>The entry content.</td>
+<td>string</td>
+</tr>
+<tr><td>category</td>
+<td>The category this entry is cataloged under.  'Entertainment, News, Sports', etc.</td>
+<td>string</td>
+</tr>
+<tr><td>author</td>
+<td>The person who published the entry (multi valued field).</td>
+<td>object/object array</td>
+</tr>
+<tr><td>contributor</td>
+<td>Contributors to the entry content. (multi valued field).</td>
+<td>object/object array</td>
+</tr>
+<tr><td>link</td>
+<td>The direct link to the ATOM entry.</td>
+<td>object/object array</td>
+</tr>
+<tr><td>rights</td>
+<td>The copyright statement of the entry.</td>
+<td>string</td>
+</tr>
+<tr><td>id</td>
+<td>The unique ID for this entry in the feed.</td>
+<td>string</td>
+</tr>
+<tr><td>updated</td>
+<td>The last date the entry was updated.</td>
+<td>string</td>
+</tr>
+<tr><td>published</td>
+<td>The date the entry was published.</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Complex Properties</strong></p>
+<p>Complex properties are those that require more than a simple string to represent their values.  The current items in the ATOM feed entry that are represented this way are 'Author', 'Contributor' and 'Link'.  All of these have either sub-tags or attributes that are important information.  These attributes are modeled as their own classes in <a class="reference" href="../atom/io/model.html#dojox-atom-io-model"><em>dojox.atom.io.model.js</em></a>.  The information about each is below:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="60%" />
+<col width="29%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Attribute</strong></td>
+<td><strong>Implementing Class</strong></td>
+<td><strong>Properties</strong></td>
+</tr>
+<tr><td>author</td>
+<td>dojox.atom.io.model.Person</td>
+<td><p class="first">name: The name of the person</p>
+<p>email: The email address of the person</p>
+<p class="last">uri:  The person's web address, if any</p>
+</td>
+</tr>
+<tr><td>contributor</td>
+<td>dojox.atom.io.model.Person</td>
+<td><p class="first">name: The name of the person</p>
+<p>email: The email address of the person</p>
+<p class="last">uri:  The person's web address, if any</p>
+</td>
+</tr>
+<tr><td>link</td>
+<td>dojox.atom.io.model.Link</td>
+<td><p class="first">href: The web address the link goes to</p>
+<p>hrefLang: The language the href goes to</p>
+<p>title: The title of the link</p>
+<p>type: The type of the link</p>
+<p class="last">rel: How the link relates to the entry</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="query-syntax">
+<h2><a class="toc-backref" href="#id9">Query Syntax<a class="headerlink" href="#query-syntax" title="Permalink to this headline">¶</a></a></h2>
+<p>The fetch method query syntax for AppStore is the same as <a class="reference" href="../../dojo/data/ItemFileReadStore.html#dojo-data-itemfilereadstore"><em>ItemFilereadStore</em></a>. It allows a list of attributes to match against in an AND fashion. For example, a query object to locate all items with attribute foo that has value bar and attribute bit that has value bite, would look like</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">title</span><span class="o">:</span><span class="s2">&quot;bar&quot;</span><span class="o">,</span> <span class="nx">subtitle</span><span class="o">:</span><span class="s2">&quot;bite&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Okay, easy. Now what if I want to do a fuzzy match of items?  Can this be done?   Yes. AppStore supports wildcard matching. Specifically, it supports multi-character * and single character ? as wildcards in attribute value queries.</p>
+</div>
+<div class="section" id="query-examples">
+<h2><a class="toc-backref" href="#id10">Query Examples<a class="headerlink" href="#query-examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="match-items-with-multi-character-wildcard">
+<h3>Match items with multi-character wildcard<a class="headerlink" href="#match-items-with-multi-character-wildcard" title="Permalink to this headline">¶</a></h3>
+<p><em>Matching attribute title that has a value starting with bar</em></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">title</span><span class="o">:</span><span class="s2">&quot;bar*&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="match-items-with-single-character-wildcard">
+<h3>Match items with single character wildcard<a class="headerlink" href="#match-items-with-single-character-wildcard" title="Permalink to this headline">¶</a></h3>
+<p><em>Matching attribute title the value of which ends with ar and starts with any character.</em></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">title</span><span class="o">:</span><span class="s2">&quot;?ar&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="match-items-on-multiple-attributes">
+<h3>Match items on multiple attributes<a class="headerlink" href="#match-items-on-multiple-attributes" title="Permalink to this headline">¶</a></h3>
+<p><em>Matching multiple attributes with various wildcards.</em></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">title</span><span class="o">:</span><span class="s2">&quot;?ar&quot;</span><span class="o">,</span> <span class="nx">subtitle</span><span class="o">:</span><span class="s2">&quot;bob&quot;</span><span class="o">,</span> <span class="nx">category</span><span class="o">:</span><span class="s2">&quot;*it*&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id11">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="example-1-programmatic-instantiation-and-querying-of-atom-feeds">
+<h3>Example 1: Programmatic instantiation and querying of ATOM Feeds.<a class="headerlink" href="#example-1-programmatic-instantiation-and-querying-of-atom-feeds" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.AppStore&quot;);
+
+  //This function performs some basic dojo initialization and will do the fetch calling for this example
+  function initSimple () {
+    var appStore = new dojox.data.AppStore({url:&quot;/_static/dojo/dojox/atom/tests/widget/samplefeedEdit.xml&quot;});
+
+    dojo.connect(dijit.byId(&quot;simpleFetchButton&quot;), &quot;onClick&quot;, function() {
+      function gotEntries(items, request) {
+        if(items){
+          //Got the items, lets attach in the results (title, date updated).
+          var list = dojo.byId(&quot;list&quot;);
+          for(i = 0; i &lt; items.length; i++){
+            var e = items[i];
+            var title = appStore.getValue(e, &quot;title&quot;);
+            var updated = appStore.getValue(e, &quot;updated&quot;);
+            list.appendChild(dojo.doc.createTextNode(title));
+            list.appendChild(dojo.doc.createElement(&quot;br&quot;));
+            list.appendChild(dojo.doc.createTextNode(updated));
+            list.appendChild(dojo.doc.createElement(&quot;br&quot;));
+            list.appendChild(dojo.doc.createElement(&quot;br&quot;));
+          }
+        }
+      }
+      appStore.fetch({onComplete: gotEntries});
+    });
+  }
+  //Set the init function to run when dojo loading and page parsing has completed.
+  dojo.addOnLoad(initSimple);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.form.Button&quot; id=&quot;simpleFetchButton&quot;&gt;Click me to search the store and display feed titles&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;span id=&quot;list&quot;&gt;
+&lt;/span&gt;</pre></div></div></div>
+<div class="section" id="example-2-programmatic-instantiation-and-querying-of-atom-feed-entry-titles">
+<h3>Example 2: Programmatic instantiation and querying of ATOM Feed Entry titles.<a class="headerlink" href="#example-2-programmatic-instantiation-and-querying-of-atom-feed-entry-titles" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.AppStore&quot;);
+
+  //This function performs some basic dojo initialization and will do the fetch calling for this example
+  function initSimple2 () {
+    var appStore = new dojox.data.AppStore({url:&quot;/_static/dojo/dojox/atom/tests/widget/samplefeedEdit.xml&quot;});
+
+    dojo.connect(dijit.byId(&quot;simpleFetchButton2&quot;), &quot;onClick&quot;, function() {
+      function gotEntries(items, request) {
+        if(items){
+          //Got the items, lets attach in the results (title, date updated).
+          var list = dojo.byId(&quot;list2&quot;);
+          for(i = 0; i &lt; items.length; i++){
+            var e = items[i];
+            var title = appStore.getValue(e, &quot;title&quot;);
+            var updated = appStore.getValue(e, &quot;updated&quot;);
+            list.appendChild(dojo.doc.createTextNode(title));
+            list.appendChild(dojo.doc.createElement(&quot;br&quot;));
+            list.appendChild(dojo.doc.createTextNode(updated));
+            list.appendChild(dojo.doc.createElement(&quot;br&quot;));
+            list.appendChild(dojo.doc.createElement(&quot;br&quot;));
+          }
+        }
+      }
+      appStore.fetch({query: {title: &quot;*Editable*&quot;}, onComplete: gotEntries});
+    });
+  }
+  //Set the init function to run when dojo loading and page parsing has completed.
+  dojo.addOnLoad(initSimple2);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dijit.form.Button&quot; id=&quot;simpleFetchButton2&quot;&gt;Click me to search the entries for titles with 'Editable'&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;span id=&quot;list2&quot;&gt;
+&lt;/span&gt;</pre></div></div></div>
+<div class="section" id="example-3-connecting-appstore-to-datagrid">
+<h3>Example 3: Connecting AppStore to DataGrid<a class="headerlink" href="#example-3-connecting-appstore-to-datagrid" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.AppStore&quot;);
+  dojo.require(&quot;dojox.grid.DataGrid&quot;);
+
+  var layout = [
+    [
+      { field: &quot;title&quot;, name: &quot;Title&quot;, width: 15 },
+      { field: &quot;link&quot;, name: &quot;Link&quot;, width: 5, formatter: function(value) { return &quot;&lt;a href=\&quot;&quot; + value.href + &quot;\&quot; target=\&quot;_blank\&quot;&gt;Link&lt;/a&gt;&quot;;}},
+      { field: &quot;author&quot;, name: &quot;Author&quot;, width: '10', formatter: function(value){
+          var ret = &quot;&quot;;
+          if(value.name) {ret = value.name;}
+          if(value.email){
+            if(value.name){
+              ret += &quot; (&quot; + value.email +&quot;)&quot;;
+            }else{
+             ret = value.email;
+            }
+          }
+          return ret;
+        }
+      },
+      { field: &quot;updated&quot;, name: &quot;Last Modified&quot;, width: 'auto' }
+    ]
+  ];
+
+  function resizeGrid() {
+      grid.resize();
+  }
+  dojo.addOnLoad(resizeGrid)
+
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojox.data.AppStore&quot; jsId=&quot;appStore&quot; url=&quot;/_static/dojo/dojox/atom/tests/widget/samplefeedEdit.xml&quot;&gt;&lt;/div&gt;
+&lt;div jsId=&quot;grid&quot; dojoType=&quot;dojox.grid.DataGrid&quot; store=&quot;appStore&quot; query=&quot;{}&quot; structure=&quot;layout&quot; style=&quot;width: 600px; height: 200px;&quot;&gt;&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;span id=&quot;list2&quot;&gt;
+&lt;/span&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/Grid.css&quot;;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/nihiloGrid.css&quot;;
+
+  .dojoxGrid table {
+    margin: 0;
+  }
+&lt;/style&gt;</pre></div></div></div>
+<div class="section" id="example-4-write-example-changing-title-and-showing-in-datagrid">
+<h3>Example 4: Write example: Changing Title and showing in DataGrid<a class="headerlink" href="#example-4-write-example-changing-title-and-showing-in-datagrid" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dijit.form.Button&quot;);
+  dojo.require(&quot;dojox.data.AppStore&quot;);
+  dojo.require(&quot;dojox.grid.DataGrid&quot;);
+
+  var layout2 = [
+    [
+      { field: &quot;title&quot;, name: &quot;Title&quot;, width: 15 },
+      { field: &quot;link&quot;, name: &quot;Link&quot;, width: 5, formatter: function(value) { return &quot;&lt;a href=\&quot;&quot; + value.href + &quot;\&quot; target=\&quot;_blank\&quot;&gt;Link&lt;/a&gt;&quot;}},
+      { field: &quot;updated&quot;, name: &quot;Last Modified&quot;, width: 'auto' }
+    ]
+  ];
+
+  function initGrid() {
+      grid.resize();
+      dojo.connect(dijit.byId(&quot;changeTitleButton&quot;), &quot;onClick&quot;, function(){
+         function gotAllItems(items, request){
+           if(items){
+             var i;
+             //Change all the titles.
+             for(i = 0; i &lt; items.length; i++){
+               appStore2.setValue(items[i], &quot;title&quot;, &quot;This is new title #&quot; + i);
+             }
+             //Requery to reload grid.  This is needed as this store does not currently implement the notification API.
+             grid2.setQuery({});
+           }
+         }
+         appStore2.fetch({onComplete: gotAllItems});
+      });
+  }
+  dojo.addOnLoad(initGrid)
+
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojox.data.AppStore&quot; jsId=&quot;appStore2&quot; url=&quot;/_static/dojo/dojox/atom/tests/widget/samplefeedEdit.xml&quot;&gt;&lt;/div&gt;
+&lt;div jsId=&quot;grid2&quot; dojoType=&quot;dojox.grid.DataGrid&quot; store=&quot;appStore2&quot; query=&quot;{}&quot; structure=&quot;layout2&quot; style=&quot;width: 600px; height: 200px;&quot;&gt;&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;button id=&quot;changeTitleButton&quot; dojoType=&quot;dijit.form.Button&quot;&gt;Change all titles!&lt;/button&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/Grid.css&quot;;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/nihiloGrid.css&quot;;
+
+  .dojoxGrid table {
+    margin: 0;
+  }
+&lt;/style&gt;</pre></div></div></div>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id12">See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li><a class="reference" href="../atom.html#dojox-atom"><em>dojox.atom</em></a></li>
+<li><a class="reference" href="AtomReadStore.html#dojox-data-atomreadstore"><em>dojox.data.AtomReadStore</em></a></li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

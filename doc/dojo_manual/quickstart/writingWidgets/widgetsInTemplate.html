@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Widgets inside the Template &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Quickstart" href="../contents.html" />
+    <link rel="next" title="Dojo" href="../../dojo/contents.html" />
+    <link rel="prev" title="The Template" href="templates.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="../../dojo/contents.html" title="Dojo"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="templates.html" title="The Template"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Quickstart</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">Widgets inside the Template</a><ul>
+<li><a class="reference" href="#dojoattachpoint">dojoAttachPoint</a></li>
+<li><a class="reference" href="#dojoattachevent">dojoAttachEvent</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="templates.html"
+                                  title="previous chapter">The Template</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../../dojo/contents.html"
+                                  title="next chapter">Dojo</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/quickstart/writingWidgets/widgetsInTemplate.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <p id="quickstart-writingwidgets-widgetsintemplate">TODO: REMOVE;  MOVED TO <cite>dijit._Templated &lt;dijit/_Templated&gt;</cite>-.</p>
+<div class="section" id="widgets-inside-the-template">
+<h1>Widgets inside the Template<a class="headerlink" href="#widgets-inside-the-template" title="Permalink to this headline">¶</a></h1>
+<p>So what if we want the widget to have a widget inside of it, as in ...:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;combinedDateTime&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.form.DateTextBox&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.form.TimeTextBox&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>When using this template in a directly extended widget class, you will need to set the property widgetsInTemplate: true. Why? Because a widget inside a template requires some recursive parsing, which may be slow if you're drawing thousands of widgets ... especially if there is nothing extra to parse. Therefore, it is false by default.</p>
+<p>dijit.Declaration-based widget classes automatically set widgetsInTemplate to true.</p>
+<div class="section" id="dojoattachpoint">
+<h2>dojoAttachPoint<a class="headerlink" href="#dojoattachpoint" title="Permalink to this headline">¶</a></h2>
+<p>In this case, the dojoAttachPoint becomes a pointer to the sub-widget, not to a DOM node.  For example, with this template:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;combinedDateTime&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.form.DateTextBox&quot;</span> <span class="na">dojoAttachPoint=</span><span class="s">&quot;start&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.form.TimeTextBox&quot;</span> <span class="na">dojoAttachPoint=</span><span class="s">&quot;end&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>You can do this in your widget code:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">this</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="o">,</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dojoattachevent">
+<h2>dojoAttachEvent<a class="headerlink" href="#dojoattachevent" title="Permalink to this headline">¶</a></h2>
+<p>dojoAttachEvent also functions to attach a widget event (not a DOM event) on the sub widget to the main widget.  For example, consider InlineEditBox which embeds dijit buttons into it's own template:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;fieldset</span> <span class="na">dojoAttachPoint=</span><span class="s">&quot;editNode&quot;</span> <span class="na">waiRole=</span><span class="s">&quot;presentation&quot;</span> <span class="na">style=</span><span class="s">&quot;position: absolute; visibility:hidden&quot;</span> <span class="na">class=</span><span class="s">&quot;dijitReset dijitInline&quot;</span>
+      <span class="na">dojoAttachEvent=</span><span class="s">&quot;onkeypress: _onKeyPress&quot;</span>
+      <span class="nt">&gt;&lt;div</span> <span class="na">dojoAttachPoint=</span><span class="s">&quot;editorPlaceholder&quot;</span><span class="nt">&gt;&lt;/div</span>
+<span class="nt">      &gt;&lt;span</span> <span class="na">dojoAttachPoint=</span><span class="s">&quot;buttonContainer&quot;</span>
+              <span class="nt">&gt;&lt;button</span> <span class="na">class=</span><span class="s">&#39;saveButton&#39;</span> <span class="na">dojoAttachPoint=</span><span class="s">&quot;saveButton&quot;</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.form.Button&quot;</span> <span class="na">dojoAttachEvent=</span><span class="s">&quot;onClick:save&quot;</span> <span class="na">disabled=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>${buttonSave}<span class="nt">&lt;/button</span>
+<span class="nt">              &gt;&lt;button</span> <span class="na">class=</span><span class="s">&#39;cancelButton&#39;</span> <span class="na">dojoAttachPoint=</span><span class="s">&quot;cancelButton&quot;</span> <span class="na">dojoType=</span><span class="s">&quot;dijit.form.Button&quot;</span> <span class="na">dojoAttachEvent=</span><span class="s">&quot;onClick:cancel&quot;</span><span class="nt">&gt;</span>${buttonCancel}<span class="nt">&lt;/button</span>
+<span class="nt">      &gt;&lt;/span</span>
+<span class="nt">&gt;&lt;/fieldset&gt;</span>
+</pre></div>
+</div>
+<p>The onClick event on the dijit.form.Button will call InlineEditBox.save().</p>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

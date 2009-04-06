@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.form.RadioButton &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dijit" href="../contents.html" />
+    <link rel="next" title="dijit.form.SimpleTextarea" href="SimpleTextarea.html" />
+    <link rel="prev" title="dijit.form.NumberTextBox" href="NumberTextBox.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="SimpleTextarea.html" title="dijit.form.SimpleTextarea"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="NumberTextBox.html" title="dijit.form.NumberTextBox"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.form.RadioButton</a><ul>
+<li><a class="reference" href="#usage">Usage</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#programmatic-and-declarative-example">Programmatic and declarative example</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#accessibility">Accessibility</a><ul>
+<li><a class="reference" href="#keyboard">Keyboard</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="NumberTextBox.html"
+                                  title="previous chapter">dijit.form.NumberTextBox</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="SimpleTextarea.html"
+                                  title="next chapter">dijit.form.SimpleTextarea</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dijit/form/RadioButton.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-form-radiobutton">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dijit.form.RadioButton<a class="headerlink" href="#dijit-form-radiobutton" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Becky Gibson, Doug Hays, Nikolai Onken</td>
+</tr>
+<tr class="field"><th class="field-name">Developers:</th><td class="field-body">?-</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V?</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dijit-form-radiobutton" id="id2" name="id2">dijit.form.RadioButton</a><ul>
+<li><a class="reference" href="#usage" id="id3" name="id3">Usage</a></li>
+<li><a class="reference" href="#examples" id="id4" name="id4">Examples</a></li>
+<li><a class="reference" href="#accessibility" id="id5" name="id5">Accessibility</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>RadioButton widgets capture binary user-choices unlike buttons which normally perform some action when clicked.</p>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id3">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<p>Normally, there are multiple RadioButton widgets assigned to a single group defined by widgets sharing the same <em>name</em> attribute. Upon FORM submission, the 1 checked RadioButton <em>value</em> is submitted using this shared <em>name</em>.</p>
+<p><strong>Note:</strong> To use the RadioButton widget, you currently have to call dojo.require(&#8220;dijit.form.CheckBox&#8221;)</p>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id4">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="programmatic-and-declarative-example">
+<h3>Programmatic and declarative example<a class="headerlink" href="#programmatic-and-declarative-example" title="Permalink to this headline">¶</a></h3>
+<p>Let&#8217;s create 2 RadioButton widgets, 1 programmatically and 1 declaratively. We&#8217;ll wrap both inside a FORM to illustrate what happens on submit.</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+  dojo.require(&quot;dijit.form.CheckBox&quot;);
+
+  dojo.addOnLoad(function(){
+    var radioOne = new dijit.form.RadioButton({
+      checked: true,
+      value: &quot;tea&quot;,
+      name: &quot;drink&quot;,
+    }, &quot;radioOne&quot;);
+  });
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;form id=&quot;myform&quot;&gt;
+    &lt;input type=&quot;radio&quot; name=&quot;drink&quot; id=&quot;radioOne&quot; checked value=&quot;tea&quot;/&gt; &lt;label for=&quot;radioOne&quot;&gt;Tea&lt;/label&gt; &lt;br /&gt;
+    &lt;input type=&quot;radio&quot; dojoType=&quot;dijit.form.RadioButton&quot; name=&quot;drink&quot; id=&quot;radioTwo&quot; value=&quot;coffee&quot;/&gt; &lt;label for=&quot;radioTwo&quot;&gt;Coffee&lt;/label&gt; &lt;br /&gt;
+&lt;/form&gt;
+&lt;button onclick=&quot;with(dojo.byId('myform'))with(elements[0])with(elements[checked?0:1])alert(name+'='+value);return false&quot;&gt;Show form submit value&lt;/button&gt;</pre></div></div></div>
+</div>
+<div class="section" id="accessibility">
+<h2><a class="toc-backref" href="#id5">Accessibility<a class="headerlink" href="#accessibility" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="keyboard">
+<h3>Keyboard<a class="headerlink" href="#keyboard" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="58%" />
+<col width="42%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Action</strong></td>
+<td><strong>Key</strong></td>
+</tr>
+<tr><td>Toggle checked state</td>
+<td>Spacebar</td>
+</tr>
+<tr><td>Focus previous radio button</td>
+<td>up or left arrow</td>
+</tr>
+<tr><td>Focus next radio button</td>
+<td>down or right arrow</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong>
+Using the TAB key to focus a radio group will only focus the selected RadioButton in a group.</p>
+<p>Radio buttons are implemented using the standard input type=checkbox and type=radio elements respectively. CSS is used to overlay the unique theme over the actual input elements. Thus, the keyboard behavior of checkboxes and radio buttons mimics the behavior in the browser.</p>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

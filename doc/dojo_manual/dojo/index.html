@@ -1,0 +1,531 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Dojo &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dojo" href="contents.html" />
+    <link rel="next" title="dojo.io.frame" href="io/iframe.html" />
+    <link rel="prev" title="dojo.html" href="html.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="io/iframe.html" title="dojo.io.frame"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="html.html" title="dojo.html"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dojo</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">Dojo</a><ul>
+<li><a class="reference" href="#dojo-js">dojo.js</a></li>
+<li><a class="reference" href="#dojo-core">Dojo Core</a></li>
+<li><a class="reference" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="html.html"
+                                  title="previous chapter">dojo.html</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="io/iframe.html"
+                                  title="next chapter">dojo.io.frame</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dojo/index.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo">
+<span id="dojo-index"></span><h1><a class="toc-backref" href="#id1">Dojo<a class="headerlink" href="#dojo" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since version 0.9</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo" id="id1" name="id1">Dojo</a><ul>
+<li><a class="reference" href="#dojo-js" id="id2" name="id2">dojo.js</a></li>
+<li><a class="reference" href="#dojo-core" id="id3" name="id3">Dojo Core</a></li>
+<li><a class="reference" href="#see-also" id="id4" name="id4">See also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Dojo is divided into two parts: <tt class="docutils literal"><span class="pre">dojo.js</span></tt>, and the rest of Dojo Core. Typically, if a function or Class exists within the dojo namespace directly (eg: <tt class="docutils literal"><span class="pre">dojo.require()</span></tt>, <tt class="docutils literal"><span class="pre">dojo.addOnLoad()</span></tt>) it is provided directly by <tt class="docutils literal"><span class="pre">dojo.js</span></tt>. If the function or Class exists beneath the dojo namespace (eg: <tt class="docutils literal"><span class="pre">dojo.dnd.Mover</span></tt>), you will need to require the appropriate module (eg: <tt class="docutils literal"><span class="pre">dojo.require(&quot;dojo.dnd.Mover&quot;);</span></tt>)</p>
+<p>These pages cover both cases, and indicate how they are provided.</p>
+<div class="section" id="dojo-js">
+<h2><a class="toc-backref" href="#id2">dojo.js<a class="headerlink" href="#dojo-js" title="Permalink to this headline">¶</a></a></h2>
+<p>Dojo Base is the functionality you get by just including dojo.js or dojo.xd.js in your page.</p>
+<ul>
+<li><p class="first"><a class="reference" href="base.html#dojo-base"><em>dojo._base</em></a></p>
+<ul>
+<li><p class="first"><a class="reference" href="base/loader.html#dojo-base-loader"><em>dojo._base._loader</em></a></p>
+<p>Dojo&#8217;s Bootstrap</p>
+<ul>
+<li><p class="first"><em>djConfig</em></p>
+<p>Configuring Dojo with djConfig</p>
+</li>
+<li><p class="first"><a class="reference" href="addOnLoad.html#dojo-addonload"><em>dojo.addOnLoad</em></a></p>
+<p>Call functions after the DOM has finished loading and widgets declared in markup have been instantiated</p>
+</li>
+<li><p class="first"><a class="reference" href="addOnUnload.html#dojo-addonunload"><em>dojo.addOnUnload</em></a></p>
+<p>Call functions when the page unloads</p>
+</li>
+<li><p class="first"><a class="reference" href="addOnWindowUnload.html#dojo-addonwindowunload"><em>dojo.addOnWindowUnload</em></a></p>
+<p>Call functions when window.onunload fires</p>
+</li>
+<li><p class="first"><a class="reference" href="attr.html#dojo-attr"><em>dojo.attr</em></a></p>
+<p>Modifying DOM node attributes</p>
+</li>
+<li><p class="first"><a class="reference" href="deprecated.html#dojo-deprecated"><em>dojo.deprecated</em></a></p>
+<p>Log a debug message to indicate that a behavior has been deprecated</p>
+</li>
+<li><p class="first"><a class="reference" href="exists.html#dojo-exists"><em>dojo.exists</em></a></p>
+<p>Determine if an object supports a given method</p>
+</li>
+<li><p class="first"><a class="reference" href="getObject.html#dojo-getobject"><em>dojo.getObject</em></a></p>
+<p>Get a property from a dot-separated string, such as &#8220;A.B.C&#8221;</p>
+</li>
+<li><p class="first"><a class="reference" href="global.html#dojo-global"><em>dojo.global</em></a></p>
+<p>Alias for the global scope</p>
+</li>
+<li><p class="first"><a class="reference" href="mixin.html#dojo-mixin"><em>dojo.mixin</em></a></p>
+<p>Multiple inheritance</p>
+</li>
+<li><p class="first"><a class="reference" href="place.html#dojo-place"><em>dojo.place</em></a></p>
+<p>Place DOM nodes relative to others</p>
+</li>
+<li><p class="first"><a class="reference" href="registerModulePath.html#dojo-registermodulepath"><em>dojo.registerModulePath</em></a></p>
+<p>Maps module name to a path</p>
+</li>
+<li><p class="first"><a class="reference" href="require.html#dojo-require"><em>dojo.require</em></a></p>
+<p>Loads a Javascript module from the appropriate URI</p>
+</li>
+<li><p class="first"><a class="reference" href="setObject.html#dojo-setobject"><em>dojo.setObject</em></a></p>
+<p>Set a property from a dot-separated string, such as &#8220;A.B.C&#8221;</p>
+</li>
+<li><p class="first"><a class="reference" href="version.html#dojo-version"><em>dojo.version</em></a></p>
+<p>The current version number of Dojo</p>
+</li>
+<li><p class="first"><a class="reference" href="windowUnloaded.html#dojo-windowunloaded"><em>dojo.windowUnloaded</em></a></p>
+<p>Signal fired by impending window destruction</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><em>dojo._base.array</em></p>
+<p>Array utilities.
+Details on dojo.every, dojo.filter, dojo.forEach, dojo.indexOf, dojo.lastIndexOf, dojo.map, and dojo.some.</p>
+<ul>
+<li><p class="first"><a class="reference" href="forEach.html#dojo-foreach"><em>dojo.forEach</em></a></p>
+<p>Invokes a callback function for every item in array</p>
+</li>
+<li><p class="first"><a class="reference" href="map.html#dojo-map"><em>dojo.map</em></a></p>
+<p>Applies a callback to each element of arr and returns an Array with the results</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="_base/Color.html#dojo-base-color"><em>dojo._base.Color</em></a></p>
+<p>Functions for setting Colors</p>
+</li>
+<li><p class="first"><a class="reference" href="_base/connect.html#dojo-base-connect"><em>dojo._base.connect</em></a></p>
+<p>Functions for connecting methods to events and to subscribe and publish events</p>
+<ul>
+<li><p class="first"><a class="reference" href="connect.html#dojo-connect"><em>dojo.connect</em></a></p>
+<p>Connects events to methods</p>
+</li>
+<li><p class="first"><a class="reference" href="disconnect.html#dojo-disconnect"><em>dojo.disconnect</em></a></p>
+<p>Disconnects methods from linked topics</p>
+</li>
+<li><p class="first"><a class="reference" href="subscribe.html#dojo-subscribe"><em>dojo.subscribe</em></a></p>
+<p>Linked a listener to a named topic</p>
+</li>
+<li><p class="first"><a class="reference" href="unsubscribe.html#dojo-unsubscribe"><em>dojo.unsubscribe</em></a></p>
+<p>Remove a topic listener</p>
+</li>
+<li><p class="first"><a class="reference" href="publish.html#dojo-publish"><em>dojo.publish</em></a></p>
+<p>Publish an event to all subscribers of a topic</p>
+</li>
+<li><p class="first"><a class="reference" href="connectPublisher.html#dojo-connectpublisher"><em>dojo.connectPublisher</em></a></p>
+<p>Ensure that everytime an event is called, a message is published on the topic.</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="_base/declare.html#dojo-base-declare"><em>dojo._base.declare</em></a></p>
+<p>Defining Classes</p>
+<ul>
+<li><p class="first"><a class="reference" href="declare.html#dojo-declare"><em>dojo.declare</em></a></p>
+<p>Creates a constructor using a compact notation for inheritance and prototype extension</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="_base/Deferred.html#dojo-base-deferred"><em>dojo._base.Deferred</em></a></p>
+<p>Managing Callbacks</p>
+<ul>
+<li><p class="first"><a class="reference" href="Deferred.html#dojo-deferred"><em>dojo.Deferred</em></a></p>
+<p>Communication between threads</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="_base/event.html#dojo-base-event"><em>dojo._base.event</em></a></p>
+<p>DOM Events</p>
+</li>
+<li><p class="first"><a class="reference" href="_base/fx.html#dojo-base-fx"><em>dojo._base.fx</em></a></p>
+<p>Dojo animation effects</p>
+<ul>
+<li><p class="first"><a class="reference" href="animateProperty.html#dojo-animateproperty"><em>dojo.animateProperty</em></a></p>
+<p>A very useful method for animating CSS properties</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="_base/html.html#dojo-base-html"><em>dojo._base.html</em></a></p>
+<p>Basic DOM handling functions</p>
+<ul>
+<li><p class="first"><a class="reference" href="byId.html#dojo-byid"><em>dojo.byId</em></a></p>
+<p>Select a DOM node by &#8216;id&#8217;</p>
+</li>
+<li><p class="first"><a class="reference" href="style.html#dojo-style"><em>dojo.style</em></a></p>
+<p>A getter/setter for styles on a DOM node</p>
+</li>
+<li><p class="first"><a class="reference" href="coords.html#dojo-coords"><em>dojo.coords</em></a></p>
+<p>Getter for the coordinates (relative to parent and absolute) of a dom node.</p>
+</li>
+<li><p class="first"><a class="reference" href="marginBox.html#dojo-marginbox"><em>dojo.marginBox</em></a></p>
+<p>Getter/setter for the margin-box of node</p>
+</li>
+<li><p class="first"><a class="reference" href="contentBox.html#dojo-contentbox"><em>dojo.contentBox</em></a></p>
+<p>Getter/setter for the content-box of node</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="_base/json.html#dojo-base-json"><em>dojo._base.json</em></a></p>
+<p>JSON helpers</p>
+<ul>
+<li><p class="first"><a class="reference" href="fromJson.html#dojo-fromjson"><em>dojo.fromJson</em></a></p>
+<p>Parses a JSON string to return a JavaScript object</p>
+</li>
+<li><p class="first"><a class="reference" href="toJson.html#dojo-tojson"><em>dojo.toJson</em></a></p>
+<p>Returns a JSON serialization of an object</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="_base/lang.html#dojo-base-lang"><em>dojo._base.lang</em></a></p>
+<p>Support for Polymorphism</p>
+<ul>
+<li><p class="first"><a class="reference" href="hitch.html#dojo-hitch"><em>dojo.hitch</em></a></p>
+<p>Function that generates a wrapper function that ensures a function that will only ever execute in a defined scope.</p>
+</li>
+<li><p class="first"><a class="reference" href="isString.html#dojo-isstring"><em>dojo.isString</em></a></p>
+<p>Checks if the parameter is a String</p>
+</li>
+<li><p class="first"><a class="reference" href="isArray.html#dojo-isarray"><em>dojo.isArray</em></a></p>
+<p>Checks if the parameter is an Array</p>
+</li>
+<li><p class="first"><a class="reference" href="isFunction.html#dojo-isfunction"><em>dojo.isFunction</em></a></p>
+<p>Checks if the parameter is a Function</p>
+</li>
+<li><p class="first"><a class="reference" href="isObject.html#dojo-isobject"><em>dojo.isObject</em></a></p>
+<p>Checks if the parameter is an Object</p>
+</li>
+<li><p class="first"><a class="reference" href="isArrayLike.html#dojo-isarraylike"><em>dojo.isArrayLike</em></a></p>
+<p>Checks if the parameter is like an Array</p>
+</li>
+<li><p class="first"><a class="reference" href="isAlien.html#dojo-isalien"><em>dojo.isAlien</em></a></p>
+<p>Checks if the parameter is a built-in function</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="_base/NodeList.html#dojo-base-nodelist"><em>dojo._base.NodeList</em></a></p>
+<p>Syntactic sugar for chaining, common iteration operations, animation, and node manipulation</p>
+<ul>
+<li><p class="first"><a class="reference" href="NodeList.html#dojo-nodelist"><em>dojo.NodeList</em></a></p>
+<p>A class to handle a list of DOM nodes</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="_base/query.html#dojo-base-query"><em>dojo._base.query</em></a></p>
+<p>A relatively full-featured CSS3 query library</p>
+<ul>
+<li><p class="first"><a class="reference" href="query.html#dojo-query"><em>dojo.query</em></a></p>
+<p>The swiss army knife of DOM node manipulation in Dojo</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="_base/window.html#dojo-base-window"><em>dojo._base.window</em></a></p>
+<p>Functions for dealing with the document-wide DOM and context related stuff</p>
+<ul>
+<li><p class="first"><a class="reference" href="doc.html#dojo-doc"><em>dojo.doc</em></a></p>
+<p>Alias for the current document</p>
+</li>
+<li><p class="first"><a class="reference" href="body.html#dojo-body"><em>dojo.body</em></a></p>
+<p>Return the body element of the document</p>
+</li>
+<li><p class="first"><a class="reference" href="setContext.html#dojo-setcontext"><em>dojo.setContext</em></a></p>
+<p>Changes the behavior of many core Dojo functions that deal with namespace and DOM lookup</p>
+</li>
+<li><p class="first"><a class="reference" href="withGlobal.html#dojo-withglobal"><em>dojo.withGlobal</em></a></p>
+<p>Call callback with globalObject as dojo.global and globalObject.document as dojo.doc</p>
+</li>
+<li><p class="first"><a class="reference" href="withDoc.html#dojo-withdoc"><em>dojo.withDoc</em></a></p>
+<p>Call callback with documentObject as dojo.doc</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="_base/xhr.html#dojo-base-xhr"><em>dojo._base.xhr</em></a></p>
+<p>AJAX I/O transports and utility methods</p>
+<ul class="simple">
+<li><a class="reference" href="formToJson.html#dojo-formtojson"><em>dojo.formToJson</em></a></li>
+<li><a class="reference" href="formToObject.html#dojo-formtoobject"><em>dojo.formToObject</em></a></li>
+<li><a class="reference" href="formToQuery.html#dojo-formtoquery"><em>dojo.formToQuery</em></a></li>
+<li><a class="reference" href="objectToQuery.html#dojo-objecttoquery"><em>dojo.objectToQuery</em></a></li>
+<li><a class="reference" href="queryToObject.html#dojo-querytoobject"><em>dojo.queryToObject</em></a></li>
+<li><a class="reference" href="xhrDelete.html#dojo-xhrdelete"><em>dojo.xhrDelete</em></a></li>
+<li><a class="reference" href="xhrGet.html#dojo-xhrget"><em>dojo.xhrGet</em></a></li>
+<li><a class="reference" href="xhrPost.html#dojo-xhrpost"><em>dojo.xhrPost</em></a></li>
+<li><a class="reference" href="xhrPut.html#dojo-xhrput"><em>dojo.xhrPut</em></a></li>
+<li><a class="reference" href="rawXhrPost.html#dojo-rawxhrpost"><em>dojo.rawXhrPost</em></a></li>
+<li><a class="reference" href="rawXhrPut.html#dojo-rawxhrput"><em>dojo.rawXhrPut</em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="dojo-core">
+<h2><a class="toc-backref" href="#id3">Dojo Core<a class="headerlink" href="#dojo-core" title="Permalink to this headline">¶</a></a></h2>
+<ul>
+<li><p class="first"><em>dojo.AdapterRegistry</em></p>
+<p>A registry to make contextual calling/searching easier</p>
+</li>
+<li><p class="first"><a class="reference" href="back.html#dojo-back"><em>dojo.back</em></a></p>
+<p>Browser history management resources (Back button functionality)</p>
+</li>
+<li><p class="first"><a class="reference" href="behavior.html#dojo-behavior"><em>dojo.behavior</em></a></p>
+<p>Utility for unobtrusive/progressive event binding, DOM traversal, and manipulation</p>
+</li>
+<li><p class="first"><em>dojo.cldr</em></p>
+<p>A Common Locale Data Repository (CLDR) implementation</p>
+</li>
+<li><p class="first"><em>dojo.colors</em></p>
+<p>CSS color manipulation functions</p>
+</li>
+<li><p class="first"><a class="reference" href="cookie.html#dojo-cookie"><em>dojo.cookie</em></a></p>
+<p>Simple HTTP cookie manipulation</p>
+</li>
+<li><p class="first"><em>dojo.currency</em></p>
+<p>Localized formatting and parsing routines for currency data</p>
+</li>
+<li><p class="first"><a class="reference" href="data.html#dojo-data"><em>dojo.data</em></a></p>
+<p>A uniform data access layer</p>
+<ul class="simple">
+<li><a class="reference" href="data/api.html#dojo-data-api"><em>dojo.data.api</em></a></li>
+<li><a class="reference" href="data/api/Read.html#dojo-data-api-read"><em>dojo.data.api.Read</em></a></li>
+<li><a class="reference" href="data/api/Write.html#dojo-data-api-write"><em>dojo.data.api.Write</em></a></li>
+<li><a class="reference" href="data/api/Identity.html#dojo-data-api-identity"><em>dojo.data.api.Identity</em></a></li>
+<li><a class="reference" href="data/api/Notification.html#dojo-data-api-notification"><em>dojo.data.api.Notification</em></a></li>
+<li><a class="reference" href="data/ItemFileReadStore.html#dojo-data-itemfilereadstore"><em>dojo.data.ItemFileReadStore</em></a></li>
+<li><a class="reference" href="data/ItemFileWriteStore.html#dojo-data-itemfilewritestore"><em>dojo.data.ItemFileWriteStore</em></a></li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="date.html#dojo-date"><em>dojo.date</em></a></p>
+<p>Date manipulation utilities</p>
+<ul class="simple">
+<li><a class="reference" href="date/locale/format.html#dojo-date-locale-format"><em>dojo.date.locale.format</em></a></li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="DeferredList.html#dojo-deferredlist"><em>dojo.DeferredList</em></a></p>
+<p>Event handling for a group of Deferred objects</p>
+</li>
+<li><p class="first"><a class="reference" href="dnd.html#dojo-dnd"><em>dojo.dnd</em></a></p>
+<p>Drag and Drop</p>
+<ul class="simple">
+<li><a class="reference" href="dnd/Moveable.html#dojo-dnd-moveable"><em>dojo.dnd.Moveable</em></a></li>
+</ul>
+</li>
+<li><p class="first"><a class="reference" href="fx.html#dojo-fx"><em>dojo.fx</em></a></p>
+<p>Effects library on top of Base animations</p>
+</li>
+<li><p class="first"><em>dojo.gears</em></p>
+<p>Google Gears</p>
+</li>
+<li><p class="first"><a class="reference" href="html.html#dojo-html"><em>dojo.html</em></a></p>
+<p>Inserting contents in HTML nodes</p>
+</li>
+<li><p class="first"><em>dojo.i18n</em></p>
+<p>Utility classes to enable loading of resources for internationalization</p>
+</li>
+<li><p class="first"><em>dojo.io</em></p>
+<p>Additional AJAX I/O transports</p>
+<ul>
+<li><p class="first"><a class="reference" href="io/iframe.html#dojo-io-iframe"><em>dojo.io.iframe</em></a></p>
+<p>Sends an AJAX I/O call using an IFrame</p>
+</li>
+<li><p class="first"><a class="reference" href="io/script.html#dojo-io-script"><em>dojo.io.script</em></a></p>
+<p>Sends a JSONP request using a script tag</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><em>dojo.jaxer</em></p>
+</li>
+<li><p class="first"><a class="reference" href="NodeList-fx.html#dojo-nodelist-fx"><em>dojo.NodeList-fx</em></a></p>
+<p>Adds dojo.fx animation support to dojo.query()</p>
+</li>
+<li><p class="first"><em>dojo.NodeList-html</em></p>
+<p>Adds a chainable html method to dojo.query()</p>
+</li>
+<li><p class="first"><a class="reference" href="number.html#dojo-number"><em>dojo.number</em></a></p>
+<p>Localized formatting and parsing methods for number data</p>
+</li>
+<li><p class="first"><a class="reference" href="parser.html#dojo-parser"><em>dojo.parser</em></a></p>
+<p>The Dom/Widget parsing package</p>
+</li>
+<li><p class="first"><em>dojo.regexp</em></p>
+<p>Regular expressions and Builder resources</p>
+</li>
+<li><p class="first"><em>dojo.robot</em></p>
+<p>experimental module for DOH users</p>
+</li>
+<li><p class="first"><em>dojo.robotx</em></p>
+<p>experimental module for DOH users</p>
+</li>
+<li><p class="first"><a class="reference" href="rpc.html#dojo-rpc"><em>dojo.rpc</em></a></p>
+<p>Communicate via Remote Procedure Calls (RPC) with Backend Servers</p>
+<ul>
+<li><p class="first"><a class="reference" href="rpc/JsonpService.html#dojo-rpc-jsonpservice"><em>dojo.rpc.JsonpService</em></a></p>
+<p>Generic JSONP service</p>
+</li>
+<li><p class="first"><a class="reference" href="rpc/JsonService.html#dojo-rpc-jsonservice"><em>dojo.rpc.JsonService</em></a></p>
+<p>JSON RPC service</p>
+</li>
+<li><p class="first"><a class="reference" href="rpc/RpcService.html#dojo-rpc-rpcservice"><em>dojo.rpc.RpcService</em></a></p>
+<p>RPC service class</p>
+</li>
+</ul>
+</li>
+<li><p class="first"><em>dojo.string</em></p>
+<p>String utilities for Dojo</p>
+</li>
+</ul>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id4">See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<ul>
+<li><p class="first"><a class="reference" href="../dijit/index.html#dijit-index"><em>Dijit</em></a></p>
+<p>The widget system layered on top of Dojo</p>
+</li>
+<li><p class="first"><a class="reference" href="../dojox/index.html#dojox-index"><em>DojoX</em></a></p>
+<p>An area for development of extensions to the Dojo toolkit</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

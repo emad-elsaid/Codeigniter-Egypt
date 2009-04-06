@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Working with selections &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="Grid styling : Rows" href="example_grid_styling_rows.html" />
+    <link rel="prev" title="Programmatically creating a DataGrid" href="example_Programmatically_creating_a_DataGrid.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="example_grid_styling_rows.html" title="Grid styling : Rows"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="example_Programmatically_creating_a_DataGrid.html" title="Programmatically creating a DataGrid"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="example_Programmatically_creating_a_DataGrid.html"
+                                  title="previous chapter">Programmatically creating a DataGrid</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="example_grid_styling_rows.html"
+                                  title="next chapter">Grid styling : Rows</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/grid/example_Working_with_selections.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="working-with-selections">
+<span id="dojox-grid-example-working-with-selections"></span><h1>Working with selections<a class="headerlink" href="#working-with-selections" title="Permalink to this headline">¶</a></h1>
+<p>To get the current selected rows of the grid, you can use the method yourGrid.selection.getSelected(). You will get an array of the selected items. The following code shows an example:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    dojo.require(&quot;dojox.grid.DataGrid&quot;);
+    dojo.require(&quot;dojox.data.CsvStore&quot;);
+    dojo.require(&quot;dijit.form.Button&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;span dojoType=&quot;dojox.data.CsvStore&quot;
+    jsId=&quot;store2&quot; url=&quot;/_static/dojo/dojox/grid/tests/support/movies.csv&quot;&gt;
+&lt;/span&gt;
+
+&lt;div&gt;
+    Select a single row or multiple rows in the Grid (click on the Selector on the left side of each row).
+    After that, a click on the Button &quot;get all Selected Items&quot; will show you each attribute/value of the
+    selected rows.
+&lt;/div&gt;
+
+&lt;table dojoType=&quot;dojox.grid.DataGrid&quot;
+    jsId=&quot;grid2&quot;
+    store=&quot;store2&quot;
+    query=&quot;{ Title: '*' }&quot;
+    clientSort=&quot;true&quot;
+    style=&quot;width: 400px; height: 200px;&quot;
+    rowSelector=&quot;20px&quot;&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th width=&quot;300px&quot; field=&quot;Title&quot;&gt;Title of Movie&lt;/th&gt;
+            &lt;th width=&quot;50px&quot;&gt;Year&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th colspan=&quot;2&quot;&gt;Producer&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+&lt;/table&gt;
+
+&lt;div dojoType=&quot;dijit.form.Button&quot;&gt;
+    get all Selected Items
+    &lt;script type=&quot;dojo/method&quot; event=&quot;onClick&quot; args=&quot;evt&quot;&gt;
+        // Get all selected items from the Grid:
+        var items = grid2.selection.getSelected();
+        if(items.length){
+            // Iterate through the list of selected items.
+            // The current item is available in the variable
+            // &quot;selectedItem&quot; within the following function:
+            dojo.forEach(items, function(selectedItem) {
+                if(selectedItem !== null) {
+                    // Iterate through the list of attributes of each item.
+                    // The current attribute is available in the variable
+                    // &quot;attribute&quot; within the following function:
+                    dojo.forEach(grid2.store.getAttributes(selectedItem), function(attribute) {
+                        // Get the value of the current attribute:
+                        var value = grid2.store.getValues(selectedItem, attribute);
+                        // Now, you can do something with this attribute/value pair.
+                        // Our short example shows the attribute together
+                        // with the value in an alert box, but we are sure, that
+                        // you'll find a more ambitious usage in your own code:
+                        alert('attribute: ' + attribute + ', value: ' + value);
+                    }); // end forEach
+                } // end if
+            }); // end forEach
+        } // end if
+    &lt;/script&gt;
+&lt;/div&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+    &#64;import &quot;/_static/dojo/dojox/grid/resources/Grid.css&quot;;
+    &#64;import &quot;/_static/dojo/dojox/grid/resources/nihiloGrid.css&quot;;
+
+    .dojoxGrid table {
+        margin: 0;
+    }
+&lt;/style&gt;</pre></div></div><p>Grid 1.2 supports a new parameter &#8220;selectionMode&#8221; which allows you to control the behaviour of the selection functionality:</p>
+<dl class="docutils">
+<dt>&#8216;none&#8217;</dt>
+<dd>deactivates the selection functionality</dd>
+<dt>&#8216;single&#8217;</dt>
+<dd>let the user select only one item at the same time</dd>
+<dt>&#8216;multiple&#8217;</dt>
+<dd>let the user selects more than one item at the same time</dd>
+<dt>&#8216;extended&#8217; (default)</dt>
+<dd><em>not sure, what&#8217;s the difference between &#8220;multiple&#8221; and &#8220;extended&#8221;</em></dd>
+</dl>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

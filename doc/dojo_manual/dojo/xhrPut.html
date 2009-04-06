@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojo.xhrPut &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dojo" href="contents.html" />
+    <link rel="next" title="Dijit" href="../dijit/contents.html" />
+    <link rel="prev" title="dojo.xhrPost" href="xhrPost.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="../dijit/contents.html" title="Dijit"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="xhrPost.html" title="dojo.xhrPost"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dojo</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojo.xhrPut</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#limitations">Limitations</a></li>
+<li><a class="reference" href="#usage">Usage</a><ul>
+<li><a class="reference" href="#dojo-xhrpost-supported-object-properties">dojo.xhrPost supported object properties</a></li>
+<li><a class="reference" href="#return-type-dojo-deferred">Return type (dojo.Deferred)</a></li>
+<li><a class="reference" href="#handling-status-codes">Handling Status Codes</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#example-1-dojo-xhrput-call-to-send-some-text-data">Example 1: dojo.xhrPut call to send some text data</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="xhrPost.html"
+                                  title="previous chapter">dojo.xhrPost</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../dijit/contents.html"
+                                  title="next chapter">Dijit</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dojo/xhrPut.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo-xhrput">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojo.xhrPut<a class="headerlink" href="#dojo-xhrput" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V0.9</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo-xhrput" id="id2" name="id2">dojo.xhrPut</a><ul>
+<li><a class="reference" href="#introduction" id="id3" name="id3">Introduction</a></li>
+<li><a class="reference" href="#limitations" id="id4" name="id4">Limitations</a></li>
+<li><a class="reference" href="#usage" id="id5" name="id5">Usage</a></li>
+<li><a class="reference" href="#examples" id="id6" name="id6">Examples</a></li>
+<li><a class="reference" href="#see-also" id="id7" name="id7">See also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>The dojo.xhrPut() function is lesser used function for pushing data for a server.  It is similar to POST, but in terms of the <a class="reference" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">HTTP spec</a> it has different meaning.  Also, common patters like REST define a PUT and a POST as different things.  For services that follow <a class="reference" href="http://en.wikipedia.org/wiki/Representational_State_Transfer">REST</a> conventions, this function will be important.  Much like its <a class="reference" href="dojo/xhrGet">GET counterpart</a> (dojo.xhrGet), its purpose is to provide an easy to use and consistent interface to making asynchronous calls.  The dojo.xhrPut is geared towards sending raw data to the server as a content body.  This function, in essence, implements making an asynchronous HTTP &#8216;PUT&#8217; call.</p>
+<p>The following information should get you up and going with dojo.xhrPut().  As with all dojo functions, always refer to the API docs for detailed information.</p>
+</div>
+<div class="section" id="limitations">
+<h2><a class="toc-backref" href="#id4">Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></a></h2>
+<p>The limitations are the same as <a class="reference" href="xhrGet.html#dojo-xhrget"><em>dojo.xhrGet</em></a></p>
+</div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id5">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<p>The xhrPut() function takes an object as its parameter.  This object defines how the xhrPost should operate.  All the <a class="reference" href="xhrGet.html#dojo-xhrget"><em>dojo.xhrGet parameters</em></a> are valid, including how to set the load and errors handlers.  So, for specific information about those parameters, please refer to dojo.xhrGet.  This page only lists out the parameters which are usually only used in conjunction with with a PUT.</p>
+<div class="section" id="dojo-xhrpost-supported-object-properties">
+<h3>dojo.xhrPost supported object properties<a class="headerlink" href="#dojo-xhrpost-supported-object-properties" title="Permalink to this headline">¶</a></h3>
+<p>All of the dojo.xhrGet <a class="reference" href="xhrGet.html#dojo-xhrget"><em>object properties</em></a></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>putData</strong></td>
+<td><p class="first">A string of data you wish to send as the put body.  dojo.xhrPut (and dojo.rawXhrPut), do not do any processing of this
+It is merely passed through as the PUT body.</p>
+<p class="last"><strong>This parameter is optional</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="return-type-dojo-deferred">
+<h3>Return type (dojo.Deferred)<a class="headerlink" href="#return-type-dojo-deferred" title="Permalink to this headline">¶</a></h3>
+<p>The return type is the same as dojo.xhrGet.  Please refer to the <a class="reference" href="xhrGet.html#dojo-xhrget"><em>return type</em></a> documentation for details.</p>
+</div>
+<div class="section" id="handling-status-codes">
+<h3>Handling Status Codes<a class="headerlink" href="#handling-status-codes" title="Permalink to this headline">¶</a></h3>
+<p>Handling status codes for xhrPost is the same as handling them for xhrGet.  Please refer to the dojo.xhrGet <a class="reference" href="xhrGet.html#dojo-xhrget"><em>status code documentation</em></a> for details.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id6">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<p>For specific examples of how to use dojo.xhrPut, please refer to the following.  Firefox&#8217;s Firebug does not show PUT content, unfortunately, so the only way to see the PUT content on the wire is to use a debugging proxy like &#8216;Charles&#8217;.</p>
+<div class="section" id="example-1-dojo-xhrput-call-to-send-some-text-data">
+<h3>Example 1: dojo.xhrPut call to send some text data<a class="headerlink" href="#example-1-dojo-xhrput-call-to-send-some-text-data" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dijit.form.Button&quot;);
+
+  function sendText() {
+    var button = dijit.byId(&quot;submitButton2&quot;);
+
+    dojo.connect(button, &quot;onClick&quot;, function(event){
+      //The parameters to pass to xhrPut, the message, and the url to send it to
+      //Also, how to handle the return and callbacks.
+      var xhrArgs = {
+        url: &quot;putIt&quot;,
+        putData: &quot;Some random text&quot;,
+        handleAs: &quot;text&quot;,
+        load: function(data){
+          dojo.byId(&quot;response2&quot;).innerHTML = &quot;Message put.&quot;;
+        },
+        error: function(error){
+          //We'll 404 in the demo, but that's okay.  We don't have a 'putIt' service on the
+          //docs server.
+          dojo.byId(&quot;response2&quot;).innerHTML = &quot;Message put.&quot;;
+        }
+      }
+      dojo.byId(&quot;response2&quot;).innerHTML = &quot;Message being sent...&quot;
+      //Call the asynchronous xhrPost
+      var deferred = dojo.xhrPut(xhrArgs);
+    });
+  }
+  dojo.addOnLoad(sendText);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;b&gt;Push the button to PUT some text.&lt;/b&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;button dojoType=&quot;dijit.form.Button&quot; id=&quot;submitButton2&quot;&gt;Send it!&lt;/button&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Result&lt;/b&gt;
+&lt;div id=&quot;response2&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id7">See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li><a class="reference" href="xhrGet.html#dojo-xhrget"><em>dojo.xhrGet</em></a></li>
+<li><a class="reference" href="xhrPost.html#dojo-xhrpost"><em>dojo.xhrPost</em></a></li>
+<li><a class="reference" href="rawXhrPost.html#dojo-rawxhrpost"><em>dojo.rawXhrPost</em></a></li>
+<li><a class="reference" href="xhrDelete.html#dojo-xhrdelete"><em>dojo.xhrDelete</em></a></li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

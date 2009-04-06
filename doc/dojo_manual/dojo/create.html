@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojo.create &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dojo" href="contents.html" />
+    <link rel="next" title="dojo.data" href="data.html" />
+    <link rel="prev" title="dojo.coords" href="coords.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="data.html" title="dojo.data"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="coords.html" title="dojo.coords"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dojo</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojo.create</a><ul>
+<li><a class="reference" href="#overview">Overview</a></li>
+<li><a class="reference" href="#examples">Examples</a></li>
+<li><a class="reference" href="#alternatives">Alternatives</a><ul>
+<li><a class="reference" href="#creating-and-or-placing-with-dojo-place">Creating and/or placing with dojo.place()</a></li>
+<li><a class="reference" href="#setting-attributes-with-dojo-attr">Setting attributes with dojo.attr()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="coords.html"
+                                  title="previous chapter">dojo.coords</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="data.html"
+                                  title="next chapter">dojo.data</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dojo/create.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo-create">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojo.create<a class="headerlink" href="#dojo-create" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.3</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo-create" id="id2" name="id2">dojo.create</a><ul>
+<li><a class="reference" href="#overview" id="id3" name="id3">Overview</a></li>
+<li><a class="reference" href="#examples" id="id4" name="id4">Examples</a></li>
+<li><a class="reference" href="#alternatives" id="id5" name="id5">Alternatives</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>A convenient DOM creation, manipulation and placement utility shorthand. It is designed to simplify the frequently used sequence of DOM manipulation: create a node, set attributes on it, and place it in the DOM. It can be used with existing nodes too, if you want to assign new attributes and place it afterwards.</p>
+<p>To see this utility in context, read the <a class="reference" href="../quickstart/dom.html#quickstart-dom"><em>DOM Quick Start</em></a> first.</p>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id3">Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></a></h2>
+<p>The function takes up to four arguments:</p>
+<p>dojo.create(tag, attrs, refNode, pos);</p>
+<p>Here is the definition of arguments:</p>
+<dl class="docutils">
+<dt>tag</dt>
+<dd><p class="first">Can be a string or a DOM node. If it is a string, it will be treated as a node tag name, which will be used to create a new node.</p>
+<p>Notes:</p>
+<ul class="last simple">
+<li>When creating a node the owner document of <tt class="docutils literal"><span class="pre">refNode</span></tt> is used. If <tt class="docutils literal"><span class="pre">refNode</span></tt> is <tt class="docutils literal"><span class="pre">null</span></tt> or unspecified, <tt class="docutils literal"><span class="pre">dojo.doc</span></tt> is used.</li>
+</ul>
+</dd>
+<dt>attrs</dt>
+<dd><p class="first">A dictionary of attributes to be set on <tt class="docutils literal"><span class="pre">node</span></tt>. This parameter is passed to <a class="reference" href="attr.html#dojo-attr"><em>dojo.attr</em></a> unmodified after the node is created.</p>
+<p class="last">Can be <tt class="docutils literal"><span class="pre">null</span></tt> or undefined meaning &#8220;don&#8217;t set any attributes&#8221;. You should always specify it explicitly (as <tt class="docutils literal"><span class="pre">null</span></tt>) if you want to specify the rest of arguments.</p>
+</dd>
+<dt>refNode</dt>
+<dd><p class="first">A string (interpreted as an id of a DOM node) or a DOM node. This parameter is passed to <a class="reference" href="place.html#dojo-place"><em>dojo.place</em></a> unmodified after the node is created, and attributes are set.</p>
+<p class="last">Can be omitted meaning &#8220;don&#8217;t place the node&#8221;.</p>
+</dd>
+<dt>pos</dt>
+<dd>Optional argument. Can be a number or one of the following strings: &#8220;before&#8221;, &#8220;after&#8221;, &#8220;replace&#8221;, &#8220;only&#8221;, &#8220;first&#8221;, or &#8220;last&#8221;. If omitted, &#8220;last&#8221; is assumed. This parameter is passed to <a class="reference" href="place.html#dojo-place"><em>dojo.place</em></a> unmodified after the node is created, and attributes are set. Please see <a class="reference" href="place.html#dojo-place"><em>dojo.place</em></a> for more details and examples.</dd>
+</dl>
+<p>The function returns a DOM node it created with <tt class="docutils literal"><span class="pre">tag</span></tt> or the first argument, if it was a DOM node.</p>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id4">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<p>Create a &lt;div&gt;:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>Create a &lt;div&gt; with content:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="o">,</span> <span class="p">{</span> <span class="nx">innerHTML</span><span class="o">:</span> <span class="s2">&quot;&lt;p&gt;hi&lt;/p&gt;&quot;</span> <span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>Append a new &lt;div&gt; to &lt;body&gt; with no attributes:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">body</span><span class="p">());</span>
+</pre></div>
+</td></tr></table></div>
+<p>Place a new &lt;div&gt; as the first child of &lt;body&gt; with no attributes:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">body</span><span class="p">()</span><span class="o">,</span> <span class="s2">&quot;first&quot;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>Decorate and place an existing node:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">node</span><span class="o">,</span> <span class="p">{</span> <span class="nx">style</span><span class="o">:</span> <span class="p">{</span> <span class="nx">color</span><span class="o">:</span> <span class="s2">&quot;red&quot;</span> <span class="p">}</span> <span class="p">}</span><span class="o">,</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">body</span><span class="p">());</span>
+</pre></div>
+</td></tr></table></div>
+<p>Create an &lt;ul&gt;, and populate it with &lt;li&gt;'s. Place the list as the first child of a node with id equals &quot;someId&quot;:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">ul</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s2">&quot;ul&quot;</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="s2">&quot;someId&quot;</span><span class="o">,</span> <span class="s2">&quot;first&quot;</span><span class="p">);</span>
+<span class="k">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;one&quot;</span><span class="o">,</span> <span class="s2">&quot;two&quot;</span><span class="o">,</span> <span class="s2">&quot;three&quot;</span><span class="o">,</span> <span class="s2">&quot;four&quot;</span><span class="p">];</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">items</span><span class="o">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+  <span class="nx">dojo</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s2">&quot;li&quot;</span><span class="o">,</span> <span class="p">{</span> <span class="nx">innerHTML</span><span class="o">:</span> <span class="nx">data</span> <span class="p">}</span><span class="o">,</span> <span class="nx">ul</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>Create an anchor, with an href. Place in &lt;body&gt;:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="o">,</span> <span class="p">{</span> <span class="nx">href</span><span class="o">:</span> <span class="s2">&quot;foo.html&quot;</span><span class="o">,</span> <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;Goto FOO!&quot;</span><span class="o">,</span> <span class="nx">innerHTML</span><span class="o">:</span> <span class="s2">&quot;link&quot;</span> <span class="p">}</span><span class="o">,</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">body</span><span class="p">());</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="alternatives">
+<h2><a class="toc-backref" href="#id5">Alternatives<a class="headerlink" href="#alternatives" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="creating-and-or-placing-with-dojo-place">
+<h3>Creating and/or placing with dojo.place()<a class="headerlink" href="#creating-and-or-placing-with-dojo-place" title="Permalink to this headline">¶</a></h3>
+<p>In some cases it is easier to create a node from an HTML fragment and place it, without applying any attributes, or specifying them as a part of the HTML fragment. If this is the case consider <a class="reference" href="place.html#dojo-place"><em>dojo.place</em></a>:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><div class="highlight"><pre><span class="c">// duplicating the next line with dojo.place()</span>
+<span class="c">//dojo.create(&quot;a&quot;, { href: &quot;foo.html&quot;, title: &quot;Goto FOO!&quot;, innerHTML: &quot;link&quot; }, dojo.body());</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">place</span><span class="p">(</span><span class="s2">&quot;&lt;a href=&#39;foo.html&#39; title=&#39;Goto FOO!&#39;&gt;link&lt;/a&gt;&quot;</span><span class="o">,</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">body</span><span class="p">()</span>
+
+<span class="c">// duplicating the next line with dojo.place()</span>
+<span class="c">//var n = dojo.create(&quot;div&quot;, null, dojo.body());</span>
+<span class="k">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">place</span><span class="p">(</span><span class="s2">&quot;&lt;div&gt;&lt;/div&gt;&quot;</span><span class="o">,</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">body</span><span class="p">());</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="setting-attributes-with-dojo-attr">
+<h3>Setting attributes with dojo.attr()<a class="headerlink" href="#setting-attributes-with-dojo-attr" title="Permalink to this headline">¶</a></h3>
+<p>While you can use <a class="reference" href="#dojo-create"><em>dojo.create</em></a> to set attributes on the existing node without placing it, using <a class="reference" href="attr.html#dojo-attr"><em>dojo.attr</em></a> is recommended:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3</pre></td><td class="code"><div class="highlight"><pre><span class="c">// duplicating the next line with dojo.attr()</span>
+<span class="c">//var n = dojo.create(node, { innerHTML: &quot;&lt;p&gt;hi&lt;/p&gt;&quot; });</span>
+<span class="k">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="nx">node</span><span class="o">,</span> <span class="p">{</span> <span class="nx">innerHTML</span><span class="o">:</span> <span class="s2">&quot;&lt;p&gt;hi&lt;/p&gt;&quot;</span> <span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojo.map &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dojo" href="contents.html" />
+    <link rel="next" title="dojo.marginBox" href="marginBox.html" />
+    <link rel="prev" title="Key Constants" href="keys.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="marginBox.html" title="dojo.marginBox"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="keys.html" title="Key Constants"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dojo</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojo.map</a><ul>
+<li><a class="reference" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="keys.html"
+                                  title="previous chapter">Key Constants</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="marginBox.html"
+                                  title="next chapter">dojo.marginBox</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dojo/map.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo-map">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojo.map<a class="headerlink" href="#dojo-map" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.2</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo-map" id="id2" name="id2">dojo.map</a><ul>
+<li><a class="reference" href="#examples" id="id3" name="id3">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id3">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<p>This example shows you how to use dojo.map with a simple array. All values of the array will get doubled:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+dojo.require(&quot;dijit.form.Button&quot;); // this is just to make the demo look nicer
+
+var arrValues = [1,2,3,4,5,6,7,8,9,10]
+
+function mapArray(){
+  var doubleValue = dojo.map(arrValues, function(item){
+    return item*2;
+  });
+
+  dojo.forEach(doubleValue, function(item){
+    var li = dojo.doc.createElement(&quot;li&quot;);
+    li.innerHTML = item;
+    dojo.byId(&quot;arrValuesAfter-items&quot;).appendChild(li);
+  });
+
+  dojo.forEach(arrValues, function(item){
+    var li = dojo.doc.createElement(&quot;li&quot;);
+    li.innerHTML = item;
+    dojo.byId(&quot;arrValues-items&quot;).appendChild(li);
+  });
+}
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;button dojoType=&quot;dijit.form.Button&quot; onClick=&quot;mapArray()&quot;&gt;Run dojo.map()&lt;/button&gt;
+&lt;div style=&quot;width: 300px; float: left; margin-top: 10px;&quot;&gt;
+Values before running dojo.map()
+&lt;ul id=&quot;arrValues-items&quot;&gt;
+
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div style=&quot;width: 300px; float: left; margin-top: 10px;&quot;&gt;
+Values after running dojo.map()
+&lt;ul id=&quot;arrValuesAfter-items&quot;&gt;
+
+&lt;/ul&gt;
+&lt;/div&gt;</pre></div></div><p>This example shows you how to use dojo.map with objects. In JavaScript, objects are references, so you can not just change a value of a property without modifying the object itself. Luckily Dojo provides you with a method to clone objects: <a class="reference" href="clone.html#dojo-clone"><em>dojo.clone</em></a></p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+dojo.require(&quot;dijit.form.Button&quot;); // this is just to make the demo look nicer
+
+var arrSalary = [{surname: &quot;Washington&quot;, name: &quot;Paul&quot;, salary: 200},
+           {surname: &quot;Gordon&quot;, name: &quot;Amie&quot;, salary: 350},
+           {surname: &quot;Meyer&quot;, name: &quot;Sofie&quot;, salary: 100},
+           {surname: &quot;Jaysons&quot;, name: &quot;Josh&quot;, salary: 2500},
+           {surname: &quot;Washington&quot;, name: &quot;George&quot;, salary: 10},
+           {surname: &quot;Doormat&quot;, name: &quot;Amber&quot;, salary: 320},
+           {surname: &quot;Smith&quot;, name: &quot;Susan&quot;, salary: 3200},
+           {surname: &quot;Hill&quot;, name: &quot;Strawberry&quot;, salary: 290},
+           {surname: &quot;Washington&quot;, name: &quot;Dan&quot;, salary: 200},
+           {surname: &quot;Dojo&quot;, name: &quot;Master&quot;, salary: 205}];
+
+function raiseSalary(){
+  var raisedSalaries = dojo.map(arrSalary, function(item){
+    var newItem = dojo.clone(item);
+    newItem.salary += (newItem.salary/100)*10;
+    return newItem;
+  });
+
+  dojo.forEach(raisedSalaries, function(item, i){
+    var li = dojo.doc.createElement(&quot;li&quot;);
+    li.innerHTML = i+1+&quot;. &quot;+item.surname+&quot;, &quot;+item.name+&quot;. New salary: &quot;+item.salary;
+    dojo.byId(&quot;filteredSalary-items&quot;).appendChild(li);
+  });
+
+  dojo.forEach(arrSalary, function(item, i){
+    var li = dojo.doc.createElement(&quot;li&quot;);
+    li.innerHTML = i+1+&quot;. &quot;+item.surname+&quot;, &quot;+item.name+&quot;. Old salary: &quot;+item.salary;
+    dojo.byId(&quot;unFilteredSalary-items&quot;).appendChild(li);
+  });
+}
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;button dojoType=&quot;dijit.form.Button&quot; onClick=&quot;raiseSalary()&quot;&gt;Raise the salary&lt;/button&gt;
+&lt;div style=&quot;width: 300px; float: left; margin-top: 10px;&quot;&gt;
+Peoples salaries after raise:
+&lt;ul id=&quot;filteredSalary-items&quot;&gt;
+
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div style=&quot;width: 300px; float: left; margin-top: 10px;&quot;&gt;
+Peoples salaries before raise:
+&lt;ul id=&quot;unFilteredSalary-items&quot;&gt;
+
+&lt;/ul&gt;
+&lt;/div&gt;</pre></div></div></div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

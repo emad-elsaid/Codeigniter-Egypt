@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.form.manager._NodeMixin &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../../index.html" />
+    <link rel="up" title="DojoX" href="../../contents.html" />
+    <link rel="next" title="dojox.form.manager._ValueMixin" href="_ValueMixin.html" />
+    <link rel="prev" title="dojox.form.manager._Mixin" href="_Mixin.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../../_static/dojo/dijit/themes/dijit.css";
+@import "../../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="_ValueMixin.html" title="dojox.form.manager._ValueMixin"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="_Mixin.html" title="dojox.form.manager._Mixin"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.form.manager._NodeMixin</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#methods-and-properties">Methods and properties</a><ul>
+<li><a class="reference" href="#value-access">Value access</a><ul>
+<li><a class="reference" href="#formnodevalue">formNodeValue</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#inspection">Inspection</a><ul>
+<li><a class="reference" href="#inspectformnodes">inspectFormNodes</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#registration">Registration</a><ul>
+<li><a class="reference" href="#registernode">registerNode</a></li>
+<li><a class="reference" href="#unregisternode">unregisterNode</a></li>
+<li><a class="reference" href="#registernodedescendants">registerNodeDescendants</a></li>
+<li><a class="reference" href="#unregisternodedescendants">unregisterNodeDescendants</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#lifecycle">Lifecycle</a><ul>
+<li><a class="reference" href="#destroy">destroy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference" href="#additional-functions">Additional functions</a><ul>
+<li><a class="reference" href="#dojox-form-manager-changeevent">dojox.form.manager.changeEvent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="_Mixin.html"
+                                  title="previous chapter">dojox.form.manager._Mixin</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="_ValueMixin.html"
+                                  title="next chapter">dojox.form.manager._ValueMixin</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../../_sources/dojox/form/manager/_NodeMixin.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-form-manager-nodemixin">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.form.manager._NodeMixin<a class="headerlink" href="#dojox-form-manager-nodemixin" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.3 (trunk)</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Eugene Lazutkin</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since 1.3</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-form-manager-nodemixin" id="id2" name="id2">dojox.form.manager._NodeMixin</a><ul>
+<li><a class="reference" href="#introduction" id="id3" name="id3">Introduction</a></li>
+<li><a class="reference" href="#methods-and-properties" id="id4" name="id4">Methods and properties</a><ul>
+<li><a class="reference" href="#value-access" id="id5" name="id5">Value access</a></li>
+<li><a class="reference" href="#inspection" id="id6" name="id6">Inspection</a></li>
+<li><a class="reference" href="#registration" id="id7" name="id7">Registration</a></li>
+<li><a class="reference" href="#lifecycle" id="id8" name="id8">Lifecycle</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#additional-functions" id="id9" name="id9">Additional functions</a><ul>
+<li><a class="reference" href="#dojox-form-manager-changeevent" id="id10" name="id10">dojox.form.manager.changeEvent</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>This class defines low-level primitives for form nodes. It is complimentary to and should be used together with <a class="reference" href="_Mixin.html#dojox-form-manager-mixin"><em>dojox.form.manager._Mixin</em></a>.</p>
+<p>On startup this mixin inspects its body and registers all found form nodes (<tt class="docutils literal"><span class="pre">&lt;input&gt;</span></tt>, &#8216;&#8217;&lt;select&gt;``, <tt class="docutils literal"><span class="pre">&lt;textarea&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;button&gt;</span></tt>) unless they are part of some form widget.</p>
+</div>
+<div class="section" id="methods-and-properties">
+<h2><a class="toc-backref" href="#id4">Methods and properties<a class="headerlink" href="#methods-and-properties" title="Permalink to this headline">¶</a></a></h2>
+<p>This section describes all public methods and properties of <em>dojox.form.manager._NodeMixin</em> class.</p>
+<div class="section" id="value-access">
+<h3><a class="toc-backref" href="#id5">Value access<a class="headerlink" href="#value-access" title="Permalink to this headline">¶</a></a></h3>
+<p>Methods in this category provide primitives for low-level access to values of individual form elements. For high-level access to values use <a class="reference" href="_ValueMixin.html#dojox-form-manager-valuemixin"><em>_ValueMixin</em></a>.</p>
+<div class="section" id="formnodevalue">
+<h4>formNodeValue<a class="headerlink" href="#formnodevalue" title="Permalink to this headline">¶</a></h4>
+<p>This method allows to get/set values of controlled form nodes. It is modeled after <a class="reference" href="_Mixin.html#dojox-form-manager-mixin"><em>dojox.form.manager._Mixin&#8217;s formWidgetValue()</em></a>. It can be used two ways: with one parameter to get the value, and with two parameters to set the value:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c">// reading the value</span>
+<span class="k">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">fm</span><span class="p">.</span><span class="nx">formNodeValue</span><span class="p">(</span><span class="s2">&quot;lastName&quot;</span><span class="p">);</span>
+<span class="c">// writing the value</span>
+<span class="nx">fm</span><span class="p">.</span><span class="nx">formNodeValue</span><span class="p">(</span><span class="s2">&quot;lastName&quot;</span><span class="o">,</span> <span class="s2">&quot;Smith&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The first parameter is a name of <a class="reference" href="../Manager.html#dojox-form-manager"><em>a controlled form element</em></a> (a string). The optional second parameter is a value to be set. It is usually a string too.</p>
+<p>The returned value is:</p>
+<ul class="simple">
+<li>A form element's value for the getter version.</li>
+<li>The form manager itself for the setter version providing easy chaining.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="inspection">
+<h3><a class="toc-backref" href="#id6">Inspection<a class="headerlink" href="#inspection" title="Permalink to this headline">¶</a></a></h3>
+<p>Methods in this category provide primitives to iterate over controlled elements. These methods are major building blocks for all other mixins. In most cases you should avoid using them directly relying on more high-level methods of other mixins. Do use them if you write your own mixins.</p>
+<p>Note: this section is similar to
+This method allows to get/set values of controlled form nodes. It is modeled after <a class="reference" href="_Mixin.html#dojox-form-manager-mixin"><em>dojox.form.manager._Mixin's inspectFormWidget()</em></a>.</p>
+<div class="section" id="inspectformnodes">
+<h4>inspectFormNodes<a class="headerlink" href="#inspectformnodes" title="Permalink to this headline">¶</a></h4>
+<p>This method iterates over controlled elements:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">inspector</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">name</span><span class="o">,</span> <span class="nx">widget</span><span class="o">,</span> <span class="nx">value</span><span class="p">){</span>
+  <span class="k">var</span> <span class="nx">oldValue</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">formNodeValue</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">formNodeValue</span><span class="p">(</span><span class="nx">name</span><span class="o">,</span> <span class="nx">value</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">oldValue</span><span class="o">;</span>
+<span class="p">};</span>
+
+<span class="k">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;firstName&quot;</span><span class="o">,</span> <span class="s2">&quot;lastName&quot;</span><span class="p">];</span>
+
+<span class="k">var</span> <span class="nx">defaultValue</span> <span class="o">=</span> <span class="s2">&quot;X&quot;</span><span class="o">;</span>
+
+<span class="nx">fm</span><span class="p">.</span><span class="nx">inspectFormNodes</span><span class="p">(</span><span class="nx">inspector</span><span class="o">,</span> <span class="nx">state</span><span class="o">,</span> <span class="nx">defaultValue</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>There are three ways to use this method:</p>
+<ol class="arabic simple">
+<li><tt class="docutils literal"><span class="pre">state</span></tt> is an array of form names. In this case <tt class="docutils literal"><span class="pre">inspector</span></tt> is called with with the same 3rd parameter <tt class="docutils literal"><span class="pre">defaultValue</span></tt> for every node in the array. The above example uses this form of inspection: both <tt class="docutils literal"><span class="pre">lastName</span></tt> and <tt class="docutils literal"><span class="pre">firstName</span></tt> will be set to <tt class="docutils literal"><span class="pre">&quot;X&quot;</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">state</span></tt> is an object. In this case keys of the object are form names, while corresponding values are actual values to be passed to <tt class="docutils literal"><span class="pre">inspector</span></tt> as the 3rd parameter (in this case <tt class="docutils literal"><span class="pre">defaultValue</span></tt> is not used):</li>
+</ol>
+<blockquote>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">firstName</span><span class="o">:</span> <span class="s2">&quot;Jill&quot;</span><span class="o">,</span>
+  <span class="nx">lastName</span><span class="o">:</span>  <span class="s2">&quot;Taylor&quot;</span>
+<span class="p">};</span>
+<span class="nx">fm</span><span class="p">.</span><span class="nx">inspectFormNodes</span><span class="p">(</span><span class="nx">inspector</span><span class="o">,</span> <span class="nx">state</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The above example sets <tt class="docutils literal"><span class="pre">lastName</span></tt> to <tt class="docutils literal"><span class="pre">&quot;Taylor&quot;</span></tt> and <tt class="docutils literal"><span class="pre">firstName</span></tt> to <tt class="docutils literal"><span class="pre">&quot;Jill&quot;</span></tt>.</p>
+</blockquote>
+<ol class="arabic simple" start="3">
+<li><tt class="docutils literal"><span class="pre">state</span></tt> is <tt class="docutils literal"><span class="pre">null</span></tt> or missing. In this case the method will iterate over all controlled nodes passing <tt class="docutils literal"><span class="pre">defaultValue</span></tt> as the <tt class="docutils literal"><span class="pre">value</span></tt> parameter to <tt class="docutils literal"><span class="pre">inspector</span></tt>.</li>
+</ol>
+<blockquote>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">fm</span><span class="p">.</span><span class="nx">inspectFormNodes</span><span class="p">(</span><span class="nx">inspector</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="s2">&quot;X&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The above example sets all controlled widgets to <tt class="docutils literal"><span class="pre">&quot;X&quot;</span></tt>.</p>
+</blockquote>
+<p>While iterating the method collects all returned values of <tt class="docutils literal"><span class="pre">inspector</span></tt> in an object keyed by corresponding widget names, and returns it as the result.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">firstName</span><span class="o">:</span> <span class="s2">&quot;Jill&quot;</span><span class="o">,</span>
+  <span class="nx">lastName</span><span class="o">:</span>  <span class="s2">&quot;Taylor&quot;</span>
+<span class="p">};</span>
+<span class="k">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">fm</span><span class="p">.</span><span class="nx">inspectFormNodes</span><span class="p">(</span><span class="nx">inspector</span><span class="o">,</span> <span class="nx">state</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">firstName</span><span class="p">);</span>              <span class="c">// Jane</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">lastName</span><span class="p">);</span>               <span class="c">// Smith</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fm</span><span class="p">.</span><span class="nx">formNodeValue</span><span class="p">(</span><span class="s2">&quot;firstName&quot;</span><span class="p">));</span> <span class="c">// Jill</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fm</span><span class="p">.</span><span class="nx">formNodeValue</span><span class="p">(</span><span class="s2">&quot;lastName&quot;</span><span class="p">));</span>  <span class="c">// Taylor</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">inspector</span></tt> function is called for every inspected node in the context of the form manager. It has following signature:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">inspector</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="nx">name</span><span class="o">,</span> <span class="nx">node</span><span class="o">,</span> <span class="nx">value</span><span class="p">){</span>
+  <span class="c">// ...</span>
+  <span class="k">return</span> <span class="nx">someValue</span><span class="o">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">name</span></tt> is the name of the inspected widget, <tt class="docutils literal"><span class="pre">node</span></tt> is the node itself, or an array of widgets for radio button nodes, <tt class="docutils literal"><span class="pre">value</span></tt> is the value passed to the function according to the above described rules. <tt class="docutils literal"><span class="pre">inspector</span></tt>'s return value will be collected and returned as a part of the result object as described above.</p>
+<p>What <tt class="docutils literal"><span class="pre">inspector</span></tt> does is up to you. It can modify or just read node values. It can return something meaningful or nothing at all. It is strongly suggested to use other form manager's methods to get/set node values rather than doing it manually.</p>
+</div>
+</div>
+<div class="section" id="registration">
+<h3><a class="toc-backref" href="#id7">Registration<a class="headerlink" href="#registration" title="Permalink to this headline">¶</a></a></h3>
+<p>These functions can register/unregister form nodes. In most cases these methods are not used directly because <em>dojox.form.manager._NodeMixin</em> registers all children form nodes automatically. But if you create/delete nodes dynamically, you should register/unregister them manually.</p>
+<p>Note: methods in this section are modeled on <a class="reference" href="_Mixin.html#dojox-form-manager-mixin"><em>dojox.form.manager._Mixin's registration</em></a>.</p>
+<div class="section" id="registernode">
+<h4>registerNode<a class="headerlink" href="#registernode" title="Permalink to this headline">¶</a></h4>
+<p>This method registers a form node with a form manager, and connects its observers. This node is not required to be a descendant of the form manager it is being registered with. This method is modeled on <a class="reference" href="_Mixin.html#dojox-form-manager-mixin"><em>dojox.form.manager._Mixin's registerWidget()</em></a>. Two signatures are recognized:</p>
+<ol class="arabic simple">
+<li>Register by node id:</li>
+</ol>
+<blockquote>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">fm</span><span class="p">.</span><span class="nx">registerNode</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+</pre></div>
+</div>
+</blockquote>
+<ol class="arabic simple" start="2">
+<li>Register a DOM node:</li>
+</ol>
+<blockquote>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">fm</span><span class="p">.</span><span class="nx">registerNode</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
+</pre></div>
+</div>
+</blockquote>
+</div>
+<div class="section" id="unregisternode">
+<h4>unregisterNode<a class="headerlink" href="#unregisternode" title="Permalink to this headline">¶</a></h4>
+<p>This method disconnects form node's observers, and removes it from internal structures of a form manager. This method is modeled on <a class="reference" href="_Mixin.html#dojox-form-manager-mixin"><em>dojox.form.manager._Mixin's unregisterWidget()</em></a>. The only way to unregister a form node is by its form name:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">fm</span><span class="p">.</span><span class="nx">unregisterNode</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="registernodedescendants">
+<h4>registerNodeDescendants<a class="headerlink" href="#registernodedescendants" title="Permalink to this headline">¶</a></h4>
+<p>This method calls <a class="reference" href="#registernode">registerNode</a> for every descendant form node of a given DOM node. This method is useful when you add several form nodes dynamically. These nodes do not need to be descendants of the form manager they are being registered with.</p>
+<p>This method is modeled on <a class="reference" href="_Mixin.html#dojox-form-manager-mixin"><em>dojox.form.manager._Mixin's registerWidgetDescendants()</em></a>.</p>
+<p>Like with <a class="reference" href="#registernode">registerNode</a> two signatures are recognized:</p>
+<ol class="arabic simple">
+<li>Register by node id:</li>
+</ol>
+<blockquote>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">fm</span><span class="p">.</span><span class="nx">registerNodeDescendants</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+</pre></div>
+</div>
+</blockquote>
+<ol class="arabic simple" start="2">
+<li>Register by specifying a DOM node:</li>
+</ol>
+<blockquote>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">fm</span><span class="p">.</span><span class="nx">registerNodeDescendants</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
+</pre></div>
+</div>
+</blockquote>
+</div>
+<div class="section" id="unregisternodedescendants">
+<h4>unregisterNodeDescendants<a class="headerlink" href="#unregisternodedescendants" title="Permalink to this headline">¶</a></h4>
+<p>This method calls <a class="reference" href="#unregisternode">unregisterNode</a> for every descendant form node of a given DOM node. Its signature is the same as <a class="reference" href="#registernodedescendants">registerNodeDescendants</a>'s signature (both variants).</p>
+<p>This method is modeled on <a class="reference" href="_Mixin.html#dojox-form-manager-mixin"><em>dojox.form.manager._Mixin's unregisterWidgetDescendants()</em></a>.</p>
+</div>
+</div>
+<div class="section" id="lifecycle">
+<h3><a class="toc-backref" href="#id8">Lifecycle<a class="headerlink" href="#lifecycle" title="Permalink to this headline">¶</a></a></h3>
+<p>Lifecycle methods are part of every widget. They are used to initialize and destroy a widget. If you mix <em>dojox.form.manager._Mixin</em> in your own widget, make sure that these methods are not overwritten. If you overwrite them, make sure to call <tt class="docutils literal"><span class="pre">this.inherited(arguments)</span></tt> at the appropriate place, so they can initialize/destroy the widget properly.</p>
+<div class="section" id="destroy">
+<h4>destroy<a class="headerlink" href="#destroy" title="Permalink to this headline">¶</a></h4>
+<p>This is the standard method of any widget. It is responsible for tearing up internal widget structures preparing the widget for the garbage collection. Usually it detaches event handlers, and kills references to DOM nodes. For more details, see <a class="reference" href="../../../dijit/_Widget.html#dijit-widget"><em>dijit._Widget</em></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="additional-functions">
+<h2><a class="toc-backref" href="#id9">Additional functions<a class="headerlink" href="#additional-functions" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="dojox-form-manager-changeevent">
+<h3><a class="toc-backref" href="#id10">dojox.form.manager.changeEvent<a class="headerlink" href="#dojox-form-manager-changeevent" title="Permalink to this headline">¶</a></a></h3>
+<p>This is the low-level helper function, which returns an appropriate change event for a give DOM node.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="k">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">doc</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;button&quot;</span><span class="p">)</span><span class="o">,</span>
+    <span class="nx">select</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">doc</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;select&quot;</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dojox</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">manager</span><span class="p">.</span><span class="nx">changeEvent</span><span class="p">(</span><span class="nx">button</span><span class="p">));</span> <span class="c">// onclick</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dojox</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">manager</span><span class="p">.</span><span class="nx">changeEvent</span><span class="p">(</span><span class="nx">select</span><span class="p">));</span> <span class="c">// onchange</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

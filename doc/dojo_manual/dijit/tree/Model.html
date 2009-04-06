@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.tree.Model &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dijit" href="../contents.html" />
+    <link rel="next" title="dijit.tree.TreeStoreModel" href="TreeStoreModel.html" />
+    <link rel="prev" title="dijit.Tree" href="../Tree.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="TreeStoreModel.html" title="dijit.tree.TreeStoreModel"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="../Tree.html" title="dijit.Tree"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="../Tree.html"
+                                  title="previous chapter">dijit.Tree</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="TreeStoreModel.html"
+                                  title="next chapter">dijit.tree.TreeStoreModel</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dijit/tree/Model.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-tree-model">
+<span id="id1"></span><h1>dijit.tree.Model<a class="headerlink" href="#dijit-tree-model" title="Permalink to this headline">¶</a></h1>
+<p>A <a class="reference" href="../Tree.html#dijit-tree"><em>dijit.Tree</em></a> presents a view onto some hierarchical data.  The &#8220;TreeModel&#8221; represents the actual data.</p>
+<p>Usually, the data ultimately comes from a data store, but the Tree
+interfaces with a &#8220;dijit.tree.Model&#8221;, an Object matching a certain API of methods the tree needs.
+This allows Tree to access data in various formats, such as with a data store where items
+reference their parents (ie, the relational model) rather than parents having a list of
+their children.</p>
+<p>There are two model implementations included with Tree:</p>
+<blockquote>
+<ul class="simple">
+<li><a class="reference" href="TreeStoreModel.html#dijit-tree-treestoremodel"><em>dijit.tree.TreeStoreModel</em></a>: interface to a data store with a single item that represents the root of the tree.  For example, a data store of employees where the root is the CEO of the company.</li>
+<li><a class="reference" href="ForestStoreModel.html#dijit-tree-foreststoremodel"><em>dijit.tree.ForestStoreModel</em></a>: interface to a data store with multiple top level items.  For example, a data store of places (countries, states, cities).  If the data store doesn&#8217;t have a single root item (&#8220;world&#8221; in this example) then ForestStoreModel is the interface for it.</li>
+</ul>
+</blockquote>
+<p>The above models have the following functions:</p>
+<blockquote>
+<ul class="simple">
+<li>respond to queries from Tree widget about items and the hierarchy of items</li>
+<li>notify the tree when underlying items in the data store have changed; could be:<ul>
+<li>new items</li>
+<li>deleted items</li>
+<li>changed items (for example, item name has changed)</li>
+<li>item&#8217;s list of children has changed</li>
+</ul>
+</li>
+<li>handle &#8220;writes&#8221; from the Tree back to the data store, by DnD.  DnD could be of items within the tree, or items dropped from an external location.</li>
+</ul>
+</blockquote>
+<p>Here&#8217;s the API to implement your own model.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">destroy</span><span class="o">:</span> <span class="k">function</span><span class="p">(){</span>
+        <span class="c">// summary: destroys this object, releasing connections to the store</span>
+<span class="p">}</span><span class="o">,</span>
+
+<span class="c">// =======================================================================</span>
+<span class="c">// Methods for traversing hierarchy</span>
+<span class="nx">getRoot</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">onItem</span><span class="p">){</span>
+        <span class="c">// summary:</span>
+        <span class="c">//            Calls onItem with the root item for the tree, possibly a fabricated item.</span>
+        <span class="c">//            Throws exception on error.</span>
+<span class="p">}</span><span class="o">,</span>
+
+<span class="nx">mayHaveChildren</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/*dojo.data.Item*/</span> <span class="nx">item</span><span class="p">){</span>
+        <span class="c">// summary</span>
+        <span class="c">//            Tells if an item has or may have children.  Implementing logic here</span>
+        <span class="c">//            avoids showing +/- expando icon for nodes that we know don&#39;t have children.</span>
+        <span class="c">//            (For efficiency reasons we may not want to check if an element actually</span>
+        <span class="c">//            has children until user clicks the expando node)</span>
+<span class="p">}</span><span class="o">,</span>
+
+<span class="nx">getChildren</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/*dojo.data.Item*/</span> <span class="nx">parentItem</span><span class="o">,</span> <span class="c">/*function(items)*/</span> <span class="nx">onComplete</span><span class="p">){</span>
+        <span class="c">// summary</span>
+        <span class="c">//           Calls onComplete() with array of child items of given parent item, all loaded.</span>
+        <span class="c">//            Throws exception on error.</span>
+<span class="p">}</span><span class="o">,</span>
+
+<span class="c">// =======================================================================</span>
+<span class="c">// Inspecting items</span>
+<span class="nx">getIdentity</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/* item */</span> <span class="nx">item</span><span class="p">){</span>
+        <span class="c">// summary: returns identity for an item</span>
+<span class="p">}</span><span class="o">,</span>
+
+<span class="nx">getLabel</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/*dojo.data.Item*/</span> <span class="nx">item</span><span class="p">){</span>
+        <span class="c">// summary: get the label for an item</span>
+<span class="p">}</span><span class="o">,</span>
+
+<span class="c">// =======================================================================</span>
+<span class="c">// Write interface</span>
+<span class="nx">newItem</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/* Object? */</span> <span class="nx">args</span><span class="o">,</span> <span class="c">/*Item?*/</span> <span class="nx">parent</span><span class="p">){</span>
+        <span class="c">// summary</span>
+        <span class="c">//            Creates a new item.   See dojo.data.api.Write for details on args.</span>
+<span class="p">}</span><span class="o">,</span>
+
+<span class="nx">pasteItem</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/*Item*/</span> <span class="nx">childItem</span><span class="o">,</span> <span class="c">/*Item*/</span> <span class="nx">oldParentItem</span><span class="o">,</span> <span class="c">/*Item*/</span> <span class="nx">newParentItem</span><span class="o">,</span> <span class="c">/*Boolean*/</span> <span class="nx">bCopy</span><span class="p">){</span>
+        <span class="c">// summary</span>
+        <span class="c">//            Move or copy an item from one parent item to another.</span>
+        <span class="c">//            Used in drag &amp; drop.</span>
+        <span class="c">//            If oldParentItem is specified and bCopy is false, childItem is removed from oldParentItem.</span>
+        <span class="c">//            If newParentItem is specified, childItem is attached to newParentItem.</span>
+<span class="p">}</span><span class="o">,</span>
+
+<span class="c">// =======================================================================</span>
+<span class="c">// Callbacks</span>
+<span class="nx">onChange</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/*dojo.data.Item*/</span> <span class="nx">item</span><span class="p">){</span>
+        <span class="c">// summary</span>
+        <span class="c">//            Callback whenever an item has changed, so that Tree</span>
+        <span class="c">//            can update the label, icon, etc.   Note that changes</span>
+        <span class="c">//            to an item&#39;s children or parent(s) will trigger an</span>
+        <span class="c">//            onChildrenChange() so you can ignore those changes here.</span>
+<span class="p">}</span><span class="o">,</span>
+
+<span class="nx">onChildrenChange</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="c">/*dojo.data.Item*/</span> <span class="nx">parent</span><span class="o">,</span> <span class="c">/*dojo.data.Item[]*/</span> <span class="nx">newChildrenList</span><span class="p">){</span>
+        <span class="c">// summary</span>
+        <span class="c">//            Callback to do notifications about new, updated, or deleted items.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

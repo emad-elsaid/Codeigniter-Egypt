@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.data.HtmlStore &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.data.HtmlTableStore" href="HtmlTableStore.html" />
+    <link rel="prev" title="dojox.data.GoogleSearchStore" href="GoogleSearchStore.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="HtmlTableStore.html" title="dojox.data.HtmlTableStore"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="GoogleSearchStore.html" title="dojox.data.GoogleSearchStore"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.data.HtmlStore</a><ul>
+<li><a class="reference" href="#api-support">API Support</a></li>
+<li><a class="reference" href="#example-data-input">Example data input</a><ul>
+<li><a class="reference" href="#html-table">HTML table</a></li>
+<li><a class="reference" href="#list">List</a></li>
+<li><a class="reference" href="#div-collection">DIV Collection</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#constructor-params">Constructor params</a></li>
+<li><a class="reference" href="#item-attributes">Item Attributes</a></li>
+<li><a class="reference" href="#query-syntax">Query Syntax</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#connecting-htmlstore-to-dijit-form-combobox">Connecting HtmlStore to dijit.form.ComboBox</a></li>
+<li><a class="reference" href="#connecting-htmlstore-to-dojox-grid-datagrid">Connecting HtmlStore to dojox.grid.DataGrid</a></li>
+<li><a class="reference" href="#connecting-htmlstore-with-list-to-dijit-form-combobox">Connecting HtmlStore with List to dijit.form.ComboBox</a></li>
+<li><a class="reference" href="#connecting-htmlstore-with-div-collection-to-dijit-form-combobox">Connecting HtmlStore with DIV collection to dijit.form.ComboBox</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="GoogleSearchStore.html"
+                                  title="previous chapter">dojox.data.GoogleSearchStore</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="HtmlTableStore.html"
+                                  title="next chapter">dojox.data.HtmlTableStore</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/data/HtmlStore.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-data-htmlstore">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.data.HtmlStore<a class="headerlink" href="#dojox-data-htmlstore" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed, Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Jared Jurkiewicz</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.1</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-data-htmlstore" id="id2" name="id2">dojox.data.HtmlStore</a><ul>
+<li><a class="reference" href="#api-support" id="id3" name="id3">API Support</a></li>
+<li><a class="reference" href="#example-data-input" id="id4" name="id4">Example data input</a></li>
+<li><a class="reference" href="#constructor-params" id="id5" name="id5">Constructor params</a></li>
+<li><a class="reference" href="#item-attributes" id="id6" name="id6">Item Attributes</a></li>
+<li><a class="reference" href="#query-syntax" id="id7" name="id7">Query Syntax</a></li>
+<li><a class="reference" href="#examples" id="id8" name="id8">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>HtmlStore is an improved version of the older <em>dojox.data.HtmlTableStore</em>. It is a simple read-only store provided by Dojo and contained in the DojoX project. HtmlTableStore is a read interface to work with HTML tables, Lists, and collections of DIV and SPAN tags with a generally set format. HTML tables, lists and DIV collections are common ways for Web data to be displayed. In Ajax applications they also remain extremely useful as an alternate representation of data that is displayed in a charting, dynamic grid, or gauge widget. This store was created so that widgets, that can use dojo.data data stores, can read their input from existing HTML structures (data islands) in the current page or in a remote page URL.</p>
+<div class="section" id="api-support">
+<h2><a class="toc-backref" href="#id3">API Support<a class="headerlink" href="#api-support" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li><a class="reference" href="../../dojo/data/api/Read.html#dojo-data-api-read"><em>dojo.data.api.Read</em></a></li>
+<li><em>dojo.data.api.Identity</em></li>
+</ul>
+</div>
+<div class="section" id="example-data-input">
+<h2><a class="toc-backref" href="#id4">Example data input<a class="headerlink" href="#example-data-input" title="Permalink to this headline">¶</a></a></h2>
+<p>The following examples are HTML structures that can be easily read by HtmlStore:</p>
+<div class="section" id="html-table">
+<h3>HTML table<a class="headerlink" href="#html-table" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Books2.html&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;table id="books2"&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;isbn&lt;/th&gt;
+          &lt;th&gt;title&lt;/th&gt;
+          &lt;th&gt;author&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;A9B57C&lt;/td&gt;
+          &lt;td&gt;Title of 1&lt;/td&gt;
+          &lt;td&gt;Author of 1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;A9B57F&lt;/td&gt;
+          &lt;td&gt;Title of 2&lt;/td&gt;
+          &lt;td&gt;Author of 2&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;A9B577&lt;/td&gt;
+          &lt;td&gt;Title of 3&lt;/td&gt;
+          &lt;td&gt;Author of 3&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;A9B574&lt;/td&gt;
+          &lt;td&gt;Title of 4&lt;/td&gt;
+          &lt;td&gt;Author of 4&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;A9B5CC&lt;/td&gt;
+          &lt;td&gt;Title of 5&lt;/td&gt;
+          &lt;td&gt;Author of 5&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p><strong>Note:</strong> The table rows in the &lt;tbody&gt; tag are the items. The &lt;thead&gt; tag is used for defining the attribute name for each column in the table row for an item.</p>
+</div>
+<div class="section" id="list">
+<h3>List<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>&lt;ul id="myList"&gt;
+  &lt;li&gt;Item 1&lt;/li&gt;
+  &lt;li&gt;Item 2&lt;/li&gt;
+  &lt;li&gt;Item 3&lt;/li&gt;
+  &lt;li&gt;Item 4&lt;/li&gt;
+  &lt;li&gt;Item 5&lt;/li&gt;
+  &lt;li&gt;Item 6&lt;/li&gt;
+  &lt;li&gt;Item 7&lt;/li&gt;
+  &lt;li&gt;Item 8&lt;/li&gt;
+  &lt;li&gt;Item 9&lt;/li&gt;
+  &lt;li&gt;Item 10&lt;/li&gt;
+&lt;/ul&gt;</pre>
+</div>
+<p><strong>Note:</strong> The &lt;LI&gt; entries are the items. Each has a single attribute 'name' which corresponds to the text content of the &lt;LI&gt;.</p>
+</div>
+<div class="section" id="div-collection">
+<h3>DIV Collection<a class="headerlink" href="#div-collection" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><pre>&lt;div id="divList"&gt;
+  &lt;div&gt;Item 1&lt;/div&gt;
+  &lt;div&gt;Item 2&lt;/div&gt;
+  &lt;div&gt;Item 3&lt;/div&gt;
+  &lt;div&gt;Item 4&lt;/div&gt;
+  &lt;div&gt;Item 5&lt;/div&gt;
+  &lt;div&gt;Item 6&lt;/div&gt;
+  &lt;div&gt;Item 7&lt;/div&gt;
+  &lt;div&gt;Item 8&lt;/div&gt;
+  &lt;div&gt;Item 9&lt;/div&gt;
+  &lt;div&gt;Item 10&lt;/div&gt;
+&lt;/div&gt;</pre>
+</div>
+<p><strong>Note:</strong> The &lt;DIV&gt; entries are the items. Each has a single attribute 'name' which corresponds to the text content of the &lt;DIV&gt;.</p>
+</div>
+</div>
+<div class="section" id="constructor-params">
+<h2><a class="toc-backref" href="#id5">Constructor params<a class="headerlink" href="#constructor-params" title="Permalink to this headline">¶</a></a></h2>
+<p>The constructor for HtmlTableStore takes the following possible parameters in its keyword arguments:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="72%" />
+<col width="18%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>name</strong></td>
+<td><strong>description</strong></td>
+<td><strong>type</strong></td>
+</tr>
+<tr><td>url</td>
+<td>The URL from which to load the HTML file containing the HTML table. This is optional.</td>
+<td>string</td>
+</tr>
+<tr><td>tableId</td>
+<td>The id of the HTML tag that contains the table to read from, in either a remote page (if
+the URL was passed) or in the current HTML DOM if the url parameter is null. This is
+required.</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="item-attributes">
+<h2><a class="toc-backref" href="#id6">Item Attributes<a class="headerlink" href="#item-attributes" title="Permalink to this headline">¶</a></a></h2>
+<p>The item attributes are defined by the type of tag set being referenced.</p>
+<dl class="docutils">
+<dt>HTML Table:</dt>
+<dd>The &lt;thead&gt;  tag of the referenced table. Each column name becomes the attribute name for that column when generating the data store view of the data.</dd>
+<dt>DIV collection:</dt>
+<dd>In a DIV collection, the items only contain one attribute/value pair, the text content. Use the attribute 'name' to acquire it.</dd>
+<dt>List:</dt>
+<dd>In a list, the list items have one value, the text content. Use the attribute Use the attribute 'name' to acquire it.</dd>
+</dl>
+</div>
+<div class="section" id="query-syntax">
+<h2><a class="toc-backref" href="#id7">Query Syntax<a class="headerlink" href="#query-syntax" title="Permalink to this headline">¶</a></a></h2>
+<p>The query syntax is identical to <a class="reference" href="../../dojo/data/ItemFileReadStore.html#dojo-data-itemfilereadstore"><em>dojo.data.ItemFileReadStore</em></a>. Please refer to it for the format of the queries.</p>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id8">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="connecting-htmlstore-to-dijit-form-combobox">
+<h3>Connecting HtmlStore to dijit.form.ComboBox<a class="headerlink" href="#connecting-htmlstore-to-dijit-form-combobox" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.HtmlTableStore&quot;);
+  dojo.require(&quot;dijit.form.ComboBox&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;table id=&quot;myData&quot; style=&quot;display: none;&quot;&gt;
+&lt;thead&gt;
+    &lt;tr&gt;
+        &lt;th&gt;isbn&lt;/th&gt;
+        &lt;th&gt;title&lt;/th&gt;
+        &lt;th&gt;author&lt;/th&gt;
+    &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+    &lt;tr&gt;
+        &lt;td&gt;A9B57C&lt;/td&gt;
+        &lt;td&gt;Title of 1&lt;/td&gt;
+        &lt;td&gt;Author of 1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;A9B57F&lt;/td&gt;
+        &lt;td&gt;Title of 2&lt;/td&gt;
+        &lt;td&gt;Author of 2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;A9B577&lt;/td&gt;
+        &lt;td&gt;Title of 3&lt;/td&gt;
+        &lt;td&gt;Author of 3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;A9B574&lt;/td&gt;
+        &lt;td&gt;Title of 4&lt;/td&gt;
+        &lt;td&gt;Author of 4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;A9B5CC&lt;/td&gt;
+        &lt;td&gt;Title of 5&lt;/td&gt;
+        &lt;td&gt;Author of 5&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;b&gt;Combo lookup of isbn&lt;/b&gt;&lt;br&gt;
+&lt;div dojoType=&quot;dojox.data.HtmlTableStore&quot; tableId=&quot;myData&quot; jsId=&quot;comboStore&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.ComboBox&quot; store=&quot;comboStore&quot; searchAttr=&quot;isbn&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="connecting-htmlstore-to-dojox-grid-datagrid">
+<h3>Connecting HtmlStore to dojox.grid.DataGrid<a class="headerlink" href="#connecting-htmlstore-to-dojox-grid-datagrid" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.HtmlStore&quot;);
+  dojo.require(&quot;dojox.grid.DataGrid&quot;);
+
+  var layoutBooks = [
+    [
+      { field: &quot;isbn&quot;, name: &quot;ISBN&quot;, width: 10 },
+      { field: &quot;author&quot;, name: &quot;Author&quot;, width: 10 },
+      { field: &quot;title&quot;, name: &quot;Title&quot;, width: 'auto' }
+    ]
+  ];
+
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;b&gt;Standard HTML table:&lt;/b&gt;&lt;br&gt;
+&lt;table id=&quot;myData2&quot;&gt;
+&lt;thead&gt;
+    &lt;tr&gt;
+        &lt;th&gt;isbn&lt;/th&gt;
+        &lt;th&gt;title&lt;/th&gt;
+        &lt;th&gt;author&lt;/th&gt;
+    &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+    &lt;tr&gt;
+        &lt;td&gt;A9B57C&lt;/td&gt;
+        &lt;td&gt;Title of 1&lt;/td&gt;
+        &lt;td&gt;Author of 1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;A9B57F&lt;/td&gt;
+        &lt;td&gt;Title of 2&lt;/td&gt;
+        &lt;td&gt;Author of 2&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;A9B577&lt;/td&gt;
+        &lt;td&gt;Title of 3&lt;/td&gt;
+        &lt;td&gt;Author of 3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;A9B574&lt;/td&gt;
+        &lt;td&gt;Title of 4&lt;/td&gt;
+        &lt;td&gt;Author of 4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;A9B5CC&lt;/td&gt;
+        &lt;td&gt;Title of 5&lt;/td&gt;
+        &lt;td&gt;Author of 5&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;b&gt;dojox.grid.DataGrid connected to the above table:&lt;/b&gt;&lt;br&gt;
+&lt;div dojoType=&quot;dojox.data.HtmlStore&quot; dataId=&quot;myData2&quot; jsId=&quot;gridStore&quot;&gt;&lt;/div&gt;
+&lt;div style=&quot;width: 400px; height: 200px;&quot;&gt;
+  &lt;div id=&quot;grid&quot;
+    dojoType=&quot;dojox.grid.DataGrid&quot;
+    store=&quot;gridStore&quot;
+    structure=&quot;layoutBooks&quot;
+    query=&quot;{}&quot;
+    rowsPerPage=&quot;40&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/Grid.css&quot;;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/nihiloGrid.css&quot;;
+
+  .dojoxGrid table {
+    margin: 0;
+  }
+&lt;/style&gt;</pre></div></div></div>
+<div class="section" id="connecting-htmlstore-with-list-to-dijit-form-combobox">
+<h3>Connecting HtmlStore with List to dijit.form.ComboBox<a class="headerlink" href="#connecting-htmlstore-with-list-to-dijit-form-combobox" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.HtmlStore&quot;);
+  dojo.require(&quot;dojox.grid.DataGrid&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;b&gt;Standard HTML Ordered List:&lt;/b&gt;&lt;br&gt;
+&lt;ul id=&quot;myList2&quot;&gt;
+  &lt;li&gt;Item 1&lt;/li&gt;
+  &lt;li&gt;Item 2&lt;/li&gt;
+  &lt;li&gt;Item 3&lt;/li&gt;
+  &lt;li&gt;Item 4&lt;/li&gt;
+  &lt;li&gt;Item 5&lt;/li&gt;
+  &lt;li&gt;Item 6&lt;/li&gt;
+  &lt;li&gt;Item 7&lt;/li&gt;
+  &lt;li&gt;Item 8&lt;/li&gt;
+  &lt;li&gt;Item 9&lt;/li&gt;
+  &lt;li&gt;Item 10&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;b&gt;dijit.form.ComboBox connected to the above list:&lt;/b&gt;&lt;br&gt;
+&lt;div dojoType=&quot;dojox.data.HtmlStore&quot; dataId=&quot;myList2&quot; jsId=&quot;comboStore2&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.ComboBox&quot; store=&quot;comboStore2&quot; searchAttr=&quot;name&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="connecting-htmlstore-with-div-collection-to-dijit-form-combobox">
+<h3>Connecting HtmlStore with DIV collection to dijit.form.ComboBox<a class="headerlink" href="#connecting-htmlstore-with-div-collection-to-dijit-form-combobox" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.HtmlStore&quot;);
+  dojo.require(&quot;dojox.grid.DataGrid&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;b&gt;DIV collection:&lt;/b&gt;&lt;br&gt;
+&lt;div id=&quot;divList2&quot;&gt;
+  &lt;div&gt;Item 1&lt;/div&gt;
+  &lt;div&gt;Item 2&lt;/div&gt;
+  &lt;div&gt;Item 3&lt;/div&gt;
+  &lt;div&gt;Item 4&lt;/div&gt;
+  &lt;div&gt;Item 5&lt;/div&gt;
+  &lt;div&gt;Item 6&lt;/div&gt;
+  &lt;div&gt;Item 7&lt;/div&gt;
+  &lt;div&gt;Item 8&lt;/div&gt;
+  &lt;div&gt;Item 9&lt;/div&gt;
+  &lt;div&gt;Item 10&lt;/div&gt;
+&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+&lt;b&gt;dijit.form.ComboBox connected to the above list:&lt;/b&gt;&lt;br&gt;
+&lt;div dojoType=&quot;dojox.data.HtmlStore&quot; dataId=&quot;divList2&quot; jsId=&quot;comboStore3&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.ComboBox&quot; store=&quot;comboStore3&quot; searchAttr=&quot;name&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

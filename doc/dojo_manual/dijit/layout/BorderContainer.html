@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dijit.layout.BorderContainer &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dijit" href="../contents.html" />
+    <link rel="next" title="dijit.layout.ContentPane" href="ContentPane.html" />
+    <link rel="prev" title="dijit.layout.AccordionContainer" href="AccordionContainer.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="ContentPane.html" title="dijit.layout.ContentPane"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="AccordionContainer.html" title="dijit.layout.AccordionContainer"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dijit</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dijit.layout.BorderContainer</a><ul>
+<li><a class="reference" href="#usage">Usage</a><ul>
+<li><a class="reference" href="#setting-sizes">Setting sizes</a></li>
+<li><a class="reference" href="#layout-modes">Layout modes</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#declarative-example">Declarative example</a></li>
+<li><a class="reference" href="#more-advanced-example">More advanced example</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#accessibility">Accessibility</a><ul>
+<li><a class="reference" href="#keyboard">Keyboard</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="AccordionContainer.html"
+                                  title="previous chapter">dijit.layout.AccordionContainer</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="ContentPane.html"
+                                  title="next chapter">dijit.layout.ContentPane</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dijit/layout/BorderContainer.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dijit-layout-bordercontainer">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dijit.layout.BorderContainer<a class="headerlink" href="#dijit-layout-bordercontainer" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Becky Gibson, Bill Keese, Nikolai Onken, Marcus Reimann</td>
+</tr>
+<tr class="field"><th class="field-name">Developers:</th><td class="field-body">?-</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V?</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dijit-layout-bordercontainer" id="id2" name="id2">dijit.layout.BorderContainer</a><ul>
+<li><a class="reference" href="#usage" id="id3" name="id3">Usage</a></li>
+<li><a class="reference" href="#examples" id="id4" name="id4">Examples</a></li>
+<li><a class="reference" href="#accessibility" id="id5" name="id5">Accessibility</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This widget is a container partitioned into up to five regions: left (or leading), right (or trailing), top, and bottom with a mandatory center to fill in any remaining space. Each edge region may have an optional splitter user interface for manual resizing.</p>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#id3">Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></a></h2>
+<p>Note that there can be at most one child marked for each region.</p>
+<div class="section" id="setting-sizes">
+<h3>Setting sizes<a class="headerlink" href="#setting-sizes" title="Permalink to this headline">¶</a></h3>
+<p>Sizes are specified for the edge regions in pixels or percentage using CSS &#8211; height to top and bottom, width for the sides. You might specify a top region of height:100px and a left region of width:50%. The center typically does not have any dimensions specified in CSS and resizes automatically to fill the remaining space.</p>
+<p>Besides setting the size of the BorderContainer itself, you generally need to set the width of the leading and trailing (left and the right) panes.
+You shouldn&#8217;t need to set the height of the top/bottom panes as that can be determined automatically.</p>
+<p>Of course, you shouldn&#8217;t set the size of the center pane, since it&#8217;s size is determined from whatever is left over after
+placing the left/right/top/bottom panes.
+You also shouldn&#8217;t set the width of the top/bottom panes or the height of the left/right panes as that would be meaningless.</p>
+<p><tt class="docutils literal"><span class="pre">note:</span></tt> In order to set the overall size of a BorderContainer to the full size of the viewport, the <cite>&lt;body&gt;</cite> element needs an explicit size set as well as a size on the BorderContainer itself:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4</pre></td><td class="code"><div class="highlight"><pre>  <span class="nt">&lt;style </span><span class="na">type=</span><span class="s">&quot;text/css&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">body</span><span class="o">,</span> <span class="nt">html</span> <span class="p">{</span> <span class="k">width</span><span class="o">:</span><span class="m">100%</span><span class="p">;</span> <span class="k">height</span><span class="o">:</span><span class="m">100%</span><span class="p">;</span> <span class="k">margin</span><span class="o">:</span><span class="m">0</span><span class="p">;</span> <span class="k">padding</span><span class="o">:</span><span class="m">0</span> <span class="p">}</span>
+  <span class="nf">#borderContainer</span> <span class="p">{</span> <span class="k">width</span><span class="o">:</span><span class="m">100%</span><span class="p">;</span> <span class="k">height</span><span class="o">:</span><span class="m">100%</span> <span class="p">}</span>
+  <span class="nt">&lt;/style&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Otherwise, the computed style of the BorderContainer will report 0 rather than the browser-calculated size of the viewport.</p>
+</div>
+<div class="section" id="layout-modes">
+<h3>Layout modes<a class="headerlink" href="#layout-modes" title="Permalink to this headline">¶</a></h3>
+<p>BorderContainer operates in a choice of two layout modes: the design attribute may be set to &quot;headline&quot; (by default) or &quot;sidebar&quot;. With the &quot;headline&quot; layout, the top and bottom sections extend the entire width of the box and the remaining regions are placed in the middle. With the &quot;sidebar&quot; layout, the side panels take priority, extending the full height of the box.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id4">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="declarative-example">
+<h3>Declarative example<a class="headerlink" href="#declarative-example" title="Permalink to this headline">¶</a></h3>
+<div dojoType="docs.widget.CompoundViewer"><p>Lets specify a simple BorderContainer with a left and center region</p>
+<div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+  dojo.require(&quot;dijit.layout.ContentPane&quot;);
+  dojo.require(&quot;dijit.layout.BorderContainer&quot;);
+&lt;/script&gt;</pre></div><p>The markup has to look as follows</p>
+<div dojoType="docs.widget.CodeViewer" label="A dijit button" lang="html"><pre>&lt;div style=&quot;position: relative; width: 100%; height: 400px; border: 1px #ccc solid;&quot;&gt;
+  &lt;div dojoType=&quot;dijit.layout.BorderContainer&quot; design=&quot;sidebar&quot; gutters=&quot;true&quot; liveSplitters=&quot;true&quot; id=&quot;borderContainer&quot;&gt;
+    &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; splitter=&quot;true&quot; region=&quot;leading&quot; style=&quot;width: 100px;&quot;&gt;Hi&lt;/div&gt;
+    &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; splitter=&quot;true&quot; region=&quot;center&quot;&gt;Hi, I'm center&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="A simple set of css rules" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  #borderContainer {
+    width: 100%;
+    height: 100%;
+  }
+&lt;/style&gt;</pre></div></div></div>
+<div class="section" id="more-advanced-example">
+<h3>More advanced example<a class="headerlink" href="#more-advanced-example" title="Permalink to this headline">¶</a></h3>
+<p>Lets take a look at a more advanced example of using BorderContainer and other layout widgets.
+This example uses two BorderContainers to allow to, left and right content areas.
+Note the tabStrip attribute on the TabContainer.</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="The dojo requires" lang="javascript"><pre>&lt;script type=&quot;text/javascript&quot;&gt;
+  dojo.require(&quot;dijit.layout.ContentPane&quot;);
+  dojo.require(&quot;dijit.layout.BorderContainer&quot;);
+  dojo.require(&quot;dijit.layout.TabContainer&quot;);
+  dojo.require(&quot;dijit.layout.AccordionContainer&quot;);
+&lt;/script&gt;</pre></div><p>The markup has to look as follows</p>
+<div dojoType="docs.widget.CodeViewer" label="The markup" lang="html"><pre>&lt;div style=&quot;position: relative; width: 100%; height: 400px; border: 1px #ccc solid;&quot;&gt;
+&lt;div dojoType=&quot;dijit.layout.BorderContainer&quot; gutters=&quot;true&quot; id=&quot;borderContainerTwo&quot; &gt;
+  &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; region=&quot;top&quot; splitter=&quot;false&quot;&gt;
+    Hi, usually here you would have important information, maybe your company logo, or functions you need to access all the time..
+  &lt;/div&gt;
+  &lt;div dojoType=&quot;dijit.layout.BorderContainer&quot; liveSplitters=&quot;false&quot; design=&quot;sidebar&quot; region=&quot;center&quot; id=&quot;mainSplit&quot;&gt;
+    &lt;div dojoType=&quot;dijit.layout.AccordionContainer&quot; minSize=&quot;20&quot; style=&quot;width: 300px;&quot; id=&quot;leftAccordion&quot; region=&quot;leading&quot; splitter=&quot;true&quot;&gt;
+      &lt;div dojoType=&quot;dijit.layout.AccordionPane&quot; title=&quot;One fancy Pane&quot;&gt;
+      &lt;/div&gt;
+      &lt;div dojoType=&quot;dijit.layout.AccordionPane&quot; title=&quot;Another one&quot;&gt;
+      &lt;/div&gt;
+      &lt;div dojoType=&quot;dijit.layout.AccordionPane&quot; title=&quot;Even more fancy&quot; selected=&quot;true&quot;&gt;
+      &lt;/div&gt;
+      &lt;div dojoType=&quot;dijit.layout.AccordionPane&quot; title=&quot;Last, but not least&quot;&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;&lt;!-- end AccordionContainer --&gt;
+    &lt;div dojoType=&quot;dijit.layout.TabContainer&quot; region=&quot;center&quot; tabStrip=&quot;true&quot;&gt;
+      &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My first tab&quot; selected=&quot;true&quot;&gt;
+        Lorem ipsum and all around...
+      &lt;/div&gt;
+      &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My second tab&quot;&gt;
+        Lorem ipsum and all around - second...
+      &lt;/div&gt;
+      &lt;div dojoType=&quot;dijit.layout.ContentPane&quot; title=&quot;My last tab&quot; closable=&quot;true&quot;&gt;
+        Lorem ipsum and all around - last...
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="A few simple css rules" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  #borderContainerTwo {
+    width: 100%;
+    height: 100%;
+  }
+&lt;/style&gt;</pre></div></div></div>
+</div>
+<div class="section" id="accessibility">
+<h2><a class="toc-backref" href="#id5">Accessibility<a class="headerlink" href="#accessibility" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="keyboard">
+<h3>Keyboard<a class="headerlink" href="#keyboard" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Action</th>
+<th class="head">Key</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Navigate to splitters for resizable regions</td>
+<td>tab - all resizable splitters are in the tab order</td>
+</tr>
+<tr><td>Change the size of a vertical region</td>
+<td>left / right arrows to decrease and increase</td>
+</tr>
+<tr><td>Change the size of a horizontal region</td>
+<td>down / up arrows to decrease and increase</td>
+</tr>
+</tbody>
+</table>
+<p>Note: The children of BorderContainer must be created in the source code in their natural tab order. Header regions should be first and footer regions last. In Left to right locales, left regions before center and right ones.</p>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

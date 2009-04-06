@@ -1,0 +1,37 @@
+.. _index:
+
+The Official Dojo Documentation
+===============================
+
+.. contents::
+    :depth: 2
+
+.. image:: /logodojocdocssmall.png
+   :alt: Dojo Documentation
+   :class: logowelcome;
+
+
+=====================================
+:ref:`Getting started <quickstart/index>`
+=====================================
+
+* :ref:`Getting started with some simple steps <quickstart/gettingstarted>`
+
+* :ref:`Installation instructions & Tutorials <quickstart/index>`
+
+
+
+=================================
+:ref:`Reference Guide <manual/index>`
+=================================
+
+* :ref:`The programmers manual for Dojo, Dijit, DojoX with more than 300 examples <manual/index>`
+
+
+================
+:ref:`About <about>`
+================
+
+* :ref:`All about Dojo Toolkits new official documentation pages <about/index>` and how you can contribute. 
+
+  It's a wiki, so dive in help us make it awesome!

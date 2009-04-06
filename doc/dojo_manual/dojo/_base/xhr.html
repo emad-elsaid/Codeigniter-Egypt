@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojo._base.xhr &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="Dojo" href="../contents.html" />
+    <link rel="next" title="dojo.addClass" href="../addClass.html" />
+    <link rel="prev" title="dojo._base.window" href="window.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="../addClass.html" title="dojo.addClass"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="window.html" title="dojo._base.window"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">Dojo</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojo._base.xhr</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#features">Features</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#example-1-dojo-xhrget-and-form-submission">Example 1:  dojo.xhrGet and form submission.</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#see-also">See also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="window.html"
+                                  title="previous chapter">dojo._base.window</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../addClass.html"
+                                  title="next chapter">dojo.addClass</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojo/_base/xhr.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo-base-xhr">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojo._base.xhr<a class="headerlink" href="#dojo-base-xhr" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V0.9</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo-base-xhr" id="id2" name="id2">dojo._base.xhr</a><ul>
+<li><a class="reference" href="#introduction" id="id3" name="id3">Introduction</a></li>
+<li><a class="reference" href="#features" id="id4" name="id4">Features</a></li>
+<li><a class="reference" href="#examples" id="id5" name="id5">Examples</a></li>
+<li><a class="reference" href="#see-also" id="id6" name="id6">See also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><strong>dojo._base.xhr</strong> offers AJAX I/O transports and utility methods.</p>
+<p>As with all dojo._base components, these functions are included within Dojo Base. You get this functionality by just including dojo.js or dojo.xd.js in your page.</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id3">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>The XMLHTTP request object (XHR for short) is one of the basic building blocks for constructing responsive Ajax-drive interactions. By allowing you to retrieve data on the user&#8217;s behalf without refreshing the whole page the XHR object provides tremendous, but cross-browser XHR usage is beset by memory leaks, divergent APIs, a lack of built-in form encoding from JavaScript, and painful corner cases when de-serializing response data.</p>
+<p>Dojo provides a solid set of battle-tested XHR wrapper functions to allow you to build Ajax interactions with confidence, use a unified API, and handle forms with ease. Read on to learn how easy it is to build powerful Ajax interactions with Dojo.</p>
+</div>
+<div class="section" id="features">
+<h2><a class="toc-backref" href="#id4">Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></a></h2>
+<ul class="simple">
+<li><a class="reference" href="../formToJson.html#dojo-formtojson"><em>dojo.formToJson</em></a> : Convert a DOM Form to JSON.</li>
+<li><a class="reference" href="../formToObject.html#dojo-formtoobject"><em>dojo.formToObject</em></a> : Convert a DOM Form to a JavaScript object.</li>
+<li><a class="reference" href="../formToQuery.html#dojo-formtoquery"><em>dojo.formToQuery</em></a> : Convert a DOM Form to a query string.</li>
+<li><a class="reference" href="../objectToQuery.html#dojo-objecttoquery"><em>dojo.objectToQuery</em></a> : Convert a JavaScript object to a query string.</li>
+<li><a class="reference" href="../queryToObject.html#dojo-querytoobject"><em>dojo.queryToObject</em></a> : Convert a query string to a JavaScript Object</li>
+<li><a class="reference" href="../xhrDelete.html#dojo-xhrdelete"><em>dojo.xhrDelete</em></a> : Use HTTP DELETE method to make an xhr call.</li>
+<li><a class="reference" href="../xhrGet.html#dojo-xhrget"><em>dojo.xhrGet</em></a> : Use HTTP GET method to make an xhr call.</li>
+<li><a class="reference" href="../xhrPost.html#dojo-xhrpost"><em>dojo.xhrPost</em></a> : Use HTTP POST method to make an xhr call.</li>
+<li><a class="reference" href="../rawXhrPost.html#dojo-rawxhrpost"><em>dojo.rawXhrPost</em></a> : Use HTTP POST method to make an xhr call.</li>
+<li><em>dojo.rawPut</em> : Use HTTP PUT method to make an xhr call.</li>
+<li><a class="reference" href="../rawXhrPut.html#dojo-rawxhrput"><em>dojo.rawXhrPut</em></a> : Use HTTP PUT method to make an xhr call.</li>
+</ul>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id5">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<p>Each of the functions above have example use cases provided in their documentation.  Please refer to those examples for further details on the particular function usage.</p>
+<p>One example is included below to get you started with xhrGet.  For more xhrGet examples, refer to the <a class="reference" href="../xhrGet.html#dojo-xhrget"><em>xhrGet documentation</em></a>.</p>
+<div class="section" id="example-1-dojo-xhrget-and-form-submission">
+<h3>Example 1:  dojo.xhrGet and form submission.<a class="headerlink" href="#example-1-dojo-xhrget-and-form-submission" title="Permalink to this headline">¶</a></h3>
+<p>dojo.xhr allows you to submit all the values of your form with minimal effort:</p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+    dojo.require(&quot;dijit.form.Form&quot;);
+    dojo.require(&quot;dijit.form.Button&quot;);
+    dojo.require(&quot;dijit.form.ValidationTextBox&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;form dojoType=&quot;dijit.form.Form&quot; id=&quot;myForm&quot; jsId=&quot;myForm&quot;
+    encType=&quot;multipart/form-data&quot; action=&quot;&quot; method=&quot;&quot;&gt;
+    &lt;label for=&quot;name&quot;&gt;Name:&lt;/label&gt;
+    &lt;input dojoType=&quot;dijit.form.ValidationTextBox&quot;
+        type=&quot;text&quot;
+        id=&quot;name&quot;
+        name=&quot;name&quot;
+        value=&quot;your name&quot;
+        trim=&quot;true&quot;
+        maxLength=&quot;30&quot; /&gt;
+
+    &lt;div dojoType=&quot;dijit.form.Button&quot;&gt;
+        Submit
+        &lt;script type=&quot;dojo/method&quot; event=&quot;onClick&quot; args=&quot;evt&quot;&gt;
+            // We are using dojo.xhrGet in this example, but
+            // you can also use dojo.xhrPost or dojo.xhrPut.
+            dojo.xhrGet({
+                // The target URL on your webserver:
+                url: &quot;#&quot;,
+
+                // The form node, which contains the
+                // to be transfered form elements:
+                form: &quot;myForm&quot;,
+
+                // The used data format.  Text is the most basic, no processing is done on it.
+                handleAs: &quot;text&quot;,
+
+                // Timeout in milliseconds:
+                timeout: 5000,
+
+                // Event handler on successful call:
+                load: function(response, ioArgs) {
+                    // do something
+                    // ...
+                    dojo.byId(&quot;results&quot;).innerHTML = &quot;Form submitted successfully.&quot;;
+
+                    // return the response for succeeding callbacks
+                    return response;
+                },
+
+                // Event handler on errors:
+                error: function(response, ioArgs){
+                    debug.dir(response);
+                    dojo.byId(&quot;results&quot;).innerHTML = &quot;Form submission failed.&quot;;
+
+                    // return the response for succeeding callbacks
+                    return response;
+                }
+            });
+        &lt;/script&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;br&gt;
+&lt;b&gt; Submission results:&lt;/b&gt;
+&lt;br&gt;
+&lt;div id=&quot;results&quot;&gt;&lt;/div&gt;</pre></div></div><p>In fact, the attribute &#8220;form:&#8221; could be set on each node, not only on form nodes. If your page contains more than one form and these forms are enclosed with a div- or span-tag, then you&#8217;re able to submit all these forms, if you set &#8220;form:&#8221; to the surronding div- or span-tag.</p>
+</div>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id6">See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<ul>
+<li><p class="first"><a class="reference" href="../../quickstart/ajax.html#quickstart-ajax"><em>quickstart/ajax</em></a></p>
+<p>AJAX quickstart tutorial</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

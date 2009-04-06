@@ -1,0 +1,420 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Shape properties &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="DojoX" href="contents.html" />
+    <link rel="next" title="Matrix tutorial" href="gfx/matrix-tutorial.html" />
+    <link rel="prev" title="dojox.gfx.matrix" href="gfx-geometric-properties.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="gfx/matrix-tutorial.html" title="Matrix tutorial"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="gfx-geometric-properties.html" title="dojox.gfx.matrix"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">Shape properties</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#color">Color</a></li>
+<li><a class="reference" href="#stroke-property">Stroke property</a><ul>
+<li><a class="reference" href="#implementation-details">Implementation details</a><ul>
+<li><a class="reference" href="#canvas">Canvas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference" href="#fill-property">Fill property</a><ul>
+<li><a class="reference" href="#solid-color-fill">Solid color fill</a></li>
+<li><a class="reference" href="#linear-gradient">Linear gradient</a></li>
+<li><a class="reference" href="#radial-gradient">Radial gradient</a></li>
+<li><a class="reference" href="#pattern">Pattern</a></li>
+<li><a class="reference" href="#id2">Implementation details</a><ul>
+<li><a class="reference" href="#vml">VML</a></li>
+<li><a class="reference" href="#svg">SVG</a></li>
+<li><a class="reference" href="#id3">Canvas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference" href="#font-property">Font property</a><ul>
+<li><a class="reference" href="#implementation-notes">Implementation notes</a><ul>
+<li><a class="reference" href="#id4">VML</a></li>
+<li><a class="reference" href="#silverlight">Silverlight</a></li>
+<li><a class="reference" href="#id5">Canvas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="gfx-geometric-properties.html"
+                                  title="previous chapter">dojox.gfx.matrix</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="gfx/matrix-tutorial.html"
+                                  title="next chapter">Matrix tutorial</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/dojox/gfx-visual-properties.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="shape-properties">
+<span id="dojox-gfx-visual-properties"></span><h1><a class="toc-backref" href="#id6">Shape properties<a class="headerlink" href="#shape-properties" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.3</td>
+</tr>
+<tr class="field"><th class="field-name">Authors:</th><td class="field-body">Eugene Lazutkin, Kun Xi, Chris Mitchell</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since 0.4</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#shape-properties" id="id6" name="id6">Shape properties</a><ul>
+<li><a class="reference" href="#introduction" id="id7" name="id7">Introduction</a></li>
+<li><a class="reference" href="#color" id="id8" name="id8">Color</a></li>
+<li><a class="reference" href="#stroke-property" id="id9" name="id9">Stroke property</a><ul>
+<li><a class="reference" href="#implementation-details" id="id10" name="id10">Implementation details</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#fill-property" id="id11" name="id11">Fill property</a><ul>
+<li><a class="reference" href="#solid-color-fill" id="id12" name="id12">Solid color fill</a></li>
+<li><a class="reference" href="#linear-gradient" id="id13" name="id13">Linear gradient</a></li>
+<li><a class="reference" href="#radial-gradient" id="id14" name="id14">Radial gradient</a></li>
+<li><a class="reference" href="#pattern" id="id15" name="id15">Pattern</a></li>
+<li><a class="reference" href="#id2" id="id16" name="id16">Implementation details</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#font-property" id="id17" name="id17">Font property</a><ul>
+<li><a class="reference" href="#implementation-notes" id="id18" name="id18">Implementation notes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id7">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>In general <tt class="docutils literal"><span class="pre">dojox.gfx</span></tt> is built on using duck-typing to specify any visual or geometric properties. You don&#8217;t need to create objects of a special class, you just use objects with the right set of properties. If some properties are missing they will be copied from the predefined default object for this property.</p>
+<p>For example, this is the default stroke object:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dojox</span><span class="p">.</span><span class="nx">gfx</span><span class="p">.</span><span class="nx">defaultStroke</span> <span class="o">=</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;stroke&quot;</span><span class="o">,</span> <span class="nx">color</span><span class="o">:</span> <span class="s2">&quot;black&quot;</span><span class="o">,</span> <span class="nx">style</span><span class="o">:</span> <span class="s2">&quot;solid&quot;</span><span class="o">,</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">1</span><span class="o">,</span> <span class="nx">cap</span><span class="o">:</span> <span class="s2">&quot;butt&quot;</span><span class="o">,</span> <span class="nx">join</span><span class="o">:</span> <span class="mi">4</span><span class="p">};</span>
+</pre></div>
+</div>
+<p>If you supply an object as the stroke, and some of its properties are missing, the missing properties will be copied from <tt class="docutils literal"><span class="pre">defaultStroke</span></tt>. Example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">shape</span><span class="p">.</span><span class="nx">setStroke</span><span class="p">({</span><span class="nx">color</span><span class="o">:</span> <span class="s2">&quot;#ff0&quot;</span><span class="o">,</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">3</span><span class="p">});</span>
+</pre></div>
+</div>
+<p>The effect will be the same as if we specified it like this:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">shape</span><span class="p">.</span><span class="nx">setStroke</span><span class="p">({</span><span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;stroke&quot;</span><span class="o">,</span> <span class="nx">color</span><span class="o">:</span> <span class="s2">&quot;#ff0&quot;</span><span class="o">,</span> <span class="nx">style</span><span class="o">:</span> <span class="s2">&quot;solid&quot;</span><span class="o">,</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">3</span><span class="o">,</span> <span class="nx">cap</span><span class="o">:</span> <span class="s2">&quot;butt&quot;</span><span class="o">,</span> <span class="nx">join</span><span class="o">:</span> <span class="mi">4</span><span class="p">});</span>
+</pre></div>
+</div>
+<p>This rule works for strokes, linear and radial gradients, patterns and fonts.</p>
+<p>If we want to use the default, we can do it like that:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">shape</span><span class="p">.</span><span class="nx">setStroke</span><span class="p">({});</span>
+</pre></div>
+</div>
+<p>But the most efficient way to do that is to pass <tt class="docutils literal"><span class="pre">null</span></tt> as a property value:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">shape</span><span class="p">.</span><span class="nx">setStroke</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Newly created shapes use <tt class="docutils literal"><span class="pre">null</span></tt> for all their visual and geometric properties effectively using all default property objects.</p>
+</div>
+<div class="section" id="color">
+<h2><a class="toc-backref" href="#id8">Color<a class="headerlink" href="#color" title="Permalink to this headline">¶</a></a></h2>
+<p>Color is the fundamental property in HTML and graphics. Dojo handles colors as a part of the base. See details in <em>dojo.Color</em>. The additional module of <em>dojo.colors</em> adds CSS3 color goodies: a huge list of named colors, HSL color space, a grayscale helper.</p>
+<p>Anywhere color is accepted following objects can be used to define it:</p>
+<ul>
+<li><p class="first">A valid color name, like: <tt class="docutils literal"><span class="pre">&quot;white&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;black&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;red&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;green&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;lime&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;blue&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;navy&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;gray&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;silver&quot;</span></tt>.</p>
+<p>If you want to support all CSS3 color names, don’t forget to require <em>dojo.colors</em> module.</p>
+</li>
+<li><p class="first">A valid CSS color code, e.g., <tt class="docutils literal"><span class="pre">&quot;#FF0000&quot;</span></tt> or <tt class="docutils literal"><span class="pre">&quot;#f00&quot;</span></tt>.</p>
+</li>
+<li><p class="first">An array of RGB or RGBA values, e.g, <tt class="docutils literal"><span class="pre">[255,</span> <span class="pre">0,</span> <span class="pre">0]</span></tt> or <tt class="docutils literal"><span class="pre">[255,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">1.0]</span></tt>.</p>
+</li>
+<li><p class="first">A valid <em>dojo.Color</em> object. Internally all other color definitions are converted to this object.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="stroke-property">
+<h2><a class="toc-backref" href="#id9">Stroke property<a class="headerlink" href="#stroke-property" title="Permalink to this headline">¶</a></a></h2>
+<p>A stroke property is an object that defines how to draw an outline of a shape. It is not supported by an image and a group shapes. Following properties are recognized:</p>
+<dl class="docutils">
+<dt>color</dt>
+<dd>defines a color of an outline. Default: <tt class="docutils literal"><span class="pre">&quot;black&quot;</span></tt>.</dd>
+<dt>style</dt>
+<dd>defines a dash pattern. Accepted values: <tt class="docutils literal"><span class="pre">&quot;Solid&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;ShortDash&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;Short-Dot&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;ShortDashDot&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;ShortDashDotDot&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;Dot&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;Dash&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;Long-Dash&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;DashDot&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;LongDashDot&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;LongDashDotDot&quot;</span></tt>, and <tt class="docutils literal"><span class="pre">&quot;none&quot;</span></tt> (the same as <tt class="docutils literal"><span class="pre">&quot;Solid&quot;</span></tt>). These values have been modeled after VML’s <tt class="docutils literal"><span class="pre">dashStyle</span></tt> parameter, and behave similarly (dash pattern is specified in terms of line width).</dd>
+<dt>width</dt>
+<dd>defines a width of a stroke in pixels. It should be a positive number. Default: 1.</dd>
+<dt>cap</dt>
+<dd>defines a shape of opening and closing of a line. Accepted values: <tt class="docutils literal"><span class="pre">&quot;butt&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;round&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;square&quot;</span></tt> (see the definition of <tt class="docutils literal"><span class="pre">stroke-linecap</span></tt> in <a class="reference" href="http://www.w3.org/TR/SVG/painting.html#StrokeProperties">SVG 1.1 stroke properties</a> for details). Default: <tt class="docutils literal"><span class="pre">&quot;butt&quot;</span></tt>.</dd>
+<dt>join</dt>
+<dd>defines a shape of joints. Accepted values: <tt class="docutils literal"><span class="pre">&quot;round&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;bevel&quot;</span></tt>, or a positive number. In case of a number a <tt class="docutils literal"><span class="pre">&quot;miter&quot;</span></tt> style is used with the number defining a miter limit (see the definitions of <tt class="docutils literal"><span class="pre">stroke-linejoin</span></tt> and <tt class="docutils literal"><span class="pre">stroke-miterlimit</span></tt> in <a class="reference" href="http://www.w3.org/TR/SVG/painting.html#StrokeProperties">SVG 1.1 stroke properties</a> for details). Default: 4.</dd>
+</dl>
+<p>By default all shapes are created with null stroke meaning “no stroke is performed”.</p>
+<p>This is the definition of the default stroke from <tt class="docutils literal"><span class="pre">/dojox/gfx/_base.js</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">dojox</span><span class="p">.</span><span class="nx">gfx</span><span class="p">.</span><span class="nx">defaultStroke</span> <span class="o">=</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;stroke&quot;</span><span class="o">,</span> <span class="nx">color</span><span class="o">:</span> <span class="s2">&quot;black&quot;</span><span class="o">,</span> <span class="nx">style</span><span class="o">:</span> <span class="s2">&quot;solid&quot;</span><span class="o">,</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">1</span><span class="o">,</span> <span class="nx">cap</span><span class="o">:</span> <span class="s2">&quot;butt&quot;</span><span class="o">,</span> <span class="nx">join</span><span class="o">:</span> <span class="mi">4</span><span class="p">};</span>
+</pre></div>
+</div>
+<p>As a convenience a stroke can be defined by specifying a color as a string:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">shape</span><span class="p">.</span><span class="nx">setStroke</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>It is equivalent to:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">shape</span><span class="p">.</span><span class="nx">setStroke</span><span class="p">({</span><span class="nx">color</span><span class="o">:</span> <span class="s2">&quot;black&quot;</span><span class="p">});</span>
+</pre></div>
+</div>
+<div class="section" id="implementation-details">
+<h3><a class="toc-backref" href="#id10">Implementation details<a class="headerlink" href="#implementation-details" title="Permalink to this headline">¶</a></a></h3>
+<div class="section" id="canvas">
+<h4>Canvas<a class="headerlink" href="#canvas" title="Permalink to this headline">¶</a></h4>
+<p>Canvas ignores the line style. All lines are drawn solid.</p>
+</div>
+</div>
+</div>
+<div class="section" id="fill-property">
+<h2><a class="toc-backref" href="#id11">Fill property<a class="headerlink" href="#fill-property" title="Permalink to this headline">¶</a></a></h2>
+<p>A fill property is an object that defines how to fill a shape. It is not supported by an image and a group shapes.</p>
+<p>By default all shapes are created with <tt class="docutils literal"><span class="pre">null</span></tt> fill meaning &quot;no fill is performed&quot;. Complex shapes with self intersections (e.g., polygons), or disjoint parts (e.g. paths) are filled using the even-odd rule.</p>
+<p>Four types of fills can be used.</p>
+<div class="section" id="solid-color-fill">
+<h3><a class="toc-backref" href="#id12">Solid color fill<a class="headerlink" href="#solid-color-fill" title="Permalink to this headline">¶</a></a></h3>
+<p>It is in effect when a color was specified as a fill property.</p>
+</div>
+<div class="section" id="linear-gradient">
+<h3><a class="toc-backref" href="#id13">Linear gradient<a class="headerlink" href="#linear-gradient" title="Permalink to this headline">¶</a></a></h3>
+<p>Linear gradient defines a smooth transition between a set of colors (so-called &quot;stops&quot;) on a line. Following properties are recognized:</p>
+<dl class="docutils">
+<dt>type</dt>
+<dd>always <tt class="docutils literal"><span class="pre">&quot;linear&quot;</span></tt>.</dd>
+<dt>x1</dt>
+<dd>defines the <tt class="docutils literal"><span class="pre">X</span></tt> component of a start point of a linear gradient. Default: 0.</dd>
+<dt>y1</dt>
+<dd>defines the <tt class="docutils literal"><span class="pre">Y</span></tt> component of a start point of a linear gradient. Default: 0.</dd>
+<dt>x2</dt>
+<dd>defines the <tt class="docutils literal"><span class="pre">X</span></tt> component of an end point of a linear gradient. Default: 100.</dd>
+<dt>y2</dt>
+<dd>defines the <tt class="docutils literal"><span class="pre">Y</span></tt> component of an end point of a linear gradient. Default: 100.</dd>
+<dt>colors</dt>
+<dd><p class="first">defines an array of stop objects, which have following structure:</p>
+<blockquote class="last">
+<dl class="docutils">
+<dt>offset</dt>
+<dd>a number from 0 to 1, which defines a position of a color on our line. 0 corresponds to <tt class="docutils literal"><span class="pre">(x1,</span> <span class="pre">y1)</span></tt> point. 1 corresponds to <tt class="docutils literal"><span class="pre">(x2,</span> <span class="pre">y2)</span></tt> point. 0.5 will be directly in the middle of a line.</dd>
+<dt>color</dt>
+<dd>a color for this stop.</dd>
+</dl>
+</blockquote>
+</dd>
+</dl>
+<p>The colors member has a following default value: <tt class="docutils literal"><span class="pre">[{offset:</span> <span class="pre">0,</span> <span class="pre">color:</span> <span class="pre">&quot;black&quot;},</span> <span class="pre">{offset:</span> <span class="pre">1,</span> <span class="pre">color:</span> <span class="pre">&quot;white&quot;}]</span></tt>.</p>
+</div>
+<div class="section" id="radial-gradient">
+<h3><a class="toc-backref" href="#id14">Radial gradient<a class="headerlink" href="#radial-gradient" title="Permalink to this headline">¶</a></a></h3>
+<p>Radial gradient defines a smooth transition between stops on a circle. Following properties are recognized:</p>
+<dl class="docutils">
+<dt>type</dt>
+<dd>always <tt class="docutils literal"><span class="pre">&quot;radial&quot;</span></tt>.</dd>
+<dt>cx</dt>
+<dd>defines the <tt class="docutils literal"><span class="pre">X</span></tt> component of a center of a radial gradient. Default: 0.</dd>
+<dt>cy</dt>
+<dd>defines the <tt class="docutils literal"><span class="pre">Y</span></tt> component of a center of a radial gradient. Default: 0.</dd>
+<dt>r</dt>
+<dd>defines a radius of a radial gradient.</dd>
+<dt>colors</dt>
+<dd>defines an array of stops in the same way as a linear gradient object. 0 corresponds to the center. 1 corresponds to the circle’s border. Defaults: <tt class="docutils literal"><span class="pre">[{offset:</span> <span class="pre">0,</span> <span class="pre">color:</span> <span class="pre">&quot;black&quot;},</span> <span class="pre">{offset:</span> <span class="pre">1,</span> <span class="pre">color:</span> <span class="pre">&quot;white&quot;}]</span></tt>.</dd>
+</dl>
+</div>
+<div class="section" id="pattern">
+<h3><a class="toc-backref" href="#id15">Pattern<a class="headerlink" href="#pattern" title="Permalink to this headline">¶</a></a></h3>
+<p>Pattern defines an infinite tiling of an image. Following properties are recognized:</p>
+<dl class="docutils">
+<dt>type</dt>
+<dd>always <tt class="docutils literal"><span class="pre">&quot;pattern&quot;</span></tt>.</dd>
+<dt>x</dt>
+<dd>defines the <tt class="docutils literal"><span class="pre">X</span></tt> component of an offset of a reference rectangle for an image. Default: 0.</dd>
+<dt>y</dt>
+<dd>defines the <tt class="docutils literal"><span class="pre">Y</span></tt> component of an offset of a reference rectangle for an image. Default: 0.</dd>
+<dt>width</dt>
+<dd>defines the width of a reference rectangle. Default: 0 --- <em>don’t forget to set it to the real value!</em></dd>
+<dt>height</dt>
+<dd>defines the height of a reference rectangle. Default: 0 --- <em>don’t forget to set it to the real value!</em></dd>
+<dt>src</dt>
+<dd>defines a URL of an image to be tiled.</dd>
+</dl>
+<p>An image will be fit into the defined reference rectangle using scaling.</p>
+</div>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id16">Implementation details<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></a></h3>
+<div class="section" id="vml">
+<h4>VML<a class="headerlink" href="#vml" title="Permalink to this headline">¶</a></h4>
+<p>VML renderer has following restrictions:</p>
+<ul class="simple">
+<li>Linear gradient should start and stop on a border of a shape. All other line definitions will be visually incompatible with the SVG implementation of the linear gradient.</li>
+<li>Radial gradient repeats the shape of an object. It means that the only way to define a compatible radial gradient for SVG and VML renderers is to define it from a center of a circle shape.</li>
+<li>Transparency (the alpha channel) is not supported for gradient fills.</li>
+</ul>
+</div>
+<div class="section" id="svg">
+<h4>SVG<a class="headerlink" href="#svg" title="Permalink to this headline">¶</a></h4>
+<p>SVG on Firefox 1.5-2.0 doesn’t support the pattern fill.</p>
+</div>
+<div class="section" id="id3">
+<h4>Canvas<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>Canvas renderer doesn’t support the even-odd rule.</p>
+</div>
+</div>
+</div>
+<div class="section" id="font-property">
+<h2><a class="toc-backref" href="#id17">Font property<a class="headerlink" href="#font-property" title="Permalink to this headline">¶</a></a></h2>
+<p>Text shapes (Text and TextPath) require a font in order to be rendered. A font description follows familiar CSS conventions. Following properties of font are recognized:</p>
+<dl class="docutils">
+<dt>style</dt>
+<dd>the same as the CSS <tt class="docutils literal"><span class="pre">font-style</span></tt> property: <tt class="docutils literal"><span class="pre">&quot;normal&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;italic&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;oblique&quot;</span></tt>. Default: <tt class="docutils literal"><span class="pre">&quot;normal&quot;</span></tt>.</dd>
+<dt>variant</dt>
+<dd>the same as the CSS <tt class="docutils literal"><span class="pre">font-variant</span></tt> property: <tt class="docutils literal"><span class="pre">&quot;normal&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;small-caps&quot;</span></tt>. Default: <tt class="docutils literal"><span class="pre">&quot;normal&quot;</span></tt>.</dd>
+<dt>weight</dt>
+<dd>the same as the CSS <tt class="docutils literal"><span class="pre">font-weight</span></tt> property: <tt class="docutils literal"><span class="pre">&quot;normal&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;bold&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;bolder&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;lighter&quot;</span></tt>, 100, 200, 300, 400, 500, 600, 700, 800, 900. Default: <tt class="docutils literal"><span class="pre">&quot;normal&quot;</span></tt>.</dd>
+<dt>size</dt>
+<dd>the same as the CSS <tt class="docutils literal"><span class="pre">font-size</span></tt> property. Default: <tt class="docutils literal"><span class="pre">&quot;10pt&quot;</span></tt>.</dd>
+<dt>family</dt>
+<dd>a string which defines a font family. Default: <tt class="docutils literal"><span class="pre">&quot;serif&quot;</span></tt>.</dd>
+</dl>
+<p>There is a useful shortcut: you can specify a font using a string similar to the CSS font property.</p>
+<div class="section" id="implementation-notes">
+<h3><a class="toc-backref" href="#id18">Implementation notes<a class="headerlink" href="#implementation-notes" title="Permalink to this headline">¶</a></a></h3>
+<div class="section" id="id4">
+<h4>VML<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p>IE7 broke a lot of VML stuff. The family property doesn’t work in IE7 at the moment but does work in IE6. IE7 uses Arial always. Unfortunately there is no workaround for that.</p>
+</div>
+<div class="section" id="silverlight">
+<h4>Silverlight<a class="headerlink" href="#silverlight" title="Permalink to this headline">¶</a></h4>
+<p>Silverlight has following restrictions:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">style</span></tt>: only <tt class="docutils literal"><span class="pre">&quot;normal&quot;</span></tt> and <tt class="docutils literal"><span class="pre">&quot;italic&quot;</span></tt> are supported, all other values are interpreted as <tt class="docutils literal"><span class="pre">&quot;normal&quot;</span></tt>.</li>
+<li><tt class="docutils literal"><span class="pre">variant</span></tt>: ignored.</li>
+<li><tt class="docutils literal"><span class="pre">weight</span></tt>: <tt class="docutils literal"><span class="pre">&quot;normal&quot;</span></tt> is implemented as 400, <tt class="docutils literal"><span class="pre">&quot;bold&quot;</span></tt> is 700, <tt class="docutils literal"><span class="pre">&quot;bolder&quot;</span></tt> and <tt class="docutils literal"><span class="pre">&quot;lighter&quot;</span></tt> are not supported.</li>
+<li><tt class="docutils literal"><span class="pre">size</span></tt>: fully supported.</li>
+<li><tt class="docutils literal"><span class="pre">family</span></tt>: <tt class="docutils literal"><span class="pre">&quot;serif&quot;</span></tt> and <tt class="docutils literal"><span class="pre">&quot;times&quot;</span></tt> are substituted by <tt class="docutils literal"><span class="pre">&quot;Times</span> <span class="pre">New</span> <span class="pre">Roman&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;sans-serif&quot;</span></tt> and <tt class="docutils literal"><span class="pre">&quot;helvetica&quot;</span></tt> are substituted by <tt class="docutils literal"><span class="pre">&quot;Arial&quot;</span></tt>, <tt class="docutils literal"><span class="pre">&quot;monotone&quot;</span></tt> and <tt class="docutils literal"><span class="pre">&quot;courier&quot;</span></tt> are substituted by <tt class="docutils literal"><span class="pre">&quot;Courier</span> <span class="pre">New&quot;</span></tt>, the rest is passed unchanged and will be interpreted by the underlying Silverlight renderer.</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h4>Canvas<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>Canvas doesn’t implement text and, consequently, font definitions.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

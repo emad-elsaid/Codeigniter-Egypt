@@ -1,0 +1,468 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>DOM Utilities &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Quickstart" href="contents.html" />
+    <link rel="next" title="JavaScript events and Dojo" href="events.html" />
+    <link rel="prev" title="Functions used Everywhere" href="dojo-basics.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="events.html" title="JavaScript events and Dojo"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="dojo-basics.html" title="Functions used Everywhere"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Quickstart</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">DOM Utilities</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a></li>
+<li><a class="reference" href="#locating-and-using-nodes">Locating and Using Nodes</a><ul>
+<li><a class="reference" href="#using-id-s">Using ID&#8217;s</a></li>
+<li><a class="reference" href="#css-selectors">CSS Selectors</a></li>
+<li><a class="reference" href="#the-body-element">The &lt;body&gt; element</a></li>
+<li><a class="reference" href="#document-vs-dojo-doc">document vs. dojo.doc</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#manipulating-nodes">Manipulating Nodes</a><ul>
+<li><a class="reference" href="#node-styles">Node styles</a></li>
+<li><a class="reference" href="#node-attributes">Node attributes</a></li>
+<li><a class="reference" href="#node-placement">Node placement</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#creating-nodes">Creating Nodes</a><ul>
+<li><a class="reference" href="#basic-nodes">Basic Nodes</a></li>
+<li><a class="reference" href="#scripts">Scripts</a></li>
+<li><a class="reference" href="#cross-browser-considerations">Cross-browser Considerations</a></li>
+<li><a class="reference" href="#destroying-nodes">Destroying Nodes</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#see-also">See Also</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="dojo-basics.html"
+                                  title="previous chapter">Functions used Everywhere</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="events.html"
+                                  title="next chapter">JavaScript events and Dojo</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/quickstart/dom.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dom-utilities">
+<span id="quickstart-dom"></span><h1><a class="toc-backref" href="#id1">DOM Utilities<a class="headerlink" href="#dom-utilities" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">Peter Higgins</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.3</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dom-utilities" id="id1" name="id1">DOM Utilities</a><ul>
+<li><a class="reference" href="#introduction" id="id2" name="id2">Introduction</a></li>
+<li><a class="reference" href="#locating-and-using-nodes" id="id3" name="id3">Locating and Using Nodes</a></li>
+<li><a class="reference" href="#manipulating-nodes" id="id4" name="id4">Manipulating Nodes</a></li>
+<li><a class="reference" href="#creating-nodes" id="id5" name="id5">Creating Nodes</a></li>
+<li><a class="reference" href="#see-also" id="id6" name="id6">See Also</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id2">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>Dojo provides a host of DOM utility functions. This guide covers combined usage of <a class="reference" href="../dojo/style.html#dojo-style"><em>dojo.style</em></a>, <a class="reference" href="../dojo/create.html#dojo-create"><em>dojo.create</em></a>, <a class="reference" href="../dojo/attr.html#dojo-attr"><em>dojo.attr</em></a>, and a number of other base utilities for DOM convenience.</p>
+</div>
+<div class="section" id="locating-and-using-nodes">
+<h2><a class="toc-backref" href="#id3">Locating and Using Nodes<a class="headerlink" href="#locating-and-using-nodes" title="Permalink to this headline">¶</a></a></h2>
+<p>All of these functions work by doing work on a passed DomNode reference (an element in the page (such as a div, li, a tag)). In order to work with these nodes, we first must locate them in the Document Object Model (DOM). The most important note to get started is all DOM activity must be done after &#8220;onload&#8221; fired, or the DOM is otherwise &#8220;ready&#8221;. This can be achieved by <a class="reference" href="../dojo/addOnLoad.html#dojo-addonload"><em>dojo.addOnLoad</em></a></p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">addOnLoad</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;page ready, can modify DOM anytime after this&quot;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>Once we've ensured our code will only execute after the DOM is ready, we can move on to locating nodes to work on.</p>
+<div class="section" id="using-id-s">
+<h3>Using ID's<a class="headerlink" href="#using-id-s" title="Permalink to this headline">¶</a></h3>
+<p>The fastest, and most common, way of locating an element is by it's <tt class="docutils literal"><span class="pre">id</span></tt> attribute. Dojo provides <a class="reference" href="../dojo/byId.html#dojo-byid"><em>dojo.byId</em></a> - a shorter to write, safer to use version of <tt class="docutils literal"><span class="pre">document.getElementById</span></tt>:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">addOnLoad</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
+    <span class="k">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;someId&quot;</span><span class="p">);</span>
+    <span class="nx">n</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">&quot;Hi, World&quot;</span><span class="o">;</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>Here, we locate a node with id=&quot;someId&quot;, and set it's <tt class="docutils literal"><span class="pre">innerHTML</span></tt> to new content. If a node is not found, dojo.byId returns undefined, and is falsy enough to work as a conditional:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;someId&quot;</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="nx">n</span><span class="p">){</span> <span class="c">/* it exists! */</span> <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="css-selectors">
+<h3>CSS Selectors<a class="headerlink" href="#css-selectors" title="Permalink to this headline">¶</a></h3>
+<p>It is not always practical to attach id's to elements you intend to modify, which is why Dojo provides <a class="reference" href="../dojo/query.html#dojo-query"><em>dojo.query</em></a> - a CSS3 selector engine. It will locate nodes that match a passed CSS selector, and return a specialized Array type - <a class="reference" href="../dojo/NodeList.html#dojo-nodelist"><em>dojo.NodeList</em></a> - that has oodles of useful DOM manipulation functions easily available.</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">addOnLoad</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
+    <span class="k">var</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;#someId&quot;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>In this example, we locate the same node found by <tt class="docutils literal"><span class="pre">dojo.byId</span></tt> before, but using the CSS selector to do so. The <tt class="docutils literal"><span class="pre">query()</span></tt> call returns a found list of nodes (in this case, a single element as id's are unique in the DOM). This list is a standard JavaScript Array, decorated with functions common throughout Dojo, most of which have single-node variants elsewhere in the toolkit. As we'll see, the more of the Core Dojo APIs you learn, the more powerful <tt class="docutils literal"><span class="pre">NodeList</span></tt> instances are:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">addOnLoad</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
+
+    <span class="c">// find a node byId, change the id, and set the color red</span>
+    <span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;#someId&quot;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="o">,</span><span class="s2">&quot;newId&quot;</span><span class="p">).</span><span class="nx">style</span><span class="p">(</span><span class="s2">&quot;color&quot;</span><span class="o">,</span><span class="s2">&quot;red&quot;</span><span class="p">);</span>
+
+    <span class="c">// find a node byId, change the id, and set the color red</span>
+    <span class="k">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;someId&quot;</span><span class="p">);</span>
+    <span class="nx">dojo</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="nx">n</span><span class="o">,</span> <span class="s2">&quot;id&quot;</span><span class="o">,</span> <span class="s2">&quot;newId&quot;</span><span class="p">);</span>
+    <span class="nx">dojo</span><span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="nx">n</span><span class="o">,</span> <span class="s2">&quot;color&quot;</span><span class="o">,</span> <span class="s2">&quot;red&quot;</span><span class="p">);</span>
+
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>The query method is convenient and more compact and both code snippets have identical results. There is some slight additional overhead to the convenience that <tt class="docutils literal"><span class="pre">dojo.query</span></tt> provides, but in general using <tt class="docutils literal"><span class="pre">dojo.query</span></tt> can save you time make your code easier to read.</p>
+<p>CSS selectors are a handy and powerful way to find most kinds of elements in a page.</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td><td class="code"><div class="highlight"><pre><span class="c">// by class</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;.someClass&quot;</span><span class="p">);</span>
+
+<span class="c">// by attributes</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;[name^=&#39;link&#39;]&quot;</span><span class="p">);</span>
+
+<span class="c">// by tag type</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">);</span>
+
+<span class="c">// first-children</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;ul &gt; li&quot;</span><span class="p">);</span>
+
+<span class="c">// odd table rows:</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;table tr:nth-child(odd)&quot;</span><span class="p">);</span>
+
+<span class="c">// scoped to some other node as parent</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;a.link&quot;</span><span class="o">,</span> <span class="s2">&quot;someNode&quot;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>Finding nodes via <tt class="docutils literal"><span class="pre">dojo.query</span></tt> is very helpful, though the same rules apply to either &quot;lists of nodes&quot; or single nodes, as found by dojo.byId.  We won't cover it here, but you can even use <tt class="docutils literal"><span class="pre">dojo.query</span></tt> to search XML documents!</p>
+</div>
+<div class="section" id="the-body-element">
+<h3>The &lt;body&gt; element<a class="headerlink" href="#the-body-element" title="Permalink to this headline">¶</a></h3>
+<p>All DOM's should contain a &lt;body&gt; element. This element is a DomNode like any other, and is considered the top most DOM Node in a document's visible content. This node is available via <tt class="docutils literal"><span class="pre">dojo.query</span></tt>:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">addOnLoad</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
+    <span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;tundra&quot;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>or more quickly available as a function call:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">addOnLoad</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
+    <span class="nx">dojo</span><span class="p">.</span><span class="nx">addClass</span><span class="p">(</span><span class="nx">dojo</span><span class="p">.</span><span class="nx">body</span><span class="p">()</span><span class="o">,</span> <span class="s2">&quot;tundra&quot;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>By wrapping &lt;body&gt; lookup in the <tt class="docutils literal"><span class="pre">dojo.body()</span></tt> function, we are able to redefine the meaning of the &lt;body&gt; element on the fly. This is useful for situations where your script might be working with multiple documents, such as the content of an iframe or a parent window. You can change the scope of a <tt class="docutils literal"><span class="pre">dojo.query</span></tt> by passing a different document as the context (second) argument:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">addOnLoad</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
+    <span class="k">var</span> <span class="nx">ifr</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;anIframe&quot;</span><span class="p">);</span>
+    <span class="nx">dojo</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="o">,</span> <span class="nx">ifr</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;tundra&quot;</span><span class="p">)</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="document-vs-dojo-doc">
+<h3>document vs. dojo.doc<a class="headerlink" href="#document-vs-dojo-doc" title="Permalink to this headline">¶</a></h3>
+<p>It is very common to see the special global 'document' used throughout JavaScript code. When using Dojo, one should reference reference the global <a class="reference" href="../dojo/doc.html#dojo-doc"><em>dojo.doc</em></a> when accessing the current document. For instance:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></td><td class="code"><div class="highlight"><pre><span class="c">// use</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">doc</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">);</span>
+<span class="k">var</span> <span class="nx">h</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">doc</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;head&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+
+<span class="c">// instead of</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">);</span>
+<span class="k">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&quot;head&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+
+<span class="c">// though, to just create, this is best:</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p>They have identical length in characters, but by using <tt class="docutils literal"><span class="pre">dojo.doc</span></tt> you are able to ensure your code will execute in switched contexts, such as iframes and popups. To switch the context for code that uses <tt class="docutils literal"><span class="pre">dojo.doc</span></tt>, <tt class="docutils literal"><span class="pre">dojo.body()</span></tt>, and <tt class="docutils literal"><span class="pre">dojo.global</span></tt> see the documentation for <a class="reference" href="../dojo/setContext.html#dojo-setcontext"><em>dojo.setContext</em></a>.</p>
+</div>
+</div>
+<div class="section" id="manipulating-nodes">
+<h2><a class="toc-backref" href="#id4">Manipulating Nodes<a class="headerlink" href="#manipulating-nodes" title="Permalink to this headline">¶</a></a></h2>
+<p>Once you are comfortable with the various ways of finding nodes in the DOM, applying the actions on them are somewhat trivial. Each of the DOM manipulation functions accept a String ID or a DomNode reference as the first parameter, and apply some action on that node.</p>
+<div class="section" id="node-styles">
+<h3>Node styles<a class="headerlink" href="#node-styles" title="Permalink to this headline">¶</a></h3>
+<p>TODOC: see <a class="reference" href="../dojo/style.html#dojo-style"><em>dojo.style</em></a></p>
+</div>
+<div class="section" id="node-attributes">
+<h3>Node attributes<a class="headerlink" href="#node-attributes" title="Permalink to this headline">¶</a></h3>
+<p>Each DomNode has a series of attributes available for setting and getting. A lot of times, you can access these properties knowing you are working with a native DomNode:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2</pre></td><td class="code"><div class="highlight"><pre><span class="k">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">byId</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">n</span><span class="p">.</span><span class="nx">id</span> <span class="o">==</span> <span class="s2">&quot;foo&quot;</span><span class="p">);</span> <span class="c">// true</span>
+</pre></div>
+</td></tr></table></div>
+<p>Though for full cross browser compatibility and convenience, it is recommended you access and set attributes through <a class="reference" href="../dojo/attr.html#dojo-attr"><em>dojo.attr</em></a>. The API for dojo.attr is straightforward:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></td><td class="code"><div class="highlight"><pre><span class="c">// set some node to have a new id</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="nx">someNode</span><span class="o">,</span> <span class="s2">&quot;id&quot;</span><span class="o">,</span> <span class="s2">&quot;newId&quot;</span><span class="p">);</span>
+
+<span class="c">// get the id of a node reference</span>
+<span class="k">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">dojo</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="nx">someNode</span><span class="o">,</span> <span class="s2">&quot;id&quot;</span><span class="p">);</span>
+
+<span class="c">// set multiple attributes at once:</span>
+<span class="nx">dojo</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="nx">someNode</span><span class="o">,</span> <span class="p">{</span>
+    <span class="nx">id</span><span class="o">:</span><span class="s2">&quot;newId&quot;</span><span class="o">,</span>
+    <span class="nx">onclick</span><span class="o">:</span> <span class="k">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span> <span class="c">/* handler code */</span> <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+<p>The <tt class="docutils literal"><span class="pre">style</span></tt> attribute is special. One can set an &quot;inline style&quot; by setting an attribute on the DomNode directly:</p>
+<div class="highlight-html"><table class="highlighttable"><tr><td class="linenos"><pre>1</pre></td><td class="code"><div class="highlight"><pre>   <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">&quot;padding:3px; color:red; height:123px&quot;</span><span class="nt">&gt;</span>Lorem, baby!<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>Though this isn't an <tt class="docutils literal"><span class="pre">attribute</span></tt> per se. Just as <a class="reference" href="../dojo/style.html#dojo-style"><em>dojo.style</em></a> (described above) accepts an object-hash of style properties, you can pass a style:{} pair to dojo.attr, and set styles in a dojo.attr call:</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="nx">someNode</span><span class="o">,</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span><span class="s2">&quot;bar&quot;</span><span class="o">,</span>
+    <span class="nx">style</span><span class="o">:</span><span class="p">{</span>
+        <span class="nx">color</span><span class="o">:</span><span class="s2">&quot;#ededed&quot;</span><span class="o">,</span> <span class="nx">fontSize</span><span class="o">:</span><span class="s2">&quot;13pt&quot;</span>
+    <span class="p">}</span><span class="o">,</span>
+    <span class="nx">id</span><span class="o">:</span><span class="s2">&quot;newId&quot;</span>
+<span class="p">});</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="node-placement">
+<h3>Node placement<a class="headerlink" href="#node-placement" title="Permalink to this headline">¶</a></h3>
+<p>Where a node exists in the DOM is important.</p>
+</div>
+</div>
+<div class="section" id="creating-nodes">
+<h2><a class="toc-backref" href="#id5">Creating Nodes<a class="headerlink" href="#creating-nodes" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="basic-nodes">
+<h3>Basic Nodes<a class="headerlink" href="#basic-nodes" title="Permalink to this headline">¶</a></h3>
+<p>The DOM document contains functions for creating each of the basic DOM node types.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Type</th>
+<th class="head">Function</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>element</td>
+<td>createElement(tagName)</td>
+</tr>
+<tr><td>text</td>
+<td>createTextNode(data)</td>
+</tr>
+<tr><td>comment</td>
+<td>createComment(data)</td>
+</tr>
+<tr><td>attribute</td>
+<td>createAttribute(name)</td>
+</tr>
+</tbody>
+</table>
+<p>For example, the following fragment will create a new DOM node of for the HTML DIV tag.</p>
+<div class="highlight-javascript"><table class="highlighttable"><tr><td class="linenos"><pre>1</pre></td><td class="code"><div class="highlight"><pre><span class="nx">dojo</span><span class="p">.</span><span class="nx">doc</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;DIV&quot;</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="scripts">
+<h3>Scripts<a class="headerlink" href="#scripts" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="cross-browser-considerations">
+<h3>Cross-browser Considerations<a class="headerlink" href="#cross-browser-considerations" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="destroying-nodes">
+<h3>Destroying Nodes<a class="headerlink" href="#destroying-nodes" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="see-also">
+<h2><a class="toc-backref" href="#id6">See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></a></h2>
+<p>Here are a list of Web references on the subject of DOM</p>
+<ul class="simple">
+<li><a class="reference" href="http://www.w3.org/DOM/DOMTR">Document Object Model (DOM) Technical Reports</a> - The official specifications from the W3 on the DOM.</li>
+</ul>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

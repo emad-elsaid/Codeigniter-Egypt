@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>dojox.data.OpmlStore &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../../index.html" />
+    <link rel="up" title="DojoX" href="../contents.html" />
+    <link rel="next" title="dojox.data.PersevereStore" href="PersevereStore.html" />
+    <link rel="prev" title="dojox.data.OpenSearchStore" href="OpenSearchStore.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../../_static/dojo/dijit/themes/dijit.css";
+@import "../../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="PersevereStore.html" title="dojox.data.PersevereStore"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="OpenSearchStore.html" title="dojox.data.OpenSearchStore"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="../contents.html" accesskey="U">DojoX</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">dojox.data.OpmlStore</a><ul>
+<li><a class="reference" href="#constructor-params">Constructor Params</a></li>
+<li><a class="reference" href="#query-syntax">Query Syntax</a></li>
+<li><a class="reference" href="#query-options">Query Options</a></li>
+<li><a class="reference" href="#examples">Examples</a><ul>
+<li><a class="reference" href="#connecting-opmlstore-to-dijit-form-combobox">Connecting OpmlStore to dijit.form.ComboBox</a></li>
+<li><a class="reference" href="#connecting-opmlstore-to-dijit-tree">Connecting OpmlStore to dijit.Tree</a></li>
+<li><a class="reference" href="#connecting-opmlstore-to-dojox-grid-datagrid">Connecting OpmlStore to dojox.grid.DataGrid</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="OpenSearchStore.html"
+                                  title="previous chapter">dojox.data.OpenSearchStore</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="PersevereStore.html"
+                                  title="next chapter">dojox.data.PersevereStore</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/dojox/data/OpmlStore.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojox-data-opmlstore">
+<span id="id1"></span><h1><a class="toc-backref" href="#id2">dojox.data.OpmlStore<a class="headerlink" href="#dojox-data-opmlstore" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Contributed, Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Author:</th><td class="field-body">Jared Jurkiewicz</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since V1.0</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojox-data-opmlstore" id="id2" name="id2">dojox.data.OpmlStore</a><ul>
+<li><a class="reference" href="#constructor-params" id="id3" name="id3">Constructor Params</a></li>
+<li><a class="reference" href="#query-syntax" id="id4" name="id4">Query Syntax</a></li>
+<li><a class="reference" href="#query-options" id="id5" name="id5">Query Options</a></li>
+<li><a class="reference" href="#examples" id="id6" name="id6">Examples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>OpmlStore is a simple read-only store provided by Dojo and contained in the DojoX project. OpmlStore is a read interface to work with <a class="reference" href="http://en.wikipedia.org/wiki/OPML">Opml</a> formatted XML files. Similar to ItemFileReadStore, OpmlStore reads the contents from an http endpoint or a browser DOM object that contains Opml formatted data.</p>
+<p>The following dojo.data APIs are implemented by OpmlStore</p>
+<ul class="simple">
+<li><a class="reference" href="../../dojo/data/api/Read.html#dojo-data-api-read"><em>dojo.data.api.Read</em></a></li>
+<li><a class="reference" href="../../dojo/data/api/Identity.html#dojo-data-api-identity"><em>dojo.data.api.Identity</em></a> - <em>Identity is implemented as the index number of the &lt;outline&gt; node</em></li>
+</ul>
+<p>The following example shows an Opml data source:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;</span>
+<span class="nt">&lt;opml</span> <span class="na">version=</span><span class="s">&quot;1.0&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>geography.opml<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;dateCreated&gt;</span>2006-11-10<span class="nt">&lt;/dateCreated&gt;</span>
+    <span class="nt">&lt;dateModified&gt;</span>2006-11-13<span class="nt">&lt;/dateModified&gt;</span>
+    <span class="nt">&lt;ownerName&gt;</span>Magellan, Ferdinand<span class="nt">&lt;/ownerName&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Africa&quot;</span> <span class="na">type=</span><span class="s">&quot;continent&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Egypt&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Kenya&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Nairobi&quot;</span> <span class="na">type=</span><span class="s">&quot;city&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Mombasa&quot;</span> <span class="na">type=</span><span class="s">&quot;city&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/outline&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Sudan&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Khartoum&quot;</span> <span class="na">type=</span><span class="s">&quot;city&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/outline&gt;</span>
+    <span class="nt">&lt;/outline&gt;</span>
+    <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Asia&quot;</span> <span class="na">type=</span><span class="s">&quot;continent&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;China&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;India&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Russia&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Mongolia&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/outline&gt;</span>
+    <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Australia&quot;</span> <span class="na">type=</span><span class="s">&quot;continent&quot;</span> <span class="na">population=</span><span class="s">&quot;21 million&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Australia&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span> <span class="na">population=</span><span class="s">&quot;21 million&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/outline&gt;</span>
+    <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Europe&quot;</span> <span class="na">type=</span><span class="s">&quot;continent&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Germany&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;France&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Spain&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Italy&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/outline&gt;</span>
+    <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;North America&quot;</span> <span class="na">type=</span><span class="s">&quot;continent&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Mexico&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span> <span class="na">population=</span><span class="s">&quot;108 million&quot;</span> <span class="na">area=</span><span class="s">&quot;1,972,550 sq km&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Mexico City&quot;</span> <span class="na">type=</span><span class="s">&quot;city&quot;</span> <span class="na">population=</span><span class="s">&quot;19 million&quot;</span> <span class="na">timezone=</span><span class="s">&quot;-6 UTC&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Guadalajara&quot;</span> <span class="na">type=</span><span class="s">&quot;city&quot;</span> <span class="na">population=</span><span class="s">&quot;4 million&quot;</span> <span class="na">timezone=</span><span class="s">&quot;-6 UTC&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/outline&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Canada&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span> <span class="na">population=</span><span class="s">&quot;33 million&quot;</span> <span class="na">area=</span><span class="s">&quot;9,984,670 sq km&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Ottawa&quot;</span> <span class="na">type=</span><span class="s">&quot;city&quot;</span> <span class="na">population=</span><span class="s">&quot;0.9 million&quot;</span> <span class="na">timezone=</span><span class="s">&quot;-5 UTC&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Toronto&quot;</span> <span class="na">type=</span><span class="s">&quot;city&quot;</span> <span class="na">population=</span><span class="s">&quot;2.5 million&quot;</span> <span class="na">timezone=</span><span class="s">&quot;-5 UTC&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/outline&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;United States of America&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/outline&gt;</span>
+    <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;South America&quot;</span> <span class="na">type=</span><span class="s">&quot;continent&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Brazil&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span> <span class="na">population=</span><span class="s">&quot;186 million&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;outline</span> <span class="na">text=</span><span class="s">&quot;Argentina&quot;</span> <span class="na">type=</span><span class="s">&quot;country&quot;</span> <span class="na">population=</span><span class="s">&quot;40 million&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/outline&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/opml&gt;</span>
+</pre></div>
+</div>
+<p>Each data item is one of the &lt;outline&gt; tags. Each attribute on the outline acts as a attribute of the data item. For children tags, they are accessed via a special 'children' attribute. So, as expected by dojo.data, everything can be easily accessed via csvStore.getValue's'(), which makes it pluggable into dojo.data aware widgets.</p>
+<div class="section" id="constructor-params">
+<h2><a class="toc-backref" href="#id3">Constructor Params<a class="headerlink" href="#constructor-params" title="Permalink to this headline">¶</a></a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="10%" />
+<col width="70%" />
+<col width="8%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Parameter</strong></td>
+<td><strong>Required</strong></td>
+<td><strong>Description</strong></td>
+<td><strong>Since</strong></td>
+</tr>
+<tr><td>url</td>
+<td>No</td>
+<td>This optional parameter specifies what URL from which to load the Opmldata Note
+that this URL is only loaded one time, as this is an in-memory data store.</td>
+<td>1.0</td>
+</tr>
+<tr><td>data</td>
+<td>No</td>
+<td>A DOM of OPML data to use to populate the store. This parameter can be
+used instead of <em>url</em>. when you wish to load data differently then modify it to fit the expected
+Opml format.</td>
+<td>1.0</td>
+</tr>
+<tr><td>label</td>
+<td>No</td>
+<td>A string that identifies which attribute to treat as the human-readable label. It must match one
+of the attributes on the &lt;outline&gt; tags for it to be effective.</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="query-syntax">
+<h2><a class="toc-backref" href="#id4">Query Syntax<a class="headerlink" href="#query-syntax" title="Permalink to this headline">¶</a></a></h2>
+<p>The query syntax used by dojox.data.OpmlStore is identical to the query syntax used by <a class="reference" href="../../dojo/data/ItemFileReadStore.html#dojo-data-itemfilereadstore"><em>dojo.data.ItemFileReadStore</em></a></p>
+</div>
+<div class="section" id="query-options">
+<h2><a class="toc-backref" href="#id5">Query Options<a class="headerlink" href="#query-options" title="Permalink to this headline">¶</a></a></h2>
+<p>Dojo.data defines support for a 'queryOptions' modifier object that affects the behavior of the query. The two defined options listed by the API are <em>ignoreCase</em> and <em>deep</em>. OpmlStore supports these options. The affect of these options on a query is defined below.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<tbody valign="top">
+<tr><td><strong>Option</strong></td>
+<td><strong>Result</strong></td>
+</tr>
+<tr><td>ignoreCase</td>
+<td>The default is <strong>false</strong>. When set to true, the match on attributes is done in a case-insensitive fashion. This means
+with ignoreCase: true, a query of A* would match <em>Apple</em> and <em>acorn</em></td>
+</tr>
+<tr><td>deep</td>
+<td>Default is <em>false</em>. By default, only root outline tags are matched. By setting to true, children tags are also scanned</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="examples">
+<h2><a class="toc-backref" href="#id6">Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></a></h2>
+<div class="section" id="connecting-opmlstore-to-dijit-form-combobox">
+<h3>Connecting OpmlStore to dijit.form.ComboBox<a class="headerlink" href="#connecting-opmlstore-to-dijit-form-combobox" title="Permalink to this headline">¶</a></h3>
+<p><em>Note that dijit.form.ComboBox automatically passes the queryOption deep:true. This is because for ComboBox, hierarchy does not make sense, so searching as a flat list is preferable</em></p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.OpmlStore&quot;);
+  dojo.require(&quot;dijit.form.ComboBox&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojox.data.OpmlStore&quot; url=&quot;/_static/dojo/dojox/data/tests/stores/geography.xml&quot; jsId=&quot;geoStore&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.form.ComboBox&quot; store=&quot;geoStore&quot; searchAttr=&quot;text&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="connecting-opmlstore-to-dijit-tree">
+<h3>Connecting OpmlStore to dijit.Tree<a class="headerlink" href="#connecting-opmlstore-to-dijit-tree" title="Permalink to this headline">¶</a></h3>
+<p><em>Since Opml data can be hierarchical, the Tree widget is an excellent demo for it. A similar demo can be seen with ItemFileReadStore.</em>
+<a class="reference" href="../../quickstart/data/usingdatastores/simple.html#quickstart-data-usingdatastores-simple"><em>here</em></a></p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.data.OpmlStore&quot;);
+  dojo.require(&quot;dijit.Tree&quot;);
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojox.data.OpmlStore&quot; url=&quot;/_static/dojo/dojox/data/tests/stores/geography.xml&quot; jsId=&quot;geoStore2&quot; label=&quot;text&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.tree.ForestStoreModel&quot; jsId=&quot;geoModel&quot; store=&quot;geoStore2&quot; query=&quot;{}&quot; rootId=&quot;Geography&quot; rootLabel=&quot;Geography&quot;&gt;&lt;/div&gt;
+&lt;div dojoType=&quot;dijit.Tree&quot; model=&quot;geoModel&quot;&gt;&lt;/div&gt;</pre></div></div></div>
+<div class="section" id="connecting-opmlstore-to-dojox-grid-datagrid">
+<h3>Connecting OpmlStore to dojox.grid.DataGrid<a class="headerlink" href="#connecting-opmlstore-to-dojox-grid-datagrid" title="Permalink to this headline">¶</a></h3>
+<p><em>Note here that as part of the DataGrid definition, the queryOption deep is set true. For the DataGrid, hierarchy here does not make sense</em></p>
+<div dojoType="docs.widget.CompoundViewer"><div dojoType="docs.widget.CodeViewer" label="" lang="javascript"><pre>&lt;script&gt;
+  dojo.require(&quot;dojox.grid.DataGrid&quot;);
+  dojo.require(&quot;dojox.data.OpmlStore&quot;);
+
+  var layoutGeo = [
+    [
+      { field: &quot;text&quot;, name: &quot;Name&quot;, width: 10 },
+      { field: &quot;type&quot;, name: &quot;Geography Type&quot;, width: 10 },
+      { field: &quot;population&quot;, name: &quot;Population&quot;, width: 'auto' }
+    ]
+  ];
+&lt;/script&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="html"><pre>&lt;div dojoType=&quot;dojox.data.OpmlStore&quot; url=&quot;/_static/dojo/dojox/data/tests/stores/geography.xml&quot; jsId=&quot;geoStore3&quot; label=&quot;text&quot;&gt;&lt;/div&gt;
+
+&lt;div style=&quot;width: 400px; height: 300px;&quot;&gt;
+  &lt;div id=&quot;grid&quot;
+    dojoType=&quot;dojox.grid.DataGrid&quot;
+    store=&quot;geoStore3&quot;
+    structure=&quot;layoutGeo&quot;
+    query=&quot;{}&quot;
+    queryOptions=&quot;{'deep':true}&quot;
+    rowsPerPage=&quot;40&quot;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div><div dojoType="docs.widget.CodeViewer" label="" lang="css"><pre>&lt;style type=&quot;text/css&quot;&gt;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/Grid.css&quot;;
+  &#64;import &quot;/_static/dojo/dojox/grid/resources/nihiloGrid.css&quot;;
+
+  .dojoxGrid table {
+    margin: 0;
+  }
+&lt;/style&gt;</pre></div></div></div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>

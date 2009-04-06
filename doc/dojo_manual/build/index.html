@@ -1,0 +1,537 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Dojo Build System &mdash; Dojo Toolkit v1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.3.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="top" title="Dojo Toolkit v1.3.0 documentation" href="../index.html" />
+    <link rel="up" title="Dojo Build" href="contents.html" />
+    <link rel="next" title="Dojo build system: keepRequires" href="keepRequires.html" />
+    <link rel="prev" title="Expanding dojo.provide calls" href="expand-provide.html" />
+<script type="text/javascript">
+	var djConfig = {
+		parseOnLoad:true, 
+		isDebug: false
+	}
+</script>
+<script type="text/javascript" src="../_static/dojo/dojo/dojo.js"></script>
+<style type="text/css">
+@import "../_static/dojo/dijit/themes/dijit.css";
+@import "../_static/dojo/dijit/themes/nihilo/nihilo.css";
+@import "../_static/dojo/docs/widget/resources/CodeViewer.css";
+@import "../_static/css/layout.css";
+</style>
+
+  </head>
+  <body>  
+
+    <div class="document">
+	<div id="container">
+      <div id="header">
+	<div class="container">
+		<div id="navHeader">
+		  <ul>
+		    <li><a href="../index.html">home</a> |</li>
+            <li style="margin-right: 10px">
+		      <a href="keepRequires.html" title="Dojo build system: keepRequires"
+			 accesskey="N">next</a></li>
+            <li >
+		      <a href="expand-provide.html" title="Expanding dojo.provide calls"
+			 accesskey="P">previous</a> |</li>
+		    <li><a href="../contents.html">Dojo Toolkit v1.3.0 documentation</a> &raquo;</li>
+		      <li><a href="contents.html" accesskey="U">Dojo Build</a> &raquo;</li> 
+		  </ul>
+		</div>
+		<div id="searchHeader">
+		    <div class="searchContainer">
+		        <form class="search" action="../search.html" method="get">
+                    <input class="textInput" type="text" name="q" size="18" />
+                    <input class="buttonInput" type="submit" value="Go" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+		    </div>
+		</div>
+	</div>
+      </div>
+      <div class="content">
+	<div id="content">
+		  <div id="contentRight">
+			  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="../contents.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference" href="">Dojo Build System</a><ul>
+<li><a class="reference" href="#introduction">Introduction</a><ul>
+<li><a class="reference" href="#what-is-a-layer">What is a layer?</a></li>
+<li><a class="reference" href="#what-should-go-in-layers">What should go in layers?</a></li>
+<li><a class="reference" href="#minification">Minification</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#what-does-the-build-system-do">What does the build system do</a></li>
+<li><a class="reference" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference" href="#profiles">Profiles</a></li>
+<li><a class="reference" href="#build-script">Build Script</a></li>
+<li><a class="reference" href="#advanced-build-topics">Advanced Build Topics</a></li>
+<li><a class="reference" href="#build-build-scenarios">Build Build Scenarios</a><ul>
+<li><a class="reference" href="#directory-layout">Directory Layout</a></li>
+<li><a class="reference" href="#basic-scenarios">Basic Scenarios</a><ul>
+<li><a class="reference" href="#base-build">Base Build</a></li>
+<li><a class="reference" href="#dojo-core-only-build">Dojo Core Only Build</a></li>
+<li><a class="reference" href="#basic-cross-domain-build">Basic Cross Domain Build</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#custom-namespace-scenarios">Custom Namespace Scenarios</a><ul>
+<li><a class="reference" href="#same-domain">Same Domain</a></li>
+<li><a class="reference" href="#cross-domain">Cross Domain</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#advanced-and-special-purpose-scenarios">Advanced and Special Purpose Scenarios</a><ul>
+<li><a class="reference" href="#micro-build">Micro Build</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="expand-provide.html"
+                                  title="previous chapter">Expanding dojo.provide calls</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="keepRequires.html"
+                                  title="next chapter">Dojo build system:  keepRequires</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../_sources/build/index.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+        </div>
+      </div>
+		  </div>
+		  <div id="contentLeft">
+		    <div class="bodywrapper">
+		      <div class="body">
+			
+  <div class="section" id="dojo-build-system">
+<span id="build-index"></span><h1><a class="toc-backref" href="#id1">Dojo Build System<a class="headerlink" href="#dojo-build-system" title="Permalink to this headline">¶</a></a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Status:</th><td class="field-body">Draft</td>
+</tr>
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">1.0</td>
+</tr>
+<tr class="field"><th class="field-name">Project owner:</th><td class="field-body">(docs) Scott Jenkins</td>
+</tr>
+<tr class="field"><th class="field-name">Available:</th><td class="field-body">since 1.0</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic">
+<p class="topic-title first"><a id="contents" name="contents">Contents</a></p>
+<ul class="simple">
+<li><a class="reference" href="#dojo-build-system" id="id1" name="id1">Dojo Build System</a><ul>
+<li><a class="reference" href="#introduction" id="id2" name="id2">Introduction</a><ul>
+<li><a class="reference" href="#what-is-a-layer" id="id3" name="id3">What is a layer?</a></li>
+<li><a class="reference" href="#what-should-go-in-layers" id="id4" name="id4">What should go in layers?</a></li>
+<li><a class="reference" href="#minification" id="id5" name="id5">Minification</a></li>
+</ul>
+</li>
+<li><a class="reference" href="#what-does-the-build-system-do" id="id6" name="id6">What does the build system do</a></li>
+<li><a class="reference" href="#prerequisites" id="id7" name="id7">Prerequisites</a></li>
+<li><a class="reference" href="#profiles" id="id8" name="id8">Profiles</a></li>
+<li><a class="reference" href="#build-script" id="id9" name="id9">Build Script</a></li>
+<li><a class="reference" href="#advanced-build-topics" id="id10" name="id10">Advanced Build Topics</a></li>
+<li><a class="reference" href="#build-build-scenarios" id="id11" name="id11">Build Build Scenarios</a><ul>
+<li><a class="reference" href="#directory-layout" id="id12" name="id12">Directory Layout</a></li>
+<li><a class="reference" href="#basic-scenarios" id="id13" name="id13">Basic Scenarios</a></li>
+<li><a class="reference" href="#custom-namespace-scenarios" id="id14" name="id14">Custom Namespace Scenarios</a></li>
+<li><a class="reference" href="#advanced-and-special-purpose-scenarios" id="id15" name="id15">Advanced and Special Purpose Scenarios</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The Dojo build system creates efficient versions of Dojo and application modules for deployment.</p>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id2">Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></a></h2>
+<p>Dojo, in its source distribution, contains thousands of separate files and resources which are available to any app via the package system. Normally each &#8220;<a class="reference" href="../dojo/require.html#dojo-require"><em>dojo.require</em></a>&#8221; statement results a synchronous HTTP call to the server to retreive a resource (<cite>dojo.require</cite> avoids re-requesting resources that have already been loaded, but module needs to be loaded before it can be used).</p>
+<p>Because browsers wait for each synchronous web call to finish before allowing anything else to happen, this can substantially impair performance. Large apps that have many dependencies can take a very long time to load when a build isn&#8217;t used, or flash and redraw several times.</p>
+<p>Furthermore, in the source distribution, files are not <a class="reference" href="http://en.wikipedia.org/wiki/Minify">minified</a>, and larger files require more time and bandwidth to download to the page.</p>
+<p>Dojo does not include a single file containing every possible dojo function, since this would very large (especially with optional modules from Dijit and Dojox); instead, the build system allows the creation of customized Dojo builds tailored to the needs of your particular web site. Better yet, the build system works with the packaging tools to allow you to make <em>your</em> modules faster too.</p>
+<div class="section" id="what-is-a-layer">
+<h3><a class="toc-backref" href="#id3">What is a layer?<a class="headerlink" href="#what-is-a-layer" title="Permalink to this headline">¶</a></a></h3>
+<p>A <em>layer</em> is a single, minified JavaScript file which combines all of the JavaScript code from multiple source files, including dependencies. This file can then be included on the site using standard HTML <tt class="docutils literal"><span class="pre">script</span></tt> tags.</p>
+<p>You load a layer file into your web page using the normal <cite>&lt;script&gt;</cite> tags, similar to:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="c">&lt;!-- dojo.js always provides the package system and base utilities --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;/js/src/dojo/dojo.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- we want dijit.js to be treated like a layer of its own --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;/js/src/dijit/dijit.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- include the rest of the modules we need --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;/js/src/acme/mylayer.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</div>
+<p>JavaScript files specified in script tags download asynchronously from the web server, but in modern browsers execution order is gauranteed, so more than one download can be in progress at once, making pages load faster. Since extra HTTP calls to the server are usually the single biggest factor in slow page loads, loading only one larger file (quite possibly from browser cache) instead of multiple little files makes your web page load much faster.</p>
+<p>We use <tt class="docutils literal"><span class="pre">dojo.require</span></tt> to specify modules that an apps needs, but larger Dojo apps put this list of requirements into a single file that <em>only</em> includes a list of dependencies. The source version of <tt class="docutils literal"><span class="pre">mylayer.js</span></tt> might read like this:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c">// this file is located at:</span>
+<span class="c">//</span>
+<span class="c">//   &lt;server_root&gt;/js/src/acme/mylayer.js</span>
+
+ <span class="c">// This is a layer file. It&#39;s like any other Dojo module, except that we</span>
+ <span class="c">// don&#39;t put any code other than require/provide statements in it. When we</span>
+ <span class="c">// make a build, this will be replaced by a single minified copy of all</span>
+ <span class="c">// the modules listed below, as well as their dependencies, all in the</span>
+ <span class="c">// right order:</span>
+
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">provide</span><span class="p">(</span><span class="s2">&quot;acme.mylayer&quot;</span><span class="p">);</span>
+
+ <span class="c">// some basics</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dojo.parser&quot;</span><span class="p">);</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dijit.dijit&quot;</span><span class="p">);</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dojo.NodeList-fx&quot;</span><span class="p">);</span>
+
+ <span class="c">// it&#39;s a pretty sophisticated app, needs grids and border containers</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dojox.grid.DataGrid&quot;</span><span class="p">);</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dijit.layout.BorderContainer&quot;</span><span class="p">);</span>
+
+ <span class="c">// we need the full suite of django templating</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dojox.dtl&quot;</span><span class="p">);</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dojox.dtl.tag.logic&quot;</span><span class="p">);</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dojox.dtl.filter.misc&quot;</span><span class="p">);</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dojox.dtl.filter.logic&quot;</span><span class="p">);</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dojox.dtl.Context&quot;</span><span class="p">);</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;dojox.dtl._Templated&quot;</span><span class="p">);</span>
+
+ <span class="c">// finally, some app-specific modules</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;acme.base&quot;</span><span class="p">);</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;acme.controllers&quot;</span><span class="p">);</span>
+ <span class="nx">dojo</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;acme.CustomDataStore&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Since <tt class="docutils literal"><span class="pre">dojo.require</span></tt> checks if the module has already been downloaded, a module will not be downloaded again if it was included in a layer on the page.</p>
+</div>
+<div class="section" id="what-should-go-in-layers">
+<h3><a class="toc-backref" href="#id4">What should go in layers?<a class="headerlink" href="#what-should-go-in-layers" title="Permalink to this headline">¶</a></a></h3>
+<p>You should build layers appropriate to your application or web site, including the resources that are used on <em>most</em> of the pages <em>most</em> of the time.  For a simple web site, you can build a single layer file containing all of the most common resources, both from Dojo (including Dijit and Dojox).</p>
+<p>More complicated websites can have multiple layers for different purposes.  Layers can include custom code from your own modules as well as those from the Dojo distribution.</p>
+<p>It is not necessary to include absolutely every Dojo resource possible--instead, the goal is to include the most commonly used resources.  Any resources not available to a web page from one of the layers included on the page will be loaded synchronously by dojo.require.</p>
+<p>You specify, via a build profile, exactly which resources to include in the layers that you build.  You should balance what is included in each layer, thus increasing its size, against how often the resources is used in your site.  Frequently used resources should be placed in a layer; rarely used resources may not need to be put in a layer. Think of it as a dial you can turn depending on the performance vs. maintainability constraints of your application.</p>
+</div>
+<div class="section" id="minification">
+<h3><a class="toc-backref" href="#id5">Minification<a class="headerlink" href="#minification" title="Permalink to this headline">¶</a></a></h3>
+<p>The Dojo build system compresses each layer with Shrinksafe, which provides a very effective minification.</p>
+<p>Minificatation takes your JavaScript code and makes it smaller by, for example:</p>
+<blockquote>
+<ul class="simple">
+<li>Removing all extra spaces and blank lines</li>
+<li>Removing comments</li>
+<li>Making internal variable names (inside of functions, which are not visible to the caller of a function) shorter</li>
+</ul>
+</blockquote>
+<p>Since layers can be large files, the minification can provide significant help in making them load faster--and, since they are smaller, they take less time for the browser's JavaScript engine to parse.</p>
+</div>
+</div>
+<div class="section" id="what-does-the-build-system-do">
+<h2><a class="toc-backref" href="#id6">What does the build system do<a class="headerlink" href="#what-does-the-build-system-do" title="Permalink to this headline">¶</a></a></h2>
+<p>The primary purpose of the build system is to create the layer files.  Overall, the build system does four things to enhance performance:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>First, it groups together modules into ''layers''</li>
+<li>Second, it ''interns'' external non-JavaScript files, such as widget templates which are kept in a separate HTML file during development. Interning makes the file contents a string in the resulting script.</li>
+<li>Third, it minifies the layer with ShrinkSafe. ShrinkSafe removes unneeded whitepsace and comments, and compacts variable names down to smaller ones. This file downloads and parses faster than the original.</li>
+<li>Finally, it copies all non-layered scripts to the appropriate places. While this doesn't speed anything up, it ensures that all Dojo modules can be loaded, even if not present in a layer. If you use a particular module only once or twice, keeping it out of the layers makes those layers load faster.</li>
+</ol>
+</blockquote>
+</div>
+<div class="section" id="prerequisites">
+<h2><a class="toc-backref" href="#id7">Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></a></h2>
+<p>To use the build system, you must have the following:</p>
+<blockquote>
+<ol class="arabic">
+<li><p class="first"><strong>A *source code version* of Dojo.</strong></p>
+<p>You can download one from <a class="reference" href="http://download.dojotoolkit.org/">download.dojotoolkit.org</a>.</p>
+<p>Choose any release of Dojo (usually, you will choose the most recent), and be sure to select the source code build, which has <cite>-src</cite> in its file name:</p>
+<img alt="../_images/dojo-download-src.png" src="../_images/dojo-download-src.png" />
+<p>You can also obtain a source build of dojo from the Subversion source code tree.  TODOC:  Link to subversion page when it is available.</p>
+</li>
+<li><p class="first"><strong>A Java runtime envionment, version 1.4.2 or higher</strong> on the machine you will use to create your custom build.</p>
+<p>This is necessary because the builder, although written in JavaScript, requires the Rhino implementation of JavaScript to run it, and Rhino is built with Java.</p>
+<p>At a minimum, you must use Java 1.4.2; Java 1.5 or higher is recommended.</p>
+<p>You can download a Java runtime environment from <a class="reference" href="http://www.java.com/en/download/index.jsp">Sun's Java download page</a>.</p>
+</li>
+<li><p class="first">Optionally, the source code tree for any custom built resources (JavaScript modules, CSS files, Dojo widgets, and so on) that you would like built into your custom build.</p>
+<p>As a best practice, your source tree should <em>not</em> be under your Dojo distribution's source tree.  By keeping it independent, you make it easier to make new builds when new versions of Dojo are available.</p>
+</li>
+<li><p class="first"><strong>A profile</strong>, which you create, that controls how the build system creates your custom build.  For details on this, see the <a class="reference" href="profiles.html#build-profiles"><em>build profiles page</em></a>.</p>
+</li>
+</ol>
+</blockquote>
+</div>
+<div class="section" id="profiles">
+<h2><a class="toc-backref" href="#id8">Profiles<a class="headerlink" href="#profiles" title="Permalink to this headline">¶</a></a></h2>
+<p>The profile is a file which defines exactly what the build system will include in your built version of dojo.  For a detailed discussion of the profile and all of its options, see <a class="reference" href="profiles.html#build-profiles"><em>profiles</em></a>.</p>
+<p>The profile should be a file named <em>something</em>.profile.js, and it contains a single JavaScript object called <tt class="docutils literal"><span class="pre">dependencies</span></tt>.  The main property within <tt class="docutils literal"><span class="pre">dependencies</span></tt> is <tt class="docutils literal"><span class="pre">layers</span></tt>, which is an array of definitions of the layers that should be built.</p>
+<p>Here is a sample profile from the Dojo 1.2.3 release directory tree, <tt class="docutils literal"><span class="pre">/utils/buildscripts/profiles/layers.profile.js</span></tt> (many build profiles will not need all of the options and complexity that this one includes, but it shows the major features of the profile):</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c">// this file is located at:</span>
+<span class="c">//</span>
+<span class="c">//      &lt;server root&gt;/js/src/mylayer.profile.js</span>
+<span class="c">//</span>
+    <span class="c">// This profile is used just to illustrate the layout of a layered build.</span>
+    <span class="c">// All layers have an implicit dependency on dojo.js.</span>
+<span class="c">//</span>
+<span class="c">// Normally you should not specify a layer object for dojo.js, as it will</span>
+<span class="c">// be built by default with the right options. Custom dojo.js files are</span>
+<span class="c">// possible, but not recommended for most apps.</span>
+
+    <span class="nx">dependencies</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nx">layers</span><span class="o">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                            <span class="c">// This layer will be discarded, it is just used</span>
+                            <span class="c">// to specify some modules that should not be included</span>
+                            <span class="c">// in a later layer, but something that should not be</span>
+                            <span class="c">// saved as an actual layer output. The important property</span>
+                            <span class="c">// is the &quot;discard&quot; property. If set to true, then the layer</span>
+                            <span class="c">// will not be a saved layer in the release directory.</span>
+                            <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;acme.discard&quot;</span><span class="o">,</span>
+                            <span class="nx">resourceName</span><span class="o">:</span> <span class="s2">&quot;acme.discard&quot;</span><span class="o">,</span>
+                            <span class="nx">discard</span><span class="o">:</span> <span class="kc">true</span><span class="o">,</span>
+                            <span class="c">// Path to the copyright file must be relative to</span>
+                            <span class="c">// the util/buildscripts directory, or an absolute path.</span>
+                            <span class="nx">copyrightFile</span><span class="o">:</span> <span class="s2">&quot;myCopyright.txt&quot;</span><span class="o">,</span>
+                            <span class="nx">dependencies</span><span class="o">:</span> <span class="p">[</span>
+                                    <span class="s2">&quot;dojo.string&quot;</span>
+                            <span class="p">]</span>
+                    <span class="p">}</span><span class="o">,</span>
+                    <span class="p">{</span>
+            <span class="c">// one of the stock layers. It builds a &quot;roll up&quot; for</span>
+            <span class="c">// dijit.dijit which includes most of the infrastructure needed to</span>
+            <span class="c">// build widgets in a single file. We explicitly ignore the string</span>
+            <span class="c">// stuff via the previous exclude layer.</span>
+
+            <span class="c">// where the output file goes, relative to the dojo dir</span>
+                            <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;../dijit/dijit.js&quot;</span><span class="o">,</span>
+            <span class="c">// what the module&#39;s name will be, i.e., what gets generated</span>
+            <span class="c">// for dojo.provide(&lt;name here&gt;);</span>
+                            <span class="nx">resourceName</span><span class="o">:</span> <span class="s2">&quot;dijit.dijit&quot;</span><span class="o">,</span>
+            <span class="c">// modules not to include code for</span>
+                            <span class="nx">layerDependencies</span><span class="o">:</span> <span class="p">[</span>
+                <span class="s2">&quot;string.discard&quot;</span>
+                            <span class="p">]</span><span class="o">,</span>
+            <span class="c">// modules to use as the &quot;source&quot; for this layer</span>
+                            <span class="nx">dependencies</span><span class="o">:</span> <span class="p">[</span>
+                                    <span class="s2">&quot;dijit.dijit&quot;</span>
+                            <span class="p">]</span>
+                    <span class="p">}</span><span class="o">,</span>
+        <span class="p">{</span>
+            <span class="c">// where to put the output relative to the Dojo root in a build</span>
+            <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;../acme/mylayer.js&quot;</span>
+            <span class="c">// what to name it (redundant w/ or example layer)</span>
+            <span class="nx">resourceName</span><span class="o">:</span> <span class="s2">&quot;acme.mylayer&quot;</span><span class="o">,</span>
+            <span class="c">// what other layers to assume will have already been loaded</span>
+            <span class="c">// specifying modules here prevents them from being included in</span>
+            <span class="c">// this layer&#39;s output file</span>
+                            <span class="nx">layerDependencies</span><span class="o">:</span> <span class="p">[</span>
+                <span class="s2">&quot;dijit.dijit&quot;</span>
+                            <span class="p">]</span><span class="o">,</span>
+            <span class="c">// which modules to pull in. All of the depedencies not</span>
+            <span class="c">// provided by dojo.js or other items in the &quot;layerDependencies&quot;</span>
+            <span class="c">// array are also included.</span>
+                            <span class="nx">dependencies</span><span class="o">:</span> <span class="p">[</span>
+                <span class="c">// our acme.mylayer specifies all the stuff our app will</span>
+                <span class="c">// need, so we don&#39;t need to list them all out here.</span>
+                <span class="s2">&quot;acme.mylayer&quot;</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span><span class="o">,</span>
+
+    <span class="nx">prefixes</span><span class="o">:</span> <span class="p">[</span>
+        <span class="c">// the system knows where to find the &quot;dojo/&quot; directory, but we</span>
+        <span class="c">// need to tell it about everything else. Directories listed here</span>
+        <span class="c">// are, at a minimum, copied to the build directory.</span>
+        <span class="p">[</span> <span class="s2">&quot;dijit&quot;</span><span class="o">,</span> <span class="s2">&quot;../dijit&quot;</span> <span class="p">]</span><span class="o">,</span>
+        <span class="p">[</span> <span class="s2">&quot;dojox&quot;</span><span class="o">,</span> <span class="s2">&quot;../dojox&quot;</span> <span class="p">]</span><span class="o">,</span>
+        <span class="p">[</span> <span class="s2">&quot;acme&quot;</span><span class="o">,</span> <span class="s2">&quot;../acme&quot;</span> <span class="p">]</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c">// If you choose to optimize the JS files in a prefix directory (via the</span>
+<span class="c">// optimize= build parameter), you can choose to have a custom copyright</span>
+<span class="c">// text prepended to the optimized file. To do this, specify the path to a</span>
+<span class="c">// file tha contains the copyright info as the third array item in the</span>
+<span class="c">// prefixes array. For instance:</span>
+    <span class="c">//      prefixes: [</span>
+    <span class="c">//              [ &quot;acme&quot;, &quot;/path/to/acme&quot;, &quot;/path/to/acme/copyright.txt&quot;]</span>
+    <span class="c">//      ]</span>
+    <span class="c">//</span>
+<span class="c">// NOTE:</span>
+<span class="c">//    If no copyright is specified in this optimize case, then by default,</span>
+<span class="c">//    the Dojo copyright will be used.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-script">
+<h2><a class="toc-backref" href="#id9">Build Script<a class="headerlink" href="#build-script" title="Permalink to this headline">¶</a></a></h2>
+<p>To actually begin your build, you use the <tt class="docutils literal"><span class="pre">build.sh</span></tt> (or <tt class="docutils literal"><span class="pre">build.bat</span></tt> on Windows).  For full details on the arguments to <tt class="docutils literal"><span class="pre">build</span></tt>, see <a class="reference" href="buildScript.html#build-buildscript"><em>build script</em></a>.</p>
+<p>A typical build command looks something like this:</p>
+<div class="highlight-text"><div class="highlight"><pre>build profileFile=../../../js/mylayer action=clean,release version=1.3.0beta3 releaseName=
+</pre></div>
+</div>
+<p>This illustrates the most important command line parameters to the build system:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">profile</span></tt></dt>
+<dd>The profile to be used for the build. <tt class="docutils literal"><span class="pre">.profile.js</span></tt> is appended automatically. The default directory is the <tt class="docutils literal"><span class="pre">&lt;dojo</span> <span class="pre">root&gt;/util/buildscripts/profiles</span></tt> directory within the Dojo source distribution, so if your build task specifies <tt class="docutils literal"><span class="pre">profile=thinger</span></tt>, the system will search for <tt class="docutils literal"><span class="pre">&lt;dojo</span> <span class="pre">root&gt;/util/build/scripts/profiles/thinger.profile.js</span></tt>.  However, most often you will want to reference a profile not within the source tree. To do this, you can specify a <tt class="docutils literal"><span class="pre">profileFile</span></tt> parameter which specifies a path from the current working directory (note, <tt class="docutils literal"><span class="pre">.profile.js</span></tt> is still appended to this file name!).</dd>
+<dt><tt class="docutils literal"><span class="pre">action</span></tt></dt>
+<dd>The list of actions to perform. The most common one is <tt class="docutils literal"><span class="pre">release</span></tt> which does the default build magic.  The <tt class="docutils literal"><span class="pre">clean</span></tt> option removes previous build artifacts.</dd>
+<dt><tt class="docutils literal"><span class="pre">version</span></tt></dt>
+<dd>Optional. The version number to &quot;bake in&quot; to the build. When you interrogate <tt class="docutils literal"><span class="pre">dojo.version</span></tt>, this is the number that will be reported.</dd>
+<dt><tt class="docutils literal"><span class="pre">releaseName</span></tt></dt>
+<dd>By specifying an empty <tt class="docutils literal"><span class="pre">releaseName</span></tt> parameter, we over-rid the default of <tt class="docutils literal"><span class="pre">dojo</span></tt>, clobbering the generation of a named sub-directory in the output <tt class="docutils literal"><span class="pre">/js/release/</span></tt> directory. This makes it somewhat simpler to deal with paths at development time, but if you are creating versioned builds, you may chose to specify something like <tt class="docutils literal"><span class="pre">r1234</span></tt> to indicate a unique build number which you can then check in. Note that specifying a blank <tt class="docutils literal"><span class="pre">releaseName</span></tt> does not work in version of Dojo prior to 1.3.</dd>
+</dl>
+<p>Once we've run the build script, all we need to do to use our new-fangled, much-faster layer file is to change the directory we point our <tt class="docutils literal"><span class="pre">&lt;script&gt;</span></tt> tags at. Intead of using the source files located in <tt class="docutils literal"><span class="pre">/js/src/&lt;modulename&gt;</span></tt>, we now look for them in <tt class="docutils literal"><span class="pre">/js/release/&lt;modulename&gt;</span></tt>:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="c">&lt;!-- dojo.js always provides the package system and base utilities --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;/js/release/dojo/dojo.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- we want dijit.js to be treated like a layer of its own --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;/js/release/dijit/dijit.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- include the rest of the modules we need --&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;/js/release/acme/mylayer.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</div>
+<p>TODOC: everything. outline here:</p>
+<blockquote>
+<ul class="simple">
+<li>summary</li>
+<li>requirements / setup DONE</li>
+<li>creating a profile</li>
+<li>command line arguments</li>
+<li>special builds: * layers * css</li>
+<li>file structure</li>
+</ul>
+</blockquote>
+<p>link to full docs to cover:</p>
+</div>
+<div class="section" id="advanced-build-topics">
+<h2><a class="toc-backref" href="#id10">Advanced Build Topics<a class="headerlink" href="#advanced-build-topics" title="Permalink to this headline">¶</a></a></h2>
+<p>The following build topics are for expert users, and not needed for routine builds:</p>
+<blockquote>
+<ul class="simple">
+<li>conditional inclusion via the <a class="reference" href="exclude.html#build-exclude"><em>excludeStart and exludeStop</em></a> pragmas</li>
+<li>prevent inlining of a resource named in a dojo.require with <a class="reference" href="keepRequires.html#build-keeprequires"><em>keepRequires</em></a></li>
+<li>layerDependencies</li>
+<li>discard</li>
+<li>.uncompressed.js</li>
+<li>create extremely small custom base <tt class="docutils literal"><span class="pre">Dojo.js</span></tt> builds with <a class="reference" href="customBase.html#build-custombase"><em>customBase</em></a></li>
+<li>Faster loading of layer files by reducing dojo.provide usage with the <a class="reference" href="expand-provide.html#build-expand-provide"><em>expandProvide</em></a> parameter</li>
+<li>Minimizing <tt class="docutils literal"><span class="pre">dojo.js</span></tt> for mobile platforms with the <em>webkitMobile</em> parameter</li>
+<li>more...</li>
+</ul>
+</blockquote>
+</div>
+<div class="section" id="build-build-scenarios">
+<h2><a class="toc-backref" href="#id11">Build Build Scenarios<a class="headerlink" href="#build-build-scenarios" title="Permalink to this headline">¶</a></a></h2>
+<p>TODOC:  All of the following, with both build invocation command line and profile</p>
+<div class="section" id="directory-layout">
+<h3><a class="toc-backref" href="#id12">Directory Layout<a class="headerlink" href="#directory-layout" title="Permalink to this headline">¶</a></a></h3>
+<p>See <a class="reference" href="directoryLayout.html#build-directorylayout"><em>possible directory layout</em></a> for the directory scheme used in these example scenarios.  This layout is designed to allow Dojo and private namespaces to work together without mixing source file trees.</p>
+</div>
+<div class="section" id="basic-scenarios">
+<h3><a class="toc-backref" href="#id13">Basic Scenarios<a class="headerlink" href="#basic-scenarios" title="Permalink to this headline">¶</a></a></h3>
+<div class="section" id="base-build">
+<h4>Base Build<a class="headerlink" href="#base-build" title="Permalink to this headline">¶</a></h4>
+<p>A simple default build that creates the basic distribution tree from the source tree:  <em>base build</em></p>
+</div>
+<div class="section" id="dojo-core-only-build">
+<h4>Dojo Core Only Build<a class="headerlink" href="#dojo-core-only-build" title="Permalink to this headline">¶</a></h4>
+<p>A small Dojo build which only builds the Dojo core into a layer, without dijit and the other name spaces:  <em>core build</em></p>
+<ul class="simple">
+<li>Simple one-layer build of all required Dojo resources, including other dijit and dojox namespaces</li>
+<li>Single layer containing required resources from a custom namespace in addition to Dojo namespaces</li>
+<li>Simple cross-domain build</li>
+<li>Custom namespace build that works in conjunction with a cross-domain build without duplicating resources</li>
+</ul>
+</div>
+<div class="section" id="basic-cross-domain-build">
+<h4>Basic Cross Domain Build<a class="headerlink" href="#basic-cross-domain-build" title="Permalink to this headline">¶</a></h4>
+<p>A basic cross-domain build of Dojo and some required components from dijit: <em>Basic cross domain build</em></p>
+</div>
+</div>
+<div class="section" id="custom-namespace-scenarios">
+<h3><a class="toc-backref" href="#id14">Custom Namespace Scenarios<a class="headerlink" href="#custom-namespace-scenarios" title="Permalink to this headline">¶</a></a></h3>
+<div class="section" id="same-domain">
+<h4>Same Domain<a class="headerlink" href="#same-domain" title="Permalink to this headline">¶</a></h4>
+<p>A same domain build creating a layer including both Dojo and custom namespace components:  <em>Custom module build </em></p>
+</div>
+<div class="section" id="cross-domain">
+<h4>Cross Domain<a class="headerlink" href="#cross-domain" title="Permalink to this headline">¶</a></h4>
+<p>A custom name space build which uses a cross domain built Dojo distribution for Dojo, dijit, and dojox resources, and a local file system build of the custom namespace for custom resources:  <em>Cross domain custom name space build</em></p>
+</div>
+</div>
+<div class="section" id="advanced-and-special-purpose-scenarios">
+<h3><a class="toc-backref" href="#id15">Advanced and Special Purpose Scenarios<a class="headerlink" href="#advanced-and-special-purpose-scenarios" title="Permalink to this headline">¶</a></a></h3>
+<div class="section" id="micro-build">
+<h4>Micro Build<a class="headerlink" href="#micro-build" title="Permalink to this headline">¶</a></h4>
+<p>An absolutely minimal build of Dojo containing just the most essential core elements, suitable for smart phones and other resource-limited hosts:  Micro-build &lt;build/scenario-micro&gt;</p>
+<ul class="simple">
+<li>Others?</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+		      </div>
+		    </div>
+		  </div>
+		  <div class="clearfix"></div>
+	</div>
+      </div>
+	</div>
+      <div class="clearer"></div>
+    </div>
+<div id="footer">
+    
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>
+</div>
+<script type="text/javascript">
+	document.body.className = "nihilo";
+</script>
+<script type="text/javascript">
+    dojo.require("docs.widget.CodeViewer");
+    dojo.require("docs.widget.CompoundViewer");
+</script>
+<!--
+    <div class="footer">
+      &copy; Copyright 2009, Dojo Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.1.
+    </div>-->
+
+  </body>
+</html>
