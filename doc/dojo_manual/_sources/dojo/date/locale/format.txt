@@ -1,3 +1,0 @@
-.. _dojo/date/locale/format:
-
-``fixme: delete page, content :ref:`here <dojo/date/locale>```

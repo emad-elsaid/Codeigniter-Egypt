@@ -1,8 +1,0 @@
-.. _dojox/widget/Pager:
-
-dojox.widget.Pager
-==================
-
-:Status: Draft
-:Version: beta
-:Authors: Nikolai Onken
