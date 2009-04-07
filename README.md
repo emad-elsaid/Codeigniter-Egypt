@@ -31,8 +31,8 @@ built on it some applications accessible by a task bar like facebook one
 			vunsy/kfm/configuration.php
 			
 * 3- to install database : 
-	vunsyURL/index.php/install
-	ex: http://localhost/vunsy/index.php/install
+	open the vunsy website 
+	ex: http://localhost/vunsy/
 -----------------------------------------------------------------
 [ Running ]
 ---
