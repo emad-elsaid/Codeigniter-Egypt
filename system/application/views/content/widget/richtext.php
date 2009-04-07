@@ -3,13 +3,6 @@
 	"info":{
 		"text":{
 			"type":"editor"
-			,"default":"default text"
-		}
-		,"title":{
-			"type":"textbox"
-		}
-		,"titlecolor":{
-			"type":"color"
 		}
 	}
 }

@@ -209,4 +209,10 @@ EOT;
 		// returning the final array of children
 		return $final_c;
 	}
+	
+	function save($object='')
+	{
+		$this->type = 'layout';
+		parent::save($object);
+	}
 }

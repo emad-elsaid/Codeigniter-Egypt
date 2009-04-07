@@ -40,6 +40,11 @@ class Vunsy {
 			$this->dojoStyle = $CI->config->item( 'dojoStyle' );
 			
 		}
+		else
+		{
+			$this->install();
+			redirect();
+		}
 	}
 	
 	/* function of checking site mode
@@ -125,7 +130,7 @@ class Vunsy {
 		$CI->load->library('datamapper');
 		//adding the default section
 		$index = new Section();
-		$index->paren_section = 0;
+		$index->parent_section = 0;
 		$index->sort = 0;
 		$index->save();
 		
@@ -161,6 +166,15 @@ class Vunsy {
 		$after_page->parent_section = $index->id;
 		$after_page->info = 'AFTER_PAGE_LOCKED';
 		$after_page->save();
+		
+		$default_layout = new Layout();
+		$default_layout->path = 'layout/default.php';
+		$default_layout->parent_content = 3;
+		$default_layout->parent_section = 1;
+		$default_layout->subsection = 0;
+		$default_layout->cell = 0;
+		$default_layout->sort = 0;
+		$default_layout->save();
 	}
 	
 	function css_text()

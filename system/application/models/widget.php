@@ -36,4 +36,9 @@ class Widget extends Content{
 		
 		return parent::render( $text );
 	}
+	function save($object='')
+	{
+		$this->type = 'widget';
+		parent::save($object);
+	}
 }
