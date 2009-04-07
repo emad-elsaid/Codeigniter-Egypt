@@ -181,7 +181,7 @@ class Vunsy {
 	{
 		$css_t= '';
 		foreach( $this->css as $item )
-			$css_t .= "	".link_tag( $item )."\n";
+			$css_t .= "\n\t".link_tag( $item );
 		
 		return $css_t;
 	}
@@ -204,8 +204,10 @@ class Vunsy {
 		
 		$js_t = '';
 		foreach( $this->js as $item )
-			$js_t .= "\n\t<script type=\"text/javascript\" src=\"".$item."\" ></script>";
-			
+		{
+			if($item!='')
+				$js_t .= "\n\t<script type=\"text/javascript\" src=\"".$item."\" ></script>";
+		}	
 		return $js_t;
 	}
 	
