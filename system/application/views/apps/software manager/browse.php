@@ -3,6 +3,8 @@ $ci =& get_instance();
 $ci->load->helper( 'directory' );
 
 $map = directory_map( './system/application/views/apps/', TRUE );
+if( array_search( 'index.html', $map ) )
+	unset( $map[array_search( 'index.html', $map )] );
 
 for( $i=0; $i<count($map); $i++ )
 {
