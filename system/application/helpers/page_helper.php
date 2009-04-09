@@ -72,7 +72,8 @@ if ( ! function_exists('add_dojo')){
 if ( ! function_exists('is_local')){
 	function is_local( $path )
 	{
-		if( str_split($path,7)=="http://" )
+		$start =  str_split($path,7);
+		if( $start[0] == "http://" )
 			return FALSE;
 		else
 			return TRUE;
