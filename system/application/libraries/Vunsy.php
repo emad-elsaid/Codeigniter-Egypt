@@ -134,23 +134,6 @@ class Vunsy {
 		$index->sort = 0;
 		$index->save();
 		
-		// adding the default content Layouts
-		$before_page = new Layout();
-		$before_page->sub_section = intval(TRUE);
-		$before_page->cell = 0;
-		$before_page->sort = 0;
-		$before_page->parent_section = $index->id;
-		$before_page->info = 'BEFORE_PAGE_LOCKED';
-		$before_page->save();
-		
-		$page_head = new Layout();
-		$page_head->sub_section = intval(TRUE);
-		$page_head->cell = 0;
-		$page_head->sort = 0;
-		$page_head->parent_section = $index->id;
-		$page_head->info = 'PAGE_HEAD_LOCKED';
-		$page_head->save();
-		
 		$page_body = new Layout();
 		$page_body->sub_section = intval(TRUE);
 		$page_body->cell = 0;
@@ -159,17 +142,9 @@ class Vunsy {
 		$page_body->info = 'PAGE_BODY_LOCKED';
 		$page_body->save();
 		
-		$after_page = new Layout();
-		$after_page->sub_section = intval(TRUE);
-		$after_page->cell = 0;
-		$after_page->sort = 0;
-		$after_page->parent_section = $index->id;
-		$after_page->info = 'AFTER_PAGE_LOCKED';
-		$after_page->save();
-		
 		$default_layout = new Layout();
 		$default_layout->path = 'layout/default.php';
-		$default_layout->parent_content = 3;
+		$default_layout->parent_content = 1;
 		$default_layout->parent_section = 1;
 		$default_layout->subsection = 0;
 		$default_layout->cell = 0;
