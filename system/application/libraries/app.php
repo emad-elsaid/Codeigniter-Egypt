@@ -76,7 +76,7 @@ class app {
 		$u_temp = explode($name,current_url());
 		$this->url = $u_temp[0] .$name.'/';
 		$this->ci_folder = APP.'views/apps/'.$name.'/';
-		$this->full_url = base_url().$this->ci_folder;
+		$this->full_url = base_url().'system/application/views/apps/'.$name.'/';
 		$this->full_folder = str_replace('/','\\',APPPATH).'views\\apps\\'.$name.'\\';
 		if( ! file_exists( $this->full_folder) )
 			$this->full_folder = str_replace('\\','/',$this->full_folder);
@@ -163,7 +163,7 @@ class app {
 	function add_css( $path="", $local=FALSE )
 	{
 		if( $local )
-			$path = $this->full_folder.$path;
+			$path = $this->full_url.$path;
 		
 		add_css( $path );
 	}
@@ -171,7 +171,7 @@ class app {
 	function add_js( $path="", $local=FALSE  )
 	{
 		if( $local )
-			$path = $this->full_folder.$path;
+			$path = $this->full_url.$path;
 		
 		add_js( $path );
 	}
