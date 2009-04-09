@@ -6,7 +6,7 @@
 	
 	"perm":"$CI->vunsy->user->is_root()",
 	"pages":{
-		"Browser":"browse"
+		"Browse":"browse"
 	},
 	"index":"Browse",
 	
