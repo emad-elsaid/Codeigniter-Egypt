@@ -41,6 +41,10 @@ class Gui {
 		$text .= form_close();
 		return $text;
 	}
+	function hidden($ID='', $value='' )
+	{
+		return form_hidden( $ID, $value );
+	}
 	/*******************************************
 	 * File chooser using the fsbrowser, use it with CAUTION
 	 * it makes an dojo textinput linked with a jquery fsbrowser
