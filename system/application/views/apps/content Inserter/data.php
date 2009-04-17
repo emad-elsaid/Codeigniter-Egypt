@@ -62,14 +62,22 @@ if( $edit === FALSE )
 	$p_cont = new Content();
 	$p_cont->get_by_id( $hidden['parent_content'] );
 	
+	if( $ci->vunsy->user->is_root() )
+		$input = 'textarea';
+	else
+	{
+		$input = 'hidden';
+		$ci->app->add_info( 'permissions are not available for the normal user' );
+	}
+		
 	$Basic_Form = 	$ci->gui->form(
 		$ci->app->app_url('addaction')
 		,array(
 		"Show in subsections : " => $ci->gui->checkbox('subsection')
-		,"View permissions : " => $ci->gui->textarea('view', $p_cont->view)
-		,"Add in permissions : " => $ci->gui->textarea('addin', $p_cont->addin)
-		,"Edit permissions : " => $ci->gui->textarea('edit', $p_cont->edit)
-		,"Delete permissions : " => $ci->gui->textarea('del', $p_cont->del)
+		,"View permissions : " => $ci->gui->$input('view', $p_cont->view)
+		,"Add in permissions : " => $ci->gui->$input('addin', $p_cont->addin)
+		,"Edit permissions : " => $ci->gui->$input('edit', $p_cont->edit)
+		,"Delete permissions : " => $ci->gui->$input('del', $p_cont->del)
 		,"" => $button
 		)
 		,array( 'id'=>'basic_form' )
@@ -82,10 +90,10 @@ else
 		$ci->app->app_url('addaction')
 		,array(
 		"Show in subsections : " => $ci->gui->checkbox('subsection','subsection', $con->subsection)
-		,"View permissions : " => $ci->gui->textarea('view', $con->view)
-		,"Add in permissions : " => $ci->gui->textarea('addin', $con->addin)
-		,"Edit permissions : " => $ci->gui->textarea('edit', $con->edit)
-		,"Delete permissions : " => $ci->gui->textarea('del', $con->del)
+		,"View permissions : " => $ci->gui->$input('view', $con->view)
+		,"Add in permissions : " => $ci->gui->$input('addin', $con->addin)
+		,"Edit permissions : " => $ci->gui->$input('edit', $con->edit)
+		,"Delete permissions : " => $ci->gui->$input('del', $con->del)
 		,"" => $button
 		)
 		,array( 'id'=>'basic_form' )
@@ -180,8 +188,10 @@ if( is_object( $Plugin_Data ) AND isset( $Plugin_Data->info) AND is_object($Plug
 		
 	}
 }
-
-$Plugin_Form_Data[""] = "&nbsp";
+if(count($Plugin_Form_Data)==0)
+	$Plugin_Form_Data[''] = 'there isn\'t any plugins paramters required';
+	
 $Plugin_Form .= $ci->gui->form( '#', $Plugin_Form_Data, array("id"=>"info_form"));
 //===============================================
-echo $ci->gui->accordion( array("Basic Data"=>$Basic_Form, "Plugin Data"=>$Plugin_Form ) ,'',array('height'=>'75%') );
+echo $ci->gui->titlepane( "Basic Data",$Basic_Form);
+echo $ci->gui->titlepane( "Plugin Data",$Plugin_Form );
