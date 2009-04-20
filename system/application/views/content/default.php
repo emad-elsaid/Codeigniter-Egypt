@@ -1,4 +1,3 @@
-<?php if($mode=='view'){ ?>
 <style>
 body{
 	background-color: #C6C6C6;
@@ -105,4 +104,3 @@ built on it some applications accessible by a task bar like facebook one</li>
 	</td>
 </tr>
 </table>
-<?php } ?>

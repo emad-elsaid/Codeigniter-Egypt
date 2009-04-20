@@ -134,7 +134,7 @@ class Vunsy {
 		$index->sort = 0;
 		$index->save();
 		
-		$page_body = new Layout();
+		$page_body = new Content();
 		$page_body->sub_section = intval(TRUE);
 		$page_body->cell = 0;
 		$page_body->sort = 0;
@@ -142,8 +142,8 @@ class Vunsy {
 		$page_body->info = 'PAGE_BODY_LOCKED';
 		$page_body->save();
 		
-		$default_layout = new Layout();
-		$default_layout->path = 'layout/default.php';
+		$default_layout = new Content();
+		$default_layout->path = 'default.php';
 		$default_layout->parent_content = 1;
 		$default_layout->parent_section = 1;
 		$default_layout->subsection = 0;

@@ -57,6 +57,14 @@ if( $edit === FALSE )
 else
 	$button = $ci->gui->button( '','Edit Content'.$script );
 
+if( $ci->vunsy->user->is_root() )
+	$input = 'textarea';
+else
+{
+	$input = 'hidden';
+	$ci->app->add_info( 'permissions are not available for the normal user' );
+}
+
 if( $edit === FALSE )
 {
 	$p_cont = new Content();
@@ -104,7 +112,6 @@ else
 /*OUR JSON OBJECT LIKE THAT
  
 {
-	"info":{
 		"text":{
 			"type":"editor"
 			,"default":"default text"
@@ -115,7 +122,6 @@ else
 		,"titlecolor":{
 			"type":"color"
 		}
-	}
 }
  * */
 
@@ -125,10 +131,10 @@ $Plugin_Form_Data = array();
 $Plugin_Form = "";
 
 // starting to make the form if it is exists
-if( is_object( $Plugin_Data ) AND isset( $Plugin_Data->info) AND is_object($Plugin_Data->info) )
+if( is_object( $Plugin_Data ) )
 {
 	// building each field
-	foreach( $Plugin_Data->info as $key=>$value )
+	foreach( $Plugin_Data as $key=>$value )
 	{
 		
 		// this line gets the default value if in insertion mode and the

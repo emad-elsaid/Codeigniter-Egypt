@@ -1,4 +1,3 @@
-<div style="font-size:13px">
 <?php
 $ci =& get_instance();
 $ci->load->library( 'gui' );
@@ -10,7 +9,7 @@ $p->get_by_id($parent);
 
 if( $can_edit OR $p->can_addin() OR $can_delete ){
 ?>
-<button dojoType="dijit.form.ComboButton" iconClass="dijitEditorIcon dijitEditorIconSave">
+<button dojoType="dijit.form.ComboButton" iconClass="dijitEditorIcon dijitEditorIconSave" style="font-size:13px">
 	<span>Edit</span>
 	<script type="dojo/method" event="onClick" args="evt">
 	<?php if( $can_edit ){ ?>
@@ -43,6 +42,5 @@ if( $can_edit OR $p->can_addin() OR $can_delete ){
 		</div>
 	</div>
 </button>
-</div>
 <?php } ?>
 <?= $text ?>

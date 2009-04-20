@@ -242,7 +242,7 @@ class Section extends DataMapper {
 		 * container box and the controller buttons
 		 * and the admin toolbar 
 		 * ********************************************/			
-		$page_body = new Layout();
+		$page_body = new Content();
 		$page_body->get_by_info( 'PAGE_BODY_LOCKED' );
 		$page_body_text = $page_body->render();
 		if( $CI->vunsy->user->is_root())

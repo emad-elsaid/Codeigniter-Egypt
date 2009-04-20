@@ -10,7 +10,7 @@ if( $c->exists() )
 {
 	if( $c->type == 'layout' )
 	{
-		$c = new Layout();
+		$c = new Content();
 		$c->get_by_id( $id );
 	}
 

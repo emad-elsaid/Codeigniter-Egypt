@@ -20,7 +20,6 @@ $config['objects'] = array(
 		'addin' => array( 'type'=>'LONGTEXT','null'=>TRUE),
 		'edit' => array( 'type'=>'LONGTEXT','null'=>TRUE),
 		'del' => array( 'type'=>'LONGTEXT','null'=>TRUE),
-		'type' => array( 'type'=>'VARCHAR', 'constraint'=>30,'null'=>TRUE ),
 		'info' => array( 'type'=>'LONGTEXT','null'=>TRUE)
 	) ,
 
