@@ -26,7 +26,9 @@ if(! $ci->input->post( "id" ) )
 {
 	$p = new content();
 	$p->get_by_id( $c->parent_content );
-	$c->attach( $ci->vunsy->section , $p, $c->cell, $c->sort );
+	$sec = new Section();
+	$sec->get_by_id( $c->parent_section );
+	$c->attach( $sec, $p, $c->cell, $c->sort );
 }
 
 $p = new Section();
