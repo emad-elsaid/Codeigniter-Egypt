@@ -247,7 +247,7 @@ EOT;
 		$sql_stat = "SELECT * FROM `content` WHERE `parent_content`= {$this->id}";
 			
 		// filter the objects to the requested cell
-		if( isset($cell) AND $cell!='' )
+		if( $cell!=='' )
 			$sql_stat .= " AND `cell`=$cell";
 			
 		/***************************************
