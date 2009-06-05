@@ -36,7 +36,15 @@ if( $can_edit OR $p->can_addin() OR $can_delete ){
 		<?php if( $can_delete ){ ?>
 		<div dojoType="dijit.MenuItem" label="Delete" style="font-size:13px" iconClass="dijitEditorIcon dijitEditorIconDelete">
 			<script type="dojo/method" event="onClick" args="evt">
-				open("<?= site_url("admin/app/content Inserter/delete/$id") ?>","","height=500,width=500");
+				dojo.xhrGet({
+						url: "<?= site_url("admin/app/content Inserter/delete/$id") ?>",
+						load: function( data ){ 
+							document.location.reload();
+						},
+						error: function( data ){
+							alert( " Error occured with deletion !\n"+ data );
+						}
+				});
 			</script>
 		<?php } ?>
 		</div>
