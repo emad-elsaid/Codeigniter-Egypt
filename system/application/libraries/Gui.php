@@ -558,6 +558,7 @@ EOT;
 	
 	function _array_to_style( $style=array() )
 	{
+		if( is_string( $style ) ) return $style;
 		$arr = array();
 		foreach( $style as $key=>$value )
 		{
