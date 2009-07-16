@@ -36,7 +36,7 @@ _4=_4.replace(/\b(checked|disabled|readonly|style)="/g,"t$1=\"");
 _4=_4.replace(/\bstyle="/g,"tstyle=\"");
 var _6;
 var _7=dojo.isWebKit;
-var _8=[[true,"select","option"],[_7,"tr","td|th"],[_7,"thead","tr","th"],[_7,"tbody","tr","td"],[_7,"table","tbody|thead|tr","tr","td"],];
+var _8=[[true,"select","option"],[_7,"tr","td|th"],[_7,"thead","tr","th"],[_7,"tbody","tr","td"],[_7,"table","tbody|thead|tr","tr","td"]];
 var _9=[];
 for(var i=0,_b;_b=_8[i];i++){
 if(!_b[0]){
@@ -164,7 +164,7 @@ var _29=false;
 var _30=(tag[2])({swallowNode:function(){
 _29=true;
 return _26;
-}},new dd.Token(dd.TOKEN_ATTR,_2f));
+}},new dd.Token(dd.TOKEN_ATTR,tag[0]+" "+_2f));
 if(_29){
 if(_26.parentNode&&_26.parentNode.removeChild){
 _26.parentNode.removeChild(_26);
