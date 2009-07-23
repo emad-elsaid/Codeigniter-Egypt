@@ -2,7 +2,9 @@
 //the plugin requirements as a JSON object is here ?>
 {
 	"parent":{"type":"number"},
-	"separator":{"type":"textbox", "default":" | "}
+	"separator":{"type":"textbox", "default":" | "},
+	"link_style":{"type":"textarea"},
+	"link_class":{"type":"textbox"}
 }
 
 
@@ -17,11 +19,12 @@
 $sections = new Section();
 $sections->get_by_parent_section( $info->parent );
 $hyperLinks = array();
-$local = base_url();
 
 foreach( $sections->all as $item )
-	array_push( $hyperLinks, "<a href=\"{$local}{$item->id}\" >{$item->name}</a>" );
-
+{
+	$l = site_url( $item->id );
+	array_push( $hyperLinks, "<a href=\"{$l}\" style=\"{$info->link_style}\" class=\"{$info->link_class}\" >{$item->name}</a>" );
+}
 echo implode( $info->separator, $hyperLinks );
 ?>
 <?php } ?>
