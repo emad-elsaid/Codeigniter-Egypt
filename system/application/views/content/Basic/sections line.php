@@ -3,8 +3,7 @@
 {
 	"parent":{"type":"number"},
 	"separator":{"type":"textbox", "default":" | "},
-	"link_style":{"type":"textarea"},
-	"link_class":{"type":"textbox"}
+	"style":{"type":"textarea"}
 }
 
 
@@ -22,9 +21,10 @@ $hyperLinks = array();
 
 foreach( $sections->all as $item )
 {
-	$l = site_url( $item->id );
-	array_push( $hyperLinks, "<a href=\"{$l}\" style=\"{$info->link_style}\" class=\"{$info->link_class}\" >{$item->name}</a>" );
+	$local = site_url( $item->id );
+	array_push( $hyperLinks, "<a href=\"{$local}\" style=\"{$info->style}\" >{$item->name}</a>" );
 }
+
 echo implode( $info->separator, $hyperLinks );
 ?>
 <?php } ?>

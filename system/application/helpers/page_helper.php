@@ -33,19 +33,31 @@ if ( ! function_exists('add_js')){
 }
 
 if ( ! function_exists('add_css')){
-	function add_css( $style = '' )
+	function add_css( $style = '', $position = '' )
 	{
 		if(is_array( $style ))
 		{
 			foreach( $style as $item )
-				add_css( $item );
+				add_css( $item, $position );
 		}
 		else
 		{
 			$CI =& get_instance();
 			
-			if(! in_array($style, $CI->vunsy->css))
-				array_push( $CI->vunsy->css, $style );
+			switch( $position )
+			{
+				case 'first':
+					if(! in_array($style, $CI->vunsy->css_first))
+						array_push( $CI->vunsy->css_first, $style );
+					break;
+				case 'last':
+					if(! in_array($style, $CI->vunsy->css_last))
+						array_push( $CI->vunsy->css_last, $style );
+					break;
+				default:
+					if(! in_array($style, $CI->vunsy->css))
+						array_push( $CI->vunsy->css, $style );
+			}
 		}
 	}
 }

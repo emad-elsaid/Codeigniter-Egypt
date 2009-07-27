@@ -3,6 +3,7 @@
 {
 	"stylesheet" : { "type":"file" },
 	"class" : { "type":"textbox" },
+	"style" : { "type":"textarea" },
 	"width" : { "type":"dropdown","options":[ "container 16", "container 12" ] }
 }
 

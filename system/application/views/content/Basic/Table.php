@@ -15,7 +15,7 @@
 <?php for( $i=0; $i<$info->rows; $i++ ){ ?>
 	 <tr>
 	<?php for( $j=0; $j<$info->columns; $j++ ){ ?>
-		 <td>
+		 <td style="vertical-align:text-top;" >
 		 <?= $cell[$i*$info->columns+$j] ?>
 		 </td>
 	<?php } ?>

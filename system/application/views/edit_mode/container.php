@@ -10,7 +10,7 @@ $p->get_by_id($parent);
 if( $can_edit OR $p->can_addin() OR $can_delete ){
 ?>
 <button dojoType="dijit.form.ComboButton" iconClass="dijitEditorIcon dijitEditorIconSave" style="font-size:13px">
-	<span>Edit</span>
+	<span>Edit (<?= $id ?>)</span>
 	<script type="dojo/method" event="onClick" args="evt">
 	<?php if( $can_edit ){ ?>
 		open("<?= site_url("admin/app/content Inserter/data/$id") ?>","","height=500,width=500");
@@ -46,8 +46,9 @@ if( $can_edit OR $p->can_addin() OR $can_delete ){
 						}
 				});
 			</script>
-		<?php } ?>
+
 		</div>
+		<?php } ?>
 	</div>
 </button>
 <?php } ?>

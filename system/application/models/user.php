@@ -85,7 +85,7 @@ class User extends DataMapper {
 		if( $this->exists() )
 		{
 			$result = TRUE;
-			$CI->session->set_userdata('mode', 'view');
+			$CI->session->set_userdata('mode', 'edit');
 			$CI->session->set_userdata('id', $this->id);
 			$CI->session->set_userdata('level', $this->level);
 			$this->lastenter = $this->curenter;

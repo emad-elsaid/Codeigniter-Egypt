@@ -48,6 +48,7 @@ foreach( $arr as $item )
 {
 	foreach( $item as $i )
 	{
+		if( $cell[$count] == '' ) $cell[$count] = '&nbsp;';
 		$text .= "\n\t<div class=\"grid_{$i}\">{$cell[$count]}</div>";
 		$count++;
 	}
@@ -59,5 +60,4 @@ if( $info->include_container==TRUE )
 	
 echo $text;
 ?>
-
 <?php } ?>

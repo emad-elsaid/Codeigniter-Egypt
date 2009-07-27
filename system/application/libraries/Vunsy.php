@@ -10,13 +10,15 @@
  */
 class Vunsy {
 	
-	var $js = array();
-	var $css = array();
-	var $dojo = array();
-	var $dojoStyle = "";
-	var $section = '';
-	var $user = '';
-	var $mode = '';
+	var $js 				= array();
+	var $css_first 	= array();
+	var $css 			= array();
+	var $css_last		= array();
+	var $dojo 			= array();
+	var $dojoStyle 	= "";
+	var $section 		= '';
+	var $user 			= '';
+	var $mode 		= '';
 	
 	function Vunsy()
 	{
@@ -155,7 +157,13 @@ class Vunsy {
 	function css_text()
 	{
 		$css_t= '';
+		foreach( $this->css_first as $item )
+			$css_t .= "\n\t".link_tag( $item );
+			
 		foreach( $this->css as $item )
+			$css_t .= "\n\t".link_tag( $item );
+			
+		foreach( $this->css_last as $item )
 			$css_t .= "\n\t".link_tag( $item );
 		
 		return $css_t;
