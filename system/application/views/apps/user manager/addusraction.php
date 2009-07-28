@@ -11,7 +11,7 @@ if( $u->exists() )
 else
 {
 	$u->name = $ci->input->post('name');
-	$u->set_password = $ci->input->post('password');
+	$u->set_password( $ci->input->post('password') );
 	$u->email = $ci->input->post('email');
 	$u->level = $ci->input->post( 'level' );
 	$u->save();
