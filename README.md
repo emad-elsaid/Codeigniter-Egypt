@@ -51,7 +51,7 @@ built on it some applications accessible by a task bar like facebook one
 * 1- user name: root
 	password: toor
 * you can change it from:
-	vunsy/system/application/config/vunsy_config.php
+	vunsy/config.php
 -----------------------------------------------------------------
 [ How to help us ]
 ---
