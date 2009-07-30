@@ -38,7 +38,7 @@ built on it some applications accessible by a task bar like facebook one
 ---
 * 1- normal site: 
 	vunsyURL/index.php
-	ex: http://localhost/vunsy/index.php/install
+	ex: http://localhost/vunsy/index.php
 * 2- login page:
 	vunsyURL/index.php/login
 	ex: http://localhost/vunsy/index.php/login
