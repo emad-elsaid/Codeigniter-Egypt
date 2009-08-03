@@ -22,8 +22,12 @@ class Vunsy {
 	
 	function Vunsy()
 	{
-		if( $this->installed() )
+		if( ! $this->installed() )
 		{
+			$this->install();
+			redirect();
+		}
+		
 			$CI =& get_instance();
 			
 			// getting the current section 
@@ -40,13 +44,6 @@ class Vunsy {
 			$this->css = $CI->config->item('css');
 			$this->js = $CI->config->item('js');
 			$this->dojoStyle = $CI->config->item( 'dojoStyle' );
-			
-		}
-		else
-		{
-			$this->install();
-			redirect();
-		}
 	}
 	
 	/* function of checking site mode

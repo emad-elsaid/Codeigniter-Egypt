@@ -13,19 +13,31 @@
 if ( ! function_exists('add_js')){
 	function add_js( $script = '' )
 	{
+		
+		/* if the paramter an array then pass
+		 * each element to the array again .
+		 * */
 		if(is_array( $script ))
 		{
 			foreach( $script as $item )
 				add_js( $item );
 		}
+		
+		/* is the paramter not an array then it's a string
+		 * we add it to vunsy javascript array
+		 * */
 		else
 		{
+			/* get full URL if script path
+			 * is local script
+			 * */
 			$CI =& get_instance();
 			if( is_local($script) )
 			{
 				$script = base_url().$script;
 			}
 			
+			// push script to vunsy JS array . 
 			if(! in_array($script, $CI->vunsy->js))
 				array_push( $CI->vunsy->js, $script );
 		}
@@ -35,11 +47,18 @@ if ( ! function_exists('add_js')){
 if ( ! function_exists('add_css')){
 	function add_css( $style = '', $position = '' )
 	{
+		/* if the paramter an array then pass
+		 * each element to the array again .
+		 * */
 		if(is_array( $style ))
 		{
 			foreach( $style as $item )
 				add_css( $item, $position );
 		}
+		
+		/* is the paramter not an array then it's a string
+		 * we add it to vunsy javascript array
+		 * */
 		else
 		{
 			$CI =& get_instance();
@@ -65,11 +84,19 @@ if ( ! function_exists('add_css')){
 if ( ! function_exists('add_dojo')){
 	function add_dojo( $req = '' )
 	{
+		
+		/* if the paramter an array then pass
+		 * each element to the array again .
+		 * */
 		if(is_array( $req ))
 		{
 			foreach( $req as $item )
 				add_dojo( $item );
 		}
+		
+		/* is the paramter not an array then it's a string
+		 * we add it to vunsy javascript array
+		 * */
 		else
 		{
 			$CI =& get_instance();

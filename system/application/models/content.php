@@ -129,7 +129,11 @@ EOT;
 		return $ci->gui->button( 
 				"",
 				$bText, 
-				array("style"=>"font-size:13px","iconClass"=>"dijitEditorIcon dijitEditorIconInsertImage")
+				array(
+				"style"=>"font-size:13px",
+				"iconClass"=>"dijitEditorIcon dijitEditorIconInsertImage",
+				"class"=>"vunsyCtrl"
+				)
 			);
 	}
 	

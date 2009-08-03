@@ -9,7 +9,7 @@ $p->get_by_id($parent);
 
 if( $can_edit OR $p->can_addin() OR $can_delete ){
 ?>
-<button dojoType="dijit.form.ComboButton" iconClass="dijitEditorIcon dijitEditorIconSave" style="font-size:13px">
+<button class="vunsyCtrl" dojoType="dijit.form.ComboButton" iconClass="dijitEditorIcon dijitEditorIconSave" style="font-size:13px">
 	<span>Edit (<?= $id ?>)</span>
 	<script type="dojo/method" event="onClick" args="evt">
 	<?php if( $can_edit ){ ?>

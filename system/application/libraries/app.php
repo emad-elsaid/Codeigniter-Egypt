@@ -26,6 +26,7 @@ class app {
 	
 	var $info_msg = array();
 	var $error_msg = array();
+	
 	// application view specifications
 	var $show_toolbar = TRUE;
 	var $show_title = TRUE;
@@ -109,6 +110,10 @@ class app {
 	
 	function render()
 	{
+		
+		if(!$this->can_view())
+			show_error('Access denied');
+			
 		// getting the page itself
 		$CI =& get_instance();
 		
@@ -125,8 +130,7 @@ class app {
 		$toolbar_text = ( $this->show_toolbar)? $this->toolbar() : "";
 		$title_text = ( $this->show_title)? $this->title() : "";
 		
-		if(!$this->can_view())
-			show_error('Access denied');
+		
 		
 		$OUTPUT = doctype( "XHTML 1.0 Strict" );
 		$OUTPUT .= "<html xmlns=\"http://www.w3.org/1999/xhtml\" >\n"
