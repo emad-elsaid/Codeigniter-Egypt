@@ -8,11 +8,12 @@
  * @author	Emad Elsaid
  * @link	http://github.com/blazeeboy/vunsy
  */
-/*class Remote extends Controller {
+class Remote extends Controller {
+	
 	function Remote(){
 		parent::Controller();
 		$perm = $this->vunsy->edit_mode();
-		if( ! $perm ) redirect();
+		if( ! $perm ) show_error("permission denied");
 	}
 
 	/* that's a model data grapper using ajax
@@ -54,7 +55,7 @@
 		$param = $this->input->post( 'param' );
 		$param = json_decode( $param );
 		echo( "cxvxcvxcvcxv" );
-		/*$obj = new $mod();
+		$obj = new $mod();
 		$obj->get_by_id( $id );
 		if( $obj->exists() )
 		{
@@ -62,7 +63,79 @@
 			eval( $expression );
 			if( isset( $result ) )
 				return json_encode( $result );
-		}*/
-	/*}
+		}
+	}*/
+	
+	function file()
+	{
+		$root = '';
+		$_POST['dir'] = urldecode($_POST['dir']);
+
+		if( file_exists($root . $_POST['dir']) )
+		{
+			
+			$files = scandir($root . $_POST['dir']);
+			natcasesort($files);
+			
+			if( count($files) > 2 )
+			{ /* The 2 accounts for . and .. */
+				echo "<ul class=\"jqueryFileTree\" style=\"display: none;\">";
+				// All dirs
+				foreach( $files as $file )
+				{
+					if( 	file_exists($root . $_POST['dir'] . $file) 
+							&& $file != '.' && $file != '..' 
+							&& is_dir($root . $_POST['dir'] . $file)
+					) {
+						echo "<li class=\"directory collapsed\"><a href=\"#\" rel=\"" . htmlentities($_POST['dir'] . $file) . "/\">" . htmlentities($file) . "</a></li>";
+					}
+				}
+				// All files
+				foreach( $files as $file )
+				{
+					if( 
+							file_exists($root . $_POST['dir'] . $file) 
+							&& $file != '.' 
+							&& $file != 'index.html' 
+							&& $file != '..' 
+							&& !is_dir($root . $_POST['dir'] . $file)
+						) {
+							$ext = preg_replace('/^.*\./', '', $file);
+							echo "<li class=\"file ext_$ext\"><a href=\"#\" rel=\"" . htmlentities($_POST['dir'] . $file) . "\">" . htmlentities($file) . "</a></li>";
+						}
+				}
+				echo "</ul>";
+			}
+		}
+	}
+	
+	function dir()
+	{
+		$root = '';
+		$_POST['dir'] = urldecode($_POST['dir']);
+
+		if( file_exists($root . $_POST['dir']) )
+		{
+			$files = scandir($root . $_POST['dir']);
+			natcasesort($files);
+			if( count($files) > 2 )
+			{ /* The 2 accounts for . and .. */
+				echo "<ul class=\"jqueryFileTree\" style=\"display: none;\">";
+				// All dirs
+				foreach( $files as $file )
+				{
+					if( 	file_exists($root . $_POST['dir'] . $file) 
+							&& $file != '.' 
+							&& $file != '..' 
+							&& is_dir($root . $_POST['dir'] . $file) 
+					){
+						echo "<li class=\"file ext_file\"><a href=\"#\" rel=\"" . htmlentities($_POST['dir'] . $file) . "/\">Choose " . htmlentities($file) . "</a></li>";
+						echo "<li class=\"directory collapsed\"><a href=\"#\" rel=\"" . htmlentities($_POST['dir'] . $file) . "/\">" . htmlentities($file) . "</a></li>";
+					}
+				}
+				echo "</ul>";
+			}
+		}
+	}
 }
-*/
+
