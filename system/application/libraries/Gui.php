@@ -62,7 +62,7 @@ class Gui {
 		
 		// adding the styles if not there
 		$attr = $this->_attributes_to_string( $attr );
-		if( !isset($style['width']) ) $style['width'] ='200px';
+		if( !isset($style['width']) ) $style['width'] ='400px';
 		if( !isset($style['height']) ) $style['height'] = '300px';
 		if(!isset($style['overflow']) ) $style['overflow'] = 'auto';
 		$style = $this->_array_to_style( $style );
@@ -72,7 +72,7 @@ class Gui {
 		else $param['root'] =  PATH.$param['root'];
 		if( ! is_dir( $param['root'] ) ) $param['root'] = str_replace( '/','\\',$param['root'] );
 		$root = $param['root'];
-		$script = base_url().$connector;
+		$script = $connector;
 		$param = $this->_params_to_js($param);
 		
 		//the output is here
@@ -86,11 +86,10 @@ class Gui {
 		return <<<EOT
 		$t
 		<div id="{$ID}dlg" dojoType="dijit.Dialog" title="Choose an Item" >
-			<div class="ui-helper-reset cui-widget ui-widget-content" id="{$ID}DIV" style="$style" ></div>
+			<div id="{$ID}DIV" style="$style" ></div>
 		</div>
 		<script language="javascript" >
 		$(document).ready( function() {
-		//$('#{$ID}DIV').hide();
     	$('#{$ID}DIV').fileTree({script:'$script' $param }, 
 		function(file) {
 			file = file.split( '{$root}')[1];
@@ -104,24 +103,24 @@ EOT;
 	
 	function file( $ID='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
-		return $this->activeTree("jquery/fileTree/jqueryFileTree.php", $ID, $value,$attr,$param,$style);
+		return $this->activeTree(site_url('remote/file'), $ID, $value,$attr,$param,$style);
 	}
 	
 	function model( $ID='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
 		$param['root'] = 'system/application/models/';
-		return $this->activeTree("jquery/fileTree/jqueryFileTree.php", $ID, $value,$attr,$param,$style);
+		return $this->activeTree(site_url('remote/file'), $ID, $value,$attr,$param,$style);
 	}
 	
 	function folder( $ID='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
-		return $this->activeTree("jquery/fileTree/jqueryDirTree.php", $ID, $value,$attr,$param,$style);
+		return $this->activeTree(site_url('remote/dir'), $ID, $value,$attr,$param,$style);
 	}
 	
 	function app( $ID='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
 		$param['root'] = 'system/application/views/apps/';
-		return $this->activeTree("jquery/fileTree/jqueryDirTree.php", $ID, $value,$attr,$param,$style);
+		return $this->activeTree(site_url('remote/dir'), $ID, $value,$attr,$param,$style);
 	}
 	/*******************************************
 	 * a color chooser field linked with a dojo color picker dialog
@@ -319,6 +318,24 @@ EOT;
 		return $text;
 	}
 	
+	function section( $ID='', $value='', $attr=array() )
+	{
+		$options = array('1'=>'index');
+		function rec_section( $id, $spacer='&nbsp;' )
+		{
+			$op = array();
+			$sec = new Section();
+			$sec->get_by_parent_section( $id );
+			foreach( $sec->all as $item )
+			{
+				$op[ $item->id ] = $spacer.$item->name;
+				$op = array_merge( $op, rec_section( $item->id, $spacer.'&nbsp;' ) );
+			}
+			return $op;
+			
+		}
+		return $this->dropdown( $ID, $value, array_merge( $options, rec_section(1)), $attr );
+	}
 	/*******************************************
 	 * a checkbox using dojo
 	 *******************************************/
@@ -386,7 +403,7 @@ EOT;
 		add_css( 'jquery/theme/ui.all.css' );
 		
 		if( ! isset($attr['align']) ) $attr['align'] = "center";
-		if( ! isset($attr['width']) ) $attr['width'] = "98%";
+		if( ! isset($attr['width']) ) $attr['width'] = "100%";
 		if( !isset($attr['class']) )
 			$attr['class'] = "ui-widget-content ui-corner-all ui-helper-reset";
 		else
