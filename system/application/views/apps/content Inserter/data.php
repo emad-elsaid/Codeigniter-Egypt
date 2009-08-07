@@ -188,6 +188,9 @@ if( is_object( $Plugin_Data ) )
 				$current_field = $ci->gui->dropdown( $key, $cVal,
 												@$value->options );
 				break;				
+			case "section":
+				$current_field = $ci->gui->section( $key, $cVal );
+				break;				
 		}
 		
 		$Plugin_Form_Data[$key] = $current_field;
