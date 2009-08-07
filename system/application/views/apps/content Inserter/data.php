@@ -199,5 +199,4 @@ if(count($Plugin_Form_Data)==0)
 	
 $Plugin_Form .= $ci->gui->form( '#', $Plugin_Form_Data, array("id"=>"info_form"));
 //===============================================
-echo $ci->gui->titlepane( "Basic Data",$Basic_Form);
-echo $ci->gui->titlepane( "Plugin Data",$Plugin_Form );
+echo $ci->gui->accordion( array("Basic Data"=>$Basic_Form,"Plugin Data"=>$Plugin_Form) );
