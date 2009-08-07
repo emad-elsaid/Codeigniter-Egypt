@@ -27,6 +27,14 @@
 		<?= $app->css_text() ?>
 		<?= $app->js_text() ?>
 		<?= $app->dojo_text() ?>
+<style>
+label{
+	padding:3px;
+}
+td{
+	padding: 3px;
+}
+</style>
 	<script type="text/javascript">
 	$(function() {
 
@@ -45,7 +53,7 @@
 				$('#aboutDlg').dialog('open');
 		});
 	});
-</script>
+	</script>
 	</head>
 	<body class="<?= $CI->vunsy->dojoStyle ?>">
 
