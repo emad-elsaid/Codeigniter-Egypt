@@ -12,7 +12,8 @@ $links = array(
 "toggle images"=>"$('img:not(#adminToolBar img)').toggle();",
 "toggle links"=>"$('a:not(#adminToolBar a)').toggle();",
 "toggle tables"=>"$('table:not(#adminToolBar table)').toggle();",
-"toggle vunsy"=>"$('.vunsyCtrl').toggle();"
+"toggle vunsy"=>"$('.vunsyCtrl').toggle();",
+"toggle edit toolbar"=>"$('#adminToolBar,#showtoolbar').toggle();"
 );
 $links_text = '';
 foreach( $links as $key=>$value )
@@ -27,7 +28,8 @@ foreach( $links as $key=>$value )
 ?>
 <script type="text/javascript" >
 $("document").ready( function(){
-	$("#adminToolBar").aqFloater({attach: 'n', duration: 0.3, opacity: 0.5});
+	$("#adminToolBar,#showtoolbar").aqFloater({attach: 'nw', duration: 0.1, opacity: 0.8});
+	$('#showtoolbar').hide();
 });
 </script>
 <style>
@@ -70,7 +72,11 @@ $("document").ready( function(){
 	padding:0px;
 }
 </style>
-<div id="adminToolBar" style="align:center;width:100%;" >
+<img id="showtoolbar" onclick="$('#adminToolBar,#showtoolbar').toggle();" 
+src="<?= "{$local}images/admin/jquery/toggle edit toolbar.png" ?>"
+title="Show edit toolbar" style="z-index:999;" >
+
+<div id="adminToolBar" style="align:center;width:100%;z-index:999;" >
 <?php 
 $text = <<<EOT
 <table class="linksTable" >
@@ -113,7 +119,7 @@ $text = <<<EOT
 	</tr>
 </table>
 EOT;
-echo $ci->gui->titlepane( 'Admin tools', $text, 'open="false" ' );
+echo $ci->gui->titlepane( 'Admin tools', $text, 'open="false"' );
 ?>
 </div>
 <script language="javascript" >

@@ -124,43 +124,15 @@ class app {
 		}
 		else
 		{
-			$page_text = $CI->load->view( $this->view_folder.$p, '', TRUE);
+			$page_text = $CI->load->view( $this->view_folder.$p, '', TRUE );
 		}
 		
-		$toolbar_text = ( $this->show_toolbar)? $this->toolbar() : "";
-		$title_text = ( $this->show_title)? $this->title() : "";
 		
-		
-		
-		$OUTPUT = doctype( "XHTML 1.0 Strict" );
-		$OUTPUT .= "<html xmlns=\"http://www.w3.org/1999/xhtml\" >\n"
-					   ."<head>\n"
-					   ."	<title>"
-					  .$this->name
-					  ." "
-					  .$this->page
-					  ."</title>\n"
-					  ."	<meta http-equiv=\"content-type\" content=\"text/html;charset="
-					  ."UTF-8"
-					  ."\" />\n"
-					  . "	<meta name=\"generator\" content=\"VUNSY system\" />\n"
-					  .  $this->css_text()
-					  .  $this->js_text()
-					  .  $this->dojo_text()
-					  . "\n</head>"
-					  . "\n<body style=\"font-size: 12px\" class=\"{$CI->vunsy->dojoStyle} ui-helper-reset\">"
-					  . $toolbar_text
-					  . "\n<div class=\"ui-widget  ui-corner-all\" style=\"margin:10px;\">"
-					  . $title_text
-					  . $this->error_text()
-					  . $this->info_text()
-					  . "\n<div class=\"ui-widget-content  ui-corner-all\" style=\"padding:10px;\" >"
-					  . $page_text
-					  . "\n</div>"
-					  . "\n</div>"
-					  . "\n</body>"
-					  . "\n</html>";
-		echo $OUTPUT;	
+		echo $CI->load->view(
+					"edit_mode/app",
+					array( "app"=> &$this, "content"=>$page_text),
+					TRUE 
+				);	
 		
 	}
 	
@@ -185,79 +157,6 @@ class app {
 		add_dojo( $path );
 	}
 	
-	function toolbar()
-	{
-			
-		add_js('jquery/jquery.js');
-		add_js('jquery/jquery.droppy.js');
-		add_css('jquery/droppy.css');
-		
-		$text = '
-	<script type="text/javascript">
-		$(document).ready(function() {
-		$(\'#nav\').droppy();
-  		});
-	</script>';
-		$text .= "\n<ul id=\"nav\"><li><a href=\"#\">Menu</a><ul>";
-		
-		foreach( $this->pages as $key=>$item )
-		{
-			$text .= '<li><a href="'.$this->app_url($key).'">'.$key.'</a></li>';
-		}
-		
-	 	$text .= '
-	</ul>
-	</li>
-	<li>
-	<a href="#">Help</a>
-	<ul>
-		<li><a target="_blank" href="'.$this->website.'" >Author website</a></li>
-		<li><a id="helpMenuItem" href="#" >About</a></li>
-	</ul>
-	</li>
-	</ul>';
-
-		return $text.$this->help_dlg();
-	}
-	
-	function title()
-	{
-		add_css('jquery/theme/ui.all.css');
-		return "\n<h1 class=\"ui-widget-header ui-corner-all\">&nbsp;&nbsp;".$this->page."</h1>";
-	}
-	
-	function help_dlg()
-	{
-		add_js('jquery/jquery.js');
-		add_js('jquery/jquery-ui.js');
-		add_css('jquery/theme/ui.all.css');
-		
-		$text = '
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$("#aboutDlg").dialog({
-			bgiframe: true,
-			modal: true,
-			autoOpen: false,
-			buttons: {
-				Ok: function() {
-					$(this).dialog(\'close\');
-				}
-			}
-		});
-	});
-	$(\'#helpMenuItem\').click(function() {
-			$(\'#aboutDlg\').dialog(\'open\');
-		});
-	</script>
-	<div id="aboutDlg" title="About">
-	<p><strong>App Name: </strong>'.$this->name.'</p>
-	<p><strong>App Version: </strong>'.$this->ver.'</p>
-	<p><strong>App Author: </strong>'.$this->author.'</p>
-	<p><strong>Website: </strong><a target="_blank" href="'.$this->website.'">'.$this->website.'</a></p>
-</div>';
-	return $text;
-	}
 	
 	function css_text()
 	{
