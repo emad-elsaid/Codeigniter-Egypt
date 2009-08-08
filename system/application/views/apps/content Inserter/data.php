@@ -128,7 +128,6 @@ else
 $Plugin_Data = $ci->load->view( 'content/'.$hidden['path'], array( "mode"=>"config" ), TRUE );
 $Plugin_Data = json_decode( $Plugin_Data );
 $Plugin_Form_Data = array();
-$Plugin_Form = "";
 
 // starting to make the form if it is exists
 if( is_object( $Plugin_Data ) )
@@ -197,9 +196,13 @@ if( is_object( $Plugin_Data ) )
 		
 	}
 }
-if(count($Plugin_Form_Data)==0)
-	$Plugin_Form_Data[''] = 'there isn\'t any plugins paramters required';
-	
-$Plugin_Form .= $ci->gui->form( '#', $Plugin_Form_Data, array("id"=>"info_form"));
-//===============================================
-echo $ci->gui->accordion( array("Basic Data"=>$Basic_Form,"Plugin Data"=>$Plugin_Form) );
+
+if( count($Plugin_Form_Data) > 0 )
+{
+	$Plugin_Form = $ci->gui->form( '#', $Plugin_Form_Data, array("id"=>"info_form"));
+	echo $ci->gui->accordion( array("Basic Data"=>$Basic_Form,"Plugin Data"=>$Plugin_Form) );
+}
+else
+{
+	echo $ci->gui->accordion( array("Basic Data"=>$Basic_Form) );
+}
