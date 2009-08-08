@@ -12,18 +12,17 @@ $links = array(
 "toggle images"=>"$('img:not(#adminToolBar img)').toggle();",
 "toggle links"=>"$('a:not(#adminToolBar a)').toggle();",
 "toggle tables"=>"$('table:not(#adminToolBar table)').toggle();",
-"toggle vunsy"=>"$('.vunsyCtrl').toggle();",
+"toggle vunsy edit buttons"=>"$('.vunsyCtrl').toggle();",
 "toggle edit toolbar"=>"$('#adminToolBar,#showtoolbar').toggle();"
 );
 $links_text = '';
 foreach( $links as $key=>$value )
 {
-	$links_text .= "
+	$links_text .= "<li><a href=\"#\" onclick=\"{$value}\" >
 	<img 
 		src=\"{$local}images/admin/jquery/{$key}.png\" 
-		onclick=\"{$value}\"
 		title=\"{$key}\"
-		>";
+		>{$key}</a></li>";
 }
 ?>
 <script type="text/javascript" >
@@ -80,7 +79,7 @@ $("document").ready( function(){
 }
 </style>
 <img id="showtoolbar" onclick="$('#adminToolBar,#showtoolbar').toggle();" 
-src="<?= "{$local}images/admin/jquery/toggle edit toolbar.png" ?>"
+src="<?= "{$local}images/admin/jquery/show toolbar.png" ?>"
 title="Show edit toolbar" style="z-index:999;" >
 
 <div id="adminToolBar" style="align:center;width:100%;z-index:999;" >
@@ -117,7 +116,9 @@ $text = <<<EOT
 				</ul>
 		</td>
 		<td>
-			{$links_text}
+			<ul>
+				{$links_text}
+			</ul>
 		</td>
 		<td>
 		</td>

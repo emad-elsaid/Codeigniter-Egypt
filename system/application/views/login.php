@@ -15,9 +15,9 @@
 			{  closeOnEscape: false ,
 				draggable: true ,
 				modal: true ,
-				height: 350 ,
-				width: 350 ,
-				resizable: false,
+				height: 400 ,
+				width: 450 ,
+				resizable: true,
 				buttons: {
 					Ok: function(){
 						$('#login').submit();
@@ -26,9 +26,23 @@
 			});
   	});
 	</script>
+<style>
+.big{
+	font-size: 25px;
+	padding: 5px;
+	color: #636363;
+	font-weight: bold;
+	border: 1px solid #636363;
+}
+label{
+	font-size: 20px;
+	text-align: right;
+	display: block;
+}
+</style>
 </head>
 
-<body style="font-size: 12px" >
+<body >
 		<div id="dialog" title="Login Dialog" >
 			<p>
 			<?php if( $this->vunsy->user->logged() ){ ?>
@@ -47,12 +61,12 @@
 					</td>
 				</tr>
 				<tr>
-					<td><label>User name</label></td>
-					<td><input name="user" type="text" ></td>
+					<td><label>User name : </label></td>
+					<td><input name="user" type="text" class="big" ></td>
 				</tr>
 				<tr>
-					<td><label>Password</label></td>
-					<td><input name="pass" type="password" ></td>
+					<td><label>Password : </label></td>
+					<td><input name="pass" type="password" class="big" ></td>
 				</tr>
 			</table>
 			
