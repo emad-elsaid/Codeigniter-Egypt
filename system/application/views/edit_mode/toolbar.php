@@ -27,9 +27,16 @@ foreach( $links as $key=>$value )
 }
 ?>
 <script type="text/javascript" >
+function closeAdminTitlepane()
+{
+	alert("sdf");
+	$('#adminToolBar,#showtoolbar').toggle();
+	return false;
+}
 $("document").ready( function(){
-	$("#adminToolBar,#showtoolbar").aqFloater({attach: 'nw', duration: 0.1, opacity: 0.8});
-	$('#showtoolbar').hide();
+	$("#adminToolBar").aqFloater({attach: 'nw', duration: 0.1, opacity: 0.8});
+	$("#showtoolbar").aqFloater({attach: 'ne', duration: 0.1, opacity: 0.8});
+	$('#adminToolBar').hide();
 });
 </script>
 <style>
@@ -119,7 +126,7 @@ $text = <<<EOT
 	</tr>
 </table>
 EOT;
-echo $ci->gui->titlepane( 'Admin tools', $text, 'open="false"' );
+echo $ci->gui->titlepane( 'Admin tools', $text);
 ?>
 </div>
 <script language="javascript" >
