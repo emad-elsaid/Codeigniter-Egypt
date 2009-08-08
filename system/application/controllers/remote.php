@@ -23,7 +23,7 @@ class Remote extends Controller {
 	 * @function : the function member you want to execute
 	 * @param : a JSON text with the paramters
 	 */
-/*	function model()
+	/*function model()
 	{
 		
 		//getting all the paramters
@@ -45,9 +45,9 @@ class Remote extends Controller {
 		if ( isset( $result ) )
 			return json_encode($result);
 		
-	}
+	}*/
 	
-	function orm()
+	/*function orm()
 	{
 		$mod = $this->input->post( 'model' );
 		$id = $this->input->post( 'id' );
@@ -65,6 +65,20 @@ class Remote extends Controller {
 				return json_encode( $result );
 		}
 	}*/
+	
+	function content( $id=0 )
+	{
+		
+		if( $id==0 )
+			$id = $this->uri->post('id');
+			
+		if( $id != FALSE && $id != 0 && $id != '' )
+		{
+			$cont = new Content();
+			$cont->get_by_id( $id );
+			$this->load->view( 'text', array( 'text'=> $cont->info ) );
+		}
+	}
 	
 	function file()
 	{
