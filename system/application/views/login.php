@@ -7,72 +7,86 @@
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="generator" content="Geany 0.15" />
 	<link rel="stylesheet" href="<?= base_url() ?>jquery/theme/ui.all.css" type="text/css" />
-	<script type="text/javascript" src="<?= base_url() ?>jquery/jquery.js" ></script>
-	<script type="text/javascript" src="<?= base_url() ?>jquery/jquery-ui.js" ></script>
-	<script type="text/javascript" >
-	$(document).ready(function(){
-    	$("#dialog").dialog(
-			{  closeOnEscape: false ,
-				draggable: true ,
-				modal: true ,
-				height: 400 ,
-				width: 450 ,
-				resizable: true,
-				buttons: {
-					Ok: function(){
-						$('#login').submit();
-					}
-					}
-			});
-  	});
+	<link  href="<?= base_url() ?>dojo/dijit/themes/tundra/tundra.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="<?= base_url() ?>dojo/dojo/dojo.js"
+	djConfig="parseOnLoad:true"></script>
+	<script type="text/javascript">
+		dojo.require("dojo.parser");
+		dojo.require("dijit.form.Button");
+		dojo.require("dijit.Dialog");
+		dojo.require("dijit.form.TextBox");
+		dojo.require("dijit.form.Button");
 	</script>
 <style>
-.big{
-	font-size: 25px;
-	padding: 5px;
-	color: #636363;
-	font-weight: bold;
-	border: 1px solid #636363;
+body{
+	font-size: 12px;
 }
+
 label{
-	font-size: 20px;
-	text-align: right;
+	text-align: left;
 	display: block;
+	vertical-align: text-top;
 }
 </style>
+<script language="javascript" >
+dojo.addOnLoad( null, function(){
+	dijit.byId( 'loginD' ).show();
+});
+</script>
 </head>
+	<body class="tundra">
 
-<body >
-		<div id="dialog" title="Login Dialog" >
-			<p>
+		<div id="loginD" dojoType="dijit.Dialog" title="Login Dialog" >
 			<?php if( $this->vunsy->user->logged() ){ ?>
-			<div class="ui-state-highlight" >
+			<div class="ui-state-highlight" style="width:300px;" >
 				<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
-<strong>Logged in</strong></p>
+				<strong>Logged in</strong></p>
 			</div>
 			<?php }else{ ?>
 			
-			<form method="POST" action="<?= site_url('login') ?>" id="login" >
-				
-			<table align="center" >
-				<tr>
-					<td colspan="2" align="center" >
-					<img src="<?= base_url() ?>images/admin/logo.png" >
-					</td>
-				</tr>
-				<tr>
-					<td><label>User name : </label></td>
-					<td><input name="user" type="text" class="big" ></td>
-				</tr>
-				<tr>
-					<td><label>Password : </label></td>
-					<td><input name="pass" type="password" class="big" ></td>
-				</tr>
-			</table>
-			
-			</form>
+<form method="POST" action="<?= site_url('login') ?>" id="login" >
+	<center><img src="<?= base_url() ?>images/admin/logo.png" align="center" ></center>
+	<label>User name : </label>
+	<input dojoType="dijit.form.TextBox" name="user" type="text" 
+	style="	color: #555555;
+	background:#FBFBFB none repeat scroll 0% 0%;
+	border:1px solid #E5E5E5;
+	font-size:24px;
+	margin-bottom: 9px;
+	margin-right:6px;
+	margin-top:2px;
+	padding:3px;
+	width:97%;
+	border-color:#DFDFDF;
+	font-family: \"Lucida Grande\",Verdana,Arial,\"Bitstream Vera Sans\",sans-serif;
+	
+	font-size-adjust:none;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:normal;" >
+	<label>Password : </label>
+	<input dojoType="dijit.form.TextBox" name="pass" type="password" 
+	style="	color: #555555;
+	background:#FBFBFB none repeat scroll 0% 0%;
+	border:1px solid #E5E5E5;
+	font-size:24px;
+	margin-bottom: 9px;
+	margin-right:6px;
+	margin-top:2px;
+	padding:3px;
+	width:97%;
+	border-color:#DFDFDF;
+	font-family: \"Lucida Grande\",Verdana,Arial,\"Bitstream Vera Sans\",sans-serif;
+	
+	font-size-adjust:none;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:normal;" >
+	<div dir="rtl" ><button type="submit" dojoType="dijit.form.Button" >Login</button></div>
+</form>
 			<?php } ?>
-			</p>
 		</div>
 </body>
 </html> 
