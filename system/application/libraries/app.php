@@ -99,7 +99,9 @@ class app {
 		
 		$ini = read_file($this->full_folder.'app.json');
 		$ini = json_decode($ini);
-
+		
+		if( ! is_object($ini) ) 
+			show_error( "Not a valid application, expected error in JSON file" );
 		//copy variables to this object
 		foreach( $ini as $key=>$value )
 			$this->$key = $value;

@@ -467,12 +467,9 @@ EOT;
 		$attr = $this->_attributes_to_string( $attr );
 		
 		return <<<EOT
-		<div class="ui-widget" $attr >
-				<div class="ui-state-error ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
-					<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
-					<strong>Error : </strong>$text</p>
+				<div class="ui-state-error ui-corner-all" style="padding:5px;" $attr > 
+					$text
 				</div>
-</div>
 EOT;
 	}
 	
@@ -485,13 +482,9 @@ EOT;
 		$attr = $this->_attributes_to_string( $attr );
 		
 		return <<<EOT
-		<div class="ui-widget" $attr >
-				<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"> 
-					<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
-					<strong>Info : </strong>$text</p>
+				<div class="ui-state-highlight ui-corner-all" style="padding:5px;" $attr > 
+					$text
 				</div>
-</div>
-
 EOT;
 	}
 	

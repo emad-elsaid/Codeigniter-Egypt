@@ -46,9 +46,11 @@ $hidden['type'] = $explodedPath[0];
 $script  = <<<EOT
 
 <script type="dojo/method" event="onClick" args="evt">
-dojo.query("[name='info']")[0].value = dojo.toJson(dijit.byId('info_form').getValues());
+if( dijit.byId('info_form')!=undefined )
+{
+	dojo.query("[name='info']")[0].value = dojo.toJson(dijit.byId('info_form').getValues());
+}
 dijit.byId('basic_form').submit();
-
 </script>
 EOT;
 
@@ -114,14 +116,13 @@ else
 {
 		"text":{
 			"type":"editor"
+			,"label":"Text Label"
 			,"default":"default text"
 		}
 		,"title":{
 			"type":"textbox"
 		}
-		,"titlecolor":{
-			"type":"color"
-		}
+		,"titlecolor":"information to display"
 }
  * */
 
@@ -136,63 +137,74 @@ if( is_object( $Plugin_Data ) )
 	foreach( $Plugin_Data as $key=>$value )
 	{
 		
-		// this line gets the default value if in insertion mode and the
-		// stored value if in the edit mode
-		$cVal = ( $edit===FALSE )? @$value->default: $info->$key;
-		
-		$current_field = $ci->gui->textbox( $key, @$value->default );
 		// build the field depending on the type
-		switch( $value->type )
+		if( is_object( $value ) )
 		{
-			case "textbox":
-				$current_field = $ci->gui->textbox( $key, $cVal );
-				break;
-			case "textarea":
-				$current_field = $ci->gui->textarea( $key, $cVal );
-				break;
-			case "color":
-				$current_field = $ci->gui->color( $key, $cVal );
-				break;
-			case "date":
-				$current_field = $ci->gui->date( $key, $cVal );
-				break;
-			case "editor":
-				$current_field = $ci->gui->editor( $key, $cVal );
-				break;
-			case "file":
-				$current_field = $ci->gui->file( $key, $cVal );
-				break;
-			case "folder":
-				$current_field = $ci->gui->folder( $key, $cVal );
-				break;
-			case "model":
-				$current_field = $ci->gui->model( $key, $cVal );
-				break;
-			case "app":
-				$current_field = $ci->gui->app( $key, $cVal );
-				break;
-			case "number":
-				$current_field = $ci->gui->number( $key, $cVal );
-				break;
-			case "password":
-				$current_field = $ci->gui->password( $key, $cVal );
-				break;
-			case "time":
-				$current_field = $ci->gui->time( $key, $cVal );
-				break;
-			case "checkbox":
-				$current_field = $ci->gui->checkbox( $key,$key, $cVal );
-				break;
-			case "dropdown":
-				$current_field = $ci->gui->dropdown( $key, $cVal,
-												@$value->options );
-				break;				
-			case "section":
-				$current_field = $ci->gui->section( $key, $cVal );
-				break;				
+			// this line gets the default value if in insertion mode and the
+			// stored value if in the edit mode
+			$cVal = ( $edit===FALSE )? @$value->default: $info->$key;
+			$current_field = $ci->gui->textbox( $key, @$value->default );
+			
+			switch( $value->type )
+			{
+				case "textbox":
+					$current_field = $ci->gui->textbox( $key, $cVal );
+					break;
+				case "textarea":
+					$current_field = $ci->gui->textarea( $key, $cVal );
+					break;
+				case "color":
+					$current_field = $ci->gui->color( $key, $cVal );
+					break;
+				case "date":
+					$current_field = $ci->gui->date( $key, $cVal );
+					break;
+				case "editor":
+					$current_field = $ci->gui->editor( $key, $cVal );
+					break;
+				case "file":
+					$current_field = $ci->gui->file( $key, $cVal );
+					break;
+				case "folder":
+					$current_field = $ci->gui->folder( $key, $cVal );
+					break;
+				case "model":
+					$current_field = $ci->gui->model( $key, $cVal );
+					break;
+				case "app":
+					$current_field = $ci->gui->app( $key, $cVal );
+					break;
+				case "number":
+					$current_field = $ci->gui->number( $key, $cVal );
+					break;
+				case "password":
+					$current_field = $ci->gui->password( $key, $cVal );
+					break;
+				case "time":
+					$current_field = $ci->gui->time( $key, $cVal );
+					break;
+				case "checkbox":
+					$current_field = $ci->gui->checkbox( $key,$key, $cVal );
+					break;
+				case "dropdown":
+					$current_field = $ci->gui->dropdown( $key, $cVal,
+													@$value->options );
+					break;				
+				case "section":
+					$current_field = $ci->gui->section( $key, $cVal );
+					break;				
+			}
+		}
+		else if( is_string( $value ) == TRUE )
+		{
+			$current_field = $ci->gui->info( $value );
 		}
 		
-		$Plugin_Form_Data[$key] = $current_field;
+		// checking the existance of label
+		if( isset( $value->label )==TRUE )
+			$Plugin_Form_Data[$value->label] = $current_field;
+		else
+			$Plugin_Form_Data[$key] = $current_field;
 		
 	}
 }
