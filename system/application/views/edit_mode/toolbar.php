@@ -33,7 +33,7 @@ function closeAdminTitlepane()
 	return false;
 }
 $("document").ready( function(){
-	$("#adminToolBar").aqFloater({attach: 'nw', duration: 0.1, opacity: 0.8});
+	$("#adminToolBar").aqFloater({attach: 'nw', duration: 0.1, opacity: 1});
 	$("#showtoolbar").aqFloater({attach: 'ne', duration: 0.1, opacity: 0.8});
 	$('#adminToolBar').hide();
 });
@@ -82,7 +82,7 @@ $("document").ready( function(){
 src="<?= "{$local}images/admin/jquery/show toolbar.png" ?>"
 title="Show edit toolbar" style="z-index:999;" >
 
-<div id="adminToolBar" style="align:center;width:100%;z-index:999;" >
+<div id="adminToolBar" style="width:100%;z-index:999;font-size: 12px;" >
 <?php 
 $text = <<<EOT
 <table class="linksTable" >
@@ -103,6 +103,9 @@ $text = <<<EOT
 				</a></li>
 				<li><a href="{$url}section manager" target="_blank" >
 					<img src="{$local}images/admin/section.png" title="Sections manager" /> Sections manager
+				</a></li>
+				<li><a href="{$url}Package manager" target="_blank" >
+					<img src="{$local}images/admin/software.png" title="Package manager" /> Package manager
 				</a></li>
 				<li><a href="{$url}software manager" target="_blank" >
 					<img src="{$local}images/admin/software.png" title="Software manager" /> Software manager

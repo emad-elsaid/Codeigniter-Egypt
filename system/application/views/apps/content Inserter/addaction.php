@@ -27,23 +27,21 @@ $c->info = $ci->input->post( "info" );
 $sec = new Section();
 $sec->get_by_id( $c->parent_section );
 
-if(! $ci->input->post( "id" ) )
-{
-	$p = new content();
-	$p->get_by_id( $c->parent_content );
-	$c->attach( $sec, $p, $c->cell, $c->sort );
-}
+$p = new Content();
+$p->get_by_id( $c->parent_content );
 
-if(		( $sec->can_addin() AND  $ci->input->post( "id" )===FALSE )
+if(		( $p->can_addin() AND  $ci->input->post( "id" )===FALSE )
 	OR  ( $ci->input->post( "id" )!==FALSE AND $old_edit ) )
 {
 	$c->save();
-	if($ci->input->post( "id" ))
-		redirect( $ci->app->app_url("data/{$c->id}") );
-	else
-		$ci->app->add_info('Content added');
 	
-
+	if( $ci->input->post( "id" )===FALSE )
+	{
+		$c->attach( $sec, $p, $c->cell, $c->sort );
+		$ci->app->add_info('Content added');
+	}
+	else
+		redirect( $ci->app->app_url("data/{$c->id}") );
 }
 else
 	$ci->app->add_error( 'Permission denied ! please check your root adminstrator for permissions' );

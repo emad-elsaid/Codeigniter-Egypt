@@ -206,30 +206,6 @@ class Section extends DataMapper {
 			return TRUE;
 	}
 	
-	function can_edit()
-	{
-		if( perm_chck( $this->edit ) )
-			return TRUE;
-		else
-			return FALSE;
-	}
-	
-	function can_addin()
-	{
-		if( perm_chck( $this->addin ) )
-			return TRUE;
-		else
-			return FALSE;
-	}
-	
-	function can_delete()
-	{
-		if( perm_chck( $this->del ) )
-			return TRUE;
-		else
-			return FALSE;
-	}
-	
 	function render()
 	{
 		$CI =& get_instance();

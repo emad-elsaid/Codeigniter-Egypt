@@ -64,7 +64,6 @@ if( $ci->vunsy->user->is_root() )
 else
 {
 	$input = 'hidden';
-	$ci->app->add_info( 'permissions are not available for the normal user' );
 }
 
 if( $edit === FALSE )
@@ -77,7 +76,6 @@ if( $edit === FALSE )
 	else
 	{
 		$input = 'hidden';
-		$ci->app->add_info( 'permissions are not available for the normal user' );
 	}
 		
 	$Basic_Form = 	$ci->gui->form(
