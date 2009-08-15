@@ -3,7 +3,14 @@ $ci =& get_instance();
 $ci->load->helper( 'directory' );
 $ci->load->library( 'gui' );
 $repo = $ci->app->ci_folder.'repo/';
+$tmp = $ci->app->ci_folder.'tmp/';
 
+if( ! file_exists( $repo ) )
+	mkdir( $repo, 0777 );
+	
+if( ! file_exists( $tmp ) )
+	mkdir( $tmp, 0777 );
+	
 $dir = directory_map( $repo,TRUE );
 
 if( count( $dir )>0 )
