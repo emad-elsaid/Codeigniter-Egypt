@@ -1,0 +1,21 @@
+{
+	"name":"Package manager",
+	"ver":"1.0",
+	"author":"Blaze Boy",
+	"website":"http:\/\/blazeeboy.wordpress.com",
+	
+	"perm":"$CI->vunsy->edit_mode()",
+	"pages":{
+		"List installed Packages":"list",
+		"Install Package":"install",
+		"Uninstall Package":"uninstall",
+		"Pack files":"pack"
+	},
+	"index":"List installed Packages",
+	
+	"css_files":[],
+	"js_files":[],
+	
+	"show_toolbar":true,
+	"show_title":true
+}

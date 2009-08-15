@@ -10,14 +10,15 @@
  */
 class Vunsy {
 	
-	var $js 				= array();
+	var $js 		= array();
 	var $css_first 	= array();
-	var $css 			= array();
-	var $css_last		= array();
-	var $dojo 			= array();
+	var $css 		= array();
+	var $css_last	= array();
+	var $dojo 		= array();
+	var $header		= array();
 	var $dojoStyle 	= "";
-	var $section 		= '';
-	var $user 			= '';
+	var $section 	= '';
+	var $user 		= '';
 	var $mode 		= '';
 	
 	function Vunsy()
@@ -230,7 +231,10 @@ class Vunsy {
 		return $text;
 	}
 	
-	
+	function header_text()
+	{
+		return implode( "\n", $this->header );
+	}
 }
 
 ?>

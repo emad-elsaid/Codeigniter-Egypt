@@ -11,7 +11,7 @@
 include( 'config.php' );
 
 $config["site_name"] = $config_site_name;
-$config["doctype"] = "XHTML 1.0 Strict";
+$config["doctype"] = "xhtml1-strict";
 $config["charset"] = "utf-8";
 
 /*

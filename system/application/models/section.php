@@ -221,6 +221,8 @@ class Section extends DataMapper {
 		$page_body = new Content();
 		$page_body->get_by_info( 'PAGE_BODY_LOCKED' );
 		$page_body_text = $page_body->render();
+		
+		// adding the root toolbar
 		if( $CI->vunsy->user->is_root())
 				$page_body_text .= $CI->load->view( 'edit_mode/toolbar', '', TRUE );
 		
@@ -241,16 +243,13 @@ class Section extends DataMapper {
 {$CI->vunsy->css_text()}
 {$CI->vunsy->js_text()}
 {$CI->vunsy->dojo_text()}
+{$CI->vunsy->header_text()}
 	</head>
 	<body class="{$CI->vunsy->dojoStyle}">
 		{$page_body_text}
 	</body>
 </html>
 EOT;
-		$CI->vunsy->js = array();
-		$CI->vunsy->css = array();
-		$CI->vunsy->dojo = array();
-		
 		}//Very long IF block for view permission
 		else
 		{

@@ -108,6 +108,32 @@ if ( ! function_exists('add_dojo')){
 	}
 }
 
+if ( ! function_exists('add_header')){
+	function add_header( $block='' )
+	{
+		/* if the paramter an array then pass
+		 * each element to the array again .
+		 * */
+		if(is_array( $block ))
+		{
+			foreach( $block as $item )
+				add_header( $item );
+		}
+		
+		/* is the paramter not an array then it's a string
+		 * we add it to vunsy javascript array
+		 * */
+		else
+		{
+			$CI =& get_instance();
+			
+			if(! in_array($block, $CI->vunsy->header))
+				array_push( $CI->vunsy->header, $block );
+				
+		}
+	}
+}
+
 if ( ! function_exists('is_local')){
 	function is_local( $path )
 	{
