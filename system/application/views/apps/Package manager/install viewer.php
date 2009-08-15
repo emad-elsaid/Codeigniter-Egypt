@@ -60,7 +60,7 @@ if( count($dir)>0 )
 	
 	$repo_pkg = $ci->app->ci_folder.'repo/'
 				.$package->name.'-'
-				.$package->version.'.vpkg';
+				.$package->version;
 	if( file_exists( $repo_pkg ) )
 	{
 		$ci->app->add_error( 'package already installed , you have to remove it at first' );

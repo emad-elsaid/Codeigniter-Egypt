@@ -18,7 +18,7 @@ function make_path($pathname, $is_filename=false){
 	// Ensure a file does not already exist with the same name
 	$pathname = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $pathname);
 	if (is_file($pathname)) {
-		trigger_error('mkdirr() File exists', E_USER_WARNING);
+		trigger_error('mkdir() File exists', E_USER_WARNING);
 		return false;
 	}
 	// Crawl up the directory tree
