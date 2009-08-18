@@ -1,10 +1,8 @@
 <?php
 		$CI =& get_instance();
-		add_js('jquery/jquery.js');
-		add_js('jquery/jquery-ui.js');
-		add_css('jquery/theme/ui.all.css');
 		add_css("assets/960.gs/reset.css");
 		add_css("assets/960.gs/text.css");
+		add_css("jquery/theme/ui.all.css");
 		
 		add_dojo("dojo.parser"); 
 		add_dojo("dijit.Menu");
@@ -27,6 +25,7 @@
 		<?= $app->css_text() ?>
 		<?= $app->js_text() ?>
 		<?= $app->dojo_text() ?>
+		<?= $app->header_text() ?>
 <style>
 label{
 	padding:3px;
@@ -35,30 +34,12 @@ td{
 	padding: 3px;
 }
 </style>
-	<script type="text/javascript">
-	$(function() {
 
-		$("#aboutDlg").dialog({
-			bgiframe: true,
-			modal: true,
-			autoOpen: false,
-			buttons: {
-				Ok: function() {
-					$(this).dialog('close');
-				}
-			}
-		});
-
-		$('#helpMenuItem').click(function() {
-				$('#aboutDlg').dialog('open');
-		});
-	});
-	</script>
 	</head>
 	<body class="<?= $CI->vunsy->dojoStyle ?>">
 
-<div style="position: relative; width: 100%; height: 100%;">
-	<div dojoType="dijit.layout.BorderContainer" gutters="true" id="borderContainerTwo" style="width: 100%;height:100%;">
+<div dojoType="dijit.layout.BorderContainer" gutters="true" id="borderContainerTwo" style="width: 100%;height:100%;">
+	
 	  <?php if($app->show_toolbar){ ?>
 	  <div dojoType="dijit.layout.ContentPane" region="top" splitter="false">
 		<div  dojoType="dijit.MenuBar" >
@@ -78,7 +59,7 @@ td{
 			<div dojoType="dijit.PopupMenuBarItem" >
 				<span>Help</span>
 				<div dojoType="dijit.Menu">
-					<div dojoType="dijit.MenuItem" onclick="$('#aboutDlg').dialog('open');" >About</div>
+					<div dojoType="dijit.MenuItem" onclick="dijit.byId( 'aboutDlg' ).show();" >About</div>
 					<div dojoType="dijit.MenuItem" onclick="window.location.href='<?=$app->website ?>'" >Author website</div>
 						
 				</div>
@@ -87,25 +68,33 @@ td{
 		</div>
 	  </div>
 	  <?php } ?>
-	  <div dojoType="dijit.layout.ContentPane" region="center" id="mainSplit">
-	  	<?php if($app->show_title){ ?>
-		<h1 class="ui-widget-header ui-corner-all">&nbsp;<?=$app->page?></h1>
-		<?php } ?>
+	  
+	  
+<!-- \\\\\\\\\\\\\\\\\\\That is the PAGE HTML/////////////////// -->
+		<div dojoType="dijit.layout.ContentPane" region="center" id="mainSplit">
+		
+			<?php if($app->show_title){ ?>
+			<h4 class="dijitDialogTitleBar" >&nbsp;<?=$app->page?></h4>
+			<?php } ?>
+		
 			<?= $app->error_text() ?>
 			<?= $app->info_text() ?>
 			<?= $content ?>
-	   </div>
+		</div>
+<!-- \\\\\\\\\\\\\\\\\\\That is the PAGE HTML/////////////////// -->
 	</div>
-</div>
 
-<div id="aboutDlg" title="About">
-	<p><strong>App Name: </strong><?= $app->name ?></p>
-	<p><strong>App Version: </strong><?= $app->ver ?></p>
-	<p><strong>App Author: </strong><?= $app->author ?></p>
-	<p><strong>Website: </strong>
-		<a target="_blank" href="<?= $app->website ?>"><?=$app->website ?></a>
-	</p>
-</div>
 
+<!-- \\\\\\\\\\\\\\\\\\\That is the help dialog HTML/////////////// -->
+		<div  dojoType="dijit.Dialog" id="aboutDlg" title="About">
+			<p><strong>App Name: </strong><?= $app->name ?></p>
+			<p><strong>App Version: </strong><?= $app->ver ?></p>
+			<p><strong>App Author: </strong><?= $app->author ?></p>
+			<p><strong>Website: </strong>
+				<a target="_blank" href="<?= $app->website ?>"><?=$app->website ?></a>
+			</p>
+		</div>
+<!-- \\\\\\\\\\\\\\\\\\\That is the help dialog HTML/////////////// -->	
+		
 	</body>
 </html>

@@ -2,17 +2,17 @@
 $ci =& get_instance();
 $ci->load->helper( 'directory' );
 
-$map = directory_map( './system/application/views/apps/', TRUE );
+$map = directory_map( APPPATH.'views/apps/', TRUE );
 if( array_search( 'index.html', $map ) )
 	unset( $map[array_search( 'index.html', $map )] );
 
-for( $i=0; $i<count($map); $i++ )
+foreach ( $map as $index=>$item )
 {
-	$map[$i] = array(
-			'Application' => $map[$i],
-			'Run' => anchor( site_url('admin/app').'/'.$map[$i], 'RUN'),
-			'Uninstall' => anchor( $ci->app->app_url("uninstall/{$map[$i]}"), 'Uninstall' ),
-			'Download' => anchor( $ci->app->app_url("download/{$map[$i]}"), 'Download' )
+	$map[$index] = array(
+			'Application' => $item,
+			'Run' => anchor( site_url('admin/app').'/'.$item, 'RUN'),
+			'Uninstall' => anchor( $ci->app->app_url("uninstall/{$item}"), 'Uninstall' ),
+			'Download' => anchor( $ci->app->app_url("download/{$item}"), 'Download' )
 	);
 }
 

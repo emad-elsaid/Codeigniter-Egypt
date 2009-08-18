@@ -1,9 +1,9 @@
 <?php
-$config_base_url = "http://localhost/b/vunsy/";
+$config_base_url = "http://localhost/vunsy/";
 
 $db_hostname = "localhost";
 $db_username = "root";
-$db_password = "toor";
+$db_password = "";
 $db_database = "vunsy";
 $db_dbdriver = "mysql";
 

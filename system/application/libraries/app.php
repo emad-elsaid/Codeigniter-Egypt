@@ -178,6 +178,12 @@ class app {
 		return $CI->vunsy->dojo_text();
 	}
 	
+	function header_text()
+	{
+		$CI =& get_instance();
+		return $CI->vunsy->header_text();
+	}
+	
 	function can_view()
 	{
 		return perm_chck( $this->perm );
