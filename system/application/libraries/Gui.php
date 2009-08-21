@@ -212,7 +212,7 @@ EOT;
 	/*******************************************
 	 * an tooltipbutton with dojo
 	 *******************************************/
-	function tooltipbutton( $text='', $title='', $dialog='', $attr=array() )
+	function tooltipbutton( $text='', $dialog='', $attr=array() )
 	{
 
 		add_dojo("dijit.form.Button");
@@ -223,7 +223,7 @@ EOT;
 		return <<<EOT
 <div dojoType="dijit.form.DropDownButton" $attr >
   <span>$text</span>
-  <div dojoType="dijit.TooltipDialog" title="$title" >
+  <div dojoType="dijit.TooltipDialog" >
   $dialog
   </div>
 </div>

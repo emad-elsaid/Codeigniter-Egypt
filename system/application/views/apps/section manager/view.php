@@ -17,7 +17,6 @@ function add( $id, $sort , $text='+' )
 	$hidden = array( 'parent_section'=>$id, 'sort'=>$sort );
 	return $ci->gui->tooltipbutton(
 			$text
-			,'New Section Info' 
 			,$ci->gui->form(
 					$ci->app->app_url( 'addaction' )
 					,array(

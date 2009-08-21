@@ -5,7 +5,7 @@ $l->get();
 $ci->load->library('gui');
 
 
- echo $ci->gui->tooltipbutton( "Add level", "Add level", $ci->gui->form( $ci->app->app_url('addlvlaction'), 
+ echo $ci->gui->tooltipbutton( "Add level", $ci->gui->form( $ci->app->app_url('addlvlaction'), 
  array(
 	"Level name" => $ci->gui->textbox( 'name' )
 	,"Level number" => $ci->gui->number( 'level', 1 )

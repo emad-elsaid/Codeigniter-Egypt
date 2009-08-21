@@ -14,7 +14,7 @@ foreach( $levels->all as $item )
 	$lvls[ $item->level ] = $item->name;
 }
 
-echo $ci->gui->tooltipbutton("Add user", "Add user", $ci->gui->form( $ci->app->app_url('addusraction')
+echo $ci->gui->tooltipbutton("Add user", $ci->gui->form( $ci->app->app_url('addusraction')
 ,array(
 		'level' => $ci->gui->dropdown( "level","",$lvls),
 		'name' => $ci->gui->textbox( "name" ),
