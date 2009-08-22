@@ -23,22 +23,23 @@ class Gui {
 	 *******************************************/
 	function form($action = '', $data=array(), $attributes = array(), $hidden = array())
 	{
-		add_dojo( "dijit.form.Form" );
 		
-		$attributes['dojoType'] = 'dijit.form.Form';
+		add_dojo( "dijit.form.Form" );
+		$attributes = $this->attribute( $attributes, 'dojoType', 'dijit.form.Form') ;
 		$attributes = $this->_attributes_to_string( $attributes );
 		
-		$text = form_open( $action, $attributes, $hidden);
-		$text .= "\n\t<table  class=\"ui-helper-reset\">";
+		$text =	form_open( $action, $attributes, $hidden).
+					"\n\t<table>";
 		foreach( $data as $key=>$value )
 		{
-			$text .= "\n\t<tr>";
-			$text .= "\n\t<td align=\"right\" >".form_label( $key )."</td>";
-			$text .= "\n\t<td>".$value."</td>";
-			$text .= "\n\t</tr>";
+			$text .=	"\n\t<tr>".
+						"\n\t<td>".form_label( $key )."</td>".
+						"\n\t<td>".$value."</td>".
+						"\n\t</tr>";
 		}
-		$text .= "\n\t</table>";
-		$text .= form_close();
+		$text .= "\n\t</table>".
+					form_close();
+		
 		return $text;
 	}
 	function hidden($ID='', $value='' )
@@ -60,20 +61,31 @@ class Gui {
 		add_css( "jquery/theme/ui.all.css");
 		add_dojo( "dijit.Dialog" );
 		
-		// adding the styles if not there
-		$attr = $this->_attributes_to_string( $attr );
-		if( !isset($style['width']) ) $style['width'] ='400px';
-		if( !isset($style['height']) ) $style['height'] = '300px';
-		if(!isset($style['overflow']) ) $style['overflow'] = 'auto';
-		$style = $this->_array_to_style( $style );
-		
 		//preparing the paramters
-		if(!isset($param['root'])) $param['root'] =  PATH;
-		else $param['root'] =  PATH.$param['root'];
-		if( ! is_dir( $param['root'] ) ) $param['root'] = str_replace( '/','\\',$param['root'] );
+		if(!isset($param['root']))
+			$param['root'] =  PATH;
+		else
+			$param['root'] =  PATH.$param['root'];
+			
+		if( ! is_dir( $param['root'] ) ) 
+			$param['root'] = str_replace( '/','\\',$param['root'] );
+			
 		$root = $param['root'];
 		$script = $connector;
+		
 		$param = $this->_params_to_js($param);
+		
+		// adding the styles if not there
+		
+		$style = $this->style( $style, 'width', '400px', FALSE );
+		$style = $this->style( $style, 'height', '300px', FALSE );
+		$style = $this->style( $style, 'overflow', 'auto', FALSE );
+		$style = $this->_array_to_style( $style );
+		
+		$attr = $this->attribute( $attr, 'id',  "{$ID}dlg" );
+		$attr = $this->attribute( $attr, 'dojoType',  "dijit.Dialog" );
+		$attr = $this->attribute( $attr, 'title',  "Choose an Item" );
+		$attr = $this->_attributes_to_string( $attr );
 		
 		//the output is here
 		$root = addslashes( $root );
@@ -85,7 +97,7 @@ class Gui {
 		);
 		return <<<EOT
 		$t
-		<div id="{$ID}dlg" dojoType="dijit.Dialog" title="Choose an Item" >
+		<div {$attr} >
 			<div id="{$ID}DIV" style="$style" ></div>
 		</div>
 		<script language="javascript" >
@@ -134,10 +146,17 @@ EOT;
 		add_css( "dojo/dojox/widget/ColorPicker/ColorPicker.css" );
 		
 		$value = form_prep( $value );
+		$attr = $this->attribute( $attr, 'type', 'text');
+		$attr = $this->attribute( $attr, 'id', $ID );
+		$attr = $this->attribute( $attr, 'name', $ID );
+		$attr = $this->attribute( $attr, 'dojoType', "dijit.form.TextBox" );
+		$attr = $this->attribute( $attr, 'onclick', "dijit.byId('{$ID}dlg').show()" );
+		$attr = $this->attribute( $attr, 'value', $value );
+		
 		$attr = $this->_attributes_to_string( $attr );
 		
 		$text = <<< EOT
-		<input type="text" id="$ID" name="$ID" dojoType="dijit.form.TextBox" onclick="dijit.byId('{$ID}dlg').show()" value="$value" $attr >
+		<input $attr >
 		<span id="{$ID}box" class="ui.helper.reset ui-corner-all" style="width:20px;height:20px;background-color:$value" >&nbsp;&nbsp;&nbsp;&nbsp;</span>
 		<div id="{$ID}dlg" dojoType="dijit.Dialog" title="Choose a color" >
 		<div  dojoType="dojox.widget.ColorPicker"
@@ -289,7 +308,6 @@ EOT;
 		add_dojo("dijit._editor.plugins.LinkDialog");
 		add_dojo("dijit._editor.plugins.FontChoice");
 		add_dojo("dijit._editor.plugins.ToggleDir");
-		add_css('jquery/theme/ui.all.css');
   
 		$attr['plugins'] = "['undo','redo','|','cut','delete','copy','paste','|','bold','italic','underline','strikethrough','|','justifyLeft','justifyCenter','justifyRight','justifyFull','|','toggleDir','|','createLink','foreColor','hiliteColor','|','selectAll','removeFormat','|','insertUnorderedList','insertOrderedList','|','indent','outdent','|','subscript','superscript','|','fontName','fontSize','formatBlock']";
 		$attr = $this->_attributes_to_string( $attr );
@@ -312,9 +330,10 @@ EOT;
 		foreach( $options as $key=>$item )
 			$options[$key] = form_prep( $item );
 			
+		$attr = $this->attribute( $attr, 'dojoType', "dijit.form.FilteringSelect");
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = form_dropdown($ID, $options, $value, 'dojoType="dijit.form.FilteringSelect" '.$attr);
+		$text = form_dropdown($ID, $options, $value, $attr);
 		return $text;
 	}
 	
@@ -343,11 +362,11 @@ EOT;
 	{
 
 		add_dojo("dijit.form.CheckBox");
-		$attr['dojoType'] = "dijit.form.CheckBox";
+		$attr = $this->attribute( $attr, 'dojoType', "dijit.form.CheckBox");
 		$attr = $this->_attributes_to_string( $attr );
 		
 		
-		return "\n\t".form_checkbox($ID, $value, $checked, $attr);
+		return form_checkbox($ID, $value, $checked, $attr);
 	}
 	/*******************************************
 	 * a radio button using dojo
@@ -356,11 +375,11 @@ EOT;
 	{
 
 		add_dojo("dijit.form.CheckBox");
-		$attr['dojoType'] = "dijit.form.RadioButton";
+		$attr = $this->attribute( $attr, 'dojoType', "dijit.form.RadioButton");
 		$attr = $this->_attributes_to_string( $attr );
 		
 		
-		return "\n\t".form_radio($ID, $value, $checked, $attr);
+		return form_radio($ID, $value, $checked, $attr);
 	}
 	
 	/*******************************************
@@ -370,7 +389,7 @@ EOT;
 	{
 
 		add_dojo("dijit.Tooltip");
-		return "\n\t<div dojoType=\"dijit.Tooltip\" connectId=\"$ID\">$value</div>";
+		return "<div dojoType=\"dijit.Tooltip\" connectId=\"$ID\">$value</div>";
 	}
 	
 	/*******************************************
@@ -379,8 +398,8 @@ EOT;
 	function accordion( $data=array(), $attr=array(), $style=array() )
 	{
 		add_dojo( "dijit.layout.AccordionContainer" );
-		if( !isset($style['width']) ) $style['width'] ='100%';
-		if( !isset($style['height']) ) $style['height'] = '300px';
+		$style = $this->style( $style, 'width', '100%' );
+		$style = $this->style( $style, 'height', '300px' );
 		$style = $this->_array_to_style( $style );
 		
 		$attr = $this->_attributes_to_string( $attr );
@@ -395,6 +414,28 @@ EOT;
 	}
 	
 	/*******************************************
+	 * an Tab container of dojo toolkit
+	 *******************************************/
+	function tab( $data=array(), $attr=array(), $style=array() )
+	{
+		add_dojo( "dijit.layout.TabContainer" );
+		add_dojo( "dijit.layout.ContentPane" );
+		$style = $this->style( $style, 'width', '100%' );
+		$style = $this->style( $style, 'height', '300px' );
+		
+		$style = $this->_array_to_style( $style );
+		$attr = $this->_attributes_to_string( $attr );
+		
+		$text = "<div dojoType=\"dijit.layout.TabContainer\" style=\"$style\"  $attr >";
+		
+		foreach($data as $key=>$value )
+			$text .= "<div dojoType=\"dijit.layout.ContentPane\" title=\"$key\" >$value</div>";
+			
+		$text .= "</div>";
+		return $text;
+	}
+		
+	/*******************************************
 	 * a jquery styled grid
 	 *******************************************/
 	function grid( $headers = array(), $body=array(), $attr=array() )
@@ -402,13 +443,9 @@ EOT;
 		
 		add_css( 'jquery/theme/ui.all.css' );
 		
-		if( ! isset($attr['align']) ) $attr['align'] = "center";
-		if( ! isset($attr['width']) ) $attr['width'] = "100%";
-		if( !isset($attr['class']) )
-			$attr['class'] = "ui-widget-content ui-corner-all ui-helper-reset";
-		else
-			$attr['class'] .= "ui-widget-content ui-corner-all ui-helper-reset";
-		
+		$attr = $this->attribute( $attr, 'align', 'center' );
+		$attr = $this->attribute( $attr, 'width', '100%' );
+		$attr = $this->attribute( $attr, 'class', "ui-widget-content");	
 		$attr = $this->_attributes_to_string( $attr );
 		
 		$text = "
@@ -496,8 +533,8 @@ EOT;
 		add_dojo( "dijit.layout.SplitContainer" );
 		add_dojo( "dijit.layout.ContentPane" );
 		
-		if( !isset($style['width']) ) $style['width'] ='100%';
-		if( !isset($style['height']) ) $style['height'] = '300px';
+		$style = $this->style( $style, 'width', '100%');
+		$style = $this->style( $style, 'height', '300px');
 		$style = $this->_array_to_style( $style );
 		
 		$attr = $this->_attributes_to_string( $attr );
@@ -519,8 +556,8 @@ EOT;
 		add_dojo( "dijit.layout.SplitContainer" );
 		add_dojo( "dijit.layout.ContentPane" );
 		
-		if( !isset($style['width']) ) $style['width'] ='100%';
-		if( !isset($style['height']) ) $style['height'] = '300px';
+		$style = $this->style( $style, 'width', '100%');
+		$style = $this->style( $style, 'height', '300px');
 		$style = $this->_array_to_style( $style );
 		
 		$attr = $this->_attributes_to_string( $attr );
@@ -534,6 +571,41 @@ EOT;
 
 	return $text;
 	}
+	
+	
+	function attribute( $attr=array(), $key='', $value='', $replace=TRUE ){
+		if( is_array($attr) )
+		{
+			if( !isset($attr[$key]) or (isset($attr[$key]) and $replace) ) $attr[$key] = $value;
+		}
+		else if( is_object($attr) )
+		{
+			if( !isset($attr->$key) or (isset($attr->$key) and $replace) ) $attr->$key =  $value;
+		}
+		else if( is_string($attr) ){
+			$attr .= " $key=\"$value\"";
+		}
+		
+		return $attr;
+	}
+	
+	function style( $attr=array(), $key='', $value='', $replace=TRUE ){
+		if( is_array($attr) )
+		{
+			if( !isset($attr[$key]) or (isset($attr[$key]) and $replace) ) $attr[$key] = $value;
+		}
+		else if( is_object($attr) )
+		{
+			if( !isset($attr->$key) or (isset($attr->$key) and $replace) ) $attr->$key =  $value;
+		}
+		else if( is_string($attr) )
+		{
+			$attr .= " $key:$value;";
+		}
+		
+		return $attr;
+	}
+	
 	/*******************************************
 	 * helper functions to convert paramters to JS object paramters 
 	 * and convert the attribute array to HTML attributes
@@ -541,12 +613,10 @@ EOT;
 	function _attributes_to_string( $attr= array() )
 	{
 		if( is_string($attr) ) return $attr;
+		
 		$att = '';
-
 		foreach ($attr as $key => $val)
-		{
 			$att .= $key . '="' . str_replace('"','\"',$val) . '" ';
-		}
 
 		return $att;
 	}
