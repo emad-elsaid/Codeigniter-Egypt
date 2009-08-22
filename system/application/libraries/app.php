@@ -122,11 +122,11 @@ class app {
 		$p = $this->page;
 		if( isset($this->pages->$p) ) 
 		{
-			$page_text = $CI->load->view( $this->view_folder.$this->pages->$p, '', TRUE);
+			$page_text = $CI->load->view( $this->view_folder.$this->pages->$p, array('ci'=>$CI), TRUE);
 		}
 		else
 		{
-			$page_text = $CI->load->view( $this->view_folder.$p, '', TRUE );
+			$page_text = $CI->load->view( $this->view_folder.$p, array('ci'=>$CI), TRUE );
 		}
 		
 		

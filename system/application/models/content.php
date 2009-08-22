@@ -94,11 +94,13 @@ class Content extends DataMapper {
 	 * **************************************/
 	function cells()
 	{
+		$ci =& get_instance();
 		if( $this->path !='' )
 			$c = $this->load->view(
 						'content/'.$this->path,
 						array(
 									'id'=> $this->id,
+									'ci'=> $ci,
 									'info'=>json_decode($this->info),
 									'mode'=>'layout'
 								),
@@ -196,6 +198,7 @@ EOT;
 								'content/'.$this->path,
 								array(
 										'id'=>$this->id,
+										'ci'=> $CI,
 										'cell'=> $layout_content,
 										'info'=>json_decode($this->info),
 										'mode'=> 'view'
