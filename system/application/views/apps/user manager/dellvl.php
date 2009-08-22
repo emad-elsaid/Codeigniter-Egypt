@@ -7,6 +7,10 @@ if( ! $l->exists() )
 	$ci->app->add_error( "level not found" );
 else
 {
+	$usr = new User();
+	$usr->get_by_level( $l->id );
+	$usr->delete_all();
+	
 	$l->delete();
 	$ci->app->add_info( " level deleted " );
 }
