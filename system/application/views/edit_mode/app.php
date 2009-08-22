@@ -28,6 +28,8 @@
 		<?= $app->header_text() ?>
 <style>
 label{
+	display: block;
+	text-align: right;
 	padding:3px;
 }
 td{

@@ -1,18 +1,17 @@
 <?php
-$CI =& get_instance();
 $hidden = array(
-				'parent_section'=>$CI->uri->segment(5)
-				,'parent_content'=>$CI->uri->segment(6)
-				,'cell'=>$CI->uri->segment(7)
-				,'sort'=>$CI->uri->segment(8) 
+				'parent_section'=>$ci->uri->segment(5)
+				,'parent_content'=>$ci->uri->segment(6)
+				,'cell'=>$ci->uri->segment(7)
+				,'sort'=>$ci->uri->segment(8) 
 				);
 				
-$CI->load->library('gui');
-echo $CI->gui->form(
-		 $CI->app->app_url('Data Editor'), 
+$ci->load->library('gui');
+echo $ci->gui->form(
+		 $ci->app->app_url('Data Editor'), 
 		array(
-				"Choose a content"=>$CI->gui->file("path", "", "", array('root'=>'system/application/views/content/') )
-				,""=> $CI->gui->button( "", "Add that content", array("type"=>"submit") )
+				"Choose a content"=>$ci->gui->file("path", "", "", array('root'=>'system/application/views/content/') )
+				,""=> $ci->gui->button( "", "Add that content", array("type"=>"submit") )
 		)
 		,''
 		,$hidden
