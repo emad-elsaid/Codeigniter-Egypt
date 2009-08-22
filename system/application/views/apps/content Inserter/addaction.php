@@ -33,7 +33,6 @@ $p->get_by_id( $c->parent_content );
 if(		( $p->can_addin() AND  $ci->input->post( "id" )===FALSE )
 	OR  ( $ci->input->post( "id" )!==FALSE AND $old_edit ) )
 {
-	$c->save();
 	
 	if( $ci->input->post( "id" )===FALSE )
 	{
@@ -41,7 +40,10 @@ if(		( $p->can_addin() AND  $ci->input->post( "id" )===FALSE )
 		$ci->app->add_info('Content added');
 	}
 	else
+	{
+		$c->save();
 		redirect( $ci->app->app_url("data/{$c->id}") );
+	}
 }
 else
 	$ci->app->add_error( 'Permission denied ! please check your root adminstrator for permissions' );
