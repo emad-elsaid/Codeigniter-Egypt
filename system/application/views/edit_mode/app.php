@@ -30,6 +30,7 @@
 label{
 	display: block;
 	text-align: right;
+	white-space:nowrap;
 	padding:3px;
 }
 td{

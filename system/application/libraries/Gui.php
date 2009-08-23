@@ -33,7 +33,7 @@ class Gui {
 		foreach( $data as $key=>$value )
 		{
 			$text .=	"\n\t<tr>".
-						"\n\t<td>".form_label( $key )."</td>".
+						"\n\t<td width=\"1%\" >".form_label( $key )."</td>".
 						"\n\t<td>".$value."</td>".
 						"\n\t</tr>";
 		}
@@ -296,6 +296,31 @@ EOT;
 	}
 	
 	/*******************************************
+	 * a perm field auto grown
+	 *******************************************/
+	function permission( $ID='', $value='', $attr=array() )
+	{
+
+		add_dojo("dijit.form.Textarea");
+		
+		$ci =& get_instance();
+		$ci->load->helper('perm');
+		$p_arr = perm_array();
+		$t_text = 	"<b>Boolean variables : </b>".implode('|', array_keys($p_arr['boolVars']) )
+						."<br><b>Variables : </b>".implode('|', array_keys($p_arr['vars']) );
+		
+		$value = form_prep( $value );
+		$id_g = 'p'.microtime();
+		
+		$attr = $this->attribute( $attr, 'id', $id_g , FALSE);
+		$id_g = $attr['id'];
+		
+		$text = $this->textbox( $ID, $value, $attr)
+					.$this->tooltip($id_g, $t_text );
+		return $text;
+	}
+	
+	/*******************************************
 	 * an rich text editor with dojo
 	 *******************************************/
 	function editor( $ID='', $value='', $attr=array() )
@@ -310,6 +335,23 @@ EOT;
 		add_dojo("dijit._editor.plugins.ToggleDir");
   
 		$attr['plugins'] = "['undo','redo','|','cut','delete','copy','paste','|','bold','italic','underline','strikethrough','|','justifyLeft','justifyCenter','justifyRight','justifyFull','|','toggleDir','|','createLink','foreColor','hiliteColor','|','selectAll','removeFormat','|','insertUnorderedList','insertOrderedList','|','indent','outdent','|','subscript','superscript','|','fontName','fontSize','formatBlock']";
+		$attr = $this->_attributes_to_string( $attr );
+		
+		$text = 
+		"<div  dojoType=\"dijit.Editor\" name=\"$ID\" $attr  >
+		$value
+		</div>";
+		return $text;
+	}
+	
+	/*******************************************
+	 * an simple rich text editor with dojo
+	 *******************************************/
+	function smalleditor( $ID='', $value='', $attr=array() )
+	{
+
+		add_dojo("dijit.Editor");
+  
 		$attr = $this->_attributes_to_string( $attr );
 		
 		$text = 
@@ -385,11 +427,13 @@ EOT;
 	/*******************************************
 	 * a Tooltip using dojo
 	 *******************************************/
-	function tooltip( $ID='', $value='' )
+	function tooltip( $ID='', $value='', $attr=array() )
 	{
 
 		add_dojo("dijit.Tooltip");
-		return "<div dojoType=\"dijit.Tooltip\" connectId=\"$ID\">$value</div>";
+		$attr = $this->attribute( $attr, 'position', 'below', FALSE );
+		$attr = _attributes_to_string( $attr );
+		return "<div dojoType=\"dijit.Tooltip\" connectId=\"$ID\" $attr>$value</div>";
 	}
 	
 	/*******************************************

@@ -60,7 +60,7 @@ else
 	$button = $ci->gui->button( '','Edit Content'.$script );
 
 if( $ci->vunsy->user->is_root() )
-	$input = 'textarea';
+	$input = 'permission';
 else
 {
 	$input = 'hidden';
@@ -72,7 +72,7 @@ if( $edit === FALSE )
 	$p_cont->get_by_id( $hidden['parent_content'] );
 	
 	if( $ci->vunsy->user->is_root() )
-		$input = 'textarea';
+		$input = 'permission';
 	else
 	{
 		$input = 'hidden';
@@ -190,6 +190,12 @@ if( is_object( $Plugin_Data ) )
 					break;				
 				case "section":
 					$current_field = $ci->gui->section( $key, $cVal );
+					break;					
+				case "permission":
+					$current_field = $ci->gui->permission( $key, $cVal );
+					break;				
+				case "smalleditor":
+					$current_field = $ci->gui->smalleditor( $key, $cVal );
 					break;				
 			}
 		}

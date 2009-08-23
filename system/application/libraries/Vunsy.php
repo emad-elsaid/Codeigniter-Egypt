@@ -19,6 +19,7 @@ class Vunsy {
 	var $dojoStyle 	= "";
 	var $section 	= '';
 	var $user 		= '';
+	var $level		= '';
 	var $mode 		= '';
 	
 	function Vunsy()
@@ -37,6 +38,19 @@ class Vunsy {
 			//getting the current user data
 			$this->user = new User();
 			$this->user->from_session();
+			
+			// getting level
+			$this->level = new Userlevel();
+			if( $this->user->is_root())
+			{
+				$this->level->id = -1;
+				$this->level->level = -1;
+				$this->level->name = 'root';
+			}
+			else
+			{
+				$this->level->get_by_id( $this->user->level );
+			}
 			
 			// getting the site mode
 			$this->mode = $CI->session->userdata('mode');
