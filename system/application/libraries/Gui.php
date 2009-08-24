@@ -315,7 +315,7 @@ EOT;
 		$attr = $this->attribute( $attr, 'id', $id_g , FALSE);
 		$id_g = $attr['id'];
 		
-		$text = $this->textbox( $ID, $value, $attr)
+		$text = $this->textarea( $ID, $value, $attr)
 					.$this->tooltip($id_g, $t_text );
 		return $text;
 	}

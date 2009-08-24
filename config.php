@@ -3,7 +3,7 @@ $config_base_url = "http://localhost/vunsy/";
 
 $db_hostname = "localhost";
 $db_username = "root";
-$db_password = "";
+$db_password = "toor";
 $db_database = "vunsy";
 $db_dbdriver = "mysql";
 
