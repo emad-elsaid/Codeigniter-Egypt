@@ -370,8 +370,11 @@ EOT;
 
 		add_dojo("dijit.form.FilteringSelect");
 		foreach( $options as $key=>$item )
-			$options[$key] = form_prep( $item );
-			
+			if( is_array($options) )
+				$options[$key] = form_prep( $item );
+			else
+				$options->$key = form_prep( $item );
+				
 		$attr = $this->attribute( $attr, 'dojoType', "dijit.form.FilteringSelect");
 		$attr = $this->_attributes_to_string( $attr );
 		

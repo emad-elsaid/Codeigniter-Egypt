@@ -5,7 +5,10 @@ if(! function_exists( "break_layout" ) )
 	{
 		$rows = explode( "\n", $layout );
 		for( $i=0; $i<count( $rows ); $i++ )
+		{
 			$rows[$i] = explode( ",", $rows[$i] );
+			$rows[$i] = array_map( 'trim', $rows[$i] );
+		}
 		return $rows;
 	}
 }
@@ -15,8 +18,10 @@ if(! function_exists( "break_layout" ) )
 {
 	"stylesheet" : { "type":"file" },
 	"class" : { "type":"textbox" },
-	"width" : { "type":"dropdown","options":[ "container 16", "container 12" ] },
-	"layout" : { "type":"textarea", "default": "10,6" },
+	"style" : { "type":"textarea" },
+	"width" : { "type":"dropdown","options":{ "container_16":"16 Column", "container_12":"12 Column" } },
+	"layout formation": " form columns with widths separated by comma to sum the containers width ex: 12,4 <br>another ex: 4,4,4,4<br>8,4,4 <br> that will form two rows first with 4 columns the second with 3 columns",
+	"layout" : { "type":"textarea" },
 	"include_container" : { "type":"checkbox", "default":"true" }
 }
 
@@ -36,14 +41,12 @@ echo $count;
 //the real content of your plugin goes here ?>
 <?php
 add_css( "assets/960.gs/960.css" );
-if( $info->stylesheet != "" ) 
-	add_css( $info->stylesheet );
+if( ! empty($info->stylesheet) ) add_css( $info->stylesheet );
 	
 $arr = break_layout( $info->layout );
-$count = 0;
 $text = "";
-$cont_class = ( $info->width==0 )? "container_16" : "container_12";
 
+$count = 0;
 foreach( $arr as $item )
 {
 	foreach( $item as $i )
@@ -56,7 +59,7 @@ foreach( $arr as $item )
 }
 
 if( $info->include_container==TRUE )
-	$text = "\n<div class=\"{$cont_class} {$info->class}\">".$text."\n</div>";
+	$text = "\n<div class=\"{$info->width} {$info->class}\" style=\"{$info->style}\">{$text}\n</div>\n";
 	
 echo $text;
 ?>

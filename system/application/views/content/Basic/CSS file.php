@@ -13,12 +13,10 @@
 <?php }else if( $mode=='view' ){
 //the real content of your plugin goes here ?>
 <?php 
+$ci->load->library( 'gui' );
 add_css( $info->CSS_File );
 
-$ci =& get_instance();
 if( $ci->vunsy->edit_mode() )
-{ 
+	echo $ci->gui->info( 'CSS: '.$info->CSS_File );
 ?>
-<div title="<?= $info->CSS_File ?>" >CSS</div>
-<?php } ?>
 <?php } ?>
