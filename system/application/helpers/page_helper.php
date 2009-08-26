@@ -145,3 +145,44 @@ if ( ! function_exists('is_local')){
 	}
 }
 
+if ( ! function_exists('add')){
+	function add( $item )
+	{
+		
+		if( is_array( $item ) )
+		{
+			foreach( $item as $i )
+				add( $i );
+		}
+		
+		$item = trim( $item );
+		$ext =  substr( $item, -3, 3 );
+		$prefix = substr( $item, 0, 4 );
+		
+		if( substr( $item, 0, 1)=='<' )
+		{
+			add_header( $item );
+			return TRUE;
+		}
+		else if( $ext=='css' )
+		{
+			add_css( $item );
+			return TRUE;
+		}
+		else if( $ext=='.js' )
+		{
+			add_js( $item );
+			return TRUE;
+		}
+		else if( in_array( $prefix, array( 'dojo', 'diji' ) ) )
+		{
+			add_dojo( $item );
+			return TRUE;
+		}
+		else
+		{
+			echo log_message( 'error',  'add function: unknown resource '.$item );
+			return FALSE;
+		}
+	}
+}

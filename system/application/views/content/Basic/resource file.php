@@ -1,7 +1,7 @@
 <?php if( $mode=='config' ){
 //the plugin requirements as a JSON object is here ?>
 {
-	"CSS_File":{"type":"file"}
+	"resourceFile":{"type":"file"}
 }
 
 
@@ -14,9 +14,9 @@
 //the real content of your plugin goes here ?>
 <?php 
 $ci->load->library( 'gui' );
-add_css( $info->CSS_File );
+$found = add( $info->resourceFile );
 
 if( $ci->vunsy->edit_mode() )
-	echo $ci->gui->info( 'CSS: '.$info->CSS_File );
+	echo $ci->gui->info( 'Resource '.((!$found)? 'not ':'').'found: '.$info->resourceFile );
 ?>
 <?php } ?>
