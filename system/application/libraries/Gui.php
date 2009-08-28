@@ -392,13 +392,21 @@ EOT;
 			$sec->get_by_parent_section( $id );
 			foreach( $sec->all as $item )
 			{
-				$op[ $item->id ] = $spacer.$item->name;
+				$op[ 's'.$item->id ] = $spacer.$item->name;
 				$op = array_merge( $op, rec_section( $item->id, $spacer.'&nbsp;' ) );
 			}
 			return $op;
 			
 		}
-		return $this->dropdown( $ID, $value, array_merge( $options, rec_section(1)), $attr );
+		$total_sections = array_merge( $options, rec_section(1) );
+		$total_sections_keys = array_keys( $total_sections );
+		$total_sections_values = array_values( $total_sections );
+		
+		foreach( $total_sections_keys as $index=>$key )
+			$total_sections_keys[$index] = substr( $key, 1 );
+			
+		$total_sections = array_combine( $total_sections_keys, $total_sections_values );
+		return $this->dropdown( $ID, $value, $total_sections, $attr );
 	}
 	/*******************************************
 	 * a checkbox using dojo

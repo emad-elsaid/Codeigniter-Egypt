@@ -5,63 +5,76 @@
 	Licensed under GPL and MIT.
 */
 
-/* `Basic HTML
-----------------------------------------------------------------------------------------------------*/
+/* =Basic HTML
+--------------------------------------------------------------------------------*/
 
-body {
+body
+{
 	font: 13px/1.5 Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif;
 }
 
-a:focus {
+a:focus
+{
 	outline: 1px dotted invert;
 }
 
-hr {
-	border: 0 #ccc solid;
-	border-top-width: 1px;
+hr
+{
+	border-color: #ccc;
+	border-style: solid;
+	border-width: 1px 0 0;
 	clear: both;
 	height: 0;
 }
 
-/* `Headings
-----------------------------------------------------------------------------------------------------*/
+/* =Headings
+--------------------------------------------------------------------------------*/
 
-h1 {
+h1
+{
 	font-size: 25px;
 }
 
-h2 {
+h2
+{
 	font-size: 23px;
 }
 
-h3 {
+h3
+{
 	font-size: 21px;
 }
 
-h4 {
+h4
+{
 	font-size: 19px;
 }
 
-h5 {
+h5
+{
 	font-size: 17px;
 }
 
-h6 {
+h6
+{
 	font-size: 15px;
 }
 
-/* `Spacing
-----------------------------------------------------------------------------------------------------*/
+/* =Spacing
+--------------------------------------------------------------------------------*/
 
-ol {
+ol
+{
 	list-style: decimal;
 }
 
-ul {
+ul
+{
 	list-style: square;
 }
 
-li {
+li
+{
 	margin-left: 30px;
 }
 
@@ -79,6 +92,7 @@ ul,
 pre,
 table,
 address,
-fieldset {
+fieldset
+{
 	margin-bottom: 20px;
 }
