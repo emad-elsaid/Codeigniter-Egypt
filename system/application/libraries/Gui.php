@@ -384,19 +384,21 @@ EOT;
 	
 	function section( $ID='', $value='', $attr=array() )
 	{
-		$options = array('1'=>'index');
-		function rec_section( $id, $spacer='&nbsp;' )
-		{
-			$op = array();
-			$sec = new Section();
-			$sec->get_by_parent_section( $id );
-			foreach( $sec->all as $item )
+		$options = array('s1'=>'index');
+		if( !function_exists( 'rec_section' ) ){
+			function rec_section( $id, $spacer='&nbsp;' )
 			{
-				$op[ 's'.$item->id ] = $spacer.$item->name;
-				$op = array_merge( $op, rec_section( $item->id, $spacer.'&nbsp;' ) );
+				$op = array();
+				$sec = new Section();
+				$sec->get_by_parent_section( $id );
+				foreach( $sec->all as $item )
+				{
+					$op[ 's'.$item->id ] = $spacer.$item->name;
+					$op = array_merge( $op, rec_section( $item->id, $spacer.'&nbsp;' ) );
+				}
+				return $op;
+				
 			}
-			return $op;
-			
 		}
 		$total_sections = array_merge( $options, rec_section(1) );
 		$total_sections_keys = array_keys( $total_sections );

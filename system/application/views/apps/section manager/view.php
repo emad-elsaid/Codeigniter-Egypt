@@ -11,7 +11,7 @@ foreach( $sections->all as $item )
 	
 }
 
-function add( $id, $sort , $text='+' )
+function addS( $id, $sort , $text='+' )
 {
 	$ci =& get_instance();
 	$hidden = array( 'parent_section'=>$id, 'sort'=>$sort );
@@ -41,7 +41,7 @@ function printS( $id )
 	$output = "<li>";
 	$output .= $s->id .'|';
 	$output .= $s->name;
-	$output .= add( $id, 0, "add first child for {$s->name}" );
+	$output .= addS( $id, 0, "add first child for {$s->name}" );
 	$output .= '|';
 	$output .= $s->e;
 	$output .= '|';
@@ -58,7 +58,7 @@ function printS( $id )
 		foreach( $c->all as $item )
 		{
 			$output .= printS( $item->id );
-			$output .= "<li>".add( $id, $item->sort+1 )."</li>";
+			$output .= "<li>".addS( $id, $item->sort+1 )."</li>";
 		}
 		$output .= "</ul>";
 	}
