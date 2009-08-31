@@ -4,7 +4,8 @@
 	"title":{"type":"textbox"},
 	"enable_text":{"type":"checkbox"},
 	"text":{"type":"smalleditor"},
-	"enable_cell":{"type":"checkbox"}
+	"enable_cell":{"type":"checkbox"},
+	"toggler":{"type":"checkbox"}
 }
 
 
@@ -29,9 +30,11 @@ add( 'jquery/jquery.js' );
 //add( 'assets/960.gs/jquery-fluid16.js' );
 add( '<!--[if IE 6]><link rel="stylesheet" type="text/css" href="'.base_url().'assets/960.gs/ie6.css" media="screen" /><![endif]-->');
 add('<!--[if IE 7]><link rel="stylesheet" type="text/css" href="'.base_url().'assets/960.gs/ie.css" media="screen" /><![endif]-->');
+
+$class = ( $info->toggler )? 'box toggle' : 'box';
 ?>
 
-<div class="box">
+<div class="<?=$class?>">
 	<h2><?= $info->title ?></h2>
 	<div class="block" >
 		<?php if( $info->enable_text ) echo '<p>'.$info->text.'</p>'; ?>

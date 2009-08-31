@@ -1,52 +1,13 @@
 var fluid = {
-Ajax : function(){
-	$("#loading").hide();
-	var content = $("#ajax-content").hide();
-	$("#toggle-ajax").bind("click", function(e) {
-        if ( $(this).is(".hidden") ) {
-            $("#ajax-content").empty();
-
-            $("#loading").show();
-            $("#ajax-content").load("/fluid960gs/data/ajax-response.html", function() {
-            	$("#loading").hide();
-            	content.slideDown();
-            });
-        }
-        else {
-            content.slideUp();
-        }
-        if ($(this).hasClass('hidden')){
-            $(this).removeClass('hidden').addClass('visible');
-        }
-        else {
-            $(this).removeClass('visible').addClass('hidden');
-        }
-        e.preventDefault();
-    });
-},
 Toggle : function(){
-	var default_hide = {"grid": true };
-	$.each(
-		["grid", "paragraphs", "blockquote", "list-items", "section-menu", "tables", "forms", "login-forms", "search", "articles", "accordion"],
-		function() {
-			var el = $("#" + (this == 'accordon' ? 'accordion-block' : this) );
-			if (default_hide[this]) {
-				el.hide();
-				$("[id='toggle-"+this+"']").addClass("hidden")
+		$('.toggle>h2').click(
+			function(){
+				if( $(this).next().is(':hidden')==true )
+					$(this).next().fadeIn();
+				else
+					$(this).next().fadeOut();
 			}
-			$("[id='toggle-"+this+"']")
-			.bind("click", function(e) {
-				if ($(this).hasClass('hidden')){
-					$(this).removeClass('hidden').addClass('visible');
-					el.slideDown();
-				} else {
-					$(this).removeClass('visible').addClass('hidden');
-					el.slideUp();
-				}
-				e.preventDefault();
-			});
-		}
-	);
+		);
 },
 Kwicks : function(){
 	var animating = false;
@@ -96,8 +57,7 @@ Accordion: function(){
 }
 jQuery(function ($) {
 	if($("#accordion").length){fluid.Accordion();}
-	if($("[id$='ajax']").length){fluid.Ajax();}
-	if($("[id^='toggle']").length){fluid.Toggle();}
+	if($(".toggle").length){fluid.Toggle();}
 	if($("#kwick .kwick").length){fluid.Kwicks();}
 	if($("#section-menu").length){fluid.SectionMenu();}
 });
