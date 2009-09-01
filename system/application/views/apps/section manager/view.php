@@ -21,7 +21,7 @@ function addS( $id, $sort , $text='+' )
 					$ci->app->app_url( 'addaction' )
 					,array(
 							'Name :'=>$ci->gui->textbox( 'name' )
-							,'View :'=>$ci->gui->textarea( 'view' )
+							,'View :'=>$ci->gui->permission( 'view' )
 							,''=>$ci->gui->button( '', 'Submit', array('type'=>'submit') )
 					)
 					,''
