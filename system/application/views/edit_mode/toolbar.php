@@ -25,6 +25,8 @@ foreach( $links as $key=>$value )
 		>{$key}</a>";
 }
 
+$XHR_URL = site_url('admin/app/editmode/'.(($ci->vunsy->edit_mode())?'viewmode':'editmode'));
+
 $scripts = <<<EOT
 
 <script type="text/javascript">
@@ -54,9 +56,19 @@ $(
 		}); 
 	}
 );
+
+function admin_editmode_toolbar()
+{
+	dojo.xhrGet({
+		url: "{$XHR_URL}",
+		load: function(args,response)
+		{
+			document.location.reload();
+		}
+	});
+}
 </script>
 EOT;
-
 add( $scripts );
 ?>
 
@@ -91,21 +103,3 @@ add( $scripts );
 </div>
 <a class="trigger" href="#"></a>
 
-<?php
-$XHR_URL = site_url('admin/app/editmode/'.(($ci->vunsy->edit_mode())?'viewmode':'editmode'));
-$XHR = <<<EOT
-<script language="javascript" >
-function admin_editmode_toolbar()
-{
-	dojo.xhrGet({
-		url: "{$XHR_URL}",
-		load: function(args,response)
-		{
-			document.location.reload();
-		}
-	});
-}
-</script>
-EOT;
-add( $XHR );
-?>

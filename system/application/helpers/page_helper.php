@@ -45,6 +45,17 @@ if ( ! function_exists('add_js')){
 }
 
 if ( ! function_exists('add_css')){
+	/**
+	 * that function attach a css file to page
+	 * so if you called it the style sheet you want will be added
+	 * to the page head
+	 * 
+	 * @param $style : path to CSS file you want to attach, path
+	 * is relative to to index.php
+	 * @param $position : could be ( first, last ) normally you
+	 * don't need to specify this paramter, but in some cases you have a special CSS file 
+	 * you want it to be the last one or the first one
+	 * */
 	function add_css( $style = '', $position = '' )
 	{
 		/* if the paramter an array then pass
@@ -111,7 +122,8 @@ if ( ! function_exists('add_dojo')){
 if ( ! function_exists('add_header')){
 	function add_header( $block='' )
 	{
-		/* if the paramter an array then pass
+		/**
+		 *  if the paramter an array then pass
 		 * each element to the array again .
 		 * */
 		if(is_array( $block ))
@@ -120,7 +132,8 @@ if ( ! function_exists('add_header')){
 				add_header( $item );
 		}
 		
-		/* is the paramter not an array then it's a string
+		/**
+		 *  is the paramter not an array then it's a string
 		 * we add it to vunsy javascript array
 		 * */
 		else

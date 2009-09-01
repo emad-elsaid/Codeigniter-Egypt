@@ -10,9 +10,14 @@
  */
 class Remote extends Controller {
 	
+	/**
+	 * that controller serves the AJAX purpose
+	 * , it provide the files , content, directory widgets with
+	 * the information needed through AJAX
+	 * */
 	function Remote(){
 		parent::Controller();
-		$perm = $this->vunsy->edit_mode();
+		$perm = $this->vunsy->edit_mode() or $this->vunsy->user->is_root();
 		if( ! $perm ) show_error("permission denied");
 	}
 
@@ -66,6 +71,12 @@ class Remote extends Controller {
 		}
 	}*/
 	
+	
+	/**
+	 * loads returns the content information field
+	 * @param $id: the content id you want to retrieve it's information
+	 * you can use it via AJAX using the URL : site_url('remote/content/20');
+	 * */
 	function content( $id=0 )
 	{
 		
@@ -80,6 +91,12 @@ class Remote extends Controller {
 		}
 	}
 	
+	
+	/**
+	 * that function you don't have to use it at all
+	 * it's the PHP backend to the file chooser widget of gui class
+	 * it returns ist of files within the passed directory via POST
+	 * */
 	function file()
 	{
 		$root = '';
@@ -123,6 +140,11 @@ class Remote extends Controller {
 		}
 	}
 	
+	/**
+	 * that function you don't have to use it at all
+	 * it's the PHP backend to the directory chooser widget of gui class
+	 * it returns ist of directories within the passed directory via POST
+	 * */
 	function dir()
 	{
 		$root = '';

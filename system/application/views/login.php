@@ -45,7 +45,7 @@ dojo.addOnLoad( null, function(){
 			<?php }else{ ?>
 			
 <form method="POST" action="<?= site_url('login') ?>" id="login" >
-	<center><img src="<?= base_url() ?>images/admin/logo.png" align="center" ></center>
+	<center><img src="<?= base_url() ?>assets/admin/logo.png" align="center" ></center>
 	<label>User name : </label>
 	<input dojoType="dijit.form.TextBox" name="user" type="text" 
 	style="	color: #555555;
