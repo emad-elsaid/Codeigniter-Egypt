@@ -37,7 +37,6 @@ td{
 	padding: 3px;
 }
 </style>
-
 	</head>
 	<body class="<?= $CI->vunsy->dojoStyle ?>">
 

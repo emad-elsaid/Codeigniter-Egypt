@@ -3,6 +3,8 @@ $ci =& get_instance();
 add( 'assets/edit panel/style.css' );
 add('dojo/dojo/dojo.js');
 add( 'jquery/jquery.js' );
+add( 'assets/fancybox/jquery.fancybox.js' );
+add( 'assets/fancybox/jquery.fancybox.css' );
 $local = base_url();
 $url = site_url('admin/app').'/';
 $logout = site_url( 'logout' );
@@ -41,25 +43,35 @@ function vunsyToggle(selector)
 $(function (){
 	$(".trigger").click(vunsyButtonToggler);
 });
+
+$(
+	function()
+	{
+		$("a.iframe").fancybox({
+			frameWidth: 700,
+			frameHeight: 450,
+		}); 
+	}
+);
 </script>
 
 
 
 <div class="panel">
-<a href="<?="{$local}"?>kfm" target="_blank" >
-	<img src="<?="{$local}"?>images/admin/kfm.png" title="My Computer" /> My computer
+<a href="<?="{$local}"?>kfm" class="iframe"  title="My Computer">
+	<img src="<?="{$local}"?>images/admin/kfm.png" /> My computer
 </a>
-<a href="<?="{$url}"?>user manager" target="_blank" >
-	<img src="<?="{$local}"?>images/admin/users.png" title="Users manager" /> User manager
+<a href="<?="{$url}"?>user manager" class="iframe" title="Users manager" >
+	<img src="<?="{$local}"?>images/admin/users.png" /> User manager
 </a>
-<a href="<?="{$url}"?>section manager" target="_blank" >
-	<img src="<?="{$local}"?>images/admin/section.png" title="Sections manager" /> Sections manager
+<a href="<?="{$url}"?>section manager" class="iframe"  title="Sections manager">
+	<img src="<?="{$local}"?>images/admin/section.png" /> Sections manager
 </a>
-<a href="<?="{$url}"?>Package manager" target="_blank" >
-	<img src="<?="{$local}"?>images/admin/software.png" title="Package manager" /> Package manager
+<a href="<?="{$url}"?>Package manager" class="iframe" title="Package manager" >
+	<img src="<?="{$local}"?>images/admin/software.png" /> Package manager
 </a>
-<a href="<?="{$url}"?>software manager" target="_blank" >
-	<img src="<?="{$local}"?>images/admin/software.png" title="Software manager" /> Software manager
+<a href="<?="{$url}"?>software manager" class="iframe"  title="Software manager">
+	<img src="<?="{$local}"?>images/admin/software.png" /> Software manager
 </a>
 
 <br />
@@ -75,11 +87,14 @@ $(function (){
 </div>
 <a class="trigger" href="#">Edit</a>
 
+<?php
+$XHR_URL = site_url('admin/app/editmode/'.(($ci->vunsy->edit_mode())?'viewmode':'editmode'));
+$XHR = <<<EOT
 <script language="javascript" >
 function admin_editmode_toolbar()
 {
 	dojo.xhrGet({
-		url: "<?= site_url('admin/app/editmode/'.(($ci->vunsy->edit_mode())?'viewmode':'editmode')) ?>",
+		url: "{$XHR_URL}",
 		load: function(args,response)
 		{
 			document.location.reload();
@@ -87,3 +102,6 @@ function admin_editmode_toolbar()
 	});
 }
 </script>
+EOT;
+add( $XHR );
+?>
