@@ -27,7 +27,7 @@ add( 'assets/960.gs/layout.css');
 //add( 'assets/960.gs/nav.css');
 add( 'jquery/jquery.js' );
 //add( 'jquery/jquery-ui.js' );
-//add( 'assets/960.gs/jquery-fluid16.js' );
+add( 'assets/960.gs/jquery-fluid16.js' );
 add( '<!--[if IE 6]><link rel="stylesheet" type="text/css" href="'.base_url().'assets/960.gs/ie6.css" media="screen" /><![endif]-->');
 add('<!--[if IE 7]><link rel="stylesheet" type="text/css" href="'.base_url().'assets/960.gs/ie.css" media="screen" /><![endif]-->');
 

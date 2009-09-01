@@ -32,11 +32,15 @@ class Content extends DataMapper {
 		
 		$CI =& get_instance();
 		
+		if( ! $this->can_view() )
+			return '';
+		
 		if( $CI->vunsy->edit_mode() AND $this->info!='PAGE_BODY_LOCKED' )
 		{
 				$text = $CI->load->view('edit_mode/container'
 						,array(
 							'text'=>$text
+							,'path'=>$this->path
 							,'parent'=>$this->parent_content
 							,'id'=>$this->id
 							,'cell'=>$this->cell
@@ -47,9 +51,6 @@ class Content extends DataMapper {
 						)
 						, TRUE);
 		}
-				
-		if( ! $this->can_view() )
-			$text='';
 			
 		return $text;
 	}
@@ -118,25 +119,10 @@ class Content extends DataMapper {
 	function add_button( $cell='', $sort='' )
 	{
 		$ci =& get_instance();
-		$ci->load->library( 'gui' );
-		add_dojo( 'dijit.form.Button' );
 		
 		$link = site_url( 'admin/app/content Inserter/index/'.$ci->vunsy->section->id.'/'.$this->id.'/'.$cell.'/'.$sort );
-		$bText = <<<EOT
-		 <span>Insert</span>
-	<script type="dojo/method" event="onClick" args="evt">
-		open("$link","","height=500,width=500");
-	</script>
-EOT;
-		return $ci->gui->button( 
-				"",
-				$bText, 
-				array(
-				"style"=>"font-size:13px",
-				"iconClass"=>"dijitEditorIcon dijitEditorIconInsertImage",
-				"class"=>"vunsyCtrl"
-				)
-			);
+		
+		return $ci->load->view( 'edit_mode/insert', array( 'url'=>$link ), TRUE );
 	}
 	
 	/***************************************

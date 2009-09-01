@@ -20,11 +20,12 @@ foreach( $links as $key=>$value )
 {
 	$links_text .= "<a href=\"#\" onclick=\"{$value}\" >
 	<img 
-		src=\"{$local}images/admin/jquery/{$key}.png\" 
+		src=\"{$local}assets/admin/jquery/{$key}.png\" 
 		title=\"{$key}\"
 		>{$key}</a>";
 }
-?>
+
+$scripts = <<<EOT
 
 <script type="text/javascript">
 
@@ -54,24 +55,27 @@ $(
 	}
 );
 </script>
+EOT;
 
+add( $scripts );
+?>
 
 
 <div class="panel">
 <a href="<?="{$local}"?>kfm" class="iframe"  title="My Computer">
-	<img src="<?="{$local}"?>images/admin/kfm.png" /> My computer
+	<img src="<?="{$local}"?>assets/admin/kfm.png" /> My computer
 </a>
 <a href="<?="{$url}"?>user manager" class="iframe" title="Users manager" >
-	<img src="<?="{$local}"?>images/admin/users.png" /> User manager
+	<img src="<?="{$local}"?>assets/admin/users.png" /> User manager
 </a>
 <a href="<?="{$url}"?>section manager" class="iframe"  title="Sections manager">
-	<img src="<?="{$local}"?>images/admin/section.png" /> Sections manager
+	<img src="<?="{$local}"?>assets/admin/section.png" /> Sections manager
 </a>
 <a href="<?="{$url}"?>Package manager" class="iframe" title="Package manager" >
-	<img src="<?="{$local}"?>images/admin/software.png" /> Package manager
+	<img src="<?="{$local}"?>assets/admin/software.png" /> Package manager
 </a>
 <a href="<?="{$url}"?>software manager" class="iframe"  title="Software manager">
-	<img src="<?="{$local}"?>images/admin/software.png" /> Software manager
+	<img src="<?="{$local}"?>assets/admin/software.png" /> Software manager
 </a>
 
 <br />
@@ -79,13 +83,13 @@ $(
 
 <br />
 <a href="javascript:admin_editmode_toolbar()" >
-	<img src="<?="{$local}"?>images/admin/editmode.png" title="Editmode toggle" /> Editmode toggle
+	<img src="<?="{$local}"?>assets/admin/editmode.png" title="Editmode toggle" /> Editmode toggle
 </a>
 <a href="<?="{$logout}"?>" >
-	<img src="<?="{$local}"?>images/admin/logout.png" title="Logout" /> Logout
+	<img src="<?="{$local}"?>assets/admin/logout.png" title="Logout" /> Logout
 </a>
 </div>
-<a class="trigger" href="#">Edit</a>
+<a class="trigger" href="#"></a>
 
 <?php
 $XHR_URL = site_url('admin/app/editmode/'.(($ci->vunsy->edit_mode())?'viewmode':'editmode'));

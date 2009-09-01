@@ -9,9 +9,9 @@ border:1px solid #111111;
 -webkit-border-top-right-radius: 20px;
 -moz-border-radius-bottomright: 20px;
 -webkit-border-bottom-right-radius: 20px;
-width: 330px;
+width: 200px;
 height: auto;
-padding: 30px 30px 30px 130px;
+padding:30px 30px 30px 50px;
 }
 
 .panel p{
@@ -51,9 +51,9 @@ font-size: 15px;
 letter-spacing:-1px;
 font-family: verdana, helvetica, arial, sans-serif;
 color:#fff;
-padding: 20px 40px 20px 15px;
+padding: 20px 10px 20px 20px;
 font-weight: 700;
-background:#333333 url(images/plus.png) 85% 55% no-repeat;
+background:#333333 url(images/plus.png) 20% 55% no-repeat;
 border:1px solid #444444;
 -moz-border-radius-topright: 20px;
 -webkit-border-top-right-radius: 20px;
@@ -72,9 +72,9 @@ font-size: 15px;
 letter-spacing:-1px;
 font-family: verdana, helvetica, arial, sans-serif;
 color:#fff;
-padding: 20px 40px 20px 15px;
+padding: 20px 10px 20px 20px;
 font-weight: 700;
-background:#222222 url(images/plus.png) 85% 55% no-repeat;
+background:#222222 url(images/plus.png) 20% 55% no-repeat;
 border:1px solid #444444;
 -moz-border-radius-topright: 20px;
 -webkit-border-top-right-radius: 20px;
@@ -86,5 +86,5 @@ display: block;
 }
 
 a.active.trigger {
-background:#222222 url(images/minus.png) 85% 55% no-repeat;
+background:#222222 url(images/minus.png) 20% 55% no-repeat;
 }
