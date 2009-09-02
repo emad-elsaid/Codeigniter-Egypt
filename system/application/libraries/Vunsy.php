@@ -61,7 +61,8 @@ class Vunsy {
 			$this->dojoStyle = $CI->config->item( 'dojoStyle' );
 	}
 	
-	/* function of checking site mode
+	/**
+	 *  function of checking site mode
 	 * 
 	 * */
 	function mode($mode='')
@@ -76,6 +77,7 @@ class Vunsy {
 		}
 			
 	}
+	
 	function edit_mode()
 	{
 		return ($this->mode=='edit')? TRUE:FALSE;
@@ -85,7 +87,6 @@ class Vunsy {
 	{
 		return ($this->mode=='view')? TRUE:FALSE;
 	}
-	
 	
     function get_section()
     {

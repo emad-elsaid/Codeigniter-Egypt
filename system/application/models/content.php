@@ -50,7 +50,7 @@ class Content extends DataMapper {
 	function move_down()
 	{
 			$cont = new Content();
-			$cont->where('parent_section',$this->parent_section );//same section
+			//$cont->where('parent_section',$this->parent_section );//same section
 			$cont->where('parent_content',$this->parent_content );//same parent
 			$cont->where('cell',$this->cell);// same cell
 			$cont->where('sort >',$this->sort);//greater sort

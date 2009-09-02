@@ -34,28 +34,33 @@ class app {
 	
 	// application URLs and folders
 	
-	/* like http://localhost/system/application/views/apps/appname/
+	/**
+	 *  like http://localhost/system/application/views/apps/appname/
 	 * to include images and javascript and css files 
 	 * from your app folder
 	 */
 	var $full_url = '';
 	
-	/*like apps/appname/
+	/**
+	 * like apps/appname/
 	 * used to include view files
 	 */
 	var $view_folder ='';
 	
-	/* like: http://localhost/index.php/app/appname/
+	/**
+	 *  like: http://localhost/index.php/app/appname/
 	 * used for links to another page in the app.
 	 */
 	var $url = '';
 	
-	/* like system/application/views/apps/appname/
+	/**
+	 *  like system/application/views/apps/appname/
 	 * path from the root to the app folder
 	 */
 	var $ci_folder = '';
 	
-	/* like H:\serverfolder\ci\system\application\views\apps\appname\
+	/**
+	 *  like H:\serverfolder\ci\system\application\views\apps\appname\
 	 * used to open files and write files in the application
 	 */
 	var $full_folder = '';

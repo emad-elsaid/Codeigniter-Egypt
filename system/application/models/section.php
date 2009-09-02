@@ -36,7 +36,7 @@ class Section extends DataMapper {
 		{
 			$s = new Section();
 			$s->where( 'sort >=', $this->sort );
-			$s->where( 'parent_section', $this->parent_section );
+			//$s->where( 'parent_section', $this->parent_section );
 			$s->get();
 			
 			foreach( $s->all as $item )
@@ -103,7 +103,7 @@ class Section extends DataMapper {
 			
 			// check if that place it took
 			$cont = new Content();
-			$cont->where('parent_section',$this->id);//same section
+			//$cont->where('parent_section',$this->id);//same section
 			$cont->where('parent_content',$parent->id);//same parent
 			$cont->where('cell',$cell);// same cell
 			$cont->where('sort',$sort);//greater sort
@@ -118,7 +118,7 @@ class Section extends DataMapper {
 				// get all this content belong to this parent and this section
 				// and the same cell and has a sort number greater that this
 				// sort number
-				$cont->where('parent_section',$this->id);//same section
+				//$cont->where('parent_section',$this->id);//same section
 				$cont->where('parent_content',$parent->id);//same parent
 				$cont->where('cell',$cell);// same cell
 				$cont->where('sort >=',$sort);//greater sort
@@ -170,7 +170,7 @@ class Section extends DataMapper {
 		// we have to push all the content up to fill that hole
 		// these content must me in the same section,parent,cell
 		// and have sort nubmer greater than that content
-		$cont->where( 'parent_section',$object->parent_section );//same section
+		//$cont->where( 'parent_section',$object->parent_section );//same section
 		$cont->where( 'parent_content',$object->parent_content );//same parent
 		$cont->where( 'cell',$object->cell );// same cell
 		$cont->where( 'sort >',$object->sort );//greater sort
