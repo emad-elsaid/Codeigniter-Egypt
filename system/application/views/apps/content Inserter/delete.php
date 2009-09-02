@@ -8,12 +8,6 @@ $c->get_by_id( $id );
 
 if( $c->exists() )
 {
-	if( $c->type == 'layout' )
-	{
-		$c = new Content();
-		$c->get_by_id( $id );
-	}
-
 	if( $c->can_delete() )
 	{
 		$c->delete();

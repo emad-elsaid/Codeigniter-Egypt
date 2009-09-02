@@ -18,6 +18,12 @@ class Content extends DataMapper {
 		
 	function attach( $section='', $parent='', $cell='', $sort='')
 	{
+		if( $section=='' )
+		{
+			$section = new Section();
+			$section->get_by_id( $this->parent_section );
+		}
+
 		$section->attach( $this, $parent, $cell, $sort );
 	}
 	
@@ -26,6 +32,41 @@ class Content extends DataMapper {
 		$sec = new Section();
 		$sec->get_by_id($this->parent_section );
 		$sec->deattach( $this );
+	}
+	
+	function move_up()
+	{
+		if( $this->sort > 0 and isset($this->id) )
+		{
+			$this->deattach();
+			$this->sort--;
+			$this->attach();
+			return TRUE;
+		}
+		
+		return FALSE;
+	}
+	
+	function move_down()
+	{
+			$cont = new Content();
+			$cont->where('parent_section',$this->parent_section );//same section
+			$cont->where('parent_content',$this->parent_content );//same parent
+			$cont->where('cell',$this->cell);// same cell
+			$cont->where('sort >',$this->sort);//greater sort
+			$cont->get();//get them to process
+			
+			// if that content object exists then that place is taken
+			// so we have to get a place for it
+			if( $cont->exists() )
+			{
+					$this->deattach();
+					$this->sort ++;
+					$this->attach();
+					return TRUE;
+			}
+			
+			return FALSE;
 	}
 	
 	function container( $text='' ){

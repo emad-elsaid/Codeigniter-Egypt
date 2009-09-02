@@ -95,6 +95,11 @@ class Section extends DataMapper {
 				$sort = $object->sort;
 			else
 				$object->sort = $sort;
+			if( empty($parent))
+			{
+				$parent = new Content();
+				$parent->get_by_id( $object->parent_content );
+			}
 			
 			// check if that place it took
 			$cont = new Content();

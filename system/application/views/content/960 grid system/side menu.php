@@ -29,7 +29,7 @@ $class = ( $info->toggler )? 'box menu toggle' : 'box menu';
 ?>
 
 <div class="<?=$class?>">
-	<h2><a href="#" id="toggle-section-menu"><?= $info->title ?></a></h2>
+	<h2  id="toggle-section-menu"><?= $info->title ?></h2>
 	<div class="block"  id="section-menu">
 		<ul class="section menu">
 	

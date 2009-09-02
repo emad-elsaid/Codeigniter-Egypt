@@ -30,6 +30,12 @@ if( $can_edit OR $p->can_addin() OR $can_delete ){
 	<a class="iframe " href="<?= site_url("admin/app/content Inserter/data/$id") ?>" title="<?=$path?>" >
 	<img src="<?=$img_url?>edit.png" title="Edit <?= $id ?>" >
 	</a>
+	<a class="iframe " href="<?= site_url("admin/app/content Inserter/up/$id") ?>" title="Move up" >
+	<img src="<?=$img_url?>move up.png"  title="Move up"  >
+	</a>
+	<a class="iframe " href="<?= site_url("admin/app/content Inserter/down/$id") ?>" title="Move down" >
+	<img src="<?=$img_url?>move down.png" title="Move down" >
+	</a>
 <?php } ?>
 
 <?php if( $p->can_addin() ){ ?>
