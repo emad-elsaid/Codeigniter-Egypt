@@ -52,7 +52,7 @@ dojo.addOnLoad(function(){
 			$form['Author : '] = $ci->gui->textbox( 'author', 'Vunsy system' );
 			$form['Website : '] = $ci->gui->textbox( 'website', 'http://' );
 			$form['Description : '] = $ci->gui->textarea( 'description' );
-			$form['Files to pack : '] = $ci->gui->textarea( 'files', '', ' id="files" cols="50" ' ); 
+			$form['Files to pack : '] = $ci->gui->textarea( 'files', '', ' id="files" ' ); 
 			$form[''] = $ci->gui->button( 'packfiles', 'Pack files', 'type="submit"' );
 			echo $ci->gui->form( $ci->app->app_url('packaction'), $form );
 			?>

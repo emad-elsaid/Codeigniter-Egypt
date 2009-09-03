@@ -1,3 +1,4 @@
+.editCtrl{ display: block;}
+.editCtrl a{ text-decoration: none; }
 .editCtrl img{ border: 0px none; } 
-.editCtrl{ display: block; }
 .editCtrl, .insertCtrl img{ padding: 2px; border: 0px none; }

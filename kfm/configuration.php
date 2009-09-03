@@ -56,7 +56,7 @@ $kfm_userfiles_output = '/userfiles/';
 
 // if you want to hide any panels, add them here as a comma-delimited string
 // for example, $kfm_hidden_panels = 'logs,file_details,file_upload,search,directory_properties';
-$kfm_hidden_panels = 'logs';
+$kfm_hidden_panels = 'logs,directory_properties,file_details,widgets';
 
 // what happens if someone double-clicks a file or presses enter on one? use 'return' for FCKeditor
 // values allowed: download, return
