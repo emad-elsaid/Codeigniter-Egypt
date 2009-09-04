@@ -18,8 +18,7 @@ class Gui {
 	}
 	
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * a form maker 
 	 *******************************************/
 	function form($action = '', $data=array(), $attributes = array(), $hidden = array())
@@ -47,8 +46,7 @@ class Gui {
 	{
 		return form_hidden( $ID, $value );
 	}
-	/**
-	 * ******************************************
+	/*******************************************
 	 * File chooser using the fsbrowser, use it with CAUTION
 	 * it makes an dojo textinput linked with a jquery fsbrowser
 	 *******************************************/
@@ -136,8 +134,7 @@ EOT;
 		$param['root'] = 'system/application/views/apps/';
 		return $this->activeTree(site_url('remote/dir'), $ID, $value,$attr,$param,$style);
 	}
-	/**
-	 * ******************************************
+	/*******************************************
 	 * a color chooser field linked with a dojo color picker dialog
 	 *******************************************/
 	function color( $ID='',$value='', $attr=array() )
@@ -173,8 +170,7 @@ EOT;
 		 return $text;
 	}
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * a date field picker using dojo
 	 *******************************************/
 	function date( $ID='', $value='', $attr=array() )
@@ -189,8 +185,7 @@ EOT;
 		return $text;
 	}
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * a Time chooser input field
 	 *******************************************/
 	function time( $ID='', $value='', $attr=array() )
@@ -205,8 +200,7 @@ EOT;
 		return $text;
 	}
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * an input field with dojo
 	 *******************************************/
 	function textbox( $ID='', $value='', $attr=array() )
@@ -220,8 +214,7 @@ EOT;
 		return $text;
 	}
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * an button with dojo
 	 *******************************************/
 	function button( $ID='', $value='', $attr=array() )
@@ -235,8 +228,7 @@ EOT;
 		return $text;
 	}
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * an tooltipbutton with dojo
 	 *******************************************/
 	function tooltipbutton( $text='', $dialog='', $attr=array() )
@@ -257,8 +249,7 @@ EOT;
 EOT;
 	}
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * an password field with dojo
 	 *******************************************/
 	function password( $ID='', $value='', $attr=array() )
@@ -273,8 +264,7 @@ EOT;
 		return $text;
 	}
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * an input spinner with dojo
 	 *******************************************/
 	function number( $ID='', $value='', $attr=array() )
@@ -289,8 +279,7 @@ EOT;
 		return $text;
 	}
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * a textarea field auto grown
 	 *******************************************/
 	function textarea( $ID='', $value='', $attr=array() )
@@ -306,8 +295,7 @@ EOT;
 		return $text;
 	}
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * a perm field auto grown
 	 *******************************************/
 	function permission( $ID='', $value='', $attr=array() )
@@ -332,8 +320,7 @@ EOT;
 		return $text;
 	}
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * an rich text editor with dojo
 	 *******************************************/
 	function editor( $ID='', $value='', $attr=array() )
@@ -357,8 +344,7 @@ EOT;
 		return $text;
 	}
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * an simple rich text editor with dojo
 	 *******************************************/
 	function smalleditor( $ID='', $value='', $attr=array() )
@@ -375,8 +361,7 @@ EOT;
 		return $text;
 	}
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * a dropdown menu using dojo
 	 * @param: options[ 'Label'=>'value' ]
 	 *******************************************/
@@ -399,21 +384,20 @@ EOT;
 	
 	function section( $ID='', $value='', $attr=array() )
 	{
-		$options = array('s1'=>'index');
-		if( !function_exists( 'rec_section' ) ){
-			function rec_section( $id, $spacer='&nbsp;' )
+		$options = array('1'=>'index');
+		function rec_section( $id, $spacer='&nbsp;' )
+		{
+			$op = array();
+			$sec = new Section();
+			$sec->order_by( 'sort', 'asc' );
+			$sec->get_by_parent_section( $id );
+			foreach( $sec->all as $item )
 			{
-				$op = array();
-				$sec = new Section();
-				$sec->get_by_parent_section( $id );
-				foreach( $sec->all as $item )
-				{
-					$op[ 's'.$item->id ] = $spacer.$item->name;
-					$op = array_merge( $op, rec_section( $item->id, $spacer.'&nbsp;' ) );
-				}
-				return $op;
-				
+				$op[ 's'.$item->id ] = $spacer.$item->name;
+				$op = array_merge( $op, rec_section( $item->id, $spacer.'&nbsp;' ) );
 			}
+			return $op;
+			
 		}
 		$total_sections = array_merge( $options, rec_section(1) );
 		$total_sections_keys = array_keys( $total_sections );
@@ -425,8 +409,7 @@ EOT;
 		$total_sections = array_combine( $total_sections_keys, $total_sections_values );
 		return $this->dropdown( $ID, $value, $total_sections, $attr );
 	}
-	/**
-	 * ******************************************
+	/*******************************************
 	 * a checkbox using dojo
 	 *******************************************/
 	function checkbox( $ID='', $value='', $checked=FALSE, $attr=array() )
@@ -439,8 +422,7 @@ EOT;
 		
 		return form_checkbox($ID, $value, $checked, $attr);
 	}
-	/**
-	 * ******************************************
+	/*******************************************
 	 * a radio button using dojo
 	 *******************************************/
 	function radio( $ID='', $value='', $checked=FALSE, $attr=array() )
@@ -454,8 +436,7 @@ EOT;
 		return form_radio($ID, $value, $checked, $attr);
 	}
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * a Tooltip using dojo
 	 *******************************************/
 	function tooltip( $ID='', $value='', $attr=array() )
@@ -467,8 +448,7 @@ EOT;
 		return "<div dojoType=\"dijit.Tooltip\" connectId=\"$ID\" $attr>$value</div>";
 	}
 	
-	/**
-	 * ******************************************
+	/*******************************************
 	 * an accordion of dojo toolkit
 	 *******************************************/
 	function accordion( $data=array(), $attr=array(), $style=array() )
@@ -489,8 +469,7 @@ EOT;
 		return $text;
 	}
 	
-	/**
-	 * *****************************************
+	/*******************************************
 	 * an Tab container of dojo toolkit
 	 *******************************************/
 	function tab( $data=array(), $attr=array(), $style=array() )
@@ -512,8 +491,7 @@ EOT;
 		return $text;
 	}
 		
-	/**
-	 * *****************************************
+	/*******************************************
 	 * a jquery styled grid
 	 *******************************************/
 	function grid( $headers = array(), $body=array(), $attr=array() )
@@ -573,8 +551,7 @@ EOT;
 EOT;
 	}
 	
-	/**
-	 * *****************************************
+	/*******************************************
 	 * a error box using jquery
 	 *******************************************/
 	function error( $text='', $attr=array() )
@@ -589,8 +566,7 @@ EOT;
 EOT;
 	}
 	
-	/**
-	 * *****************************************
+	/*******************************************
 	 * an Info box using jquery
 	 *******************************************/
 	function info( $text='', $attr=array() )
@@ -605,8 +581,7 @@ EOT;
 EOT;
 	}
 	
-	/**
-	 * *****************************************
+	/*******************************************
 	 * a horizontal box with dojo
 	 *******************************************/
 	function hbox( $content='', $attr=array(), $style=array() )
@@ -629,8 +604,7 @@ EOT;
 
 	return $text;
 	}
-	/**
-	 * *****************************************
+	/*******************************************
 	 * a vertical box with dojo
 	 *******************************************/
 	function vbox( $content='', $attr=array(), $style=array() )
@@ -688,8 +662,7 @@ EOT;
 		return $attr;
 	}
 	
-	/**
-	 * *****************************************
+	/*******************************************
 	 * helper functions to convert paramters to JS object paramters 
 	 * and convert the attribute array to HTML attributes
 	 *******************************************/
