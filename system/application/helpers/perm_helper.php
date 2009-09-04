@@ -23,13 +23,14 @@ if ( ! function_exists('perm_array')){
 			'boolVars' => array(
 								'root'=> intval($CI->vunsy->user->is_root()).'=1',
 								'logged'=>intval($CI->vunsy->user->logged()).'=1',
-								'guest'=>intval($CI->vunsy->user->is_guest()).'=1'
+								'guest'=>intval($CI->vunsy->user->is_guest()).'=1',
+								'view'=>intval($CI->vunsy->view_mode()).'=1',
+								'edit'=>intval($CI->vunsy->edit_mode()).'=1'
 			),
 			'vars' => array(
 								'level'=>$CI->session->userdata('level'),
 								'user'=>$CI->session->userdata('id'),
 								'section'=>$CI->vunsy->section->id,
-								'mode'=>"'".$CI->session->userdata('mode')."'",
 			)
 		);
 	}
