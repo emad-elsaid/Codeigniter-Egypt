@@ -36,7 +36,7 @@ $ci->load->library( 'gui' );
 echo $ci->gui->info( 'if you want to start just login using root and remove that layout and enjoy' )
 ?>
 <br>
-		<img src="<?= base_url() ?>images/admin/logo.png" >
+		<img src="<?= base_url() ?>assets/admin/logo.png" >
 		<br><h1 class="ui-helper-reset title" >VUnSy</h1>
 		<h2 class="ui-helper-reset title2" >Virtual Univeral System</h2>
 		<div class="sep"></div>
