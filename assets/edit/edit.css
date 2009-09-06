@@ -1,4 +1,7 @@
-.editCtrl{ display: block;}
+.editCtrl{ 
+	display: block;
+	text-align: left;
+}
 .editCtrl a{ text-decoration: none; }
 .editCtrl img{ border: 0px none; } 
 .editCtrl, .insertCtrl img{ padding: 2px; border: 0px none; }

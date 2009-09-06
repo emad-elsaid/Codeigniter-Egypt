@@ -67,7 +67,8 @@ class app {
 	
 	function app( $data )
 	{
-		$this->load_app( $data['name'], $data['page'] );
+		if( ! $this->load_app( $data['name'], $data['page'] ) )
+			show_404( '' );
 	}
 	
 	function load_app( $name='', $page='' )
@@ -92,7 +93,8 @@ class app {
 		//setting the page;
 		if( ! empty($page) )
 			$this->page = $page;
-			
+		
+		return TRUE;	
 	}
 	
 	function _get_app_data()
