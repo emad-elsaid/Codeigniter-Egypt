@@ -47,6 +47,7 @@ $route['(:num)'] = "page/index/$1";
 $route['(:num)/(:any)'] = "page/index/$1/$2";
 $route['login'] = "users/login";
 $route['logout'] = "users/logout";
+$route['\+.+'] = "page/index/$1";
 
 /* End of file routes.php */
 /* Location: ./system/application/config/routes.php */

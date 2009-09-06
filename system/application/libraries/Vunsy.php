@@ -91,19 +91,18 @@ class Vunsy {
     function get_section()
     {
 		$CI =& get_instance();
-		if( $this->installed() )
-		{
-			if( ! isset($CI->uri) )
-				$CI->load->library('URI');
-			$sec = new Section();
-			$sec->get_by_id($CI->uri->segment(1));
-			if( ! $sec->exists())
-			{
-				$sec->get();
-			}
+		$sec = new Section();
+		$section_segment = $CI->uri->segment(1);
+		
+		if( substr( $section_segment, 0, 1 )== '+' )
+			$sec->get_by_name( substr( $section_segment, 1 ) );
+		else
+			$sec->get_by_id( $section_segment );
+		
+		if( ! $sec->exists())
+			$sec->get_by_id('1');
 			
-			return $sec;
-		}
+		return $sec;
     }
 	
 	function installed()
