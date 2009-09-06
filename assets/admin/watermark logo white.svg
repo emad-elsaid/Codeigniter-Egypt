@@ -14,10 +14,10 @@
    height="40"
    id="svg2"
    version="1.1"
-   inkscape:version="0.47pre0 r21549"
-   sodipodi:docname="watermark logo.svg"
+   inkscape:version="0.47pre1 r21720"
+   sodipodi:docname="watermark logo white.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/home/blaze/Desktop/vunsy/images/admin/watermark logo.png"
+   inkscape:export-filename="/home/blaze/projects/vunsy/assets/admin/logo-small.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -201,24 +201,38 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 80 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2860"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2879"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
-     pagecolor="#ffffff"
+     pagecolor="#525252"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="0.0"
+     inkscape:pageopacity="0.64705882"
      inkscape:pageshadow="2"
-     inkscape:zoom="11.313708"
-     inkscape:cx="17.09455"
-     inkscape:cy="13.486235"
+     inkscape:zoom="8"
+     inkscape:cx="30.867401"
+     inkscape:cy="16.362724"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1024"
-     inkscape:window-height="722"
-     inkscape:window-x="0"
-     inkscape:window-y="21"
+     inkscape:window-height="717"
+     inkscape:window-x="-6"
+     inkscape:window-y="0"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -238,11 +252,8 @@
      id="layer1"
      transform="translate(-353.35355,-457.20933)">
     <path
-       id="path4146"
-       style="opacity:0.59999999999999998;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 382.14921,475.6862 0,0 c 3.15975,7.06835 -3.49943,12.5028 -9.80027,12.52258 -6.30084,0.0198 -7.89397,-5.23969 -8.60246,-10.67141 l 1.96005,1.08892 c -1.36182,-2.12611 -0.97989,-4.05348 0,-6.20684 0.63287,2.54141 2.08575,3.92064 4.46458,4.79124 -2.44524,-4.73789 3.01873,-7.21651 5.00902,-10.99807 0,0 -0.65336,6.6424 1.52449,6.53351 2.17784,-0.10889 1.1978,-2.94008 1.1978,-2.94008 4.38799,2.75648 2.50031,7.11602 1.85117,11.21586 1.20739,-1.58271 1.81567,-3.46029 2.39562,-5.33571 z m -4.35568,2.55897 c -2.96869,4.93593 -5.75533,4.57159 -5.2268,-1.36115 -1.87614,1.6034 -2.29224,3.58863 -1.74227,5.88016 -0.92472,-0.55814 -1.52836,-1.37499 -1.96006,-2.34117 -0.71114,3.03811 -0.0388,4.80198 2.77674,5.93461 -0.2665,-0.72264 -0.20157,-1.33152 0.32668,-1.63338 1.38432,2.88321 4.09893,0.61152 5.9346,-0.65335 -1.02556,0.4556 -2.11363,0.58572 -3.2123,0.70779 2.01242,-1.71369 3.4522,-3.83309 3.10341,-6.53351 z m -3.26676,1.36114 c 3.62531,-1.22849 0.22913,-4.14482 -0.81668,-6.0435 -0.10889,-0.65335 0,-0.92557 0,-0.92557 0,0 -0.38112,1.03446 -0.10889,1.63338 1.25665,1.80511 2.11667,3.34099 0.92557,5.33569 z m -6.09793,-12.087 c 0,0 0.28936,4.52474 -1.19782,4.08346 -1.98072,-0.58774 1.08892,-4.13789 1.19782,-4.08346 z m 4.92471,-3.13384 c -7.07338,0 -12.82609,5.7527 -12.82609,12.82608 0,7.07339 5.75271,12.82609 12.82609,12.82609 7.07338,0 12.82609,-5.7527 12.82609,-12.82609 0,-7.07338 -5.75271,-12.82608 -12.82609,-12.82608 z m 0,1.73325 c 6.13667,0 11.09283,4.95617 11.09283,11.09283 0,6.13667 -4.95616,11.09283 -11.09283,11.09283 -6.13667,0 -11.09283,-4.95616 -11.09283,-11.09283 0,-6.13666 4.95616,-11.09283 11.09283,-11.09283 z m 15,11.09061 c 0,8.28427 -6.71573,15 -15,15 -8.28427,0 -15,-6.71573 -15,-15 0,-8.28427 6.71573,-15 15,-15 8.28427,0 15,6.71573 15,15 z"
-       inkscape:export-filename="/home/blaze/Desktop/masryclub/website/assets/style/vunsy.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       id="path2866"
+       style="fill:#ffffff;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:0.59999999999999998;color:#000000;fill-opacity:1;fill-rule:evenodd;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       d="m 373.46644,485.7011 7.41106,-10.20363 -0.64445,-2.36295 -3.2938,-2.18393 -2.14814,-0.35803 -3.15059,0.1074 -2.36295,0.46542 -2.79257,2.29134 -1.4679,2.07654 8.44934,10.16783 z m 14.88711,-8.49177 c 0,8.28427 -6.71573,15 -15,15 -8.28427,0 -15,-6.71573 -15,-15 0,-8.28427 6.71573,-15 15,-15 8.28427,0 15,6.71573 15,15 z m -15,-11.09061 c 6.13667,0 11.09283,4.95617 11.09283,11.09283 0,6.13667 -4.95616,11.09283 -11.09283,11.09283 -6.13667,0 -11.09283,-4.95616 -11.09283,-11.09283 0,-6.13666 4.95616,-11.09283 11.09283,-11.09283 z m 0,-1.73325 c -7.07338,0 -12.82609,5.7527 -12.82609,12.82608 0,7.07339 5.75271,12.82609 12.82609,12.82609 7.07338,0 12.82609,-5.7527 12.82609,-12.82609 0,-7.07338 -5.75271,-12.82608 -12.82609,-12.82608 z" />
   </g>
 </svg>
