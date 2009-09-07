@@ -1,7 +1,7 @@
 <?php
 $ci =& get_instance();
 
-add( 'assets/edit/edit.css' );
+add( 'assets/admin/edit/edit.css' );
 add( 'jquery/theme/ui.core.css' );
 add( 'jquery/jquery.js' );
 
@@ -9,7 +9,17 @@ $script = <<<EOT
 <script language="javascript" >
 $(function(){
 	$('.editCtrl > .editCtrlToggler' ).click(function(){
-		$(this).fadeOut().next('.editGroup').fadeIn();
+		if( $(this).next('.editGroup').is(':hidden')==false )
+			$(this).next('.editGroup').slideUp('fast');
+		else
+		{
+			$('.editGroup').slideUp('fast');
+			$(this).next('.editGroup').slideDown('fast');
+		}
+		
+	});
+	$('.editGroup a>img' ).click(function(){
+		$(this).parent().parent().fadeOut('fast');
 	});
 });
 </script>
@@ -18,7 +28,7 @@ add( $script );
 
 $p = new Content();
 $p->get_by_id($parent);
-$img_url = base_url().'assets/edit/';
+$img_url = base_url().'assets/admin/edit/';
 if( $can_edit OR $p->can_addin() OR $can_delete ){
 ?>
 
