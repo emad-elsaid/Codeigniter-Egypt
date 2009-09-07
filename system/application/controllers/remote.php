@@ -17,10 +17,36 @@ class Remote extends Controller {
 	 * */
 	function Remote(){
 		parent::Controller();
-		$perm = $this->vunsy->edit_mode() or $this->vunsy->user->is_root();
-		if( ! $perm ) show_error("permission denied");
 	}
 
+
+	/**
+	 * function that load a view file from directory ajax
+	 * and return the result.
+	 * it's mainly made for ajax purposes
+	 * 
+	 * */
+	function ajax($file='')
+	{
+		if( empty( $file ) )
+			show_404('');
+		if( strpos( $file, '..' )!==FALSE )
+			show_error( '.. characters not allwed' );
+		
+		$file = str_replace( '.', '/', $file );
+		$file = 'ajax/'. $file;
+		
+		if( count($_POST)>0 )
+			$info = json_decode( json_encode( $_POST ) );
+		else
+			$info = FALSE;
+		
+		$this->load->view(
+						$file,
+						array( 'info'=>$info )
+						);
+		
+	}
 	/* that's a model data grapper using ajax
 	 * you can use it to get data from model
 	 * send your paramters using POST method
@@ -77,7 +103,8 @@ class Remote extends Controller {
 	 * @param $id: the content id you want to retrieve it's information
 	 * you can use it via AJAX using the URL : site_url('remote/content/20');
 	 * */
-	function content( $id=0 )
+	/** i disabled it so that it could be considered as a security hole **/
+	/*function remote( $id=0 )
 	{
 		
 		if( $id==0 )
@@ -90,7 +117,7 @@ class Remote extends Controller {
 			$this->load->view( 'text', array( 'text'=> $cont->info ) );
 		}
 	}
-	
+	*/
 	
 	/**
 	 * that function you don't have to use it at all
@@ -99,6 +126,8 @@ class Remote extends Controller {
 	 * */
 	function file()
 	{
+		if( ! perm_chck( 'edit' ) ) show_error("permission denied");
+		
 		$root = '';
 		$_POST['dir'] = urldecode($_POST['dir']);
 
@@ -147,6 +176,8 @@ class Remote extends Controller {
 	 * */
 	function dir()
 	{
+		if( ! perm_chck( 'edit' ) ) show_error("permission denied");
+		
 		$root = '';
 		$_POST['dir'] = urldecode($_POST['dir']);
 
