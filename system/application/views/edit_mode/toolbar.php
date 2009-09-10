@@ -3,6 +3,8 @@ $ci =& get_instance();
 add( 'assets/admin/edit panel/style.css' );
 add('dojo/dojo/dojo.js');
 add( 'jquery/jquery.js' );
+add( 'jquery/jquery-ui.js' );
+add( 'jquery/theme/ui.all.css' );
 add( 'assets/fancybox/jquery.fancybox.js' );
 add( 'assets/fancybox/jquery.fancybox.css' );
 $local = base_url().'/assets/admin/';
@@ -47,6 +49,8 @@ $(function (){
 	$(".trigger").click(vunsyButtonToggler);
 });
 
+
+// initialise Iframe links
 $(
 	function()
 	{
@@ -57,6 +61,11 @@ $(
 	}
 );
 
+$(function(){
+	$('.trigger').draggable({axis:'y'});
+});
+
+// switching editmode
 function admin_editmode_toolbar()
 {
 	dojo.xhrGet({
@@ -101,5 +110,5 @@ add( $scripts );
 	<img src="<?="{$local}"?>logout.png" title="Logout" /> Logout
 </a>
 </div>
-<a class="trigger" href="#"></a>
+<a class="ui-draggable trigger" href="#"></a>
 

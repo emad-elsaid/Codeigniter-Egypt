@@ -556,13 +556,11 @@ EOT;
 	 *******************************************/
 	function error( $text='', $attr=array() )
 	{
-		add_css( 'jquery/theme/ui.all.css' );
+		add_css( 'assets/style/style.css' );
 		$attr = $this->_attributes_to_string( $attr );
 		
 		return <<<EOT
-				<div class="ui-state-error ui-corner-all" style="padding:5px;" $attr > 
-					$text
-				</div>
+				<div class="error" $attr > $text </div>
 EOT;
 	}
 	
@@ -571,13 +569,11 @@ EOT;
 	 *******************************************/
 	function info( $text='', $attr=array() )
 	{
-		add_css( 'jquery/theme/ui.all.css' );
+		add_css( 'assets/style/style.css' );
 		$attr = $this->_attributes_to_string( $attr );
 		
 		return <<<EOT
-				<div class="ui-state-highlight ui-corner-all" style="padding:5px;" $attr > 
-					$text
-				</div>
+				<div class="info" $attr > $text </div>
 EOT;
 	}
 	
