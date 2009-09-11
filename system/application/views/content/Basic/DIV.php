@@ -1,9 +1,15 @@
 <?php if( $mode=='config' ){
 //the plugin requirements as a JSON object is here ?>
 {
+	"background attributes":"if you specified a background image all the related attributes would be wrriten as well in the rendered HTML, otherwise they will be ignored",
 	"background_image" : { "type" : "file" },
-	"repeat" : { "type" : "dropdown", "options" : ["no-repeat","repeat","repeat-x","repeat-y"], "default" : "0" },
-	"attachment" : { "type" : "dropdown", "options" : ["scroll","fixed"], "default": "0" },
+	"repeat" : { "type" : "dropdown",
+			"options" :{"no-repeat":"no-repeat",
+				"repeat":"repeat",
+				"repeat-x":"repeat-x",
+				"repeat-y":"repeat-y"},
+			 "default" : "0" },
+	"attachment" : { "type" : "dropdown", "options" : {"scroll":"scroll","fixed":"fixed"}, "default": "0" },
 	"horizontal_position" : { "type" : "textbox", "default" : "left" },
 	"vertical_position" : { "type" : "textbox", "default" : "top" },
 	"class" : { "type" : "textbox" },
@@ -20,38 +26,15 @@
 //the real content of your plugin goes here ?>
 <?php 
 $local = base_url();
+
 $style = '';
 if( $info->background_image != '' )
+{
 	$style .= "background-image: url({$local}{$info->background_image});";
-$style .= "background-position: {$info->horizontal_position} {$info->vertical_position};";
-
-switch( $info->repeat )
-{
-	case '0':
-		$t = 'no-repeat';
-		break;
-	case '1':
-		$t = 'repeat';
-		break;
-	case '2':
-		$t = 'repeat-x';
-		break;
-	case '3':
-		$t = 'repeat-y';
-		break;
+	$style .= "background-position: {$info->horizontal_position} {$info->vertical_position};";
+	$style .= "background-repeat: {$info->repeat};";
+	$style .= "background-attachment: {$info->attachment};";
 }
-$style .= "background-repeat: {$t};";
-
-switch( $info->attachment )
-{
-	case '0':
-		$t = 'scroll';
-		break;
-	case '1':
-		$t = 'fixed';
-		break;
-}
-$style .= "background-attachment: {$t};";
 $style .= $info->style;
 $style  = "style=\"{$style}\"";
 

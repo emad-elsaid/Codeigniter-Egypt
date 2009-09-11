@@ -384,7 +384,7 @@ EOT;
 	
 	function section( $ID='', $value='', $attr=array() )
 	{
-		$options = array('1'=>'index');
+		$options = array('s1'=>'index');
 		function rec_section( $id, $spacer='&nbsp;' )
 		{
 			$op = array();

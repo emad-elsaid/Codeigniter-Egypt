@@ -15,7 +15,13 @@
 <?php 
 $instance = new Content();
 $instance->get_by_id( $info->id );
-echo $instance->render();
+if( $instance->exists() )
+	echo $instance->render();
+else
+{
+	$ci->load->library('gui');
+	echo $ci->gui->error('Content Choosen not found');
+}
 ?>
 
 <?php } ?>

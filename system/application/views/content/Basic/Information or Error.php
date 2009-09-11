@@ -1,7 +1,8 @@
 <?php if( $mode=='config' ){
 //the plugin requirements as a JSON object is here ?>
 {
-	"text":{"type":"editor"}
+	"type":{"type":"dropdown","options":{"info":"info","error":"error"}},
+	"text":{"type":"smalleditor"}
 }
 
 
@@ -14,9 +15,9 @@
 //the real content of your plugin goes here ?>
 
 <?php
-$ci =& get_instance();
 $ci->load->library( "gui" );
-echo $ci->gui->info( $info->text );
+$f = $info->type;
+echo $ci->gui->$f( $info->text );
 ?>
 
 <?php } ?>

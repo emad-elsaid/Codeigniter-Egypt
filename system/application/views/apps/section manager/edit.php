@@ -17,7 +17,7 @@ echo $ci->gui->form(
 	$ci->app->app_url( 'editaction' )
 	,array(
 			'Name :'=>$ci->gui->textbox( 'name', $s->name )
-			,'view'=>$ci->gui->textarea( 'view', $s->view )
+			,'view'=>$ci->gui->permission( 'view', $s->view )
 			,''=>$ci->gui->button( '', 'Edit Section', array('type'=>'submit') )
 	)
 	,''
