@@ -1,5 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
+/*!\file page_helper.php
+ * 
  * page helper functions
  * to add javascripts ans css links 
  * to the page header
@@ -14,7 +15,8 @@ if ( ! function_exists('add_js')){
 	function add_js( $script = '' )
 	{
 		
-		/* if the paramter an array then pass
+		/*
+		 *  if the paramter an array then pass
 		 * each element to the array again .
 		 * */
 		if(is_array( $script ))

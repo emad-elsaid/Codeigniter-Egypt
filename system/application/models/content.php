@@ -143,7 +143,7 @@ class Content extends DataMapper {
 						array(
 									'id'=> $this->id,
 									'ci'=> $ci,
-									'info'=>json_decode($this->info),
+									'info'=>$this->get_info(),
 									'mode'=>'layout'
 								),
 						TRUE
@@ -154,6 +154,17 @@ class Content extends DataMapper {
 		return intval($c);
 	}
 	
+	function get_info()
+	{
+		$ci =& get_instance();
+		$info = json_decode( $this->info );
+		foreach( $info as $key=>$value )
+		{
+			if( is_array( $value ) )
+				$info->$key = intval(count($value)==1);
+		}
+		return $info;
+	}
 	/***************************************
 	 * the add button function
 	 * **************************************/
@@ -227,7 +238,7 @@ class Content extends DataMapper {
 										'id'=>$this->id,
 										'ci'=> $CI,
 										'cell'=> $layout_content,
-										'info'=>json_decode($this->info),
+										'info'=>$this->get_info(),
 										'mode'=> 'view'
 								),
 								TRUE
