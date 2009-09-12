@@ -1,6 +1,6 @@
 <?php
-/**
- * admin controller
+/** \addtogroup Controllers 
+ * Admin controller
  *
  * @package	Vunsy
  * @subpackage	Vunsy

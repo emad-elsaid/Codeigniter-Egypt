@@ -1,6 +1,6 @@
 <?php
-/**
- * page controller that shows current
+/** \addtogroup Controllers
+ * Page controller that shows current
  * section from vunsy object
  *
  * @package	Vunsy

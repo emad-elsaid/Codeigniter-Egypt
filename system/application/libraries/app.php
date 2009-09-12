@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * application class
+/** \addtogroup Libraries 
+ * app class: application class that loads and render application pages
  *
  * @package	Vunsy
  * @subpackage	Vunsy

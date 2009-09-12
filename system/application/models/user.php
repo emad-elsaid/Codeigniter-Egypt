@@ -1,6 +1,6 @@
 <?php
-/**
- * user class
+/** \addtogroup Models
+ * User class instance of datamapper that holds user data
  *
  * @package	Vunsy
  * @subpackage	Vunsy

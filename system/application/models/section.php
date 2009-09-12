@@ -1,6 +1,6 @@
 <?php
-/**
- * section class
+/**  \addtogroup Models
+ * Section class: a datamapper class that holds page data from the database
  *
  * @package	Vunsy
  * @subpackage	Vunsy

@@ -1,6 +1,11 @@
 <?php
-/**
- * user login and out controller
+/** \addtogroup Controllers
+ * Users login and logout controller* users controller perform login and logout action
+ * you can use it like that :
+ * make a form contain inputs ( user, pass ) and
+ * the the action is site_url( 'users/login' ) OR for short site_url('login' )
+ * if you want to logout just direct your user to 
+ * site_url( 'users/logout' ) OR for short site_url( 'logout' )
  *
  * @package	Vunsy
  * @subpackage	Vunsy
@@ -27,8 +32,8 @@ class Users extends Controller {
 	 * login the user and return to index
 	 * it takes the input from POST
 	 * input needed 
-	 * @param user : for user name
-	 * @param pass : for the password
+	 * -user : for user name
+	 * -pass : for the password
 	 * */
 	function login()
 	{

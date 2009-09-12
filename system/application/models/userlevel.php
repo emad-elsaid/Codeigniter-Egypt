@@ -1,6 +1,6 @@
 <?php
-/**
- * user level class
+/** \addtogroup Models
+ * Userlevel class: datamapper class that holds userlevel data from the database
  *
  * @package	Vunsy
  * @subpackage	Vunsy

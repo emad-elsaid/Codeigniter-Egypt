@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*! \file
- * gui class used to generate multiple HTML text 
+/*! \addtogroup Libraries
+ * Gui class:  used to generate multiple HTML text 
  * used with content, applications, it's very useful with 
  * generating forms, tables, titlepanels, splitters, error messages,
  * information messages, colorpickers and a lot more

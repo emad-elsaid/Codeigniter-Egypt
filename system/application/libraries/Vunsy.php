@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * Vunsy main Class
+/** \addtogroup Libraries 
+ * Vunsy main Class that store user , section, level, and all other main data
  *
  * @package	Vunsy
  * @subpackage	Vunsy

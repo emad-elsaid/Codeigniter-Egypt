@@ -1,7 +1,10 @@
 <?php 
-/**
- * remote access controller
- *
+/** \addtogroup Controllers
+ * Remote access controller
+ *that controller serves the AJAX purpose
+ * , it provide the files , content, directory widgets with
+ * the information needed through AJAX
+ * 
  * @package	Vunsy
  * @subpackage	Vunsy
  * @category	controller file
@@ -98,7 +101,7 @@ class Remote extends Controller {
 	}*/
 	
 	
-	/**
+	/*
 	 * loads returns the content information field
 	 * @param $id: the content id you want to retrieve it's information
 	 * you can use it via AJAX using the URL : site_url('remote/content/20');

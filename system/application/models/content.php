@@ -1,6 +1,6 @@
 <?php
-/**
- * content class
+/** \addtogroup Models
+ * Content class that holds the content data from the database
  *
  * @package	Vunsy
  * @subpackage	Vunsy

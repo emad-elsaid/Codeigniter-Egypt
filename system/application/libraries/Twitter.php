@@ -1,7 +1,9 @@
 <?php
 
+/** \addtogroup Libraries 
+* Twitter class: A CodeIgniter library to allow use of the Twitter API
+* */
 /**
-* A CodeIgniter library to allow use of the Twitter API
 *
 * Example Usage:
 *

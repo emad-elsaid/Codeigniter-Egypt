@@ -1,7 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*!\file page_helper.php
+/*! \addtogroup Helpers
  * 
- * page helper functions
+ * page_helper.php functions
  * to add javascripts ans css links 
  * to the page header
  *
