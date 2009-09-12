@@ -10,29 +10,72 @@
  */
 class app {
 	
-	// application information
+	/**
+	 * application name
+	 */
 	var $name ='';
+	/**
+	 *  application current version
+	 */
 	var $ver = '';
+	/**
+	 *  application author name
+	 */
 	var $author = '';
+	/**
+	 *  application website or author's website
+	 */
 	var $website = '';
 	
-	// application run permissions
+	/**
+	 *  application run permissions, if it's true the application will run.
+	 * otherwise application will raise permission denied message
+	 */ 
 	var $perm = '';
 	
-	// pages and sections of the application
+	/**
+	 *  pages and sections of the application
+	 *  it's an array Key(page title ) => value(file name)
+	 *  and you have to write filename without extension 
+	 *  if the required page not in that array the file name 
+	 *  will be displayed as title
+	 */
 	var $pages = array();
+	
+	/**
+	 *  index page filename or key from $pages
+	 */
 	var $index = '';
+	
+	/**
+	 *  current running page title
+	 */
 	var $page = '';
 	
+	/**
+	 *  array or information messages to display in head of the page
+	 */
 	var $info_msg = array();
+	
+	/**
+	 *  array or error messages to display in head of the page
+	 */
 	var $error_msg = array();
 	
-	// application view specifications
+	/**
+	 *  show hide menubar
+	 */ 
 	var $show_toolbar = TRUE;
-	var $show_title = TRUE;
-	var $show_statusbar = TRUE;
 	
-	// application URLs and folders
+	/**
+	 *  show hide titlebar
+	 */
+	var $show_title = TRUE;
+	
+	/**
+	 *  show hide statusbar
+	 */
+	var $show_statusbar = TRUE;
 	
 	/**
 	 *  like http://localhost/system/application/views/apps/appname/
@@ -71,6 +114,11 @@ class app {
 			show_404( '' );
 	}
 	
+	/**
+	 *  load application page
+	 * @param:
+	 * 		$data: array that has name: for application name, page: the pag titlee to load
+	 */
 	function load_app( $name='', $page='' )
 	{
 		if( empty($name) )
@@ -97,6 +145,9 @@ class app {
 		return TRUE;	
 	}
 	
+	/**
+	 *  load application JSON file and sync with object
+	 */
 	function _get_app_data()
 	{
 		$CI =& get_instance();
@@ -117,6 +168,9 @@ class app {
 			
 	}
 	
+	/**
+	 *  render the application page and return the produced HTML
+	 */
 	function render()
 	{
 		
@@ -137,7 +191,7 @@ class app {
 		}
 		
 		
-		echo $CI->load->view(
+		return $CI->load->view(
 					"edit_mode/app",
 					array( "app"=> &$this, "content"=>$page_text),
 					TRUE 
@@ -145,57 +199,108 @@ class app {
 		
 	}
 	
+	/**
+	 *  add css file to the page head
+	 * @param
+	 * 		$path: file path relative to index.php
+	 * 		$local: if true the put $path relative to application folder
+	 */
 	function add_css( $path="", $local=FALSE )
 	{
-		if( $local )
+		if( $local and is_array($path) )
 			$path = $this->full_url.$path;
 		
 		add_css( $path );
 	}
 	
+	/**
+	 *  add javascript file to the page head
+	 * @param
+	 * 		$path: file path relative to index.php
+	 * 		$local: if true the put $path relative to application folder
+	 */
 	function add_js( $path="", $local=FALSE  )
 	{
-		if( $local )
+		if( $local and is_array($path) )
 			$path = $this->full_url.$path;
 		
 		add_js( $path );
 	}
 	
+	/**
+	 *  add dojo reuired to the page head
+	 * @param
+	 * 		$path: dojo widget path like: dijit.Form.Button
+	 */
 	function add_dojo( $path="" )
 	{
 		add_dojo( $path );
 	}
 	
+	/**
+	 *  add css,js,dojo,headblock to the page head
+	 *  you can use it instead of add_js, add_css, ass_dojo
+	 * @param
+	 * 		$path: file path relative to index.php
+	 * 		$local: if true the put $path relative to application folder
+	 */
+	function add( $path="", $local=FALSE )
+	{
+		if( $local and is_array($path) )
+			$path = $this->full_url.$path;
+		
+		add( $path );
+	}
 	
+	/**
+	 *  returns css head text from vunsy library
+	 */
 	function css_text()
 	{
 		$CI =& get_instance();
 		return $CI->vunsy->css_text();
 	}
 	
+	/**
+	 * returns javascript head text from vunsy library 
+	 */
 	function js_text()
 	{
 		$CI =& get_instance();
 		return $CI->vunsy->js_text();
 	}
 	
+	/**
+	 * returns dojo required text from vunsy library 
+	 */
 	function dojo_text()
 	{
 		$CI =& get_instance();
 		return $CI->vunsy->dojo_text();
 	}
 	
+	/**
+	 * returns head text from vunsy library 
+	 */
 	function header_text()
 	{
 		$CI =& get_instance();
 		return $CI->vunsy->header_text();
 	}
 	
+	/**
+	 * check if the that user can use the application
+	 */
 	function can_view()
 	{
 		return perm_chck( $this->perm );
 	}
 	
+	/**
+	 * returns a url for a page in the current application
+	 * @param
+	 * 		$p: page title or page filename
+	 */
 	function app_url( $p='' )
 	{
 		if( ! empty($p) )
@@ -208,6 +313,9 @@ class app {
 		}
 	}
 	
+	/**
+	 * add information message to application, to be displyed at top of the page
+	 */
 	function add_info( $text='' )
 	{
 		if( is_array($text) )
@@ -221,6 +329,9 @@ class app {
 		}
 	}
 	
+	/**
+	 * add Error message to application, to be displyed at top of the page
+	 */
 	function add_error( $text='' )
 	{
 		if( is_array($text) )
@@ -234,6 +345,10 @@ class app {
 		}
 	}
 	
+	/**
+	 * generate the HTML of information 
+	 * messages to be added at the top of the page
+	 */
 	function info_text()
 	{
 		$t = '';
@@ -245,6 +360,10 @@ class app {
 		return $t;
 	}
 	
+	/**
+	 * generate the HTML of error
+	 * messages to be added at the top of the page
+	 */
 	function error_text()
 	{
 		$t = '';

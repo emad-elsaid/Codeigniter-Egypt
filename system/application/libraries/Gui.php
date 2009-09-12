@@ -1,6 +1,9 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * gui class
+/*! \file
+ * gui class used to generate multiple HTML text 
+ * used with content, applications, it's very useful with 
+ * generating forms, tables, titlepanels, splitters, error messages,
+ * information messages, colorpickers and a lot more
  *
  * @package	Vunsy
  * @subpackage	Vunsy
@@ -18,9 +21,13 @@ class Gui {
 	}
 	
 	
-	/*******************************************
+	/**
 	 * a form maker 
-	 *******************************************/
+	 * @param $action: target page of the form
+	 * @param $data: array of key( label text )=>value(corresponding input HTML ), values can be generated with functions like textbox,color,file,folder,app.etc
+	 * @param $attributes: array or object of key(attribute)=>value(value of the attribute)
+	 * @param $hidden: array of hiden fields and values as key=>value
+	 */
 	function form($action = '', $data=array(), $attributes = array(), $hidden = array())
 	{
 		
@@ -42,14 +49,27 @@ class Gui {
 		
 		return $text;
 	}
+	
+	/**
+	 * generate hidden field HTML
+	 * @param $NAME: hidden field name
+	 * @param $value: hidden field value
+	 */
 	function hidden($NAME='', $value='' )
 	{
 		return form_hidden( $NAME, $value );
 	}
-	/*******************************************
+	
+	/**
 	 * File chooser using the fsbrowser, use it with CAUTION
-	 * it makes an dojo textinput linked with a jquery fsbrowser
-	 *******************************************/
+	 * it makes a dojo text input linked with a jquery fsbrowser
+	 * @param $connector: path to php file to use as ajax backend
+	 * @param $NAME: text input name and id
+	 * @param $value: text input value
+	 * @param $attr: attributes->value associative array
+	 * @param $param: sfbrowser config object paramter->value associative array
+	 * @param $style: property->value associative array
+	 */
 	function activeTree( $connector='', $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
 		
@@ -113,30 +133,47 @@ class Gui {
 EOT;
 	}
 	
+	/**
+	 * generate file chooser HTML using activeTree with connector 
+	 * controller file remote/file function
+	 */
 	function file( $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
 		return $this->activeTree(site_url('remote/file'), $NAME, $value,$attr,$param,$style);
 	}
 	
+	/**
+	 * generate model chooser HTML using activeTree with connector 
+	 * controller file remote/file function
+	 */
 	function model( $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
 		$param['root'] = 'system/application/models/';
 		return $this->activeTree(site_url('remote/file'), $NAME, $value,$attr,$param,$style);
 	}
 	
+	/**
+	 * generate folder chooser HTML using activeTree with connector 
+	 * controller file remote/file function
+	 */
 	function folder( $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
 		return $this->activeTree(site_url('remote/dir'), $NAME, $value,$attr,$param,$style);
 	}
 	
+	/**
+	 * generate application chooser HTML using activeTree with connector 
+	 * controller file remote/file function
+	 */
 	function app( $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
 		$param['root'] = 'system/application/views/apps/';
 		return $this->activeTree(site_url('remote/dir'), $NAME, $value,$attr,$param,$style);
 	}
-	/*******************************************
+	
+	/**
 	 * a color chooser field linked with a dojo color picker dialog
-	 *******************************************/
+	 */
 	function color( $NAME='',$value='', $attr=array() )
 	{
 		add_dojo( "dojox.widget.ColorPicker" );
@@ -170,9 +207,9 @@ EOT;
 		 return $text;
 	}
 	
-	/*******************************************
+	/**
 	 * a date field picker using dojo
-	 *******************************************/
+	 */
 	function date( $NAME='', $value='', $attr=array() )
 	{
 
@@ -185,9 +222,9 @@ EOT;
 		return $text;
 	}
 	
-	/*******************************************
+	/**
 	 * a Time chooser input field
-	 *******************************************/
+	 */
 	function time( $NAME='', $value='', $attr=array() )
 	{
 
@@ -200,9 +237,9 @@ EOT;
 		return $text;
 	}
 	
-	/*******************************************
+	/**
 	 * an input field with dojo
-	 *******************************************/
+	 */
 	function textbox( $NAME='', $value='', $attr=array() )
 	{
 		add_dojo("dijit.form.TextBox");
@@ -214,9 +251,9 @@ EOT;
 		return $text;
 	}
 	
-	/*******************************************
+	/**
 	 * an button with dojo
-	 *******************************************/
+	 */
 	function button( $NAME='', $value='', $attr=array() )
 	{
 
@@ -228,9 +265,11 @@ EOT;
 		return $text;
 	}
 	
-	/*******************************************
+	/**
 	 * an tooltipbutton with dojo
-	 *******************************************/
+	 * @param $text: button text
+	 * @param $dialog: tooltip dialog content text
+	 */
 	function tooltipbutton( $text='', $dialog='', $attr=array() )
 	{
 
@@ -249,9 +288,9 @@ EOT;
 EOT;
 	}
 	
-	/*******************************************
+	/**
 	 * an password field with dojo
-	 *******************************************/
+	 */
 	function password( $NAME='', $value='', $attr=array() )
 	{
 
@@ -264,9 +303,9 @@ EOT;
 		return $text;
 	}
 	
-	/*******************************************
-	 * an input spinner with dojo
-	 *******************************************/
+	/**
+	 * an input number spinner with dojo
+	 */
 	function number( $NAME='', $value='', $attr=array() )
 	{
 
@@ -279,9 +318,9 @@ EOT;
 		return $text;
 	}
 	
-	/*******************************************
+	/**
 	 * a textarea field auto grown
-	 *******************************************/
+	 */
 	function textarea( $NAME='', $value='', $attr=array() )
 	{
 
@@ -295,9 +334,9 @@ EOT;
 		return $text;
 	}
 	
-	/*******************************************
-	 * a perm field auto grown
-	 *******************************************/
+	/**
+	 * a permission field auto grow textarea
+	 */
 	function permission( $NAME='', $value='', $attr=array() )
 	{
 
@@ -320,9 +359,9 @@ EOT;
 		return $text;
 	}
 	
-	/*******************************************
-	 * an rich text editor with dojo
-	 *******************************************/
+	/**
+	 * an richtext editor with dojo
+	 */
 	function editor( $NAME='', $value='', $attr=array() )
 	{
 
@@ -344,9 +383,9 @@ EOT;
 		return $text;
 	}
 	
-	/*******************************************
-	 * an simple rich text editor with dojo
-	 *******************************************/
+	/**
+	 * an simple richtext editor with dojo
+	 */
 	function smalleditor( $NAME='', $value='', $attr=array() )
 	{
 
@@ -361,10 +400,10 @@ EOT;
 		return $text;
 	}
 	
-	/*******************************************
+	/**
 	 * a dropdown menu using dojo
 	 * @param: options[ 'Label'=>'value' ]
-	 *******************************************/
+	 */
 	function dropdown( $NAME='', $value='', $options=array(), $attr=array() )
 	{
 
@@ -382,6 +421,9 @@ EOT;
 		return $text;
 	}
 	
+	/**
+	 * a section chooser dropdown field 
+	 */
 	function section( $NAME='', $value='', $attr=array() )
 	{
 		$options = array('s1'=>'index');
@@ -409,9 +451,10 @@ EOT;
 		$total_sections = array_combine( $total_sections_keys, $total_sections_values );
 		return $this->dropdown( $NAME, $value, $total_sections, $attr );
 	}
-	/*******************************************
+	
+	/**
 	 * a checkbox using dojo
-	 *******************************************/
+	 */
 	function checkbox( $NAME='', $value='', $checked=FALSE, $attr=array() )
 	{
 
@@ -422,9 +465,10 @@ EOT;
 		
 		return form_checkbox($NAME, $value, $checked, $attr);
 	}
-	/*******************************************
+	
+	/**
 	 * a radio button using dojo
-	 *******************************************/
+	 */
 	function radio( $NAME='', $value='', $checked=FALSE, $attr=array() )
 	{
 
@@ -436,9 +480,9 @@ EOT;
 		return form_radio($NAME, $value, $checked, $attr);
 	}
 	
-	/*******************************************
+	/**
 	 * a Tooltip using dojo
-	 *******************************************/
+	 */
 	function tooltip( $NAME='', $value='', $attr=array() )
 	{
 
@@ -448,9 +492,11 @@ EOT;
 		return "<div dojoType=\"dijit.Tooltip\" connectId=\"$NAME\" $attr>$value</div>";
 	}
 	
-	/*******************************************
+	/**
 	 * an accordion of dojo toolkit
-	 *******************************************/
+	 * @param
+	 * 		$data: associative array of title=>panelHTML
+	 */
 	function accordion( $data=array(), $attr=array(), $style=array() )
 	{
 		add_dojo( "dijit.layout.AccordionContainer" );
@@ -469,9 +515,11 @@ EOT;
 		return $text;
 	}
 	
-	/*******************************************
-	 * an Tab container of dojo toolkit
-	 *******************************************/
+	/**
+	 * a Tab container of dojo toolkit
+	 * @param
+	 * 		$data: associative array of tabTitle->panelHTML
+	 */
 	function tab( $data=array(), $attr=array(), $style=array() )
 	{
 		add_dojo( "dijit.layout.TabContainer" );
@@ -491,9 +539,11 @@ EOT;
 		return $text;
 	}
 		
-	/*******************************************
+	/**
 	 * a jquery styled grid
-	 *******************************************/
+	 * @param $headers: associative array of member->columnTitle
+	 * @param $body: array of (arrays or objects) to extract information members spcified in head from them
+	 */
 	function grid( $headers = array(), $body=array(), $attr=array() )
 	{
 		
@@ -540,6 +590,11 @@ EOT;
 		return $text;
 	}
 	
+	/**
+	 * title panel with dojo
+	 * @param $titel: panel title
+	 * @param $body: panel contents
+	 */
 	function titlepane( $title='', $body='', $attr=array() )
 	{
 		add_dojo( 'dijit.TitlePane' );
@@ -551,9 +606,9 @@ EOT;
 EOT;
 	}
 	
-	/*******************************************
+	/**
 	 * a error box using jquery
-	 *******************************************/
+	 */
 	function error( $text='', $attr=array() )
 	{
 		add_css( 'assets/style/style.css' );
@@ -564,9 +619,9 @@ EOT;
 EOT;
 	}
 	
-	/*******************************************
+	/**
 	 * an Info box using jquery
-	 *******************************************/
+	 */
 	function info( $text='', $attr=array() )
 	{
 		add_css( 'assets/style/style.css' );
@@ -577,9 +632,9 @@ EOT;
 EOT;
 	}
 	
-	/*******************************************
-	 * a horizontal box with dojo
-	 *******************************************/
+	/**
+	 * a horizontal spliter box with dojo
+	 */
 	function hbox( $content='', $attr=array(), $style=array() )
 	{
 		add_dojo( "dijit.layout.SplitContainer" );
@@ -600,9 +655,10 @@ EOT;
 
 	return $text;
 	}
-	/*******************************************
-	 * a vertical box with dojo
-	 *******************************************/
+	
+	/**
+	 * a vertical splitter box with dojo
+	 */
 	function vbox( $content='', $attr=array(), $style=array() )
 	{
 		add_dojo( "dijit.layout.SplitContainer" );
@@ -624,7 +680,14 @@ EOT;
 	return $text;
 	}
 	
-	
+	/**
+	 * used to manipulate attributes paramter in other functions
+	 * return the result attributes object or array
+	 * @param $attr: object or array of attributes wanted to be manipulated
+	 * @param $key: attribute to set
+	 * @param $value: value of the attribute to set
+	 * @param $replace: will replace current attribute value if exists or add it if not otherwise will it will add attribute of not exists only
+	 */
 	function attribute( $attr=array(), $key='', $value='', $replace=TRUE ){
 		if( is_array($attr) )
 		{
@@ -641,6 +704,10 @@ EOT;
 		return $attr;
 	}
 	
+	
+	/**
+	 * just like attribute function but for style paramter
+	 */
 	function style( $attr=array(), $key='', $value='', $replace=TRUE ){
 		if( is_array($attr) )
 		{
@@ -658,10 +725,9 @@ EOT;
 		return $attr;
 	}
 	
-	/*******************************************
-	 * helper functions to convert paramters to JS object paramters 
-	 * and convert the attribute array to HTML attributes
-	 *******************************************/
+	/**
+	 * helper function to convert the attribute array to HTML attributes
+	 */
 	function _attributes_to_string( $attr= array() )
 	{
 		if( is_string($attr) ) return $attr;
@@ -673,6 +739,9 @@ EOT;
 		return $att;
 	}
 	
+	/**
+	 * helper function to convert the paramters array to javascript object
+	 */
 	function _params_to_js( $param=array() )
 	{
 		$att = '';
@@ -688,6 +757,9 @@ EOT;
 		return $att;
 	}
 	
+	/**
+	 * helper function to convert style array to CSS text
+	 */
 	function _array_to_style( $style=array() )
 	{
 		if( is_string( $style ) ) return $style;
