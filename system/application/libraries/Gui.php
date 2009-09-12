@@ -42,15 +42,15 @@ class Gui {
 		
 		return $text;
 	}
-	function hidden($ID='', $value='' )
+	function hidden($NAME='', $value='' )
 	{
-		return form_hidden( $ID, $value );
+		return form_hidden( $NAME, $value );
 	}
 	/*******************************************
 	 * File chooser using the fsbrowser, use it with CAUTION
 	 * it makes an dojo textinput linked with a jquery fsbrowser
 	 *******************************************/
-	function activeTree( $connector='', $ID='',$value='', $attr=array(), $param=array(), $style=array() )
+	function activeTree( $connector='', $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
 		
 		//adding the nessecery javascripts and CSSs
@@ -82,62 +82,62 @@ class Gui {
 		$style = $this->style( $style, 'overflow', 'auto', FALSE );
 		$style = $this->_array_to_style( $style );
 		
-		$attr = $this->attribute( $attr, 'id',  "{$ID}dlg" );
+		$attr = $this->attribute( $attr, 'id',  "{$NAME}dlg" );
 		$attr = $this->attribute( $attr, 'dojoType',  "dijit.Dialog" );
 		$attr = $this->attribute( $attr, 'title',  "Choose an Item" );
 		$attr = $this->_attributes_to_string( $attr );
 		
 		//the output is here
 		$root = addslashes( $root );
-		$t = $this->textbox( $ID, $value, 
+		$t = $this->textbox( $NAME, $value, 
 				array(
-					'onclick'=>"dijit.byId('{$ID}dlg').show();"
-					,'id' => $ID
+					'onclick'=>"dijit.byId('{$NAME}dlg').show();"
+					,'id' => $NAME
 				)
 		);
 		return <<<EOT
 		$t
 		<div {$attr} >
-			<div id="{$ID}DIV" style="$style" ></div>
+			<div id="{$NAME}DIV" style="$style" ></div>
 		</div>
 		<script language="javascript" >
 		$(document).ready( function() {
-    	$('#{$ID}DIV').fileTree({script:'$script' $param }, 
+    	$('#{$NAME}DIV').fileTree({script:'$script' $param }, 
 		function(file) {
 			file = file.split( '{$root}')[1];
-        	dijit.byId('$ID').setValue( file );
-			dijit.byId('{$ID}dlg').hide();
+        	dijit.byId('$NAME').setValue( file );
+			dijit.byId('{$NAME}dlg').hide();
     	});
 		});
 		</script>
 EOT;
 	}
 	
-	function file( $ID='',$value='', $attr=array(), $param=array(), $style=array() )
+	function file( $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
-		return $this->activeTree(site_url('remote/file'), $ID, $value,$attr,$param,$style);
+		return $this->activeTree(site_url('remote/file'), $NAME, $value,$attr,$param,$style);
 	}
 	
-	function model( $ID='',$value='', $attr=array(), $param=array(), $style=array() )
+	function model( $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
 		$param['root'] = 'system/application/models/';
-		return $this->activeTree(site_url('remote/file'), $ID, $value,$attr,$param,$style);
+		return $this->activeTree(site_url('remote/file'), $NAME, $value,$attr,$param,$style);
 	}
 	
-	function folder( $ID='',$value='', $attr=array(), $param=array(), $style=array() )
+	function folder( $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
-		return $this->activeTree(site_url('remote/dir'), $ID, $value,$attr,$param,$style);
+		return $this->activeTree(site_url('remote/dir'), $NAME, $value,$attr,$param,$style);
 	}
 	
-	function app( $ID='',$value='', $attr=array(), $param=array(), $style=array() )
+	function app( $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
 		$param['root'] = 'system/application/views/apps/';
-		return $this->activeTree(site_url('remote/dir'), $ID, $value,$attr,$param,$style);
+		return $this->activeTree(site_url('remote/dir'), $NAME, $value,$attr,$param,$style);
 	}
 	/*******************************************
 	 * a color chooser field linked with a dojo color picker dialog
 	 *******************************************/
-	function color( $ID='',$value='', $attr=array() )
+	function color( $NAME='',$value='', $attr=array() )
 	{
 		add_dojo( "dojox.widget.ColorPicker" );
 		add_dojo( "dijit.Dialog" );
@@ -147,24 +147,24 @@ EOT;
 		
 		$value = form_prep( $value );
 		$attr = $this->attribute( $attr, 'type', 'text');
-		$attr = $this->attribute( $attr, 'id', $ID );
-		$attr = $this->attribute( $attr, 'name', $ID );
+		$attr = $this->attribute( $attr, 'id', $NAME );
+		$attr = $this->attribute( $attr, 'name', $NAME );
 		$attr = $this->attribute( $attr, 'dojoType', "dijit.form.TextBox" );
-		$attr = $this->attribute( $attr, 'onclick', "dijit.byId('{$ID}dlg').show()" );
+		$attr = $this->attribute( $attr, 'onclick', "dijit.byId('{$NAME}dlg').show()" );
 		$attr = $this->attribute( $attr, 'value', $value );
 		
 		$attr = $this->_attributes_to_string( $attr );
 		
 		$text = <<< EOT
 		<input $attr >
-		<span id="{$ID}box" class="ui.helper.reset ui-corner-all" style="width:20px;height:20px;background-color:$value" >&nbsp;&nbsp;&nbsp;&nbsp;</span>
-		<div id="{$ID}dlg" dojoType="dijit.Dialog" title="Choose a color" >
+		<span id="{$NAME}box" class="ui.helper.reset ui-corner-all" style="width:20px;height:20px;background-color:$value" >&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		<div id="{$NAME}dlg" dojoType="dijit.Dialog" title="Choose a color" >
 		<div  dojoType="dojox.widget.ColorPicker"
 		showHsv="false"
   		showRgb="false" 
 		hexCode="$value"
 		liveUpdate="true"
-		 onChange="dijit.byId('{$ID}').setValue(this.value);$('#{$ID}box').css('background-color',this.value);" class="ui.helper.clearfix" >
+		 onChange="dijit.byId('{$NAME}').setValue(this.value);$('#{$NAME}box').css('background-color',this.value);" class="ui.helper.clearfix" >
 		</div></div>
 EOT;
 		 return $text;
@@ -173,7 +173,7 @@ EOT;
 	/*******************************************
 	 * a date field picker using dojo
 	 *******************************************/
-	function date( $ID='', $value='', $attr=array() )
+	function date( $NAME='', $value='', $attr=array() )
 	{
 
 		add_dojo("dijit.form.DateTextBox");
@@ -181,14 +181,14 @@ EOT;
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = "<input type=\"text\" dojoType=\"dijit.form.DateTextBox\" name=\"$ID\" value=\"$value\" $attr >";
+		$text = "<input type=\"text\" dojoType=\"dijit.form.DateTextBox\" name=\"$NAME\" value=\"$value\" $attr >";
 		return $text;
 	}
 	
 	/*******************************************
 	 * a Time chooser input field
 	 *******************************************/
-	function time( $ID='', $value='', $attr=array() )
+	function time( $NAME='', $value='', $attr=array() )
 	{
 
 		add_dojo("dijit.form.TimeTextBox");
@@ -196,35 +196,35 @@ EOT;
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = "<input type=\"text\" dojoType=\"dijit.form.TimeTextBox\" name=\"$ID\" value=\"$value\" $attr >";
+		$text = "<input type=\"text\" dojoType=\"dijit.form.TimeTextBox\" name=\"$NAME\" value=\"$value\" $attr >";
 		return $text;
 	}
 	
 	/*******************************************
 	 * an input field with dojo
 	 *******************************************/
-	function textbox( $ID='', $value='', $attr=array() )
+	function textbox( $NAME='', $value='', $attr=array() )
 	{
 		add_dojo("dijit.form.TextBox");
   
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = "<input type=\"text\" dojoType=\"dijit.form.TextBox\" name=\"$ID\" value=\"$value\" $attr >";
+		$text = "<input type=\"text\" dojoType=\"dijit.form.TextBox\" name=\"$NAME\" value=\"$value\" $attr >";
 		return $text;
 	}
 	
 	/*******************************************
 	 * an button with dojo
 	 *******************************************/
-	function button( $ID='', $value='', $attr=array() )
+	function button( $NAME='', $value='', $attr=array() )
 	{
 
 		add_dojo("dijit.form.Button");
   
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = "<button dojoType=\"dijit.form.Button\" name=\"$ID\" $attr >$value</button>";
+		$text = "<button dojoType=\"dijit.form.Button\" name=\"$NAME\" $attr >$value</button>";
 		return $text;
 	}
 	
@@ -252,7 +252,7 @@ EOT;
 	/*******************************************
 	 * an password field with dojo
 	 *******************************************/
-	function password( $ID='', $value='', $attr=array() )
+	function password( $NAME='', $value='', $attr=array() )
 	{
 
 		add_dojo("dijit.form.TextBox");
@@ -260,14 +260,14 @@ EOT;
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = "<input type=\"password\" dojoType=\"dijit.form.TextBox\" name=\"$ID\" value=\"$value\" $attr >";
+		$text = "<input type=\"password\" dojoType=\"dijit.form.TextBox\" name=\"$NAME\" value=\"$value\" $attr >";
 		return $text;
 	}
 	
 	/*******************************************
 	 * an input spinner with dojo
 	 *******************************************/
-	function number( $ID='', $value='', $attr=array() )
+	function number( $NAME='', $value='', $attr=array() )
 	{
 
 		add_dojo("dijit.form.NumberSpinner");
@@ -275,14 +275,14 @@ EOT;
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = "<input type=\"text\" dojoType=\"dijit.form.NumberSpinner\"name=\"$ID\" value=\"$value\" $attr >";
+		$text = "<input type=\"text\" dojoType=\"dijit.form.NumberSpinner\"name=\"$NAME\" value=\"$value\" $attr >";
 		return $text;
 	}
 	
 	/*******************************************
 	 * a textarea field auto grown
 	 *******************************************/
-	function textarea( $ID='', $value='', $attr=array() )
+	function textarea( $NAME='', $value='', $attr=array() )
 	{
 
 		add_dojo("dijit.form.Textarea");
@@ -291,14 +291,14 @@ EOT;
 		$attr = $this->_attributes_to_string( $attr );
 		
 		$text = 
-		"<textarea  dojoType=\"dijit.form.Textarea\" name=\"$ID\" $attr >$value</textarea>";
+		"<textarea  dojoType=\"dijit.form.Textarea\" name=\"$NAME\" $attr >$value</textarea>";
 		return $text;
 	}
 	
 	/*******************************************
 	 * a perm field auto grown
 	 *******************************************/
-	function permission( $ID='', $value='', $attr=array() )
+	function permission( $NAME='', $value='', $attr=array() )
 	{
 
 		add_dojo("dijit.form.Textarea");
@@ -315,7 +315,7 @@ EOT;
 		$attr = $this->attribute( $attr, 'id', $id_g , FALSE);
 		$id_g = $attr['id'];
 		
-		$text = $this->textarea( $ID, $value, $attr)
+		$text = $this->textarea( $NAME, $value, $attr)
 					.$this->tooltip($id_g, $t_text );
 		return $text;
 	}
@@ -323,7 +323,7 @@ EOT;
 	/*******************************************
 	 * an rich text editor with dojo
 	 *******************************************/
-	function editor( $ID='', $value='', $attr=array() )
+	function editor( $NAME='', $value='', $attr=array() )
 	{
 
 		add_dojo("dijit.Editor");
@@ -338,7 +338,7 @@ EOT;
 		$attr = $this->_attributes_to_string( $attr );
 		
 		$text = 
-		"<div  dojoType=\"dijit.Editor\" name=\"$ID\" $attr  >
+		"<div  dojoType=\"dijit.Editor\" name=\"$NAME\" $attr  >
 		$value
 		</div>";
 		return $text;
@@ -347,7 +347,7 @@ EOT;
 	/*******************************************
 	 * an simple rich text editor with dojo
 	 *******************************************/
-	function smalleditor( $ID='', $value='', $attr=array() )
+	function smalleditor( $NAME='', $value='', $attr=array() )
 	{
 
 		add_dojo("dijit.Editor");
@@ -355,7 +355,7 @@ EOT;
 		$attr = $this->_attributes_to_string( $attr );
 		
 		$text = 
-		"<div  dojoType=\"dijit.Editor\" name=\"$ID\" $attr  >
+		"<div  dojoType=\"dijit.Editor\" name=\"$NAME\" $attr  >
 		$value
 		</div>";
 		return $text;
@@ -365,7 +365,7 @@ EOT;
 	 * a dropdown menu using dojo
 	 * @param: options[ 'Label'=>'value' ]
 	 *******************************************/
-	function dropdown( $ID='', $value='', $options=array(), $attr=array() )
+	function dropdown( $NAME='', $value='', $options=array(), $attr=array() )
 	{
 
 		add_dojo("dijit.form.FilteringSelect");
@@ -378,11 +378,11 @@ EOT;
 		$attr = $this->attribute( $attr, 'dojoType', "dijit.form.FilteringSelect");
 		$attr = $this->_attributes_to_string( $attr );
 		
-		$text = form_dropdown($ID, $options, $value, $attr);
+		$text = form_dropdown($NAME, $options, $value, $attr);
 		return $text;
 	}
 	
-	function section( $ID='', $value='', $attr=array() )
+	function section( $NAME='', $value='', $attr=array() )
 	{
 		$options = array('s1'=>'index');
 		function rec_section( $id, $spacer='&nbsp;' )
@@ -407,12 +407,12 @@ EOT;
 			$total_sections_keys[$index] = substr( $key, 1 );
 			
 		$total_sections = array_combine( $total_sections_keys, $total_sections_values );
-		return $this->dropdown( $ID, $value, $total_sections, $attr );
+		return $this->dropdown( $NAME, $value, $total_sections, $attr );
 	}
 	/*******************************************
 	 * a checkbox using dojo
 	 *******************************************/
-	function checkbox( $ID='', $value='', $checked=FALSE, $attr=array() )
+	function checkbox( $NAME='', $value='', $checked=FALSE, $attr=array() )
 	{
 
 		add_dojo("dijit.form.CheckBox");
@@ -420,12 +420,12 @@ EOT;
 		$attr = $this->_attributes_to_string( $attr );
 		
 		
-		return form_checkbox($ID, $value, $checked, $attr);
+		return form_checkbox($NAME, $value, $checked, $attr);
 	}
 	/*******************************************
 	 * a radio button using dojo
 	 *******************************************/
-	function radio( $ID='', $value='', $checked=FALSE, $attr=array() )
+	function radio( $NAME='', $value='', $checked=FALSE, $attr=array() )
 	{
 
 		add_dojo("dijit.form.CheckBox");
@@ -433,19 +433,19 @@ EOT;
 		$attr = $this->_attributes_to_string( $attr );
 		
 		
-		return form_radio($ID, $value, $checked, $attr);
+		return form_radio($NAME, $value, $checked, $attr);
 	}
 	
 	/*******************************************
 	 * a Tooltip using dojo
 	 *******************************************/
-	function tooltip( $ID='', $value='', $attr=array() )
+	function tooltip( $NAME='', $value='', $attr=array() )
 	{
 
 		add_dojo("dijit.Tooltip");
 		$attr = $this->attribute( $attr, 'position', 'below', FALSE );
 		$attr = _attributes_to_string( $attr );
-		return "<div dojoType=\"dijit.Tooltip\" connectId=\"$ID\" $attr>$value</div>";
+		return "<div dojoType=\"dijit.Tooltip\" connectId=\"$NAME\" $attr>$value</div>";
 	}
 	
 	/*******************************************
