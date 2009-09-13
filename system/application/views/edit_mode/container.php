@@ -5,7 +5,7 @@ add( 'assets/admin/edit/edit.css' );
 add( 'jquery/theme/ui.core.css' );
 add( 'jquery/jquery.js' );
 
-$script = <<<EOT
+add( <<<EOT
 <script language="javascript" >
 $(function(){
 	$('.editCtrl > .editCtrlToggler' ).click(function(){
@@ -23,8 +23,8 @@ $(function(){
 	});
 });
 </script>
-EOT;
-add( $script );
+EOT
+);
 
 $p = new Content();
 $p->get_by_id($parent);
@@ -33,7 +33,7 @@ if( $can_edit OR $p->can_addin() OR $can_delete ){
 ?>
 
 <div class="editCtrl vunsyCtrl"  >
-<img class="editCtrlToggler" src="<?=$img_url?>edit show.png" >
+<img class="editCtrlToggler" src="<?=$img_url?>edit show.png" title="<?=substr( $path, strrpos($path,'/')+1,strrpos($path,'.')-strrpos($path,'/')-1 ) ?>" >
 
 <span class="editGroup ui-helper-hidden" >
 <?php if( $can_edit ){ ?>
@@ -63,7 +63,10 @@ if( $can_edit OR $p->can_addin() OR $can_delete ){
 	<img src="<?=$img_url?>delete.png" title="Delete" >
 	</a>
 <?php } ?>
-
+	<a class="iframe" href="<?= site_url("admin/app/content Inserter/info/$id") ?>" >
+	<img src="<?=$img_url?>info.png" title="Information" >
+	</a>
+	
 </span>
 </div>
 <?php } ?>

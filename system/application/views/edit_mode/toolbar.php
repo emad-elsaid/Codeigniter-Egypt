@@ -29,7 +29,7 @@ foreach( $links as $key=>$value )
 
 $XHR_URL = site_url('admin/app/editmode/'.(($ci->vunsy->edit_mode())?'viewmode':'editmode'));
 
-$scripts = <<<EOT
+add( <<<EOT
 
 <script type="text/javascript">
 
@@ -61,6 +61,8 @@ $(
 	}
 );
 
+
+// make trigger draggable to show content under it
 $(function(){
 	$('.trigger').draggable({axis:'y'});
 });
@@ -77,37 +79,37 @@ function admin_editmode_toolbar()
 	});
 }
 </script>
-EOT;
-add( $scripts );
+EOT
+);
 ?>
 
 
 <div class="panel">
 <a href="<?=base_url()?>/kfm" class="iframe"  title="My Computer">
-	<img src="<?="{$local}"?>kfm.png" /> My computer
+	<img src="<?=$local?>kfm.png" /> My computer
 </a>
-<a href="<?="{$url}"?>user manager" class="iframe" title="Users manager" >
-	<img src="<?="{$local}"?>users.png" /> User manager
+<a href="<?=$url?>user manager" class="iframe" title="Users manager" >
+	<img src="<?=$local?>users.png" /> User manager
 </a>
-<a href="<?="{$url}"?>section manager" class="iframe"  title="Sections manager">
-	<img src="<?="{$local}"?>section.png" /> Sections manager
+<a href="<?=$url?>section manager" class="iframe"  title="Sections manager">
+	<img src="<?=$local?>section.png" /> Sections manager
 </a>
-<a href="<?="{$url}"?>Package manager" class="iframe" title="Package manager" >
-	<img src="<?="{$local}"?>software.png" /> Package manager
+<a href="<?=$url?>Package manager" class="iframe" title="Package manager" >
+	<img src="<?=$local?>software.png" /> Package manager
 </a>
-<a href="<?="{$url}"?>software manager" class="iframe"  title="Software manager">
-	<img src="<?="{$local}"?>software.png" /> Software manager
+<a href="<?=$url?>software manager" class="iframe"  title="Software manager">
+	<img src="<?=$local?>software.png" /> Software manager
 </a>
 
 <br />
-<?="{$links_text}"?>
+<?=$links_text?>
 
 <br />
 <a href="javascript:admin_editmode_toolbar()" >
-	<img src="<?="{$local}"?>editmode.png" title="Editmode toggle" /> Editmode toggle
+	<img src="<?=$local?>editmode.png" title="Editmode toggle" /> Toggle Edit mode
 </a>
-<a href="<?="{$logout}"?>" >
-	<img src="<?="{$local}"?>logout.png" title="Logout" /> Logout
+<a href="<?=$logout?>" >
+	<img src="<?=$local?>logout.png" title="Logout" /> Logout
 </a>
 </div>
 <a class="ui-draggable trigger" href="#"></a>
