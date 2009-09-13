@@ -11,6 +11,10 @@
 	"attachment" : { "type" : "dropdown", "options" : {"scroll":"scroll","fixed":"fixed"}, "default": "0" },
 	"horizontal_position" : { "type" : "textbox", "default" : "left" },
 	"vertical_position" : { "type" : "textbox", "default" : "top" },
+	"style sheets":" you can include Reset and Text stylesheets from here ",
+	"Reset960":{"type":"checkbox"},
+	"Text960":{"type":"checkbox"},
+	"extra attributs":"you can specify extra body classes and style",
 	"class":{"type":"textbox"},
 	"style":{"type":"textarea"}
 }
@@ -33,6 +37,10 @@ if( $ci->vunsy->edit_mode() )
 
 <?php
 	$local = base_url();
+	
+	if( $info->Reset960 ) add( 'assets/960.gs/reset.css' );
+	if( $info->Text960 ) add( 'assets/960.gs/text.css' );
+	
 	$style = '';
 	if( $info->background_image != '' )
 	{
@@ -42,26 +50,29 @@ if( $ci->vunsy->edit_mode() )
 		$style .= "background-attachment: {$info->attachment};";
 	}
 	$style .= $info->style;
-	add("
+	if( $style!='' )
+	{
+		add("
 <style>
 body{
 	{$style}
 }
 </style>
 
-	");
-	if(!empty($info->class))
-	{ 
-		add('jquery/jquery.js');
-		add(
+		");
+		if(!empty($info->class))
+		{ 
+			add('jquery/jquery.js');
+			add(
 <<<EOT
-	<script language="javascript" >
-		$(function(){
-			$(document).addClass('{$info->class}');
-		});
-	</script>
+<script language="javascript" >
+	$(function(){
+		$(document).addClass('{$info->class}');
+	});
+</script>
 EOT
-);
+			);
+		}
 	}
 }
 ?>
