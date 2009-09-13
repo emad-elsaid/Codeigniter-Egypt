@@ -27,17 +27,18 @@
 		<?= $app->js_text() ?>
 		<?= $app->dojo_text() ?>
 		<?= $app->header_text() ?>
-<style>
-label{
-	display: block;
-	text-align: right;
-	white-space:nowrap;
-	padding:3px;
-}
-td{
-	padding: 3px;
-}
-</style>
+		
+	<style>
+	label{
+		display: block;
+		text-align: right;
+		white-space:nowrap;
+		padding:3px;
+	}
+	td{
+		padding: 3px;
+	}
+	</style>
 	</head>
 	<body class="<?= $CI->vunsy->dojoStyle ?>">
 
