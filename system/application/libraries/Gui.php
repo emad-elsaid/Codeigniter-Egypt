@@ -427,7 +427,7 @@ EOT;
 	function section( $NAME='', $value='', $attr=array() )
 	{
 		$options = array('s1'=>'index');
-		function rec_section( $id, $spacer='&nbsp;' )
+		function rec_section( $id, $spacer='--' )
 		{
 			$op = array();
 			$sec = new Section();
