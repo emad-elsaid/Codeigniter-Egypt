@@ -158,10 +158,13 @@ class Content extends DataMapper {
 	{
 		$ci =& get_instance();
 		$info = json_decode( $this->info );
-		foreach( $info as $key=>$value )
+		if( is_object($info) )
 		{
-			if( is_array( $value ) )
-				$info->$key = intval(count($value)==1);
+			foreach( $info as $key=>$value )
+			{
+				if( is_array( $value ) )
+					$info->$key = intval(count($value)==1);
+			}
 		}
 		return $info;
 	}
