@@ -21,11 +21,11 @@ have fun.
 
 [program built on]
 ---
-* CodeIgniter PHP framework
-* Datamapper
-* Dojo+Dijit+Dojox
-* Jquery
-* KFM file browser
+* CodeIgniter PHP framework Version 1.7.2
+* Datamapper OverZealous Edition Version 1.5.2
+* Dojo+Dijit+Dojox Version 1.3.2
+* Jquery UI Version (1.7.2: for jQuery 1.3+)
+* KFM file browser Version 1.3
 
 [The idea]
 ---
