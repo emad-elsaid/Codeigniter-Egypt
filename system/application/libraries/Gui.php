@@ -746,7 +746,11 @@ EOT;
 	
 	if( is_string( $value ) )
 	{
-		$value = array_map( 'trim', explode( "\n", trim($value) ));
+		$value = trim($value);
+		if( ! empty($value) )
+			$value = array_map( 'trim', explode( "\n", $value));
+		else
+			$value = array();
 	}
 	else if( is_array($value) )
 	{
