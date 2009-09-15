@@ -323,7 +323,7 @@ class Content extends DataMapper {
 	
 	function apply_filters($input)
 	{
-		if( is_null( $this->filter ) )
+		if( is_null( $this->filter ) or empty( $this->filter ) )
 			return $input;
 		
 		$ci =& get_instance();
