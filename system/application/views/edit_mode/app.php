@@ -36,6 +36,7 @@
 		padding:3px;
 	}
 	td{
+		vertical-align: top;
 		padding: 3px;
 	}
 	</style>

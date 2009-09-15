@@ -704,7 +704,121 @@ EOT;
 		return $attr;
 	}
 	
+	/**
+	 * make a selectable sortable two linked lists one have the 
+	 * list array an the other have the values array
+	 * the values will be extracted before rendreing from the
+	 * list array
+	 * you can use it to allow the user to select some items 
+	 * from a group and sort them
+	 * in a specific order
+	 * all that linked with textarea input that get the values list in 
+	 * every change
+	 * the values are line break separated you can handle them with 
+	 * explode then
+	 * @param $NAME: the textarea name
+	 * @param $list: the original list of items
+	 * @param $value: the selected items
+	 * */
+	function select_sort($NAME, $list=array(), $value=array(), $attr=array() )
+{
+
+	add(array(
+		'jquery/jquery.js',
+		'jquery/jquery-ui.js',
+		'jquery/theme/ui.all.css'
+	));
 	
+	$attr = $this->_attributes_to_string( $attr );
+	
+	if( is_string( $list ) )
+	{
+		$list = array_map( 'trim', explode( "\n", trim($list) ));
+	}
+	else if( is_array($list) )
+	{
+		array_map( 'trim', $list );
+	}
+	else
+	{
+		$list = array();
+	}
+	
+	if( is_string( $value ) )
+	{
+		$value = array_map( 'trim', explode( "\n", trim($value) ));
+	}
+	else if( is_array($value) )
+	{
+		$value = array_map( 'trim', $value );
+	}
+	else
+	{
+		$value = array();
+	}
+		
+	$values = array();
+	foreach( $list as $item )
+	{
+		if( !in_array( $item, $value ) )
+			array_push( $values, $item );
+	}
+	$list = $values;
+
+add( <<<EOT
+<style type="text/css">
+	.filter .list { 
+		float: left;
+		background-color: #E9E9E9;
+		width:40%;
+	}
+</style>
+<script type="text/javascript">
+	$(function() {
+		$(".filterBox")
+			.hide('fast')
+			.siblings(".list")
+				.sortable({connectWith: 'div',})
+				.bind('sortupdate', function(event, ui) {
+					x = Array();
+					$('.list:last').find('div').each(function(){
+					    x.push( $(this).text().trim() );
+					});
+					x = x.join( "\\n" );
+					$(this).siblings('.filterBox').val(x);
+				});
+	});
+</script>
+EOT
+);
+$output = '
+<div class="filter">
+
+<textarea class="filterBox" name="'.$NAME.'" '.$attr.' >'.
+implode( "\n", $value ).
+'</textarea>
+<div  class="list dijitTitlePaneContentInner">
+Available filters';
+
+foreach( $list as $item)
+{
+	$output .= '<div class="dijitTitlePaneTitle">'.$item.'</div>';
+}
+
+$output .= '</div>
+<div class="list dijitTitlePaneContentInner">
+Selected filters';
+
+foreach( $value as $item)
+{
+	$output .= '<div class="dijitTitlePaneTitle">'.$item.'</div>';
+}
+
+$output .= '
+	</div>
+</div>';
+return $output;
+}
 	/**
 	 * just like attribute function but for style paramter
 	 */

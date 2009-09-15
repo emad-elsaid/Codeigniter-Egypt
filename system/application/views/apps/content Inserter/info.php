@@ -12,6 +12,9 @@
 	$parent_section = new Section();
 	$parent_section->get_by_id( $content_ins->parent_section );
 	
+	$children = new Content();
+	$children->get_by_parent_section( $content_ins->id );
+	
 	$data_table = array(
 				'Content ID'=>$content_ins->id,
 				'Content path'=>$content_ins->path,
@@ -19,7 +22,8 @@
 				'Subsections'=>($content_ins->subsection)? 'Yes':'No',
 				'Parent'=>$parent_content->path,
 				'Cell'=>$content_ins->cell,
-				'Sort'=>$content_ins->sort
+				'Sort'=>$content_ins->sort,
+				'Children count'=>count($children->all)
 	);
 	
 	$ci->load->library('gui');

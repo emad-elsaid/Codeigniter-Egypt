@@ -1,6 +1,14 @@
 <?php
 $ci =& get_instance();
 $ci->load->library('gui');
+$ci->load->helper('directory');
+
+$filters_list = directory_map(APP.'views/filter');
+function remove_ext($item)
+{
+	return substr( $item, 0, strrpos($item,'.') );
+}
+$filters_list = array_map( 'remove_ext', $filters_list );
 
 /********************************************
  * checking if the page has a ID get paramter
@@ -86,6 +94,7 @@ if( $edit === FALSE )
 		,"Add in permissions : " => $ci->gui->$input('addin', $p_cont->addin)
 		,"Edit permissions : " => $ci->gui->$input('edit', $p_cont->edit)
 		,"Delete permissions : " => $ci->gui->$input('del', $p_cont->del)
+		,"Filters : "=> $ci->gui->select_sort( 'filter',$filters_list )
 		,"" => $button
 		)
 		,array( 'id'=>'basic_form' )
@@ -102,6 +111,7 @@ else
 		,"Add in permissions : " => $ci->gui->$input('addin', $con->addin)
 		,"Edit permissions : " => $ci->gui->$input('edit', $con->edit)
 		,"Delete permissions : " => $ci->gui->$input('del', $con->del)
+		,"Filters : "=> $ci->gui->select_sort( 'filter', $filters_list, $con->filter )
 		,"" => $button
 		)
 		,array( 'id'=>'basic_form' )
@@ -140,7 +150,8 @@ if( is_object( $Plugin_Data ) )
 		{
 			// this line gets the default value if in insertion mode and the
 			// stored value if in the edit mode
-			$cVal = ( $edit===FALSE )? @$value->default: $info->$key;
+			$cVal = '';
+			$cVal = ( $edit===FALSE )? @$value->default: @$info->$key;
 			$current_field = $ci->gui->textbox( $key, @$value->default );
 			
 			switch( $value->type )

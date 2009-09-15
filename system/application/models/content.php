@@ -128,7 +128,7 @@ class Content extends DataMapper {
 			return FALSE;
 	}
 	
-		/***************************************
+	/***************************************
 	 * getting the number of the cells in the layout
 	 * it loads the layout in config mode
 	 * the layout should return the number of cells
@@ -214,10 +214,8 @@ class Content extends DataMapper {
 				$cell_text = $this->add_button($i,0); // +++ buttons +++ in start of every cell
 				
 			// rendering the cell content
-			$sort_num = 0;
 			foreach( $c_children as $item )
 			{
-				$sort_num++;
 				$cell_text .= $item->render();
 			}
 			
@@ -257,7 +255,9 @@ class Content extends DataMapper {
 		/* i comented that block and i'll make the parent class display all 
 		 * the layoutsand widgets in a container
 		 */
-		return $this->container($text);
+		$text = $this->apply_filters( $text );
+		$text = $this->container($text);
+		return $text;
 	}
 	
 	/***************************************
@@ -318,6 +318,23 @@ class Content extends DataMapper {
 		
 		// returning the final array of children
 		return $children->all;
+	}
+	
+	
+	function apply_filters($input)
+	{
+		if( is_null( $this->filter ) )
+			return $input;
+		
+		$ci =& get_instance();
+		$output = $input;
+		
+		$filters_array = array_map( 'trim', explode( "\n", $this->filter ) );
+		foreach( $filters_array as $item )
+		{
+			$output = $ci->load->view( 'filter/'.$item, array( 'text'=>$output ), TRUE );
+		}
+		return $output;
 	}
 	
 }

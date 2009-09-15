@@ -23,6 +23,7 @@ $c->addin = $ci->input->post( "addin" );
 $c->edit = $ci->input->post( "edit" );
 $c->del = $ci->input->post( "del" );
 $c->info = $ci->input->post( "info" );
+$c->filter = $ci->input->post( "filter" );
 
 $sec = new Section();
 $sec->get_by_id( $c->parent_section );
