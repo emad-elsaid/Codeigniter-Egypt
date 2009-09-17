@@ -1,3 +1,5 @@
+<?php if( $mode=='view' ){
+add(<<<EOT
 <style>
 body{
 	background-color: #C6C6C6;
@@ -26,7 +28,10 @@ body{
 	margin-bottom: 10px;
 }
 </style>
-<?php add_css('jquery/theme/ui.all.css'); ?>
+EOT
+);
+
+add_css('jquery/theme/ui.all.css'); ?>
 <table class="ui-corner-all ui-widget-content page" align="center" >
 <tr>
 	<td align="center" >
@@ -104,3 +109,4 @@ built on it some applications accessible by a task bar like facebook one</li>
 	</td>
 </tr>
 </table>
+<?php } ?>

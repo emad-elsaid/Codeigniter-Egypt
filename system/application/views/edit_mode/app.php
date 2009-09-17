@@ -29,6 +29,9 @@
 		<?= $app->header_text() ?>
 		
 	<style>
+	body{
+		font-size: 12px;
+	}
 	label{
 		display: block;
 		text-align: right;

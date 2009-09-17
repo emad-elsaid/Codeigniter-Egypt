@@ -97,6 +97,12 @@ class app {
 	var $url = '';
 	
 	/**
+	 *  like: http://localhost/index.php/app/ajax/appname/
+	 * used for links to another page in the app with ajax.
+	 */
+	var $ajax_url = '';
+	
+	/**
 	 *  like system/application/views/apps/appname/
 	 * path from the root to the app folder
 	 */
@@ -107,6 +113,14 @@ class app {
 	 * used to open files and write files in the application
 	 */
 	var $full_folder = '';
+	
+	/**
+	 * detemine if the page rendered as ajax page or not
+	 * if true the page return will be printed only without HTML
+	 * default application container(html,head,body,js,css)
+	 * else all the HTML page will be returned
+	 * */
+	var $ajax = FALSE;
 	
 	function app( $data )
 	{
@@ -130,6 +144,7 @@ class app {
 		
 		$u_temp = explode($name,current_url());
 		$this->url = $u_temp[0] .$name.'/';
+		$this->ajax_url = site_url( 'admin/ajax/'.$name ).'/';
 		$this->ci_folder = APP.'views/apps/'.$name.'/';
 		$this->full_url = base_url().'system/application/views/apps/'.$name.'/';
 		$this->full_folder = str_replace('/','\\',APPPATH).'views\\apps\\'.$name.'\\';
@@ -181,21 +196,31 @@ class app {
 		$CI =& get_instance();
 		
 		$p = $this->page;
-		if( isset($this->pages->$p) ) 
+		if( isset($this->pages->$p) )
 		{
-			$page_text = $CI->load->view( $this->view_folder.$this->pages->$p, array('ci'=>$CI), TRUE);
+			$page_text = $CI->load->view( 
+						$this->view_folder.$this->pages->$p,
+						array('ci'=>$CI),
+						TRUE
+					);
 		}
 		else
 		{
-			$page_text = $CI->load->view( $this->view_folder.$p, array('ci'=>$CI), TRUE );
+			$page_text = $CI->load->view(
+						$this->view_folder.$p,
+						array('ci'=>$CI),
+						TRUE
+					);
 		}
 		
-		
-		return $CI->load->view(
+		if( $this->ajax )
+			return $page_text;
+		else
+			return $CI->load->view(
 					"edit_mode/app",
 					array( "app"=> &$this, "content"=>$page_text),
 					TRUE 
-				);	
+				);
 		
 	}
 	
@@ -301,15 +326,22 @@ class app {
 	 * @param
 	 * 		$p: page title or page filename
 	 */
-	function app_url( $p='' )
+	
+	function app_url( $p='', $ajax=FALSE )
 	{
-		if( ! empty($p) )
+		if( $ajax )
 		{
-			return $this->url.$p;
+			if( ! empty($p) )
+				return $this->ajax_url.$p;
+			else
+				return FALSE;
 		}
 		else
 		{
-			return FALSE;
+			if( ! empty($p) )
+				return $this->url.$p;
+			else
+				return FALSE;
 		}
 	}
 	

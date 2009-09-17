@@ -35,4 +35,17 @@ class Admin extends Controller {
 		$this->load->library( 'app',$config);
 		echo $this->app->render();
 	}
+	
+	/**
+	 * function works just like the app mothed but
+	 * it works in ajax mode
+	 * 
+	 * */
+	function ajax($appname='', $page='')
+	{
+		$config = array( 'name'=>$appname,'page'=>$page );
+		$this->load->library( 'app',$config);
+		$this->app->ajax = TRUE;
+		echo $this->app->render();
+	}
 }

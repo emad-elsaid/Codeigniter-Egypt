@@ -43,8 +43,17 @@ if(		( $p->can_addin() AND  $ci->input->post( "id" )===FALSE )
 	else
 	{
 		$c->save();
-		redirect( $ci->app->app_url("data/{$c->id}") );
+		if( $ci->app->ajax )
+			echo "Content Edited";
+		else
+			redirect( $ci->app->app_url("data/{$c->id}") );
+		
 	}
 }
 else
-	$ci->app->add_error( 'Permission denied ! please check your root adminstrator for permissions' );
+{
+	if( $ci->app->ajax )
+		echo 'Permission denied';
+	else
+		$ci->app->add_error( 'Permission denied' );
+}

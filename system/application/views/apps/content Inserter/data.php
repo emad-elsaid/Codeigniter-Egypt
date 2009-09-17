@@ -3,11 +3,9 @@ $ci =& get_instance();
 $ci->load->library('gui');
 $ci->load->helper('directory');
 
-$filters_list = directory_map(APP.'views/filter');
 function remove_ext($item)
-{
-	return substr( $item, 0, strrpos($item,'.') );
-}
+{ return substr( $item, 0, strrpos($item,'.') ); }
+$filters_list = directory_map(APP.'views/filter');
 $filters_list = array_map( 'remove_ext', $filters_list );
 
 /********************************************
@@ -50,7 +48,28 @@ else
 // determine the contetn type
 $explodedPath = explode( '/', $hidden['path'] );
 $hidden['type'] = $explodedPath[0];
-
+$form_ajax_url = $ci->app->app_url( 'addaction', true );
+if( $edit === FALSE )
+{
+	$submit_script = "dijit.byId('basic_form').submit();";
+}
+else
+{
+	$submit_script = <<<EOT
+	dojo.xhrPost({           
+         url: "$form_ajax_url",
+         handleAs: "text",
+         preventCache: true,               
+         content: dojo.formToObject("basic_form"),
+         load: function(response, args) {
+				alert( response );
+			 },
+         error: function(response, args) {
+				alert( response );
+			 }
+    });
+EOT;
+}
 $script  = <<<EOT
 
 <script type="dojo/method" event="onClick" args="evt">
@@ -58,7 +77,8 @@ if( dijit.byId('info_form')!=undefined )
 {
 	dojo.query("[name='info']")[0].value = dojo.toJson(dijit.byId('info_form').getValues());
 }
-dijit.byId('basic_form').submit();
+
+$submit_script
 </script>
 EOT;
 
