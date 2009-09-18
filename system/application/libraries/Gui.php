@@ -500,8 +500,8 @@ EOT;
 	function accordion( $data=array(), $attr=array(), $style=array() )
 	{
 		add_dojo( "dijit.layout.AccordionContainer" );
-		$style = $this->style( $style, 'width', '100%' );
-		$style = $this->style( $style, 'height', '300px' );
+		$style = $this->style( $style, 'width', '100%' , FALSE);
+		$style = $this->style( $style, 'height', '300px', FALSE );
 		$style = $this->_array_to_style( $style );
 		
 		$attr = $this->_attributes_to_string( $attr );
@@ -829,11 +829,13 @@ return $output;
 	function style( $attr=array(), $key='', $value='', $replace=TRUE ){
 		if( is_array($attr) )
 		{
-			if( !isset($attr[$key]) or (isset($attr[$key]) and $replace) ) $attr[$key] = $value;
+			if( !isset($attr[$key]) or (isset($attr[$key]) and $replace) )
+				$attr[$key] = $value;
 		}
 		else if( is_object($attr) )
 		{
-			if( !isset($attr->$key) or (isset($attr->$key) and $replace) ) $attr->$key =  $value;
+			if( !isset($attr->$key) or (isset($attr->$key) and $replace) )
+				$attr->$key =  $value;
 		}
 		else if( is_string($attr) )
 		{
