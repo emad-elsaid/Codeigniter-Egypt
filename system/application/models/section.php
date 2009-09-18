@@ -10,10 +10,12 @@
  */
 class Section extends DataMapper {
 	var $table = 'section';
+	var $ci;
 	
     function Section()
     {
         parent::DataMapper();
+        $this->ci =& get_instance();
     }
 	
 	function get_parents()
@@ -213,9 +215,8 @@ class Section extends DataMapper {
 	
 	function render()
 	{
-		$CI =& get_instance();
 		
-		if($CI->vunsy->section->can_view())
+		if($this->ci->vunsy->section->can_view())
 		{
 		/*********************************************
 		 *  redering the page BODY content
@@ -228,10 +229,10 @@ class Section extends DataMapper {
 		$page_body_text = $page_body->render();
 		
 		// adding the root toolbar
-		if( $CI->vunsy->user->is_root())
-				$page_body_text .= $CI->load->view( 'edit_mode/toolbar', '', TRUE );
+		if( $this->ci->vunsy->user->is_root())
+				$page_body_text .= $this->ci->load->view( 'edit_mode/toolbar', '', TRUE );
 		
-		$doctype_text = doctype( $CI->config->item('doctype') );
+		$doctype_text = doctype( $this->ci->config->item('doctype') );
 		/*********************************************************
 		 * display the page content
 		 * i sum all the page content text
@@ -242,15 +243,15 @@ class Section extends DataMapper {
 {$doctype_text}
 <html xmlns="http://www.w3.org/1999/xhtml" >
 	<head>
-	<title>{$CI->config->item('site_name')} {$this->name}</title>
-	<meta http-equiv="content-type" content="text/html;charset={$CI->config->item('charset')}" />
+	<title>{$this->ci->config->item('site_name')} {$this->name}</title>
+	<meta http-equiv="content-type" content="text/html;charset={$this->ci->config->item('charset')}" />
 	<meta name="generator" content="VUNSY system" />
-{$CI->vunsy->css_text()}
-{$CI->vunsy->js_text()}
-{$CI->vunsy->dojo_text()}
-{$CI->vunsy->header_text()}
+{$this->ci->vunsy->css_text()}
+{$this->ci->vunsy->js_text()}
+{$this->ci->vunsy->dojo_text()}
+{$this->ci->vunsy->header_text()}
 	</head>
-	<body class="{$CI->vunsy->dojoStyle}">
+	<body class="{$this->ci->vunsy->dojoStyle}">
 		{$page_body_text}
 	</body>
 </html>

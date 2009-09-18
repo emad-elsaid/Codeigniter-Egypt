@@ -10,24 +10,25 @@
  */
 class User extends DataMapper {
 	var $table = 'user';
+	var $ci;
 	
     function User()
     {
         parent::DataMapper();
+        $this->ci =& get_instance();
     }
 	
 	function from_session()
 	{
-		$CI =& get_instance();
-		$uid = $CI->session->userdata('id');
+		$uid = $this->ci->session->userdata('id');
 			
 			if( $uid>0 )
 				$this->get_by_id($uid);
-			else if( $uid==-1 and $CI->session->userdata('level')==-1 )
+			else if( $uid==-1 and $this->ci->session->userdata('level')==-1 )
 			{
 				$this->id = -1;
 				$this->level = -1;
-				$this->name = $CI->config->item('root');
+				$this->name = $this->ci->config->item('root');
 			}
 			else
 			{
@@ -71,7 +72,6 @@ class User extends DataMapper {
 	{
 		
 		$result = FALSE;
-		$CI =& get_instance();
 		
 		if( empty($username) or empty($password) )
 			return FALSE;
@@ -89,29 +89,29 @@ class User extends DataMapper {
 			$lvl = new Userlevel();
 			$lvl->get_by_id( $this->level );
 			if( $lvl->exists() )
-				$CI->session->set_userdata( 'level', $lvl->level );
+				$this->ci->session->set_userdata( 'level', $lvl->level );
 			else
-				$CI->session->set_userdata( 'level', 0 );
+				$this->ci->session->set_userdata( 'level', 0 );
 			
 			
 				
-			$CI->session->set_userdata( 'mode', 'view' );
-			$CI->session->set_userdata( 'id', $this->id );
+			$this->ci->session->set_userdata( 'mode', 'view' );
+			$this->ci->session->set_userdata( 'id', $this->id );
 			$this->lastenter = $this->curenter;
-			$this->curenter = $CI->input->ip_address();
+			$this->curenter = $this->ci->input->ip_address();
 			$this->save();
 		}
 		else 
 		{
 			// check if it is the root
-			$g_name = $CI->config->item('root');
-			$g_pass = $CI->config->item('root_password');
+			$g_name = $this->ci->config->item('root');
+			$g_pass = $this->ci->config->item('root_password');
 			if( $username == $g_name and $password== $g_pass )
 			{
 				$result = TRUE;
-				$CI->session->set_userdata('mode', 'edit');
-				$CI->session->set_userdata('id', -1);
-				$CI->session->set_userdata('level', -1);
+				$this->ci->session->set_userdata('mode', 'edit');
+				$this->ci->session->set_userdata('id', -1);
+				$this->ci->session->set_userdata('level', -1);
 			}
 		}
 		
@@ -124,10 +124,9 @@ class User extends DataMapper {
 	
 	function logout()
 	{
-		$CI =& get_instance();
-		$CI->session->set_userdata('id', 0);
-		$CI->session->set_userdata('level', 0);
-		$CI->session->set_userdata('mode', 'view');
+		$this->ci->session->set_userdata('id', 0);
+		$this->ci->session->set_userdata('level', 0);
+		$this->ci->session->set_userdata('mode', 'view');
 		$this->lastenter = $this->curenter;
 		$this->save();
 	}

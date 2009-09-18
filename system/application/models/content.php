@@ -9,11 +9,13 @@
  * @link	http://github.com/blazeeboy/vunsy
  */
 class Content extends DataMapper {
-	var $table = 'content';
+	var $table = 'content'; 
+	var $ci;
 	
     function Content()
     {
         parent::DataMapper();
+        $this->ci =& get_instance();
     }
 		
 	function attach( $section='', $parent='', $cell='', $sort='')
@@ -71,14 +73,13 @@ class Content extends DataMapper {
 	
 	function container( $text='' ){
 		
-		$CI =& get_instance();
 		
 		if( ! $this->can_view() )
 			return '';
 		
-		if( $CI->vunsy->edit_mode() AND $this->info!='PAGE_BODY_LOCKED' )
+		if( $this->ci->vunsy->edit_mode() AND $this->info!='PAGE_BODY_LOCKED' )
 		{
-				$text = $CI->load->view('edit_mode/container'
+				$text = $this->ci->load->view('edit_mode/container'
 						,array(
 							'text'=>$text
 							,'path'=>$this->path
@@ -136,13 +137,12 @@ class Content extends DataMapper {
 	 * **************************************/
 	function cells()
 	{
-		$ci =& get_instance();
 		if( $this->path !='' )
 			$c = $this->load->view(
 						'content/'.$this->path,
 						array(
 									'id'=> $this->id,
-									'ci'=> $ci,
+									'ci'=> $this->ci,
 									'info'=>$this->get_info(),
 									'mode'=>'layout'
 								),
@@ -156,7 +156,6 @@ class Content extends DataMapper {
 	
 	function get_info()
 	{
-		$ci =& get_instance();
 		$info = json_decode( $this->info );
 		if( is_object($info) )
 		{
@@ -173,11 +172,10 @@ class Content extends DataMapper {
 	 * **************************************/
 	function add_button( $cell='', $sort='' )
 	{
-		$ci =& get_instance();
 		
-		$link = site_url( 'admin/app/content Inserter/index/'.$ci->vunsy->section->id.'/'.$this->id.'/'.$cell.'/'.$sort );
+		$link = site_url( 'admin/app/content Inserter/index/'.$this->ci->vunsy->section->id.'/'.$this->id.'/'.$cell.'/'.$sort );
 		
-		return $ci->load->view( 'edit_mode/insert', array( 'url'=>$link ), TRUE );
+		return $this->ci->load->view( 'edit_mode/insert', array( 'url'=>$link ), TRUE );
 	}
 	
 	/***************************************
@@ -188,9 +186,7 @@ class Content extends DataMapper {
 	 * **************************************/
 	function render()
 	{
-		
-		$CI =& get_instance();
-		
+				
 		/***************************************
 		 *  the main render code
 		 * **************************************/
@@ -207,10 +203,10 @@ class Content extends DataMapper {
 		for( $i=0; $i<$cell_number; $i++ )
 		{
 			// getting the content in that cell
-			$c_children = $this->children( $CI->vunsy->get_section(), $i );
+			$c_children = $this->children( $this->ci->vunsy->get_section(), $i );
 			
 			$cell_text = '';
-			if( $CI->vunsy->edit_mode() AND count($c_children)==0 AND $this->can_addin() )
+			if( $this->ci->vunsy->edit_mode() AND count($c_children)==0 AND $this->can_addin() )
 				$cell_text = $this->add_button($i,0); // +++ buttons +++ in start of every cell
 				
 			// rendering the cell content
@@ -237,7 +233,7 @@ class Content extends DataMapper {
 								'content/'.$this->path,
 								array(
 										'id'=>$this->id,
-										'ci'=> $CI,
+										'ci'=> $this->ci,
 										'cell'=> $layout_content,
 										'info'=>$this->get_info(),
 										'mode'=> 'view'
@@ -326,13 +322,12 @@ class Content extends DataMapper {
 		if( is_null( $this->filter ) or empty( $this->filter ) )
 			return $input;
 		
-		$ci =& get_instance();
 		$output = $input;
 		
 		$filters_array = array_map( 'trim', explode( "\n", $this->filter ) );
 		foreach( $filters_array as $item )
 		{
-			$output = $ci->load->view( 'filter/'.$item, array( 'text'=>$output ), TRUE );
+			$output = $this->ci->load->view( 'filter/'.$item, array( 'text'=>$output ), TRUE );
 		}
 		return $output;
 	}
