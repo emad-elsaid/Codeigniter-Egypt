@@ -18,6 +18,10 @@ class User extends DataMapper {
         $this->ci =& get_instance();
     }
 	
+	/**
+	 * get user information from seesion
+	 * that will get the current user information
+	 **/
 	function from_session()
 	{
 		$uid = $this->ci->session->userdata('id');
@@ -38,6 +42,9 @@ class User extends DataMapper {
 			}
 	}
 	
+	/**
+	 * return if the user is a root user
+	 **/
 	function is_root()
 	{
 		if( $this->id==-1 and $this->level==-1 )
@@ -46,7 +53,10 @@ class User extends DataMapper {
 			return FALSE;
 	}
 	
-	
+	/**
+	 * return true if it's a normal user and not a guest
+	 * false if the user is root or guest
+	 **/
 	function is_user()
 	{
 		if( $this->id > 0 )
@@ -55,6 +65,9 @@ class User extends DataMapper {
 			return FALSE;
 	}
 	
+	/**
+	 * return true is the user is guest false if not 
+	 **/
 	function is_guest()
 	{
 		if( $this->id == 0 )
@@ -63,11 +76,21 @@ class User extends DataMapper {
 			return FALSE;
 	}
 	
+	/**
+	 * return true if the user is logged ( not a guest )
+	 **/
 	function logged()
 	{
 		return (! $this->is_guest() );
 	}
 	
+	/**
+	 * login with user name and password and assign the information
+	 * in session
+	 * returns true if logged and false if not
+	 * @param	$username: user name 
+	 * @param	$password: password of the user (normal not encrypted)
+	 **/
 	function login( $username='' ,$password='')
 	{
 		
@@ -97,8 +120,8 @@ class User extends DataMapper {
 				
 			$this->ci->session->set_userdata( 'mode', 'view' );
 			$this->ci->session->set_userdata( 'id', $this->id );
-			$this->lastenter = $this->curenter;
-			$this->curenter = $this->ci->input->ip_address();
+			$this->lastenter	= $this->curenter;
+			$this->curenter	= $this->ci->input->ip_address();
 			$this->save();
 		}
 		else 
@@ -122,15 +145,24 @@ class User extends DataMapper {
 		return $result;
 	}
 	
+	/**
+	 * logout from current user and destroy the damn session ... Yahooooo
+	 **/
 	function logout()
 	{
 		$this->ci->session->set_userdata('id', 0);
 		$this->ci->session->set_userdata('level', 0);
 		$this->ci->session->set_userdata('mode', 'view');
-		$this->lastenter = $this->curenter;
-		$this->save();
+		if( $this->logged() )
+		{
+			$this->lastenter = $this->curenter;
+			$this->save();
+		}
 	}
 	
+	/**
+	 * set a new password for that user... without saving
+	 **/
 	function set_password( $password="" )
 	{
 		$this->password = md5( $password );

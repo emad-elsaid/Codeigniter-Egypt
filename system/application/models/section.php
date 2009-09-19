@@ -18,6 +18,10 @@ class Section extends DataMapper {
         $this->ci =& get_instance();
     }
 	
+	/**
+	 * get all the parent of that section up to 
+	 * the index page as an array of IDs
+	 **/
 	function get_parents()
 	{	
 		$c = new Section();
@@ -52,6 +56,9 @@ class Section extends DataMapper {
 		
 	}
 	
+	/**
+	 * delete that section with all it's subsections
+	 **/
 	function delete_with_sub( )
 	{
 			// getting the subsections
@@ -59,7 +66,9 @@ class Section extends DataMapper {
 			$c->where( 'parent_section', $this->id );
 			$c->get();
 			// delete all subsections relations
-			$c->delete_all();
+			foreach( $c->all as $item )
+				$item->delete_with_sub();
+				
 			// delete all children
 			$cont = new Content();
 			$cont->get_where_parent_section($this->id);
@@ -83,21 +92,28 @@ class Section extends DataMapper {
 		
 	}
 	
-	function attach( $object='', $parent='', $cell='', $sort='' )
+	/**
+	 * attach the object to that section and under the parent in cell with order sort
+	 * @param	$object: content object we want to attach
+	 * @param	$parent: content parent object
+	 * @param	$cell: cell in parent content we want to attach in it
+	 * @param	$sort: order of the content in it's cell
+	 **/
+	function attach( $object, $parent=NULL, $cell=NULL, $sort=NULL )
 	{
-		if(! empty($object) )
-		{
 			// synchronyze the cell and sort numbers
 			// to prevent paradox
-			if( empty($cell)) 
+			if( is_null($cell)) 
 				$cell = $object->cell;
 			else
 				$object->cell = $cell;
-			if( empty($sort))
+				
+			if( is_null($sort))
 				$sort = $object->sort;
 			else
 				$object->sort = $sort;
-			if( empty($parent))
+				
+			if( is_null($parent))
 			{
 				$parent = new Content();
 				$parent->get_by_id( $object->parent_content );
@@ -106,9 +122,9 @@ class Section extends DataMapper {
 			// check if that place it took
 			$cont = new Content();
 			//$cont->where('parent_section',$this->id);//same section
-			$cont->where('parent_content',$parent->id);//same parent
-			$cont->where('cell',$cell);// same cell
-			$cont->where('sort',$sort);//greater sort
+			$cont->where( 'parent_content', $parent->id );//same parent
+			$cont->where( 'cell', $cell );// same cell
+			$cont->where( 'sort', $sort );//greater sort
 			$cont->get();//get them to process
 			
 			// if that content object exists then that place is taken
@@ -121,9 +137,9 @@ class Section extends DataMapper {
 				// and the same cell and has a sort number greater that this
 				// sort number
 				//$cont->where('parent_section',$this->id);//same section
-				$cont->where('parent_content',$parent->id);//same parent
-				$cont->where('cell',$cell);// same cell
-				$cont->where('sort >=',$sort);//greater sort
+				$cont->where( 'parent_content', $parent->id );//same parent
+				$cont->where( 'cell', $cell );// same cell
+				$cont->where( 'sort >=', $sort) ;//greater sort
 				$cont->get();//get them to process
 				foreach( $cont->all as $item )
 				{
@@ -135,22 +151,25 @@ class Section extends DataMapper {
 			
 			//save the object itself
 			$object->save();
-			
-		}
 	}
 	
+	/**
+	 * attach $section to the current section object
+	 * @param	$section: 	section object we want to attach
+	 * 					as a child to current section
+	 **/
 	function attach_section( $section='' )
 	{
 			// check if that place it took
 			$cont = new Section();
 			$cont->where( 'parent_section', $this->id );//same section
-			$cont->where( 'sort',$section->sort );//greater sort
+			$cont->where( 'sort', $section->sort );//greater sort
 			$cont->get();//get them to process
 			
 			if( $cont->exists() )
 			{
-				$cont->where('parent_section',$this->id);//same section
-				$cont->where('sort >=',$section->sort);//greater sort
+				$cont->where( 'parent_section', $this->id );//same section
+				$cont->where( 'sort >=', $section->sort );//greater sort
 				$cont->get();//get them to process
 				foreach( $cont->all as $item )
 				{
@@ -163,6 +182,11 @@ class Section extends DataMapper {
 			$section->save();
 	}
 	
+	/**
+	 * deattach the content object from current section object 
+	 * and it's parent
+	 * @param	$object: content object we want to deattach
+	 **/
 	function deattach( $object='' )
 	{	
 		//=========================
@@ -173,9 +197,9 @@ class Section extends DataMapper {
 		// these content must me in the same section,parent,cell
 		// and have sort nubmer greater than that content
 		//$cont->where( 'parent_section',$object->parent_section );//same section
-		$cont->where( 'parent_content',$object->parent_content );//same parent
-		$cont->where( 'cell',$object->cell );// same cell
-		$cont->where( 'sort >',$object->sort );//greater sort
+		$cont->where( 'parent_content', $object->parent_content );//same parent
+		$cont->where( 'cell', $object->cell );// same cell
+		$cont->where( 'sort >', $object->sort );//greater sort
 		$cont->get();//get them to process
 		foreach( $cont->all as $item )
 		{
@@ -185,6 +209,10 @@ class Section extends DataMapper {
 			
 	}
 	
+	/**
+	 * deattach section object from current section
+	 * @param	$section: section we want to deattach
+	 **/
 	function deattach_section( $section='' )
 	{	
 		//=========================
@@ -194,8 +222,8 @@ class Section extends DataMapper {
 		// we have to push all the content up to fill that hole
 		// these content must me in the same section,parent,cell
 		// and have sort nubmer greater than that content
-		$cont->where( 'parent_section',$section->parent_section );//same section
-		$cont->where( 'sort >',$section->sort );//greater sort
+		$cont->where( 'parent_section', $section->parent_section );//same section
+		$cont->where( 'sort >', $section->sort );//greater sort
 		$cont->get();//get them to process
 		foreach( $cont->all as $item )
 		{
@@ -205,6 +233,10 @@ class Section extends DataMapper {
 			
 	}
 	
+	/**
+	 * return true if that user can view the section
+	 * and false if cannot view it
+	 **/
 	function can_view()
 	{
 		if( ! (empty($this->view)  or perm_chck( $this->view )) )
@@ -213,33 +245,38 @@ class Section extends DataMapper {
 			return TRUE;
 	}
 	
+	/**
+	 * render the HTML of current section
+	 * that function works if that section is the current
+	 * section of the user
+	 **/
 	function render()
 	{
 		
 		if($this->ci->vunsy->section->can_view())
 		{
-		/*********************************************
-		 *  redering the page BODY content
-		 * here i open the edit mode so the widgets got the
-		 * container box and the controller buttons
-		 * and the admin toolbar 
-		 * ********************************************/			
-		$page_body = new Content();
-		$page_body->get_by_info( 'PAGE_BODY_LOCKED' );
-		$page_body_text = $page_body->render();
-		
-		// adding the root toolbar
-		if( $this->ci->vunsy->user->is_root())
-				$page_body_text .= $this->ci->load->view( 'edit_mode/toolbar', '', TRUE );
-		
-		$doctype_text = doctype( $this->ci->config->item('doctype') );
-		/*********************************************************
-		 * display the page content
-		 * i sum all the page content text
-		 * before page + CSS + JS + head + body + after page
-		 * *******************************************************/
-		// Rendering the page 
-		echo <<<EOT
+			/*********************************************
+			 *  redering the page BODY content
+			 * here i open the edit mode so the widgets got the
+			 * container box and the controller buttons
+			 * and the admin toolbar 
+			 * ********************************************/			
+			$page_body = new Content();
+			$page_body->get_by_info( 'PAGE_BODY_LOCKED' );
+			$page_body_text = $page_body->render();
+			
+			// adding the root toolbar
+			if( $this->ci->vunsy->user->is_root())
+					$page_body_text .= $this->ci->load->view( 'edit_mode/toolbar', '', TRUE );
+			
+			$doctype_text = doctype( $this->ci->config->item('doctype') );
+			/*********************************************************
+			 * display the page content
+			 * i sum all the page content text
+			 * before page + CSS + JS + head + body + after page
+			 * *******************************************************/
+			// Rendering the page 
+			echo <<<EOT
 {$doctype_text}
 <html xmlns="http://www.w3.org/1999/xhtml" >
 	<head>
