@@ -31,7 +31,7 @@ $hyperLinks = array();
 foreach( $secs as $item )
 {
 	$local = site_url( $item->id );
-	array_push( $hyperLinks, "<a href=\"{$local}\" style=\"{$info->style}\" >{$item->name}</a>" );
+	array_push( $hyperLinks, "<a href=\"{$local}\" style=\"{$info->style}\" >{$item->name}</a>\n" );
 }
 
 echo implode( $info->separator, $hyperLinks );
