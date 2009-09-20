@@ -17,6 +17,14 @@ $ci->load->library( 'gui' );
 $found = add( $info->resourceFile );
 
 if( $ci->vunsy->edit_mode() )
-	echo $ci->gui->info( 'Resource '.((!$found)? 'not ':'').'found: '.$info->resourceFile );
+{
+	$c = new Content();
+	$c->get_by_id( $id );
+	
+	if( $c->can_edit() or $c->can_delete() )
+	{
+		echo $ci->gui->info( 'Resource '.((!$found)? 'not ':'').'found: '.$info->resourceFile );
+	}
+}
 ?>
 <?php } ?>

@@ -30,8 +30,14 @@
 $ci =& get_instance();
 if( $ci->vunsy->edit_mode() )
 {
-	$ci->load->library( 'gui' );
-	echo $ci->gui->info( 'Document settings here' );
+	$c = new Content();
+	$c->get_by_id( $id );
+	
+	if( $c->can_edit() or $c->can_delete() )
+	{
+		$ci->load->library( 'gui' );
+		echo $ci->gui->info( 'Document settings here' );
+	}
 }
 
 ?>
