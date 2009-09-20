@@ -5,15 +5,21 @@ $ci->load->library( 'gui' );
 $repo = $ci->app->ci_folder.'repo/';
 $tmp = $ci->app->ci_folder.'tmp/';
 
-if( ! file_exists( $repo ) )
+if( (!file_exists($repo)) and is_writable($ci->app->ci_folder) )
 	mkdir( $repo, 0777 );
+else
+	$ci->app->add_error( $ci->app->ci_folder .
+	' Must be writable to create the Repository and the Temperory directory' );
 	
-if( ! file_exists( $tmp ) )
+if( (!file_exists($tmp)) and is_writable($ci->app->ci_folder) )
 	mkdir( $tmp, 0777 );
+else
+	$ci->app->add_error( $ci->app->ci_folder .
+	' Must be writable to create the Repository and the Temperory directory' );
 	
-$dir = directory_map( $repo,TRUE );
+$dir = directory_map( $repo, TRUE );
 
-if( count( $dir )>0 )
+if( count( $dir )>0 and is_writable($ci->app->ci_folder) )
 {
 	$header = array(
 				'name'=>'Package name',
