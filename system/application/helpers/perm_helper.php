@@ -14,23 +14,26 @@ if ( ! function_exists('perm_array')){
 		$CI =& get_instance();
 		return array(
 			'opers' => array(
-						'='=>'==',
-						'>=='=>'>=',
-						'<=='=>'<=',
-						'!=='=>'!=',
-						'not'=>'!'
+						'='		=> '==',
+						'>=='		=> '>=',
+						'<=='		=> '<=',
+						'!=='		=> '!=',
+						'not'		=> '!'
 			),
 			'boolVars' => array(
-						'root'=> intval($CI->vunsy->user->is_root()).'=1',
-						'logged'=>intval($CI->vunsy->user->logged()).'=1',
-						'guest'=>intval($CI->vunsy->user->is_guest()).'=1',
-						'view'=>intval($CI->vunsy->view_mode()).'=1',
-						'edit'=>intval($CI->vunsy->edit_mode()).'=1'
+						'root'		=> intval($CI->vunsy->user->is_root()).'=1',
+						'logged'	=> intval($CI->vunsy->user->logged()).'=1',
+						'guest'	=> intval($CI->vunsy->user->is_guest()).'=1',
+						'view'		=> intval($CI->vunsy->view_mode()).'=1',
+						'edit'		=> intval($CI->vunsy->edit_mode()).'=1'
 			),
 			'vars' => array(
-						'level'=>$CI->session->userdata('level'),
-						'user'=>$CI->session->userdata('id'),
-						'section'=>$CI->vunsy->section->id,
+						'level'	=> $CI->session->userdata('level'),
+						'user'		=> $CI->session->userdata('id'),
+						'section'	=> $CI->vunsy->section->id,
+						'day'		=> date('j'),
+						'month'	=> date('n'),
+						'year'		=> date('Y')
 			)
 		);
 	}
@@ -48,12 +51,12 @@ if ( ! function_exists('perm_chck')){
 		$perm_vars = perm_array();
 		
 		$perms = str_replace( 
-					array_keys($perm_vars['boolVars']),
-					array_values($perm_vars['boolVars']),
+					array_keys		($perm_vars['boolVars']),
+					array_values	($perm_vars['boolVars']),
 					$perms
 					);
-		$vars_reg = implode('|', array_keys($perm_vars['vars']));
-		$matches = array();
+		$vars_reg	= implode('|', array_keys($perm_vars['vars']));
+		$matches	= array();
 		
 		
 		// regular expression to ckeck is the permission string
@@ -67,15 +70,15 @@ if ( ! function_exists('perm_chck')){
 		
 		// replace operators with valid operators like = with ==
 		$matches = str_replace(
-					array_keys($perm_vars['opers']),
-					array_values($perm_vars['opers']),
+					array_keys		($perm_vars['opers']),
+					array_values	($perm_vars['opers']),
 					$matches
 					);
 		
 		// replace variables with it's values
 		$matches = str_replace(
-					array_keys($perm_vars['vars']),
-					array_values($perm_vars['vars']),
+					array_keys		($perm_vars['vars']),
+					array_values	($perm_vars['vars']),
 					$matches
 					);
 		

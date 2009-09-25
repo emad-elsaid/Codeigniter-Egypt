@@ -33,8 +33,8 @@ if ( ! function_exists('add_js')){
 			/* get full URL if script path
 			 * is local script
 			 * */
-			$script = trim($script);
-			$CI =& get_instance();
+			$script	=	trim($script);
+			$CI		=&	get_instance();
 			if( is_local($script) )
 			{
 				$script = base_url().$script;
@@ -75,8 +75,8 @@ if ( ! function_exists('add_css')){
 		 * */
 		else
 		{
-			$style = trim($style);
-			$CI =& get_instance();
+			$style	=	trim($style);
+			$CI		=&	get_instance();
 			
 			switch( $position )
 			{
@@ -114,8 +114,8 @@ if ( ! function_exists('add_dojo')){
 		 * */
 		else
 		{
-			$req = trim($req);
-			$CI =& get_instance();
+			$req	=	trim($req);
+			$CI	=&	get_instance();
 			
 			if(! in_array($req, $CI->vunsy->dojo))
 				array_push( $CI->vunsy->dojo, $req );
@@ -143,8 +143,8 @@ if ( ! function_exists('add_header')){
 		 * */
 		else
 		{
-			$block = trim($block);
-			$CI =& get_instance();
+			$block	=	trim($block);
+			$CI		=&	get_instance();
 			
 			if(! in_array($block, $CI->vunsy->header))
 				array_push( $CI->vunsy->header, $block );
@@ -175,9 +175,9 @@ if ( ! function_exists('add')){
 			return;
 		}
 		
-		$item = trim( $item );
-		$ext =  substr( $item, -3, 3 );
-		$prefix = substr( $item, 0, 4 );
+		$item		= trim( $item );
+		$ext		= substr( $item, -3, 3 );
+		$prefix	= substr( $item, 0, 4 );
 		
 		if( substr( $item, 0, 1)=='<' )
 		{

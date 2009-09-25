@@ -2,6 +2,7 @@
 	display: block;
 	text-align: left;
 	position: relative;
+	clear: both;
 }
 .editCtrl .editGroup{
 	text-align: left;

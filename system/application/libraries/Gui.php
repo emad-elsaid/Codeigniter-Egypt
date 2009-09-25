@@ -74,12 +74,12 @@ class Gui {
 	{
 		
 		//adding the nessecery javascripts and CSSs
-		add_js( "jquery/jquery.js");
-		add_js( "jquery/fileTree/jqueryFileTree.js" );
-		add_js( "jquery/easing.js" );
-		add_css( "jquery/fileTree/jqueryFileTree.css" );
-		add_css( "jquery/theme/ui.all.css");
-		add_dojo( "dijit.Dialog" );
+		add_js	( "jquery/jquery.js");
+		add_js	( "jquery/fileTree/jqueryFileTree.js" );
+		add_js	( "jquery/easing.js" );
+		add_css	( "jquery/fileTree/jqueryFileTree.css" );
+		add_css	( "jquery/theme/ui.all.css");
+		add_dojo	( "dijit.Dialog" );
 		
 		//preparing the paramters
 		if(!isset($param['root']))
@@ -90,10 +90,10 @@ class Gui {
 		if( ! is_dir( $param['root'] ) ) 
 			$param['root'] = str_replace( '/','\\',$param['root'] );
 			
-		$root = $param['root'];
-		$script = $connector;
+		$root		= $param['root'];
+		$script	= $connector;
 		
-		$param = $this->_params_to_js($param);
+		$param	= $this->_params_to_js($param);
 		
 		// adding the styles if not there
 		
@@ -183,6 +183,7 @@ EOT;
 		add_css( "dojo/dojox/widget/ColorPicker/ColorPicker.css" );
 		
 		$value = form_prep( $value );
+		
 		$attr = $this->attribute( $attr, 'type', 'text');
 		$attr = $this->attribute( $attr, 'id', $NAME );
 		$attr = $this->attribute( $attr, 'name', $NAME );
