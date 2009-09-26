@@ -51,6 +51,7 @@ built on it some applications accessible by a task bar like facebook one
 * 3- to install database : 
 	open the vunsy website 
 	ex: http://localhost/vunsy/
+	you can use install.php but config.php must be writable
 -----------------------------------------------------------------
 [ Running ]
 ---
