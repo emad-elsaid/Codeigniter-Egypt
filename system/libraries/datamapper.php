@@ -9,7 +9,7 @@
  * @category	Models
  * @author  	Simon Stenhouse, Phil DeJarnett
  * @link    	http://www.overzealous.com/dmz/
- * @version 	1.5.2 ($Rev: 245 $) (Based on DataMapper 1.6.0)
+ * @version 	1.5.3 ($Rev: 250 $) (Based on DataMapper 1.6.0)
  */
 
 // --------------------------------------------------------------------------
@@ -787,26 +787,33 @@ class DataMapper implements IteratorAggregate {
 		// Check if this is a related object and if so, perform a related get
 		if ( ! empty($this->parent))
 		{
-			// Set limit and offset
-			if( ! is_null($limit)) {
-				$this->limit($limit, $offset);
-			}
-
 			$has_many = array_key_exists($this->parent['model'], $this->has_many);
 			$has_one = array_key_exists($this->parent['model'], $this->has_one);
 
 			// If this is a "has many" or "has one" related item
 			if ($has_many || $has_one)
 			{
-				$this->_get_relation($this->parent['model'], $this->parent['id']);
+				if( ! $this->_get_relation($this->parent['model'], $this->parent['id']))
+				{
+					// invalid get request, return this for chaining.
+					return $this;
+				}
 			}
-
-			// For method chaining
-			return $this;
+			else
+			{
+				// provide feedback on errors
+				$parent = $this->parent['model'];
+				$this_model = get_class($this);
+				show_error("DataMapper Error: '$parent' is not a valid parent relationship for $this_model.  Are your relationships configured correctly?");
+			}
+			
+			// Fall through to a normal get
 		}
+		
+		$query = FALSE;
 
-		// Check if object has been validated
-		if ($this->validated)
+		// Check if object has been validated (skipped for related items)
+		if ($this->validated && empty($this->parent))
 		{
 			// Reset validated
 			$this->validated = FALSE;
@@ -824,24 +831,7 @@ class DataMapper implements IteratorAggregate {
 
 				// Get by objects properties
 				$query = $this->db->get_where($this->table, $data, $limit, $offset);
-
-				if ($query->num_rows() > 0)
-				{
-					// Populate all with records as objects
-					$this->all = $this->_to_object($query->result(), get_class($this));
-
-					// Populate this object with values from first record
-					foreach ($query->row() as $key => $value)
-					{
-						$this->{$key} = $value;
-					}
-				}
-				
-				if($query->num_rows() > $this->free_result_threshold)
-				{
-					$query->free_result();
-				}
-			}
+			} // FIXME: notify user if nothing was set?
 		}
 		else
 		{
@@ -853,29 +843,13 @@ class DataMapper implements IteratorAggregate {
 
 			// Get by built up query
 			$query = $this->db->get($this->table, $limit, $offset);
-
-			if ($query->num_rows() > 0)
-			{
-				// Populate all with records as objects
-				$this->all = $this->_to_object($query->result(), get_class($this));
-
-				// Populate this object with values from first record
-				foreach ($query->row() as $key => $value)
-				{
-					$this->{$key} = $value;
-				}
-				
-				// Run any pre-process actions on this object
-				$this->_run_get_rules();
-			}
-			
-			if($query->num_rows() > $this->free_result_threshold)
-			{
-				$query->free_result();
-			}
 		}
-
-		$this->_refresh_stored_values();
+		
+		// Convert the query result into DataMapper objects
+		if($query)
+		{
+			$this->_process_query($query);
+		}
 
 		// For method chaining
 		return $this;
@@ -1768,24 +1742,7 @@ class DataMapper implements IteratorAggregate {
 		// Get by objects properties
 		$query = $this->db->query($sql, $binds);
 
-		if ($query->num_rows() > 0)
-		{
-			// Populate all with records as objects
-			$this->all = $this->_to_object($query->result(), get_class($this));
-
-			// Populate this object with values from first record
-			foreach ($query->row() as $key => $value)
-			{
-				$this->{$key} = $value;
-			}
-		}
-		
-		if($query->num_rows() > $this->free_result_threshold)
-		{
-			$query->free_result();
-		}
-
-		$this->_refresh_stored_values();
+		$this->_process_query($query);
 
 		// For method chaining
 		return $this;
@@ -3357,11 +3314,6 @@ class DataMapper implements IteratorAggregate {
 	 * @param object $append_name[optional] The name to use for joining (with '_'), or FALSE to disable.
 	 */
 	function include_related($related_field, $fields = NULL, $append_name = TRUE) {
-		if ( ! is_array($fields))
-		{
-			$fields = array($fields);
-		}
-		
 		if (is_object($related_field))
 		{
 			$object = $related_field;
@@ -3379,6 +3331,10 @@ class DataMapper implements IteratorAggregate {
 		if(is_null($fields) || $fields == '*')
 		{
 			$fields = $object->fields;
+		}
+		else if ( ! is_array($fields))
+		{
+			$fields = array((string)$fields);
 		}
 		
 		$rfs = explode('/', $related_field);
@@ -3461,7 +3417,7 @@ class DataMapper implements IteratorAggregate {
 			// Reset query
 			$this->db->_reset_select();
 
-			return;
+			return FALSE;
 		}
 		
 		// To ensure result integrity, group all previous queries
@@ -3474,32 +3430,7 @@ class DataMapper implements IteratorAggregate {
 		// query all items related to the given model
 		$this->where_related($related_field, 'id', $id);
 				
-		// Set up default order by (if available)
-		$this->_handle_default_order_by();
-
-		$query = $this->db->get($this->table);
-
-		// Clear this object to make way for new data
-		$this->clear();
-
-		if ($query->num_rows() > 0)
-		{
-			// Populate all with records as objects
-			$this->all = $this->_to_object($query->result(), get_class($this));
-
-			// Populate this object with values from first record
-			foreach ($query->row() as $key => $value)
-			{
-				$this->{$key} = $value;
-			}
-		}
-		
-		if($query->num_rows() > $this->free_result_threshold)
-		{
-			$query->free_result();
-		}
-
-		$this->_refresh_stored_values();
+		return TRUE;
 	}
 
 	// --------------------------------------------------------------------
@@ -4551,52 +4482,82 @@ class DataMapper implements IteratorAggregate {
 	// --------------------------------------------------------------------
 
 	/**
-	 * To Object
+	 * Process Query
 	 *
-	 * Converts the query result into an array of objects.
+	 * Converts a query result into an array of objects.
+	 * Also updates this object
 	 *
 	 * @access	private
-	 * @param	array
-	 * @param	string
-	 * @return	array
+	 * @param	object
 	 */
-	function _to_object($result, $model)
+	function _process_query($query)
 	{
-		$items = array();
-
-		foreach ($result as $row)
+		if ($query->num_rows() > 0)
 		{
-			$item = new $model();
-
-			// Populate this object with values from first record
-			foreach ($row as $key => $value)
+			// Populate all with records as objects
+			$this->all = array();
+				
+			$model = get_class($this);
+			
+			foreach ($query->result() as $row)
 			{
-				$item->{$key} = $value;
-			}
-
-			foreach ($this->fields as $field)
-			{
-				if (! isset($row->{$field}))
+				$item = new $model();
+	
+				$this->_to_object($item, $row);
+				
+				if($this->all_array_uses_ids && isset($item->id))
 				{
-					$item->{$field} = NULL;
+					$this->all[$item->id] = $item;
+				}
+				else
+				{
+					$this->all[] = $item;
 				}
 			}
-			
-			$item->_run_get_rules();
 
-			$item->_refresh_stored_values();
-			
-			if($this->all_array_uses_ids && isset($item->id))
+			$this->_to_object($this, $query->row());
+		
+			// free large queries
+			if($query->num_rows() > $this->free_result_threshold)
 			{
-				$items[$item->id] = $item;
-			}
-			else
-			{
-				$items[] = $item;
+				$query->free_result();
 			}
 		}
+		
+		$this->_refresh_stored_values();
+	}
 
-		return $items;
+	// --------------------------------------------------------------------
+	
+	/**
+	 * To Object
+	 * Copies the values from a query result row to an object.
+	 * Also initializes that object by running get rules, and
+	 *   refreshing stored values on the object.
+	 * 
+	 * @param object $item
+	 * @param object $row
+	 * @return 
+	 */
+	function _to_object($item, $row)
+	{
+		// Populate this object with values from first record
+		foreach ($row as $key => $value)
+		{
+			$item->{$key} = $value;
+		}
+
+		foreach ($this->fields as $field)
+		{
+			if (! isset($row->{$field}))
+			{
+				$item->{$field} = NULL;
+			}
+		}
+		
+		$item->_run_get_rules();
+
+		$item->_refresh_stored_values();
 	}
 
 	// --------------------------------------------------------------------

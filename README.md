@@ -20,7 +20,7 @@ vunsy support the idea of applications on the website every application has a JS
 [program built on]
 ---
 * CodeIgniter PHP framework Version 1.7.2
-* Datamapper OverZealous Edition Version 1.5.2
+* Datamapper OverZealous Edition Version 1.5.3
 * Dojo+Dijit+Dojox Version 1.3.2
 * Jquery UI Version (1.7.2: for jQuery 1.3+)
 * KFM file browser Version 1.3
