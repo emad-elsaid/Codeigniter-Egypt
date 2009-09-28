@@ -4,21 +4,6 @@
 	position: relative;
 	clear: both;
 }
-.editCtrl .editGroup{
-	text-align: left;
-	position: absolute;
-	top: 20;
-	background-color: #EDEDED;
-	border: 1px solid #A3A3A3;
-	-moz-border-radius-bottomright: 5px;
-	-webkit-border-bottom-right-radius: 5px;
-	-moz-border-radius-bottomleft: 5px;
-	-webkit-border-bottom-left-radius: 5px;
-	padding: 2px;
-	z-index: 1;
-}
-
-
 .editCtrl a{ text-decoration: none; }
 .editCtrl img{ border: 0px none; } 
 .editCtrl, .insertCtrl img{ padding: 2px; border: 0px none; }
