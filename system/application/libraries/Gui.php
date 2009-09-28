@@ -528,8 +528,8 @@ EOT;
 	{
 		add_dojo( "dijit.layout.TabContainer" );
 		add_dojo( "dijit.layout.ContentPane" );
-		$style = $this->style( $style, 'width', '100%' );
-		$style = $this->style( $style, 'height', '300px' );
+		$style = $this->style( $style, 'width', '100%', FALSE );
+		$style = $this->style( $style, 'height', '300px', FALSE );
 		
 		$style = $this->_array_to_style( $style );
 		$attr = $this->_attributes_to_string( $attr );
@@ -553,8 +553,8 @@ EOT;
 		
 		add_css( 'jquery/theme/ui.all.css' );
 		
-		$attr = $this->attribute( $attr, 'align', 'center' );
-		$attr = $this->attribute( $attr, 'width', '100%' );
+		$attr = $this->attribute( $attr, 'align', 'center', FALSE );
+		$attr = $this->attribute( $attr, 'width', '100%', FALSE );
 		$attr = $this->attribute( $attr, 'class', "ui-widget-content");	
 		$attr = $this->_attributes_to_string( $attr );
 		
@@ -644,8 +644,8 @@ EOT;
 		add_dojo( "dijit.layout.SplitContainer" );
 		add_dojo( "dijit.layout.ContentPane" );
 		
-		$style = $this->style( $style, 'width', '100%');
-		$style = $this->style( $style, 'height', '300px');
+		$style = $this->style( $style, 'width', '100%', FALSE);
+		$style = $this->style( $style, 'height', '300px', FALSE);
 		$style = $this->_array_to_style( $style );
 		
 		$attr = $this->_attributes_to_string( $attr );
@@ -668,8 +668,8 @@ EOT;
 		add_dojo( "dijit.layout.SplitContainer" );
 		add_dojo( "dijit.layout.ContentPane" );
 		
-		$style = $this->style( $style, 'width', '100%');
-		$style = $this->style( $style, 'height', '300px');
+		$style = $this->style( $style, 'width', '100%', FALSE);
+		$style = $this->style( $style, 'height', '300px', FALSE);
 		$style = $this->_array_to_style( $style );
 		
 		$attr = $this->_attributes_to_string( $attr );
