@@ -13,7 +13,6 @@ function curPageURL() {
 
 if( count($_POST)>0 )
 {
-	$config_base_url = $_POST['config_base_url'];
 	$db_hostname = $_POST['db_hostname'];
 	$db_username = $_POST['db_username'];
 	$db_password = $_POST['db_password'];
@@ -25,7 +24,6 @@ if( count($_POST)>0 )
 }
 else
 {
-	$config_base_url = substr(curPageURL(), 0, strrpos( curPageURL(), '/' )+1 );
 	$db_hostname = "localhost";
 	$db_username = "root";
 	$db_password = "toor";
@@ -39,7 +37,6 @@ else
 if( count($_POST)>0 )
 {
 	$config_file = '<?php
-$config_base_url			= "'.$config_base_url.'";
 $config_site_name		= "'.$config_site_name.'";
 $config_root			= "'.$config_root.'";
 $config_root_password		= "'.$config_root_password.'";
@@ -153,8 +150,6 @@ file_put_contents( 'config.php', $config_file );
 
 	<form action="<?=curPageURL()?>" method="post" >
 		<h1>Site config variables</h1>
-			<label>Site domain (base_url) :</label>
-		<input type="text" value="<?=$config_base_url ?>" name="config_base_url" ><br />
 			<label>You site name :</label>
 		<input type="text" value="<?=$config_site_name ?>" name="config_site_name" ><br />
 			<label>Adminstrator user name :</label>

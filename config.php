@@ -1,5 +1,4 @@
 <?php
-$config_base_url			= "http://localhost/vunsy/";
 $config_site_name		= "siteName";
 $config_root			= "root";
 $config_root_password		= "toor";
