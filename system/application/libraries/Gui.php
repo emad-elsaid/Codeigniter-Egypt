@@ -806,7 +806,7 @@ $output = '
 implode( "\n", $value ).
 '</textarea>
 <div  class="list dijitTitlePaneContentInner">
-Available filters';
+Available items';
 
 foreach( $list as $item)
 {
@@ -815,7 +815,7 @@ foreach( $list as $item)
 
 $output .= '</div>
 <div class="list dijitTitlePaneContentInner">
-Selected filters';
+Selected items';
 
 foreach( $value as $item)
 {
