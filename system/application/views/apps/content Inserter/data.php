@@ -194,6 +194,9 @@ if( is_object( $Plugin_Data ) )
 				case "file":
 					$current_field = $ci->gui->file( $key, $cVal );
 					break;
+				case "file list":
+					$current_field = $ci->gui->file_list( $key, $cVal );
+					break;
 				case "folder":
 					$current_field = $ci->gui->folder( $key, $cVal );
 					break;

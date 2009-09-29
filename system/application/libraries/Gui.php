@@ -827,6 +827,102 @@ $output .= '
 </div>';
 return $output;
 }
+
+	/**
+	 * a file list chooser that return a text with some lines every line is 
+	 * a choosen file ( it's a textarea interface with jquery)
+	 **/
+function file_list($NAME='',$value='', $attr=array(), $param=array(), $style=array())
+{
+add('jquery/jquery.js');
+$ci =& get_instance();
+$ci->load->library('gui');
+add(<<<EOT
+<script language="javascript" >
+function updateList(list)
+{
+	$(list).each(function(){
+		i = $(this).children('textarea').val();
+		i.trim();
+		if( i!="" )
+		{
+			i = i.split("\\n");
+			i = '<div class="item dijitTitlePaneTitle" >'+i.join('</div><div class="item dijitTitlePaneTitle" >')+'</div>';
+		}
+		
+		$(this).children('.items').html(i);
+		
+		$(this).children('.items').children('.item').click(
+				function(){
+					$(this).parent().parent().children('input').val($(this).text());
+				});
+	});
+}
+
+$(function(){
+	$('.filelist>textarea').hide();
+	
+	$('.filelist').each(function(){
+			updateList(this);
+	
+			$(this).children('.add').click(function(){
+				input = $(this).siblings('input');
+				textarea = $(this).siblings('textarea');
+				if( textarea.val()!='')
+					i = "\\n"+input.val();
+				else
+					i = input.val();
+				textarea.val(textarea.val()+i);
+				updateList($(this).parent());
+				input.val('');
+			});
+			$(this).children('.del').click(function(){
+				ta = $(this).siblings('textarea');
+				inp = $(this).siblings('input').val();
+				list = ta.val();
+				list = list.split("\\n");
+				newList = new Array();
+				for( i=0; i<list.length; i++)
+				{
+					if( inp!=list[i] )
+						newList.push(list[i]);
+				}
+				if( newList.length>0)
+					ta.val(newList.join("\\n"));
+				else
+					ta.val('');
+				updateList($(this).parent());
+				$(this).siblings('input').val('');
+			});
+	});
+	
+});
+</script>
+<style>
+.filelist .items .item{
+	border-bottom: 1px solid;
+	padding: 3px;
+}
+.filelist img{
+	padding-top: 5px;
+}
+</style>
+EOT
+);
+
+$input = $this->file('d'.rand(1,10000), '', $attr, $param, $style);
+$textarea = $this->textarea($NAME, $value);
+$base_url = base_url();
+return <<<EOT
+<div class="filelist" >
+<div class="items" ></div>
+$textarea
+$input
+<img class="add" src="{$base_url}assets/admin/edit/add.png" >
+<img class="del" src="{$base_url}assets/admin/edit/delete.png" >
+</div>
+EOT;
+}
 	/**
 	 * just like attribute function but for style paramter
 	 */

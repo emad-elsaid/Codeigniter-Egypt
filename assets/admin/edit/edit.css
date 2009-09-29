@@ -4,6 +4,13 @@
 	position: relative;
 	clear: both;
 }
-.editCtrl a{ text-decoration: none; }
+.editCtrl a{ 
+	text-decoration: none;
+	background: url('edit show.png') no-repeat center center;
+	height: 8px;
+	overflow: hidden;
+	display: block;
+	text-align: center;
+}
 .editCtrl img{ border: 0px none; } 
 .editCtrl, .insertCtrl img{ padding: 2px; border: 0px none; }
