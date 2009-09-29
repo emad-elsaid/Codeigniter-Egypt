@@ -17,7 +17,9 @@
 	"extra attributs":"you can specify extra body classes and style",
 	"class":{"type":"textbox"},
 	"style":{"type":"textarea"},
-	"favIcon":{"type":"file"}
+	"favIcon":{"type":"file"},
+	"javascript_files" : {"type":"file list"},
+	"css_files" : {"type":"file list"}
 }
 <?php }else if( $mode=='layout' ){ 
 //replace 0 with number of cells your plugin has ?>
@@ -48,6 +50,8 @@ if( $ci->vunsy->edit_mode() )
 	if( $info->Reset960 ) add( 'assets/960.gs/reset.css' );
 	if( $info->Text960 ) add( 'assets/960.gs/text.css' );
 	if( !empty($info->favIcon) ) add('<link rel="icon" href="'.base_url().$info->favIcon.'">');
+	add(explode("\n",$info->javascript_files));
+	add(explode("\n",$info->css_files));
 	
 	$style = '';
 	if( $info->background_image != '' )

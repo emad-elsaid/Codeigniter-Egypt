@@ -1,7 +1,7 @@
 <?php if( $mode=='config' ){
 //the plugin requirements as a JSON object is here ?>
 {
-	"resourceFile":{"type":"file"}
+	"resourceFiles":{"type":"file list"}
 }
 
 
@@ -12,9 +12,8 @@
 
 <?php }else if( $mode=='view' ){
 //the real content of your plugin goes here ?>
-<?php 
-$ci->load->library( 'gui' );
-$found = add( $info->resourceFile );
+<?php
+add( explode( "\n", $info->resourceFiles) );
 
 if( $ci->vunsy->edit_mode() )
 {
@@ -23,7 +22,8 @@ if( $ci->vunsy->edit_mode() )
 	
 	if( $c->can_edit() or $c->can_delete() )
 	{
-		echo $ci->gui->info( 'Resource '.((!$found)? 'not ':'').'found: '.$info->resourceFile );
+		$ci->load->library( 'gui' );
+		echo $ci->gui->info( 'Resource '.nl2br($info->resourceFiles) );
 	}
 }
 ?>
