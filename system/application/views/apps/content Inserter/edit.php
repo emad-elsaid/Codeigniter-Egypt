@@ -45,7 +45,7 @@ margin-right:10px;
 <div class="links" >
 	<?php if( $can_edit ){ ?>
 		<div><a href="<?= $ci->app->app_url("data/$id") ?>" >
-			<img src="<?=$img_url?>edit.png" >Edit
+			<img src="<?=$img_url?>edit.png" >Edit Properties
 		</a></div>
 		<div><a href="<?= $ci->app->app_url("up/$id") ?>" >
 			<img src="<?=$img_url?>move up.png" >Move Up
@@ -72,6 +72,14 @@ margin-right:10px;
 		
 		<div><a href="<?= $ci->app->app_url("recycle/$id") ?>" >
 		<img src="<?=$img_url?>recycle.png" >Put in Recycle
+		</a></div>
+		
+		<div><a href="<?= $ci->app->app_url("delete children/$id") ?>" >
+		<img src="<?=$img_url?>delete children.png" >Delete Children
+		</a></div>
+		
+		<div><a href="<?= $ci->app->app_url("recycle children/$id") ?>" >
+		<img src="<?=$img_url?>recycle children.png" >Recycle Children 
 		</a></div>
 	<?php } ?>
 	
