@@ -13,8 +13,8 @@ $levels->get();
 $lvls = '';
 foreach( $levels->all as $item )
 {
-	$l = $item->level;
-	$lvls->$l = $item->name;
+	$lvvv = $item->level;
+	$lvls->$lvvv = $item->name;
 }
 
 if( $lvls=='')
