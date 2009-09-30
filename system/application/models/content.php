@@ -388,7 +388,14 @@ class Content extends DataMapper {
 		
 		$filters_array = array_map( 'trim', explode( "\n", $this->filter ) );
 		foreach( $filters_array as $item )
-			$output = $this->ci->load->view( 'filter/'.$item, array( 'text'=>$output ), TRUE );
+			$output = $this->ci->load->view( 
+							'filter/'.$item, 
+							array( 
+								'text'=>$output,
+								'id'=>$this->id
+							),
+							 TRUE
+						);
 
 		return $output;
 	}
