@@ -11,8 +11,13 @@ if( $ci->input->post( "id" )!==FALSE )
 	$old_edit = $c->can_edit();
 }
 
+if( $ci->input->post( "id" )===FALSE )
+{
+	$c->user = $ci->vunsy->user->id;
+}
 $c->parent_section = $ci->input->post( "parent_section" );
 $c->parent_content = $ci->input->post( "parent_content" );
+$c->title = $ci->input->post("title");
 $c->cell = $ci->input->post( "cell" );
 $c->sort = $ci->input->post( "sort" );
 $c->path = $ci->input->post( "path" );

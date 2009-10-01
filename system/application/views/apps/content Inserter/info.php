@@ -9,6 +9,12 @@
 	$parent_content = new Content();
 	$parent_content->get_by_id( $content_ins->parent_content );
 	
+	$user = new User();
+	if( $content_ins->user == -1 )
+		$user->name = 'root';
+	else
+		$user->get_by_id( $content_ins->user );
+	
 	$parent_section = new Section();
 	$parent_section->get_by_id( $content_ins->parent_section );
 	
@@ -17,9 +23,11 @@
 	
 	$data_table = array(
 				'Content ID'=>$content_ins->id,
+				'Content Title'=>$content_ins->title,
 				'Content path'=>$content_ins->path,
 				'Section'=>(empty($parent_section->name))? 'Index':$parent_section->name,
 				'Subsections'=>($content_ins->subsection)? 'Yes':'No',
+				'User added it'=> $user->name,
 				'Parent'=>$parent_content->path,
 				'Cell'=>$content_ins->cell,
 				'Sort'=>$content_ins->sort,

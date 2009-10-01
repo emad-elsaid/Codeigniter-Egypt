@@ -109,13 +109,14 @@ if( $edit === FALSE )
 	$Basic_Form = 	$ci->gui->form(
 		$ci->app->app_url('addaction')
 		,array(
-		"Show in subsections : " => $ci->gui->checkbox('subsection')
-		,"View permissions : " => $ci->gui->$input('view', $p_cont->view)
-		,"Add in permissions : " => $ci->gui->$input('addin', $p_cont->addin)
-		,"Edit permissions : " => $ci->gui->$input('edit', $p_cont->edit)
-		,"Delete permissions : " => $ci->gui->$input('del', $p_cont->del)
-		,"Filters : "=> $ci->gui->select_sort( 'filter',$filters_list )
-		,"" => $button
+		"Title : " => $ci->gui->textbox('title'),
+		"Show in subsections : " => $ci->gui->checkbox('subsection'),
+		"View permissions : " => $ci->gui->$input('view', $p_cont->view),
+		"Add in permissions : " => $ci->gui->$input('addin', $p_cont->addin),
+		"Edit permissions : " => $ci->gui->$input('edit', $p_cont->edit),
+		"Delete permissions : " => $ci->gui->$input('del', $p_cont->del),
+		"Filters : "=> $ci->gui->select_sort( 'filter',$filters_list ),
+		"" => $button
 		)
 		,array( 'id'=>'basic_form' )
 		,$hidden
@@ -126,13 +127,14 @@ else
 	$Basic_Form = 	$ci->gui->form(
 		$ci->app->app_url('addaction')
 		,array(
-		"Show in subsections : " => $ci->gui->checkbox('subsection','subsection', $con->subsection)
-		,"View permissions : " => $ci->gui->$input('view', $con->view)
-		,"Add in permissions : " => $ci->gui->$input('addin', $con->addin)
-		,"Edit permissions : " => $ci->gui->$input('edit', $con->edit)
-		,"Delete permissions : " => $ci->gui->$input('del', $con->del)
-		,"Filters : "=> $ci->gui->select_sort( 'filter', $filters_list, $con->filter )
-		,"" => $button
+		"Title : " => $ci->gui->textbox('title', $con->title ),
+		"Show in subsections : " => $ci->gui->checkbox('subsection','subsection', $con->subsection),
+		"View permissions : " => $ci->gui->$input('view', $con->view),
+		"Add in permissions : " => $ci->gui->$input('addin', $con->addin),
+		"Edit permissions : " => $ci->gui->$input('edit', $con->edit),
+		"Delete permissions : " => $ci->gui->$input('del', $con->del),
+		"Filters : "=> $ci->gui->select_sort( 'filter', $filters_list, $con->filter ),
+		"" => $button
 		)
 		,array( 'id'=>'basic_form' )
 		,$hidden
