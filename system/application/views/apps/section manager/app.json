@@ -4,7 +4,7 @@
 	"author":"Blaze Boy",
 	"website":"http:\/\/blazeeboy.wordpress.com",
 	
-	"perm":"$CI->vunsy->user->is_root()",
+	"perm":"",
 	"pages":{
 		"View Sections":"view"
 	},

@@ -4,7 +4,7 @@
 	"author":"Blaze Boy",
 	"website":"http:\/\/blazeeboy.wordpress.com",
 	
-	"perm":"$CI->vunsy->edit_mode()",
+	"perm":"",
 	"pages":{
 		"index":"chooser"
 		,"Data Editor":"data"
