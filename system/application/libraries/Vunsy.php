@@ -132,13 +132,12 @@ class Vunsy {
 		// loading objects;
 		$CI->config->load('objects');
 		$tables = $CI->config->item('objects');
-		$tables_keys = array_keys($tables);
 		
-		foreach( $tables_keys as $item )
+		foreach( $tables as $table=>$fields )
 		{
-				$CI->dbforge->add_field($tables[$item]);
-				$CI->dbforge->create_table($item);
-				$CI->db->query("ALTER TABLE `".$item."` ADD COLUMN `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`)");
+				$CI->dbforge->add_field('id');
+				$CI->dbforge->add_field($fields);
+				$CI->dbforge->create_table($table);
 		}
 	
 		$CI->load->library('datamapper');
