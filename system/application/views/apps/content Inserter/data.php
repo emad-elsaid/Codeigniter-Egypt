@@ -46,8 +46,6 @@ else
 }
 
 // determine the contetn type
-$explodedPath = explode( '/', $hidden['path'] );
-$hidden['type'] = $explodedPath[0];
 $form_ajax_url = $ci->app->app_url( 'addaction', true );
 if( $edit === FALSE )
 {
