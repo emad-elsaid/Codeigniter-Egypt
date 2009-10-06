@@ -939,7 +939,10 @@ EOT;
 		}
 		else if( is_string($attr) )
 		{
-			$attr .= " $key:$value;";
+			if( $replace )
+				$attr .= " $key:$value;";
+			else
+				$attr = " $key:$value;".$attr;
 		}
 		
 		return $attr;
