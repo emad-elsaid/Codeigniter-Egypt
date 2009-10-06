@@ -24,6 +24,7 @@ vunsy support the idea of applications on the website every application has a JS
 * Dojo+Dijit+Dojox Version 1.3.2
 * Jquery UI Version (1.7.2: for jQuery 1.3+)
 * KFM file browser Version 1.3
+* Tiny MCE editor plugin Version 3.2.7
 
 [The idea]
 ---
