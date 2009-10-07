@@ -85,7 +85,7 @@ EOT
 
 
 <div class="panel">
-<a href="<?=base_url()?>/kfm" class="iframe"  title="My Computer">
+<a href="<?=base_url()?>kfm/" class="iframe"  title="My Computer">
 	<img src="<?=$local?>kfm.png" /> My computer
 </a>
 <a href="<?=$url?>user manager" class="iframe" title="Users manager" >

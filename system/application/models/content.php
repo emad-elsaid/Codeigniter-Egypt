@@ -27,10 +27,10 @@ class Content extends DataMapper {
 	 * @param	$cell: the parent cell that will be the container of that object
 	 * @param	$sort: the order of object in the list of siblings in that cell starts from zero the top
 	 **/
-	function attach( $section='', $parent='', $cell='', $sort='')
+	function attach( $section=NULL, $parent=NULL, $cell=NULL, $sort=NULL)
 	{
 		// getting section object
-		if( $section=='' )
+		if( $section==NULL )
 		{
 			$section = new Section();
 			$section->get_by_id( $this->parent_section );
@@ -105,7 +105,8 @@ class Content extends DataMapper {
 	 * 
 	 * returns the edit button + the content HTML
 	 **/
-	function container( $text='' ){
+	function container( $text='' )
+	{
 		
 		
 		if( $this->ci->vunsy->edit_mode() AND $this->info!='PAGE_BODY_LOCKED' )
@@ -335,7 +336,7 @@ class Content extends DataMapper {
 	 * section
 	 * you must pass objects to the function
 	 ***************************************/
-	function children($section=NULL , $cell=NULL )
+	function children($section=NULL , $cell=NULL, $limit=0, $offset=0 )
 	{
 		// getting the section path to the main index page
 		if( ! is_null($section) )
@@ -364,9 +365,18 @@ class Content extends DataMapper {
 			(
 				(`parent_section`={$section->id})";
 				if( count($par_sec) >0 )
-					$sql_stat .= sprintf(" OR (`parent_section` IN (%s) AND `subsection`=%s)", implode(',',$par_sec), intval(TRUE));
+					$sql_stat .= sprintf(
+								" OR (`parent_section` IN (%s) AND `subsection`=%s)",
+								implode(',',$par_sec),
+								intval(TRUE)
+							);
 				$sql_stat .= ") ORDER BY `sort` ASC";
 		}
+		
+		//adding the limit and offset
+		if( $limit!=0)
+			$sql_stat .= " LIMIT $limit OFFSET $offset";
+		
 		// submit the query
 		$children = new Content();
 		$children->query($sql_stat);
