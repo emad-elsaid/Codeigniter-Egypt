@@ -790,7 +790,7 @@ add( <<<EOT
 				.bind('sortupdate', function(event, ui) {
 					x = Array();
 					$('.list:last').find('div').each(function(){
-					    x.push( $(this).text().trim() );
+					    x.push( $(this).text() );
 					});
 					x = x.join( "\\n" );
 					$(this).siblings('.filterBox').val(x);
@@ -843,7 +843,6 @@ function updateList(list)
 {
 	$(list).each(function(){
 		i = $(this).children('textarea').val();
-		i.trim();
 		if( i!="" )
 		{
 			i = i.split("\\n");
