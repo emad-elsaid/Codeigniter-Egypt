@@ -100,6 +100,9 @@ EOT
 <a href="<?=$url?>software manager" class="iframe"  title="Software manager">
 	<img src="<?=$local?>software.png" /> Software manager
 </a>
+<a href="<?=$url?>help" class="iframe"  title="Help and support">
+	<img src="<?=$local?>help.png" /> Help and support
+</a>
 
 <br />
 <?=$links_text?>

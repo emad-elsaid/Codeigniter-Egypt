@@ -1,0 +1,21 @@
+#titles li{
+	border: solid 1px gray;
+	padding: 2px;
+	background-color: #e7e7e7;
+	margin-left: 0px;
+	margin-bottom: 3px;
+	list-style: none;
+	display: block;
+	cursor: pointer;
+}
+#view .controls{
+	background-color: #d7e3e6;
+	padding: 3px;
+	margin-bottom: 5px;
+}
+
+#view > h1{
+	border-bottom: 1px solid black;
+	padding-bottom: 5px;
+	font-family: Times;
+}

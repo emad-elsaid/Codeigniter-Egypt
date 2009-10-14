@@ -1,0 +1,13 @@
+{
+	"name":"Help and support",
+	"ver":"1.0",
+	"author":"Blaze Boy",
+	"website":"http:\/\/blazeeboy.wordpress.com",
+	
+	"pages":{
+		"Viewer":"viewer.php",
+		"Editor":"editor.php"
+	},
+	"index":"Viewer",
+	"show_title" : false
+}

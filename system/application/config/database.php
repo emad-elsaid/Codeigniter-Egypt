@@ -51,6 +51,18 @@ $db['default']['cachedir'] = "";
 $db['default']['char_set'] = "utf8";
 $db['default']['dbcollat'] = "utf8_general_ci";
 
+$db['help']['hostname'] = '';
+$db['help']['username'] = '';
+$db['help']['password'] = '';
+$db['help']['database'] = 'help.sqlite';
+$db['help']['dbdriver'] = 'sqlite';
+$db['help']['dbprefix'] = "";
+$db['help']['pconnect'] = FALSE;
+$db['help']['db_debug'] = TRUE;
+$db['help']['cache_on'] = FALSE;
+$db['help']['cachedir'] = "";
+$db['help']['char_set'] = "utf8";
+$db['help']['dbcollat'] = "utf8_general_ci";
 
 /* End of file database.php */
 /* Location: ./system/application/config/database.php */

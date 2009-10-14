@@ -143,7 +143,7 @@ class app {
 		$this->view_folder = 'apps/'.$name.'/';
 		
 		$u_temp = explode($name,current_url());
-		$this->url = $u_temp[0] .$name.'/';
+		$this->url = site_url( 'admin/app/'.$name).'/';
 		$this->ajax_url = site_url( 'admin/ajax/'.$name ).'/';
 		$this->ci_folder = APP.'views/apps/'.$name.'/';
 		$this->full_url = base_url().'system/application/views/apps/'.$name.'/';
