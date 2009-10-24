@@ -17,5 +17,9 @@ $lang['related_required']	= 'The %s relationship is required.';
 $lang['related_min_size']	= 'The %s relationship must be at least %s.';
 $lang['related_max_size']	= 'The %s relationship can not exceed %s.';
 
+$lang['dm_save_rel_failed']	= 'The %s relationship is not properly defined.';
+$lang['dm_save_rel_nothis']	= 'Unable to save the %s relationship: This object is not saved.';
+$lang['dm_save_rel_noobj']	= 'Unable to save the %s relationship: The related object was not saved.';
+
 /* End of file datamapper_lang.php */
 /* Location: ./application/language/english/datamapper_lang.php */

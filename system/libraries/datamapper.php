@@ -9,7 +9,7 @@
  * @category	Models
  * @author  	Simon Stenhouse, Phil DeJarnett
  * @link    	http://www.overzealous.com/dmz/
- * @version 	1.5.3 ($Rev: 250 $) (Based on DataMapper 1.6.0)
+ * @version 	1.5.4 ($Rev: 255 $) (Based on DataMapper 1.6.0)
  */
 
 // --------------------------------------------------------------------------
@@ -1657,7 +1657,7 @@ class DataMapper implements IteratorAggregate {
 	 * @access	public
 	 * @return	integer
 	 */
-	function count()
+	function count($exclude_ids = NULL)
 	{
 		// Check if related object
 		if ( ! empty($this->parent))
@@ -1694,6 +1694,9 @@ class DataMapper implements IteratorAggregate {
 				// All other cases
 				$this->db->where($other_model . '_id', $this->parent['id']);
 			}
+			if(!empty($exclude_ids)) {
+				$this->db->where_not_in($this_model . '_id', $exclude_ids);
+			}
 			$this->db->from($relationship_table);
 
 			// Return count
@@ -1702,6 +1705,9 @@ class DataMapper implements IteratorAggregate {
 		else
 		{
 			$this->db->from($this->table);
+			if(!empty($exclude_ids)) {
+				$this->db->where_not_in('id', $exclude_ids);
+			}
 
 			// Return count
 			return intval($this->db->count_all_results());
@@ -3771,11 +3777,9 @@ class DataMapper implements IteratorAggregate {
 				// Store parent data
 				$object->parent = array('model' => $rel_properties['other_field'], 'id' => $this->id);
 				
-				if( ! empty($ids)) {
-					$object->where_not_in('id', $ids);
-				}
+				// pass in IDs to exclude from the count 
 				
-				$count += $object->count();
+				$count += $object->count($ids);
 			}
 		}
 
