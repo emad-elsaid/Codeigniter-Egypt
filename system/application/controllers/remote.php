@@ -131,13 +131,15 @@ class Remote extends Controller {
 	{
 		if( ! perm_chck( 'edit' ) ) show_error("permission denied");
 		
+		$this->load->helper('directory');
+		
 		$root = '';
 		$_POST['dir'] = urldecode($_POST['dir']);
 
 		if( file_exists($root . $_POST['dir']) )
 		{
 			
-			$files = scandir($root . $_POST['dir']);
+			$files = directory_map($root . $_POST['dir'], TRUE );
 			natcasesort($files);
 			
 			if( count($files) > 2 )
@@ -186,7 +188,7 @@ class Remote extends Controller {
 
 		if( file_exists($root . $_POST['dir']) )
 		{
-			$files = scandir($root . $_POST['dir']);
+			$files = directory_map($root . $_POST['dir'], TRUE);
 			natcasesort($files);
 			if( count($files) > 2 )
 			{ /* The 2 accounts for . and .. */
