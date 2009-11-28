@@ -56,7 +56,7 @@ margin-right:10px;
 	<?php } ?>
 	
 	<?php if( $p->can_addin() ){ ?>
-		<div><a href="<?= $ci->app->app_url("index/{$ci->vunsy->section->id}/$parent/$cell/$sort" ) ?>" >
+		<div><a href="<?= $ci->app->app_url("index/{$sec}/$parent/$cell/$sort" ) ?>" >
 			<img src="<?=$img_url?>add before.png" >Add Before
 		</a></div>
 		
