@@ -439,7 +439,7 @@ EOT;
 				foreach( $sec->all as $item )
 				{
 					$op[ 's'.$item->id ] = $spacer.$item->name;
-					$op = array_merge( $op, rec_section( $item->id, $spacer.'&nbsp;' ) );
+					$op = array_merge( $op, rec_section( $item->id, $spacer.$spacer ) );
 				}
 				return $op;
 				
