@@ -142,7 +142,7 @@ class Remote extends Controller {
 			$files = directory_map($root . $_POST['dir'], TRUE );
 			natcasesort($files);
 			
-			if( count($files) > 2 )
+			if( count($files) > 0 )
 			{ /* The 2 accounts for . and .. */
 				echo "<ul class=\"jqueryFileTree\" style=\"display: none;\">";
 				// All dirs
@@ -160,9 +160,7 @@ class Remote extends Controller {
 				{
 					if( 
 							file_exists($root . $_POST['dir'] . $file) 
-							&& $file != '.' 
 							&& $file != 'index.html' 
-							&& $file != '..' 
 							&& !is_dir($root . $_POST['dir'] . $file)
 						) {
 							$ext = preg_replace('/^.*\./', '', $file);
@@ -182,7 +180,7 @@ class Remote extends Controller {
 	function dir()
 	{
 		if( ! perm_chck( 'edit' ) ) show_error("permission denied");
-		
+		$this->load->helper('directory');
 		$root = '';
 		$_POST['dir'] = urldecode($_POST['dir']);
 
@@ -190,15 +188,13 @@ class Remote extends Controller {
 		{
 			$files = directory_map($root . $_POST['dir'], TRUE);
 			natcasesort($files);
-			if( count($files) > 2 )
+			if( count($files) > 0 )
 			{ /* The 2 accounts for . and .. */
 				echo "<ul class=\"jqueryFileTree\" style=\"display: none;\">";
 				// All dirs
 				foreach( $files as $file )
 				{
 					if( 	file_exists($root . $_POST['dir'] . $file) 
-							&& $file != '.' 
-							&& $file != '..' 
 							&& is_dir($root . $_POST['dir'] . $file) 
 					){
 						echo "<li class=\"file ext_file\"><a href=\"#\" rel=\"" . htmlentities($_POST['dir'] . $file) . "/\">Choose " . htmlentities($file) . "</a></li>";
