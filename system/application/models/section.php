@@ -71,7 +71,7 @@ class Section extends DataMapper {
 				
 			// delete all children
 			$cont = new Content();
-			$cont->get_where_parent_section($this->id);
+			$cont->where( 'parent_section', $this->id)->get();
 			$cont->delete_all();
 			
 			// update all the sections sort after that section
