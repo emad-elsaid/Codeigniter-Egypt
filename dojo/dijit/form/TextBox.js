@@ -9,7 +9,7 @@ if(!dojo._hasResource["dijit.form.TextBox"]){
 dojo._hasResource["dijit.form.TextBox"]=true;
 dojo.provide("dijit.form.TextBox");
 dojo.require("dijit.form._FormWidget");
-dojo.declare("dijit.form.TextBox",dijit.form._FormValueWidget,{trim:false,uppercase:false,lowercase:false,propercase:false,maxLength:"",templateString:"<input class=\"dijit dijitReset dijitLeft\" dojoAttachPoint='textbox,focusNode'\n\tdojoAttachEvent='onmouseenter:_onMouse,onmouseleave:_onMouse'\n\tautocomplete=\"off\" type=\"${type}\" ${nameAttrSetting}\n\t/>\n",baseClass:"dijitTextBox",attributeMap:dojo.delegate(dijit.form._FormValueWidget.prototype.attributeMap,{maxLength:"focusNode"}),_getValueAttr:function(){
+dojo.declare("dijit.form.TextBox",dijit.form._FormValueWidget,{trim:false,uppercase:false,lowercase:false,propercase:false,maxLength:"",selectOnClick:false,templateString:dojo.cache("dijit.form","templates/TextBox.html","<input class=\"dijit dijitReset dijitLeft\" dojoAttachPoint='textbox,focusNode'\n\tdojoAttachEvent='onmouseenter:_onMouse,onmouseleave:_onMouse'\n\tautocomplete=\"off\" type=\"${type}\" ${nameAttrSetting}\n\t/>\n"),baseClass:"dijitTextBox",attributeMap:dojo.delegate(dijit.form._FormValueWidget.prototype.attributeMap,{maxLength:"focusNode"}),_getValueAttr:function(){
 return this.parse(this.attr("displayedValue"),this.constraints);
 },_setValueAttr:function(_1,_2,_3){
 var _4;
@@ -61,9 +61,9 @@ return;
 }
 }
 if(this.intermediateChanges){
-var _c=this;
+var _b=this;
 setTimeout(function(){
-_c._handleOnChange(_c.attr("value"),false);
+_b._handleOnChange(_b.attr("value"),false);
 },0);
 }
 this._refreshState();
@@ -78,29 +78,28 @@ this.connect(this.textbox,"onkeyup",this._onInput);
 this.connect(this.textbox,"onpaste",this._onInput);
 this.connect(this.textbox,"oncut",this._onInput);
 }
-this._layoutHack();
-},_blankValue:"",filter:function(_d){
-if(_d===null){
+},_blankValue:"",filter:function(_c){
+if(_c===null){
 return this._blankValue;
 }
-if(typeof _d!="string"){
-return _d;
+if(typeof _c!="string"){
+return _c;
 }
 if(this.trim){
-_d=dojo.trim(_d);
+_c=dojo.trim(_c);
 }
 if(this.uppercase){
-_d=_d.toUpperCase();
+_c=_c.toUpperCase();
 }
 if(this.lowercase){
-_d=_d.toLowerCase();
+_c=_c.toLowerCase();
 }
 if(this.propercase){
-_d=_d.replace(/[^\s]+/g,function(_e){
-return _e.substring(0,1).toUpperCase()+_e.substring(1);
+_c=_c.replace(/[^\s]+/g,function(_d){
+return _d.substring(0,1).toUpperCase()+_d.substring(1);
 });
 }
-return _d;
+return _c;
 },_setBlurValue:function(){
 this._setValueAttr(this.attr("value"),true);
 },_onBlur:function(e){
@@ -109,9 +108,31 @@ return;
 }
 this._setBlurValue();
 this.inherited(arguments);
-},_onFocus:function(e){
-if(this.disabled){
+if(this._selectOnClickHandle){
+this.disconnect(this._selectOnClickHandle);
+}
+if(this.selectOnClick&&dojo.isMoz){
+this.textbox.selectionStart=this.textbox.selectionEnd=undefined;
+}
+},_onFocus:function(by){
+if(this.disabled||this.readOnly){
 return;
+}
+if(this.selectOnClick&&by=="mouse"){
+this._selectOnClickHandle=this.connect(this.domNode,"onmouseup",function(){
+this.disconnect(this._selectOnClickHandle);
+var _e;
+if(dojo.isIE){
+var _f=dojo.doc.selection.createRange();
+var _10=_f.parentElement();
+_e=_10==this.textbox&&_f.text.length==0;
+}else{
+_e=this.textbox.selectionStart==this.textbox.selectionEnd;
+}
+if(_e){
+dijit.selectInputText(this.textbox);
+}
+});
 }
 this._refreshState();
 this.inherited(arguments);
@@ -129,20 +150,20 @@ _12=0;
 if(isNaN(_13)){
 _13=_11.value?_11.value.length:0;
 }
-_11.focus();
+dijit.focus(_11);
 if(_15["selection"]&&dojo.body()["createTextRange"]){
 if(_11.createTextRange){
 var _16=_11.createTextRange();
 with(_16){
 collapse(true);
+moveStart("character",-99999);
 moveStart("character",_12);
-moveEnd("character",_13);
+moveEnd("character",_13-_12);
 select();
 }
 }
 }else{
 if(_14["getSelection"]){
-var _17=_14.getSelection();
 if(_11.setSelectionRange){
 _11.setSelectionRange(_12,_13);
 }

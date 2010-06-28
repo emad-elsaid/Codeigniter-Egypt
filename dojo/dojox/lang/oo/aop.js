@@ -9,14 +9,13 @@ if(!dojo._hasResource["dojox.lang.oo.aop"]){
 dojo._hasResource["dojox.lang.oo.aop"]=true;
 dojo.provide("dojox.lang.oo.aop");
 dojo.require("dojox.lang.oo.Decorator");
-dojo.require("dojox.lang.oo.chain");
 dojo.require("dojox.lang.oo.general");
 (function(){
-var oo=dojox.lang.oo,md=oo.makeDecorator,_3=oo.aop;
-_3.before=oo.chain.before;
-_3.around=oo.general.wrap;
-_3.afterReturning=md(function(_4,_5,_6){
-return dojo.isFunction(_6)?function(){
+var oo=dojox.lang.oo,md=oo.makeDecorator,_1=oo.general,_2=oo.aop,_3=dojo.isFunction;
+_2.before=_1.before;
+_2.around=_1.wrap;
+_2.afterReturning=md(function(_4,_5,_6){
+return _3(_6)?function(){
 var _7=_6.apply(this,arguments);
 _5.call(this,_7);
 return _7;
@@ -24,8 +23,8 @@ return _7;
 _5.call(this);
 };
 });
-_3.afterThrowing=md(function(_8,_9,_a){
-return dojo.isFunction(_a)?function(){
+_2.afterThrowing=md(function(_8,_9,_a){
+return _3(_a)?function(){
 var _b;
 try{
 _b=_a.apply(this,arguments);
@@ -37,8 +36,8 @@ throw e;
 return _b;
 }:_a;
 });
-_3.after=md(function(_c,_d,_e){
-return dojo.isFunction(_e)?function(){
+_2.after=md(function(_c,_d,_e){
+return _3(_e)?function(){
 var _f;
 try{
 _f=_e.apply(this,arguments);
