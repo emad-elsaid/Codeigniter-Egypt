@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -11,14 +11,16 @@ dojo.provide("dijit.TitlePane");
 dojo.require("dojo.fx");
 dojo.require("dijit._Templated");
 dojo.require("dijit.layout.ContentPane");
-dojo.declare("dijit.TitlePane",[dijit.layout.ContentPane,dijit._Templated],{title:"",open:true,toggleable:true,tabIndex:"0",duration:dijit.defaultDuration,baseClass:"dijitTitlePane",templateString:dojo.cache("dijit","templates/TitlePane.html","<div class=\"${baseClass}\">\n\t<div dojoAttachEvent=\"onclick:_onTitleClick, onkeypress:_onTitleKey, onfocus:_handleFocus, onblur:_handleFocus, onmouseenter:_onTitleEnter, onmouseleave:_onTitleLeave\"\n\t\t\tclass=\"dijitTitlePaneTitle\" dojoAttachPoint=\"titleBarNode,focusNode\">\n\t\t<img src=\"${_blankGif}\" alt=\"\" dojoAttachPoint=\"arrowNode\" class=\"dijitArrowNode\" waiRole=\"presentation\"\n\t\t><span dojoAttachPoint=\"arrowNodeInner\" class=\"dijitArrowNodeInner\"></span\n\t\t><span dojoAttachPoint=\"titleNode\" class=\"dijitTitlePaneTextNode\"></span>\n\t</div>\n\t<div class=\"dijitTitlePaneContentOuter\" dojoAttachPoint=\"hideNode\" waiRole=\"presentation\">\n\t\t<div class=\"dijitReset\" dojoAttachPoint=\"wipeNode\" waiRole=\"presentation\">\n\t\t\t<div class=\"dijitTitlePaneContentInner\" dojoAttachPoint=\"containerNode\" waiRole=\"region\" tabindex=\"-1\" id=\"${id}_pane\">\n\t\t\t\t<!-- nested divs because wipeIn()/wipeOut() doesn't work right on node w/padding etc.  Put padding on inner div. -->\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n"),attributeMap:dojo.delegate(dijit.layout.ContentPane.prototype.attributeMap,{title:{node:"titleNode",type:"innerHTML"},tooltip:{node:"focusNode",type:"attribute",attribute:"title"},id:""}),postCreate:function(){
+dojo.require("dijit._CssStateMixin");
+dojo.declare("dijit.TitlePane",[dijit.layout.ContentPane,dijit._Templated,dijit._CssStateMixin],{title:"",open:true,toggleable:true,tabIndex:"0",duration:dijit.defaultDuration,baseClass:"dijitTitlePane",templateString:dojo.cache("dijit","templates/TitlePane.html","<div>\n\t<div dojoAttachEvent=\"onclick:_onTitleClick, onkeypress:_onTitleKey\"\n\t\t\tclass=\"dijitTitlePaneTitle\" dojoAttachPoint=\"titleBarNode\">\n\t\t<div class=\"dijitTitlePaneTitleFocus\" dojoAttachPoint=\"focusNode\">\n\t\t\t<img src=\"${_blankGif}\" alt=\"\" dojoAttachPoint=\"arrowNode\" class=\"dijitArrowNode\" waiRole=\"presentation\"\n\t\t\t/><span dojoAttachPoint=\"arrowNodeInner\" class=\"dijitArrowNodeInner\"></span\n\t\t\t><span dojoAttachPoint=\"titleNode\" class=\"dijitTitlePaneTextNode\"></span>\n\t\t</div>\n\t</div>\n\t<div class=\"dijitTitlePaneContentOuter\" dojoAttachPoint=\"hideNode\" waiRole=\"presentation\">\n\t\t<div class=\"dijitReset\" dojoAttachPoint=\"wipeNode\" waiRole=\"presentation\">\n\t\t\t<div class=\"dijitTitlePaneContentInner\" dojoAttachPoint=\"containerNode\" waiRole=\"region\" tabindex=\"-1\" id=\"${id}_pane\">\n\t\t\t\t<!-- nested divs because wipeIn()/wipeOut() doesn't work right on node w/padding etc.  Put padding on inner div. -->\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n"),attributeMap:dojo.delegate(dijit.layout.ContentPane.prototype.attributeMap,{title:{node:"titleNode",type:"innerHTML"},tooltip:{node:"focusNode",type:"attribute",attribute:"title"},id:""}),postCreate:function(){
 if(!this.open){
 this.hideNode.style.display=this.wipeNode.style.display="none";
 }
+if(this.toggleable){
+this._trackMouseState(this.titleBarNode,"dijitTitlePaneTitle");
+}
 this._setCss();
 dojo.setSelectable(this.titleNode,false);
-dijit.setWaiState(this.containerNode,"hidden",this.open?"false":"true");
-dijit.setWaiState(this.focusNode,"pressed",this.open?"true":"false");
 var _1=this.hideNode,_2=this.wipeNode;
 this._wipeIn=dojo.fx.wipeIn({node:this.wipeNode,duration:this.duration,beforeBegin:function(){
 _1.style.display="";
@@ -31,12 +33,16 @@ this.inherited(arguments);
 if(this.open!==_3){
 this.toggle();
 }
+dijit.setWaiState(this.containerNode,"hidden",this.open?"false":"true");
+dijit.setWaiState(this.focusNode,"pressed",this.open?"true":"false");
 },_setToggleableAttr:function(_4){
 this.toggleable=_4;
 dijit.setWaiRole(this.focusNode,_4?"button":"heading");
-dojo.attr(this.focusNode,"tabIndex",_4?this.tabIndex:"-1");
 if(_4){
 dijit.setWaiState(this.focusNode,"controls",this.id+"_pane");
+dojo.attr(this.focusNode,"tabIndex",this.tabIndex);
+}else{
+dojo.removeAttr(this.focusNode,"tabIndex");
 }
 this._setCss();
 },_setContentAttr:function(_5){
@@ -67,8 +73,6 @@ _7.play();
 this.hideNode.style.display=this.open?"":"none";
 }
 this.open=!this.open;
-dijit.setWaiState(this.containerNode,"hidden",this.open?"false":"true");
-dijit.setWaiState(this.focusNode,"pressed",this.open?"true":"false");
 if(this.open){
 this._onShow();
 }else{
@@ -95,22 +99,12 @@ this.containerNode.focus();
 e.preventDefault();
 }
 }
-},_onTitleEnter:function(){
-if(this.toggleable){
-dojo.addClass(this.focusNode,"dijitTitlePaneTitle-hover");
-}
-},_onTitleLeave:function(){
-if(this.toggleable){
-dojo.removeClass(this.focusNode,"dijitTitlePaneTitle-hover");
-}
 },_onTitleClick:function(){
 if(this.toggleable){
 this.toggle();
 }
-},_handleFocus:function(e){
-dojo.toggleClass(this.focusNode,this.baseClass+"Focused",e.type=="focus");
 },setTitle:function(_9){
-dojo.deprecated("dijit.TitlePane.setTitle() is deprecated.  Use attr('title', ...) instead.","","2.0");
-this.attr("title",_9);
+dojo.deprecated("dijit.TitlePane.setTitle() is deprecated.  Use set('title', ...) instead.","","2.0");
+this.set("title",_9);
 }});
 }

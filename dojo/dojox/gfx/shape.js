@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -38,13 +38,8 @@ if(!b){
 return null;
 }
 var m=this._getRealMatrix();
-var r=[];
-var g=dojox.gfx.matrix;
-r.push(g.multiplyPoint(m,b.x,b.y));
-r.push(g.multiplyPoint(m,b.x+b.width,b.y));
-r.push(g.multiplyPoint(m,b.x+b.width,b.y+b.height));
-r.push(g.multiplyPoint(m,b.x,b.y+b.height));
-return r;
+gm=dojox.gfx.matrix;
+return [gm.multiplyPoint(m,b.x,b.y),gm.multiplyPoint(m,b.x+b.width,b.y),gm.multiplyPoint(m,b.x+b.width,b.y+b.height),gm.multiplyPoint(m,b.x,b.y+b.height)];
 },getEventSource:function(){
 return this.rawNode;
 },setShape:function(_1){
@@ -142,6 +137,8 @@ dojo.disconnect(_f);
 dojo.extend(dojox.gfx.Shape,dojox.gfx.shape._eventsProcessing);
 dojox.gfx.shape.Container={_init:function(){
 this.children=[];
+},openBatch:function(){
+},closeBatch:function(){
 },add:function(_10){
 var _11=_10.getParent();
 if(_11){

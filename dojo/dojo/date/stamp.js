@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -23,12 +23,10 @@ _3[6]*=1000;
 }
 if(_2){
 _2=new Date(_2);
-dojo.map(["FullYear","Month","Date","Hours","Minutes","Seconds","Milliseconds"],function(_5){
+dojo.forEach(dojo.map(["FullYear","Month","Date","Hours","Minutes","Seconds","Milliseconds"],function(_5){
 return _2["get"+_5]();
-}).forEach(function(_6,_7){
-if(_3[_7]===undefined){
-_3[_7]=_6;
-}
+}),function(_6,_7){
+_3[_7]=_3[_7]||_6;
 });
 }
 _4=new Date(_3[0]||1970,_3[1]||0,_3[2]||1,_3[3]||0,_3[4]||0,_3[5]||0,_3[6]||0);

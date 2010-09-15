@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -37,9 +37,6 @@ _7=this.node=dojo.byId(this.node||_7);
 if(!this.id){
 this.id=["Setter",(_7)?_7.id||_7.tagName:"",_1++].join("_");
 }
-if(!(this.node||_7)){
-new Error(this.declaredClass+": no node provided to "+this.id);
-}
 },set:function(_8,_9){
 if(undefined!==_8){
 this.content=_8;
@@ -54,7 +51,7 @@ return this.node;
 },setContent:function(){
 var _a=this.node;
 if(!_a){
-console.error("setContent given no node");
+throw new Error(this.declaredClass+": setContent given no node");
 }
 try{
 _a=dojo.html._setNodeContent(_a,this.content);
@@ -117,7 +114,7 @@ this[key]=_f[key];
 },_parse:function(){
 var _11=this.node;
 try{
-this.parseResults=dojo.parser.parse(_11,true);
+this.parseResults=dojo.parser.parse({rootNode:_11,dir:this.dir,lang:this.lang});
 }
 catch(e){
 this._onError("Content",e,"Error parsing in _ContentSetter#"+this.id);

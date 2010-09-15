@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -12,7 +12,7 @@ dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
 dojo.require("dijit._Container");
 dojo.require("dijit.form.ToggleButton");
-dojo.requireLocalization("dijit","common",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ru,sk,sl,sv,th,tr,zh,zh-tw");
+dojo.requireLocalization("dijit","common",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ro,ru,sk,sl,sv,th,tr,zh,zh-tw");
 dojo.declare("dijit.layout.StackController",[dijit._Widget,dijit._Templated,dijit._Container],{templateString:"<span wairole='tablist' dojoAttachEvent='onkeypress' class='dijitStackController'></span>",containerId:"",buttonWidget:"dijit.layout._StackButton",postCreate:function(){
 dijit.setWaiRole(this.domNode,"tablist");
 this.pane2button={};
@@ -33,108 +33,104 @@ this.onRemoveChild(dijit.byId(_2));
 }
 this.inherited(arguments);
 },onAddChild:function(_3,_4){
-var _5=dojo.doc.createElement("span");
-this.domNode.appendChild(_5);
-var _6=dojo.getObject(this.buttonWidget);
-var _7=new _6({id:this.id+"_"+_3.id,label:_3.title,showLabel:_3.showTitle,iconClass:_3.iconClass,closeButton:_3.closable,title:_3.tooltip},_5);
-dijit.setWaiState(_7.focusNode,"selected","false");
-this.pane2handles[_3.id]=[this.connect(_3,"attr",function(_8,_9){
-if(arguments.length==2){
-var _a={title:"label",showTitle:"showLabel",iconClass:"iconClass",closable:"closeButton",tooltip:"title"}[_8];
-if(_a){
-_7.attr(_a,_9);
+var _5=dojo.getObject(this.buttonWidget);
+var _6=new _5({id:this.id+"_"+_3.id,label:_3.title,dir:_3.dir,lang:_3.lang,showLabel:_3.showTitle,iconClass:_3.iconClass,closeButton:_3.closable,title:_3.tooltip});
+dijit.setWaiState(_6.focusNode,"selected","false");
+this.pane2handles[_3.id]=[this.connect(_3,"set",function(_7,_8){
+var _9={title:"label",showTitle:"showLabel",iconClass:"iconClass",closable:"closeButton",tooltip:"title"}[_7];
+if(_9){
+_6.set(_9,_8);
 }
-}
-}),this.connect(_7,"onClick",dojo.hitch(this,"onButtonClick",_3)),this.connect(_7,"onClickCloseButton",dojo.hitch(this,"onCloseButtonClick",_3))];
-this.addChild(_7,_4);
-this.pane2button[_3.id]=_7;
-_3.controlButton=_7;
+}),this.connect(_6,"onClick",dojo.hitch(this,"onButtonClick",_3)),this.connect(_6,"onClickCloseButton",dojo.hitch(this,"onCloseButtonClick",_3))];
+this.addChild(_6,_4);
+this.pane2button[_3.id]=_6;
+_3.controlButton=_6;
 if(!this._currentChild){
-_7.focusNode.setAttribute("tabIndex","0");
-dijit.setWaiState(_7.focusNode,"selected","true");
+_6.focusNode.setAttribute("tabIndex","0");
+dijit.setWaiState(_6.focusNode,"selected","true");
 this._currentChild=_3;
 }
 if(!this.isLeftToRight()&&dojo.isIE&&this._rectifyRtlTabList){
 this._rectifyRtlTabList();
 }
-},onRemoveChild:function(_b){
-if(this._currentChild===_b){
+},onRemoveChild:function(_a){
+if(this._currentChild===_a){
 this._currentChild=null;
 }
-dojo.forEach(this.pane2handles[_b.id],this.disconnect,this);
-delete this.pane2handles[_b.id];
-var _c=this.pane2button[_b.id];
-if(_c){
-this.removeChild(_c);
-delete this.pane2button[_b.id];
-_c.destroy();
+dojo.forEach(this.pane2handles[_a.id],this.disconnect,this);
+delete this.pane2handles[_a.id];
+var _b=this.pane2button[_a.id];
+if(_b){
+this.removeChild(_b);
+delete this.pane2button[_a.id];
+_b.destroy();
 }
-delete _b.controlButton;
-},onSelectChild:function(_d){
-if(!_d){
+delete _a.controlButton;
+},onSelectChild:function(_c){
+if(!_c){
 return;
 }
 if(this._currentChild){
-var _e=this.pane2button[this._currentChild.id];
-_e.attr("checked",false);
-dijit.setWaiState(_e.focusNode,"selected","false");
-_e.focusNode.setAttribute("tabIndex","-1");
+var _d=this.pane2button[this._currentChild.id];
+_d.set("checked",false);
+dijit.setWaiState(_d.focusNode,"selected","false");
+_d.focusNode.setAttribute("tabIndex","-1");
 }
-var _f=this.pane2button[_d.id];
-_f.attr("checked",true);
-dijit.setWaiState(_f.focusNode,"selected","true");
-this._currentChild=_d;
-_f.focusNode.setAttribute("tabIndex","0");
-var _10=dijit.byId(this.containerId);
-dijit.setWaiState(_10.containerNode,"labelledby",_f.id);
-},onButtonClick:function(_11){
-var _12=dijit.byId(this.containerId);
-_12.selectChild(_11);
-},onCloseButtonClick:function(_13){
-var _14=dijit.byId(this.containerId);
-_14.closeChild(_13);
+var _e=this.pane2button[_c.id];
+_e.set("checked",true);
+dijit.setWaiState(_e.focusNode,"selected","true");
+this._currentChild=_c;
+_e.focusNode.setAttribute("tabIndex","0");
+var _f=dijit.byId(this.containerId);
+dijit.setWaiState(_f.containerNode,"labelledby",_e.id);
+},onButtonClick:function(_10){
+var _11=dijit.byId(this.containerId);
+_11.selectChild(_10);
+},onCloseButtonClick:function(_12){
+var _13=dijit.byId(this.containerId);
+_13.closeChild(_12);
 if(this._currentChild){
 var b=this.pane2button[this._currentChild.id];
 if(b){
 dijit.focus(b.focusNode||b.domNode);
 }
 }
-},adjacent:function(_15){
+},adjacent:function(_14){
 if(!this.isLeftToRight()&&(!this.tabPosition||/top|bottom/.test(this.tabPosition))){
-_15=!_15;
+_14=!_14;
 }
-var _16=this.getChildren();
-var _17=dojo.indexOf(_16,this.pane2button[this._currentChild.id]);
-var _18=_15?1:_16.length-1;
-return _16[(_17+_18)%_16.length];
+var _15=this.getChildren();
+var _16=dojo.indexOf(_15,this.pane2button[this._currentChild.id]);
+var _17=_14?1:_15.length-1;
+return _15[(_16+_17)%_15.length];
 },onkeypress:function(e){
 if(this.disabled||e.altKey){
 return;
 }
-var _19=null;
+var _18=null;
 if(e.ctrlKey||!e._djpage){
 var k=dojo.keys;
 switch(e.charOrCode){
 case k.LEFT_ARROW:
 case k.UP_ARROW:
 if(!e._djpage){
-_19=false;
+_18=false;
 }
 break;
 case k.PAGE_UP:
 if(e.ctrlKey){
-_19=false;
+_18=false;
 }
 break;
 case k.RIGHT_ARROW:
 case k.DOWN_ARROW:
 if(!e._djpage){
-_19=true;
+_18=true;
 }
 break;
 case k.PAGE_DOWN:
 if(e.ctrlKey){
-_19=true;
+_18=true;
 }
 break;
 case k.DELETE:
@@ -158,14 +154,14 @@ dojo.stopEvent(e);
 }
 }
 }
-if(_19!==null){
-this.adjacent(_19).onClick();
+if(_18!==null){
+this.adjacent(_18).onClick();
 dojo.stopEvent(e);
 }
 }
-},onContainerKeyPress:function(_1a){
-_1a.e._djpage=_1a.page;
-this.onkeypress(_1a.e);
+},onContainerKeyPress:function(_19){
+_19.e._djpage=_19.page;
+this.onkeypress(_19.e);
 }});
 dojo.declare("dijit.layout._StackButton",dijit.form.ToggleButton,{tabIndex:"-1",postCreate:function(evt){
 dijit.setWaiRole((this.focusNode||this.domNode),"tab");

@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -23,7 +23,7 @@ return this.data;
 },_create:function(_2,d,_3){
 this.remove(this[_2]);
 this[_2]=this.container.createEllipse(d).setStroke(_3).setFill(_3.fill);
-this.util.attr(this[_2],"drawingType","stencil");
+this._setNodeAtts(this[_2]);
 },render:function(){
 this.onBeforeRender(this);
 this.renderHit&&this._create("hit",this.data,this.style.currentHit);

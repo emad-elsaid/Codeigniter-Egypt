@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -26,6 +26,7 @@ this.yaxis=dojo.mixin(dojo.mixin({},_1),_5.yaxis);
 if(this.yaxis.labelFunc=="seriesLabels"){
 this.yaxis.labelFunc=dojo.hitch(this,"seriesLabels");
 }
+this._events=[];
 this.convertLabels(this.yaxis);
 this.convertLabels(this.xaxis);
 this.onSetItems={};
@@ -54,6 +55,9 @@ this.render();
 if(_5.store){
 this.setStore(_5.store,_5.query,_5.fieldName,_5.queryOptions);
 }
+},destroy:function(){
+dojo.forEach(this._events,dojo.disconnect);
+this.inherited(arguments);
 },setStore:function(_6,_7,_8,_9){
 this.firstRun=true;
 this.store=_6||this.store;
@@ -61,8 +65,8 @@ this.query=_7||this.query;
 this.fieldName=_8||this.fieldName;
 this.label=this.store.getLabelAttributes();
 this.queryOptions=_9||_9;
-dojo.connect(this.store,"onSet",this,"onSet");
-dojo.connect(this.store,"onError",this,"onError");
+dojo.forEach(this._events,dojo.disconnect);
+this._events=[dojo.connect(this.store,"onSet",this,"onSet"),dojo.connect(this.store,"onError",this,"onError")];
 this.fetch();
 },show:function(){
 if(!this.showing){

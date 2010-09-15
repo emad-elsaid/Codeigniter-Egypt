@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -10,7 +10,7 @@ dojo._hasResource["dijit.layout.ScrollingTabController"]=true;
 dojo.provide("dijit.layout.ScrollingTabController");
 dojo.require("dijit.layout.TabController");
 dojo.require("dijit.Menu");
-dojo.declare("dijit.layout.ScrollingTabController",dijit.layout.TabController,{templateString:dojo.cache("dijit.layout","templates/ScrollingTabController.html","<div class=\"dijitTabListContainer-${tabPosition}\" style=\"visibility:hidden\">\n\t<div dojoType=\"dijit.layout._ScrollingTabControllerButton\" buttonType=\"menuBtn\" buttonClass=\"tabStripMenuButton\"\n\t\t\ttabPosition=\"${tabPosition}\" dojoAttachPoint=\"_menuBtn\" showLabel=false>&darr;</div>\n\t<div dojoType=\"dijit.layout._ScrollingTabControllerButton\" buttonType=\"leftBtn\" buttonClass=\"tabStripSlideButtonLeft\"\n\t\t\ttabPosition=\"${tabPosition}\" dojoAttachPoint=\"_leftBtn\" dojoAttachEvent=\"onClick: doSlideLeft\" showLabel=false>&larr;</div>\n\t<div dojoType=\"dijit.layout._ScrollingTabControllerButton\" buttonType=\"rightBtn\" buttonClass=\"tabStripSlideButtonRight\"\n\t\t\ttabPosition=\"${tabPosition}\" dojoAttachPoint=\"_rightBtn\" dojoAttachEvent=\"onClick: doSlideRight\" showLabel=false>&rarr;</div>\n\t<div class='dijitTabListWrapper' dojoAttachPoint='tablistWrapper'>\n\t\t<div wairole='tablist' dojoAttachEvent='onkeypress:onkeypress'\n\t\t\t\tdojoAttachPoint='containerNode' class='nowrapTabStrip'>\n\t\t</div>\n\t</div>\n</div>\n"),useMenu:true,useSlider:true,tabStripClass:"",widgetsInTemplate:true,_minScroll:5,attributeMap:dojo.delegate(dijit._Widget.prototype.attributeMap,{"class":"containerNode"}),postCreate:function(){
+dojo.declare("dijit.layout.ScrollingTabController",dijit.layout.TabController,{templateString:dojo.cache("dijit.layout","templates/ScrollingTabController.html","<div class=\"dijitTabListContainer-${tabPosition}\" style=\"visibility:hidden\">\n\t<div dojoType=\"dijit.layout._ScrollingTabControllerButton\"\n\t\t\tclass=\"tabStripButton-${tabPosition}\"\n\t\t\tid=\"${id}_menuBtn\" iconClass=\"dijitTabStripMenuIcon\"\n\t\t\tdojoAttachPoint=\"_menuBtn\" showLabel=false>&#9660;</div>\n\t<div dojoType=\"dijit.layout._ScrollingTabControllerButton\"\n\t\t\tclass=\"tabStripButton-${tabPosition}\"\n\t\t\tid=\"${id}_leftBtn\" iconClass=\"dijitTabStripSlideLeftIcon\"\n\t\t\tdojoAttachPoint=\"_leftBtn\" dojoAttachEvent=\"onClick: doSlideLeft\" showLabel=false>&#9664;</div>\n\t<div dojoType=\"dijit.layout._ScrollingTabControllerButton\"\n\t\t\tclass=\"tabStripButton-${tabPosition}\"\n\t\t\tid=\"${id}_rightBtn\" iconClass=\"dijitTabStripSlideRightIcon\"\n\t\t\tdojoAttachPoint=\"_rightBtn\" dojoAttachEvent=\"onClick: doSlideRight\" showLabel=false>&#9654;</div>\n\t<div class='dijitTabListWrapper' dojoAttachPoint='tablistWrapper'>\n\t\t<div wairole='tablist' dojoAttachEvent='onkeypress:onkeypress'\n\t\t\t\tdojoAttachPoint='containerNode' class='nowrapTabStrip'></div>\n\t</div>\n</div>\n"),useMenu:true,useSlider:true,tabStripClass:"",widgetsInTemplate:true,_minScroll:5,attributeMap:dojo.delegate(dijit._Widget.prototype.attributeMap,{"class":"containerNode"}),postCreate:function(){
 this.inherited(arguments);
 var n=this.domNode;
 this.scrollNode=this.tablistWrapper;
@@ -29,18 +29,18 @@ this.inherited(arguments);
 var _3;
 if(this.useMenu){
 var _4=this.containerId;
-_3=new dijit.MenuItem({label:_1.title,onClick:dojo.hitch(this,function(){
+_3=new dijit.MenuItem({id:_1.id+"_stcMi",label:_1.title,dir:_1.dir,lang:_1.lang,onClick:dojo.hitch(this,function(){
 var _5=dijit.byId(_4);
 _5.selectChild(_1);
 })});
 this._menuChildren[_1.id]=_3;
 this._menu.addChild(_3,_2);
 }
-this.pane2handles[_1.id].push(this.connect(this.pane2button[_1.id],"attr",function(_6,_7){
+this.pane2handles[_1.id].push(this.connect(this.pane2button[_1.id],"set",function(_6,_7){
 if(this._postStartup){
-if(arguments.length==2&&_6=="label"){
+if(_6=="label"){
 if(_3){
-_3.attr(_6,_7);
+_3.set(_6,_7);
 }
 if(this._dim){
 this.resize(this._dim);
@@ -73,7 +73,7 @@ return false;
 }
 },this);
 if(this.useMenu){
-this._menu=new dijit.Menu({id:this.id+"_menu",targetNodeIds:[this._menuBtn.domNode],leftClickToOpen:true,refocus:false});
+this._menu=new dijit.Menu({id:this.id+"_menu",dir:this.dir,lang:this.lang,targetNodeIds:[this._menuBtn.domNode],leftClickToOpen:true,refocus:false});
 this._supportingWidgets.push(this._menu);
 }
 },_getTabsWidth:function(){
@@ -104,15 +104,19 @@ this._rightBtn.layoutAlign="right";
 this._menuBtn.layoutAlign=this.isLeftToRight()?"right":"left";
 dijit.layout.layoutChildren(this.domNode,this._contentBox,[this._menuBtn,this._leftBtn,this._rightBtn,{domNode:this.scrollNode,layoutAlign:"client"}]);
 if(this._selectedTab){
+if(this._anim&&this._anim.status()=="playing"){
+this._anim.stop();
+}
 var w=this.scrollNode,sl=this._convertToScrollLeft(this._getScrollForSelectedTab());
 w.scrollLeft=sl;
 }
 this._setButtonClass(this._getScroll());
+this._postResize=true;
 },_getScroll:function(){
-var sl=(this.isLeftToRight()||dojo.isIE<8||dojo.isQuirks||dojo.isWebKit)?this.scrollNode.scrollLeft:dojo.style(this.containerNode,"width")-dojo.style(this.scrollNode,"width")+(dojo.isIE==8?-1:1)*this.scrollNode.scrollLeft;
+var sl=(this.isLeftToRight()||dojo.isIE<8||(dojo.isIE&&dojo.isQuirks)||dojo.isWebKit)?this.scrollNode.scrollLeft:dojo.style(this.containerNode,"width")-dojo.style(this.scrollNode,"width")+(dojo.isIE==8?-1:1)*this.scrollNode.scrollLeft;
 return sl;
 },_convertToScrollLeft:function(val){
-if(this.isLeftToRight()||dojo.isIE<8||dojo.isQuirks||dojo.isWebKit){
+if(this.isLeftToRight()||dojo.isIE<8||(dojo.isIE&&dojo.isQuirks)||dojo.isWebKit){
 return val;
 }else{
 var _12=dojo.style(this.containerNode,"width")-dojo.style(this.scrollNode,"width");
@@ -124,7 +128,7 @@ if(!tab||!_13){
 return;
 }
 var _14=tab.domNode;
-if(_14!=this._selectedTab){
+if(this._postResize&&_14!=this._selectedTab){
 this._selectedTab=_14;
 var sl=this._getScroll();
 if(sl>_14.offsetLeft||sl+dojo.style(this.scrollNode,"width")<_14.offsetLeft+dojo.style(_14,"width")){
@@ -178,7 +182,7 @@ this.doSlide(1,this._getBtnNode(e));
 },doSlideLeft:function(e){
 this.doSlide(-1,this._getBtnNode(e));
 },doSlide:function(_22,_23){
-if(_23&&dojo.hasClass(_23,"dijitTabBtnDisabled")){
+if(_23&&dojo.hasClass(_23,"dijitTabDisabled")){
 return;
 }
 var _24=dojo.style(this.scrollNode,"width");
@@ -187,9 +191,9 @@ var to=this._getScroll()+d;
 this._setButtonClass(to);
 this.createSmoothScroll(to).play();
 },_setButtonClass:function(_25){
-var cls="dijitTabBtnDisabled",_26=this._getScrollBounds();
-dojo.toggleClass(this._leftBtn.domNode,cls,_25<=_26.min);
-dojo.toggleClass(this._rightBtn.domNode,cls,_25>=_26.max);
+var _26=this._getScrollBounds();
+this._leftBtn.set("disabled",_25<=_26.min);
+this._rightBtn.set("disabled",_25>=_26.max);
 }});
-dojo.declare("dijit.layout._ScrollingTabControllerButton",dijit.form.Button,{baseClass:"dijitTab",buttonType:"",buttonClass:"",tabPosition:"top",templateString:dojo.cache("dijit.layout","templates/_ScrollingTabControllerButton.html","<div id=\"${id}-${buttonType}\" class=\"tabStripButton dijitTab ${buttonClass} tabStripButton-${tabPosition}\"\n\t\tdojoAttachEvent=\"onclick:_onButtonClick,onmouseenter:_onMouse,onmouseleave:_onMouse,onmousedown:_onMouse\">\n\t<div role=\"presentation\" wairole=\"presentation\" class=\"dijitTabInnerDiv\" dojoattachpoint=\"innerDiv,focusNode\">\n\t\t<div role=\"presentation\" wairole=\"presentation\" class=\"dijitTabContent dijitButtonContents\" dojoattachpoint=\"tabContent\">\n\t\t\t<img src=\"${_blankGif}\"/>\n\t\t\t<span dojoAttachPoint=\"containerNode,titleNode\" class=\"dijitButtonText\"></span>\n\t\t</div>\n\t</div>\n</div>\n"),tabIndex:""});
+dojo.declare("dijit.layout._ScrollingTabControllerButton",dijit.form.Button,{baseClass:"dijitTab tabStripButton",templateString:dojo.cache("dijit.layout","templates/_ScrollingTabControllerButton.html","<div dojoAttachEvent=\"onclick:_onButtonClick\">\n\t<div waiRole=\"presentation\" class=\"dijitTabInnerDiv\" dojoattachpoint=\"innerDiv,focusNode\">\n\t\t<div waiRole=\"presentation\" class=\"dijitTabContent dijitButtonContents\" dojoattachpoint=\"tabContent\">\n\t\t\t<img waiRole=\"presentation\" alt=\"\" src=\"${_blankGif}\" class=\"dijitTabStripIcon\" dojoAttachPoint=\"iconNode\"/>\n\t\t\t<span dojoAttachPoint=\"containerNode,titleNode\" class=\"dijitButtonText\"></span>\n\t\t</div>\n\t</div>\n</div>\n"),tabIndex:"-1"});
 }

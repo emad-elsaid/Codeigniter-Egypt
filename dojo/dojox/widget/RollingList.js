@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -9,15 +9,16 @@ if(!dojo._hasResource["dojox.widget.RollingList"]){
 dojo._hasResource["dojox.widget.RollingList"]=true;
 dojo.provide("dojox.widget.RollingList");
 dojo.experimental("dojox.widget.RollingList");
+dojo.require("dojo.window");
 dojo.require("dijit.layout.ContentPane");
 dojo.require("dijit._Templated");
 dojo.require("dijit._Contained");
 dojo.require("dijit.layout._LayoutWidget");
 dojo.require("dijit.Menu");
-dojo.require("dojox.html.metrics");
 dojo.require("dijit.form.Button");
+dojo.require("dojox.html.metrics");
 dojo.require("dojo.i18n");
-dojo.requireLocalization("dijit","common",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ru,sk,sl,sv,th,tr,zh,zh-tw");
+dojo.requireLocalization("dijit","common",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ro,ru,sk,sl,sv,th,tr,zh,zh-tw");
 dojo.declare("dojox.widget._RollingListPane",[dijit.layout.ContentPane,dijit._Templated,dijit._Contained],{templateString:"<div class=\"dojoxRollingListPane\"><table><tbody><tr><td dojoAttachPoint=\"containerNode\"></td></tr></tbody></div>",parentWidget:null,parentPane:null,store:null,items:null,query:null,queryOptions:null,_focusByNode:true,minWidth:0,_setContentAndScroll:function(_1,_2){
 this._setContent(_1,_2);
 this.parentWidget.scrollIntoView(this);
@@ -275,7 +276,7 @@ catch(e){
 }
 window.setTimeout(function(){
 try{
-dijit.scrollIntoView(_28.focusNode);
+dojo.window.scrollIntoView(_28.focusNode);
 }
 catch(e){
 }
@@ -506,7 +507,7 @@ window.clearTimeout(this._scrollingTimeout);
 delete this._scrollingTimeout;
 this._scrollingTimeout=window.setTimeout(dojo.hitch(this,function(){
 if(_4f.domNode){
-dijit.scrollIntoView(_4f.domNode);
+dojo.window.scrollIntoView(_4f.domNode);
 }
 delete this._scrollingTimeout;
 return;
@@ -633,7 +634,7 @@ fx();
 }
 }else{
 if(idx===0){
-this.attr("value",null);
+this.set("value",null);
 }
 }
 });
@@ -809,12 +810,12 @@ return;
 }
 }
 },_resetValue:function(){
-this.attr("value",this._lastExecutedValue);
+this.set("value",this._lastExecutedValue);
 },_onCancel:function(){
 this._resetValue();
 this.onCancel();
 },_onExecute:function(){
-this._lastExecutedValue=this.attr("value");
+this._lastExecutedValue=this.get("value");
 this.onExecute();
 },focus:function(){
 var _79=this._savedFocus;
@@ -865,9 +866,9 @@ this.connect(dojo.global,"onresize","resize");
 this.connect(this,"addChild","_updateChildClasses");
 this.connect(this,"removeChild","_updateChildClasses");
 this._setStore(this.store);
-this.attr("showButtons",this.showButtons);
+this.set("showButtons",this.showButtons);
 this.inherited(arguments);
-this._lastExecutedValue=this.attr("value");
+this._lastExecutedValue=this.get("value");
 },getChildItems:function(_7d){
 var _7e,_7f=this.store;
 dojo.forEach(this.childrenAttrs,function(_80){

@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -38,7 +38,7 @@ d.forEach(["id","title","duration","waitForEvent"],function(a){
 q[a]=d.attr(n,a);
 });
 if(q.id){
-_9[id]=i;
+_9[q.id]=i;
 }
 if(!tt[r]&&!(tt[r]=d.getObject(r))){
 _a(r,q.trans=_8.transition);
@@ -135,12 +135,18 @@ _16.onManualChange(_14);
 }else{
 console.warn(_16.declaredClass," - Unsupported action \"",_14,"\".");
 }
+},resize:function(_17,_18){
+var b=this._domNodeContentBox={w:_17,h:_18};
+d.contentBox(this._domNode,b);
+d.forEach(this.panes,function(p){
+d.contentBox(p.node,b);
+});
 },onManualChange:function(){
 }});
-d.setObject(_1,function(_17){
+d.setObject(_1,function(_19){
 return new d._Animation({play:function(){
-d.style(_17.current.node,_3,_4);
-d.style(_17.next.node,_3,"");
+d.style(_19.current.node,_3,_4);
+d.style(_19.next.node,_3,"");
 this._fire("onEnd");
 }});
 });

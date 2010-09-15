@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -56,11 +56,11 @@ for(var nm in _8){
 this.registerTool(_8[nm].name);
 }
 var _9=dojox.drawing.getRegistered("tool");
-for(var nm in _9){
+for(nm in _9){
 this.registerTool(_9[nm].name);
 }
 var _a=dojox.drawing.getRegistered("plugin");
-for(var nm in _a){
+for(nm in _a){
 this.registerTool(_a[nm].name);
 }
 this._createCanvas();
@@ -68,17 +68,21 @@ this._createCanvas();
 this.canvas=new dojox.drawing.manager.Canvas({srcRefNode:this.domNode,util:this.util,mouse:this.mouse,callback:dojo.hitch(this,"onSurfaceReady")});
 this.initPlugins();
 },resize:function(_b){
-dojo.style(this.domNode,{width:_b.w+"px",height:_b.h+"px"});
+_b&&dojo.style(this.domNode,{width:_b.w+"px",height:_b.h+"px"});
 if(!this.canvas){
 this._createCanvas();
 }else{
+if(_b){
 this.canvas.resize(_b.w,_b.h);
+}
 }
 },startup:function(){
 },getShapeProps:function(_c,_d){
-return dojo.mixin({container:this.mode=="ui"||_d=="ui"?this.canvas.overlay.createGroup():this.canvas.surface.createGroup(),util:this.util,keys:this.keys,mouse:this.mouse,drawing:this,drawingType:this.mode=="ui"||_d=="ui"?"ui":"stencil",style:this.defaults.copy()},_c||{});
-},addPlugin:function(_e){
-this.plugins.push(_e);
+var _e=_c.stencilType;
+var ui=this.mode=="ui"||_d=="ui";
+return dojo.mixin({container:ui&&!_e?this.canvas.overlay.createGroup():this.canvas.surface.createGroup(),util:this.util,keys:this.keys,mouse:this.mouse,drawing:this,drawingType:ui&&!_e?"ui":"stencil",style:this.defaults.copy()},_c||{});
+},addPlugin:function(_f){
+this.plugins.push(_f);
 if(this.canvas.surfaceReady){
 this.initPlugins();
 }
@@ -91,10 +95,10 @@ this.initPlugins();
 return;
 }
 dojo.forEach(this.plugins,function(p,i){
-var _f=dojo.mixin({util:this.util,keys:this.keys,mouse:this.mouse,drawing:this,stencils:this.stencils,anchors:this.anchors,canvas:this.canvas},p.options||{});
+var _10=dojo.mixin({util:this.util,keys:this.keys,mouse:this.mouse,drawing:this,stencils:this.stencils,anchors:this.anchors,canvas:this.canvas},p.options||{});
 this.registerTool(p.name,dojo.getObject(p.name));
 try{
-this.plugins[i]=new this.tools[p.name](_f);
+this.plugins[i]=new this.tools[p.name](_10);
 }
 catch(e){
 console.error("Failed to initilaize plugin:\t"+p.name+". Did you require it?");
@@ -125,96 +129,105 @@ throw new Error("Attempted to install the Silverlight plugin, but it was not fou
 dojo.forEach(this.plugins,function(p){
 p.onSurfaceReady&&p.onSurfaceReady();
 });
-},addUI:function(_10,_11){
+},addUI:function(_11,_12){
 if(!this.ready){
 var c=dojo.connect(this,"onSurfaceReady",this,function(){
 dojo.disconnect(c);
-this.addUI(_10,_11);
+this.addUI(_11,_12);
 });
 return false;
 }
-if(_11&&!_11.data&&!_11.points){
-_11={data:_11};
+if(_12&&!_12.data&&!_12.points){
+_12={data:_12};
 }
-if(!this.stencilTypes[_10]){
-if(_10!="tooltip"){
-console.warn("Not registered:",_10);
+if(!this.stencilTypes[_11]){
+if(_11!="tooltip"){
+console.warn("Not registered:",_11);
 }
 return null;
 }
-var s=this.uiStencils.register(new this.stencilTypes[_10](this.getShapeProps(_11,"ui")));
+var s=this.uiStencils.register(new this.stencilTypes[_11](this.getShapeProps(_12,"ui")));
 return s;
-},addStencil:function(_12,_13){
+},addStencil:function(_13,_14){
 if(!this.ready){
 var c=dojo.connect(this,"onSurfaceReady",this,function(){
 dojo.disconnect(c);
-this.addStencil(_12,_13);
+this.addStencil(_13,_14);
 });
 return false;
 }
-if(_13&&!_13.data&&!_13.points){
-_13={data:_13};
+if(_14&&!_14.data&&!_14.points){
+_14={data:_14};
 }
-var s=this.stencils.register(new this.stencilTypes[_12](this.getShapeProps(_13)));
+var s=this.stencils.register(new this.stencilTypes[_13](this.getShapeProps(_14)));
 this.currentStencil&&this.currentStencil.moveToFront();
 return s;
-},removeStencil:function(_14){
-this.stencils.unregister(_14);
-_14.destroy();
+},removeStencil:function(_15){
+this.stencils.unregister(_15);
+_15.destroy();
 },removeAll:function(){
 this.stencils.removeAll();
 },selectAll:function(){
 this.stencils.selectAll();
-},toSelected:function(_15){
+},toSelected:function(_16){
 this.stencils.toSelected.apply(this.stencils,arguments);
 },exporter:function(){
 return this.stencils.exporter();
-},importer:function(_16){
-dojo.forEach(_16,function(m){
+},importer:function(_17){
+dojo.forEach(_17,function(m){
 this.addStencil(m.type,m);
 },this);
-},changeDefaults:function(_17){
-for(var nm in _17){
-for(var n in _17[nm]){
-this.defaults[nm][n]=_17[nm][n];
+},changeDefaults:function(_18){
+for(var nm in _18){
+for(var n in _18[nm]){
+this.defaults[nm][n]=_18[nm][n];
 }
 }
 this.unSetTool();
 this.setTool(this.currentType);
-},onRenderStencil:function(_18){
-this.stencils.register(_18);
+},onRenderStencil:function(_19){
+this.stencils.register(_19);
 this.unSetTool();
+if(!this.defaults.clickMode){
 this.setTool(this.currentType);
-},onDeleteStencil:function(_19){
-this.stencils.unregister(_19);
-},registerTool:function(_1a){
-if(this.tools[_1a]){
+}else{
+if(this.defaults.clickMode){
+this.defaults.clickable=true;
+}
+}
+},onDeleteStencil:function(_1a){
+this.stencils.unregister(_1a);
+},registerTool:function(_1b){
+if(this.tools[_1b]){
 return;
 }
-var _1b=dojo.getObject(_1a);
-this.tools[_1a]=_1b;
-var _1c=this.util.abbr(_1a);
-this.stencilTypes[_1c]=_1b;
-this.stencilTypeMap[_1c]=_1a;
-},getConstructor:function(_1d){
-return this.stencilTypes[_1d];
-},setTool:function(_1e){
+var _1c=dojo.getObject(_1b);
+this.tools[_1b]=_1c;
+var _1d=this.util.abbr(_1b);
+this.stencilTypes[_1d]=_1c;
+this.stencilTypeMap[_1d]=_1b;
+},getConstructor:function(_1e){
+return this.stencilTypes[_1e];
+},setTool:function(_1f){
 if(this.mode=="ui"){
 return;
 }
 if(!this.canvas||!this.canvas.surface){
 var c=dojo.connect(this,"onSurfaceReady",this,function(){
 dojo.disconnect(c);
-this.setTool(_1e);
+this.setTool(_1f);
 });
 return;
 }
 if(this.currentStencil){
 this.unSetTool();
 }
-this.currentType=this.tools[_1e]?_1e:this.stencilTypeMap[_1e];
+this.currentType=this.tools[_1f]?_1f:this.stencilTypeMap[_1f];
 try{
 this.currentStencil=new this.tools[this.currentType]({container:this.canvas.surface.createGroup(),util:this.util,mouse:this.mouse,keys:this.keys});
+if(this.defaults.clickMode){
+this.defaults.clickable=false;
+}
 this.currentStencil.connect(this.currentStencil,"onRender",this,"onRenderStencil");
 this.currentStencil.connect(this.currentStencil,"destroy",this,"onDeleteStencil");
 }

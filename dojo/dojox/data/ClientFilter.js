@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -32,7 +32,7 @@ var _8=this._updates[i].create;
 var _9=this._updates[i].remove;
 if(_9){
 for(var j=0;j<_6.length;j++){
-if(_6[j]==_9){
+if(this.getIdentity(_6[j])==this.getIdentity(_9)){
 _6.splice(j--,1);
 var _a=true;
 }

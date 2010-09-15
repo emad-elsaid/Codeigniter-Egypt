@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -17,7 +17,7 @@ this.editor.onLoadDeferred.addCallback(dojo.hitch(this,function(){
 var _1=this.editor.editorObject.contentWindow.document.documentElement;
 _1=_1.getElementsByTagName("body")[0];
 var _2=dojo.getComputedStyle(_1).direction=="ltr";
-this.button.attr("checked",!_2);
+this.button.set("checked",!_2);
 this.connect(this.button,"onChange","_setRtl");
 }));
 },updateState:function(){

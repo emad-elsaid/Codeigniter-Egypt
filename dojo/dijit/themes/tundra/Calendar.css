@@ -19,7 +19,7 @@
 .tundra .dijitCalendarIncrease {
 	background-position: -30px top;
 }
-.tundra table.dijitCalendarContainer {
+.tundra .dijitCalendarContainer {
 	font-size: 100%;
 	border-spacing: 0;
 	border-collapse: separate;
@@ -69,24 +69,11 @@
 .tundra .dijitCalendarNextMonth 		{
 	
 	color:#999999;
-	background-color:#f8f8f8 !important;
-}
-.tundra .dijitCalendarPreviousMonthDisabled,
-.tundra .dijitCalendarNextMonthDisabled	{
-	
-	background-color:#a4a5a6 !important;
+	background-color:#f8f8f8;
 }
 .tundra .dijitCalendarCurrentMonth {
 	
-	background-color:white !important;
-}
-.tundra .dijitCalendarCurrentMonthDisabled {
-	
-	background-color:#bbbbbc !important;
-}
-.tundra .dijitCalendarDisabledDate {
-	cursor:default !important;
-	text-decoration:line-through !important;
+	background-color: white;
 }
 .tundra .dijitCalendarCurrentDate {
 	
@@ -94,7 +81,11 @@
 	font-weight:bold;
 }
 .tundra .dijitCalendarHoveredDate {
-	background-color: #e2ebf2 !important;
+	background-color: #e2ebf2;
+}
+.tundra .dijitCalendarDisabledDate {
+	text-decoration: line-through;
+	background-color: white;	
 }
 .tundra .dijitCalendarSelectedDate {
 	

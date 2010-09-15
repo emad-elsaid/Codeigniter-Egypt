@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -9,7 +9,7 @@ if(!dojo._hasResource["dojox.form.BusyButton"]){
 dojo._hasResource["dojox.form.BusyButton"]=true;
 dojo.provide("dojox.form.BusyButton");
 dojo.require("dijit.form.Button");
-dojo.requireLocalization("dijit","loading",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ru,sk,sl,sv,th,tr,zh,zh-tw");
+dojo.requireLocalization("dijit","loading",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ro,ru,sk,sl,sv,th,tr,zh,zh-tw");
 dojo.declare("dojox.form._BusyButtonMixin",null,{isBusy:false,busyLabel:"",timeout:null,useIcon:true,postMixInProperties:function(){
 this.inherited(arguments);
 if(!this.busyLabel){
@@ -24,10 +24,10 @@ this.makeBusy();
 }
 },makeBusy:function(){
 this.isBusy=true;
-this.attr("disabled",true);
+this.set("disabled",true);
 this.setLabel(this.busyLabel,this.timeout);
 },cancel:function(){
-this.attr("disabled",false);
+this.set("disabled",false);
 this.isBusy=false;
 this.setLabel(this._label);
 if(this._timeout){

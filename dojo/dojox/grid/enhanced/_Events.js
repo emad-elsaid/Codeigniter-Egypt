@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -18,7 +18,7 @@ this.p=this._events.p;
 _1.mixin(_1,this);
 },onStyleRow:function(_2){
 var i=_2;
-i.customClasses+=(i.odd?" dojoxGridRowOdd":"")+(i.selected?" dojoxGridRowSelected":"")+(i.over&&!this.isDndSelectEnable?" dojoxGridRowOver":"");
+i.customClasses+=(i.odd?" dojoxGridRowOdd":"")+(i.selected?" dojoxGridRowSelected":"")+(i.over?" dojoxGridRowOver":"");
 this.focus.styleRow(_2);
 this.edit.styleRow(_2);
 },dokeyup:function(e){
@@ -293,7 +293,7 @@ this.select.drugSelectRow(e.rowIndex);
 !this.edit.isEditing()&&this.menus&&this.showRowCellMenu(e);
 },onSelectedRegionContextMenu:function(e){
 if(this.selectedRegionMenu){
-this.selectedRegionMenu._openMyself(e);
+this.selectedRegionMenu._openMyself({target:e.target,coords:"pageX" in e?{x:e.pageX,y:e.pageY}:null});
 dojo.stopEvent(e);
 }
 },onHeaderCellMouseOver:function(e){
@@ -357,10 +357,16 @@ dojo.removeClass(_12,this.headerCellActiveClass);
 e.selectChoice&&dojo.addClass(_12,this.selectRegionHoverClass);
 }
 },onHeaderCellClick:function(e){
-if(this.indirectSelection&&e.cell&&e.cell.isRowSelector){
-return;
+if(this.nestedSorting){
+if((e.unarySortChoice||e.nestedSortChoice)&&!this._inResize(e.sourceView)){
+this.setSortIndex(e.cell.index,null,e);
 }
-dojo.hitch(this,this._events.onHeaderCellClick)(e);
+}else{
+if(!(this.indirectSelection&&e.cell&&e.cell.isRowSelector)){
+this.setSortIndex(e.cell.index);
+}
+}
+dojo.hitch(this,this._events.onHeaderClick)(e);
 },onHeaderContextMenu:function(e){
 if(this.nestedSorting&&this.headerMenu){
 this._toggleHighlight(e.sourceView,e,true);

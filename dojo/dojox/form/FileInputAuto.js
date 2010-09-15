@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -10,7 +10,9 @@ dojo._hasResource["dojox.form.FileInputAuto"]=true;
 dojo.provide("dojox.form.FileInputAuto");
 dojo.require("dojox.form.FileInput");
 dojo.require("dojo.io.iframe");
-dojo.declare("dojox.form.FileInputAuto",dojox.form.FileInput,{url:"",blurDelay:2000,duration:500,uploadMessage:"Uploading ...",triggerEvent:"onblur",_sent:false,templateString:dojo.cache("dojox.form","resources/FileInputAuto.html","<div class=\"dijitFileInput\">\n\t<input id=\"${id}\" name=\"${name}\" class=\"dijitFileInputReal\" type=\"file\" dojoAttachPoint=\"fileInput\" />\n\t<div class=\"dijitFakeInput\" dojoAttachPoint=\"fakeNodeHolder\">\n\t\t<input class=\"dijitFileInputVisible\" type=\"text\" dojoAttachPoint=\"focusNode, inputNode\" />\n\t\t<div class=\"dijitInline dijitFileInputText\" dojoAttachPoint=\"titleNode\">${label}</div>\n\t\t<div class=\"dijitInline dijitFileInputButton\" dojoAttachPoint=\"cancelNode\" dojoAttachEvent=\"onclick:reset\">${cancelText}</div>\n\t</div>\n\t<div class=\"dijitProgressOverlay\" dojoAttachPoint=\"overlay\">&nbsp;</div>\n</div>\n"),startup:function(){
+dojo.declare("dojox.form.FileInputAuto",dojox.form.FileInput,{url:"",blurDelay:2000,duration:500,uploadMessage:"Uploading ...",triggerEvent:"onblur",_sent:false,templateString:dojo.cache("dojox.form","resources/FileInputAuto.html","<div class=\"dijitFileInput\">\n\t<input id=\"${id}\" name=\"${name}\" class=\"dijitFileInputReal\" type=\"file\" dojoAttachPoint=\"fileInput\" />\n\t<div class=\"dijitFakeInput\" dojoAttachPoint=\"fakeNodeHolder\">\n\t\t<input class=\"dijitFileInputVisible\" type=\"text\" dojoAttachPoint=\"focusNode, inputNode\" />\n\t\t<div class=\"dijitInline dijitFileInputText\" dojoAttachPoint=\"titleNode\">${label}</div>\n\t\t<div class=\"dijitInline dijitFileInputButton\" dojoAttachPoint=\"cancelNode\" dojoAttachEvent=\"onclick:reset\">${cancelText}</div>\n\t</div>\n\t<div class=\"dijitProgressOverlay\" dojoAttachPoint=\"overlay\">&nbsp;</div>\n</div>\n"),onBeforeSend:function(){
+return {};
+},startup:function(){
 this._blurListener=this.connect(this.fileInput,this.triggerEvent,"_onBlur");
 this._focusListener=this.connect(this.fileInput,"onfocus","_onFocus");
 this.inherited(arguments);
@@ -47,7 +49,7 @@ _2.setAttribute("enctype","multipart/form-data");
 }
 _2.appendChild(this.fileInput);
 dojo.body().appendChild(_2);
-dojo.io.iframe.send({url:this.url,form:_2,handleAs:"json",handle:dojo.hitch(this,"_handleSend")});
+dojo.io.iframe.send({url:this.url,form:_2,handleAs:"json",handle:dojo.hitch(this,"_handleSend"),content:this.onBeforeSend()});
 },_handleSend:function(_3,_4){
 this.overlay.removeChild(this.overlay.firstChild);
 this._sent=true;

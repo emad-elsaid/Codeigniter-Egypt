@@ -74,23 +74,11 @@
 	background-color:#f5f5f5 !important;
 	border:#f5f5f5 solid 1px !important;
 }
-.nihilo .dijitCalendarPreviousMonthDisabled,
-.nihilo .dijitCalendarNextMonthDisabled	{
-	
-	background-color:#a4a5a6 !important;
-}
 .nihilo .dijitCalendarCurrentMonth {
 	
 }
-.nihilo .dijitCalendarCurrentMonthDisabled {
-	
-	background-color:#bbbbbc !important;
-}
 .nihilo .dijitCalendarDisabledDate {
-	
-	
 	text-decoration:line-through !important;
-	cursor:default !important;
 }
 .nihilo .dijitCalendarCurrentDate {
 	

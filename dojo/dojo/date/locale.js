@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -13,7 +13,7 @@ dojo.require("dojo.cldr.supplemental");
 dojo.require("dojo.regexp");
 dojo.require("dojo.string");
 dojo.require("dojo.i18n");
-dojo.requireLocalization("dojo.cldr","gregorian",null,"ROOT,ar,ca,cs,da,de,el,en,en-au,en-ca,en-gb,es,es-es,fi,fr,he,hu,it,it-it,ja,ko,ko-kr,nb,nl,pl,pt,pt-br,pt-pt,ru,sk,sl,sv,th,tr,zh,zh-cn,zh-tw");
+dojo.requireLocalization("dojo.cldr","gregorian",null,"ROOT,ar,ca,cs,da,de,el,en,en-au,en-ca,en-gb,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ru,sk,sl,sv,th,tr,zh,zh-tw");
 (function(){
 function _1(_2,_3,_4,_5){
 return _5.replace(/([a-z])\1*/ig,function(_6){
@@ -77,7 +77,7 @@ s=_3[_b][d];
 break;
 case "a":
 var _c=(_2.getHours()<12)?"am":"pm";
-s=_3[_c];
+s=_3["dayPeriods-format-wide-"+_c];
 break;
 case "h":
 case "H":
@@ -253,8 +253,7 @@ case "d":
 _2c[2]=v;
 break;
 case "a":
-var am=_26.am||_29.am;
-var pm=_26.pm||_29.pm;
+var am=_26.am||_29["dayPeriods-format-wide-am"],pm=_26.pm||_29["dayPeriods-format-wide-pm"];
 if(!_26.strict){
 var _35=/\./g;
 v=v.replace(_35,"").toLowerCase();
@@ -322,7 +321,7 @@ dojo.forEach(_40,function(_42,i){
 if(!_42){
 _40[i]="";
 }else{
-_40[i]=(_41?_3d:_3c)(_42);
+_40[i]=(_41?_3d:_3c)(_42.replace(/''/g,"'"));
 _41=!_41;
 }
 });
@@ -357,7 +356,7 @@ case "D":
 s=p2+"[1-9]|"+p3+"[1-9][0-9]|[12][0-9][0-9]|3[0-5][0-9]|36[0-6]";
 break;
 case "d":
-s="[12]\\d|"+p2+"[1-9]|3[01]";
+s="3[01]|[12]\\d|"+p2+"[1-9]";
 break;
 case "w":
 s=p2+"[1-9]|[1-4][0-9]|5[0-3]";
@@ -385,8 +384,7 @@ case "S":
 s="\\d{"+l+"}";
 break;
 case "a":
-var am=_45.am||_44.am||"AM";
-var pm=_45.pm||_44.pm||"PM";
+var am=_45.am||_44["dayPeriods-format-wide-am"],pm=_45.pm||_44["dayPeriods-format-wide-pm"];
 if(_45.strict){
 s=am+"|"+pm;
 }else{

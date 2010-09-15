@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -12,6 +12,7 @@ dojo.experimental("dojox.layout.ResizeHandle");
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
 dojo.require("dojo.fx");
+dojo.require("dojo.window");
 dojo.declare("dojox.layout.ResizeHandle",[dijit._Widget,dijit._Templated],{targetId:"",targetContainer:null,resizeAxis:"xy",activeResize:false,activeResizeClass:"dojoxResizeHandleClone",animateSizing:true,animateMethod:"chain",animateDuration:225,minHeight:100,minWidth:100,constrainMax:false,maxHeight:0,maxWidth:0,fixedAspect:false,intermediateChanges:false,startTopic:"/dojo/resize/start",endTopic:"/dojo/resize/stop",templateString:"<div dojoAttachPoint=\"resizeHandle\" class=\"dojoxResizeHandle\"><div></div></div>",postCreate:function(){
 this.connect(this.resizeHandle,"onmousedown","_beginSizing");
 if(!this.activeResize){
@@ -59,7 +60,7 @@ if(!this.targetDomNode){
 return false;
 }
 if(!this.activeResize){
-var c=dojo.coords(this.targetDomNode,true);
+var c=dojo.position(this.targetDomNode,true);
 this._resizeHelper.resize({l:c.x,t:c.y,w:c.w,h:c.h});
 this._resizeHelper.show();
 }
@@ -104,7 +105,7 @@ catch(e){
 return false;
 }
 this._activeResizeLastEvent=e;
-var dx=this.startPoint.x-e.clientX,dy=this.startPoint.y-e.clientY,_5=this.startSize.w-(this._resizeX?dx:0),_6=this.startSize.h-(this._resizeY?dy:0);
+var dx=(this.isLeftToRight()?this.startPoint.x-e.clientX:e.clientX-this.startPoint.x),dy=this.startPoint.y-e.clientY,_5=this.startSize.w-(this._resizeX?dx:0),_6=this.startSize.h-(this._resizeY?dy:0);
 return this._checkConstraints(_5,_6);
 },_checkConstraints:function(_7,_8){
 if(this.minSize){

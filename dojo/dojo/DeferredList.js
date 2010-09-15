@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -8,62 +8,51 @@
 if(!dojo._hasResource["dojo.DeferredList"]){
 dojo._hasResource["dojo.DeferredList"]=true;
 dojo.provide("dojo.DeferredList");
-dojo.declare("dojo.DeferredList",dojo.Deferred,{constructor:function(_1,_2,_3,_4,_5){
-this.list=_1;
-this.resultList=new Array(this.list.length);
-this.chain=[];
-this.id=this._nextId();
-this.fired=-1;
-this.paused=0;
-this.results=[null,null];
-this.canceller=_5;
-this.silentlyCancelled=false;
-if(this.list.length===0&&!_2){
-this.callback(this.resultList);
+dojo.DeferredList=function(_1,_2,_3,_4,_5){
+var _6=[];
+dojo.Deferred.call(this);
+var _7=this;
+if(_1.length===0&&!_2){
+this.resolve([0,[]]);
 }
-this.finishedCount=0;
-this.fireOnOneCallback=_2;
-this.fireOnOneErrback=_3;
-this.consumeErrors=_4;
-dojo.forEach(this.list,function(d,_6){
-d.addCallback(this,function(r){
-this._cbDeferred(_6,true,r);
-return r;
-});
-d.addErrback(this,function(r){
-this._cbDeferred(_6,false,r);
-return r;
-});
-},this);
-},_cbDeferred:function(_7,_8,_9){
-this.resultList[_7]=[_8,_9];
-this.finishedCount+=1;
-if(this.fired!==0){
-if(_8&&this.fireOnOneCallback){
-this.callback([_7,_9]);
+var _8=0;
+dojo.forEach(_1,function(_9,i){
+_9.then(function(_a){
+if(_2){
+_7.resolve([i,_a]);
 }else{
-if(!_8&&this.fireOnOneErrback){
-this.errback(_9);
+_b(true,_a);
+}
+},function(_c){
+if(_3){
+_7.reject(_c);
 }else{
-if(this.finishedCount==this.list.length){
-this.callback(this.resultList);
+_b(false,_c);
 }
+if(_4){
+return null;
 }
-}
-}
-if(!_8&&this.consumeErrors){
-_9=null;
-}
-return _9;
-},gatherResults:function(_a){
-var d=new dojo.DeferredList(_a,false,true,false);
-d.addCallback(function(_b){
-var _c=[];
-dojo.forEach(_b,function(_d){
-_c.push(_d[1]);
+throw _c;
 });
-return _c;
+function _b(_d,_e){
+_6[i]=[_d,_e];
+_8++;
+if(_8===_1.length){
+_7.resolve(_6);
+}
+};
+});
+};
+dojo.DeferredList.prototype=new dojo.Deferred();
+dojo.DeferredList.prototype.gatherResults=function(_f){
+var d=new dojo.DeferredList(_f,false,true,false);
+d.addCallback(function(_10){
+var ret=[];
+dojo.forEach(_10,function(_11){
+ret.push(_11[1]);
+});
+return ret;
 });
 return d;
-}});
+};
 }

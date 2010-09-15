@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -10,18 +10,16 @@ dojo._hasResource["dojox.grid.EnhancedGrid"]=true;
 dojo.provide("dojox.grid.EnhancedGrid");
 dojo.require("dojox.grid.DataGrid");
 dojo.require("dojox.grid.enhanced._Plugin");
-dojo.requireLocalization("dojox.grid.enhanced","EnhancedGrid",null,"ROOT,cs,de,es,fr,hu,it,ja,ko,pl,pt,ru,zh,zh-tw");
+dojo.requireLocalization("dojox.grid.enhanced","EnhancedGrid",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ro,ru,sk,sl,sv,th,tr,zh,zh-tw");
 dojo.experimental("dojox.grid.EnhancedGrid");
-dojo.declare("dojox.grid.EnhancedGrid",dojox.grid.DataGrid,{plugins:null,pluginMgr:null,doubleAffordance:false,postMixInProperties:function(){
+dojo.declare("dojox.grid.EnhancedGrid",dojox.grid.DataGrid,{plugins:null,pluginMgr:null,doubleAffordance:false,minRowHeight:10,keepSortSelection:false,rowSelectionChangedTopic:"ROW_SELECTION_CHANGED",sortRowSelectionChangedTopic:"SORT_ROW_SELECTION_CHANGED",rowMovedTopic:"ROW_MOVED",postMixInProperties:function(){
 this._nls=dojo.i18n.getLocalization("dojox.grid.enhanced","EnhancedGrid",this.lang);
 this.inherited(arguments);
 },postCreate:function(){
-if(this.plugins){
 this.pluginMgr=new dojox.grid.enhanced._Plugin(this);
 this.pluginMgr.preInit();
-}
 this.inherited(arguments);
-this.pluginMgr&&this.pluginMgr.postInit();
+this.pluginMgr.postInit();
 },_fillContent:function(){
 this.menuContainer=this.srcNodeRef;
 this.inherited(arguments);

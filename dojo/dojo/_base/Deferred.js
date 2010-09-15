@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -9,127 +9,122 @@ if(!dojo._hasResource["dojo._base.Deferred"]){
 dojo._hasResource["dojo._base.Deferred"]=true;
 dojo.provide("dojo._base.Deferred");
 dojo.require("dojo._base.lang");
-dojo.Deferred=function(_1){
-this.chain=[];
-this.id=this._nextId();
-this.fired=-1;
-this.paused=0;
-this.results=[null,null];
-this.canceller=_1;
-this.silentlyCancelled=false;
-this.isFiring=false;
+(function(){
+var _1=function(){
 };
-dojo.extend(dojo.Deferred,{_nextId:(function(){
-var n=1;
-return function(){
-return n++;
+var _2=Object.freeze||function(){
 };
-})(),cancel:function(){
-var _2;
-if(this.fired==-1){
-if(this.canceller){
-_2=this.canceller(this);
-}else{
-this.silentlyCancelled=true;
+dojo.Deferred=function(_3){
+var _4,_5,_6,_7,_8;
+var _9=this.promise={};
+function _a(_b){
+if(_5){
+throw new Error("This deferred has already been resolved");
 }
-if(this.fired==-1){
-if(!(_2 instanceof Error)){
-var _3=_2;
-var _4="Deferred Cancelled";
-if(_2&&_2.toString){
-_4+=": "+_2.toString();
+_4=_b;
+_5=true;
+_c();
+};
+function _c(){
+var _d;
+while(!_d&&_8){
+var _e=_8;
+_8=_8.next;
+if(_d=(_e.progress==_1)){
+_5=false;
 }
-_2=new Error(_4);
-_2.dojoType="cancel";
-_2.cancelResult=_3;
-}
-this.errback(_2);
-}
-}else{
-if((this.fired==0)&&(this.results[0] instanceof dojo.Deferred)){
-this.results[0].cancel();
-}
-}
-},_resback:function(_5){
-this.fired=((_5 instanceof Error)?1:0);
-this.results[this.fired]=_5;
-this._fire();
-},_check:function(){
-if(this.fired!=-1){
-if(!this.silentlyCancelled){
-throw new Error("already called!");
-}
-this.silentlyCancelled=false;
-return;
-}
-},callback:function(_6){
-this._check();
-this._resback(_6);
-},errback:function(_7){
-this._check();
-if(!(_7 instanceof Error)){
-_7=new Error(_7);
-}
-this._resback(_7);
-},addBoth:function(cb,_8){
-var _9=dojo.hitch.apply(dojo,arguments);
-return this.addCallbacks(_9,_9);
-},addCallback:function(cb,_a){
-return this.addCallbacks(dojo.hitch.apply(dojo,arguments));
-},addErrback:function(cb,_b){
-return this.addCallbacks(null,dojo.hitch.apply(dojo,arguments));
-},addCallbacks:function(cb,eb){
-this.chain.push([cb,eb]);
-if(this.fired>=0&&!this.isFiring){
-this._fire();
-}
-return this;
-},_fire:function(){
-this.isFiring=true;
-var _c=this.chain;
-var _d=this.fired;
-var _e=this.results[_d];
-var _f=this;
-var cb=null;
-while((_c.length>0)&&(this.paused==0)){
-var f=_c.shift()[_d];
-if(!f){
+var _f=(_6?_e.error:_e.resolved);
+if(_f){
+try{
+var _10=_f(_4);
+if(_10&&typeof _10.then==="function"){
+_10.then(dojo.hitch(_e.deferred,"resolve"),dojo.hitch(_e.deferred,"reject"));
 continue;
 }
-var _10=function(){
-var ret=f(_e);
-if(typeof ret!="undefined"){
-_e=ret;
+var _11=_d&&_10===undefined;
+_e.deferred[_11&&_6?"reject":"resolve"](_11?_4:_10);
 }
-_d=((_e instanceof Error)?1:0);
-if(_e instanceof dojo.Deferred){
-cb=function(res){
-_f._resback(res);
-_f.paused--;
-if((_f.paused==0)&&(_f.fired>=0)){
-_f._fire();
+catch(e){
+_e.deferred.reject(e);
 }
-};
-this.paused++;
-}
-};
-if(dojo.config.debugAtAllCosts){
-_10.call(this);
 }else{
-try{
-_10.call(this);
-}
-catch(err){
-_d=1;
-_e=err;
+if(_6){
+_e.deferred.reject(_4);
+}else{
+_e.deferred.resolve(_4);
 }
 }
 }
-this.fired=_d;
-this.results[_d]=_e;
-this.isFiring=false;
-if((cb)&&(this.paused)){
-_e.addBoth(cb);
+};
+this.resolve=this.callback=function(_12){
+this.fired=0;
+this.results=[_12,null];
+_a(_12);
+};
+this.reject=this.errback=function(_13){
+_6=true;
+this.fired=1;
+_a(_13);
+this.results=[null,_13];
+if(!_13||_13.log!==false){
+(dojo.config.deferredOnError||function(x){
+console.error(x);
+})(_13);
 }
-}});
+};
+this.progress=function(_14){
+var _15=_8;
+while(_15){
+var _16=_15.progress;
+_16&&_16(_14);
+_15=_15.next;
+}
+};
+this.addCallbacks=function(_17,_18){
+this.then(_17,_18,_1);
+return this;
+};
+this.then=_9.then=function(_19,_1a,_1b){
+var _1c=_1b==_1?this:new dojo.Deferred(_9.cancel);
+var _1d={resolved:_19,error:_1a,progress:_1b,deferred:_1c};
+if(_8){
+_7=_7.next=_1d;
+}else{
+_8=_7=_1d;
+}
+if(_5){
+_c();
+}
+return _1c.promise;
+};
+var _1e=this;
+this.cancel=_9.cancel=function(){
+if(!_5){
+var _1f=_3&&_3(_1e);
+if(!_5){
+if(!(_1f instanceof Error)){
+_1f=new Error(_1f);
+}
+_1f.log=false;
+_1e.reject(_1f);
+}
+}
+};
+_2(_9);
+};
+dojo.extend(dojo.Deferred,{addCallback:function(_20){
+return this.addCallbacks(dojo.hitch.apply(dojo,arguments));
+},addErrback:function(_21){
+return this.addCallbacks(null,dojo.hitch.apply(dojo,arguments));
+},addBoth:function(_22){
+var _23=dojo.hitch.apply(dojo,arguments);
+return this.addCallbacks(_23,_23);
+},fired:-1});
+})();
+dojo.when=function(_24,_25,_26,_27){
+if(_24&&typeof _24.then==="function"){
+return _24.then(_25,_26,_27);
+}
+return _25(_24);
+};
 }

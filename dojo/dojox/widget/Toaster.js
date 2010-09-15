@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -9,6 +9,7 @@ if(!dojo._hasResource["dojox.widget.Toaster"]){
 dojo._hasResource["dojox.widget.Toaster"]=true;
 dojo.provide("dojox.widget.Toaster");
 dojo.require("dojo.fx");
+dojo.require("dojo.window");
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
 dojo.declare("dojox.widget.Toaster",[dijit._Widget,dijit._Templated],{templateString:"<div class=\"dijitToasterClip\" dojoAttachPoint=\"clipNode\"><div class=\"dijitToasterContainer\" dojoAttachPoint=\"containerNode\" dojoAttachEvent=\"onclick:onSelect\"><div class=\"dijitToasterContent\" dojoAttachPoint=\"contentNode\"></div></div></div>",messageTopic:"",messageTypes:{MESSAGE:"message",WARNING:"warning",ERROR:"error",FATAL:"fatal"},defaultType:"message",positionDirection:"br-up",positionDirectionTypes:["br-up","br-left","bl-up","bl-right","tr-down","tr-left","tl-down","tl-right"],duration:2000,slideDuration:500,separator:"<hr></hr>",postCreate:function(){
@@ -124,7 +125,7 @@ this.fadeAnim.play();
 this._stickyMessage=true;
 }
 },_placeClip:function(){
-var _f=dijit.getViewport();
+var _f=dojo.window.getBox();
 var _10=dojo.marginBox(this.containerNode);
 var _11=this.clipNode.style;
 _11.height=_10.h+"px";

@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -20,7 +20,7 @@ var _4;
 switch(_3.nodeType){
 case 1:
 var _5=_3.nodeName.toLowerCase();
-if(_5.charAt(0)=="/"){
+if(!_5||_5.charAt(0)=="/"){
 return "";
 }
 _4="<"+_5;

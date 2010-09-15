@@ -123,6 +123,54 @@
 	}
 	
 	
+	.claro .dojoxExpandoTitle {
+		font-weight: bold;
+		border:1px solid #769DC0;
+		border-bottom:none;
+        background-color:#cde8ff;
+		background-image: url("../../../dijit/themes/claro/layout/images/accordion.png");
+        background-position:0px 0px;
+        background-repeat:repeat-x;
+		padding: 5px 7px 2px 7px;
+        min-height:17px;
+        color:#4a4a4a;
+	}
+		
+	.claro .dojoxExpandoClosed .dojoxExpandoTitle {
+		background: none;
+		background-color: #E6E6E7;
+		border: none;
+		padding:3px;
+	}
+	
+	.claro .dojoxExpandoClosed {
+		background: none;
+		background-color: #E6E6E7;
+		border: 1px solid #769DC0 !important;
+	}
+	.claro .dojoxExpandoRight .dojoxExpandoTitle,
+	.claro .dojoxExpandoLeft .dojoxExpandoTitle,
+	.claro .dojoxExpandoClosed .dojoxExpandoTitle{
+		background-color: #E6E6E7;
+	}
+	.claro .dojoxExpandoClosed .dojoxExpandoTitle{
+		background-image: url("../../../dijit/themes/claro/layout/images/accordion.png");
+		background-position:0 0;
+	}
+	
+	
+	.claro .dojoxExpandoIcon {
+		background-image: url('../../../dijit/themes/tundra/images/spriteRoundedIconsSmall.gif');
+	}
+	
+	.claro .dojoxExpandoClosed .dojoxExpandoIconLeft,
+	.claro .dojoxExpandoClosed .dojoxExpandoIconRight,
+	.claro .dojoxExpandoClosed .dojoxExpandoIconTop,
+	.claro .dojoxExpandoClosed .dojoxExpandoIconBottom {
+		margin-top: 3px;
+	}
+	
+	
 	.nihilo .dojoxExpandoPane {
 		background: #fafafa;
 	}

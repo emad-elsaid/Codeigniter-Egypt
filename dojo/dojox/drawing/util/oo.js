@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -46,7 +46,7 @@ for(var n in a[i].prototype){
 f.prototype[n]=a[i].prototype[n];
 }
 }
-for(var n in _2.prototype){
+for(n in _2.prototype){
 f.prototype[n]=_2.prototype[n];
 }
 return f;

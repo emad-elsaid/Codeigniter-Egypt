@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -14,21 +14,36 @@ dojo.require("dijit._editor._Plugin");
 dojo.require("dijit.form.ToggleButton");
 dojo.require("dijit.form.DropDownButton");
 dojo.require("dojox.editor.plugins._SmileyPalette");
-dojo.requireLocalization("dojox.editor.plugins","Smiley",null,"ROOT,cs,de,es,fr,hu,it,ja,ko,pl,pt,ru,zh,zh-tw");
-dojo.declare("dojox.editor.plugins.Smiley",dijit._editor._Plugin,{iconClassPrefix:"dijitAdditionalEditorIcon",_initButton:function(){
+dojo.requireLocalization("dojox.editor.plugins","Smiley",null,"ROOT,cs,de,es,fr,hu,it,ja,ko,pl,pt,ro,ru,zh,zh-tw");
+dojo.declare("dojox.editor.plugins.Smiley",dijit._editor._Plugin,{iconClassPrefix:"dijitAdditionalEditorIcon",emoticonMarker:"[]",emoticonImageClass:"dojoEditorEmoticon",_initButton:function(){
 this.dropDown=new dojox.editor.plugins._SmileyPalette();
 this.connect(this.dropDown,"onChange",function(_1){
 this.button.closeDropDown();
 this.editor.focus();
+_1=this.emoticonMarker.charAt(0)+_1+this.emoticonMarker.charAt(1);
 this.editor.execCommand("inserthtml",_1);
 });
-var _2=dojo.i18n.getLocalization("dojox.editor.plugins","Smiley");
-this.button=new dijit.form.DropDownButton({label:_2.smiley,showLabel:false,iconClass:this.iconClassPrefix+" "+this.iconClassPrefix+"Smiley",tabIndex:"-1",dropDown:this.dropDown});
-},setEditor:function(_3){
-this.editor=_3;
+this.i18n=dojo.i18n.getLocalization("dojox.editor.plugins","Smiley");
+this.button=new dijit.form.DropDownButton({label:this.i18n.smiley,showLabel:false,iconClass:this.iconClassPrefix+" "+this.iconClassPrefix+"Smiley",tabIndex:"-1",dropDown:this.dropDown});
+this.emoticonImageRegexp=new RegExp("class=(\"|')"+this.emoticonImageClass+"(\"|')");
+},setEditor:function(_2){
+this.editor=_2;
 this._initButton();
-},_preFilterEntities:function(s){
-},_postFilterEntities:function(s){
+this.editor.contentPreFilters.push(dojo.hitch(this,this._preFilterEntities));
+this.editor.contentPostFilters.push(dojo.hitch(this,this._postFilterEntities));
+},_preFilterEntities:function(_3){
+return _3.replace(/\[([^\]]*)\]/g,dojo.hitch(this,this._decode));
+},_postFilterEntities:function(_4){
+return _4.replace(/<img [^>]*>/gi,dojo.hitch(this,this._encode));
+},_decode:function(_5,_6){
+var _7=dojox.editor.plugins.Emoticon.fromAscii(_6);
+return _7?_7.imgHtml(this.emoticonImageClass):_6;
+},_encode:function(_8){
+if(_8.search(this.emoticonImageRegexp)>-1){
+return this.emoticonMarker.charAt(0)+_8.replace(/(<img [^>]*)alt="([^"]*)"([^>]*>)/,"$2")+this.emoticonMarker.charAt(1);
+}else{
+return _8;
+}
 }});
 dojo.subscribe(dijit._scopeName+".Editor.getPlugin",null,function(o){
 if(o.plugin){

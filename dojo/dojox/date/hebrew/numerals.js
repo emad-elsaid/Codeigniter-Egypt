@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -74,30 +74,27 @@ _c=0;
 return _d;
 };
 dojox.date.hebrew.numerals.getYearHebrewLetters=function(_e){
-var y=_e%1000;
-if(!y){
-throw new Error("Hebrew year "+_e+" is not in range 5001-5999");
-}
-return _4(_b(y));
+var _f=_e%1000;
+return _4(_b(_f));
 };
-dojox.date.hebrew.numerals.parseYearHebrewLetters=function(_f){
-return _8(_f)+5000;
+dojox.date.hebrew.numerals.parseYearHebrewLetters=function(_10){
+return _8(_10)+5000;
 };
-dojox.date.hebrew.numerals.getDayHebrewLetters=function(day,_10){
-return _4(_b(day),_10);
+dojox.date.hebrew.numerals.getDayHebrewLetters=function(day,_11){
+return _4(_b(day),_11);
 };
 dojox.date.hebrew.numerals.parseDayHebrewLetters=function(day){
 return _8(day);
 };
-dojox.date.hebrew.numerals.getMonthHebrewLetters=function(_11){
-return _4(_b(_11+1));
+dojox.date.hebrew.numerals.getMonthHebrewLetters=function(_12){
+return _4(_b(_12+1));
 };
-dojox.date.hebrew.numerals.parseMonthHebrewLetters=function(_12){
-var _13=dojox.date.hebrew.numerals.parseDayHebrewLetters(_12)-1;
-if(_13==-1||_13>12){
-throw new Error("The month name is incorrect , month = "+_13);
+dojox.date.hebrew.numerals.parseMonthHebrewLetters=function(_13){
+var _14=dojox.date.hebrew.numerals.parseDayHebrewLetters(_13)-1;
+if(_14==-1||_14>12){
+throw new Error("The month name is incorrect , month = "+_14);
 }
-return _13;
+return _14;
 };
 })();
 }

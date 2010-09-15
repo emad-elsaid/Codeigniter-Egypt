@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -9,10 +9,11 @@ if(!dojo._hasResource["dojox.layout.FloatingPane"]){
 dojo._hasResource["dojox.layout.FloatingPane"]=true;
 dojo.provide("dojox.layout.FloatingPane");
 dojo.experimental("dojox.layout.FloatingPane");
-dojo.require("dojox.layout.ContentPane");
+dojo.require("dojo.window");
 dojo.require("dijit._Templated");
 dojo.require("dijit._Widget");
 dojo.require("dojo.dnd.Moveable");
+dojo.require("dojox.layout.ContentPane");
 dojo.require("dojox.layout.ResizeHandle");
 dojo.declare("dojox.layout.FloatingPane",[dojox.layout.ContentPane,dijit._Templated],{closable:true,dockable:true,resizable:false,maxable:false,resizeAxis:"xy",title:"",dockTo:"",duration:400,contentClass:"dojoxFloatingPaneContent",_showAnim:null,_hideAnim:null,_dockNode:null,_restoreState:{},_allFPs:[],_startZ:100,templateString:dojo.cache("dojox.layout","resources/FloatingPane.html","<div class=\"dojoxFloatingPane\" id=\"${id}\">\n\t<div tabindex=\"0\" waiRole=\"button\" class=\"dojoxFloatingPaneTitle\" dojoAttachPoint=\"focusNode\">\n\t\t<span dojoAttachPoint=\"closeNode\" dojoAttachEvent=\"onclick: close\" class=\"dojoxFloatingCloseIcon\"></span>\n\t\t<span dojoAttachPoint=\"maxNode\" dojoAttachEvent=\"onclick: maximize\" class=\"dojoxFloatingMaximizeIcon\">&thinsp;</span>\n\t\t<span dojoAttachPoint=\"restoreNode\" dojoAttachEvent=\"onclick: _restore\" class=\"dojoxFloatingRestoreIcon\">&thinsp;</span>\t\n\t\t<span dojoAttachPoint=\"dockNode\" dojoAttachEvent=\"onclick: minimize\" class=\"dojoxFloatingMinimizeIcon\">&thinsp;</span>\n\t\t<span dojoAttachPoint=\"titleNode\" class=\"dijitInline dijitTitleNode\"></span>\n\t</div>\n\t<div dojoAttachPoint=\"canvas\" class=\"dojoxFloatingPaneCanvas\">\n\t\t<div dojoAttachPoint=\"containerNode\" waiRole=\"region\" tabindex=\"-1\" class=\"${contentClass}\">\n\t\t</div>\n\t\t<span dojoAttachPoint=\"resizeHandle\" class=\"dojoxFloatingResizeHandle\"></span>\n\t</div>\n</div>\n"),attributeMap:dojo.delegate(dijit._Widget.prototype.attributeMap,{title:{type:"innerHTML",node:"titleNode"}}),postCreate:function(){
 this.inherited(arguments);
@@ -79,7 +80,7 @@ this.resize(dojo.coords(this.domNode));
 this._started=true;
 },setTitle:function(_4){
 dojo.deprecated("pane.setTitle","Use pane.attr('title', someTitle)","2.0");
-this.attr("title",_4);
+this.set("title",_4);
 },close:function(){
 if(!this.closable){
 return;
@@ -130,7 +131,7 @@ this.show();
 setTimeout(dojo.hitch(this,"maximize"),this.duration);
 }
 dojo.addClass(this.focusNode,"floatingPaneMaximized");
-this.resize(dijit.getViewport());
+this.resize(dojo.window.getBox());
 this._maximized=true;
 },_restore:function(){
 if(this._maximized){
@@ -200,7 +201,7 @@ if(!this._inPositioning){
 if(this.autoPosition=="south"){
 setTimeout(dojo.hitch(this,function(){
 this._inPositiononing=true;
-var _f=dijit.getViewport();
+var _f=dojo.window.getBox();
 var s=this.domNode.style;
 s.left=_f.l+"px";
 s.width=(_f.w-2)+"px";

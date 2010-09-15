@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -10,13 +10,11 @@ dojo._hasResource["dojox.grid.enhanced._Plugin"]=true;
 dojo.provide("dojox.grid.enhanced._Plugin");
 dojo.require("dojox.grid.enhanced._Builder");
 dojo.require("dojox.grid.enhanced._Events");
-dojo.declare("dojox.grid.enhanced._Plugin",null,{fixedCellNum:-1,funcMap:{},rowSelectionChangedTopic:"ROW_SELECTION_CHANGED",sortRowSelectionChangedTopic:"SORT_ROW_SELECTION_CHANGED",rowMovedTopic:"ROW_MOVED",constructor:function(_1){
+dojo.declare("dojox.grid.enhanced._Plugin",null,{fixedCellNum:-1,funcMap:{},constructor:function(_1){
 this.grid=_1;
 this._parseProps(this.grid);
 },_parseProps:function(_2){
 _2.plugins&&dojo.mixin(_2,_2.plugins);
-_2.rowSelectionChangedTopic=this.rowSelectionChangedTopic;
-_2.sortRowSelectionChangedTopic=this.sortRowSelectionChangedTopic;
 _2.rowSelectCell=null;
 _2.dnd&&(_2.nestedSorting=true);
 (_2.dnd||_2.indirectSelection)&&(_2.columnReordering=false);
@@ -42,7 +40,7 @@ new (this.getPluginClazz("dojox.grid.enhanced.plugins.DnD"))(_4);
 }
 dojo.isChrome<3&&(_4.constructor.prototype.startup=_4.startup);
 this.fixedCellNum=this.getFixedCellNumber();
-this._bindFuncs();
+this.grid.plugins&&this._bindFuncs();
 },getPluginClazz:function(_5){
 var _6=dojo.getObject(_5);
 if(_6){
@@ -80,13 +78,15 @@ this.grid.focus.previousKey=this.previousKey;
 if(this.grid.indirectSelection){
 this.funcMap["renderPage"]=this.grid.scroller.renderPage;
 this.grid.scroller.renderPage=this.renderPage;
+this.funcMap["measurePage"]=this.grid.scroller.measurePage;
+this.grid.scroller.measurePage=this.measurePage;
 }
 this.funcMap["updateRow"]=this.grid.updateRow;
 this.grid.updateRow=this.updateRow;
-if(this.grid.nestedSorting){
-dojox.grid.cells._Base.prototype.getEditNode=this.getEditNode;
+if(this.grid.nestedSorting&&dojox.grid.cells._Widget){
 dojox.grid.cells._Widget.prototype.sizeWidget=this.sizeWidget;
 }
+dojox.grid.cells._Base.prototype.getEditNode=this.getEditNode;
 dojox.grid._EditManager.prototype.styleRow=function(_a){
 };
 },setColumnsWidth:function(_b){
@@ -149,41 +149,44 @@ for(var i=0,j=_f*this.rowsPerPage;(i<this.rowsPerPage)&&(j<this.rowCount);i++,j+
 this.grid.lastRenderingRowIdx=--j;
 dojo.addClass(this.grid.domNode,"dojoxGridSortInProgress");
 dojo.hitch(this,this.grid.pluginMgr.funcMap["renderPage"])(_f);
-},updateRow:function(_10){
-var _11=arguments.callee.caller;
-if(_11.nom=="move"&&!this.pluginMgr.needUpdateRow()){
+},measurePage:function(_10){
+var _11=dojo.hitch(this,this.grid.pluginMgr.funcMap["measurePage"])(_10);
+return (!dojo.isIE||this.grid.rowHeight||_11>this.rowsPerPage*this.grid.minRowHeight)?_11:undefined;
+},updateRow:function(_12){
+var _13=arguments.callee.caller;
+if(_13.nom=="move"&&!this.pluginMgr.needUpdateRow()){
 return;
 }
-dojo.hitch(this,this.pluginMgr.funcMap["updateRow"])(_10);
-},getEditNode:function(_12){
-return ((this.getNode(_12)||0).firstChild||0).firstChild||0;
-},sizeWidget:function(_13,_14,_15){
-var p=this.getNode(_15).firstChild,box=dojo.contentBox(p);
+dojo.hitch(this,this.pluginMgr.funcMap["updateRow"])(_12);
+},getEditNode:function(_14){
+return ((this.getNode(_14)||0).firstChild||0).firstChild||0;
+},sizeWidget:function(_15,_16,_17){
+var p=this.getNode(_17).firstChild,box=dojo.contentBox(p);
 dojo.marginBox(this.widget.domNode,{w:box.w});
-},setScrollTop:function(_16){
-this.lastTop=_16;
-this.scrollboxNode.scrollTop=_16;
+},setScrollTop:function(_18){
+this.lastTop=_18;
+this.scrollboxNode.scrollTop=_18;
 return this.scrollboxNode.scrollTop;
-},getViewByCellIdx:function(_17){
-var _18=function(_19){
-var j=0,_1a=false;
-for(;j<_19.length;j++){
-if(dojo.isArray(_19[j])){
-if(_18(_19[j])){
+},getViewByCellIdx:function(_19){
+var _1a=function(_1b){
+var j=0,_1c=false;
+for(;j<_1b.length;j++){
+if(dojo.isArray(_1b[j])){
+if(_1a(_1b[j])){
 return true;
 }
 }else{
-if(_19[j].index==_17){
+if(_1b[j].index==_19){
 return true;
 }
 }
 }
 };
-var i=0,_1b=this.grid.views.views;
-for(;i<_1b.length;i++){
-cells=_1b[i].structure.cells;
-if(_18(cells)){
-return _1b[i];
+var i=0,_1d=this.grid.views.views;
+for(;i<_1d.length;i++){
+cells=_1d[i].structure.cells;
+if(_1a(cells)){
+return _1d[i];
 }
 }
 return null;

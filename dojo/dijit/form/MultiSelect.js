@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -9,7 +9,7 @@ if(!dojo._hasResource["dijit.form.MultiSelect"]){
 dojo._hasResource["dijit.form.MultiSelect"]=true;
 dojo.provide("dijit.form.MultiSelect");
 dojo.require("dijit.form._FormWidget");
-dojo.declare("dijit.form.MultiSelect",dijit.form._FormValueWidget,{size:7,templateString:"<select multiple='true' ${nameAttrSetting} dojoAttachPoint='containerNode,focusNode' dojoAttachEvent='onchange: _onChange'></select>",attributeMap:dojo.delegate(dijit.form._FormWidget.prototype.attributeMap,{size:"focusNode"}),reset:function(){
+dojo.declare("dijit.form.MultiSelect",dijit.form._FormValueWidget,{size:7,templateString:"<select multiple='true' ${!nameAttrSetting} dojoAttachPoint='containerNode,focusNode' dojoAttachEvent='onchange: _onChange'></select>",attributeMap:dojo.delegate(dijit.form._FormWidget.prototype.attributeMap,{size:"focusNode"}),reset:function(){
 this._hasBeenBlurred=false;
 this._setValueAttr(this._resetValue,true);
 },addSelected:function(_1){
@@ -36,9 +36,9 @@ n.selected=(dojo.indexOf(_3,n.value)!=-1);
 dojo.query("option",this.containerNode).forEach(function(n){
 n.selected=!n.selected;
 });
-this._handleOnChange(this.attr("value"),_4==true);
+this._handleOnChange(this.get("value"),_4==true);
 },_onChange:function(e){
-this._handleOnChange(this.attr("value"),true);
+this._handleOnChange(this.get("value"),true);
 },resize:function(_5){
 if(_5){
 dojo.marginBox(this.domNode,_5);

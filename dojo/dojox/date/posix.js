@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -76,7 +76,7 @@ return _5(_1.getMinutes());
 case "n":
 return "\n";
 case "p":
-return _6[_1.getHours()<12?"am":"pm"];
+return _6["dayPeriods-format-wide-"+(_1.getHours()<12?"am":"pm")];
 case "r":
 return $("I")+":"+$("M")+":"+$("S")+" "+$("p");
 case "R":

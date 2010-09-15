@@ -14,15 +14,13 @@
 }
 .nihilo .dijitDialog .dijitDialogPaneContent {
 	background: #ffffff;
-	border:none;
-	border-top: 1px solid #d3d3d3; 
+	border-top: 1px solid #d3d3d3;
 	padding:10px;
 }
 .nihilo .dijitDialogTitleBar {
 	
 	background: #fafafa url("images/titleBar.png") repeat-x top left;
 	padding: 5px 6px 3px 6px;
-	cursor: move;
 	outline:0; 
 }
 .nihilo .dijitDialogCloseIcon {
@@ -36,12 +34,11 @@
 	top: 4px;
 	height: 15px;
 	width: 15px;
-	cursor: pointer;
 }
 .dj_ie6 .nihilo .dijitDialogCloseIcon {
 	background-image: url("images/spriteRoundedIconsSmall.gif");
 }
-.nihilo .dijitDialogCloseIcon-hover {
+.nihilo .dijitDialogCloseIconHover {
 	background-position: -60px -15px;
 }
 .nihilo .dijitTooltip,

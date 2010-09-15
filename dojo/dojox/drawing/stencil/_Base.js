@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -83,8 +83,8 @@ _1.data.height=_1.data.height?_1.data.height:this._lineHeight;
 this.setData(_1.data);
 this.connect(this,"render",this,"onRender",true);
 this.baseRender&&this.enabled&&this.render(_1.data.text);
-_1.label&&this.setLabel(_1.label);
-_1.shadow&&this.addShadow(_1.shadow);
+this.baseRender&&_1.label&&this.setLabel(_1.label);
+this.baseRender&&_1.shadow&&this.addShadow(_1.shadow);
 }else{
 if(this.draws){
 this.points=[];
@@ -195,8 +195,10 @@ this.attr(o);
 }
 }),ms);
 },attr:function(key,_14){
-var n=this.style.norm,t=this.style.text,ts=this.textSelected||{},o,nm,_15,_16=dojo.toJson(n),_17=dojo.toJson(t);
-var _18={x:true,y:true,r:true,height:true,width:true,r:true,radius:true,angle:true};
+var n=this.enabled?this.style.norm:this.style.disabled;
+var t=this.enabled?this.style.text:this.style.textDisabled;
+var ts=this.textSelected||{},o,nm,_15,_16=dojo.toJson(n),_17=dojo.toJson(t);
+var _18={x:true,y:true,r:true,height:true,width:true,radius:true,angle:true};
 var _19=false;
 if(typeof (key)!="object"){
 o={};
@@ -280,6 +282,10 @@ if(_19||_17!=dojo.toJson(t)||_16!=dojo.toJson(n)){
 this.onChangeStyle(this);
 }
 o.width=_15;
+if(o.cosphi!=undefined){
+!this.data?this.data={cosphi:o.cosphi}:this.data.cosphi=o.cosphi;
+this.style.zAxis=o.cosphi!=0?true:false;
+}
 },exporter:function(){
 var _1a=this.type.substring(this.type.lastIndexOf(".")+1).charAt(0).toLowerCase()+this.type.substring(this.type.lastIndexOf(".")+2);
 var o=dojo.clone(this.style.norm);
@@ -399,8 +405,7 @@ return null;
 var d=this.pointsToData();
 var obj={start:{x:d.x1,y:d.y1},x:d.x2,y:d.y2};
 var _23=this.util.angle(obj,this.angleSnap);
-_23=180-_23;
-_23=_23==360?0:_23;
+_23<0?_23=360+_23:_23;
 return _23;
 },getRadius:function(){
 var box=this.getBounds(true);
@@ -560,6 +565,7 @@ this.mouse.unregister(this._mouseHandle);
 },dataToPoints:function(_2c){
 },pointsToData:function(_2d){
 },onDown:function(obj){
+this._downOnCanvas=true;
 dojo.disconnect(this._postRenderCon);
 this._postRenderCon=null;
 },onMove:function(obj){

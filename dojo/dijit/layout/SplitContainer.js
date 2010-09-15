@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -78,7 +78,6 @@ this.domNode.appendChild(_6);
 _6.className=this.isHorizontal?"dijitSplitContainerSizerH":"dijitSplitContainerSizerV";
 var _7=dojo.doc.createElement("div");
 _7.className="thumb";
-_7.id=_6.id;
 _6.appendChild(_7);
 this.connect(_6,"onmousedown","_onSizerMouseDown");
 dojo.setSelectable(_6,false);

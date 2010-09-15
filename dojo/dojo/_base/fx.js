@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -79,7 +79,6 @@ _e._startTime=new Date().valueOf();
 if(_e._paused){
 _e._startTime-=_e.duration*_e._percent;
 }
-_e._endTime=_e._startTime+_e.duration;
 _e._active=true;
 _e._paused=false;
 var _f=_e.curve.getValue(_e._getStep());
@@ -137,7 +136,7 @@ return "stopped";
 var _16=this;
 if(_16._active){
 var _17=new Date().valueOf();
-var _18=(_17-_16._startTime)/(_16._endTime-_16._startTime);
+var _18=(_17-_16._startTime)/(_16.duration);
 if(_18>=1){
 _18=1;
 }
@@ -173,15 +172,15 @@ return _16;
 clearTimeout(this._delayTimer);
 delete this._delayTimer;
 }});
-var ctr=0,_19=[],_1a=null,_1b={run:function(){
+var ctr=0,_19=null,_1a={run:function(){
 }};
 d.extend(d.Animation,{_startTimer:function(){
 if(!this._timer){
-this._timer=d.connect(_1b,"run",this,"_cycle");
+this._timer=d.connect(_1a,"run",this,"_cycle");
 ctr++;
 }
-if(!_1a){
-_1a=setInterval(d.hitch(_1b,"run"),this.rate);
+if(!_19){
+_19=setInterval(d.hitch(_1a,"run"),this.rate);
 }
 },_stopTimer:function(){
 if(this._timer){
@@ -190,114 +189,114 @@ this._timer=null;
 ctr--;
 }
 if(ctr<=0){
-clearInterval(_1a);
-_1a=null;
+clearInterval(_19);
+_19=null;
 ctr=0;
 }
 }});
-var _1c=d.isIE?function(_1d){
-var ns=_1d.style;
-if(!ns.width.length&&d.style(_1d,"width")=="auto"){
+var _1b=d.isIE?function(_1c){
+var ns=_1c.style;
+if(!ns.width.length&&d.style(_1c,"width")=="auto"){
 ns.width="auto";
 }
 }:function(){
 };
-dojo._fade=function(_1e){
-_1e.node=d.byId(_1e.node);
-var _1f=_1({properties:{}},_1e),_20=(_1f.properties.opacity={});
-_20.start=!("start" in _1f)?function(){
-return +d.style(_1f.node,"opacity")||0;
-}:_1f.start;
-_20.end=_1f.end;
-var _21=d.animateProperty(_1f);
-d.connect(_21,"beforeBegin",d.partial(_1c,_1f.node));
-return _21;
+dojo._fade=function(_1d){
+_1d.node=d.byId(_1d.node);
+var _1e=_1({properties:{}},_1d),_1f=(_1e.properties.opacity={});
+_1f.start=!("start" in _1e)?function(){
+return +d.style(_1e.node,"opacity")||0;
+}:_1e.start;
+_1f.end=_1e.end;
+var _20=d.animateProperty(_1e);
+d.connect(_20,"beforeBegin",d.partial(_1b,_1e.node));
+return _20;
 };
-dojo.fadeIn=function(_22){
-return d._fade(_1({end:1},_22));
+dojo.fadeIn=function(_21){
+return d._fade(_1({end:1},_21));
 };
-dojo.fadeOut=function(_23){
-return d._fade(_1({end:0},_23));
+dojo.fadeOut=function(_22){
+return d._fade(_1({end:0},_22));
 };
 dojo._defaultEasing=function(n){
 return 0.5+((Math.sin((n+1.5)*Math.PI))/2);
 };
-var _24=function(_25){
-this._properties=_25;
-for(var p in _25){
-var _26=_25[p];
-if(_26.start instanceof d.Color){
-_26.tempColor=new d.Color();
+var _23=function(_24){
+this._properties=_24;
+for(var p in _24){
+var _25=_24[p];
+if(_25.start instanceof d.Color){
+_25.tempColor=new d.Color();
 }
 }
 };
-_24.prototype.getValue=function(r){
+_23.prototype.getValue=function(r){
 var ret={};
 for(var p in this._properties){
-var _27=this._properties[p],_28=_27.start;
-if(_28 instanceof d.Color){
-ret[p]=d.blendColors(_28,_27.end,r,_27.tempColor).toCss();
+var _26=this._properties[p],_27=_26.start;
+if(_27 instanceof d.Color){
+ret[p]=d.blendColors(_27,_26.end,r,_26.tempColor).toCss();
 }else{
-if(!d.isArray(_28)){
-ret[p]=((_27.end-_28)*r)+_28+(p!="opacity"?_27.units||"px":0);
+if(!d.isArray(_27)){
+ret[p]=((_26.end-_27)*r)+_27+(p!="opacity"?_26.units||"px":0);
 }
 }
 }
 return ret;
 };
-dojo.animateProperty=function(_29){
-var n=_29.node=d.byId(_29.node);
-if(!_29.easing){
-_29.easing=d._defaultEasing;
+dojo.animateProperty=function(_28){
+var n=_28.node=d.byId(_28.node);
+if(!_28.easing){
+_28.easing=d._defaultEasing;
 }
-var _2a=new d.Animation(_29);
-d.connect(_2a,"beforeBegin",_2a,function(){
+var _29=new d.Animation(_28);
+d.connect(_29,"beforeBegin",_29,function(){
 var pm={};
 for(var p in this.properties){
 if(p=="width"||p=="height"){
 this.node.display="block";
 }
-var _2b=this.properties[p];
-if(d.isFunction(_2b)){
-_2b=_2b(n);
+var _2a=this.properties[p];
+if(d.isFunction(_2a)){
+_2a=_2a(n);
 }
-_2b=pm[p]=_1({},(d.isObject(_2b)?_2b:{end:_2b}));
-if(d.isFunction(_2b.start)){
-_2b.start=_2b.start(n);
+_2a=pm[p]=_1({},(d.isObject(_2a)?_2a:{end:_2a}));
+if(d.isFunction(_2a.start)){
+_2a.start=_2a.start(n);
 }
-if(d.isFunction(_2b.end)){
-_2b.end=_2b.end(n);
+if(d.isFunction(_2a.end)){
+_2a.end=_2a.end(n);
 }
-var _2c=(p.toLowerCase().indexOf("color")>=0);
-function _2d(_2e,p){
-var v={height:_2e.offsetHeight,width:_2e.offsetWidth}[p];
+var _2b=(p.toLowerCase().indexOf("color")>=0);
+function _2c(_2d,p){
+var v={height:_2d.offsetHeight,width:_2d.offsetWidth}[p];
 if(v!==undefined){
 return v;
 }
-v=d.style(_2e,p);
-return (p=="opacity")?+v:(_2c?v:parseFloat(v));
+v=d.style(_2d,p);
+return (p=="opacity")?+v:(_2b?v:parseFloat(v));
 };
-if(!("end" in _2b)){
-_2b.end=_2d(n,p);
+if(!("end" in _2a)){
+_2a.end=_2c(n,p);
 }else{
-if(!("start" in _2b)){
-_2b.start=_2d(n,p);
+if(!("start" in _2a)){
+_2a.start=_2c(n,p);
 }
 }
-if(_2c){
-_2b.start=new d.Color(_2b.start);
-_2b.end=new d.Color(_2b.end);
+if(_2b){
+_2a.start=new d.Color(_2a.start);
+_2a.end=new d.Color(_2a.end);
 }else{
-_2b.start=(p=="opacity")?+_2b.start:parseFloat(_2b.start);
+_2a.start=(p=="opacity")?+_2a.start:parseFloat(_2a.start);
 }
 }
-this.curve=new _24(pm);
+this.curve=new _23(pm);
 });
-d.connect(_2a,"onAnimate",d.hitch(d,"style",_2a.node));
-return _2a;
+d.connect(_29,"onAnimate",d.hitch(d,"style",_29.node));
+return _29;
 };
-dojo.anim=function(_2f,_30,_31,_32,_33,_34){
-return d.animateProperty({node:_2f,duration:_31||d.Animation.prototype.duration,properties:_30,easing:_32,onEnd:_33}).play(_34||0);
+dojo.anim=function(_2e,_2f,_30,_31,_32,_33){
+return d.animateProperty({node:_2e,duration:_30||d.Animation.prototype.duration,properties:_2f,easing:_31,onEnd:_32}).play(_33||0);
 };
 })();
 }

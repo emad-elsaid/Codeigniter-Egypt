@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -64,8 +64,8 @@ dojo.addClass(this.node,"dojoMoveItem");
 dojo.publish("/dnd/move/stop",[_6]);
 dojo.removeClass(dojo.body(),"dojoMove");
 dojo.removeClass(this.node,"dojoMoveItem");
-},onFirstMove:function(_7){
-},onMove:function(_8,_9){
+},onFirstMove:function(_7,e){
+},onMove:function(_8,_9,e){
 this.onMoving(_8,_9);
 var s=_8.node.style;
 s.left=_9.l+"px";

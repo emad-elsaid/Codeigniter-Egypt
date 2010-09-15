@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -22,7 +22,6 @@ this.templateString=dojo.string.substitute(_2,{stars:_4});
 this.inherited(arguments);
 this._renderStars(this.value);
 },_onMouse:function(_5){
-this.inherited(arguments);
 if(this._hovering){
 var _6=+dojo.attr(_5.target,"value");
 this.onMouseOver(_5,_6);

@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -19,10 +19,10 @@ var de=_4.documentElement;
 var _6="http://www.mozilla.org/newlayout/xml/parsererror.xml";
 if(de.nodeName=="parsererror"&&de.namespaceURI==_6){
 var _7=de.getElementsByTagNameNS(_6,"sourcetext")[0];
-if(!_7){
+if(_7){
 _7=_7.firstChild.data;
 }
-throw new Error("Error parsing text "+nativeDoc.documentElement.firstChild.data+" \n"+_7);
+throw new Error("Error parsing text "+de.firstChild.data+" \n"+_7);
 }
 return _4;
 }else{

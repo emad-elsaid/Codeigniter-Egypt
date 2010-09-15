@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -9,6 +9,7 @@ if(!dojo._hasResource["dojox.editor.plugins.NormalizeIndentOutdent"]){
 dojo._hasResource["dojox.editor.plugins.NormalizeIndentOutdent"]=true;
 dojo.provide("dojox.editor.plugins.NormalizeIndentOutdent");
 dojo.require("dijit._editor._Plugin");
+dojo.require("dijit._editor.selection");
 dojo.experimental("dojox.editor.plugins.NormalizeIndentOutdent");
 dojo.declare("dojox.editor.plugins.NormalizeIndentOutdent",dijit._editor._Plugin,{indentBy:40,indentUnits:"px",setEditor:function(_1){
 this.editor=_1;
@@ -148,7 +149,7 @@ end=end.parentNode;
 }
 if(end===ed.editNode||end===ed.document.body){
 _10=_f;
-while(_10.nextSibling&&this._inSelection(_10,_c)){
+while(_10.nextSibling&&dojo.withGlobal(ed.window,"inSelection",dijit._editor.selection,[_10])){
 _10=_10.nextSibling;
 }
 end=_10;
@@ -587,53 +588,13 @@ if(_35&&_35.nodeType===3||_35.nodeType===4){
 return true;
 }
 return false;
-},_inSelection:function(_36,_37){
-if(_36&&_37){
-var _38;
-var doc=this.editor.document;
-if(_37.compareBoundaryPoints&&doc.createRange){
-try{
-_38=doc.createRange();
-_38.setStart(_36,0);
-if(_37.compareBoundaryPoints(_37.START_TO_END,_38)===1){
-return true;
-}
-}
-catch(e){
-}
-}else{
-if(doc.selection){
-_37=doc.selection.createRange();
-try{
-_38=_36.ownerDocument.body.createControlRange();
-if(_38){
-_38.addElement(_36);
-}
-}
-catch(e1){
-try{
-_38=_36.ownerDocument.body.createTextRange();
-_38.moveToElementText(_36);
-}
-catch(e2){
-}
-}
-if(_37&&_38){
-if(_37.compareEndPoints("EndToStart",_38)===1){
-return true;
-}
-}
-}
-}
-}
-return false;
 }});
 dojo.subscribe(dijit._scopeName+".Editor.getPlugin",null,function(o){
 if(o.plugin){
 return;
 }
-var _39=o.args.name.toLowerCase();
-if(_39==="normalizeindentoutdent"){
+var _36=o.args.name.toLowerCase();
+if(_36==="normalizeindentoutdent"){
 o.plugin=new dojox.editor.plugins.NormalizeIndentOutdent({indentBy:("indentBy" in o.args)?(o.args.indentBy>0?o.args.indentBy:40):40,indentUnits:("indentUnits" in o.args)?(o.args.indentUnits.toLowerCase()=="em"?"em":"px"):"px"});
 }
 });

@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -9,9 +9,7 @@ if(!dojo._hasResource["dojox.av.FLAudio"]){
 dojo._hasResource["dojox.av.FLAudio"]=true;
 dojo.provide("dojox.av.FLAudio");
 dojo.experimental("dojox.av.FLAudio");
-dojo.require("dijit._Widget");
 dojo.require("dojox.embed.Flash");
-dojo.require("dojox.av._Media");
 dojo.require("dojox.timing.doLater");
 dojo.declare("dojox.av.FLAudio",null,{id:"",initialVolume:0.7,initialPan:0,isDebug:false,statusInterval:200,_swfPath:dojo.moduleUrl("dojox.av","resources/audio.swf"),constructor:function(_1){
 dojo.global.swfIsInHTML=function(){
@@ -33,6 +31,7 @@ this._sub("mediaError","onError");
 this._sub("filesProgress","onLoadStatus");
 this._sub("filesAllLoaded","onAllLoaded");
 this._sub("mediaPosition","onPlayStatus");
+this._sub("mediaEnd","onComplete");
 this._sub("mediaMeta","onID3");
 this._flashObject=new dojox.embed.Flash(_2,this.domNode);
 this._flashObject.onError=function(_3){
@@ -71,11 +70,14 @@ this.flashMedia.setPan(_a);
 return this.flashMedia.getVolume(_b);
 },getPan:function(_c){
 return this.flashMedia.getPan(_c);
-},onError:function(_d){
-console.warn("SWF ERROR:",_d);
-},onLoadStatus:function(_e){
+},getPosition:function(_d){
+return this.flashMedia.getPosition(_d);
+},onError:function(_e){
+console.warn("SWF ERROR:",_e);
+},onLoadStatus:function(_f){
 },onAllLoaded:function(){
-},onPlayStatus:function(_f){
+},onPlayStatus:function(_10){
+},onComplete:function(_11){
 },onLoad:function(){
 },onID3:function(evt){
 },destroy:function(){
@@ -90,8 +92,8 @@ dojo.forEach(this._cons,function(c){
 dojo.disconnect(c);
 });
 this._flashObject.destroy();
-},_sub:function(_10,_11){
-dojo.subscribe(this.id+"/"+_10,this,_11);
+},_sub:function(_12,_13){
+dojo.subscribe(this.id+"/"+_12,this,_13);
 },_normalizeVolume:function(vol){
 if(vol>1){
 while(vol>1){
@@ -99,13 +101,13 @@ vol*=0.1;
 }
 }
 return vol;
-},_normalizeUrl:function(_12){
-if(_12&&_12.toLowerCase().indexOf("http")<0){
+},_normalizeUrl:function(_14){
+if(_14&&_14.toLowerCase().indexOf("http")<0){
 var loc=window.location.href.split("/");
 loc.pop();
 loc=loc.join("/")+"/";
-_12=loc+_12;
+_14=loc+_14;
 }
-return _12;
+return _14;
 }});
 }

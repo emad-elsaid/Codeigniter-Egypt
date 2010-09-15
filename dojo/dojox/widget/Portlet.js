@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -103,6 +103,7 @@ if(_c.portletIconClass&&_c.toggle&&!_c.attr("portlet")){
 this._createIcon(_c.portletIconClass,_c.portletIconHoverClass,dojo.hitch(_c,"toggle"));
 dojo.place(_c.domNode,this.containerNode,"before");
 _c.attr("portlet",this);
+this._settingsWidget=_c;
 }
 }));
 },_createIcon:function(_d,_e,fn){
@@ -181,6 +182,11 @@ this._updateSize();
 if(this._started&&!_14.started&&!_14._started){
 _14.startup();
 }
+},destroyDescendants:function(_15){
+this.inherited(arguments);
+if(this._settingsWidget){
+this._settingsWidget.destroyRecursive(_15);
+}
 },_setCss:function(){
 this.inherited(arguments);
 dojo.style(this.arrowNode,"display",this.toggleable?"":"none");
@@ -189,8 +195,8 @@ dojo.declare("dojox.widget.PortletSettings",[dijit._Container,dijit.layout.Conte
 dojo.style(this.domNode,"display","none");
 dojo.addClass(this.domNode,"dojoxPortletSettingsContainer");
 dojo.removeClass(this.domNode,"dijitContentPane");
-},_setPortletAttr:function(_15){
-this.portlet=_15;
+},_setPortletAttr:function(_16){
+this.portlet=_16;
 },toggle:function(){
 var n=this.domNode;
 if(dojo.style(n,"display")=="none"){
@@ -202,8 +208,8 @@ dojo.style(n,{"display":"none","height":"","width":""});
 })}).play();
 }
 }});
-dojo.declare("dojox.widget.PortletDialogSettings",dojox.widget.PortletSettings,{dimensions:null,constructor:function(_16,_17){
-this.dimensions=_16.dimensions||[300,100];
+dojo.declare("dojox.widget.PortletDialogSettings",dojox.widget.PortletSettings,{dimensions:null,constructor:function(_17,_18){
+this.dimensions=_17.dimensions||[300,100];
 },toggle:function(){
 if(!this.dialog){
 dojo["require"]("dijit.Dialog");

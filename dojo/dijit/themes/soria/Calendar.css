@@ -74,23 +74,11 @@
 	background-color:#fdfdfd !important;
 	border:#fdfdfd solid 1px !important;
 }
-.soria .dijitCalendarPreviousMonthDisabled,
-.soria .dijitCalendarNextMonthDisabled	{
-	
-	background-color:#a4a5a6 !important;
-}
 .soria .dijitCalendarCurrentMonth {
 	
 }
-.soria .dijitCalendarCurrentMonthDisabled {
-	
-	background-color:#bbbbbc !important;
-}
 .soria .dijitCalendarDisabledDate {
-	
-	
 	text-decoration:line-through !important;
-	cursor:default !important;
 }
 .soria .dijitCalendarCurrentDate {
 	

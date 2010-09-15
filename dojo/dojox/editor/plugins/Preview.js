@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -11,7 +11,7 @@ dojo.provide("dojox.editor.plugins.Preview");
 dojo.require("dijit._editor._Plugin");
 dojo.require("dijit.form.Button");
 dojo.require("dojo.i18n");
-dojo.requireLocalization("dojox.editor.plugins","Preview",null,"ROOT,cs,de,es,fr,hu,it,ja,ko,pl,pt,ru,zh,zh-tw");
+dojo.requireLocalization("dojox.editor.plugins","Preview",null,"ROOT,cs,de,es,fr,hu,it,ja,ko,pl,pt,ro,ru,zh,zh-tw");
 dojo.declare("dojox.editor.plugins.Preview",dijit._editor._Plugin,{useDefaultCommand:false,styles:"",stylesheets:null,iconClassPrefix:"dijitAdditionalEditorIcon",_initButton:function(){
 this._nlsResources=dojo.i18n.getLocalization("dojox.editor.plugins","Preview");
 this.button=new dijit.form.Button({label:this._nlsResources["preview"],showLabel:false,iconClass:this.iconClassPrefix+" "+this.iconClassPrefix+"Preview",tabIndex:"-1",onClick:dojo.hitch(this,"_preview")});
@@ -20,7 +20,7 @@ this.editor=_1;
 this._initButton();
 },_preview:function(){
 try{
-var _2=this.editor.attr("value");
+var _2=this.editor.get("value");
 var _3="\t\t<meta http-equiv='Content-Type' content='text/html; charset='UTF-8'>\n";
 var i;
 if(this.stylesheets){

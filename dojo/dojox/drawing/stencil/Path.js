@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -18,6 +18,7 @@ return;
 if(dojox.gfx.renderer=="svg"){
 var _4=[];
 dojo.forEach(this.points,function(o,i){
+if(!o.skip){
 if(i==0){
 _4.push("M "+o.x+" "+o.y);
 }else{
@@ -26,6 +27,7 @@ if(o.x===undefined){
 _4.push(_5);
 }else{
 _4.push(_5+o.x+" "+o.y);
+}
 }
 }
 },this);
@@ -39,6 +41,7 @@ this.closePath&&this[_2].setFill(_3.fill);
 this[_2]=this.container.createPath({}).setStroke(_3);
 this.closePath&&this[_2].setFill(_3.fill);
 dojo.forEach(this.points,function(o,i){
+if(!o.skip){
 if(i==0||o.t=="M"){
 this[_2].moveTo(o.x,o.y);
 }else{
@@ -46,6 +49,7 @@ if(o.t=="Z"){
 this.closePath&&this[_2].closePath();
 }else{
 this[_2].lineTo(o.x,o.y);
+}
 }
 }
 },this);

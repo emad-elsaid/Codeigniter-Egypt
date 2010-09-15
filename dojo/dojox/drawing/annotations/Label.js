@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -27,7 +27,7 @@ this.setData({x:d.x,y:d.y,width:d.w||this.style.text.minWidth,height:d.h||this._
 if(_2&&!_2.split){
 _2=null;
 }
-this.render(_2);
+this.render(this.typesetter(_2));
 },setLabel:function(_3){
 var x,y,_4=this.master.getBounds();
 if(/B/.test(this.labelPosition)){
@@ -41,10 +41,10 @@ x=_4.x2;
 y=_4.y1;
 this._align="end";
 }
-if(!this.labelWidth||(_3&&_3.split&&_3!=this._text)){
+if(!this.labelWidth||(_3&&_3.split&&_3!=this.getText())){
 this.setData({x:x,y:y,height:this._lineHeight,width:this.style.text.minWidth});
 this.labelWidth=this.style.text.minWidth;
-this.render(_3);
+this.render(this.typesetter(_3));
 }else{
 this.setData({x:x,y:y,height:this.data.height,width:this.data.width});
 this.render();

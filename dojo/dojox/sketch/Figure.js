@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -327,7 +327,7 @@ this.shapes.splice(idx,1);
 }
 return _15;
 };
-p.get=function(id){
+p.getAnnotator=function(id){
 for(var i=0;i<this.shapes.length;i++){
 if(this.shapes[i].id==id){
 return this.shapes[i];

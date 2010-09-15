@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -32,12 +32,15 @@ break;
 case "path":
 this.method="createForPath";
 break;
+case "vector":
+this.method="createForZArrow";
+break;
 default:
 console.warn("A shadow cannot be made for Stencil type ",this.stencil.type);
 }
 if(this.method){
 this.render();
-this.stencil.connectMult([[this.stencil,"onTransform",this,"onTransform"],[this.stencil,"render",this,"onRender"],[this.stencil,"onDelete",this,"destroy"]]);
+this.stencil.connectMult([[this.stencil,"onTransform",this,"onTransform"],this.method=="createForZArrow"?[this.stencil,"render",this,"render"]:[this.stencil,"render",this,"onRender"],[this.stencil,"onDelete",this,"destroy"]]);
 }
 },{showing:true,render:function(){
 if(this.container){
@@ -109,6 +112,66 @@ var sh=_15*_16/2,shy=/B/.test(p)?sh:/T/.test(p)?0:sh/2,shx=/R/.test(p)?sh:/L/.te
 for(var i=1;i<=_15;i++){
 var _17=i*_16;
 this.container.createRect({x:d.x+shx,y:d.y+shy,width:d.width-sh,height:d.height-sh,r:r}).setStroke({width:_17,color:c});
+}
+},arrowPoints:function(){
+var d=this.stencil.data;
+var _18=this.stencil.getRadius();
+var _19=this.style.zAngle+30;
+var pt=this.util.pointOnCircle(d.x1,d.y1,_18*0.75,_19);
+var obj={start:{x:d.x1,y:d.y1},x:pt.x,y:pt.y};
+var _19=this.util.angle(obj);
+var _1a=this.util.length(obj);
+var al=this.style.arrows.length;
+var aw=this.style.arrows.width/3;
+if(_1a<al){
+al=_1a/2;
+}
+var p1=this.util.pointOnCircle(obj.x,obj.y,-al,_19-aw);
+var p2=this.util.pointOnCircle(obj.x,obj.y,-al,_19+aw);
+return [{x:obj.x,y:obj.y},p1,p2];
+},createForZArrow:function(o,_1b,_1c,pts,r,p,c){
+if(this.stencil.data.cosphi<1||!this.stencil.points[0]){
+return;
+}
+var sh=_1b*_1c/4,shy=/B/.test(p)?sh:/T/.test(p)?sh*-1:0,shx=/R/.test(p)?sh:/L/.test(p)?sh*-1:0;
+var _1d=true;
+for(var i=1;i<=_1b;i++){
+var _1e=i*_1c;
+pts=this.arrowPoints();
+if(!pts){
+return;
+}
+if(dojox.gfx.renderer=="svg"){
+var _1f=[];
+dojo.forEach(pts,function(o,i){
+if(i==0){
+_1f.push("M "+(o.x+shx)+" "+(o.y+shy));
+}else{
+var cmd=o.t||"L ";
+_1f.push(cmd+(o.x+shx)+" "+(o.y+shy));
+}
+},this);
+if(_1d){
+_1f.push("Z");
+}
+this.container.createPath(_1f.join(", ")).setStroke({width:_1e,color:c,cap:"round"}).setFill(c);
+}else{
+var pth=this.container.createPath({}).setStroke({width:_1e,color:c,cap:"round"});
+dojo.forEach(pts,function(o,i){
+if(i==0||o.t=="M"){
+pth.moveTo(o.x+shx,o.y+shy);
+}else{
+if(o.t=="Z"){
+_1d&&pth.closePath();
+}else{
+pth.lineTo(o.x+shx,o.y+shy);
+}
+}
+},this);
+_1d&&pth.closePath();
+}
+var sp=this.stencil.points;
+this.container.createLine({x1:sp[0].x,y1:sp[0].y,x2:pts[0].x,y2:pts[0].y}).setStroke({width:_1e,color:c,cap:"round"});
 }
 },onTransform:function(){
 this.render();

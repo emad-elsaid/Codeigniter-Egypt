@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -33,7 +33,16 @@ pt.y/=this.mouse.zoom;
 var x=this.stencil._offX+pt.x-sc.left+dx;
 var y=this.stencil._offY+pt.y-sc.top+dy;
 dojo.style(_2,{left:x+"px",top:y+"px",align:pt.align});
-_2.innerHTML=Math.ceil(this.stencil.getAngle());
+var _3=this.stencil.getAngle();
+if(this.stencil.style.zAxis&&this.stencil.shortType=="vector"){
+_2.innerHTML=this.stencil.data.cosphi>0?"out of":"into";
+}else{
+if(this.stencil.shortType=="line"){
+_2.innerHTML=this.stencil.style.zAxis?"out of":Math.ceil(_3%180);
+}else{
+_2.innerHTML=Math.ceil(_3);
+}
+}
 },getAngleNode:function(){
 if(!this._angleNode){
 this._angleNode=dojo.create("span",null,dojo.body());
@@ -43,8 +52,8 @@ dojo.style(this._angleNode,"opacity",1);
 return this._angleNode;
 },hideAngle:function(){
 if(this._angleNode&&dojo.style(this._angleNode,"opacity")>0.9){
-dojo.fadeOut({node:this._angleNode,duration:500,onEnd:function(_3){
-dojo.destroy(_3);
+dojo.fadeOut({node:this._angleNode,duration:500,onEnd:function(_4){
+dojo.destroy(_4);
 }}).play();
 this._angleNode=null;
 }

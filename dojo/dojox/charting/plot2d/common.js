@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -38,16 +38,16 @@ return dc.augmentColor(_6,_7);
 }
 return _6;
 },defaultStats:{hmin:Number.POSITIVE_INFINITY,hmax:Number.NEGATIVE_INFINITY,vmin:Number.POSITIVE_INFINITY,vmax:Number.NEGATIVE_INFINITY},collectSimpleStats:function(_8){
-var _9=dojo.clone(dc.defaultStats);
+var _9=dojo.delegate(dc.defaultStats);
 for(var i=0;i<_8.length;++i){
 var _a=_8[i];
-if(!_a.data.length){
-continue;
-}
-if(typeof _a.data[0]=="number"){
+for(var j=0;j<_a.data.length;j++){
+if(_a.data[j]!==null){
+if(typeof _a.data[j]=="number"){
 var _b=_9.vmin,_c=_9.vmax;
 if(!("ymin" in _a)||!("ymax" in _a)){
 dojo.forEach(_a.data,function(_d,i){
+if(_d!==null){
 var x=i+1,y=_d;
 if(isNaN(y)){
 y=0;
@@ -56,6 +56,7 @@ _9.hmin=Math.min(_9.hmin,x);
 _9.hmax=Math.max(_9.hmax,x);
 _9.vmin=Math.min(_9.vmin,y);
 _9.vmax=Math.max(_9.vmax,y);
+}
 });
 }
 if("ymin" in _a){
@@ -68,6 +69,7 @@ _9.vmax=Math.max(_c,_a.ymax);
 var _e=_9.hmin,_f=_9.hmax,_b=_9.vmin,_c=_9.vmax;
 if(!("xmin" in _a)||!("xmax" in _a)||!("ymin" in _a)||!("ymax" in _a)){
 dojo.forEach(_a.data,function(val,i){
+if(val!==null){
 var x="x" in val?val.x:i+1,y=val.y;
 if(isNaN(x)){
 x=0;
@@ -79,6 +81,7 @@ _9.hmin=Math.min(_9.hmin,x);
 _9.hmax=Math.max(_9.hmax,x);
 _9.vmin=Math.min(_9.vmin,y);
 _9.vmax=Math.max(_9.vmax,y);
+}
 });
 }
 if("xmin" in _a){
@@ -92,6 +95,9 @@ _9.vmin=Math.min(_b,_a.ymin);
 }
 if("ymax" in _a){
 _9.vmax=Math.max(_c,_a.ymax);
+}
+}
+break;
 }
 }
 }

@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -817,7 +817,7 @@ for(var _df in sls){
 var _e0=tls[_df]={_connectId:_b4(_db,_df)};
 var _e1=sls[_df];
 for(var _e2 in _e1){
-_e0[_e2]={fn:_e1[_e2].fn,data:_e1[_e2].data,};
+_e0[_e2]={fn:_e1[_e2].fn,data:_e1[_e2].data};
 }
 }
 };

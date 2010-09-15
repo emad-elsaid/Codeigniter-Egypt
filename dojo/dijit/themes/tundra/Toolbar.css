@@ -38,8 +38,8 @@
 .tundra .dijitToolbar .dijitButtonHover,
 .tundra .dijitToolbar .dijitToggleButtonHover,
 .tundra .dijitToolbar .dijitDropDownButtonHover,
-.tundra .dijitToolbar .dijitComboButtonHover .dijitButtonContents,
-.tundra .dijitToolbar .dijitComboButtonDownArrowHover .dijitDownArrowButton {
+.tundra .dijitToolbar .dijitComboButton .dijitButtonContentsHover,
+.tundra .dijitToolbar .dijitComboButton .dijitDownArrowButtonHover {
 	
 	border: 1px solid #869cbf;
 	padding: 0px;	
@@ -53,4 +53,12 @@
 	
 	border: 1px #555 dotted !important;
 	padding: 0px;
+}
+.tundra .dijitToolbarSeparator {
+	
+	background: url('../../icons/images/editorIconsEnabled.png');
+}
+.tundra .dijitToolbarRtl .dijitToolbarSeparator {
+	
+	background-image: url('../../icons/images/editorIconsDisabled.png');
 }

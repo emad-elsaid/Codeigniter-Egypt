@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -46,12 +46,12 @@ this._onChildBlur(this.focusedChild);
 _d.focus(_e?"end":"start");
 this.focusedChild=_d;
 },_startupChild:function(_f){
-_f.attr("tabIndex","-1");
+_f.set("tabIndex","-1");
 this.connect(_f,"_onFocus",function(){
-_f.attr("tabIndex",this.tabIndex);
+_f.set("tabIndex",this.tabIndex);
 });
 this.connect(_f,"_onBlur",function(){
-_f.attr("tabIndex","-1");
+_f.set("tabIndex","-1");
 });
 },_onContainerFocus:function(evt){
 if(evt.target!==this.domNode){

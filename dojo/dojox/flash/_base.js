@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -9,7 +9,7 @@ if(!dojo._hasResource["dojox.flash._base"]){
 dojo._hasResource["dojox.flash._base"]=true;
 dojo.provide("dojox.flash._base");
 dojo.experimental("dojox.flash");
-dojo.require("dijit._base.place");
+dojo.require("dojo.window");
 dojox.flash=function(){
 };
 dojox.flash={ready:false,url:null,_visible:true,_loadedListeners:[],_installingListeners:[],setSwf:function(_1,_2){
@@ -199,7 +199,7 @@ _27.style.visibility="hidden";
 },center:function(){
 var _28=this.width;
 var _29=this.height;
-var _2a=dijit.getViewport();
+var _2a=dojo.window.getBox();
 var x=_2a.l+(_2a.w-_28)/2;
 var y=_2a.t+(_2a.h-_29)/2;
 var _2b=dojo.byId(this.id+"Container");

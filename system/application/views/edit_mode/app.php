@@ -30,8 +30,8 @@
 		
 	<style>
 	html,body{
-		width: 100%;
-		height: 100%;
+		width: 99.9%;
+		height: 99.8%;
 	}
 	body{
 		font-size: 12px;

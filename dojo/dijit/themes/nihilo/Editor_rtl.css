@@ -1,10 +1,7 @@
 
 .dijitRtl .nihilo .dijitEditorIcon {
-	background-image: url('images/editor_rtl.gif'); 
+	background-image: url('../../icons/images/editorIconsEnabled_rtl.png'); 
 }
 .dijitRtl .nihilo .dijitDisabled .dijitEditorIcon {
-	background-image: url('images/editorDisabled_rtl.gif'); 
-}
-.dijitRtl .nihilo .dijitToolbar .dijitToolbarSeparator {
-	background-image: url('images/editor_rtl.gif');
+	background-image: url('../../icons/images/editorIconsDisabled_rtl.png'); 
 }

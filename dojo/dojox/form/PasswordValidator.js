@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -10,7 +10,7 @@ dojo._hasResource["dojox.form.PasswordValidator"]=true;
 dojo.provide("dojox.form.PasswordValidator");
 dojo.require("dijit.form._FormWidget");
 dojo.require("dijit.form.ValidationTextBox");
-dojo.requireLocalization("dojox.form","PasswordValidator",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ru,sk,sl,sv,th,tr,zh,zh-tw");
+dojo.requireLocalization("dojox.form","PasswordValidator",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ro,ru,sk,sl,sv,th,tr,zh,zh-tw");
 dojo.declare("dojox.form._ChildTextBox",dijit.form.ValidationTextBox,{containerWidget:null,type:"password",reset:function(){
 dijit.form.ValidationTextBox.prototype._setValueAttr.call(this,"",true);
 this._hasBeenBlurred=false;
@@ -55,7 +55,7 @@ this.containerWidget._inputWidgets[2].validate(false);
 this.inherited(arguments);
 }});
 dojo.declare("dojox.form._VerifyPWBox",dojox.form._ChildTextBox,{isValid:function(_5){
-return this.inherited("isValid",arguments)&&(this.attr("value")==this.containerWidget._inputWidgets[1].attr("value"));
+return this.inherited("isValid",arguments)&&(this.get("value")==this.containerWidget._inputWidgets[1].attr("value"));
 }});
 dojo.declare("dojox.form.PasswordValidator",dijit.form._FormValueWidget,{required:true,_inputWidgets:null,oldName:"",templateString:dojo.cache("dojox.form","resources/PasswordValidator.html","<div dojoAttachPoint=\"containerNode\">\n\t<input type=\"hidden\" name=\"${name}\" value=\"\" dojoAttachPoint=\"focusNode\" />\n</div>\n"),_hasBeenBlurred:false,isValid:function(_6){
 return dojo.every(this._inputWidgets,function(i){
@@ -121,7 +121,7 @@ this._createSubWidgets();
 this.connect(this._inputWidgets[1],"_setValueAttr","_childValueAttr");
 this.connect(this._inputWidgets[2],"_setValueAttr","_childValueAttr");
 },_childValueAttr:function(v){
-this.attr("value",this.isValid()?v:"");
+this.set("value",this.isValid()?v:"");
 },_setDisabledAttr:function(_d){
 this.inherited(arguments);
 dojo.forEach(this._inputWidgets,function(i){

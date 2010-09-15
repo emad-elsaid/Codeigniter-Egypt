@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -26,12 +26,12 @@ var _3={amp:"&",apos:"'",quot:"\"",lt:"<",gt:">"};
 var r,_4="";
 while((r=this._entityRe.exec(_2))!==null){
 if(r[1].charAt(1)=="x"){
-_4+=String.fromCharCode(r[1].slice(2),16);
+_4+=String.fromCharCode(parseInt(r[1].slice(2),16));
 }else{
 if(!isNaN(parseInt(r[1].slice(1),10))){
-_4+=String.fromCharCode(r[1].slice(1));
+_4+=String.fromCharCode(parseInt(r[1].slice(1),10));
 }else{
-_4+=_3(r[1]);
+_4+=_3[r[1]]||"";
 }
 }
 }

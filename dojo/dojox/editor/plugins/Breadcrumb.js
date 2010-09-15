@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -19,7 +19,7 @@ dojo.require("dijit.Menu");
 dojo.require("dijit.MenuItem");
 dojo.require("dijit.MenuSeparator");
 dojo.experimental("dojox.editor.plugins.Breadcrumb");
-dojo.requireLocalization("dojox.editor.plugins","Breadcrumb",null,"ROOT,cs,de,es,fr,hu,it,ja,ko,pl,pt,ru,zh,zh-tw");
+dojo.requireLocalization("dojox.editor.plugins","Breadcrumb",null,"ROOT,cs,de,es,fr,hu,it,ja,ko,pl,pt,ro,ru,zh,zh-tw");
 dojo.declare("dojox.editor.plugins._BreadcrumbMenuTitle",[dijit._Widget,dijit._Templated,dijit._Contained],{templateString:"<tr><td dojoAttachPoint=\"title\" colspan=\"4\" class=\"dijitToolbar\" style=\"font-weight: bold; padding: 3px;\"></td></tr>",menuTitle:"",postCreate:function(){
 dojo.setSelectable(this.domNode,false);
 var _1=this.id+"_text";
@@ -33,10 +33,9 @@ dojo.declare("dojox.editor.plugins.Breadcrumb",dijit._editor._Plugin,{_menu:null
 this.editor=_4;
 this._buttons=[];
 this.breadcrumbBar=new dijit.Toolbar();
-dojo.style(this.breadcrumbBar.domNode,"height","1.5em");
 var _5=dojo.i18n.getLocalization("dojox.editor.plugins","Breadcrumb");
 this._titleTemplate=_5.nodeActions;
-dojo.place(this.breadcrumbBar.domNode,this.editor.iframe,"after");
+dojo.place(this.breadcrumbBar.domNode,_4.footer);
 this.editor.onLoadDeferred.addCallback(dojo.hitch(this,function(){
 this._menu=new dijit.Menu({});
 dojo.addClass(this.breadcrumbBar.domNode,"dojoxEditorBreadcrumbArrow");
@@ -63,18 +62,23 @@ this._menu.addChild(this._moveSMenu);
 this._menu.addChild(this._moveEMenu);
 _7._ddConnect=dojo.connect(_7,"openDropDown",dojo.hitch(this,function(){
 this._menuTarget=_7._selNode;
-this._menuTitle.attr("menuTitle",dojo.string.substitute(this._titleTemplate,{"nodeName":"&lt;body&gt;"}));
-this._selEMenu.attr("disabled",true);
-this._delEMenu.attr("disabled",true);
-this._selCMenu.attr("disabled",false);
-this._delCMenu.attr("disabled",false);
-this._moveSMenu.attr("disabled",false);
-this._moveEMenu.attr("disabled",false);
+this._menuTitle.set("menuTitle",dojo.string.substitute(this._titleTemplate,{"nodeName":"&lt;body&gt;"}));
+this._selEMenu.set("disabled",true);
+this._delEMenu.set("disabled",true);
+this._selCMenu.set("disabled",false);
+this._delCMenu.set("disabled",false);
+this._moveSMenu.set("disabled",false);
+this._moveEMenu.set("disabled",false);
 }));
 this.breadcrumbBar.addChild(_7);
 this.connect(this.editor,"onNormalizedDisplayChanged","updateState");
 }));
 this.breadcrumbBar.startup();
+if(dojo.isIE){
+setTimeout(dojo.hitch(this,function(){
+this.breadcrumbBar.domNode.className=this.breadcrumbBar.domNode.className;
+}),100);
+}
 },_selectContents:function(){
 this.editor.focus();
 if(this._menuTarget){
@@ -145,7 +149,7 @@ var _a=_9.getRangeAt(0);
 var _b=dojo.withGlobal(ed.window,"getSelectedElement",dijit._editor.selection)||_a.startContainer;
 var _c=[];
 if(_b&&_b.ownerDocument===ed.document){
-while(_b&&_b!==ed.editNode){
+while(_b&&_b!==ed.editNode&&_b!=ed.document.body&&_b!=ed.document){
 if(_b.nodeType===1){
 _c.push({type:_b.tagName.toLowerCase(),node:_b});
 }
@@ -170,7 +174,7 @@ b._ddConnect=dojo.connect(b,"openDropDown",dojo.hitch(b,function(){
 _d._menuTarget=this._selNode;
 var _e=_d._menuTarget.tagName.toLowerCase();
 var _f=dojo.string.substitute(_d._titleTemplate,{"nodeName":"&lt;"+_e+"&gt;"});
-_d._menuTitle.attr("menuTitle",_f);
+_d._menuTitle.set("menuTitle",_f);
 switch(_e){
 case "br":
 case "hr":
@@ -180,20 +184,20 @@ case "base":
 case "meta":
 case "area":
 case "basefont":
-_d._selCMenu.attr("disabled",true);
-_d._delCMenu.attr("disabled",true);
-_d._moveSMenu.attr("disabled",true);
-_d._moveEMenu.attr("disabled",true);
-_d._selEMenu.attr("disabled",false);
-_d._delEMenu.attr("disabled",false);
+_d._selCMenu.set("disabled",true);
+_d._delCMenu.set("disabled",true);
+_d._moveSMenu.set("disabled",true);
+_d._moveEMenu.set("disabled",true);
+_d._selEMenu.set("disabled",false);
+_d._delEMenu.set("disabled",false);
 break;
 default:
-_d._selCMenu.attr("disabled",false);
-_d._delCMenu.attr("disabled",false);
-_d._selEMenu.attr("disabled",false);
-_d._delEMenu.attr("disabled",false);
-_d._moveSMenu.attr("disabled",false);
-_d._moveEMenu.attr("disabled",false);
+_d._selCMenu.set("disabled",false);
+_d._delCMenu.set("disabled",false);
+_d._selEMenu.set("disabled",false);
+_d._delEMenu.set("disabled",false);
+_d._moveSMenu.set("disabled",false);
+_d._moveEMenu.set("disabled",false);
 }
 }));
 this._buttons.push(b);
@@ -213,6 +217,8 @@ if(dojo.style(this.breadcrumbBar.domNode,"display")==="none"){
 dojo.style(this.breadcrumbBar.domNode,"display","block");
 }
 this._updateBreadcrumb();
+var _10=dojo.marginBox(this.editor.domNode);
+this.editor.resize({h:_10.h});
 }
 },destroy:function(){
 if(this.breadcrumbBar){
@@ -227,8 +233,8 @@ dojo.subscribe(dijit._scopeName+".Editor.getPlugin",null,function(o){
 if(o.plugin){
 return;
 }
-var _10=o.args.name.toLowerCase();
-if(_10==="breadcrumb"){
+var _11=o.args.name.toLowerCase();
+if(_11==="breadcrumb"){
 o.plugin=new dojox.editor.plugins.Breadcrumb({});
 }
 });

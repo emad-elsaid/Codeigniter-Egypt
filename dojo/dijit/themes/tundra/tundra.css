@@ -8,6 +8,9 @@
 	font: inherit;
 	color: inherit;
 }
+.dijit_a11y .dijitReset {
+	-moz-appearance: none; 
+}
 .dijitInline {
 	
 	display:inline-block;			
@@ -27,12 +30,30 @@
 	display: block !important;	
 	position: relative;			
 }
+.dijitInputContainer {
+	
+	#zoom: 1;
+	overflow: hidden;
+	float: none !important; 
+	position:relative;
+}
 .dj_ie INPUT.dijitTextBox,
-.dj_ie .dijitInputField INPUT {
+.dj_ie .dijitTextBox INPUT {
 	font-size: 100%;
 }
-.dj_ie .dijitInputField INPUT { 
-	margin: -1px 0 !important;
+.dijitTextBox .dijitSpinnerButtonContainer,
+.dijitTextBox .dijitArrowButtonContainer,
+.dijitTextBox .dijitValidationContainer {
+	float: right;
+	text-align: center;
+}
+.dijitTextBox INPUT.dijitInputField {
+	
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+.dijitTextBox .dijitValidationContainer {
+	display: none;
 }
 .dijitInlineTable {
 	
@@ -48,6 +69,12 @@
 	font-size:1px;
 	line-height:1px;
 }
+.dijitOffScreen {
+	position: absolute;
+	visibility: hidden;
+	left: 50%;
+	top: -10000px;
+}
 .dijitPopup {
 	position: absolute;
 	background-color: transparent;
@@ -56,14 +83,10 @@
 	padding: 0;
 }
 .dijit_a11y .dijitPopup,
-.dijit_ally .dijitPopup div,
-.dijit_a11y .dijitPopup table,
+.dijit_ally .dijitPopup DIV,
+.dijit_a11y .dijitPopup TABLE,
 .dijit_a11y .dijitTooltipContainer {
 	background-color: white !important;
-}
-.dijitInputField {
-	overflow:hidden;
-	#zoom:1;
 }
 .dijitPositionOnly {
 	
@@ -93,11 +116,6 @@
 	padding: 0;
 	margin: 0;
 }
-.dijitClickableRegion {
-	
-	background-color: #e2ebf2;
-	cursor: text;
-}
 .dijitDisplayNone {
 	
 	display:none !important;
@@ -109,8 +127,16 @@
 .dijit_a11y * {
 	background-image:none !important;
 }
+.dijit_a11y .dijitIcon,
+.dijit_a11y DIV.dijitArrowButtonInner, 
+.dijit_a11y SPAN.dijitArrowButtonInner,
+.dijit_a11y IMG.dijitArrowButtonInner,
 .dijit_a11y .dijitCalendarIncrementControl {
-	display: none;	
+	
+	display: none;
+}
+.dijitSpinner DIV.dijitArrowButtonInner {
+	display: block; 
 }
 .dijit_a11y .dijitA11ySideArrow {
 	display: inline !important; 
@@ -120,7 +146,8 @@
 	padding: 1px;
 }
 .dijit_a11y .dijitCalendarSelectedDate .dijitCalendarDateLabel {
-	border: solid 1px black;
+	border-style: dotted !important;
+	border-width: 1px;
 	padding: 0px;
 }
 .dijit_a11y .dijitCalendarDateTemplate {
@@ -135,17 +162,8 @@
 	border-style: outset!important;
 	border-width: medium!important;
 }
-.dijit_a11y .dijitComboBoxReadOnly .dijitInputField,
-.dijit_a11y .dijitComboBoxReadOnly .dijitButtonNode,
-.dijit_a11y .dijitSpinnerReadOnly .dijitButtonNode,
-.dijit_a11y .dijitSpinnerReadOnly .dijitInputField,
-.dijit_a11y .dijitButtonDisabled .dijitButtonNode,
-.dijit_a11y .dijitDropDownButtonDisabled .dijitButtonNode,
-.dijit_a11y .dijitComboButtonDisabled .dijitButtonNode,
-.dijit_a11y .dijitComboBoxDisabled .dijitInputField,
-.dijit_a11y .dijitComboBoxDisabled .dijitButtonNode,
-.dijit_a11y .dijitSpinnerDisabled .dijitButtonNode,
-.dijit_a11y .dijitSpinnerDisabled .dijitInputField {
+.dijit_a11y .dijitTextBoxReadOnly .dijitInputField,
+.dijit_a11y .dijitTextBoxReadOnly .dijitButtonNode {
 	border-style: outset!important;
 	border-width: medium!important;
 	border-color: #999 !important;
@@ -154,19 +172,12 @@
 .dijitButtonNode * {
 	vertical-align: middle;
 }
-.dijit_a11y .dijitArrowButtonInner {
-	width: 1em;
-	display: none !important;
-}
 .dijitButtonNode .dijitArrowButtonInner {
-	background:no-repeat center;
-	width: 16px;
-}
-.dijitComboBox .dijitArrowButtonInner {
-	display: block;
-}
-.dijit_a11y .dijitToggleButtonChecked .dijitToggleButtonIconChar {
-	display: inline !important;
+	
+	background: no-repeat center;
+	width: 12px;
+	height: 12px;
+	direction: ltr; 
 }
 .dijitLeft {
 	
@@ -191,20 +202,37 @@
 	
 	margin: 0.2em;
 }
+.dijitButtonContents {
+	display: block;		
+}
+td.dijitButtonContents {
+	display: table-cell;	
+}
+.dijitButtonNode IMG {
+	
+	vertical-align:middle;
+	
+}
+TABLE.dijitComboButton { 
+	
+	border-collapse: collapse;
+	border:0;
+	padding:0;
+	margin:0;
+}
+.dijitToolbar .dijitComboButton {
+	
+	border-collapse: separate;
+}
 .dijitToolbar .dijitToggleButton,
 .dijitToolbar .dijitButton,
 .dijitToolbar .dijitDropDownButton,
 .dijitToolbar .dijitComboButton {
 	margin: 0;
 }
-.dj_ie8 .dijitToolbar button,
-.dj_webkit .dijitToolbar button {
+.dijitToolbar .dijitButtonContents {
 	
 	padding: 1px 2px;
-}
-.dj_ie .dijitToolbar .dijitComboBox{
-	
-	vertical-align: middle;
 }
 .dj_ie .dijitComboButton {
 	
@@ -226,15 +254,16 @@
 	text-align:center;
 	white-space: nowrap;
 }
-.dijitButtonNode, .dijitButtonNode * {
-	cursor: pointer;
+.dj_webkit .dijitSpinner .dijitSpinnerButtonContainer {
+	
+	line-height:inherit;
 }
-.dijitReadOnly *,
-.dijitDisabled *,
-.dijitReadOnly,
-.dijitDisabled,
-.dijitDisabledClickableRegion {	
-	cursor: not-allowed !important;
+.dijitTextBox .dijitButtonNode {
+	border-width: 0;
+}
+.dijitButtonNode,
+.dijitButtonNode * {
+	cursor: pointer;
 }
 .dj_ie .dijitButtonNode {
 	
@@ -244,121 +273,250 @@
 	
 	overflow: visible;
 }
-.dijitArrowButton {
-	
-	
-	padding: 0 .4em;
-}
 DIV.dijitArrowButton {
 	float: right;
 }
-.dijitSpinner .dijitInputLayoutContainer .dijitArrowButton {
-	border-style: solid;
-	border-width: 0 0 0 1px !important;
-	padding: 0;
-	position: absolute;
-	right: 0;
-	float: none;
-}
-.dijitSpinner .dijitInputLayoutContainer .dijitArrowButton {
-	position: absolute;
-	height: 50%;
-}
-.dijitSpinner .dijitInputLayoutContainer .dijitDownArrowButton {
-	top: auto;
-	bottom: 0;
-	border-top-width: 1px !important;
-}
-.dijitSpinner .dijitInputLayoutContainer .dijitUpArrowButton {
-	top: 0;
-	bottom: auto;
-}
-TABLE.dijitComboButton {
-	
-	border-collapse: collapse;
-	border:0;
-	padding:0;
-	margin:0;
-}
-.dijitToolbar .dijitComboButton {
-	
-	border-collapse: separate;
-}
-.dj_ie BUTTON.dijitButtonNode {
-	overflow: visible; 
-}
-table .dijitButton .dijitButtonNode,
-table .dijitComboButton .dijitButtonNode {
-	#overflow:hidden; 
-}
-.dijitButtonNode IMG {
-	
-	vertical-align:middle;
-	
-}
-.dijitTextBox,
-.dijitComboBox,
-.dijitSpinner {
+.dijitTextBox {
 	border: solid black 1px;
 	#overflow: hidden; 
 	width: 15em;	
 	vertical-align: middle;
 	#vertical-align: auto;
 }
+.dijitTextBoxReadOnly,
+.dijitTextBoxDisabled {
+	color: gray;
+}
+.dj_webkit .dijitTextBoxDisabled INPUT {
+	color: #eee; 
+}
+.dj_webkit TEXTAREA.dijitTextAreaDisabled {
+	color: #333; 
+}
+.dj_gecko .dijitTextBoxReadOnly INPUT,
+.dj_gecko .dijitTextBoxDisabled INPUT {
+	-moz-user-input: none; 
+}
+.dijitPlaceHolder {
+	
+	color: #AAAAAA;
+	font-style: italic;
+	position: absolute;
+	top: 0;
+	left: 0;
+	#filter: ""; 
+}
 .dijitTimeTextBox {
 	width: 8em;
 }
-.dijitTextBox input:focus,
-.dijitComboBox input:focus,
-.dijitSpinner input:focus {
+.dijitTextBox INPUT:focus {
 	outline: none;	
 }
-.dijitTextBoxFocused,
-.dijitComboBoxFocused,
-.dijitSpinnerFocused, .dijitSpinnerUpArrowActive, .dijitSpinnerDownArrowActive,
-.dijitTextAreaFocused {
-	
+.dijitTextBoxFocused {
 	outline: auto 5px -webkit-focus-ring-color;
 }
-.dijitTextBox INPUT,
-.dijitComboBox INPUT,
-.dijitSpinner INPUT {
-	border-left: solid black 1px;	
-	display:inline;
-	position:static !important;
+.dijitTextBox INPUT {
+	float: left; 
+}
+.dijitInputInner {
+	
 	border:0 !important;
-	margin:0 !important;
-	vertical-align:top !important;
+	vertical-align:middle !important;
 	background-color:transparent !important;
-	background-image:none !important;
 	width:100% !important;
+	
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
 }
-.dijitValidationIcon {
+.dijit_a11y .dijitTextBox INPUT {
+	margin: 0 !important;
+}
+.dijitTextBoxError INPUT.dijitValidationInner,
+.dijitTextBox INPUT.dijitArrowButtonInner {
+	
+	text-indent: -1em !important;
+	direction: ltr !important;
+	text-align: left !important;
+	height: auto !important;
+	#text-indent: 0 !important;
+	#letter-spacing: -5em !important;
+	#text-align: right !important;
+}
+.dj_ie .dijitTextBox INPUT,
+.dj_ie INPUT.dijitTextBox {
+	overflow-y: visible; 
+	line-height: normal; 
+}
+.dj_ie7 .dijitTextBox INPUT.dijitValidationInner,
+.dj_ie7 .dijitTextBox INPUT.dijitArrowButtonInner {
+	line-height: 86%; 
+}
+.dj_ie6 .dijitTextBox INPUT,
+.dj_ie6 INPUT.dijitTextBox,
+.dj_iequirks .dijitTextBox INPUT.dijitValidationInner,
+.dj_iequirks .dijitTextBox INPUT.dijitArrowButtonInner,
+.dj_iequirks .dijitTextBox INPUT.dijitSpinnerButtonInner,
+.dj_iequirks .dijitTextBox INPUT.dijitInputInner,
+.dj_iequirks INPUT.dijitTextBox {
+	line-height: 100%; 
+}
+.dijit_a11y INPUT.dijitValidationInner,
+.dijit_a11y INPUT.dijitArrowButtonInner {
+	
+	text-indent: 0 !important;
+	width: 1em !important;
+	#text-align: left !important;
+}
+.dijitTextBoxError .dijitValidationContainer {
+	display: inline;
+	cursor: default;
+}
+.dijitSpinner .dijitSpinnerButtonContainer,
+.dijitComboBox .dijitArrowButtonContainer {
+	
+	border-width: 0 0 0 1px !important; 
+}
+.dijitSpinner .dijitSpinnerButtonContainer .dijitButtonNode {
+	
+	border-width: 0;
+}
+.dj_ie .dijit_a11y .dijitSpinner .dijitSpinnerButtonContainer .dijitButtonNode {
+	clear: both; 
+}
+.dijit_a11y .dijitTextBox .dijitValidationContainer,
+.dijit_a11y .dijitTextBox .dijitSpinnerButtonContainer,
+.dijit_a11y .dijitComboBox .dijitArrowButtonContainer {
+	
+	border: solid black !important;
+	border-width: 0 0 0 1px !important;
+}
+.dj_ie .dijitToolbar .dijitComboBox {
+	
+	vertical-align: middle;
+}
+.dijitTextBox .dijitSpinnerButtonContainer {
+	width: 1em;
+	position: relative !important;
+	overflow: hidden;
+}
+.dijitSpinner .dijitSpinnerButtonInner {
+	width:1em;
+	visibility:hidden !important; 
+	overflow-x:hidden;
+}
+.dijitComboBox .dijitButtonNode,
+.dijitSpinnerButtonContainer .dijitButtonNode {
+	border-width: 0;
+}
+.dijit_a11y .dijitSpinnerButtonContainer .dijitButtonNode {
+	border: 0 none !important;
+}
+.dijit_a11y .dijitTextBox .dijitSpinnerButtonContainer,
+.dijit_a11y .dijitSpinner .dijitArrowButtonInner,
+.dijit_a11y .dijitSpinnerButtonContainer INPUT {
+	width: 1em !important;
+}
+.dijit_a11y .dijitSpinner .dijitArrowButtonInner {
+	margin: 0 auto !important; 
+}
+.dj_ie .dijit_a11y .dijitSpinner .dijitArrowButtonInner .dijitInputField {
+	padding-left: 0.3em !important;
+	padding-right: 0.3em !important;
+	margin-left: 0.3em !important;
+	margin-right: 0.3em !important;
+	width: 1.4em !important;
+}
+.dj_ie7 .dijit_a11y .dijitSpinner .dijitArrowButtonInner .dijitInputField {
+	padding-left: 0.0em !important; 
+	padding-right: 0.0em !important;
+	width: 1em !important;
+}
+.dj_ie6 .dijit_a11y .dijitSpinner .dijitArrowButtonInner .dijitInputField {
+	margin-left: 0.1em !important;
+	margin-right: 0.1em !important;
+	width: 1em !important;
+}
+.dj_iequirks .dijit_a11y .dijitSpinner .dijitArrowButtonInner .dijitInputField {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	width: 2em !important;
+}
+.dijitSpinner .dijitSpinnerButtonContainer .dijitArrowButton {
+	
+	padding: 0;
+	position: absolute !important;
+	right: 0;
+	float: none;
+	height: 50%;
+	width: 100%;
+	bottom: auto;
+	left: 0;
+	right: auto;
+}
+.dj_iequirks .dijitSpinner .dijitSpinnerButtonContainer .dijitArrowButton {
+	width: auto;
+}
+.dijit_a11y .dijitSpinnerButtonContainer .dijitArrowButton {
+	overflow: visible !important;
+}
+.dijitSpinner .dijitSpinnerButtonContainer .dijitDownArrowButton {
+	top: 50%;
+	border-top-width: 1px !important;
+}
+.dijitSpinner .dijitSpinnerButtonContainer .dijitUpArrowButton {
+	#bottom: 50%;	
+	top: 0;
+}
+.dijitSpinner .dijitArrowButtonInner {
+	margin: auto;
+	overflow-x: hidden;
+	height: 100% !important;
+}
+.dj_iequirks .dijitSpinner .dijitArrowButtonInner {
+	height: auto !important;
+}
+.dijitSpinner .dijitArrowButtonInner .dijitInputField {
+	-moz-transform: scale(0.5);
+	-moz-transform-origin: center top;
+	-webkit-transform: scale(0.5);
+	-webkit-transform-origin: center top;
+	-o-transform: scale(0.5);
+	-o-transform-origin: center top;
+	transform: scale(0.5);
+	transform-origin: left top;
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	width: 100%;
+}
+.dj_ie .dijitSpinner .dijitArrowButtonInner .dijitInputField {
+	zoom: 50%; 
+}
+.dijitSpinner .dijitSpinnerButtonContainer .dijitArrowButtonInner {
+	overflow: hidden;
+}
+.dijit_a11y .dijitSpinner .dijitSpinnerButtonContainer .dijitArrowButton {
+	width: 100%;
+}
+.dj_iequirks .dijit_a11y .dijitSpinner .dijitSpinnerButtonContainer .dijitArrowButton {
+	width: 1em; 
+}
+.dijitSpinner .dijitArrowButtonInner .dijitInputField {
 	visibility: hidden;
-	display: block;
-	padding: 0 2px;
-	float: right;
-	height: auto;
 }
-.dijitValidationIconText {
-	visibility: hidden;
-	display: none;
-	float:right;
-	font-family: sans-serif;
-	font-style:italic;
-	font-size: 0.75em;
-	padding-right: 0.15em;
-	line-height: 160%;
-}
-.dijit_a11y .dijitValidationIcon { display: none !important; }
-.dijit_a11y .dijitValidationIconText { display: block !important; }
-.dijitError .dijitValidationIcon,
-.dijitError .dijitValidationIconText {
+.dijit_a11y .dijitSpinner .dijitArrowButtonInner .dijitInputField {
+	vertical-align:top;
 	visibility: visible;
 }
-.dijitTextBox .dijitArrowButton {
-	
-	display:none;
+.dijit_a11y .dijitSpinnerButtonContainer {
+	width: 1em;
+}
+.dijit_a11y .dijitSpinnerButtonContainer .dijitButtonNode {
+	border-width: 1px 0px 0px 0px;
+	border-style: solid !important;
 }
 .dijitCheckBox,
 .dijitRadio,
@@ -386,8 +544,9 @@ table .dijitComboButton .dijitButtonNode {
 }
 .dijit_a11y .dijitCheckBox,
 .dijit_a11y .dijitRadio {
-	width: auto;
-	height: auto;
+	
+	width: auto !important;
+	height: auto !important;
 }
 .dijit_a11y .dijitCheckBoxInput {
 	opacity: 1;
@@ -395,7 +554,7 @@ table .dijitComboButton .dijitButtonNode {
 	width: auto;
 	height: auto;
 }
-.dijitProgressBarEmpty{
+.dijitProgressBarEmpty {
 	
 	position:relative;overflow:hidden;
 	border:1px solid black; 	
@@ -427,9 +586,9 @@ table .dijitComboButton .dijitButtonNode {
 	background-color:#aaa;
 	background-attachment: fixed;
 }
-.dijit_a11y .dijitProgressBarTile{
+.dijit_a11y .dijitProgressBarTile {
 	
-	border-width:4px;
+	border-width:2px;
 	border-style:solid;
 	background-color:transparent !important;
 }
@@ -486,10 +645,13 @@ table .dijitComboButton .dijitButtonNode {
 .dijitTooltipConnector {
 	position: absolute;
 }
+.dijit_a11y .dijitTooltipConnector {
+	display: none;	
+}
 .dijitTooltipData {
 	display:none;
 }
-.dijitLayoutContainer{
+.dijitLayoutContainer {
 	position: relative;
 	display: block;
 	overflow: hidden;
@@ -535,7 +697,7 @@ body .dijitAlignClient { position: absolute; }
 .dijitSplitterActive {
 	z-index: 11 !important;
 }
-.dijitSplitterCover{
+.dijitSplitterCover {
 	position:absolute;
 	z-index:-1;
 	top:0;
@@ -543,10 +705,10 @@ body .dijitAlignClient { position: absolute; }
 	width:100%;
 	height:100%;
 }
-.dijitSplitterCoverActive{
+.dijitSplitterCoverActive {
 	z-index:3 !important;
 }
-.dj_ie .dijitSplitterCover{
+.dj_ie .dijitSplitterCover {
 	background: white;
 	filter: alpha(opacity=0);
 }
@@ -562,12 +724,16 @@ body .dijitAlignClient { position: absolute; }
 	border-right:1px;
 	cursor: ew-resize;
 }
-.dijitSplitContainer{
+.dijitSplitContainer {
 	position: relative;
 	overflow: hidden;
 	display: block;
 }
-.dijitSplitPane{
+.dj_ff3 .dijit_a11y div.dijitSplitter:focus {
+	outline-style:dotted;
+	outline-width: 2px;
+}
+.dijitSplitPane {
 	position: absolute;
 }
 .dijitSplitContainerSizerH,
@@ -626,74 +792,112 @@ body .dijitAlignClient { position: absolute; }
 	display: block;
 	overflow: hidden;
 }
+.dijitTitlePaneTitle {
+	cursor: pointer;
+}
+.dijitFixedOpen {
+	
+	cursor: default;
+}
+.dijitTitlePaneTitle * {
+	vertical-align: middle;
+}
+.dijitTitlePane .dijitArrowNodeInner {
+	
+	display: none;
+}
+.dijit_a11y .dijitTitlePane .dijitArrowNodeInner {
+	
+	display:inline !important;
+	font-family: monospace;		
+}
+.dijit_a11y .dijitTitlePane .dijitArrowNode {
+	
+	display:none;
+}
+.dj_ie6 .dijitTitlePaneContentOuter,
+.dj_ie6 .dijitTitlePane .dijitTitlePaneTitle {
+	
+	zoom: 1;
+}
 .dijitColorPalette {
-	border:1px solid #999;
-	background:#fff;
-	-moz-border-radius:3pt;
+	border: 1px solid #999;
+	background: #fff;
+	position: relative;
 }
 img.dijitColorPaletteUnder {
-	border-style:none;
-	position:absolute;
-	left:0;
-	top:0;
+	
+	border-style: none;
+	position: absolute;
+	left: 0;
+	top: 0;
 }
-.dijitColorPaletteInner {
+.dijitColorPalette .dijitPaletteTable {
+	
+	padding: 2px 3px 3px 3px;
 	position: relative;
-	overflow:hidden;
-	outline:0;
+	overflow: hidden;
+	outline: 0;
+	border-collapse: separate;
 }
-.dijitPaletteCell {
-	width: 20px;
+.dj_ie6 .dijitColorPalette .dijitPaletteTable,
+.dj_ie7 .dijitColorPalette .dijitPaletteTable,
+.dj_iequirks .dijitColorPalette .dijitPaletteTable {
+	
+	padding: 0;
+	margin: 2px 3px 3px 3px;
+}
+.dijitColorPalette .dijitPaletteCell {
+	
 	height: 20px;
-	position: absolute;
-	overflow: hidden;
-	z-index: 10;
-	outline-width: 0;
+	width: 20px;
+	font-size: 1px;
+	vertical-align: middle;
+	text-align: center;
 }
-.dijitPaletteImg {
-	width: 16px; 
-	height: 14px; 
-	position: absolute;
-	top: 1px;
-	left: 1px;
-	overflow: hidden;
-	cursor: default;
-	border:1px solid #999;
+.dijitColorPalette .dijitPaletteImg {
 	
-}
-.dijitPaletteCellHighlight img {
-	width: 14px; 
-	height: 12px; 
-	position: absolute;
-	top: 1px;
-	left: 1px;
-	overflow: hidden;
+	width: 16px;
+	height: 14px;
+	border: 1px solid #999;
 	cursor: default;
-	border:2px solid #000;
-	outline:1px solid #dedede;
+	vertical-align: middle;
+}
+.dj_iequirks .dijitColorPalette .dijitPaletteImg {
+	margin: 1px;	
+}
+.dijitPaletteTable td {
+		padding: 0px;
+}
+.dijitColorPalette .dijitPaletteCellHover .dijitPaletteImg {
 	
+	border: 1px solid #000;
 }
-.dijit_a11y .dijitPaletteCell {
-	background-color:transparent !important;
+.dijitColorPalette .dijitPaletteCellActive .dijitPaletteImg,
+.dijitColorPalette .dijitPaletteCellSelected .dijitPaletteImg {
+	border: 2px solid #000;
 }
-.dijit_a11y .dijitPaletteImg {
-	background-color:transparent !important;
+.dijit_a11y .dijitColorPalette .dijitPaletteTable,
+.dijit_a11y .dijitColorPalette .dijitPaletteTable * {
+	
+	background-color: transparent !important;
+}
+.dj_gecko .dijit_a11y .dijitColorPalette .dijitPaletteCellFocused .dijitPaletteImg {
+	border: 3px dotted #000;	
+	margin: -1px;
+}
+.dijit_a11y  .dijitColorPalette .dijitPaletteCellHover .dijitPaletteImg {
+	border: 2px solid #000 !important;
 }
 .dijitAccordionContainer {
 	border:1px solid #b7b7b7;
 	border-top:0 !important;
 }
-.dj_webkit .dijitAccordionContainer  div:focus {
-	outline:none;
-}
-.dj_ff3 .dijitAccordionContainer  div:focus {
-	outline:none;
-}
 .dijitAccordionTitle {
 	cursor: pointer;
 }
-.dijitAccordionFocused  {
-	text-decoration: underline;
+.dijitAccordionTitleSelected {
+	cursor: default;
 }
 .dijitAccordionTitle .arrowTextUp,
 .dijitAccordionTitle .arrowTextDown {
@@ -702,13 +906,21 @@ img.dijitColorPaletteUnder {
 	font-weight: normal !important;
 }
 .dijit_a11y .dijitAccordionTitle .arrowTextUp,
-.dijit_a11y .dijitAccordionTitle-selected .arrowTextDown {
+.dijit_a11y .dijitAccordionTitleSelected .arrowTextDown {
 	display: inline;
 }
-.dijit_a11y .dijitAccordionTitle-selected .arrowTextUp {
+.dijit_a11y .dijitAccordionTitleSelected .arrowTextUp {
 	display: none;
 }
-.dijitCalendarContainer thead tr th, .dijitCalendarContainer thead tr td, .dijitCalendarContainer tbody tr td, .dijitCalendarContainer tfoot tr td {
+.dj_ie6 .dijitAccordionTitle,
+.dj_iequirks .dijitAccordionTitle {
+	
+	zoom: 1;
+}
+.dijitCalendarContainer {
+	width: auto;	
+}
+.dijitCalendarContainer th, .dijitCalendarContainer td {
 	padding: 0;
 }
 .dijitCalendarNextYear {
@@ -720,19 +932,17 @@ img.dijitColorPaletteUnder {
 .dijitCalendarIncrementControl {
 	vertical-align: middle;
 }
-.dijitCalendarDisabledDate {
-	color:gray !important;
-}
-.dijitCalendarPreviousMonthDisabled,
-.dijitCalendarCurrentMonthDisabled,
-.dijitCalendarNextMonthDisabled {
-	cursor:default !important
-}
 .dijitCalendarIncrementControl,
-.dijitCalendarBodyContainer tbody tr td,
 .dijitCalendarDateTemplate,
-.dijitCalendarContainer .dijitInline {
-	cursor:pointer;
+.dijitCalendarMonthLabel,
+.dijitCalendarPreviousYear,
+.dijitCalendarNextYear {
+	cursor: pointer;
+}
+.dijitCalendarDisabledDate {
+	color: gray;
+	text-decoration: line-through;
+	cursor: default;
 }
 .dijitSpacer {
 	
@@ -746,7 +956,6 @@ img.dijitColorPaletteUnder {
 	background-color:white;
 }
 .dijitMenuTable {
-	margin:1px 0;
 	border-collapse:collapse;
 	border-width:0;
 	background-color:white;
@@ -754,7 +963,7 @@ img.dijitColorPaletteUnder {
 .dj_webkit .dijitMenuTable td[colspan="2"]{
 	border-right:hidden;
 }
-.dijitMenuItem{
+.dijitMenuItem {
 	text-align: left;
 	white-space: nowrap;
 	padding:.1em .2em;
@@ -771,9 +980,10 @@ img.dijitColorPaletteUnder {
 }
 .dijitMenuItemDisabled * {
 	
-	opacity:0.3;
+	opacity:0.5;
 	cursor:default;
 }
+.dj_ie .dijit_a11y .dijitMenuItemDisabled,
 .dj_ie .dijit_a11y .dijitMenuItemDisabled td,
 .dj_ie .dijitMenuItemDisabled *,
 .dj_ie .dijitMenuItemDisabled td {
@@ -785,11 +995,11 @@ img.dijitColorPaletteUnder {
 	vertical-align: middle;
 }
 .dijit_a11y .dijitMenuItemSelected {
-	border: 1px #fff dotted !important;
+	border: 1px dotted black !important;
 }
 .dj_ff3 .dijit_a11y .dijitMenuItem td {
 	padding: none !important;
-	background:none ! important;
+	background:none !important;
 }
 .dijit_a11y .dijitMenuItemSelected .dijitMenuItemLabel {
 	border-width: 1px;
@@ -833,6 +1043,10 @@ img.dijitColorPaletteUnder {
 .dijit_a11y .dijitCheckedMenuItemIcon {
 	display: none;
 }
+.dj_ie .dijit_a11y .dijitMenuBar .dijitMenuItem {
+	
+	margin: 0px;
+}
 .dijitStackController .dijitToggleButtonChecked * {
 	cursor: default;	
 }
@@ -853,15 +1067,15 @@ img.dijitColorPaletteUnder {
 	overflow: hidden;
 	border: 1px solid black;
 }
-.dijitTabContainer .nowrapTabStrip {
+.nowrapTabStrip {
 	width: 50000px;
 	display: block;
 	position: relative;
 }
-.dijitTabContainer .dijitTabListWrapper {
+.dijitTabListWrapper {
 	overflow: hidden;
 }
-.dijit_a11y .dijitTabContainer .tabStripButton img {
+.dijit_a11y .tabStripButton img {
 	
 	display: none;
 }
@@ -891,7 +1105,7 @@ img.dijitColorPaletteUnder {
 .dijitTabContainerRight-container {
 	border-right: 0px;
 }
-div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
+DIV.dijitTabDisabled, .dj_ie DIV.dijitTabDisabled {
 	cursor: auto;
 }
 .dijitTab {
@@ -906,9 +1120,6 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 }
 .dijitTabChecked {
 	cursor: default;	
-}
-.dijitTabButtonIcon {
-	height: 18px;
 }
 .dijitTabContainerTop-tabs .dijitTab {
 	top: 1px;	
@@ -938,23 +1149,26 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .dijitTabButtonDisabled .tabStripButton {
 	display: none;
 }
-.dijitTab .closeButton {
+.dijitTabCloseButton {
 	margin-left: 1em;
 }
-.dijitTab .closeText {
+.dijitTabCloseText {
 	display:none;
 }
-.dijit_a11y .closeText {
-	display:inline;
-	margin: 0px 6px;
+.dijit_a11y .dijitTabCloseButton {
+	background-image: none !important;
+	width: auto !important;
+	height: auto !important;
+	border: thin dotted;	
 }
-.dijit_a11y .dijitTab .closeImage {
-	display:none;
+.dijit_a11y .dijitTabCloseButtonHover {
+	border:thin solid;	
 }
-.dijit_a11y .closeButton-hover .closeText {
-	border:thin solid;
+.dijit_a11y .dijitTabCloseText {
+	display: inline;
 }
 .dijit_a11y .dijitTabChecked {
+	
 	border-style:dashed !important;
 }
 .dijit_a11y .dijitTabInnerDiv {
@@ -966,25 +1180,24 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	
     border: none !important;
 }
-.dijitInlineEditor {
+.dijitInlineEditBoxDisplayMode {
+	border: 1px solid transparent;	
+	cursor: text;
+}
+.dijit_a11y .dijitInlineEditBoxDisplayMode,
+.dj_ie6 .dijitInlineEditBoxDisplayMode {
 	
-	position:relative;
-	vertical-align:bottom;
+	border: none;
 }
-.dj_ie .dijitInlineEditor {
-	vertical-align:middle;
-}
-.dijitInlineValue {
+.dijitInlineEditBoxDisplayModeHover,
+.dijit_a11y .dijitInlineEditBoxDisplayModeHover,
+.dj_ie6 .dijitInlineEditBoxDisplayModeHover {
 	
+	background-color: #e2ebf2;
+	border: solid 1px black;
 }
-.dijitInlineEditor .dijitButtonContainer {
-	
-	position:absolute;
-	right:0;
-	overflow:visible;
-}
-.dijitInlineEditor .saveButton,
-.dijitInlineEditor .cancelButton {
+.dijitInlineEditBoxDisplayModeDisabled {
+	cursor: default;
 }
 .dijitTreeIndent {
 	
@@ -1018,11 +1231,16 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .dijitDialog {
 	position: absolute;
 	z-index: 999;
-	padding: 1px;
 	overflow: hidden;       
 }
-.dijitDialogFixed div.dijitDialogTitleBar {
+.dijitDialogTitleBar {
+	cursor: move;
+}
+.dijitDialogFixed .dijitDialogTitleBar {
 	cursor:default;
+}
+.dijitDialogCloseIcon {
+	cursor: pointer;
 }
 .dijitDialogUnderlayWrapper {
 	position: absolute;
@@ -1039,7 +1257,7 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .dj_ie .dijitDialogUnderlay {
 	filter: alpha(opacity=50);
 }
-.dijit_a11y .dijitInputLayoutContainer,
+.dijit_a11y .dijitSpinnerButtonContainer,
 .dijit_a11y .dijitDialog {
 	opacity: 1 !important;
 	background-color: white !important;
@@ -1061,14 +1279,27 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .dijitSliderMoveableH {
 	right:0;
 }
-.dijit_a11y div.dijitSliderImageHandle,
+.dijitSliderMoveableV {
+	right:50%;
+}
+.dijit_a11y DIV.dijitSliderImageHandle,
 .dijitSliderImageHandle {
 	margin:0;
 	padding:0;
-	position:absolute !important;
+	position:relative !important;
 	border:8px solid gray;
 	width:0;
 	height:0;
+	cursor: pointer;
+}
+.dj_iequirks .dijit_a11y .dijitSliderImageHandle {
+	font-size: 0;
+}
+.dj_ie7 .dijitSliderImageHandle {
+	overflow: hidden; 
+}
+.dj_ie7 .dijit_a11y .dijitSliderImageHandle {
+	overflow: visible; 
 }
 .dijit_a11y .dijitSliderFocused .dijitSliderImageHandle {
 	border:4px solid #000;
@@ -1077,16 +1308,17 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 }
 .dijitSliderImageHandleV {
 	top:-8px;
-	left:-6px;
+	right: -50%;
 }
 .dijitSliderImageHandleH {
-	left:-8px;
+	left:50%;
 	top:-5px;
 	vertical-align:top;
 }
 .dijitSliderBar {
 	border-style:solid;
 	border-color:black;
+	cursor: pointer;
 }
 .dijitSliderBarContainerV {
 	position:relative;
@@ -1155,10 +1387,19 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .dijitSliderRightBumper {
 	background-color:transparent;
 }
-.dijitSliderDecorationH {
+.dijitSliderDecoration {
 	text-align:center;
 }
-.dijitSlider .dijitSliderButton {
+.dijitSliderV TD {
+	position: relative; 
+}
+.dijitSliderDecorationH {
+	width: 100%;
+}
+.dijitSliderDecorationV {
+	height: 100%;
+}
+.dijitSliderButton {
 	font-family:monospace;
 	margin:0;
 	padding:0;
@@ -1169,7 +1410,10 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 }
 .dijitSliderButtonContainer {
 	text-align:center;
-	height:0;
+	height:0;	
+}
+.dijitSliderButtonContainer * {
+	cursor: pointer;
 }
 .dijitSlider .dijitButtonNode {
 	padding:0;
@@ -1217,6 +1461,12 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	position:relative;
 	left:-50%;
 }
+.dijitRuleLabelV {
+	
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
 .dijitRuleMarkV {
 	height:0;
 	border-right-width:0 !important;
@@ -1228,12 +1478,25 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .dj_ie .dijitRuleLabelContainerV {
 	margin-top:-.55em;
 }
+.dijit_a11y .dijitSliderReadOnly,
+.dijit_a11y .dijitSliderDisabled {
+	opacity:0.6;
+}
+.dj_ie .dijit_a11y .dijitSliderReadOnly .dijitSliderBar,
+.dj_ie .dijit_a11y .dijitSliderDisabled .dijitSliderBar {
+	filter: alpha(opacity=40);
+}
+.dijit_a11y .dijitSlider .dijitSliderButtonContainer DIV {
+	font-family: monospace; 
+	font-size: 1em;
+	line-height: 1em;
+	height: auto;
+	width: auto;
+	margin: 0px 4px;
+}
 .dijit_a11y .dijitButtonContents .dijitButtonText,
 .dijit_a11y .dijitTab .tabLabel {
 	display: inline !important;
-}
-.dj_ie7 .dijitButtonNode > BUTTON.dijitButtonContents > * {
-	position: relative; 
 }
 .dijitTextArea {
 	width:100%;
@@ -1244,16 +1507,6 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 }
 .dj_ie .dijitTextAreaCols {
 	width:auto;
-}
-.dijitTextArea > DIV {
-	text-decoration:none;
-	overflow:auto;
-	min-height: 1.40em;
-}
-.dj_ie .dijitTextArea p {
-	margin-top:0;
-	margin-bottom:0;
-	line-height: normal !important;
 }
 .dijitToolbarSeparator {
 	height: 18px;
@@ -1266,8 +1519,12 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	
 	top: expression(eval((document.documentElement||document.body).scrollTop));
 }
-.RichTextEditable {
+.dijitEditor {
 	display: block;	
+}
+.dijitEditorDisabled,
+.dijitEditorReadOnly {
+	color: gray;
 }
 .dijitTimePickerItemInner {
 	text-align:center;
@@ -1298,64 +1555,40 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	color:white;
 	cursor:pointer;
 }
-.dijit_a11y .dijitTimePickerItem {
-	border-bottom:1px solid #333;
+.dijit_a11y .dijitTimePickerItemSelected .dijitTimePickerItemInner {
+	border: solid 4px black;
+}
+.dijit_a11y .dijitTimePickerItemHover .dijitTimePickerItemInner {
+	border: dashed 4px black;
 }
 .dijitToggleButtonIconChar {
+	
 	display:none !important;
 }
-.dijit_a11y .dijitToggleButtonIconChar {
+.dijit_a11y .dijitToggleButton .dijitToggleButtonIconChar {
 	display:inline !important;
-}
-.dijit_a11y .dijitToggleButtonIconChar {
 	visibility:hidden;
 }
+.dj_ie6 .dijitToggleButtonIconChar, .dj_ie6 .tabStripButton .dijitButtonText {
+	font-family: "Arial Unicode MS";	
+}
 .dijit_a11y .dijitToggleButtonChecked .dijitToggleButtonIconChar {
+	display: inline !important; 
 	visibility:visible !important;
 }
 .dijitArrowButtonChar {
-	display:none !important;
+        display:none !important;
 }
 .dijit_a11y .dijitArrowButtonChar {
-	display:inline !important;
+        display:inline !important;
 }
-.dijitInputLayoutContainer {
-	position: relative;
-	overflow: hidden;
-}
-.dijitSpinnerButtonContainer {
-	float: right;
-	width: 18px;
-	position: relative;
-	overflow: hidden;
-}
-.dijitSpinner .dijitInputLayoutContainer .dijitArrowButton {
-	height: 50%;
-	width: 16px;
-	overflow: hidden;
-}
-.dijitSpinner .dijitInputLayoutContainer .dijitArrowButtonInner {
-	overflow: hidden;
-	line-height: 50%;
-}
-.dijit_a11y .dijitSpinner .dijitInputLayoutContainer .dijitArrowButton {
-	width: 100%;
-}
-.dijit_a11y .dijitSpinner .dijitArrowButton .dijitArrowButtonChar {
-	font-size: 0.4em;
-	vertical-align: top;
-}
-.dijit_a11y .dijitSpinnerButtonContainer {
-	width: 0.5em;
-	margin-left: 2px;
-	overflow: visible;
-}
-.dijit_a11y .dijitSpinnerButtonContainer .dijitButtonNode {
-	border-width: 1px 0px 0px 1px;
-	border-style: solid !important;
+.dijit_a11y .dijitDropDownButton .dijitArrowButtonInner,
+.dijit_a11y .dijitComboButton .dijitArrowButtonInner {
+	display:none !important;
 }
 .dijitSelect {
 	margin: 0.2em;
+	border-collapse: collapse;
 }
 .dj_ie .dijitSelect,
 .dj_ie7 .dijitSelect,
@@ -1364,12 +1597,6 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 }
 .dj_ie8 .dijitSelect .dijitButtonText {
 	vertical-align: top;
-}
-.dijitSelect .dijitButtonNode {
-	text-align: left;
-}
-.dijitRtl .dijitSelect .dijitButtonNode {
-	text-align: right;
 }
 .dijitToolbar .dijitSelect {
 	margin: 0;
@@ -1386,12 +1613,15 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .dijitSelect .dijitButtonContents {
 	padding: 0px;
 	background: transparent none;
+	white-space: nowrap;
+	text-align: left;
 }
 .dijitSelectFixedWidth .dijitButtonContents {
 	width: 100%;
 }
-.dijitSelect .dijitArrowButton {
-	width: 16px;
+.dijitSelectMenu .dijitMenuItemIcon {
+	
+	display:none;
 }
 .dj_ie6 .dijitSelectMenu .dijitMenuItemLabel,
 .dj_ie7 .dijitSelectMenu .dijitMenuItemLabel {
@@ -1408,51 +1638,165 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .dijitSelectMenu {
 	border-width: 1px;
 }
-.dijitSelect .dijitButtonContents {
-	white-space: nowrap;
-}
 .dijitSelectMenu .dijitMenuTable {
 	margin: 0px;
 	background-color: transparent;
 }
-.dijitTextBoxReadOnly,
-.dijitComboBoxReadOnly,
-.dijitSpinnerReadOnly,
-.dijitTextAreaReadOnly,
-.dijitTextBoxDisabled,
-.dijitComboBoxDisabled,
-.dijitSpinnerDisabled,
-.dijitTextAreaDisabled {
-	color: gray;
-}
-.dj_webkit .dijitTextBoxDisabled INPUT,
-.dj_webkit .dijitComboBoxDisabled INPUT,
-.dj_webkit .dijitSpinnerDisabled INPUT {
-	color: #eee;
-}
-.dj_webkit INPUT.dijitTextBoxDisabled,
-.dj_webkit TEXTAREA.dijitTextAreaDisabled {
-	color: #333; 
-}
-.dijit_a11y .dijitSliderReadOnly,
-.dijit_a11y .dijitSliderDisabled {
-	opacity:0.6;
-}
-.dj_ie .dijit_a11y .dijitSliderReadOnly .dijitSliderBar,
-.dj_ie .dijit_a11y .dijitSliderDisabled .dijitSliderBar {
-	filter: alpha(opacity=40);
-}
-.dijit_a11y .dijitSlider .dijitSliderButtonContainer DIV {
-	font-family: monospace; 
-	font-size: 1em;
-	line-height: 1em;
-	height: auto;
-	width: auto;
-	margin: 0px 4px;
-}
 .dijitForceStatic {
-    position: static !important;
+	position: static !important;
 }
+.dijitReadOnly *,
+.dijitDisabled *,
+.dijitReadOnly,
+.dijitDisabled {
+	
+	cursor: default;
+}
+.dijitIconSave,
+.dijitIconPrint,
+.dijitIconCut,
+.dijitIconCopy,
+.dijitIconClear,
+.dijitIconDelete,
+.dijitIconUndo,
+.dijitIconEdit,
+.dijitIconNewTask,
+.dijitIconEditTask,
+.dijitIconEditProperty,
+.dijitIconTask,
+.dijitIconFilter,
+.dijitIconConfigure,
+.dijitIconSearch,
+.dijitIconApplication,
+.dijitIconBookmark,
+.dijitIconChart,
+.dijitIconConnector,
+.dijitIconDatabase,
+.dijitIconDocuments,
+.dijitIconMail,
+.dijitLeaf,
+.dijitIconFile,
+.dijitIconFunction,
+.dijitIconKey,
+.dijitIconPackage,
+.dijitIconSample,
+.dijitIconTable,
+.dijitIconUsers,
+.dijitFolderClosed,
+.dijitIconFolderClosed,
+.dijitFolderOpened,
+.dijitIconFolderOpen,
+.dijitIconError {
+	background-image: url(../../icons/images/commonIconsObjActEnabled.png); 
+	width: 16px;
+	height: 16px;
+}
+.dj_ie6 .dijitIconSave,
+.dj_ie6 .dijitIconPrint,
+.dj_ie6 .dijitIconCut,
+.dj_ie6 .dijitIconCopy,
+.dj_ie6 .dijitIconClear,
+.dj_ie6 .dijitIconDelete,
+.dj_ie6 .dijitIconUndo,
+.dj_ie6 .dijitIconEdit,
+.dj_ie6 .dijitIconNewTask,
+.dj_ie6 .dijitIconEditTask,
+.dj_ie6 .dijitIconEditProperty,
+.dj_ie6 .dijitIconTask,
+.dj_ie6 .dijitIconFilter,
+.dj_ie6 .dijitIconConfigure,
+.dj_ie6 .dijitIconSearch,
+.dj_ie6 .dijitIconApplication,
+.dj_ie6 .dijitIconBookmark,
+.dj_ie6 .dijitIconChart,
+.dj_ie6 .dijitIconConnector,
+.dj_ie6 .dijitIconDatabase,
+.dj_ie6 .dijitIconDocuments,
+.dj_ie6 .dijitIconMail,
+.dj_ie6 .dijitLeaf,
+.dj_ie6 .dijitIconFile,
+.dj_ie6 .dijitIconFunction,
+.dj_ie6 .dijitIconKey,
+.dj_ie6 .dijitIconPackage,
+.dj_ie6 .dijitIconSample,
+.dj_ie6 .dijitIconTable,
+.dj_ie6 .dijitIconUsers,
+.dj_ie6 .dijitFolderClosed,
+.dj_ie6 .dijitIconFolderClosed,
+.dj_ie6 .dijitFolderOpened,
+.dj_ie6 .dijitIconFolderOpen,
+.dj_ie6 .dijitIconError {
+	background-image: url(../../icons/images/commonIconsObjActEnabled8bit.png);
+}
+.dijitDisabled .dijitIconSave,
+.dijitDisabled .dijitIconPrint,
+.dijitDisabled .dijitIconCut,
+.dijitDisabled .dijitIconCopy,
+.dijitDisabled .dijitIconClear,
+.dijitDisabled .dijitIconDelete,
+.dijitDisabled .dijitIconUndo,
+.dijitDisabled .dijitIconEdit,
+.dijitDisabled .dijitIconNewTask,
+.dijitDisabled .dijitIconEditTask,
+.dijitDisabled .dijitIconEditProperty,
+.dijitDisabled .dijitIconTask,
+.dijitDisabled .dijitIconFilter,
+.dijitDisabled .dijitIconConfigure,
+.dijitDisabled .dijitIconSearch,
+.dijitDisabled .dijitIconApplication,
+.dijitDisabled .dijitIconBookmark,
+.dijitDisabled .dijitIconChart,
+.dijitDisabled .dijitIconConnector,
+.dijitDisabled .dijitIconDatabase,
+.dijitDisabled .dijitIconDocuments,
+.dijitDisabled .dijitIconMail,
+.dijitDisabled .dijitLeaf,
+.dijitDisabled .dijitIconFile,
+.dijitDisabled .dijitIconFunction,
+.dijitDisabled .dijitIconKey,
+.dijitDisabled .dijitIconPackage,
+.dijitDisabled .dijitIconSample,
+.dijitDisabled .dijitIconTable,
+.dijitDisabled .dijitIconUsers,
+.dijitDisabled .dijitFolderClosed,
+.dijitDisabled .dijitIconFolderClosed,
+.dijitDisabled .dijitFolderOpened,
+.dijitDisabled .dijitIconFolderOpen,
+.dijitDisabled .dijitIconError {
+	background-image: url(../../icons/images/commonIconsObjActDisabled.png); 
+}
+.dijitIconSave { background-position: 0px; }
+.dijitIconPrint { background-position: -16px; }
+.dijitIconCut { background-position: -32px; }
+.dijitIconCopy { background-position: -48px; }
+.dijitIconClear { background-position: -64px; }
+.dijitIconDelete { background-position: -80px; }
+.dijitIconUndo { background-position: -96px; }
+.dijitIconEdit { background-position: -112px; }
+.dijitIconNewTask { background-position: -128px; }
+.dijitIconEditTask { background-position: -144px; }
+.dijitIconEditProperty { background-position: -166px; }
+.dijitIconTask { background-position: -176px; }
+.dijitIconFilter { background-position: -192px; }
+.dijitIconConfigure { background-position: -208px; }
+.dijitIconSearch { background-position: -224px; }
+.dijitIconError { background-position: -496px; } 
+.dijitIconApplication { background-position: -240px; }
+.dijitIconBookmark { background-position: -256px; }
+.dijitIconChart { background-position: -272px; }
+.dijitIconConnector { background-position: -288px; }
+.dijitIconDatabase { background-position: -304px; }
+.dijitIconDocuments { background-position: -320px; }
+.dijitIconMail { background-position: -336px; }
+.dijitIconFile, .dijitLeaf { background-position: -352px; }
+.dijitIconFunction { background-position: -368px; }
+.dijitIconKey { background-position: -384px; }
+.dijitIconPackage{ background-position: -400px; }
+.dijitIconSample { background-position: -416px; }
+.dijitIconTable { background-position: -432px; }
+.dijitIconUsers { background-position: -448px; }
+.dijitIconFolderClosed, .dijitFolderClosed { background-position: -464px; }
+.dijitIconFolderOpen, .dijitFolderOpened { background-position: -480px; }
 .tundra .dojoDndItemBefore {
 	border-top: 2px solid #369;
 }
@@ -1527,9 +1871,6 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	top: 0px;
 	bottom: 2px;
 }
-.tundra .dijitTabContainer .tabStripMenuButton-Hover {
-	cursor: pointer;
-}
 .tundra .dijitTabChecked {
 	
 	background-color:#fff;
@@ -1561,11 +1902,6 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	border:1px solid #ccc;
 	background:#fff;
 }
-.tundra .dijitTab .dijitClosable .closeImage {
-	background: url(images/tabClose.png) no-repeat right top;
-	width: 12px;
-	height: 12px;
-}
 .tundra .dijitTab .tabLabel {
 	
 	min-height: 12px;
@@ -1595,16 +1931,18 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .tundra .dijitTabContainer .dijitTabPaneWrapperNested {
 	border: none;	
 }
-.tundra .dijitTab .closeImage {
-	background-image : url(images/tabClose.png);
+.tundra .dijitTabCloseButton {
+	background: url(images/tabClose.png) no-repeat right top;
+	width: 12px;
+	height: 12px;
 }
-.dj_ie6 .tundra .dijitTab .closeImage {
+.dj_ie6 .tundra .dijitTabCloseButton {
 	background-image : url(images/tabClose.gif);
 }
-.tundra .dijitTab .closeButton-hover .closeImage {
+.tundra .dijitTabCloseButtonHover {
 	background-image : url(images/tabCloseHover.png);
 }
-.dj_ie6 .tundra .dijitTab .closeButton-hover .closeImage {
+.dj_ie6 .tundra .dijitTabCloseButtonHover {
 	background-image : url(images/tabCloseHover.gif);
 }
 .tundra .dijitTabContainerTop-tabs {
@@ -1686,8 +2024,6 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	padding-top: 3px;
 	height: 100%;
 }
-.tundra .dijitTabContainerLeft .dijitTabListWrapper {
-}
 .tundra .dijitTabContainerLeft-container {
 	border-left: none;
 }
@@ -1737,25 +2073,19 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .dj_opera .tundra .tabStrip-disabled .tabStripButton .dijitTabInnerDiv {
 	padding-bottom: 4px;
 }
-.tundra .dijitTabContainer .tabStripButton {
-	
-	width: 21px;
-}
-.tundra .dijitTabContainer .tabStripButton img {
+.tundra .dijitTabStripIcon {
 	height: 14px;
-	background: url(images/spriteRoundedIconsSmall.png) no-repeat;
+	width: 14px;
+	background: url(images/spriteRoundedIconsSmall.png) no-repeat left top ;
 }
-.dj_ie6 .tundra .dijitTabContainer .tabStripButton img {
+.dj_ie6 .tundra .dijitTabStripIcon {
 	background-image: url(images/spriteRoundedIconsSmall.gif);
 }
-.tundra .dijitTabContainer .tabStripMenuButton img {
-	background-position: -15px top;
-}
-.tundra .dijitTabContainer .tabStripSlideButtonLeft img {
-	background-position: 0px top;
-}
-.tundra .dijitTabContainer .tabStripSlideButtonRight img {
+.tundra .dijitTabStripSlideRightIcon {
 	background-position: -30px top;
+}
+.tundra .dijitTabStripMenuIcon {
+	background-position: -15px top;
 }
 .tundra .dijitAccordionContainer {
 	border-color: #ccc;
@@ -1765,18 +2095,16 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	background:#fafafa url(images/titleBar.png) repeat-x bottom left;
 	border-top: 1px solid #bfbfbf;
 	padding: 4px 4px 4px 8px;
-	cursor:pointer;
 }
-.tundra .dijitAccordionTitle-hover  {
+.tundra .dijitAccordionTitleHover  {
 	background: #f8fafd url(images/accordionItemHover.gif) bottom repeat-x;
 }
-.tundra .dijitAccordionTitle-selected  {
+.tundra .dijitAccordionTitleSelected  {
 	background: #f9f9f9 url(images/accordionItemActive.gif) bottom repeat-x;
 	font-weight: bold;
 	border-top: 1px solid #aaaaaa;
 	border-bottom: 1px solid #bfbfbf;
 	padding: 4px 4px 4px 8px;
-	cursor: default;
 }
 .tundra .dijitSplitContainerSizerH {
 	background:url(images/splitContainerSizerV.png) repeat-y #fff;
@@ -1805,9 +2133,6 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	width:19px;
 	height:3px;
 	overflow: hidden;
-}
-.tundra .dijitSplitter {
-	border-color: #bfbfbf;
 }
 .tundra .dijitBorderContainer {
 	background-color: #fcfcfc;
@@ -1863,102 +2188,45 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	filter: Alpha(Opacity=60);
 	margin: 0;
 }
-.tundra .dijitInputField INPUT,
-.tundra .dijitTextBox,
-.tundra .dijitComboBox,
-.tundra .dijitSpinner {
+.tundra .dijitInputContainer INPUT,
+.tundra .dijitTextBox {
 	margin: 0em 0.1em;
-}
-.tundra .dijitTextBox,
-.tundra .dijitComboBox,
-.tundra .dijitSpinner,
-.tundra .dijitTextArea {
-	font-family: sans-serif;
-	font-size: 100%;
 }
 .tundra .dijitTextArea {
 	padding: 3px;
 }
-.tundra .dijitTextBox,
-.tundra .dijitComboBox,
-.tundra .dijitSpinner,
-.tundra .dijitTextArea,
-.tundra .dijitInlineEditor input {
+.tundra .dijitTextBox {
 	
 	background:#fff url(images/validationInputBg.png) repeat-x top left;
 	#background:#fff url(images/validationInputBg.gif) repeat-x top left;
 	border:1px solid #b3b3b3;
-	line-height: normal;
-}
-.tundra .dijitComboBox .dijitInputField {
-	padding: 1px 0;
 }
 .tundra .dijitComboBox .dijitButtonNode {
-	padding: 1px 0.2em;
+	padding: 0 0.2em;
 }
-.tundra .dijitComboBox .dijitButtonNode,
-.tundra .dijitSpinner .dijitButtonNode {
+.tundra .dijitTextBox .dijitButtonNode {
 	
 	border-color: #9b9b9b;
-	border-width: 0px 0px 0px 1px;
-	border-style: solid;
 }
-.tundra .dijitTextBoxFocused,
-.tundra .dijitComboBoxFocused,
-.tundra .dijitSpinnerFocused, .tundra .dijitSpinnerUpArrowActive, .tundra .dijitSpinnerDownArrowActive,
-.tundra .dijitTextAreaFocused {
+.tundra .dijitTextBoxFocused {
 	
 	border-color:#406b9b;
 }
-.tundra .dijitComboBoxFocused .dijitButtonNode,
-.tundra .dijitSpinnerFocused .dijitButtonNode,
-.tundra .dijitSpinnerUpArrowActive .dijitButtonNode,
-.tundra .dijitSpinnerDownArrowActive .dijitButtonNode {
-	border-left-color:#366dba;
-}
-.tundra .dijitSpinnerFocused .dijitDownArrowButton,
-.tundra .dijitSpinnerUpArrowActive .dijitDownArrowButton,
-.tundra .dijitSpinnerDownArrowActive .dijitDownArrowButton {
-	border-top-color:#366dba;
+.tundra .dijitTextBoxFocused .dijitButtonNode {
+	border-color:#366dba;
 }
 .tundra .dijitError {
 	background-color:#f9f7ba;
 	background-image:none;
 }
-.dj_ie6 .tundra .dijitError INPUT {
-	
-	background-color:#f9f7ba !important;
-}
 .tundra .dijitErrorFocused {
 	background-color:#f9f999;
 	background-image:none;
-}
-.dj_ie6 .tundra .dijitErrorFocused INPUT {
-	
-	background-color:#f9f999 !important;
 }
 .tundra .dijitValidationIcon {
 	
 	width: 16px;
 	background: transparent url(images/warning.png) no-repeat center center;
-}
-.tundra .dijitInlineValue {
-	
-	padding:3px;
-	margin:4px;
-}
-.tundra .dijitInlineEditor {
-	
-	display: inline-block;
-	#display:inline;
-}
-.dijitInlineEditor .saveButton,
-.dijitInlineEditor .cancelButton {
-	margin:3px 3px 3px 0px;
-}
-.RichTextEditable {
-	border:1px solid #bfbfbf;
-	border-top:0;
 }
 .tundra .dijitComboBoxHighlightMatch {
 	background-color:#a5beda;
@@ -1974,17 +2242,6 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	padding: 0.1em 0.2em 0.2em 0.2em;
 	background: #fff url(images/buttonEnabled.png) repeat-x bottom left;
 }
-.tundra .dijitSelect .dijitButtonContents {
-	border-right: none;
-}
-.dijitRtl .tundra .dijitSelect .dijitButtonContents {
-	border-left: none;
-	border-right-width: 1px;
-}
-.tundra .dijitButtonNode button {
-	border: 0px;
-	background-color: transparent;
-}
 .tundra .dijitButtonText {
 	text-align: center;
 	padding: 0 0.3em;
@@ -1998,17 +2255,14 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .tundra .dijitComboButton .dijitDownArrowButton {
 	padding-right:4px;
 }
-.tundra .dijitComboBoxReadOnly,
-.tundra .dijitSpinnerReadOnly,
-.tundra .dijitSpinnerReadOnly .dijitButtonNode,
+.tundra .dijitTextBoxReadOnly,
+.tundra .dijitTextBoxReadOnly .dijitButtonNode,
 .tundra .dijitButtonDisabled .dijitButtonNode,
 .tundra .dijitToggleButtonDisabled .dijitButtonNode,
 .tundra .dijitDropDownButtonDisabled .dijitButtonNode,
 .tundra .dijitComboButtonDisabled .dijitButtonNode,
-.tundra .dijitComboBoxDisabled,
-.tundra .dijitSpinnerDisabled,
-.tundra .dijitSpinnerDisabled .dijitButtonNode {
-	
+.tundra .dijitTextBoxDisabled,
+.tundra .dijitTextBoxDisabled .dijitButtonNode {
 	
 	border-color: #d5d5d5 #d5d5d5 #bdbdbd #d5d5d5;
 	background:#e4e4e4 url(images/buttonDisabled.png) top repeat-x;
@@ -2017,8 +2271,8 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .tundra .dijitButtonNodeHover,
 .tundra .dijitToggleButtonHover .dijitButtonNode,
 .tundra .dijitDropDownButtonHover .dijitButtonNode,
-.tundra .dijitComboButtonHover .dijitButtonContents,
-.tundra .dijitComboButtonDownArrowHover .dijitArrowButton {
+.tundra .dijitComboButton .dijitButtonContentsHover,
+.tundra .dijitComboButton .dijitDownArrowButtonHover {
 	
 	
 	border-color: #a5beda;
@@ -2026,21 +2280,18 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	color:#243C5F;
 	background:#fcfdff url(images/buttonHover.png) repeat-x bottom;
 }
-.tundra .dijitComboBoxHover .dijitDownArrowButton,
-.tundra .dijitSpinnerUpArrowHover .dijitUpArrowButton,
-.tundra .dijitSpinnerDownArrowHover .dijitDownArrowButton {
+.tundra .dijitDownArrowButtonHover,
+.tundra .dijitUpArrowButtonHover {
 	
 	color:#243C5F;
 	background:#fcfdff url(images/buttonHover.png) repeat-x bottom;
 }
-.tundra .dijitSpinnerUpArrowActive .dijitUpArrowButton,
-.tundra .dijitSpinnerDownArrowActive .dijitDownArrowButton,
+.tundra .dijitUpArrowButtonActive,
+.tundra .dijitDownArrowButtonActive,
 .tundra .dijitButtonActive .dijitButtonNode,
 .tundra .dijitToggleButtonActive .dijitButtonNode,
 .tundra .dijitDropDownButtonActive .dijitButtonNode,
-.tundra .dijitComboButtonActive .dijitButtonContents,
-.tundra .dijitDownArrowActive .dijitDownArrowButton,
-.tundra .dijitComboBoxActive .dijitDownArrowButton,
+.tundra .dijitButtonContentsActive,
 .tundra .dijitStackController .dijitToggleButtonChecked .dijitButtonNode {
 	
 	border-color:#366dba;
@@ -2050,8 +2301,10 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	background:url(images/spriteArrows.png) no-repeat scroll 0px center;
 	width: 7px;
 	height: 7px;
-	font-size: 1px;
-	margin: 0px 4px 0px 5px;
+	margin: 0px 4px 0px 4px;
+}
+.tundra .dijitTextBox .dijitArrowButtonInner {
+	background-position: 0 center;
 }
 .dj_ie6 .tundra .dijitArrowButtonInner {
 	background-image:url(images/spriteArrows.gif);
@@ -2077,22 +2330,27 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .tundra .dijitDisabled .dijitUpArrowButton .dijitArrowButtonInner {
 	background-position: -49px center;
 }
-.tundra .dijitComboBox .dijitArrowButton .dijitArrowButtonInner {
-	height: auto;
-	font-size: 100%;
-	font-size: inherit;
+.dj_webkit .tundra .dijitSpinner .dijitUpArrowButton .dijitArrowButtonInner {
+	margin-top: -1px; 
 }
-.tundra .dijitComboBoxHover .dijitArrowButtonInner {
-	
+.dj_ie .tundra .dijitSpinner .dijitDownArrowButton .dijitArrowButtonInner {
+	margin-top: -2px; 
 }
-.tundra .dijitSpinner .dijitArrowButtonInner {
-	display: block;  
-	position:absolute;
-	top: 50%;
-	margin-top: -4px; 
-	left: 50%;
-	margin-left: -4px; 
-	line-height: 2px;
+.dj_ie8 .tundra .dijitSpinner .dijitDownArrowButton .dijitArrowButtonInner {
+	margin-top: -1px; 
+}
+.tundra .dijitSpinnerButtonContainer {
+	width: auto;
+	padding: 0;
+}
+.tundra .dijitSpinner .dijitArrowButton {
+	width: 15px;
+}
+.tundra .dijitSpinner .dijitSpinnerButtonInner {
+	width: 15px;
+}
+.tundra .dijitSpinner .dijitArrowButtonInner .dijitInputField {
+	padding: 0;
 }
 .tundra .dijitToggleButton .dijitCheckBoxIcon {
 	background-image: url(images/checkmarkNoBorder.png);
@@ -2139,15 +2397,7 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	
 	background-position: -64px;
 }
-.tundra .dijitToggleButton .dijitRadio,
-.tundra .dijitToggleButton .dijitRadioIcon {
-	background-image: url(images/checkmarkNoBorder.png);
-}
-.dj_ie6 .tundra .dijitToggleButton .dijitRadio,
-.dj_ie6 .tundra .dijitToggleButton .dijitRadioIcon {
-	background-image: url(images/checkmarkNoBorder.gif);
-}
-.tundra .dijitRadio,
+.tundra .dijitRadio,			
 .tundra .dijitRadioIcon	{		
 	background-image: url(images/checkmark.png); 
 	background-repeat: no-repeat;
@@ -2157,11 +2407,18 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	padding: 0;
 }
 .dj_ie6 .tundra .dijitRadio,
-.dj_ie6 .tundra .dijitRadioIcon	{		
+.dj_ie6 .tundra .dijitRadioIcon	{
 	background-image: url(images/checkmark.gif); 
 }
-.tundra .dijitRadio,
 .tundra .dijitToggleButton .dijitRadioIcon {
+	
+	background-image: url(images/checkmarkNoBorder.png);
+}
+.dj_ie6 .tundra .dijitToggleButton .dijitRadioIcon {
+	background-image: url(images/checkmarkNoBorder.gif);
+}
+.tundra .dijitRadio,
+.tundra .dijitRadioIcon {
 	
 	background-position: -112px;
 }
@@ -2214,15 +2471,11 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .tundra .dijitSliderFocused .dijitSliderBar {
 	border-color:#888;
 }
-.dijit_a11y .dijitSliderProgressBar {
-	background-color:#888 !important;
-}
 .tundra .dijitSliderImageHandleH {
 	border:0px;
 	width:16px;
 	height:16px;
 	background:url(images/preciseSliderThumb.png) no-repeat center top;
-	cursor:pointer;
 }
 .tundra .dijitSliderFocused .dijitSliderImageHandleH {
 	background-image:url(images/preciseSliderThumbFocus.png);
@@ -2246,7 +2499,6 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	width:16px;
 	height:16px;
 	background:url(images/sliderThumb.png) no-repeat center center;
-	cursor:pointer;
 }
 .tundra .dijitSliderFocused .dijitSliderImageHandleV {
 	background-image:url(images/sliderThumbFocus.png);
@@ -2268,7 +2520,6 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .tundra .dijitSliderDecrementIconV,
 .tundra .dijitSliderIncrementIconH,
 .tundra .dijitSliderIncrementIconV {
-	cursor: pointer;
 	background-image: url(images/spriteArrows.png);
 	background-repeat: no-repeat;
 	margin: 5px;
@@ -2318,19 +2569,16 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .tundra .dijitSliderDisabled .dijitSliderIncrementIconV {
 	background-position: -49px 0px;
 }
-.tundra .dijitSelectDisabled * {
-    cursor: not-allowed !important;
-}
-.tundra .dijitSelectReadOnly * {
-    cursor: default !important;
-}
 .tundra .dijitSelect .dijitButtonNode {
 	padding: 0px;
 }
+.tundra .dijitSelect .dijitButtonNode .dijitArrowButtonInner {
+	margin: 0px 4px 0px 5px;
+}
 .tundra .dijitSelect .dijitButtonContents {
 	padding-top: 1px;
-    background:#fff url(images/validationInputBg.png) repeat-x top left;
-    #background:#fff url(images/validationInputBg.gif) repeat-x top left;
+	background:#fff url(images/validationInputBg.png) repeat-x top left;
+	#background:#fff url(images/validationInputBg.gif) repeat-x top left;
 }
 .tundra .dijitSelectHover .dijitButtonContents,
 .tundra .dijitSelectActive .dijitButtonContents,
@@ -2343,30 +2591,26 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	padding-top: 0px;
 }
 .tundra .dijitSelectDisabled .dijitButtonNode {
-    border-color: #d5d5d5 #bdbdbd #bdbdbd #d5d5d5;
-    background:#e4e4e4 url(images/buttonDisabled.png) top repeat-x;
+	border-color: #d5d5d5 #bdbdbd #bdbdbd #d5d5d5;
+	background:#e4e4e4 url(images/buttonDisabled.png) top repeat-x;
 }
 .dj_ie .tundra .dijitSelectDisabled  .dijitButtonNode * {
 	filter: gray() alpha(opacity=50);
 }
 .tundra .dijitSelectHover .dijitButtonNode {
-    border-color:#a5beda;
-    border-bottom-color:#5c7590;
-    border-right-color:#5c7590;
-    color:#243C5F;
-    background:#fcfdff url(images/buttonHover.png) repeat-x bottom;
+	border-color:#a5beda;
+	border-bottom-color:#5c7590;
+	border-right-color:#5c7590;
+	color:#243C5F;
+	background:#fcfdff url(images/buttonHover.png) repeat-x bottom;
 }
 .tundra .dijitSelectActive .dijitButtonNode,
 .tundra .dijitSelectOpened .dijitButtonNode {
-    border-color:#366dba;
-    background: #ededed url(images/buttonActive.png) bottom repeat-x;
+	border-color:#366dba;
+	background: #ededed url(images/buttonActive.png) bottom repeat-x;
 }
 .tundra .dijitSelectMenu td {
 	padding: 0em;
-}
-.tundra .dijitSelectMenu .dijitMenuItemIcon {
-	margin: 0.1em 0.2em;
-	display: none;
 }
 .tundra .dijitSelectMenu .dijitMenuItemLabel,
 .tundra .dijitSelectMenu .dijitMenuArrowCell {
@@ -2395,28 +2639,15 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .tundra .dijitTreeContent {
     min-height: 18px;
     min-width: 18px;
- }
-.tundra .dijitTreeExpand {
-    width: 18px;
-    height: 18px;
-    background-repeat : no-repeat;
 }
-.tundra .dijitTreeNodeEmphasized {
-    background-color: Highlight;
-    color: HighlightText;
-}
-.tundra .dijitTreeLabelFocused {
-	outline: 1px invert dotted;
-}
-.tundra .dijitTreeNodeSelected .dijitTreeLabel {
+.tundra .dijitTreeRowSelected .dijitTreeLabel {
 	background:#e2ebfe;
 }
-.tundra .dijitTreeNodeHover {
-	
+.tundra .dijitTreeRowHover {
 	
 	background-image: url(images/treeHover.png);
 	background-repeat: repeat;
-	background-color: none !important;
+	background-color: transparent !important;
 }
 .tundra .dijitTreeExpandoOpened {
 	background-image: url(images/treeExpand_minus.gif);
@@ -2485,57 +2716,29 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	border:1px solid #bfbfbf;
 	padding:3px 4px;
 }
-.tundra .dijitTitlePaneTitle-hover  {
+.tundra .dijitTitlePaneTitleHover  {
 	background: #f8fafd url(images/accordionItemHover.gif) bottom repeat-x;
-	cursor: pointer;
 }
-.tundra .dijitTitlePaneTitle * {
-	vertical-align: middle;
-}
-.tundra .dijitTitlePane .dijitOpen .dijitArrowNode,
-.tundra .dijitTitlePane .dijitClosed .dijitArrowNode {
+.tundra .dijitTitlePane .dijitArrowNode {
 	background-image: url(images/spriteArrows.png);
 	background-repeat: no-repeat;
+	background-position: 0px 0px;
 	height: 7px;
 	width: 7px;
 }
 .dj_ie6 .tundra .dijitTitlePane .dijitArrowNode {
 	background-image: url(images/spriteArrows.gif);
 }
-.tundra .dijitTitlePane .dijitOpen .dijitArrowNode {
-	background-position: 0px 0px;
-}
 .tundra .dijitTitlePane .dijitClosed .dijitArrowNode {
 	background-position: -14px 0px;
-}
-.tundra .dijitTitlePaneFocused .dijitTitlePaneTextNode {
-	text-decoration:underline;
-}
-.tundra .dijitTitlePane .dijitArrowNodeInner {
-	
-	display:none;
-}
-.dijit_a11y .dijitTitlePane .dijitOpen .dijitArrowNodeInner,
-.dijit_a11y .dijitTitlePane .dijitClosed .dijitArrowNodeInner {
-	display:inline !important;
-	font-family:monospace;
-	padding-bottom:.2em;
-}
-.dijit_a11y .dijitTitlePane .dijitArrowNode {
-	
-	display:none;
 }
 .tundra .dijitTitlePaneContentOuter {
 	background: #ffffff;
 	border:1px solid #bfbfbf;
-	border-top: 1px solid #ccc;	
+	border-top: 0px;
 }
 .tundra .dijitTitlePaneContentInner {
 	padding:10px;
-}
-.dj_ie6 .tundra .dijitTitlePaneContentOuter,
-.dj_ie6 .tundra .dijitTitlePane .dijitTitlePaneTitle {
-	zoom: 1;
 }
 .tundra .dijitTitlePaneTextNode {
 	margin-left: 4px;
@@ -2561,7 +2764,7 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .tundra .dijitCalendarIncrease {
 	background-position: -30px top;
 }
-.tundra table.dijitCalendarContainer {
+.tundra .dijitCalendarContainer {
 	font-size: 100%;
 	border-spacing: 0;
 	border-collapse: separate;
@@ -2611,24 +2814,11 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .tundra .dijitCalendarNextMonth 		{
 	
 	color:#999999;
-	background-color:#f8f8f8 !important;
-}
-.tundra .dijitCalendarPreviousMonthDisabled,
-.tundra .dijitCalendarNextMonthDisabled	{
-	
-	background-color:#a4a5a6 !important;
+	background-color:#f8f8f8;
 }
 .tundra .dijitCalendarCurrentMonth {
 	
-	background-color:white !important;
-}
-.tundra .dijitCalendarCurrentMonthDisabled {
-	
-	background-color:#bbbbbc !important;
-}
-.tundra .dijitCalendarDisabledDate {
-	cursor:default !important;
-	text-decoration:line-through !important;
+	background-color: white;
 }
 .tundra .dijitCalendarCurrentDate {
 	
@@ -2636,7 +2826,11 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	font-weight:bold;
 }
 .tundra .dijitCalendarHoveredDate {
-	background-color: #e2ebf2 !important;
+	background-color: #e2ebf2;
+}
+.tundra .dijitCalendarDisabledDate {
+	text-decoration: line-through;
+	background-color: white;	
 }
 .tundra .dijitCalendarSelectedDate {
 	
@@ -2708,14 +2902,6 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	margin-bottom:-0.3em;
 	border-bottom: none;
 }
-.dijit_a11y .dijitTimePickerTickHover {
-	background-color: #CCC !important;
-	border-top: 1px solid #333 !important;
-	border-bottom: 1px solid #333 !important;
-}
-.dijit_a11y .dijitTimePickerMarkerHover {
-	border-bottom-width: 2px;
-}
 .tundra .dijitToolbar {
 	border-bottom: 1px solid #ccc;
 	background:#eaeaea url(images/titleBar.png) repeat-x top left;
@@ -2756,8 +2942,8 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .tundra .dijitToolbar .dijitButtonHover,
 .tundra .dijitToolbar .dijitToggleButtonHover,
 .tundra .dijitToolbar .dijitDropDownButtonHover,
-.tundra .dijitToolbar .dijitComboButtonHover .dijitButtonContents,
-.tundra .dijitToolbar .dijitComboButtonDownArrowHover .dijitDownArrowButton {
+.tundra .dijitToolbar .dijitComboButton .dijitButtonContentsHover,
+.tundra .dijitToolbar .dijitComboButton .dijitDownArrowButtonHover {
 	
 	border: 1px solid #869cbf;
 	padding: 0px;	
@@ -2772,24 +2958,29 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	border: 1px #555 dotted !important;
 	padding: 0px;
 }
+.tundra .dijitToolbarSeparator {
+	
+	background: url(../../icons/images/editorIconsEnabled.png);
+}
+.tundra .dijitToolbarRtl .dijitToolbarSeparator {
+	
+	background-image: url(../../icons/images/editorIconsDisabled.png);
+}
 .tundra .dijitDialog {
 	background: #fff;
 	border: 1px solid #7eabcd;
-	
 	padding: 0px;
 	-webkit-box-shadow: 0px 5px 10px #adadad;
 }
-.tundra .dijitDialog .dijitDialogPaneContent {
+.tundra .dijitDialogPaneContent {
 	background: #fff;
-	border:none;
-	border-top: 1px solid #d3d3d3; 
+	border-top: 1px solid #d3d3d3;
 	padding:10px;
 }
 .tundra .dijitDialogTitleBar {
 	
 	background: #fafafa url(images/titleBar.png) repeat-x top left;
 	padding: 5px 6px 3px 6px;
-	cursor: move;
 	outline:0; 
 }
 .tundra .dijitDialogTitle {
@@ -2807,15 +2998,14 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	top: 4px;
 	height: 15px;
 	width: 15px;
-	cursor: pointer;
 }
 .dj_ie6 .tundra .dijitDialogCloseIcon {
 	background : url(images/tabClose.gif) no-repeat right top;
 }
-.tundra .dijitDialogCloseIcon-hover {
+.tundra .dijitDialogCloseIconHover {
 	background: url(images/tabCloseHover.png) no-repeat right top;
 }
-.dj_ie6 .tundra .dijitDialogCloseIcon-hover {
+.dj_ie6 .tundra .dijitDialogCloseIconHover {
 	background : url(images/tabCloseHover.gif) no-repeat right top;
 }
 .tundra .dijitTooltip,
@@ -2906,9 +3096,7 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .dj_ie .tundra .dijitTooltipRight .dijitTooltipConnector {
 	background-image: url(images/tooltipConnectorLeft.gif);
 }
-.dj_webkit .tundra .dijitPopup .dijitTooltipContainer,
-.dj_webkit .tundra .dijitPopup .dijitMenu {
-	
+.dj_webkit .tundra .dijitTooltipContainer {
 	-webkit-box-shadow: 0px 5px 10px #adadad;
 }
 .tundra .dijitMenu,
@@ -2917,7 +3105,6 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	margin: 0px;
 	padding: 0px;
 	background-color: #f7f7f7;
-	
 }
 .tundra .dijitBorderContainer .dijitMenuBar {
 	border:1px solid #ccc;
@@ -2926,7 +3113,7 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	font-family: sans-serif;
 	margin: 0;
 }
-.tundra .dijitMenuBar .dijitMenuItem {
+.tundra .dijitMenuItem {
 	padding: 4px 5px;
 }
 .tundra .dijitMenuPreviousButton, .tundra .dijitMenuNextButton {
@@ -2945,6 +3132,7 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 	height: 16px;
 }
 .tundra .dijitMenuExpand {
+	
 	width: 7px;
 	height: 7px;
 	background-image: url(images/spriteArrows.png);
@@ -2972,214 +3160,233 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .tundra .dijitCheckedMenuItemChecked .dijitCheckedMenuItemIcon {
 	background-position: -64px;
 }
-.dijitIEFixedToolbar {
-	position:absolute;
-	
-	top: expression(eval((document.documentElement||document.body).scrollTop));
-}
-.tundra .dijitToolbar .dijitToolbarSeparator {
-	background: url(images/editor.gif);
+.dijitEditor {
+	border:1px solid #bfbfbf;
+	border-top:0;
 }
 .tundra .dijitEditorIcon {
-	background-image: url(images/editor.gif); 
+	background-image: url(../../icons/images/editorIconsEnabled.png); 
 	background-repeat: no-repeat;
 	width: 18px;
 	height: 18px;
 	text-align: center;
 }
 .tundra .dijitDisabled .dijitEditorIcon {
-	background-image: url(images/editorDisabled.gif); 
+	background-image: url(../../icons/images/editorIconsDisabled.png); 
 }
-.tundra .dijitEditorIconSep { background-position: 0px; }
-.tundra .dijitEditorIconBackColor { background-position: -18px; }
-.tundra .dijitEditorIconBold { background-position: -36px; }
-.tundra .dijitEditorIconCancel { background-position: -54px; }
-.tundra .dijitEditorIconCopy { background-position: -72px; }
-.tundra .dijitEditorIconCreateLink { background-position: -90px; }
-.tundra .dijitEditorIconCut { background-position: -108px; }
-.tundra .dijitEditorIconDelete { background-position: -126px; }
-.tundra .dijitEditorIconForeColor { background-position: -144px; }
-.tundra .dijitEditorIconHiliteColor { background-position: -162px; }
-.tundra .dijitEditorIconIndent { background-position: -180px; }
-.tundra .dijitEditorIconInsertHorizontalRule { background-position: -198px; }
-.tundra .dijitEditorIconInsertImage { background-position: -216px; }
-.tundra .dijitEditorIconInsertOrderedList { background-position: -234px; }
-.tundra .dijitEditorIconInsertTable { background-position: -252px; }
-.tundra .dijitEditorIconInsertUnorderedList { background-position: -270px; }
-.tundra .dijitEditorIconItalic { background-position: -288px; }
-.tundra .dijitEditorIconJustifyCenter { background-position: -306px; }
-.tundra .dijitEditorIconJustifyFull { background-position: -324px; }
-.tundra .dijitEditorIconJustifyLeft { background-position: -342px; }
-.tundra .dijitEditorIconJustifyRight { background-position: -360px; }
-.tundra .dijitEditorIconLeftToRight { background-position: -378px; }
-.tundra .dijitEditorIconListBulletIndent { background-position: -396px; }
-.tundra .dijitEditorIconListBulletOutdent { background-position: -414px; }
-.tundra .dijitEditorIconListNumIndent { background-position: -432px; }
-.tundra .dijitEditorIconListNumOutdent { background-position: -450px; }
-.tundra .dijitEditorIconOutdent { background-position: -468px; }
-.tundra .dijitEditorIconPaste { background-position: -486px; }
-.tundra .dijitEditorIconRedo { background-position: -504px; }
-.tundra .dijitEditorIconRemoveFormat { background-position: -522px; }
-.tundra .dijitEditorIconRightToLeft { background-position: -540px; }
-.tundra .dijitEditorIconSave { background-position: -558px; }
-.tundra .dijitEditorIconSpace { background-position: -576px; }
-.tundra .dijitEditorIconStrikethrough { background-position: -594px; }
-.tundra .dijitEditorIconSubscript { background-position: -612px; }
-.tundra .dijitEditorIconSuperscript { background-position: -630px; }
-.tundra .dijitEditorIconUnderline { background-position: -648px; }
-.tundra .dijitEditorIconUndo { background-position: -666px; }
-.tundra .dijitEditorIconWikiword { background-position: -684px; }
-.tundra .dijitEditorIconToggleDir { background-position: -540px; }
-.tundra .dijitEditorIconTabIndent { background-position: -702px; }
-.tundra .dijitEditorIconSelectAll { background-position: -720px; }
-.tundra .dijitEditorIconUnlink { background-position: -738px; }
-.tundra .dijitEditorIconFullScreen { background-position: -756px; }
-.tundra .dijitEditorIconViewSource { background-position: -774px; }
-.tundra .dijitEditorIconPrint { background-position: -792px; }
-.tundra .dijitEditorIconNewPage { background-position: -810px; }
+.dijitEditorIcon {
+	background-image: url(../../icons/images/editorIconsEnabled.png); 
+	background-repeat: no-repeat;
+	width: 18px;
+	height: 18px;
+	text-align: center;
+}
+.dijitDisabled .dijitEditorIcon {
+	background-image: url(../../icons/images/editorIconsDisabled.png); 
+}
+.dijitEditorIconSep { background-position: 0px; }
+.dijitEditorIconSave { background-position: -18px; }
+.dijitEditorIconPrint { background-position: -36px; }
+.dijitEditorIconCut { background-position: -54px; }
+.dijitEditorIconCopy { background-position: -72px; }
+.dijitEditorIconPaste { background-position: -90px; }
+.dijitEditorIconDelete { background-position: -108px; }
+.dijitEditorIconCancel { background-position: -126px; }
+.dijitEditorIconUndo { background-position: -144px; }
+.dijitEditorIconRedo { background-position: -162px; }
+.dijitEditorIconSelectAll { background-position: -180px; }
+.dijitEditorIconBold { background-position: -198px; }
+.dijitEditorIconItalic { background-position: -216px; }
+.dijitEditorIconUnderline { background-position: -234px; }
+.dijitEditorIconStrikethrough { background-position: -252px; }
+.dijitEditorIconSuperscript { background-position: -270px; }
+.dijitEditorIconSubscript { background-position: -288px; }
+.dijitEditorIconJustifyCenter { background-position: -306px; }
+.dijitEditorIconJustifyFull { background-position: -324px; }
+.dijitEditorIconJustifyLeft { background-position: -342px; }
+.dijitEditorIconJustifyRight { background-position: -360px; }
+.dijitEditorIconIndent { background-position: -378px; }
+.dijitEditorIconOutdent { background-position: -396px; }
+.dijitEditorIconListBulletIndent { background-position: -414px; }
+.dijitEditorIconListBulletOutdent { background-position: -432px; }
+.dijitEditorIconListNumIndent { background-position: -450px; }
+.dijitEditorIconListNumOutdent { background-position: -468px; }
+.dijitEditorIconTabIndent { background-position: -486px; }
+.dijitEditorIconLeftToRight { background-position: -504px; }
+.dijitEditorIconRightToLeft, .dijitEditorIconToggleDir { background-position: -522px; }
+.dijitEditorIconBackColor { background-position: -540px; }
+.dijitEditorIconForeColor { background-position: -558px; }
+.dijitEditorIconHiliteColor { background-position: -576px; }
+.dijitEditorIconNewPage { background-position: -594px; }
+.dijitEditorIconInsertImage { background-position: -612px; }
+.dijitEditorIconInsertTable { background-position: -630px; }
+.dijitEditorIconSpace { background-position: -648px; }
+.dijitEditorIconInsertHorizontalRule { background-position: -666px; }
+.dijitEditorIconInsertOrderedList { background-position: -684px; }
+.dijitEditorIconInsertUnorderedList { background-position: -702px; }
+.dijitEditorIconCreateLink { background-position: -720px; }
+.dijitEditorIconUnlink { background-position: -738px; }
+.dijitEditorIconViewSource { background-position: -756px; }
+.dijitEditorIconRemoveFormat { background-position: -774px; }
+.dijitEditorIconFullScreen { background-position: -792px; }
+.dijitEditorIconWikiword { background-position: -810px; }
+ 
 .dijitColorPalette {
 	border:1px solid #7eabcd;
 	background:#fff;
 	-moz-border-radius: 0px !important;
 }
-.dj_gecko-rtl .dijitInputField {
-	direction: ltr; 
+.dijitRtl .dijitPlaceHolder {
+	left: auto;
+	right: 0;
 }
-.dj_gecko-rtl .dijitInputField * {
-	direction: rtl; 
-}
-.dijitRtl .dijitMenuItem {
+.dijitMenuItemRtl {
 	text-align: right;
 }
-.dijitRtl .dijitComboBox .dijitInputField {
-	border-right-width:1px !important;
-	border-left-width:0 !important;
+.dj_iequirks .dijitComboButtonRtl BUTTON {
+	
+	float:left;
 }
-.dijitRtl .dijitCalendarNextYear {
+.dijit_a11y .dijitTextBoxRtl .dijitValidationContainer,
+.dijitTextBoxRtl .dijitSpinnerButtonContainer,
+.dijitComboBoxRtl .dijitArrowButtonContainer {
+	
+	border-right-width: 1px !important;
+	border-right-style: solid !important;
+	border-left-width: 0px !important;
+	border-left-style: none !important;
+}
+.dijit_a11y .dijitTextBoxRtl .dijitValidationContainer,
+.dijit_a11y .dijitTextBoxRtl .dijitSpinnerButtonContainer,
+.dijit_a11y .dijitComboBoxRtl .dijitArrowButtonContainer {
+	border-right: 1px solid black !important;
+	border-left: 0px none black !important;
+}
+.dijitSpinnerRtl .dijitSpinnerButtonContainer .dijitArrowButton {
+	right: 0;
+	left: auto;
+}
+.dijitTextBoxRtl .dijitSpinnerButtonContainer,
+.dijitTextBoxRtl .dijitValidationContainer,
+.dijitTextBoxRtl .dijitArrowButtonContainer {
+	float: left;
+}
+.dijitCalendarRtl .dijitCalendarNextYear {
 	margin:0 0.55em 0 0;
 }
-.dijitRtl .dijitCalendarPreviousYear {
+.dijitCalendarRtl .dijitCalendarPreviousYear {
 	margin:0 0 0 0.55em;
 }
-.dijitRtl .dijitProgressBarFull .dijitProgressBarLabel {
-	right:0; 
-}
-.dijitRtl .dijitSliderImageHandleV {
+.dijitSliderRtl .dijitSliderImageHandleV {
 	left:auto;
-	right:-6px;
 }
-.dj_ie-rtl .dijitSliderImageHandleV {
-	right:-10px;
+.dijitSliderRtl .dijitSliderImageHandleH {
+	left:-50%;
 }
-.dijitRtl .dijitSliderMoveableH {
+.dijitSliderRtl .dijitSliderMoveableH {
 	right:auto;
 	left:0;
 }
-.dijitRtl .dijitRuleContainerV {
+.dijitSliderRtl .dijitRuleContainerV {
 	float:right;
 }
-.dj_gecko-rtl .dijitRuleContainerV {
-	float:left;
-}
-.dj_ie-rtl .dijitRuleContainerV {
+.dj_ie .dijitSliderRtl .dijitRuleContainerV {
 	text-align:right;
 }
-.dj_ie-rtl .dijitRuleLabelV {
+.dj_ie .dijitSliderRtl .dijitRuleLabelV {
 	text-align:left;
 }
-.dj_ie-rtl .dijitRuleLabelH {
+.dj_ie .dijitSliderRtl .dijitRuleLabelH {
 	zoom:1;
 }
-.dj_ie-rtl .dijitSliderProgressBarH {
-	right:0;
-	left:auto;
-}
-.dj_gecko-rtl .dijitSliderProgressBarH {
+.dijitSliderRtl .dijitSliderProgressBarH {
+	
 	float:right;
 	right:0;
 	left:auto;
-}
-.dijitRtl .dijitSpinner .dijitInputLayoutContainer .dijitArrowButton {
-	right: auto;
-	left: 0;
-	border-width: 0 1px 0 0 !important;
-}
-.dijitRtl .dijitSpinnerButtonContainer {
-	float: left;
-}
-.dijitRtl .dijit_a11y .dijitSpinnerButtonContainer {
-	margin-left: none;
-	margin-right: 2px;
-}
-.dijitRtl DIV.dijitArrowButton, .dijitRtl .dijitValidationIcon, .dijitRtl .dijitValidationIconText {
-	float: left;
 }
 .dijitRtl .dijitContentPaneLoading, .dijitRtl .dijitContentPaneError {
 	background-position:right;
 	padding-right:25px;
 }
-.dijitRtl .dijitTabContainer .tabStripMenuButton {
-	float: left;
+.dijitTabRtl .dijitTabCloseButton {
+	margin-left: 0px;
+	margin-right: 1em;
 }
-.dj_iequirks-rtl .dijitComboButton BUTTON {
-        float:left;
+.dj_ie .dijitTimePickerRtl .dijitTimePickerItem {
+	width:100%;
 }
-.dijitRtl .tundra .dijitCalendarDecrease {
+.dijitColorPaletteRtl .dijitColorPaletteUnder {
+	
+	left: auto;
+	right: 0;
+}
+.dijitSelectRtl .dijitButtonContents {
+	text-align: right;
+}
+.tundra .dijitCalendarRtl .dijitCalendarDecrease {
 	background-position: -30px top;
 }
-.dijitRtl .tundra .dijitCalendarIncrease {
+.tundra .dijitCalendarRtl .dijitCalendarIncrease {
 	background-position: 0px top;
 }
-.dijitRtl .tundra .dijitDialogTitleBar .dijitDialogCloseIcon {
+ .dj_ie6 .tundra .dijitTimePickerRtl .dijitTimePickerMarkerHover,
+.dj_ie7 .tundra .dijitTimePickerRtl .dijitTimePickerMarkerHover {
+        border-top: 0px; 
+}
+.tundra .dijitDialogRtl .dijitDialogCloseIcon {
 	right: auto;
 	left: 5px;
 }
-.dijitRtl .tundra .dijitEditorIcon {
-	background-image: url(images/editor_rtl.gif); 
+.tundra .dijitEditorRtl .dijitEditorIcon {
+	background-image: url(../../icons/images/editorIconsEnabled_rtl.png); 
 }
-.dijitRtl .tundra .dijitDisabled .dijitEditorIcon {
-	background-image: url(images/editorDisabled_rtl.gif); 
+.tundra .dijitEditorRtlDisabled .dijitEditorIcon {
+	background-image: url(../../icons/images/editorIconsDisabled_rtl.png); 
 }
-.dijitRtl .tundra .dijitToolbar .dijitToolbarSeparator {
-	background-image: url(images/editor_rtl.gif);
+.dijitEditorRtl .dijitEditorIcon {
+	background-image: url(../../icons/images/editorIconsEnabled_rtl.png); 
 }
-.dijitRtl .tundra .dijitMenuItem .dijitMenuItemIcon {
-	padding-left: 3px;
-	padding-right: 0px;
+.dijitEditorRtlDisabled .dijitEditorIcon {
+	background-image: url(../../icons/images/editorIconsDisabled_rtl.png); 
 }
-.dijitRtl .tundra .dijitMenuItem .dijitMenuExpand {
+.dijitToolbarRtl .dijitToolbarSeparator {
+	background-image: url(../../icons/images/editorIconsEnabled_rtl.png);
+}
+.tundra .dijitMenuItemRtl .dijitMenuExpand {
 	background-position: -7px 0px;
 }
-.dijitRtl .tundra .dijitTreeContainer .dijitTreeNode {
-    background-image : none;
+.tundra .dijitTreeNodeRtl,
+.tundra .dijitTreeNodeRtl .dijitTreeExpandoLeaf {
+	
+    background-image: none;
 }
-.dijitRtl .tundra .dijitTreeContainer .dijitTreeExpandoOpened {
+.tundra .dijitTreeNodeRtl .dijitTreeExpandoOpened {
+	
 	background-image: url(images/treeExpand_minus_rtl.gif);
 }
-.dijitRtl .tundra .dijitTreeContainer .dijitTreeExpandoClosed {
+.tundra .dijitTreeNodeRtl .dijitTreeExpandoClosed {
 	background-image: url(images/treeExpand_plus_rtl.gif);
 }
-.dijitRtl .tundra .dijitTreeContainer .dijitTreeExpandoLeaf {
-	background-image: none;
-}
-.dijitRtl .tundra .dijitTitlePane .dijitClosed .dijitArrowNode {
+.tundra .dijitTitlePaneRtl .dijitClosed .dijitArrowNode {
 	background-position: -7px 0px;
 }
-.dijitRtl .tundra .dijitTab {
+.tundra .dijitTabRtl {
 	-moz-box-orient:horizontal;
 	text-align: right;
 }
-.dijitRtl .tundra .dijitTabInnerDiv {
+.tundra .dijitTabRtl .dijitTabInnerDiv {
 	padding:2px 9px 2px 8px;
 }
-.dijitRtl .tundra .tabStrip-disabled .tabStripButton .dijitTabInnerDiv {
+.tundra .tabStrip-disabled .tabStripButtonRtl .dijitTabInnerDiv {
+	
 	padding-bottom: 3px;
 	padding-top: 1px;
 }
-.dijitRtl .tundra .tabStripButton .dijitTabInnerDiv {
+.tundra .tabStripButtonRtl .dijitTabInnerDiv {
 	padding: 3px 2px 4px 2px;
 }
-.dijitRtl .tundra .dijitTabPaneWrapper {
+.tundra .dijitTabPaneWrapper {
 	#zoom: 1;
 }
 .dj_ie-rtl .tundra .dijitTabContainerLeft-tabs {
@@ -3188,43 +3395,43 @@ div.dijitTabBtnDisabled, .dj_ie div.dijitTabBtnDisabled {
 .dj_ie-rtl .tundra .dijitTabContainerRight-tabs {
 	margin-right: 1px !important;
 }
-.dijitRtl .tundra .dijitTabContainerLeft-tabs .dijitTab,
-.dijitRtl .tundra .dijitTabContainerRight-tabs .dijitTab {
+.tundra .dijitTabContainerLeft-tabs .dijitTabRtl,
+.tundra .dijitTabContainerRight-tabs .dijitTabRtl {
 	margin-left:0px;
 }
-.dj_ie-rtl .tundra .dijitTab .dijitTabInnerDiv {
+.dj_ie .tundra .dijitTabRtl .dijitTabInnerDiv {
 	
 	width : 0.1% !important;
 }
-.dijitRtl .tundra .dijitSliderProgressBarH,
-.dijitRtl .tundra .dijitSliderRemainingBarH,
-.dijitRtl .tundra .dijitSliderLeftBumper,
-.dijitRtl .tundra .dijitSliderRightBumper,
-.dijitRtl .tundra .dijitSliderTopBumper {
+.dj_iequirks-rtl .tundra .dijitTabContainerTopNone,
+.dj_iequirks-rtl .tundra .dijitTabContainerBottomNone {
+	
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
+}
+.tundra .dijitSliderRtl .dijitSliderProgressBarH,
+.tundra .dijitSliderRtl .dijitSliderRemainingBarH,
+.tundra .dijitSliderRtl .dijitSliderLeftBumper,
+.tundra .dijitSliderRtl .dijitSliderRightBumper,
+.tundra .dijitSliderRtl .dijitSliderTopBumper {
 	background-position: top right;
 }
-.dijitRtl .tundra .dijitSliderProgressBarV,
-.dijitRtl .tundra .dijitSliderRemainingBarV,
-.dijitRtl .tundra .dijitSliderBottomBumper {
+.tundra .dijitSliderRtl .dijitSliderProgressBarV,
+.tundra .dijitSliderRtl .dijitSliderRemainingBarV,
+.tundra .dijitSliderRtl .dijitSliderBottomBumper {
 	background-position: bottom right;
 }
-.dijitRtl .tundra .dijitSliderLeftBumper {
+.tundra .dijitSliderRtl .dijitSliderLeftBumper {
 	border-left-width: 0px;
 	border-right-width: 1px;
 }
-.dijitRtl .tundra .dijitSliderRightBumper {
+.tundra .dijitSliderRtl .dijitSliderRightBumper {
 	border-left-width: 1px;
 	border-right-width: 0px;
 }
-.dijitRtl .tundra .dijitSliderIncrementIconH {
+.tundra .dijitSliderRtl .dijitSliderIncrementIconH {
 	background-position: -7px 0px;
 }
-.dijitRtl .tundra .dijitSliderDecrementIconH {
+.tundra .dijitSliderRtl .dijitSliderDecrementIconH {
 	background-position: -14px 0px;
-}
-.dijitRtl .tundra .dijitComboBox .dijitButtonNode,
-.dijitRtl .tundra .dijitSpinner .dijitButtonNode {
-	
-	border-left-width: 0px;
-	border-right-width: 1px;
 }

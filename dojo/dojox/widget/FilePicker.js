@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -10,7 +10,7 @@ dojo._hasResource["dojox.widget.FilePicker"]=true;
 dojo.provide("dojox.widget.FilePicker");
 dojo.require("dojox.widget.RollingList");
 dojo.require("dojo.i18n");
-dojo.requireLocalization("dojox.widget","FilePicker",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ru,sk,sl,sv,th,tr,zh,zh-tw");
+dojo.requireLocalization("dojox.widget","FilePicker",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ro,ru,sk,sl,sv,th,tr,zh,zh-tw");
 dojo.declare("dojox.widget._FileInfoPane",[dojox.widget._RollingListPane],{templateString:"",templateString:dojo.cache("dojox.widget","FilePicker/_FileInfoPane.html","<div class=\"dojoxFileInfoPane\">\n\t<table>\n\t\t<tbody>\n\t\t\t<tr>\n\t\t\t\t<td class=\"dojoxFileInfoLabel dojoxFileInfoNameLabel\">${_messages.name}</td>\n\t\t\t\t<td class=\"dojoxFileInfoName\" dojoAttachPoint=\"nameNode\"></td>\n\t\t\t</tr>\n\t\t\t<tr>\n\t\t\t\t<td class=\"dojoxFileInfoLabel dojoxFileInfoPathLabel\">${_messages.path}</td>\n\t\t\t\t<td class=\"dojoxFileInfoPath\" dojoAttachPoint=\"pathNode\"></td>\n\t\t\t</tr>\n\t\t\t<tr>\n\t\t\t\t<td class=\"dojoxFileInfoLabel dojoxFileInfoSizeLabel\">${_messages.size}</td>\n\t\t\t\t<td class=\"dojoxFileInfoSize\" dojoAttachPoint=\"sizeNode\"></td>\n\t\t\t</tr>\n\t\t</tbody>\n\t</table>\n\t<div dojoAttachPoint=\"containerNode\" style=\"display:none;\"></div>\n</div>\n"),postMixInProperties:function(){
 this._messages=dojo.i18n.getLocalization("dojox.widget","FilePicker",this.lang);
 this.inherited(arguments);
@@ -117,7 +117,7 @@ ret=new dojox.widget._FileInfoPane({});
 return ret;
 },_setPathValueAttr:function(_17,_18,_19){
 if(!_17){
-this.attr("value",null);
+this.set("value",null);
 return;
 }
 if(_17.lastIndexOf(this.pathSeparator)==(_17.length-1)){
@@ -127,7 +127,7 @@ this.store.fetchItemByIdentity({identity:_17,onItem:function(v){
 if(_18){
 this._lastExecutedValue=v;
 }
-this.attr("value",v);
+this.set("value",v);
 if(_19){
 _19();
 }

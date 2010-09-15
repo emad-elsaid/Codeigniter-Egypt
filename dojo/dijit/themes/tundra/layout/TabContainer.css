@@ -31,9 +31,6 @@
 	top: 0px;
 	bottom: 2px;
 }
-.tundra .dijitTabContainer .tabStripMenuButton-Hover {
-	cursor: pointer;
-}
 .tundra .dijitTabChecked {
 	
 	background-color:#fff;
@@ -65,11 +62,6 @@
 	border:1px solid #ccc;
 	background:#fff;
 }
-.tundra .dijitTab .dijitClosable .closeImage {
-	background: url("../images/tabClose.png") no-repeat right top;
-	width: 12px;
-	height: 12px;
-}
 .tundra .dijitTab .tabLabel {
 	
 	min-height: 12px;
@@ -99,16 +91,18 @@
 .tundra .dijitTabContainer .dijitTabPaneWrapperNested {
 	border: none;	
 }
-.tundra .dijitTab .closeImage {
-	background-image : url("../images/tabClose.png");
+.tundra .dijitTabCloseButton {
+	background: url("../images/tabClose.png") no-repeat right top;
+	width: 12px;
+	height: 12px;
 }
-.dj_ie6 .tundra .dijitTab .closeImage {
+.dj_ie6 .tundra .dijitTabCloseButton {
 	background-image : url("../images/tabClose.gif");
 }
-.tundra .dijitTab .closeButton-hover .closeImage {
+.tundra .dijitTabCloseButtonHover {
 	background-image : url("../images/tabCloseHover.png");
 }
-.dj_ie6 .tundra .dijitTab .closeButton-hover .closeImage {
+.dj_ie6 .tundra .dijitTabCloseButtonHover {
 	background-image : url("../images/tabCloseHover.gif");
 }
 .tundra .dijitTabContainerTop-tabs {
@@ -190,8 +184,6 @@
 	padding-top: 3px;
 	height: 100%;
 }
-.tundra .dijitTabContainerLeft .dijitTabListWrapper {
-}
 .tundra .dijitTabContainerLeft-container {
 	border-left: none;
 }
@@ -241,23 +233,17 @@
 .dj_opera .tundra .tabStrip-disabled .tabStripButton .dijitTabInnerDiv {
 	padding-bottom: 4px;
 }
-.tundra .dijitTabContainer .tabStripButton {
-	
-	width: 21px;
-}
-.tundra .dijitTabContainer .tabStripButton img {
+.tundra .dijitTabStripIcon {
 	height: 14px;
-	background: url(../images/spriteRoundedIconsSmall.png) no-repeat;
+	width: 14px;
+	background: url(../images/spriteRoundedIconsSmall.png) no-repeat left top ;
 }
-.dj_ie6 .tundra .dijitTabContainer .tabStripButton img {
+.dj_ie6 .tundra .dijitTabStripIcon {
 	background-image: url(../images/spriteRoundedIconsSmall.gif);
 }
-.tundra .dijitTabContainer .tabStripMenuButton img {
-	background-position: -15px top;
-}
-.tundra .dijitTabContainer .tabStripSlideButtonLeft img {
-	background-position: 0px top;
-}
-.tundra .dijitTabContainer .tabStripSlideButtonRight img {
+.tundra .dijitTabStripSlideRightIcon {
 	background-position: -30px top;
+}
+.tundra .dijitTabStripMenuIcon {
+	background-position: -15px top;
 }

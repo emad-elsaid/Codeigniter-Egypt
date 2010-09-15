@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -75,7 +75,9 @@ val=it[i];
 if((typeof val=="object")&&val&&!(val instanceof Date)&&i!="__parent"){
 _a=val[_4]||(_5&&val[_3]);
 if(!_a||!val.__parent){
-val.__parent=it;
+if(it!=_b){
+val.__parent=_15;
+}
 }
 if(_a){
 delete it[i];
@@ -116,7 +118,7 @@ _8.onUpdate(_15,i,old,val);
 }
 }
 }
-if(_14&&(_3 in it)){
+if(_14&&(_3 in it||_15 instanceof Array)){
 for(i in _15){
 if(!_15.__isDirty&&_15.hasOwnProperty(i)&&!it.hasOwnProperty(i)&&!(i.charAt(0)=="_"&&i.charAt(1)=="_")&&!(_15 instanceof Array&&isNaN(i))){
 if(_8.onUpdate&&i!="_loadObject"&&i!="_idAttr"){

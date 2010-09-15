@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -105,7 +105,7 @@ dojo.forEach(_10,function(i){
 this._addOptionForItem(i);
 },this);
 this._loadingStore=false;
-this.attr("value",(("_pendingValue" in this)?this._pendingValue:_d));
+this.set("value",(("_pendingValue" in this)?this._pendingValue:_d));
 delete this._pendingValue;
 if(!this.loadChildrenOnOpen){
 this._loadChildren();
@@ -165,7 +165,7 @@ this._setDisplay(this.multiple?_16:_16[0]);
 this._updateSelection();
 this._handleOnChange(this.value,_13);
 },_getDisplayedValueAttr:function(){
-var val=this.attr("value");
+var val=this.get("value");
 if(!dojo.isArray(val)){
 val=[val];
 }
@@ -300,7 +300,7 @@ this.inherited(arguments);
 },_getChildren:function(){
 return [];
 },_getSelectedOptionsAttr:function(){
-return this.getOptions(this.attr("value"));
+return this.getOptions(this.get("value"));
 },_pseudoLoadChildren:function(_2f){
 },onSetStore:function(){
 }});

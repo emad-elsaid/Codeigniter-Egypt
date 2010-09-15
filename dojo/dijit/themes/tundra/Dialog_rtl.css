@@ -1,5 +1,5 @@
 
-.dijitRtl .tundra .dijitDialogTitleBar .dijitDialogCloseIcon {
+.tundra .dijitDialogRtl .dijitDialogCloseIcon {
 	right: auto;
 	left: 5px;
 }

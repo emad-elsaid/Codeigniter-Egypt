@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -104,7 +104,7 @@ return _a;
 };
 d._isDocumentOk=function(_d){
 var _e=_d.status||0,lp=location.protocol;
-return (_e>=200&&_e<300)||_e==304||_e==1223||(!_e&&(lp=="file:"||lp=="chrome:"||lp=="app:"));
+return (_e>=200&&_e<300)||_e==304||_e==1223||(!_e&&(lp=="file:"||lp=="chrome:"||lp=="chrome-extension:"||lp=="app:"));
 };
 var _f=window.location+"";
 var _10=document.getElementsByTagName("base");
@@ -150,6 +150,7 @@ var mll=d._windowUnloaders;
 while(mll.length){
 (mll.pop())();
 }
+d=null;
 };
 var _18=0;
 d.addOnWindowUnload=function(obj,_19){
@@ -170,6 +171,10 @@ _15("onbeforeunload",dojo.unloaded);
 })();
 dojo._initFired=false;
 dojo._loadInit=function(e){
+if(dojo._scrollIntervalId){
+clearInterval(dojo._scrollIntervalId);
+dojo._scrollIntervalId=0;
+}
 if(!dojo._initFired){
 dojo._initFired=true;
 if(!dojo.config.afterOnLoad&&window.detachEvent){
@@ -187,23 +192,34 @@ window.addEventListener("load",dojo._loadInit,false);
 }else{
 if(window.attachEvent){
 window.attachEvent("onload",dojo._loadInit);
+if(!dojo.config.skipIeDomLoaded&&self===self.top){
+dojo._scrollIntervalId=setInterval(function(){
+try{
+if(document.body){
+document.documentElement.doScroll("left");
+dojo._loadInit();
+}
+}
+catch(e){
+}
+},30);
+}
 }
 }
 }
 if(dojo.isIE){
-if(!dojo.config.afterOnLoad&&!dojo.config.skipIeDomLoaded){
-document.write("<scr"+"ipt defer src=\"//:\" "+"onreadystatechange=\"if(this.readyState=='complete'){"+dojo._scopeName+"._loadInit();}\">"+"</scr"+"ipt>");
-}
 try{
+(function(){
 document.namespaces.add("v","urn:schemas-microsoft-com:vml");
-var vmlElems=["*","group","roundrect","oval","shape","rect","imagedata"],i=0,l=1,s=document.createStyleSheet();
+var _1c=["*","group","roundrect","oval","shape","rect","imagedata","path","textpath","text"],i=0,l=1,s=document.createStyleSheet();
 if(dojo.isIE>=8){
 i=1;
-l=vmlElems.length;
+l=_1c.length;
 }
 for(;i<l;++i){
-s.addRule("v\\:"+vmlElems[i],"behavior:url(#default#VML); display:inline-block");
+s.addRule("v\\:"+_1c[i],"behavior:url(#default#VML); display:inline-block");
 }
+})();
 }
 catch(e){
 }
@@ -212,8 +228,8 @@ catch(e){
 (function(){
 var mp=dojo.config["modulePaths"];
 if(mp){
-for(var _1c in mp){
-dojo.registerModulePath(_1c,mp[_1c]);
+for(var _1d in mp){
+dojo.registerModulePath(_1d,mp[_1d]);
 }
 }
 })();

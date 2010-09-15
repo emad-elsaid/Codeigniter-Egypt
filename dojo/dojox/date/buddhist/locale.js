@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -13,7 +13,7 @@ dojo.require("dojox.date.buddhist.Date");
 dojo.require("dojo.regexp");
 dojo.require("dojo.string");
 dojo.require("dojo.i18n");
-dojo.requireLocalization("dojo.cldr","buddhist",null,"th");
+dojo.requireLocalization("dojo.cldr","buddhist",null,"ROOT,th");
 (function(){
 function _1(_2,_3,_4,_5,_6){
 return _6.replace(/([a-z])\1*/ig,function(_7){
@@ -54,7 +54,7 @@ s=_3[_b][d];
 break;
 case "a":
 var _c=(_2.getHours()<12)?"am":"pm";
-s=_3[_c];
+s=_3["dayPeriods-format-wide-"+_c];
 break;
 case "h":
 case "H":
@@ -201,8 +201,7 @@ case "d":
 _2b[2]=Number(v);
 break;
 case "a":
-var am=_23.am||_26.am;
-var pm=_23.pm||_26.pm;
+var am=_23.am||_26["dayPeriods-format-wide-am"],pm=_23.pm||_26["dayPeriods-format-wide-pm"];
 if(!_23.strict){
 var _32=/\./g;
 v=v.replace(_32,"").toLowerCase();
@@ -316,8 +315,7 @@ case "S":
 s="\\d{"+l+"}";
 break;
 case "a":
-var am=_3f.am||_3e.am||"AM";
-var pm=_3f.pm||_3e.pm||"PM";
+var am=_3f.am||_3e["dayPeriods-format-wide-am"],pm=_3f.pm||_3e["dayPeriods-format-wide-pm"];
 if(_3f.strict){
 s=am+"|"+pm;
 }else{

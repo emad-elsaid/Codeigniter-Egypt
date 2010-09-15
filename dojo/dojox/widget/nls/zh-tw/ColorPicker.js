@@ -1,1 +1,1 @@
-({"hexLabel":"十六進位","redLabel":"r","valueLabel":"v","hueLabel":"h","saturationLabel":"s","degLabel":"°","greenLabel":"g","blueLabel":"b"})
+({"hexLabel":"十六進位","saturationPickerTitle":"Saturation Selector","valueLabel":"v","blueLabel":"b","saturationLabel":"s","greenLabel":"g","redLabel":"r","hueLabel":"h","huePickerTitle":"Hue Selector","degLabel":"°"})

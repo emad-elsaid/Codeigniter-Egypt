@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -146,6 +146,7 @@ this._togglingColumn=-1;
 }
 var _12=this.grid.layout.cells;
 var _13=dojo.hitch(this,function(_14,_15){
+!dojo._isBodyLtr()&&(_15=!_15);
 var inc=_15?-1:1;
 var idx=this.header.getCellNodeIndex(_14)+inc;
 var _16=_12[idx];
@@ -294,6 +295,7 @@ _2b.setColumnsWidth(_2b.getColumnsWidth());
 }
 var stn=this.source._targetNode;
 var stb=this.source._beforeTarget;
+!dojo._isBodyLtr()&&(stb=!stb);
 var _2c=this.grid.layout;
 var idx=this.index;
 delete this.source._targetNode;
@@ -312,9 +314,9 @@ var ret=["<div class=\"dojoxGridSortNode"];
 if(_2d.index!=_2d.grid.getSortIndex()){
 ret.push("\">");
 }else{
-ret=ret.concat([" ",_2d.grid.sortInfo>0?"dojoxGridSortUp":"dojoxGridSortDown","\"><div class=\"dojoxGridArrowButtonChar\">",_2d.grid.sortInfo>0?"&#9650;":"&#9660;","</div><div class=\"dojoxGridArrowButtonNode\" role=\"presentation\"></div>"]);
+ret=ret.concat([" ",_2d.grid.sortInfo>0?"dojoxGridSortUp":"dojoxGridSortDown","\"><div class=\"dojoxGridArrowButtonChar\">",_2d.grid.sortInfo>0?"&#9650;":"&#9660;","</div><div class=\"dojoxGridArrowButtonNode\" role=\"presentation\"></div>","<div class=\"dojoxGridColCaption\">"]);
 }
-ret=ret.concat([n,"</div>"]);
+ret=ret.concat([n,"</div></div>"]);
 return ret.join("");
 },resize:function(){
 this.adaptHeight();

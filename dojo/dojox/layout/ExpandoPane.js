@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -12,7 +12,7 @@ dojo.experimental("dojox.layout.ExpandoPane");
 dojo.require("dijit.layout.ContentPane");
 dojo.require("dijit._Templated");
 dojo.require("dijit._Contained");
-dojo.declare("dojox.layout.ExpandoPane",[dijit.layout.ContentPane,dijit._Templated,dijit._Contained],{maxHeight:"",maxWidth:"",splitter:false,templateString:dojo.cache("dojox.layout","resources/ExpandoPane.html","<div class=\"dojoxExpandoPane\" dojoAttachEvent=\"ondblclick:toggle\" >\n\t<div dojoAttachPoint=\"titleWrapper\" class=\"dojoxExpandoTitle\">\n\t\t<div class=\"dojoxExpandoIcon\" dojoAttachPoint=\"iconNode\" dojoAttachEvent=\"onclick:toggle\"><span class=\"a11yNode\">X</span></div>\t\t\t\n\t\t<span class=\"dojoxExpandoTitleNode\" dojoAttachPoint=\"titleNode\">${title}</span>\n\t</div>\n\t<div class=\"dojoxExpandoWrapper\" dojoAttachPoint=\"cwrapper\" dojoAttachEvent=\"ondblclick:_trap\">\n\t\t<div class=\"dojoxExpandoContent\" dojoAttachPoint=\"containerNode\"></div>\n\t</div>\n</div>\n"),easeOut:"dojo._DefaultEasing",easeIn:"dojo._DefaultEasing",duration:420,startExpanded:true,baseClass:"dijitExpandoPane",postCreate:function(){
+dojo.declare("dojox.layout.ExpandoPane",[dijit.layout.ContentPane,dijit._Templated,dijit._Contained,dijit._Container],{templateString:dojo.cache("dojox.layout","resources/ExpandoPane.html","<div class=\"dojoxExpandoPane\">\n\t<div dojoAttachPoint=\"titleWrapper\" class=\"dojoxExpandoTitle\">\n\t\t<div class=\"dojoxExpandoIcon\" dojoAttachPoint=\"iconNode\" dojoAttachEvent=\"onclick:toggle\"><span class=\"a11yNode\">X</span></div>\t\t\t\n\t\t<span class=\"dojoxExpandoTitleNode\" dojoAttachPoint=\"titleNode\">${title}</span>\n\t</div>\n\t<div class=\"dojoxExpandoWrapper\" dojoAttachPoint=\"cwrapper\" dojoAttachEvent=\"ondblclick:_trap\">\n\t\t<div class=\"dojoxExpandoContent\" dojoAttachPoint=\"containerNode\"></div>\n\t</div>\n</div>\n"),easeOut:"dojo._DefaultEasing",easeIn:"dojo._DefaultEasing",duration:420,startExpanded:true,previewOpacity:0.75,previewOnDblClick:false,baseClass:"dijitExpandoPane",postCreate:function(){
 this.inherited(arguments);
 this._animConnects=[];
 this._isHorizontal=true;
@@ -45,6 +45,12 @@ dojo.addClass(this.iconNode,"dojoxExpandoIcon"+_1);
 this._isHorizontal=/top|bottom/.test(this.region);
 }
 dojo.style(this.domNode,{overflow:"hidden",padding:0});
+this.connect(this.domNode,"ondblclick",this.previewOnDblClick?"preview":"toggle");
+if(this.previewOnDblClick){
+this.connect(this.getParent(),"_layoutChildren",dojo.hitch(this,function(){
+this._isonlypreview=false;
+}));
+}
 },_startupSizes:function(){
 this._container=this.getParent();
 this._closedSize=this._titleHeight=dojo.marginBox(this.titleWrapper).h;
@@ -92,6 +98,11 @@ _8[_9]={end:this._closedSize};
 this._showAnim=dojo.animateProperty(dojo.mixin(_5,{easing:this.easeIn,properties:_7}));
 this._hideAnim=dojo.animateProperty(dojo.mixin(_5,{easing:this.easeOut,properties:_8}));
 this._animConnects=[dojo.connect(this._showAnim,"onEnd",this,"_showEnd"),dojo.connect(this._hideAnim,"onEnd",this,"_hideEnd")];
+},preview:function(){
+if(!this._showing){
+this._isonlypreview=!this._isonlypreview;
+}
+this.toggle();
 },toggle:function(){
 if(this._showing){
 this._hideWrapper();
@@ -107,18 +118,30 @@ dojo.addClass(this.domNode,"dojoxExpandoClosed");
 dojo.style(this.cwrapper,{visibility:"hidden",opacity:"0",overflow:"hidden"});
 },_showEnd:function(){
 dojo.style(this.cwrapper,{opacity:0,visibility:"visible"});
-dojo.fadeIn({node:this.cwrapper,duration:227}).play(1);
+dojo.anim(this.cwrapper,{opacity:this._isonlypreview?this.previewOpacity:1},227);
 dojo.removeClass(this.domNode,"dojoxExpandoClosed");
+if(!this._isonlypreview){
 setTimeout(dojo.hitch(this._container,"layout"),15);
+}else{
+this._previewShowing=true;
+this.resize();
+}
 },_hideEnd:function(){
-setTimeout(dojo.hitch(this._container,"layout"),15);
-},resize:function(_a){
+if(!this._isonlypreview){
+setTimeout(dojo.hitch(this._container,"layout"),25);
+}else{
+this._previewShowing=false;
+}
+this._isonlypreview=false;
+},resize:function(_a,_b){
 if(!this._hasSizes){
 this._startupSizes(_a);
 }
-var _b=(_a&&_a.h)?_a:dojo.marginBox(this.domNode);
-this._contentBox={w:_b.w||dojo.marginBox(this.domNode).w,h:_b.h-this._titleHeight};
+this._contentBox={w:_a&&"w" in _a?_a.w:_b.w,h:(_a&&"h" in _a?_a.h:_b.h)-this._titleHeight};
 dojo.style(this.containerNode,"height",this._contentBox.h+"px");
+if(_a){
+dojo.marginBox(this.domNode,_a);
+}
 this._layoutChildren();
 },_trap:function(e){
 dojo.stopEvent(e);

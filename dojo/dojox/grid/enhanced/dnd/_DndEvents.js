@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -8,7 +8,7 @@
 if(!dojo._hasResource["dojox.grid.enhanced.dnd._DndEvents"]){
 dojo._hasResource["dojox.grid.enhanced.dnd._DndEvents"]=true;
 dojo.provide("dojox.grid.enhanced.dnd._DndEvents");
-dojo.declare("dojox.grid.enhanced.dnd._DndEvents",null,{onMouseUp:function(e){
+dojo.declare("dojox.grid.enhanced.dnd._DndEvents",null,{rowBarActiveClass:"dojoxGridRowBarActive",onMouseUp:function(e){
 e.rowIndex==-1?this.onHeaderCellMouseUp(e):this.onCellMouseUp(e);
 this.select.resetStartPoint();
 this.select.clearInSelectingMode();
@@ -38,9 +38,11 @@ if(this.select.extendSelect&&!this.pluginMgr.inSingleSelection()){
 this.select.restorLastDragPoint();
 }
 this.select.drugSelectRow(e.rowIndex);
+dojo.addClass(e.rowNode,this.rowBarActiveClass);
 dojo.stopEvent(e);
 },onRowHeaderMouseUp:function(e){
 this.onMouseUp(e);
+dojo.removeClass(e.rowNode,this.rowBarActiveClass);
 },onRowMouseUp:function(e){
 this.select.setInSelectingMode("row",false);
 }});

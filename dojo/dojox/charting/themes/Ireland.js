@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -11,6 +11,6 @@ dojo.provide("dojox.charting.themes.Ireland");
 dojo.require("dojox.charting.Theme");
 (function(){
 var _1=dojox.charting;
-_1.themes.Ireland=new _1.Theme({colors:["#abdbcb","#435a51","#70998b","#78q596","#5f8074"]});
+_1.themes.Ireland=new _1.Theme({colors:["#abdbcb","#435a51","#70998b","#78d596","#5f8074"]});
 })();
 }

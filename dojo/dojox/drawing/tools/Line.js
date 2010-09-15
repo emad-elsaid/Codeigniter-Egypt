@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -43,12 +43,19 @@ y2-=dy;
 this.setPoints([{x:x1,y:y1},{x:x2,y:y2}]);
 this.render();
 },onUp:function(_4){
-if(this.created||!this.shape){
+if(this.created||!this._downOnCanvas){
 return;
 }
+this._downOnCanvas=false;
+if(!this.shape){
+var s=_4.start,e=this.minimumSize*4;
+this.setPoints([{x:s.x,y:s.y+e},{x:s.x,y:s.y}]);
+this.render();
+}else{
 if(this.getRadius()<this.minimumSize){
 this.remove(this.shape,this.hit);
 return;
+}
 }
 var pt=this.util.snapAngle(_4,this.angleSnap/180);
 var p=this.points;

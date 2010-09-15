@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -61,85 +61,85 @@ _10++;
 if(_10==0){
 _9(_e);
 }else{
-var _12=function _12(_13){
+dojo.forEach(_e,function(_12,idx){
+if(!_b.isItemLoaded(_12)){
+_b.loadItem({item:_12,onItem:function(_13){
+_e[idx]=_13;
 if(--_10==0){
 _9(_e);
 }
-};
-dojo.forEach(_e,function(_14){
-if(!_b.isItemLoaded(_14)){
-_b.loadItem({item:_14,onItem:_12,onError:_a});
+},onError:_a});
 }
 });
 }
-},isItem:function(_15){
-return this.store.isItem(_15);
-},fetchItemByIdentity:function(_16){
-this.store.fetchItemByIdentity(_16);
-},getIdentity:function(_17){
-return this.store.getIdentity(_17);
-},getLabel:function(_18){
+},isItem:function(_14){
+return this.store.isItem(_14);
+},fetchItemByIdentity:function(_15){
+this.store.fetchItemByIdentity(_15);
+},getIdentity:function(_16){
+return this.store.getIdentity(_16);
+},getLabel:function(_17){
 if(this.labelAttr){
-return this.store.getValue(_18,this.labelAttr);
+return this.store.getValue(_17,this.labelAttr);
 }else{
-return this.store.getLabel(_18);
+return this.store.getLabel(_17);
 }
-},newItem:function(_19,_1a,_1b){
-var _1c={parent:_1a,attribute:this.childrenAttrs[0],insertIndex:_1b};
-if(this.newItemIdAttr&&_19[this.newItemIdAttr]){
-this.fetchItemByIdentity({identity:_19[this.newItemIdAttr],scope:this,onItem:function(_1d){
-if(_1d){
-this.pasteItem(_1d,null,_1a,true,_1b);
+},newItem:function(_18,_19,_1a){
+var _1b={parent:_19,attribute:this.childrenAttrs[0],insertIndex:_1a};
+if(this.newItemIdAttr&&_18[this.newItemIdAttr]){
+this.fetchItemByIdentity({identity:_18[this.newItemIdAttr],scope:this,onItem:function(_1c){
+if(_1c){
+this.pasteItem(_1c,null,_19,true,_1a);
 }else{
-this.store.newItem(_19,_1c);
+this.store.newItem(_18,_1b);
 }
 }});
 }else{
-this.store.newItem(_19,_1c);
+this.store.newItem(_18,_1b);
 }
-},pasteItem:function(_1e,_1f,_20,_21,_22){
-var _23=this.store,_24=this.childrenAttrs[0];
+},pasteItem:function(_1d,_1e,_1f,_20,_21){
+var _22=this.store,_23=this.childrenAttrs[0];
+if(_1e){
+dojo.forEach(this.childrenAttrs,function(_24){
+if(_22.containsValue(_1e,_24,_1d)){
+if(!_20){
+var _25=dojo.filter(_22.getValues(_1e,_24),function(x){
+return x!=_1d;
+});
+_22.setValues(_1e,_24,_25);
+}
+_23=_24;
+}
+});
+}
 if(_1f){
-dojo.forEach(this.childrenAttrs,function(_25){
-if(_23.containsValue(_1f,_25,_1e)){
-if(!_21){
-var _26=dojo.filter(_23.getValues(_1f,_25),function(x){
-return x!=_1e;
-});
-_23.setValues(_1f,_25,_26);
-}
-_24=_25;
-}
-});
-}
-if(_20){
-if(typeof _22=="number"){
-var _27=_23.getValues(_20,_24);
-_27.splice(_22,0,_1e);
-_23.setValues(_20,_24,_27);
+if(typeof _21=="number"){
+var _26=_22.getValues(_1f,_23).slice();
+_26.splice(_21,0,_1d);
+_22.setValues(_1f,_23,_26);
 }else{
-_23.setValues(_20,_24,_23.getValues(_20,_24).concat(_1e));
+_22.setValues(_1f,_23,_22.getValues(_1f,_23).concat(_1d));
 }
 }
-},onChange:function(_28){
-},onChildrenChange:function(_29,_2a){
-},onDelete:function(_2b,_2c){
-},onNewItem:function(_2d,_2e){
-if(!_2e){
+},onChange:function(_27){
+},onChildrenChange:function(_28,_29){
+},onDelete:function(_2a,_2b){
+},onNewItem:function(_2c,_2d){
+if(!_2d){
 return;
 }
-this.getChildren(_2e.item,dojo.hitch(this,function(_2f){
-this.onChildrenChange(_2e.item,_2f);
+this.getChildren(_2d.item,dojo.hitch(this,function(_2e){
+this.onChildrenChange(_2d.item,_2e);
 }));
-},onDeleteItem:function(_30){
-this.onDelete(_30);
-},onSetItem:function(_31,_32,_33,_34){
-if(dojo.indexOf(this.childrenAttrs,_32)!=-1){
-this.getChildren(_31,dojo.hitch(this,function(_35){
-this.onChildrenChange(_31,_35);
+},onDeleteItem:function(_2f){
+this.onDelete(_2f);
+},onSetItem:function(_30,_31,_32,_33){
+if(dojo.indexOf(this.childrenAttrs,_31)!=-1){
+this.getChildren(_30,dojo.hitch(this,function(_34){
+this.onChildrenChange(_30,_34);
 }));
 }else{
-this.onChange(_31);
+this.onChange(_30);
 }
 }});
 }

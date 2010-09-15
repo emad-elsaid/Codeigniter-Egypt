@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -15,7 +15,7 @@ dojox.dtl._Context.call(this,_1);
 },dojox.dtl._Context.prototype,{getKeys:function(){
 var _2=[];
 for(var _3 in this){
-if(this.hasOwnProperty(_3)&&_3!="_dicts"&&_3!="_this"){
+if(this.hasOwnProperty(_3)&&_3!="_this"){
 _2.push(_3);
 }
 }
@@ -50,13 +50,14 @@ this._this=_a;
 },getThis:function(){
 return this._this;
 },hasKey:function(_b){
+if(this._getter){
+var _c=this._getter(_b);
+if(typeof _c!="undefined"){
+return true;
+}
+}
 if(typeof this[_b]!="undefined"){
 return true;
-}
-for(var i=0,_c;_c=this._dicts[i];i++){
-if(typeof _c[_b]!="undefined"){
-return true;
-}
 }
 return false;
 }});

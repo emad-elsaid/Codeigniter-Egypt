@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -27,37 +27,38 @@ if(!o.shape||o.element!="slice"||!(o.type in this.overOutEvents)){
 return;
 }
 if(!this.angles){
+var _6=m._degToRad(o.plot.opt.startAngle);
 if(typeof o.run.data[0]=="number"){
-this.angles=df.map(df.scanl(o.run.data,"+",0),"* 2 * Math.PI / this",df.foldl(o.run.data,"+",0));
+this.angles=df.map(df.scanl(o.run.data,"+",_6),"* 2 * Math.PI / this",df.foldl(o.run.data,"+",0));
 }else{
-this.angles=df.map(df.scanl(o.run.data,"a + b.y",0),"* 2 * Math.PI / this",df.foldl(o.run.data,"a + b.y",0));
+this.angles=df.map(df.scanl(o.run.data,"a + b.y",_6),"* 2 * Math.PI / this",df.foldl(o.run.data,"a + b.y",0));
 }
 }
-var _6=o.index,_7,_8,_9,_a,_b,_c=(this.angles[_6]+this.angles[_6+1])/2,_d=m.rotateAt(-_c,o.cx,o.cy),_e=m.rotateAt(_c,o.cx,o.cy);
-_7=this.anim[_6];
-if(_7){
-_7.action.stop(true);
+var _7=o.index,_8,_9,_a,_b,_c,_d=(this.angles[_7]+this.angles[_7+1])/2,_e=m.rotateAt(-_d,o.cx,o.cy),_f=m.rotateAt(_d,o.cx,o.cy);
+_8=this.anim[_7];
+if(_8){
+_8.action.stop(true);
 }else{
-this.anim[_6]=_7={};
+this.anim[_7]=_8={};
 }
 if(o.type=="onmouseover"){
-_a=0;
-_b=this.shift;
-_8=1;
-_9=this.scale;
-}else{
-_a=this.shift;
 _b=0;
-_8=this.scale;
+_c=this.shift;
 _9=1;
+_a=this.scale;
+}else{
+_b=this.shift;
+_c=0;
+_9=this.scale;
+_a=1;
 }
-_7.action=dojox.gfx.fx.animateTransform({shape:o.shape,duration:this.duration,easing:this.easing,transform:[_e,{name:"translate",start:[_a,0],end:[_b,0]},{name:"scaleAt",start:[_8,o.cx,o.cy],end:[_9,o.cx,o.cy]},_d]});
+_8.action=dojox.gfx.fx.animateTransform({shape:o.shape,duration:this.duration,easing:this.easing,transform:[_f,{name:"translate",start:[_b,0],end:[_c,0]},{name:"scaleAt",start:[_9,o.cx,o.cy],end:[_a,o.cx,o.cy]},_e]});
 if(o.type=="onmouseout"){
-dojo.connect(_7.action,"onEnd",this,function(){
-delete this.anim[_6];
+dojo.connect(_8.action,"onEnd",this,function(){
+delete this.anim[_7];
 });
 }
-_7.action.play();
+_8.action.play();
 },reset:function(){
 delete this.angles;
 }});

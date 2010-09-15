@@ -1,17 +1,18 @@
 
-.dijitRtl .soria .dijitTreeContainer .dijitTreeNode {
-    background-image : none;
+.dijitRtl .soria .dijitTreeNode,
+.dijitRtl .soria .dijitTreeExpandoLeaf {
+	
+    background-image: none;
 }
-.dijitRtl .soria .dijitTreeContainer .dijitTreeContent {
-    padding-left: auto;
+.dijitRtl .soria .dijitTreeContent {
+    padding-left: 0px;
     padding-right: 1px;
 }
-.dijitRtl .soria .dijitTreeContainer .dijitTreeExpandoOpened {
+.dijitRtl .soria .dijitTreeExpandoOpened {
+	
 	background: url('images/spriteTree_rtl.gif') no-repeat -18px top;
 }
-.dijitRtl .soria .dijitTreeContainer .dijitTreeExpandoClosed {
+.dijitRtl .soria .dijitTreeExpandoClosed {
+	
 	background-image: url('images/spriteTree_rtl.gif');
-}
-.dijitRtl .soria .dijitTreeContainer .dijitTreeExpandoLeaf {
-	background: none;
 }

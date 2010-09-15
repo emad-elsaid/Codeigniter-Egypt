@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -18,19 +18,32 @@ return (n*180)/Math.PI;
 return m.toRadians(n);
 },radiansToDegrees:function(n){
 return m.toDegrees(n);
-},factorial:function(n){
-if(n===0){
-return 1;
-}else{
-if(n<0||Math.floor(n)!=n){
+},_gamma:function(z){
+var _1=1;
+while(--z>=1){
+_1*=z;
+}
+if(z==0){
+return _1;
+}
+if(Math.floor(z)==z){
 return NaN;
 }
+if(z==-0.5){
+return Math.sqrt(Math.PI);
 }
-var _1=1;
-for(var i=1;i<=n;i++){
-_1*=i;
+if(z<-0.5){
+return Math.PI/(Math.sin(Math.PI*(z+1))*this._gamma(-z));
 }
-return _1;
+var a=13;
+var c=[0.000005665805601518633,1.274371766337968,-4.937419909315511,7.872026703248596,-6.676050374943609,3.252529844448517,-0.9185252144102627,0.14474022977730785,-0.011627561382389852,0.0004011798075706662,-0.0000042652458386405745,6.665191329033609e-9,-1.5392547381874824e-13];
+var _2=c[0];
+for(var k=1;k<a;k++){
+_2+=c[k]/(z+k);
+}
+return _1*Math.pow(z+a,z+0.5)/Math.exp(z)*_2;
+},factorial:function(n){
+return this._gamma(n+1);
 },permutations:function(n,k){
 if(n==0||k==0){
 return 1;
@@ -51,25 +64,25 @@ var j=2*Math.random()-1;
 k=i*i+j*j;
 }while(k>=1);
 return i*Math.sqrt((-2*Math.log(k))/k);
-},range:function(a,b,_2){
+},range:function(a,b,_3){
 if(arguments.length<2){
 b=a,a=0;
 }
-var _3=[],s=_2||1,i;
+var _4=[],s=_3||1,i;
 if(s>0){
 for(i=a;i<b;i+=s){
-_3.push(i);
+_4.push(i);
 }
 }else{
 if(s<0){
 for(i=a;i>b;i+=s){
-_3.push(i);
+_4.push(i);
 }
 }else{
 throw new Error("dojox.math.range: step must not be zero.");
 }
 }
-return _3;
+return _4;
 },distance:function(a,b){
 return Math.sqrt(Math.pow(b[0]-a[0],2)+Math.pow(b[1]-a[1],2));
 },midpoint:function(a,b){

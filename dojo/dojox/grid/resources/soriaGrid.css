@@ -65,12 +65,18 @@
 	padding-bottom: 0;
 	border-bottom-width: 3px;
 }
+.dojoxGridSortNode{
+	white-space:nowrap;
+}
 .dojoxGridArrowButtonNode {
 	display: none;
 	padding-left: 16px;
 }
 .dojoxGridArrowButtonChar {
 	display:inline;
+}
+.dojoxGridColCaption {
+	overflow:hidden;
 }
  
 .dojoxGridArrowButtonNode:hover {

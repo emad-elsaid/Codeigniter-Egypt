@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -25,7 +25,7 @@ c.max=_1(c.max);
 }
 }
 },postCreate:function(){
-this.displayMonth=new Date(this.attr("value"));
+this.displayMonth=new Date(this.get("value"));
 var _2={parent:this,_getValueAttr:dojo.hitch(this,function(){
 return new Date(this._internalValue||this.value);
 }),_getDisplayMonthAttr:dojo.hitch(this,function(){
@@ -46,7 +46,7 @@ dojo.style(_5,"display","none");
 }
 dojo.style(_4.domNode,"visibility","hidden");
 dojo.connect(_4,"onValueSelected",this,"_onDateSelected");
-_4.attr("value",this.attr("value"));
+_4.attr("value",this.get("value"));
 },this);
 if(this._views.length<2){
 dojo.style(this.header,"cursor","auto");
@@ -101,10 +101,10 @@ return c&&(c.min&&(_14(c.min,_12,"date")>0)||(c.max&&_14(c.max,_12,"date")<0));
 },onValueSelected:function(_15){
 },_onDateSelected:function(_16,_17,_18){
 this.displayMonth=_16;
-this.attr("value",_16);
+this.set("value",_16);
 if(!this._transitionVert(-1)){
 if(!_17&&_17!==0){
-_17=this.attr("value");
+_17=this.get("value");
 }
 this.onValueSelected(_17);
 }
@@ -112,8 +112,8 @@ this.onValueSelected(_17);
 },onHeaderClick:function(e){
 this._transitionVert(1);
 },goToToday:function(){
-this.attr("value",new Date());
-this.onValueSelected(this.attr("value"));
+this.set("value",new Date());
+this.onValueSelected(this.get("value"));
 },_transitionVert:function(_1a){
 var _1b=this._children[this._currentChild];
 var _1c=this._children[this._currentChild+_1a];
@@ -221,7 +221,7 @@ this.addFx(".dijitCalendarDateTemplate div",this.domNode);
 if(typeof (e.target._date)=="undefined"){
 return;
 }
-var _3e=new Date(this.attr("displayMonth"));
+var _3e=new Date(this.get("displayMonth"));
 var p=e.target.parentNode;
 var c="dijitCalendar";
 var d=dojo.hasClass(p,c+"PreviousMonth")?-1:(dojo.hasClass(p,c+"NextMonth")?1:0);
@@ -237,13 +237,13 @@ this.parent._onDateSelected(_3e);
 },_setValueAttr:function(_3f){
 this._populateDays();
 },_populateDays:function(){
-var _40=new Date(this.attr("displayMonth"));
+var _40=new Date(this.get("displayMonth"));
 _40.setDate(1);
 var _41=_40.getDay();
 var _42=dojo.date.getDaysInMonth(_40);
 var _43=dojo.date.getDaysInMonth(dojo.date.add(_40,"month",-1));
 var _44=new Date();
-var _45=this.attr("value");
+var _45=this.get("value");
 var _46=dojo.cldr.supplemental.getFirstDayOfWeek(this.getLang());
 if(_46>_41){
 _46-=7;
@@ -331,7 +331,7 @@ dojo.query(".dojoxCal-MY-M-Template",this.domNode).filter(function(_59){
 return _59.cellIndex==1;
 }).addClass("dojoxCal-MY-M-last");
 dojo.connect(this,"onBeforeDisplay",dojo.hitch(this,function(){
-this._cachedDate=new Date(this.attr("value").getTime());
+this._cachedDate=new Date(this.get("value").getTime());
 this._populateYears(this._cachedDate.getFullYear());
 this._populateMonths();
 this._updateSelectedMonth();
@@ -343,7 +343,7 @@ this._updateSelectedYear();
 dojo.connect(this,"_populateMonths",dojo.hitch(this,function(){
 this._updateSelectedMonth();
 }));
-this._cachedDate=this.attr("value");
+this._cachedDate=this.get("value");
 this._populateYears();
 this._populateMonths();
 this.addFx(".dojoxCalendarMonthLabel,.dojoxCalendarYearLabel ",this.myContainer);
@@ -359,7 +359,7 @@ var _5c=this._getMonthNames("abbr");
 dojo.query(".dojoxCalendarMonthLabel",this.monthContainer).forEach(dojo.hitch(this,function(_5d,cnt){
 this._setText(_5d,_5c[cnt]);
 }));
-var _5e=this.attr("constraints");
+var _5e=this.get("constraints");
 if(_5e){
 var _5f=new Date();
 _5f.setFullYear(this._year);
@@ -390,11 +390,11 @@ dojo[(cnt<min||cnt>max)?"addClass":"removeClass"](_62,"dijitCalendarDisabledDate
 }
 var h=this.getHeader();
 if(h){
-this._setText(this.getHeader(),this.attr("value").getFullYear());
+this._setText(this.getHeader(),this.get("value").getFullYear());
 }
 },_populateYears:function(_63){
-var _64=this.attr("constraints");
-var _65=_63||this.attr("value").getFullYear();
+var _64=this.get("constraints");
+var _65=_63||this.get("value").getFullYear();
 var _66=_65-Math.floor(this.displayedYears/2);
 var min=_64&&_64.min?_64.min.getFullYear():_66-10000;
 _66=Math.max(min,_66);
@@ -421,12 +421,12 @@ if(h){
 this._setText(this.getHeader(),_66+" - "+(_66+11));
 }
 },_updateSelectedYear:function(){
-this._year=String((this._cachedDate||this.attr("value")).getFullYear());
+this._year=String((this._cachedDate||this.get("value")).getFullYear());
 this._updateSelectedNode(".dojoxCalendarYearLabel",dojo.hitch(this,function(_6a,idx){
 return this._year!==null&&_6a.innerHTML==this._year;
 }));
 },_updateSelectedMonth:function(){
-var _6b=(this._cachedDate||this.attr("value")).getMonth();
+var _6b=(this._cachedDate||this.get("value")).getMonth();
 this._month=_6b;
 this._updateSelectedNode(".dojoxCalendarMonthLabel",function(_6c,idx){
 return idx==_6b;
@@ -492,7 +492,7 @@ this.onValueSelected(this._cachedDate);
 return false;
 },onCancel:function(evt){
 dojo.stopEvent(evt);
-this.onValueSelected(this.attr("value"));
+this.onValueSelected(this.get("value"));
 return false;
 }});
 dojo.declare("dojox.widget.Calendar2Pane",[dojox.widget._CalendarBase,dojox.widget._CalendarDay,dojox.widget._CalendarMonthYear],{});

@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -11,11 +11,12 @@ dojo.provide("dojo.NodeList-fx");
 dojo.require("dojo.fx");
 dojo.extend(dojo.NodeList,{_anim:function(_1,_2,_3){
 _3=_3||{};
-return dojo.fx.combine(this.map(function(_4){
+var a=dojo.fx.combine(this.map(function(_4){
 var _5={node:_4};
 dojo.mixin(_5,_3);
 return _1[_2](_5);
 }));
+return _3.auto?a.play()&&this:a;
 },wipeIn:function(_6){
 return this._anim(dojo.fx,"wipeIn",_6);
 },wipeOut:function(_7){

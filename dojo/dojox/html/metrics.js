@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -22,7 +22,7 @@ ds.left="-100px";
 ds.top="0";
 ds.width="30px";
 ds.height="1000em";
-ds.border="0";
+ds.borderWidth="0";
 ds.margin="0";
 ds.padding="0";
 ds.outline="0";
@@ -46,41 +46,55 @@ return _4;
 };
 var _6=null,_7={};
 _1.getTextBox=function(_8,_9,_a){
-var m;
+var m,s;
 if(!_6){
 m=_6=dojo.doc.createElement("div");
-m.style.position="absolute";
-m.style.left="0px";
-m.style.top="-10000px";
-dojo.body().appendChild(m);
+var c=dojo.doc.createElement("div");
+c.appendChild(m);
+s=c.style;
+s.overflow="scroll";
+s.position="absolute";
+s.left="0px";
+s.top="-10000px";
+s.width="1px";
+s.height="1px";
+s.visibility="hidden";
+s.borderWidth="0";
+s.margin="0";
+s.padding="0";
+s.outline="0";
+dojo.body().appendChild(c);
 }else{
 m=_6;
 }
 m.className="";
-m.style.border="0";
-m.style.margin="0";
-m.style.padding="0";
-m.style.outline="0";
+s=m.style;
+s.borderWidth="0";
+s.margin="0";
+s.padding="0";
+s.outline="0";
 if(arguments.length>1&&_9){
 for(var i in _9){
 if(i in _7){
 continue;
 }
-m.style[i]=_9[i];
+s[i]=_9[i];
 }
 }
 if(arguments.length>2&&_a){
 m.className=_a;
 }
 m.innerHTML=_8;
-return dojo.marginBox(m);
+var _b=dojo.position(m);
+_b.w=m.parentNode.scrollWidth;
+return _b;
 };
-var _b={w:16,h:16};
+var _c={w:16,h:16};
 _1.getScrollbar=function(){
-return {w:_b.w,h:_b.h};
+return {w:_c.w,h:_c.h};
 };
 _1._fontResizeNode=null;
-_1.initOnFontResize=function(_c){
+_1.initOnFontResize=function(_d){
 var f=_1._fontResizeNode=dojo.doc.createElement("iframe");
 var fs=f.style;
 fs.position="absolute";
@@ -126,8 +140,8 @@ try{
 var n=dojo.doc.createElement("div");
 n.style.cssText="top:0;left:0;width:100px;height:100px;overflow:scroll;position:absolute;visibility:hidden;";
 dojo.body().appendChild(n);
-_b.w=n.offsetWidth-n.clientWidth;
-_b.h=n.offsetHeight-n.clientHeight;
+_c.w=n.offsetWidth-n.clientWidth;
+_c.h=n.offsetHeight-n.clientHeight;
 dojo.body().removeChild(n);
 delete n;
 }

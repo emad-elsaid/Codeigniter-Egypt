@@ -69,9 +69,6 @@
 .nihilo .dijitTabContainerBottom .nowrapTabStrip .dijitTab {
 	top: 0px;
 }
-.nihilo .dijitTabContainer .tabStripMenuButton-Hover {
-	cursor: pointer;
-}
 .nihilo .dijitTabPaneWrapper {
 	background:#fff;
 	border:1px solid #ccc;
@@ -107,8 +104,7 @@
 .nihilo .dijitTabHover .dijitTabInnerDiv .dijitTabContent {
 	background: url("../images/tabContainerSprite.gif") repeat-x 0 -200px;
 }
-.nihilo .dijitTabChecked,
-.nihilo .dijitTabCloseButtonChecked
+.nihilo .dijitTabChecked
 {
 	
 	background: url("../images/tabContainerSprite.gif") no-repeat 0px -0px;
@@ -152,19 +148,19 @@
 .nihilo .dijitTabPaneWrapperNested {
 	border: none;	
 }
-.nihilo .dijitTab .closeImage {
+.nihilo .dijitTabCloseButton {
 	background: url("../images/spriteRoundedIconsSmall.png") no-repeat -60px top;
 	width: 15px;
 	height: 15px;
 	margin-top: -1px;
 }
-.dj_ie6 .nihilo .dijitTab .closeImage {
+.dj_ie6 .nihilo .dijitTabCloseButton {
 	background: url("../images/spriteRoundedIconsSmall.gif") no-repeat -60px top;
 }
-.nihilo .dijitTab .closeButton-hover .closeImage {
+.nihilo .dijitTabCloseButtonHover {
 	background: url("../images/spriteRoundedIconsSmall.png") no-repeat -60px -15px;
 }
-.dj_ie6 .nihilo .dijitTab .closeButton-hover .closeImage {
+.dj_ie6 .nihilo .dijitTabCloseButtonHover {
 	background: url("../images/spriteRoundedIconsSmall.gif") no-repeat -60px -15px;
 }
 .nihilo .dijitTab .tabLabel {
@@ -253,9 +249,7 @@
 .nihilo .dijitTabContainerBottom-tabs .dijitTabHover .dijitTabInnerDiv .dijitTabContent {
 	background: url("../images/tabBottomHoverC.gif") repeat-x bottom left;
 }
-.nihilo .dijitTabContainerBottom-tabs .dijitTabChecked,
-.nihilo .dijitTabContainerBottom-tabs .dijitTabCloseButtonChecked
-{
+.nihilo .dijitTabContainerBottom-tabs .dijitTabChecked {
 	
 	background: url("../images/tabBottomActiveSpriteLR.gif") no-repeat bottom left;
 }
@@ -412,21 +406,18 @@
 .dj_opera .nihilo .tabStrip-disabled .tabStripButton .dijitTabInnerDiv .dijitTabContent {
 	padding-top: 4px;
 }
-.nihilo .dijitTabContainer .tabStripButton {
-	
-	width: 21px;
-}
-.nihilo .dijitTabContainer .tabStripButton img {
+.nihilo .dijitTabStripIcon {
 	height: 14px;
-	background: url(../images/spriteRoundedIconsSmall.png) no-repeat left top ;
+	width: 14px;
+	background: url(../images/spriteRoundedIconsSmall.png) no-repeat left top;
 }
-.dj_ie6 .nihilo .dijitTabContainer .tabStripButton img {
+.dj_ie6 .nihilo .dijitTabStripIcon {
 	background-image: url(../images/spriteRoundedIconsSmall.gif);
 }
-.nihilo .dijitTabContainer .tabStripSlideButtonRight img {
+.nihilo .dijitTabStripSlideRightIcon {
 	background-position: -30px top;
 }
-.nihilo .dijitTabContainer .tabStripMenuButton img {
+.nihilo .dijitTabStripMenuIcon {
 	background-position: -15px top;
 }
 .nihilo .dijitTabContainerTopNone {

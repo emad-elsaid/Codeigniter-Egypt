@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -8,10 +8,11 @@
 if(!dojo._hasResource["dojox.widget.UpgradeBar"]){
 dojo._hasResource["dojox.widget.UpgradeBar"]=true;
 dojo.provide("dojox.widget.UpgradeBar");
-dojo.require("dijit._Widget");
-dojo.require("dijit._Templated");
+dojo.require("dojo.window");
 dojo.require("dojo.fx");
 dojo.require("dojo.cookie");
+dojo.require("dijit._Widget");
+dojo.require("dijit._Templated");
 dojo.experimental("dojox.widget.UpgradeBar");
 dojo.declare("dojox.widget.UpgradeBar",[dijit._Widget,dijit._Templated],{notifications:[],buttonCancel:"Close for now",noRemindButton:"Don't Remind Me Again",templateString:dojo.cache("dojox.widget","UpgradeBar/UpgradeBar.html","<div class=\"dojoxUpgradeBar\">\n\t<div class=\"dojoxUpgradeBarMessage\" dojoAttachPoint=\"messageNode\">message</div>\n\t<div class=\"dojoxUpgradeBarReminderButton\" dojoAttachPoint=\"dontRemindButtonNode\" dojoAttachEvent=\"onclick:_onDontRemindClick\">${noRemindButton}</div>\n\t<span dojoAttachPoint=\"closeButtonNode\" class=\"dojoxUpgradeBarCloseIcon\" dojoAttachEvent=\"onclick: hide, onmouseenter: _onCloseEnter, onmouseleave: _onCloseLeave\" title=\"${buttonCancel}\"></span>\n</div>\n"),constructor:function(_1,_2){
 if(!_1.notifications&&_2){
@@ -53,7 +54,7 @@ dojo.destroy(this.dontRemindButtonNode);
 if(dojo.isIE==6){
 var _6=this;
 var _7=function(){
-var v=dijit.getViewport();
+var v=dojo.window.getBox();
 dojo.style(_6.domNode,"width",v.w+"px");
 };
 this.connect(window,"resize",function(){
@@ -66,13 +67,12 @@ dojo.addOnLoad(this,"checkNotifications");
 if(dojo.cookie("disableUpgradeReminders")){
 return;
 }
-if(!this.domNode.parentNode){
+if(!this.domNode.parentNode||!this.domNode.parentNode.innerHTML){
 document.body.appendChild(this.domNode);
-}else{
-dojo.style(this.domNode,"display","");
 }
+dojo.style(this.domNode,"display","");
 if(_8){
-this.attr("message",_8);
+this.set("message",_8);
 }
 },show:function(){
 this._bodyMarginTop=dojo.style(dojo.body(),"marginTop");

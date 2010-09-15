@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -271,8 +271,9 @@ if(dojo.isMoz){
 n=_8(e.target,_b("th"));
 x-=(n&&n.offsetLeft)||0;
 var t=e.sourceView.getScrollbarWidth();
-if(!dojo._isBodyLtr()&&e.sourceView.headerNode.scrollLeft<t){
-x-=t;
+if(!dojo._isBodyLtr()){
+table=_8(n,_b("table"));
+x-=(table&&table.offsetLeft)||0;
 }
 }
 n=_8(e.target,function(){
@@ -367,9 +368,13 @@ if(_37){
 this.lineDiv=document.createElement("div");
 var vw=(dojo.position||dojo._abs)(e.sourceView.headerNode,true);
 var _39=dojo.contentBox(e.sourceView.domNode);
-dojo.style(this.lineDiv,{top:vw.y+"px",left:e.clientX+"px",height:(_39.h+_38.h)+"px"});
+var l=e.clientX;
+if(!dojo._isBodyLtr()&&dojo.isIE<8){
+l-=dojox.html.metrics.getScrollbar().w;
+}
+dojo.style(this.lineDiv,{top:vw.y+"px",left:l+"px",height:(_39.h+_38.h)+"px"});
 dojo.addClass(this.lineDiv,"dojoxGridResizeColLine");
-this.lineDiv._origLeft=e.clientX;
+this.lineDiv._origLeft=l;
 dojo.body().appendChild(this.lineDiv);
 }
 var _3a=[],_3b=this.tableMap.findOverlappingNodes(e.cellNode);
@@ -410,7 +415,7 @@ e.cellNode.setCapture();
 m.onMouseDown(e);
 },doResizeColumn:function(_44,_45,_46){
 var _47=_46.l;
-var _48={deltaX:_47,w:_44.w+_47,vw:_44.vw+_47,tw:_44.tw+_47};
+var _48={deltaX:_47,w:_44.w+(dojo._isBodyLtr()?_47:-_47),vw:_44.vw+_47,tw:_44.tw+_47};
 this.dragRecord={inDrag:_44,mover:_45,leftTop:_46};
 if(_48.w>=this.minColWidth){
 if(!_45){
@@ -452,9 +457,11 @@ sw=s.width+_4e.deltaX;
 s.node.style.width=sw+"px";
 _4d.view.setColWidth(s.index,sw);
 }
+if(dojo._isBodyLtr()||!dojo.isIE){
 for(i=0;(f=_4d.followers[i]);i++){
 fl=f.left+_4e.deltaX;
 f.node.style.left=fl+"px";
+}
 }
 _4d.node.style.width=_4e.w+"px";
 _4d.view.setColWidth(_4d.index,_4e.w);

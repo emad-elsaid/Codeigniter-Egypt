@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -14,6 +14,7 @@ dojo.require("dijit._Templated");
 dojo.declare("dojox.form.FileInput",dijit.form._FormWidget,{label:"Browse ...",cancelText:"Cancel",name:"uploadFile",templateString:dojo.cache("dojox.form","resources/FileInput.html","<div class=\"dijitFileInput\">\n\t<input id=\"${id}\" class=\"dijitFileInputReal\" type=\"file\" dojoAttachPoint=\"fileInput\" name=\"${name}\" />\n\t<div class=\"dijitFakeInput\">\n\t\t<input class=\"dijitFileInputVisible\" type=\"text\" dojoAttachPoint=\"focusNode, inputNode\" />\n\t\t<div class=\"dijitInline dijitFileInputText\" dojoAttachPoint=\"titleNode\">${label}</div>\n\t\t<div class=\"dijitInline dijitFileInputButton\" dojoAttachPoint=\"cancelNode\" \n\t\t\tdojoAttachEvent=\"onclick:reset\">${cancelText}</div>\n\t</div>\n</div>\n"),startup:function(){
 this._listener=this.connect(this.fileInput,"onchange","_matchValue");
 this._keyListener=this.connect(this.fileInput,"onkeyup","_matchValue");
+},postCreate:function(){
 },_matchValue:function(){
 this.inputNode.value=this.fileInput.value;
 if(this.inputNode.value){

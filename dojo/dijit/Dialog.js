@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -11,14 +11,16 @@ dojo.provide("dijit.Dialog");
 dojo.require("dojo.dnd.move");
 dojo.require("dojo.dnd.TimedMoveable");
 dojo.require("dojo.fx");
+dojo.require("dojo.window");
 dojo.require("dijit._Widget");
 dojo.require("dijit._Templated");
+dojo.require("dijit._CssStateMixin");
 dojo.require("dijit.form._FormMixin");
 dojo.require("dijit._DialogMixin");
 dojo.require("dijit.DialogUnderlay");
 dojo.require("dijit.layout.ContentPane");
-dojo.requireLocalization("dijit","common",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ru,sk,sl,sv,th,tr,zh,zh-tw");
-dojo.declare("dijit._DialogBase",[dijit._Templated,dijit.form._FormMixin,dijit._DialogMixin],{templateString:dojo.cache("dijit","templates/Dialog.html","<div class=\"dijitDialog\" tabindex=\"-1\" waiRole=\"dialog\" waiState=\"labelledby-${id}_title\">\n\t<div dojoAttachPoint=\"titleBar\" class=\"dijitDialogTitleBar\">\n\t<span dojoAttachPoint=\"titleNode\" class=\"dijitDialogTitle\" id=\"${id}_title\"></span>\n\t<span dojoAttachPoint=\"closeButtonNode\" class=\"dijitDialogCloseIcon\" dojoAttachEvent=\"onclick: onCancel, onmouseenter: _onCloseEnter, onmouseleave: _onCloseLeave\" title=\"${buttonCancel}\">\n\t\t<span dojoAttachPoint=\"closeText\" class=\"closeText\" title=\"${buttonCancel}\">x</span>\n\t</span>\n\t</div>\n\t\t<div dojoAttachPoint=\"containerNode\" class=\"dijitDialogPaneContent\"></div>\n</div>\n"),attributeMap:dojo.delegate(dijit._Widget.prototype.attributeMap,{title:[{node:"titleNode",type:"innerHTML"},{node:"titleBar",type:"attribute"}],"aria-describedby":""}),open:false,duration:dijit.defaultDuration,refocus:true,autofocus:true,_firstFocusItem:null,_lastFocusItem:null,doLayout:false,draggable:true,"aria-describedby":"",postMixInProperties:function(){
+dojo.requireLocalization("dijit","common",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ro,ru,sk,sl,sv,th,tr,zh,zh-tw");
+dojo.declare("dijit._DialogBase",[dijit._Templated,dijit.form._FormMixin,dijit._DialogMixin,dijit._CssStateMixin],{templateString:dojo.cache("dijit","templates/Dialog.html","<div class=\"dijitDialog\" tabindex=\"-1\" waiRole=\"dialog\" waiState=\"labelledby-${id}_title\">\n\t<div dojoAttachPoint=\"titleBar\" class=\"dijitDialogTitleBar\">\n\t<span dojoAttachPoint=\"titleNode\" class=\"dijitDialogTitle\" id=\"${id}_title\"></span>\n\t<span dojoAttachPoint=\"closeButtonNode\" class=\"dijitDialogCloseIcon\" dojoAttachEvent=\"onclick: onCancel\" title=\"${buttonCancel}\">\n\t\t<span dojoAttachPoint=\"closeText\" class=\"closeText\" title=\"${buttonCancel}\">x</span>\n\t</span>\n\t</div>\n\t\t<div dojoAttachPoint=\"containerNode\" class=\"dijitDialogPaneContent\"></div>\n</div>\n"),baseClass:"dijitDialog",cssStateNodes:{closeButtonNode:"dijitDialogCloseIcon"},attributeMap:dojo.delegate(dijit._Widget.prototype.attributeMap,{title:[{node:"titleNode",type:"innerHTML"},{node:"titleBar",type:"attribute"}],"aria-describedby":""}),open:false,duration:dijit.defaultDuration,refocus:true,autofocus:true,_firstFocusItem:null,_lastFocusItem:null,doLayout:false,draggable:true,"aria-describedby":"",postMixInProperties:function(){
 var _1=dojo.i18n.getLocalization("dijit","common");
 dojo.mixin(this,_1);
 this.inherited(arguments);
@@ -31,6 +33,10 @@ this.connect(this,"onCancel","hide");
 this._modalconnects=[];
 },onLoad:function(){
 this._position();
+if(this.autofocus){
+this._getFocusItems(this.domNode);
+dijit.focus(this._firstFocusItem);
+}
 this.inherited(arguments);
 },_endDrag:function(e){
 if(e&&e.node&&e.node===this.domNode){
@@ -52,12 +58,14 @@ var _3=dijit._underlay;
 if(!_3){
 _3=dijit._underlay=new dijit.DialogUnderlay(this.underlayAttrs);
 }else{
-_3.attr(this.underlayAttrs);
+_3.set(this.underlayAttrs);
 }
-var _4=948+dijit._dialogStack.length*2;
+var ds=dijit._dialogStack,_4=948+ds.length*2;
+if(ds.length==1){
+_3.show();
+}
 dojo.style(dijit._underlay.domNode,"zIndex",_4);
 dojo.style(this.domNode,"zIndex",_4+1);
-_3.show();
 }),onEnd:dojo.hitch(this,function(){
 if(this.autofocus){
 this._getFocusItems(this.domNode);
@@ -71,7 +79,7 @@ if(ds.length==0){
 dijit._underlay.hide();
 }else{
 dojo.style(dijit._underlay.domNode,"zIndex",948+ds.length*2);
-dijit._underlay.attr(ds[ds.length-1].underlayAttrs);
+dijit._underlay.set(ds[ds.length-1].underlayAttrs);
 }
 if(this.refocus){
 var _5=this._savedFocus;
@@ -113,7 +121,7 @@ delete this._singleChildOriginalStyle;
 dojo.style(this.containerNode,{width:"auto",height:"auto"});
 }
 var mb=dojo.marginBox(this.domNode);
-var _7=dijit.getViewport();
+var _7=dojo.window.getBox();
 if(mb.w>=_7.w||mb.h>=_7.h){
 var w=Math.min(mb.w,Math.floor(_7.w*0.75)),h=Math.min(mb.h,Math.floor(_7.h*0.75));
 if(this._singleChild&&this._singleChild.resize){
@@ -129,7 +137,7 @@ this._singleChild.resize();
 }
 },_position:function(){
 if(!dojo.hasClass(dojo.body(),"dojoMove")){
-var _8=this.domNode,_9=dijit.getViewport(),p=this._relativePosition,bb=p?null:dojo._getBorderBox(_8),l=Math.floor(_9.l+(p?p.x:(_9.w-bb.w)/2)),t=Math.floor(_9.t+(p?p.y:(_9.h-bb.h)/2));
+var _8=this.domNode,_9=dojo.window.getBox(),p=this._relativePosition,bb=p?null:dojo._getBorderBox(_8),l=Math.floor(_9.l+(p?p.x:(_9.w-bb.w)/2)),t=Math.floor(_9.t+(p?p.y:(_9.h-bb.h)/2));
 dojo.style(_8,{left:l+"px",top:t+"px"});
 }
 },_onKey:function(_a){
@@ -193,7 +201,7 @@ this._fadeOut.stop();
 }
 this._modalconnects.push(dojo.connect(window,"onscroll",this,"layout"));
 this._modalconnects.push(dojo.connect(window,"onresize",this,function(){
-var _d=dijit.getViewport();
+var _d=dojo.window.getBox();
 if(!this._oldViewport||_d.h!=this._oldViewport.h||_d.w!=this._oldViewport.w){
 this.layout();
 this._oldViewport=_d;
@@ -241,10 +249,6 @@ if(this.refocus&&this.open){
 setTimeout(dojo.hitch(dijit,"focus",this._savedFocus),25);
 }
 this.inherited(arguments);
-},_onCloseEnter:function(){
-dojo.addClass(this.closeButtonNode,"dijitDialogCloseIcon-hover");
-},_onCloseLeave:function(){
-dojo.removeClass(this.closeButtonNode,"dijitDialogCloseIcon-hover");
 }});
 dojo.declare("dijit.Dialog",[dijit.layout.ContentPane,dijit._DialogBase],{});
 dijit._dialogStack=[];

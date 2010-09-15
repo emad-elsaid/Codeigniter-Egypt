@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -54,6 +54,7 @@ this.width-=sw;
 if(this.width>this.parentWidth){
 this.height-=sw;
 }
+this.mouse.resize(this.width,this.height);
 this.gfxSurface.setDimensions(this.width,this.height);
 this.domNode.parentNode.scrollTop=_8||0;
 this.domNode.parentNode.scrollLeft=_7||0;
@@ -71,7 +72,7 @@ this.setDimensions(this.width*_9,this.height*_9);
 return {top:this.domNode.parentNode.scrollTop,left:this.domNode.parentNode.scrollLeft};
 },getScrollWidth:function(){
 var p=dojo.create("div");
-p.innerHTML="<div style=\"width:50px;height:50px;overflow:hidden;position:absolute;top:0px;left:-1000px;\"><div style=\"height:100px;\"></div>";
+p.innerHTML="<div style=\"width:50px;height:50px;overflow:hidden;position:absolute;top:0;left:-1000px;\"><div style=\"height:100px;\"></div>";
 var _a=p.firstChild;
 dojo.body().appendChild(_a);
 var _b=dojo.contentBox(_a).h;

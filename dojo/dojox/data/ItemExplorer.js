@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -114,13 +114,13 @@ var _1f=dijit.getEnclosingWidget(e.target);
 if(_1f){
 var _20=_1f.item;
 if(this.store.isItem(_20.value,true)&&!_20.parent){
-_1e.getChildren().forEach(function(_21){
+dojo.forEach(_1e.getChildren(),function(_21){
 _21.attr("disabled",(_21.label!="Add"));
 });
 this.lastFocused=_1f;
 }else{
 if(_20.value&&typeof _20.value=="object"&&!(_20.value instanceof Date)){
-_1e.getChildren().forEach(function(_22){
+dojo.forEach(_1e.getChildren(),function(_22){
 _22.attr("disabled",(_22.label!="Add")&&(_22.label!="Delete"));
 });
 this.lastFocused=_1f;
@@ -132,7 +132,7 @@ alert("Cannot modify an Identifier node.");
 if(_20.addNew){
 this.focusNode(_1f);
 }else{
-_1e.getChildren().forEach(function(_23){
+dojo.forEach(_1e.getChildren(),function(_23){
 _23.attr("disabled",(_23.label!="Edit")&&(_23.label!="Delete"));
 });
 this.lastFocused=_1f;

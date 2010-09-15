@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -147,8 +147,7 @@ this.group.add(m.container);
 m.select();
 });
 },setConstraint:function(){
-var t=Infinity;
-l=Infinity;
+var t=Infinity,l=Infinity;
 this.withSelected(function(m){
 var o=m.getBounds();
 t=Math.min(o.y1,t);
@@ -239,7 +238,7 @@ this.deselect();
 }
 }
 this.selectItem(obj.id);
-var mx=this.group.getTransform();
+mx=this.group.getTransform();
 this._offx=obj.x-mx.dx;
 this._offy=obj.y-mx.dx;
 this.orgx=obj.x;
@@ -255,7 +254,7 @@ this.onBeginDrag(obj);
 this._dragBegun=true;
 }else{
 this.saveThrottledState();
-var x=obj.x-obj.last.x,y=obj.y-obj.last.y,mx=this.group.getTransform(),c=this.constrain,mz=this.defaults.anchors.marginZero;
+var x=obj.x-obj.last.x,y=obj.y-obj.last.y,c=this.constrain,mz=this.defaults.anchors.marginZero;
 x=obj.x-this._offx;
 y=obj.y-this._offy;
 if(x<c.l+mz){
@@ -272,12 +271,18 @@ this._dragBegun=false;
 this._wasDragged=true;
 },onDown:function(obj){
 this.deselect();
+},onStencilOver:function(obj){
+dojo.style(obj.id,"cursor","move");
+},onStencilOut:function(obj){
+dojo.style(obj.id,"cursor","crosshair");
 },exporter:function(){
 var _11=[];
 for(var m in this.stencils){
 this.stencils[m].enabled&&_11.push(this.stencils[m].exporter());
 }
 return _11;
+},listStencils:function(){
+return this.stencils;
 },toSelected:function(_12){
 var _13=Array.prototype.slice.call(arguments).splice(1);
 for(var m in this.selectedStencils){

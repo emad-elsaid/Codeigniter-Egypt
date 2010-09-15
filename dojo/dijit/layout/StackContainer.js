@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -10,7 +10,7 @@ dojo._hasResource["dijit.layout.StackContainer"]=true;
 dojo.provide("dijit.layout.StackContainer");
 dojo.require("dijit._Templated");
 dojo.require("dijit.layout._LayoutWidget");
-dojo.requireLocalization("dijit","common",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ru,sk,sl,sv,th,tr,zh,zh-tw");
+dojo.requireLocalization("dijit","common",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ro,ru,sk,sl,sv,th,tr,zh,zh-tw");
 dojo.require("dojo.cookie");
 dojo.declare("dijit.layout.StackContainer",dijit.layout._LayoutWidget,{doLayout:true,persist:false,baseClass:"dijitStackContainer",postCreate:function(){
 this.inherited(arguments);
@@ -69,9 +69,6 @@ dojo.publish(this.id+"-removeChild",[_8]);
 if(this._beingDestroyed){
 return;
 }
-if(this._started){
-this.layout();
-}
 if(this.selectedChildWidget===_8){
 this.selectedChildWidget=undefined;
 if(this._started){
@@ -81,70 +78,71 @@ this.selectChild(_9[0]);
 }
 }
 }
-},selectChild:function(_a){
+if(this._started){
+this.layout();
+}
+},selectChild:function(_a,_b){
 _a=dijit.byId(_a);
 if(this.selectedChildWidget!=_a){
-this._transition(_a,this.selectedChildWidget);
+this._transition(_a,this.selectedChildWidget,_b);
 this.selectedChildWidget=_a;
 dojo.publish(this.id+"-selectChild",[_a]);
 if(this.persist){
 dojo.cookie(this.id+"_selectedChild",this.selectedChildWidget.id);
 }
 }
-},_transition:function(_b,_c){
-if(_c){
-this._hideChild(_c);
+},_transition:function(_c,_d){
+if(_d){
+this._hideChild(_d);
 }
-this._showChild(_b);
-if(_b.resize){
+this._showChild(_c);
+if(_c.resize){
 if(this.doLayout){
-_b.resize(this._containerContentBox||this._contentBox);
+_c.resize(this._containerContentBox||this._contentBox);
 }else{
-_b.resize();
+_c.resize();
 }
 }
-},_adjacent:function(_d){
-var _e=this.getChildren();
-var _f=dojo.indexOf(_e,this.selectedChildWidget);
-_f+=_d?1:_e.length-1;
-return _e[_f%_e.length];
+},_adjacent:function(_e){
+var _f=this.getChildren();
+var _10=dojo.indexOf(_f,this.selectedChildWidget);
+_10+=_e?1:_f.length-1;
+return _f[_10%_f.length];
 },forward:function(){
-this.selectChild(this._adjacent(true));
+this.selectChild(this._adjacent(true),true);
 },back:function(){
-this.selectChild(this._adjacent(false));
+this.selectChild(this._adjacent(false),true);
 },_onKeyPress:function(e){
 dojo.publish(this.id+"-containerKeyPress",[{e:e,page:this}]);
 },layout:function(){
 if(this.doLayout&&this.selectedChildWidget&&this.selectedChildWidget.resize){
-this.selectedChildWidget.resize(this._contentBox);
+this.selectedChildWidget.resize(this._containerContentBox||this._contentBox);
 }
-},_showChild:function(_10){
-var _11=this.getChildren();
-_10.isFirstChild=(_10==_11[0]);
-_10.isLastChild=(_10==_11[_11.length-1]);
-_10.selected=true;
-dojo.removeClass(_10.domNode,"dijitHidden");
-dojo.addClass(_10.domNode,"dijitVisible");
-_10._onShow();
-},_hideChild:function(_12){
-_12.selected=false;
-dojo.removeClass(_12.domNode,"dijitVisible");
-dojo.addClass(_12.domNode,"dijitHidden");
-_12.onHide();
-},closeChild:function(_13){
-var _14=_13.onClose(this,_13);
-if(_14){
-this.removeChild(_13);
-_13.destroyRecursive();
+},_showChild:function(_11){
+var _12=this.getChildren();
+_11.isFirstChild=(_11==_12[0]);
+_11.isLastChild=(_11==_12[_12.length-1]);
+_11.selected=true;
+dojo.removeClass(_11.domNode,"dijitHidden");
+dojo.addClass(_11.domNode,"dijitVisible");
+_11._onShow();
+},_hideChild:function(_13){
+_13.selected=false;
+dojo.removeClass(_13.domNode,"dijitVisible");
+dojo.addClass(_13.domNode,"dijitHidden");
+_13.onHide();
+},closeChild:function(_14){
+var _15=_14.onClose(this,_14);
+if(_15){
+this.removeChild(_14);
+_14.destroyRecursive();
 }
-},destroyDescendants:function(_15){
-dojo.forEach(this.getChildren(),function(_16){
-this.removeChild(_16);
-_16.destroyRecursive(_15);
+},destroyDescendants:function(_16){
+dojo.forEach(this.getChildren(),function(_17){
+this.removeChild(_17);
+_17.destroyRecursive(_16);
 },this);
 }});
 dojo.require("dijit.layout.StackController");
-dojo.extend(dijit._Widget,{selected:false,closable:false,iconClass:"",showTitle:true,onClose:function(){
-return true;
-}});
+dojo.extend(dijit._Widget,{selected:false,closable:false,iconClass:"",showTitle:true});
 }

@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -20,7 +20,7 @@ dojox.io.xhrScriptPlugin(_1,"callback",dojox.io.xhrPlugins.fullHttpAdapter);
 }
 var _3=dojo.xhr;
 dojo.xhr=function(_4,_5){
-(_5.headers=_5.headers||{})["Server-Methods"]=false;
+(_5.headers=_5.headers||{})["Server-Methods"]="false";
 return _3.apply(dojo,arguments);
 };
 var _6=dojox.rpc.Rest(_1,true);

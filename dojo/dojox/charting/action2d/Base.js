@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -15,7 +15,7 @@ dojo.require("dojox.gfx.fx");
 var _1=400,_2=dojo.fx.easing.backOut,df=dojox.lang.functional;
 dojo.declare("dojox.charting.action2d.Base",null,{overOutEvents:{onmouseover:1,onmouseout:1},constructor:function(_3,_4,_5){
 this.chart=_3;
-this.plot=_4?_4:"default";
+this.plot=_4||"default";
 this.anim={};
 if(!_5){
 _5={};
@@ -31,9 +31,7 @@ this.handle=null;
 }
 },reset:function(){
 },destroy:function(){
-if(this.handle){
 this.disconnect();
-}
 df.forIn(this.anim,function(o){
 df.forIn(o,function(_6){
 _6.action.stop(true);

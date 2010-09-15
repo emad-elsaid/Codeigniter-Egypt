@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -10,7 +10,11 @@ dojo._hasResource["dijit.form.FilteringSelect"]=true;
 dojo.provide("dijit.form.FilteringSelect");
 dojo.require("dijit.form.ComboBox");
 dojo.declare("dijit.form.FilteringSelect",[dijit.form.MappedTextBox,dijit.form.ComboBoxMixin],{_isvalid:true,required:true,_lastDisplayedValue:"",isValid:function(){
-return this._isvalid||(!this.required&&this.attr("displayedValue")=="");
+return this._isvalid||(!this.required&&this.get("displayedValue")=="");
+},_refreshState:function(){
+if(!this.searchTimer){
+this.inherited(arguments);
+}
 },_callbackSetLabel:function(_1,_2,_3){
 if((_2&&_2.query[this.searchAttr]!=this._lastQuery)||(!_2&&_1.length&&this.store.getIdentity(_1[0])!=this._lastQuery)){
 return;
@@ -22,14 +26,16 @@ this._isvalid=false;
 this.validate(this._focused);
 this.item=null;
 }else{
-this.attr("item",_1[0],_3);
+this.set("item",_1[0],_3);
 }
 },_openResultList:function(_4,_5){
 if(_5.query[this.searchAttr]!=this._lastQuery){
 return;
 }
-this._isvalid=_4.length!=0;
+if(this.item===undefined){
+this._isvalid=_4.length!=0||this._maxOptions!=0;
 this.validate(true);
+}
 dijit.form.ComboBoxMixin.prototype._openResultList.apply(this,arguments);
 },_getValueAttr:function(){
 return this.valueNode.value;
@@ -46,7 +52,7 @@ return;
 }
 var _8=this;
 this.store.fetchItemByIdentity({identity:_6,onItem:function(_9){
-_8._callbackSetLabel([_9],undefined,_7);
+_8._callbackSetLabel(_9?[_9]:[],undefined,_7);
 }});
 },_setItemAttr:function(_a,_b,_c){
 this._isvalid=true;
@@ -81,6 +87,6 @@ this._fetchHandle=this.store.fetch(_12);
 this.inherited(arguments);
 this._isvalid=!this.required;
 },undo:function(){
-this.attr("displayedValue",this._lastDisplayedValue);
+this.set("displayedValue",this._lastDisplayedValue);
 }});
 }

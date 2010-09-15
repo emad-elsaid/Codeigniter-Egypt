@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -81,7 +81,7 @@ this._setCopyStatus(_8);
 },onMouseUp:function(e){
 if(this.avatar){
 if(this.target&&this.canDropFlag){
-var _9=Boolean(this.source.copyState(dojo.isCopyKey(e))),_a=[this.source,this.nodes,_9,this.target];
+var _9=Boolean(this.source.copyState(dojo.isCopyKey(e))),_a=[this.source,this.nodes,_9,this.target,e];
 dojo.publish("/dnd/drop/before",_a);
 dojo.publish("/dnd/drop",_a);
 }else{

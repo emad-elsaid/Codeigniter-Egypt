@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -12,8 +12,8 @@ dojo.require("dijit.layout.StackContainer");
 dojo.require("dijit.layout.ContentPane");
 dojo.require("dijit.form.Button");
 dojo.require("dojo.i18n");
-dojo.requireLocalization("dijit","common",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ru,sk,sl,sv,th,tr,zh,zh-tw");
-dojo.requireLocalization("dojox.widget","Wizard",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ru,sk,sl,sv,th,tr,zh,zh-tw");
+dojo.requireLocalization("dijit","common",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ro,ru,sk,sl,sv,th,tr,zh,zh-tw");
+dojo.requireLocalization("dojox.widget","Wizard",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ro,ru,sk,sl,sv,th,tr,zh,zh-tw");
 dojo.declare("dojox.widget.Wizard",[dijit.layout.StackContainer,dijit._Templated],{widgetsInTemplate:true,templateString:dojo.cache("dojox.widget","Wizard/Wizard.html","<div class=\"dojoxWizard\" dojoAttachPoint=\"wizardNode\">\n    <div class=\"dojoxWizardContainer\" dojoAttachPoint=\"containerNode\"></div>\n    <div class=\"dojoxWizardButtons\" dojoAttachPoint=\"wizardNav\">\n        <button dojoType=\"dijit.form.Button\" type=\"button\" dojoAttachPoint=\"previousButton\">${previousButtonLabel}</button>\n        <button dojoType=\"dijit.form.Button\" type=\"button\" dojoAttachPoint=\"nextButton\">${nextButtonLabel}</button>\n        <button dojoType=\"dijit.form.Button\" type=\"button\" dojoAttachPoint=\"doneButton\" style=\"display:none\">${doneButtonLabel}</button>\n        <button dojoType=\"dijit.form.Button\" type=\"button\" dojoAttachPoint=\"cancelButton\">${cancelButtonLabel}</button>\n    </div>\n</div>\n"),nextButtonLabel:"",previousButtonLabel:"",cancelButtonLabel:"",doneButtonLabel:"",cancelFunction:null,hideDisabled:false,postMixInProperties:function(){
 this.inherited(arguments);
 var _1=dojo.mixin({cancel:dojo.i18n.getLocalization("dijit","common",this.lang).buttonCancel},dojo.i18n.getLocalization("dojox.widget","Wizard",this.lang));
@@ -45,7 +45,7 @@ this._started=true;
 },_checkButtons:function(){
 var sw=this.selectedChildWidget;
 var _3=sw.isLastChild;
-this.nextButton.attr("disabled",_3);
+this.nextButton.set("disabled",_3);
 this._setButtonClass(this.nextButton);
 if(sw.doneFunction){
 this.doneButton.domNode.style.display="";
@@ -55,7 +55,7 @@ this.nextButton.domNode.style.display="none";
 }else{
 this.doneButton.domNode.style.display="none";
 }
-this.previousButton.attr("disabled",!this.selectedChildWidget.canGoBack);
+this.previousButton.set("disabled",!this.selectedChildWidget.canGoBack);
 this._setButtonClass(this.previousButton);
 },_setButtonClass:function(_4){
 _4.domNode.style.display=(this.hideDisabled&&_4.disabled)?"none":"";

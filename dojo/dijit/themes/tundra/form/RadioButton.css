@@ -1,12 +1,5 @@
-.tundra .dijitToggleButton .dijitRadio,
-.tundra .dijitToggleButton .dijitRadioIcon {
-	background-image: url('../images/checkmarkNoBorder.png');
-}
-.dj_ie6 .tundra .dijitToggleButton .dijitRadio,
-.dj_ie6 .tundra .dijitToggleButton .dijitRadioIcon {
-	background-image: url('../images/checkmarkNoBorder.gif');
-}
-.tundra .dijitRadio,
+
+.tundra .dijitRadio,			
 .tundra .dijitRadioIcon	{		
 	background-image: url('../images/checkmark.png'); 
 	background-repeat: no-repeat;
@@ -16,11 +9,18 @@
 	padding: 0;
 }
 .dj_ie6 .tundra .dijitRadio,
-.dj_ie6 .tundra .dijitRadioIcon	{		
+.dj_ie6 .tundra .dijitRadioIcon	{
 	background-image: url('../images/checkmark.gif'); 
 }
-.tundra .dijitRadio,
 .tundra .dijitToggleButton .dijitRadioIcon {
+	
+	background-image: url('../images/checkmarkNoBorder.png');
+}
+.dj_ie6 .tundra .dijitToggleButton .dijitRadioIcon {
+	background-image: url('../images/checkmarkNoBorder.gif');
+}
+.tundra .dijitRadio,
+.tundra .dijitRadioIcon {
 	
 	background-position: -112px;
 }

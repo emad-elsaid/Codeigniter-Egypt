@@ -31,15 +31,11 @@
 .soria .dijitSliderFocused .dijitSliderBar {
 	border-color:#8ba0bd;
 }
-.dijit_a11y .dijitSliderProgressBar {
-	background-color:#333 !important;
-}
 .soria .dijitSliderImageHandleH {
 	border:0px;
 	width:15px;
 	height:18px;
 	background:url("../images/preciseSliderThumb.png") no-repeat center top;
-	cursor:pointer;
 }
 .soria .dijitSliderFocused .dijitSliderImageHandleH {
 	background-image:url("../images/preciseSliderThumbFocus.png");
@@ -64,7 +60,6 @@
 	height:15px;
 	background:url("../images/sliderThumb.png") no-repeat center center;
 	#background:url("../images/sliderThumb.gif") no-repeat center center;
-	cursor:pointer;
 }
 .soria .dijitSliderFocused .dijitSliderImageHandleV {
 	background-image:url("../images/sliderThumbFocus.png");
@@ -85,7 +80,6 @@
 	background:url('../images/spriteRoundedIconsSmall.png') no-repeat -45px top;
 	#background:url('../images/spriteRoundedIconsSmall.gif') no-repeat -45px top;
 	width:15px; height:15px;
-	cursor:pointer;
 }
 .soria .dijitSliderIncrementIconH {
 	background:url('../images/spriteRoundedIconsSmall.png') no-repeat -30px top;
@@ -95,7 +89,6 @@
 .soria .dijitSliderDecrementIconV {
 	width:15px;
 	height:15px;
-	cursor:pointer;
 	background:url('../images/spriteRoundedIconsSmall.png') no-repeat -15px top;
 	#background:url('../images/spriteRoundedIconsSmall.gif') no-repeat -15px top;
 }

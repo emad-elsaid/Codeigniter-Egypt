@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -93,6 +93,11 @@ dojo.style(this.textbox,{overflowY:"hidden",overflowX:"auto",boxSizing:"border-b
 this.connect(this.textbox,"onscroll",this._onInput);
 this.connect(this.textbox,"onresize",this._onInput);
 this.connect(this.textbox,"onfocus",this._onInput);
-setTimeout(dojo.hitch(this,"resize"),0);
+this._setTimeoutHandle=setTimeout(dojo.hitch(this,"resize"),0);
+},uninitialize:function(){
+if(this._setTimeoutHandle){
+clearTimeout(this._setTimeoutHandle);
+}
+this.inherited(arguments);
 }});
 }

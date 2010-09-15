@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -13,9 +13,9 @@ dojo._listener={getDispatcher:function(){
 return function(){
 var ap=Array.prototype,c=arguments.callee,ls=c._listeners,t=c.target;
 var r=t&&t.apply(this,arguments);
-var _1;
+var i,_1;
 _1=[].concat(ls);
-for(var i in _1){
+for(i in _1){
 if(!(i in ap)){
 _1[i].apply(this,arguments);
 }
@@ -80,6 +80,6 @@ dojo.connectPublisher=function(_1c,obj,_1d){
 var pf=function(){
 dojo.publish(_1c,arguments);
 };
-return (_1d)?dojo.connect(obj,_1d,pf):dojo.connect(obj,pf);
+return _1d?dojo.connect(obj,_1d,pf):dojo.connect(obj,pf);
 };
 }

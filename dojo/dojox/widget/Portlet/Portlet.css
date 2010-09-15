@@ -71,7 +71,7 @@
 	border-bottom: none;
 }
 .soria .dojoDndItemOver .dojoxPortletTitle {
-  border-top: 1px solid #8D8D8D;
+	border-top: 1px solid #8D8D8D;
 	border-left: 1px solid #8D8D8D;
 	border-right: 1px solid #8D8D8D;
 }
@@ -81,7 +81,7 @@
 	border-right: 1px solid #9D9D9D;
 }
 .dojoxPortlet div.dojoxPortletContentOuter {
-	background: url(../../../dijit/themes/tundra/images/validationInputBg.gif) repeat-x top left;
+	background: #fff url(../../../dijit/themes/tundra/images/validationInputBg.gif) repeat-x top left;
 }
 .dojoxFeedPortletList {
 	padding-left: 25px;

@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -33,7 +33,7 @@ _c.push(_d);
 }
 return _c;
 },_e=function(_f){
-var _10=_f.attr("name");
+var _10=_f.get("name");
 if(_10&&_f instanceof dijit.form._FormWidget){
 if(_10 in this.formWidgets){
 var a=this.formWidgets[_10].widget;
@@ -52,7 +52,7 @@ return _10;
 },_11=function(_12){
 var _13={};
 aa(function(_14,w){
-var o=w.attr("observer");
+var o=w.get("observer");
 if(o&&typeof o=="string"){
 dojo.forEach(o.split(","),function(o){
 o=dojo.trim(o);
@@ -74,7 +74,7 @@ dojo.forEach(w,function(w){
 dojo.forEach(_17,function(o){
 c.push(dojo.connect(w,"onChange",this,function(evt){
 if(this.watch&&dojo.attr(w.focusNode,"checked")){
-this[o](w.attr("value"),_16,w,evt);
+this[o](w.get("value"),_16,w,evt);
 }
 }));
 },this);
@@ -84,7 +84,7 @@ var _18=w.declaredClass=="dijit.form.Button"?"onClick":"onChange";
 dojo.forEach(_17,function(o){
 c.push(dojo.connect(w,_18,this,function(evt){
 if(this.watch){
-this[o](w.attr("value"),_16,w,evt);
+this[o](w.get("value"),_16,w,evt);
 }
 }));
 },this);
@@ -147,7 +147,7 @@ _20=dijit.byNode(_20);
 }
 }
 dojo.forEach(dojo.map(_20.getDescendants(),function(w){
-return w instanceof dijit.form._FormWidget&&w.attr("name")||null;
+return w instanceof dijit.form._FormWidget&&w.get("name")||null;
 }),function(_21){
 if(_21){
 this.unregisterNode(_21);
@@ -168,10 +168,10 @@ return null;
 if(dojo.isArray(_22)){
 if(_24){
 dojo.forEach(_22,function(_26){
-_26.attr("checked",false);
+_26.set("checked",false,!this.watch);
 });
 dojo.forEach(_22,function(_27){
-_27.attr("checked",_27.attr("value")===_23);
+_27.set("checked",_27.value===_23,!this.watch);
 });
 return this;
 }
@@ -182,13 +182,20 @@ return true;
 }
 return false;
 });
-return _25?_25.attr("value"):"";
+return _25?_25.get("value"):"";
 }
+if(_22.declaredClass=="dijit.form.CheckBox"){
 if(_24){
-_22.attr("value",_23);
+_22.set("value",Boolean(_23),!this.watch);
 return this;
 }
-return _22.attr("value");
+return Boolean(_22.get("value"));
+}
+if(_24){
+_22.set("value",_23,!this.watch);
+return this;
+}
+return _22.get("value");
 },formPointValue:function(_29,_2a){
 if(_29&&typeof _29=="string"){
 _29=this[_29];

@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -70,9 +70,6 @@ if(p.noAnchor){
 return;
 }
 if(i==0||i==_c.points.length-1){
-if(i==0){
-}else{
-}
 }
 var a=new dojox.drawing.manager.Anchor({stencil:_c,point:p,pointIdx:i,mouse:this.mouse,util:this.util});
 this.items[_c.id]._cons=[dojo.connect(a,"onRenderStencil",this,"onRenderStencil"),dojo.connect(a,"reset",this,"onReset"),dojo.connect(a,"onAnchorUp",this,"onAnchorUp"),dojo.connect(a,"onAnchorDown",this,"onAnchorDown"),dojo.connect(a,"onAnchorDrag",this,"onAnchorDrag"),dojo.connect(a,"onTransformPoint",this,"onTransformPoint"),dojo.connect(_c,"onChangeStyle",this,"onChangeStyle")];
@@ -125,6 +122,9 @@ this.stencil=_10.stencil;
 if(this.stencil.anchorPositionCheck){
 this.anchorPositionCheck=dojo.hitch(this.stencil,this.stencil.anchorPositionCheck);
 }
+if(this.stencil.anchorConstrain){
+this.anchorConstrain=dojo.hitch(this.stencil,this.stencil.anchorConstrain);
+}
 this._zCon=dojo.connect(this.mouse,"setZoom",this,"render");
 this.render();
 this.connectMouse();
@@ -148,9 +148,7 @@ if(this.selected){
 var mx=this.shape.getTransform();
 var pmx=this.shape.getParent().getParent().getTransform();
 var _15=this.defaults.anchors.marginZero;
-var _16=pmx.dx+this.org.x,_17=pmx.dy+this.org.y,x=obj.x-_16;
-y=obj.y-_17;
-s=this.defaults.anchors.minSize;
+var _16=pmx.dx+this.org.x,_17=pmx.dy+this.org.y,x=obj.x-_16,y=obj.y-_17,s=this.defaults.anchors.minSize;
 var _18,_19,_1a,_1b;
 var chk=this.anchorPositionCheck(x,y,this);
 if(chk.x<0){
@@ -213,13 +211,20 @@ if(x<_18){
 x=_18;
 }
 }
+var _1c=this.anchorConstrain(x,y);
+if(_1c!=null){
+x=_1c.x;
+y=_1c.y;
+}
 this.shape.setTransform({dx:x,dy:y});
 if(this.linkedAnchor){
 this.linkedAnchor.shape.setTransform({dx:x,dy:y});
 }
 this.onTransformPoint(this);
 }
-},anchorPositionCheck:function(x,y,_1c){
+},anchorConstrain:function(x,y){
+return null;
+},anchorPositionCheck:function(x,y,_1d){
 return {x:1,y:1};
 },setPoint:function(mx){
 this.shape.applyTransform(mx);
@@ -227,7 +232,7 @@ this.shape.applyTransform(mx);
 this._mouseHandle=this.mouse.register(this);
 },disconnectMouse:function(){
 this.mouse.unregister(this._mouseHandle);
-},reset:function(_1d){
+},reset:function(_1e){
 },destroy:function(){
 dojo.disconnect(this._zCon);
 this.disconnectMouse();

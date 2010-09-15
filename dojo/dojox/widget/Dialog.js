@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -9,6 +9,7 @@ if(!dojo._hasResource["dojox.widget.Dialog"]){
 dojo._hasResource["dojox.widget.Dialog"]=true;
 dojo.provide("dojox.widget.Dialog");
 dojo.experimental("dojox.widget.Dialog");
+dojo.require("dojo.window");
 dojo.require("dijit.Dialog");
 dojo.require("dojox.layout.ContentPane");
 dojo.require("dojox.fx");
@@ -28,7 +29,7 @@ dojo.addClass(this.domNode,"dojoxDialogNoTitle");
 this._setSize();
 this.inherited(arguments);
 },_setSize:function(){
-this._vp=dijit.getViewport();
+this._vp=dojo.window.getBox();
 var tc=this.containerNode,_3=this.sizeToViewport;
 return this._displaysize={w:_3?tc.scrollWidth:this.dimensions[0],h:_3?tc.scrollHeight:this.dimensions[1]};
 },show:function(){

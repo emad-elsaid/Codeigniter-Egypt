@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -226,7 +226,9 @@ _24=(_23&&_21.data)?_21.data:_21;
 _25=(_23&&_21.type)?_21.type:["text"];
 n=(_22=="avatar"?dojo.dnd._createSpan:c)(String(_24));
 }
+if(!n.id){
 n.id=dojo.dnd.getUniqueId();
+}
 return {node:n,data:_24,type:_25};
 };
 };

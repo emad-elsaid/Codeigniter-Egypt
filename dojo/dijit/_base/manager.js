@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -77,44 +77,48 @@ return true;
 }
 return false;
 }});
+(function(){
 dijit.registry=new dijit.WidgetSet();
-dijit._widgetTypeCtr={};
-dijit.getUniqueId=function(_10){
+var _10=dijit.registry._hash,_11=dojo.attr,_12=dojo.hasAttr,_13=dojo.style;
+dijit.byId=function(id){
+return typeof id=="string"?_10[id]:id;
+};
+var _14={};
+dijit.getUniqueId=function(_15){
 var id;
 do{
-id=_10+"_"+(_10 in dijit._widgetTypeCtr?++dijit._widgetTypeCtr[_10]:dijit._widgetTypeCtr[_10]=0);
-}while(dijit.byId(id));
+id=_15+"_"+(_15 in _14?++_14[_15]:_14[_15]=0);
+}while(_10[id]);
 return dijit._scopeName=="dijit"?id:dijit._scopeName+"_"+id;
 };
-dijit.findWidgets=function(_11){
-var _12=[];
-function _13(_14){
-for(var _15=_14.firstChild;_15;_15=_15.nextSibling){
-if(_15.nodeType==1){
-var _16=_15.getAttribute("widgetId");
-if(_16){
-var _17=dijit.byId(_16);
-_12.push(_17);
+dijit.findWidgets=function(_16){
+var _17=[];
+function _18(_19){
+for(var _1a=_19.firstChild;_1a;_1a=_1a.nextSibling){
+if(_1a.nodeType==1){
+var _1b=_1a.getAttribute("widgetId");
+if(_1b){
+_17.push(_10[_1b]);
 }else{
-_13(_15);
+_18(_1a);
 }
 }
 }
 };
-_13(_11);
-return _12;
+_18(_16);
+return _17;
 };
 dijit._destroyAll=function(){
 dijit._curFocus=null;
 dijit._prevFocus=null;
 dijit._activeStack=[];
-dojo.forEach(dijit.findWidgets(dojo.body()),function(_18){
-if(!_18._destroyed){
-if(_18.destroyRecursive){
-_18.destroyRecursive();
+dojo.forEach(dijit.findWidgets(dojo.body()),function(_1c){
+if(!_1c._destroyed){
+if(_1c.destroyRecursive){
+_1c.destroyRecursive();
 }else{
-if(_18.destroy){
-_18.destroy();
+if(_1c.destroy){
+_1c.destroy();
 }
 }
 }
@@ -125,36 +129,27 @@ dojo.addOnWindowUnload(function(){
 dijit._destroyAll();
 });
 }
-dijit.byId=function(id){
-return typeof id=="string"?dijit.registry._hash[id]:id;
+dijit.byNode=function(_1d){
+return _10[_1d.getAttribute("widgetId")];
 };
-dijit.byNode=function(_19){
-return dijit.registry.byId(_19.getAttribute("widgetId"));
-};
-dijit.getEnclosingWidget=function(_1a){
-while(_1a){
-var id=_1a.getAttribute&&_1a.getAttribute("widgetId");
+dijit.getEnclosingWidget=function(_1e){
+while(_1e){
+var id=_1e.getAttribute&&_1e.getAttribute("widgetId");
 if(id){
-return dijit.byId(id);
+return _10[id];
 }
-_1a=_1a.parentNode;
+_1e=_1e.parentNode;
 }
 return null;
 };
-dijit._isElementShown=function(_1b){
-var _1c=dojo.style(_1b);
-return (_1c.visibility!="hidden")&&(_1c.visibility!="collapsed")&&(_1c.display!="none")&&(dojo.attr(_1b,"type")!="hidden");
-};
-dijit.isTabNavigable=function(_1d){
-if(dojo.attr(_1d,"disabled")){
-return false;
-}else{
-if(dojo.hasAttr(_1d,"tabIndex")){
-return dojo.attr(_1d,"tabIndex")>=0;
-}else{
-switch(_1d.nodeName.toLowerCase()){
+var _1f=(dijit._isElementShown=function(_20){
+var s=_13(_20);
+return (s.visibility!="hidden")&&(s.visibility!="collapsed")&&(s.display!="none")&&(_11(_20,"type")!="hidden");
+});
+dijit.hasDefaultTabStop=function(_21){
+switch(_21.nodeName.toLowerCase()){
 case "a":
-return dojo.hasAttr(_1d,"href");
+return _12(_21,"href");
 case "area":
 case "button":
 case "input":
@@ -164,16 +159,21 @@ case "textarea":
 return true;
 case "iframe":
 if(dojo.isMoz){
-return _1d.contentDocument.designMode=="on";
+try{
+return _21.contentDocument.designMode=="on";
+}
+catch(err){
+return false;
+}
 }else{
 if(dojo.isWebKit){
-var doc=_1d.contentDocument,_1e=doc&&doc.body;
-return _1e&&_1e.contentEditable=="true";
+var doc=_21.contentDocument,_22=doc&&doc.body;
+return _22&&_22.contentEditable=="true";
 }else{
 try{
-doc=_1d.contentWindow.document;
-_1e=doc&&doc.body;
-return _1e&&_1e.firstChild&&_1e.firstChild.contentEditable=="true";
+doc=_21.contentWindow.document;
+_22=doc&&doc.body;
+return _22&&_22.firstChild&&_22.firstChild.contentEditable=="true";
 }
 catch(e){
 return false;
@@ -181,53 +181,65 @@ return false;
 }
 }
 default:
-return _1d.contentEditable=="true";
-}
-}
+return _21.contentEditable=="true";
 }
 };
-dijit._getTabNavigable=function(_1f){
-var _20,_21,_22,_23,_24,_25;
-var _26=function(_27){
-dojo.query("> *",_27).forEach(function(_28){
-var _29=dijit._isElementShown(_28);
-if(_29&&dijit.isTabNavigable(_28)){
-var _2a=dojo.attr(_28,"tabIndex");
-if(!dojo.hasAttr(_28,"tabIndex")||_2a==0){
-if(!_20){
-_20=_28;
-}
-_21=_28;
+var _23=(dijit.isTabNavigable=function(_24){
+if(_11(_24,"disabled")){
+return false;
 }else{
-if(_2a>0){
-if(!_22||_2a<_23){
-_23=_2a;
-_22=_28;
-}
-if(!_24||_2a>=_25){
-_25=_2a;
-_24=_28;
+if(_12(_24,"tabIndex")){
+return _11(_24,"tabIndex")>=0;
+}else{
+return dijit.hasDefaultTabStop(_24);
 }
 }
+});
+dijit._getTabNavigable=function(_25){
+var _26,_27,_28,_29,_2a,_2b;
+var _2c=function(_2d){
+dojo.query("> *",_2d).forEach(function(_2e){
+if((dojo.isIE&&_2e.scopeName!=="HTML")||!_1f(_2e)){
+return;
+}
+if(_23(_2e)){
+var _2f=_11(_2e,"tabIndex");
+if(!_12(_2e,"tabIndex")||_2f==0){
+if(!_26){
+_26=_2e;
+}
+_27=_2e;
+}else{
+if(_2f>0){
+if(!_28||_2f<_29){
+_29=_2f;
+_28=_2e;
+}
+if(!_2a||_2f>=_2b){
+_2b=_2f;
+_2a=_2e;
 }
 }
-if(_29&&_28.nodeName.toUpperCase()!="SELECT"){
-_26(_28);
+}
+}
+if(_2e.nodeName.toUpperCase()!="SELECT"){
+_2c(_2e);
 }
 });
 };
-if(dijit._isElementShown(_1f)){
-_26(_1f);
+if(_1f(_25)){
+_2c(_25);
 }
-return {first:_20,last:_21,lowest:_22,highest:_24};
+return {first:_26,last:_27,lowest:_28,highest:_2a};
 };
-dijit.getFirstInTabbingOrder=function(_2b){
-var _2c=dijit._getTabNavigable(dojo.byId(_2b));
-return _2c.lowest?_2c.lowest:_2c.first;
+dijit.getFirstInTabbingOrder=function(_30){
+var _31=dijit._getTabNavigable(dojo.byId(_30));
+return _31.lowest?_31.lowest:_31.first;
 };
-dijit.getLastInTabbingOrder=function(_2d){
-var _2e=dijit._getTabNavigable(dojo.byId(_2d));
-return _2e.last?_2e.last:_2e.highest;
+dijit.getLastInTabbingOrder=function(_32){
+var _33=dijit._getTabNavigable(dojo.byId(_32));
+return _33.last?_33.last:_33.highest;
 };
 dijit.defaultDuration=dojo.config["defaultDuration"]||200;
+})();
 }

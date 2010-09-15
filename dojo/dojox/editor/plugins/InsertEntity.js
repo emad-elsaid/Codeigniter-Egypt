@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -14,7 +14,7 @@ dojo.require("dijit.TooltipDialog");
 dojo.require("dojox.editor.plugins.EntityPalette");
 dojo.require("dojox.html.entities");
 dojo.require("dojo.i18n");
-dojo.requireLocalization("dojox.editor.plugins","InsertEntity",null,"ROOT,cs,de,es,fr,hu,it,ja,ko,pl,pt,ru,zh,zh-tw");
+dojo.requireLocalization("dojox.editor.plugins","InsertEntity",null,"ROOT,cs,de,es,fr,hu,it,ja,ko,pl,pt,ro,ru,zh,zh-tw");
 dojo.declare("dojox.editor.plugins.InsertEntity",dijit._editor._Plugin,{iconClassPrefix:"dijitAdditionalEditorIcon",_initButton:function(){
 this.dropDown=new dojox.editor.plugins.EntityPalette({showCode:this.showCode,showEntityName:this.showEntityName});
 this.connect(this.dropDown,"onChange",function(_1){

@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -12,7 +12,7 @@ dojo.provide("dojox.form.ListInput");
 dojo.require("dijit.form._FormWidget");
 dojo.require("dijit.form.ValidationTextBox");
 dojo.require("dijit.InlineEditBox");
-dojo.requireLocalization("dijit","common",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ru,sk,sl,sv,th,tr,zh,zh-tw");
+dojo.requireLocalization("dijit","common",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ro,ru,sk,sl,sv,th,tr,zh,zh-tw");
 dojo.declare("dojox.form.ListInput",[dijit.form._FormValueWidget],{constructor:function(){
 this._items=[];
 if(!dojo.isArray(this.delimiter)){
@@ -20,7 +20,7 @@ this.delimiter=[this.delimiter];
 }
 var r="("+this.delimiter.join("|")+")?";
 this.regExp="^"+this.regExp+r+"$";
-},inputClass:"dojox.form._ListInputInputBox",inputHandler:"onChange",inputProperties:{minWidth:50},submitOnlyValidValue:true,useOnBlur:true,readOnlyInput:false,maxItems:null,showCloseButtonWhenValid:true,showCloseButtonWhenInvalid:true,regExp:".*",delimiter:",",constraints:{},baseClass:"dojoxListInput",type:"select",value:"",templateString:"<div dojoAttachPoint=\"focusNode\" class=\"dijit dijitReset dijitLeft dojoxListInput\"><select dojoAttachpoint=\"_selectNode\" multiple=\"multiple\" class=\"dijitHidden\" ${nameAttrSetting}></select><ul dojoAttachPoint=\"_listInput\"><li dojoAttachEvent=\"onclick: _onClick\" class=\"dijitInputField dojoxListInputNode dijitHidden\" dojoAttachPoint=\"_inputNode\"></li></ul></div>",useAnim:true,duration:500,easingIn:null,easingOut:null,readOnlyItem:false,useArrowForEdit:true,_items:null,_lastAddedItem:null,_currentItem:null,_input:null,_count:0,postCreate:function(){
+},inputClass:"dojox.form._ListInputInputBox",inputHandler:"onChange",inputProperties:{minWidth:50},submitOnlyValidValue:true,useOnBlur:true,readOnlyInput:false,maxItems:null,showCloseButtonWhenValid:true,showCloseButtonWhenInvalid:true,regExp:".*",delimiter:",",constraints:{},baseClass:"dojoxListInput",type:"select",value:"",templateString:"<div dojoAttachPoint=\"focusNode\" class=\"dijit dijitReset dijitLeft dojoxListInput\"><select dojoAttachpoint=\"_selectNode\" multiple=\"multiple\" class=\"dijitHidden\" ${!nameAttrSetting}></select><ul dojoAttachPoint=\"_listInput\"><li dojoAttachEvent=\"onclick: _onClick\" class=\"dijitInputField dojoxListInputNode dijitHidden\" dojoAttachPoint=\"_inputNode\"></li></ul></div>",useAnim:true,duration:500,easingIn:null,easingOut:null,readOnlyItem:false,useArrowForEdit:true,_items:null,_lastAddedItem:null,_currentItem:null,_input:null,_count:0,postCreate:function(){
 this.inherited(arguments);
 this._createInputBox();
 },_setReadOnlyInputAttr:function(_1){
@@ -126,10 +126,10 @@ this.onChange(this.value);
 }
 this._setReadOnlyWhenMaxItemsReached();
 },_setReadOnlyWhenMaxItemsReached:function(){
-this.attr("readOnlyInput",(this._count>=this.maxItems&&this.maxItems!==null));
+this.set("readOnlyInput",(this._count>=this.maxItems&&this.maxItems!==null));
 },_setSelectNode:function(){
 this._selectNode.options.length=0;
-var _a=this.submitOnlyValidValue?this.attr("MatchedValue"):this.value;
+var _a=this.submitOnlyValidValue?this.get("MatchedValue"):this.value;
 if(!dojo.isArray(_a)){
 return;
 }
@@ -254,8 +254,8 @@ this._input.focus();
 }
 },_inputOnKeyDown:function(e){
 this._currentItem=null;
-if(e.keyCode==dojo.keys.BACKSPACE&&this._input.attr("value")==""&&this.attr("lastItem")){
-this._destroyItem(this.attr("lastItem"));
+if(e.keyCode==dojo.keys.BACKSPACE&&this._input.attr("value")==""&&this.get("lastItem")){
+this._destroyItem(this.get("lastItem"));
 }else{
 if(e.keyCode==dojo.keys.ENTER&&this._input.attr("value")!=""){
 this.add(this._input.attr("value"));

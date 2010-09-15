@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -14,7 +14,7 @@ dojo.require("dijit.layout._LayoutWidget");
 dojo.require("dojo.parser");
 dojo.require("dojo.string");
 dojo.require("dojo.html");
-dojo.requireLocalization("dijit","loading",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ru,sk,sl,sv,th,tr,zh,zh-tw");
+dojo.requireLocalization("dijit","loading",null,"ROOT,ar,ca,cs,da,de,el,es,fi,fr,he,hu,it,ja,ko,nb,nl,pl,pt,pt-pt,ro,ru,sk,sl,sv,th,tr,zh,zh-tw");
 dojo.declare("dijit.layout.ContentPane",dijit._Widget,{href:"",extractContent:false,parseOnLoad:true,preventCache:false,preload:false,refreshOnShow:false,loadingMessage:"<span class='dijitContentPaneLoading'>${loadingState}</span>",errorMessage:"<span class='dijitContentPaneError'>${errorState}</span>",isLoaded:false,baseClass:"dijitContentPane",doLayout:true,ioArgs:{},isContainer:true,isLayoutContainer:true,onLoadDeferred:null,attributeMap:dojo.delegate(dijit._Widget.prototype.attributeMap,{title:[]}),postMixInProperties:function(){
 this.inherited(arguments);
 var _1=dojo.i18n.getLocalization("dijit","loading",this.lang);
@@ -65,8 +65,8 @@ delete this._singleChild;
 }
 dojo.toggleClass(this.containerNode,this.baseClass+"SingleChild",!!this._singleChild);
 },setHref:function(_a){
-dojo.deprecated("dijit.layout.ContentPane.setHref() is deprecated. Use attr('href', ...) instead.","","2.0");
-return this.attr("href",_a);
+dojo.deprecated("dijit.layout.ContentPane.setHref() is deprecated. Use set('href', ...) instead.","","2.0");
+return this.set("href",_a);
 },_setHrefAttr:function(_b){
 this.cancel();
 this.onLoadDeferred=new dojo.Deferred(dojo.hitch(this,"cancel"));
@@ -78,8 +78,8 @@ this._hrefChanged=true;
 }
 return this.onLoadDeferred;
 },setContent:function(_c){
-dojo.deprecated("dijit.layout.ContentPane.setContent() is deprecated.  Use attr('content', ...) instead.","","2.0");
-this.attr("content",_c);
+dojo.deprecated("dijit.layout.ContentPane.setContent() is deprecated.  Use set('content', ...) instead.","","2.0");
+this.set("content",_c);
 },_setContentAttr:function(_d){
 this.href="";
 this.cancel();
@@ -235,7 +235,7 @@ console.error("Fatal "+this.id+" could not change content due to "+e.message,e);
 }
 })});
 }
-var _1e=dojo.mixin({cleanContent:this.cleanContent,extractContent:this.extractContent,parseContent:this.parseOnLoad},this._contentSetterParams||{});
+var _1e=dojo.mixin({cleanContent:this.cleanContent,extractContent:this.extractContent,parseContent:this.parseOnLoad,dir:this.dir,lang:this.lang},this._contentSetterParams||{});
 dojo.mixin(_1c,_1e);
 _1c.set((dojo.isObject(_1a)&&_1a.domNode)?_1a.domNode:_1a);
 delete this._contentSetterParams;

@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -8,7 +8,6 @@
 if(!dojo._hasResource["dojox.date.islamic.Date"]){
 dojo._hasResource["dojox.date.islamic.Date"]=true;
 dojo.provide("dojox.date.islamic.Date");
-dojo.experimental("dojox.date.islamic.Date");
 dojo.require("dojo.date");
 dojo.requireLocalization("dojo.cldr","islamic",null,"ROOT,ar,he");
 dojo.declare("dojox.date.islamic.Date",null,{_date:0,_month:0,_year:0,_hours:0,_minutes:0,_seconds:0,_milliseconds:0,_day:0,_GREGORIAN_EPOCH:1721425.5,_ISLAMIC_EPOCH:1948439.5,constructor:function(){
@@ -96,7 +95,11 @@ return this;
 this._year=+_5;
 },setMonth:function(_6){
 this._year+=Math.floor(_6/12);
+if(_6>0){
 this._month=Math.floor(_6%12);
+}else{
+this._month=Math.floor(((_6%12)+12)%12);
+}
 },setHours:function(){
 var _7=arguments.length;
 var _8=0;
@@ -201,7 +204,7 @@ x.setHours(this._hours);
 x.setMinutes(this._minutes);
 x.setSeconds(this._seconds);
 x.setMilliseconds(this._milliseconds);
-return (this._month+" "+this._date+" "+this._year+" "+x.toTimeString());
+return this._month+" "+this._date+" "+this._year+" "+x.toTimeString();
 },toGregorian:function(){
 var _10=this._year;
 var _11=this._month;
@@ -217,19 +220,15 @@ var tjd=(this._GREGORIAN_EPOCH-1)+(365*(_1b-1))+Math.floor((_1b-1)/4)-(Math.floo
 var _1e=((wjd<tjd)?0:(dojo.date.isLeapYear(new Date(_1b,3,1))?1:2));
 var _1f=Math.floor((((_1d+_1e)*12)+373)/367);
 var _20=(this._GREGORIAN_EPOCH-1)+(365*(_1b-1))+Math.floor((_1b-1)/4)-(Math.floor((_1b-1)/100))+Math.floor((_1b-1)/400)+Math.floor((((367*_1f)-362)/12)+((_1f<=2)?0:(dojo.date.isLeapYear(new Date(_1b,_1f,1))?-1:-2))+1);
-var day=(wjd-_20);
-var _21=new Date(_1b,_1f-1,day);
-_21.setHours(this._hours);
-_21.setMilliseconds(this._milliseconds);
-_21.setMinutes(this._minutes);
-_21.setSeconds(this._seconds);
+var day=(wjd-_20)+1;
+var _21=new Date(_1b,(_1f-1),day,this._hours,this._minutes,this._seconds,this._milliseconds);
 return _21;
 },fromGregorian:function(_22){
 var _23=new Date(_22);
 var _24=_23.getFullYear(),_25=_23.getMonth(),_26=_23.getDate();
 var _27=(this._GREGORIAN_EPOCH-1)+(365*(_24-1))+Math.floor((_24-1)/4)+(-Math.floor((_24-1)/100))+Math.floor((_24-1)/400)+Math.floor((((367*(_25+1))-362)/12)+(((_25+1)<=2)?0:(dojo.date.isLeapYear(_23)?-1:-2))+_26)+(Math.floor(_23.getSeconds()+60*(_23.getMinutes()+60*_23.getHours())+0.5)/86400);
 _27=Math.floor(_27)+0.5;
-var _28=_27-1948440;
+var _28=_27-this._ISLAMIC_EPOCH;
 var _29=Math.floor((30*_28+10646)/10631);
 var _2a=Math.ceil((_28-29-this._yearStart(_29))/29.5);
 _2a=Math.min(_2a,11);

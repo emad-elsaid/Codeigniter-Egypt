@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -78,69 +78,69 @@ _17.setItem(_18);
 });
 this.gridOnFetchComplete=_e._onFetchComplete;
 this.setStore(this.store);
-},setQuery:function(_19){
-this.grid.setQuery(_19);
-},_formatCell:function(_1a){
-if(this.store.isItem(_1a)){
-return this.store.getLabel(_1a)||this.store.getIdentity(_1a);
+},setQuery:function(_19,_1a){
+this.grid.setQuery(_19,_1a);
+},_formatCell:function(_1b){
+if(this.store.isItem(_1b)){
+return this.store.getLabel(_1b)||this.store.getIdentity(_1b);
 }
-return _1a;
-},setStore:function(_1b){
-this.store=_1b;
-var _1c=this;
-var _1d=this.grid;
-_1d._pending_requests[0]=false;
-function _1e(_1f){
-return _1c._formatCell(_1f);
+return _1b;
+},setStore:function(_1c){
+this.store=_1c;
+var _1d=this;
+var _1e=this.grid;
+_1e._pending_requests[0]=false;
+function _1f(_20){
+return _1d._formatCell(_20);
 };
-var _20=this.gridOnFetchComplete;
-_1d._onFetchComplete=function(_21,req){
-var _22=_1c.gridLayout=[];
-var _23,key,_24,i,j,k,_25=_1b.getIdentityAttributes();
-for(i=0;i<_25.length;i++){
-key=_25[i];
-_22.push({field:key,name:key,_score:100,formatter:_1e,editable:false});
+var _21=this.gridOnFetchComplete;
+_1e._onFetchComplete=function(_22,req){
+var _23=_1d.gridLayout=[];
+var _24,key,_25,i,j,k,_26=_1c.getIdentityAttributes();
+for(i=0;i<_26.length;i++){
+key=_26[i];
+_23.push({field:key,name:key,_score:100,formatter:_1f,editable:false});
 }
-for(i=0;_24=_21[i++];){
-var _26=_1b.getAttributes(_24);
-for(k=0;key=_26[k++];){
-var _27=false;
-for(j=0;_23=_22[j++];){
-if(_23.field==key){
-_23._score++;
-_27=true;
+for(i=0;_25=_22[i++];){
+var _27=_1c.getAttributes(_25);
+for(k=0;key=_27[k++];){
+var _28=false;
+for(j=0;_24=_23[j++];){
+if(_24.field==key){
+_24._score++;
+_28=true;
 break;
 }
 }
-if(!_27){
-_22.push({field:key,name:key,_score:1,formatter:_1e,styles:"white-space:nowrap; ",editable:true});
+if(!_28){
+_23.push({field:key,name:key,_score:1,formatter:_1f,styles:"white-space:nowrap; ",editable:true});
 }
 }
 }
-_22=_22.sort(function(a,b){
+_23=_23.sort(function(a,b){
 return a._score>b._score?-1:1;
 });
-for(j=0;_23=_22[j];j++){
-if(_23._score<_21.length/40*j){
-_22.splice(j,_22.length-j);
+for(j=0;_24=_23[j];j++){
+if(_24._score<_22.length/40*j){
+_23.splice(j,_23.length-j);
 break;
 }
 }
-for(j=0;_23=_22[j++];){
-_23.width=Math.round(100/_22.length)+"%";
+for(j=0;_24=_23[j++];){
+_24.width=Math.round(100/_23.length)+"%";
 }
-_1d._onFetchComplete=_20;
-_1d.attr("structure",_22);
-var _28=_20.apply(this,arguments);
+_1e._onFetchComplete=_21;
+_1e.attr("structure",_23);
+var _29=_21.apply(this,arguments);
 };
-_1d.setStore(_1b);
+_1e.setStore(_1c);
 this.queryOptions={cache:true};
-this.tree.setStore(_1b);
+this.tree.setStore(_1c);
 },createNew:function(){
-var _29=prompt("Enter any properties (in JSON literal form) to put in the new item (passed to the newItem constructor):","{ }");
-if(_29){
+var _2a=prompt("Enter any properties (in JSON literal form) to put in the new item (passed to the newItem constructor):","{ }");
+if(_2a){
 try{
-this.store.newItem(dojo.fromJson(_29));
+this.store.newItem(dojo.fromJson(_2a));
 }
 catch(e){
 alert(e);

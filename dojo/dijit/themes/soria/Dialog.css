@@ -14,15 +14,13 @@
 }
 .soria .dijitDialog .dijitDialogPaneContent {
 	background: #ffffff;
-	border:none;
-	border-top: 1px solid #b1badf; 
+	border-top: 1px solid #b1badf;
 	padding:10px;
 }
 .soria .dijitDialogTitleBar {
 	
 	background: #fafafa url("images/titleBar.png") repeat-x top left;
 	padding: 5px 6px 3px 6px;
-	cursor: move;
 	outline:0; 
 }
 .soria .dijitDialogCloseIcon {
@@ -36,12 +34,11 @@
 	top: 4px;
 	height: 15px;
 	width: 15px;
-	cursor: pointer;
 }
 .dj_ie6 .soria .dijitDialogCloseIcon {
 	background-image: url("images/spriteRoundedIconsSmallBl.gif");
 }
-.soria .dijitDialogCloseIcon-hover {
+.soria .dijitDialogCloseIconHover {
 	background-position: -60px -15px;
 }
 .soria .dijitTooltip,

@@ -1,5 +1,5 @@
 /*
-	Copyright (c) 2004-2009, The Dojo Foundation All Rights Reserved.
+	Copyright (c) 2004-2010, The Dojo Foundation All Rights Reserved.
 	Available via Academic Free License >= 2.1 OR the modified BSD license.
 	see: http://dojotoolkit.org/license for details
 */
@@ -17,7 +17,7 @@ dojox.validate.isValidCreditCardNumber=function(_3,_4){
 _3=String(_3).replace(/[- ]/g,"");
 var _5=dojox.validate._cardInfo,_6=[];
 if(_4){
-var _7=_5[_4.toLowerCase()];
+var _7="^"+_5[_4.toLowerCase()]+"$";
 return _7?!!_3.match(_7):false;
 }
 for(var p in _5){

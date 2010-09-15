@@ -1,23 +1,37 @@
-.dj_ie .dijitRtl .dojoxGridHeader table {
+.dj_ie .dojoxGridRtl .dojoxGridHeader table {
 	float:none;
 }
-.dijitRtl .dojoxGridCell {
+.dojoxGridRtl .dojoxGridCell {
 	text-align:right;
 }
-.dijitRtl .dojoxGridNestedSort, 
-.dijitRtl .dojoxGridUnarySort {
+.dj_ie8 .dojoxGridRtl .dojoxGridCell {
+	border-left: none;
+}
+.dojoxGridRtl .dojoxGridArrowButtonNode {
+	float:left;
+}
+.dojoxGridRtl .dojoxGridNestedSort, 
+.dojoxGridRtl .dojoxGridUnarySort {
 	text-align: right;
 }
-.dijitRtl .dojoxGridSortWrapper {
+.dojoxGridRtl .dojoxGridSortWrapper {
 	left: 0;
 	right: auto;
 }
-.dijitRtl .dojoxGridCell .dojoxGridHeaderCellSelectRegion {
+.dojoxGridRtl .dojoxGridCell .dojoxGridHeaderCellSelectRegion {
 	float: right;
 	text-align: right;
+	padding-right:4px;
 }
-.dijitRtl .dojoxGridSortSeparatorOn,
-.dijitRtl .dojoxGridNestedSortWrapper,
-.dijitRtl .dojoxGridUnarySortWrapper {
+.dojoxGridRtl .dojoxGridSortSeparatorOn,
+.dojoxGridRtl .dojoxGridNestedSortWrapper,
+.dojoxGridRtl .dojoxGridUnarySortWrapper {
 	float: right;
+}
+.dojoxGridRtl .dojoxGridLoading, 
+.dojoxGridRtl .dojoxGridError,
+.dojoxGridRtl .dojoxGridNoData {
+	background-position:right;
+	padding-right:25px;
+	padding-left:0px;
 }
