@@ -12,8 +12,8 @@
 	"horizontal_position" : { "type" : "textbox", "default" : "left" },
 	"vertical_position" : { "type" : "textbox", "default" : "top" },
 	"style sheets":" you can include Reset and Text stylesheets from here ",
-	"Reset960":{"type":"checkbox"},
-	"Text960":{"type":"checkbox"},
+	"Resetstyle":{"type":"checkbox"},
+	"Textstyle":{"type":"checkbox"},
 	"extra attributs":"you can specify extra body classes and style",
 	"class":{"type":"textbox"},
 	"style":{"type":"textarea"},
@@ -47,8 +47,8 @@ if( $ci->vunsy->edit_mode() )
 <?php
 	$local = base_url();
 	
-	if( $info->Reset960 ) add( 'assets/960.gs/reset.css' );
-	if( $info->Text960 ) add( 'assets/960.gs/text.css' );
+	if( $info->Resetstyle ) add( 'assets/style/reset.css' );
+	if( $info->Textstyle ) add( 'assets/style/text.css' );
 	if( !empty($info->favIcon) ) add('<link rel="icon" href="'.base_url().$info->favIcon.'">');
 	add(explode("\n",$info->javascript_files));
 	add(explode("\n",$info->css_files));

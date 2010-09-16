@@ -1,7 +1,7 @@
 <?php
 		$CI =& get_instance();
-		add_css("assets/960.gs/reset.css");
-		add_css("assets/960.gs/text.css");
+		add_css("assets/style/reset.css");
+		add_css("assets/style/text.css");
 		add_css("jquery/theme/ui.all.css");
 		add_css("assets/style/style.css");
 		

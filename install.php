@@ -58,8 +58,8 @@ file_put_contents( 'config.php', $config_file );
 <head>
 	<title>Vunsy websites kernel installer</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-	<link  href="assets/960.gs/reset.css" rel="stylesheet" type="text/css" />
-	<link  href="assets/960.gs/text.css" rel="stylesheet" type="text/css" />
+	<link  href="assets/style/reset.css" rel="stylesheet" type="text/css" />
+	<link  href="assets/style/text.css" rel="stylesheet" type="text/css" />
 	<link  href="assets/style/style.css" rel="stylesheet" type="text/css" />
 
 <style>
