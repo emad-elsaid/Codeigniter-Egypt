@@ -6,6 +6,8 @@ if you are a website developer then you know the amount of work getting the site
 3.user groups table: users groups
 4.content table: site articles and every components
 
+
+
 and you need to get your javascript frameworks and some minimal backend pages.
 We take about 20% of overall projects work hours in preperations. If you are tired of that then vunsy is for you.
 
