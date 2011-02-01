@@ -853,7 +853,7 @@ function updateList(list)
 		
 		$(this).children('.items').children('.item').click(
 				function(){
-					$(this).parent().parent().children('input').val($(this).text());
+					$(this).parent().parent().find('input').val($(this).text());
 				});
 	});
 }
@@ -865,7 +865,7 @@ $(function(){
 			updateList(this);
 	
 			$(this).children('.add').click(function(){
-				input = $(this).siblings('input');
+				input = $(this).parent().find('input');
 				textarea = $(this).siblings('textarea');
 				if( textarea.val()!='')
 					i = "\\n"+input.val();
@@ -877,7 +877,7 @@ $(function(){
 			});
 			$(this).children('.del').click(function(){
 				ta = $(this).siblings('textarea');
-				inp = $(this).siblings('input').val();
+				inp = $(this).parent().find('input').val();
 				list = ta.val();
 				list = list.split("\\n");
 				newList = new Array();
@@ -891,7 +891,7 @@ $(function(){
 				else
 					ta.val('');
 				updateList($(this).parent());
-				$(this).siblings('input').val('');
+				 $(this).parent().find('input').val('');
 			});
 	});
 	
