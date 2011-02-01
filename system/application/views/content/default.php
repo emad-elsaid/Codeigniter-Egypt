@@ -53,7 +53,7 @@ echo $ci->gui->info( 'if you want to start just login using root and remove that
 <ul>
 	<li>CodeIgniter PHP framework</li>
 	<li>Datamapper</li>
-	<li>Dojo+Dijit+Dojox</li>
+	<li>Dojo+Dijit</li>
 	<li>Jquery</li>
 	<li>KFM file browser</li>
 </ul>

@@ -6,5 +6,5 @@ $config_root_password		= "toor";
 $db_hostname			= "localhost";
 $db_database			= "vunsy";
 $db_username			= "root";
-$db_password			= "root";
+$db_password			= "";
 $db_dbdriver			= "mysql";

@@ -85,9 +85,6 @@ EOT
 
 
 <div class="panel">
-<a href="<?=base_url()?>kfm/" class="iframe"  title="My Computer">
-	<img src="<?=$local?>kfm.png" /> My computer
-</a>
 <a href="<?=$url?>user manager" class="iframe" title="Users manager" >
 	<img src="<?=$local?>users.png" /> User manager
 </a>
@@ -99,9 +96,6 @@ EOT
 </a>
 <a href="<?=$url?>software manager" class="iframe"  title="Software manager">
 	<img src="<?=$local?>software.png" /> Software manager
-</a>
-<a href="<?=$url?>help" class="iframe"  title="Help and support">
-	<img src="<?=$local?>help.png" /> Help and support
 </a>
 
 <br />
