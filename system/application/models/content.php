@@ -135,10 +135,7 @@ class Content extends DataMapper {
 	 **/
 	function can_view()
 	{
-		if( ! (empty($this->view)  or perm_chck( $this->view )) )
-			return FALSE;
-		else
-			return TRUE;
+		return  (empty($this->view)  or perm_chck( $this->view ));
 	}
 	
 	/**
@@ -146,10 +143,7 @@ class Content extends DataMapper {
 	 **/
 	function can_edit()
 	{
-		if( perm_chck( $this->edit ) )
-			return TRUE;
-		else
-			return FALSE;
+		return perm_chck( $this->edit );
 	}
 	
 	/**
@@ -158,10 +152,7 @@ class Content extends DataMapper {
 	 **/
 	function can_addin()
 	{
-		if( perm_chck( $this->addin ) )
-			return TRUE;
-		else
-			return FALSE;
+		return perm_chck( $this->addin );
 	}
 	
 	/**
@@ -169,10 +160,7 @@ class Content extends DataMapper {
 	 **/
 	function can_delete()
 	{
-		if( perm_chck( $this->del ) )
-			return TRUE;
-		else
-			return FALSE;
+		return perm_chck( $this->del );
 	}
 	
 	/**
@@ -187,11 +175,11 @@ class Content extends DataMapper {
 			$c = $this->load->view(
 						'content/'.$this->path,
 						array(
-									'id'=> $this->id,
-									'ci'=> $this->ci,
-									'info'=>$this->get_info(),
-									'mode'=>'layout'
-								),
+							'id'=> $this->id,
+							'ci'=> $this->ci,
+							'info'=>$this->get_info(),
+							'mode'=>'layout'
+						),
 						TRUE
 					);
 		else

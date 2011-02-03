@@ -16,7 +16,7 @@ class Vunsy {
 	var $css_last	= array();
 	var $dojo 		= array();
 	var $header		= array();
-	var $dojoStyle 	= "";
+	var $dojoStyle 	= '';
 	var $section 	= '';
 	var $user 		= '';
 	var $level		= '';
@@ -75,7 +75,6 @@ class Vunsy {
 			$CI->session->set_userdata( 'mode', $mode );
 			$this->mode = $mode ;
 		}
-			
 	}
 	
 	function edit_mode()

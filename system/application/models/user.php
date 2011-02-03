@@ -26,20 +26,20 @@ class User extends DataMapper {
 	{
 		$uid = $this->ci->session->userdata('id');
 			
-			if( $uid>0 )
-				$this->get_by_id($uid);
-			else if( $uid==-1 and $this->ci->session->userdata('level')==-1 )
-			{
-				$this->id = -1;
-				$this->level = -1;
-				$this->name = $this->ci->config->item('root');
-			}
-			else
-			{
-				$this->id = 0;
-				$this->name = "Guest";
-				$this->level = 0;
-			}
+		if( $uid>0 )
+			$this->get_by_id($uid);
+		else if( $uid==-1 and $this->ci->session->userdata('level')==-1 )
+		{
+			$this->id = -1;
+			$this->level = -1;
+			$this->name = $this->ci->config->item('root');
+		}
+		else
+		{
+			$this->id = 0;
+			$this->name = "Guest";
+			$this->level = 0;
+		}
 	}
 	
 	/**
@@ -47,10 +47,7 @@ class User extends DataMapper {
 	 **/
 	function is_root()
 	{
-		if( $this->id==-1 and $this->level==-1 )
-			return TRUE;
-		else
-			return FALSE;
+		return ( $this->id==-1 and $this->level==-1 );
 	}
 	
 	/**
@@ -59,10 +56,7 @@ class User extends DataMapper {
 	 **/
 	function is_user()
 	{
-		if( $this->id > 0 )
-			return TRUE;
-		else
-			return FALSE;
+		return ( $this->id > 0 );
 	}
 	
 	/**
@@ -70,10 +64,7 @@ class User extends DataMapper {
 	 **/
 	function is_guest()
 	{
-		if( $this->id == 0 )
-			return TRUE;
-		else
-			return FALSE;
+		return ( $this->id == 0 );
 	}
 	
 	/**

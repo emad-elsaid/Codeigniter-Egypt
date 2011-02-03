@@ -61,34 +61,34 @@ class Section extends DataMapper {
 	 **/
 	function delete_with_sub( )
 	{
-			// getting the subsections
-			$c = new Section();
-			$c->where( 'parent_section', $this->id );
-			$c->get();
-			// delete all subsections relations
-			foreach( $c->all as $item )
-				$item->delete_with_sub();
-				
-			// delete all children
-			$cont = new Content();
-			$cont->where( 'parent_section', $this->id)->get();
-			$cont->delete_all();
+		// getting the subsections
+		$c = new Section();
+		$c->where( 'parent_section', $this->id );
+		$c->get();
+		// delete all subsections relations
+		foreach( $c->all as $item )
+			$item->delete_with_sub();
 			
-			// update all the sections sort after that section
-			// that in the same parent section
-			$s = new Section();
-			$s->where( 'sort >', $this->sort );
-			$s->where( 'parent_section', $this->parent_section );
-			$s->get();
-			
-			foreach( $s->all as $item )
-			{
-				$item->sort--;
-				$item->save();
-			}
+		// delete all children
+		$cont = new Content();
+		$cont->where( 'parent_section', $this->id)->get();
+		$cont->delete_all();
 		
-		//delete this section
-		parent::delete($object);
+		// update all the sections sort after that section
+		// that in the same parent section
+		$s = new Section();
+		$s->where( 'sort >', $this->sort );
+		$s->where( 'parent_section', $this->parent_section );
+		$s->get();
+		
+		foreach( $s->all as $item )
+		{
+			$item->sort--;
+			$item->save();
+		}
+	
+	//delete this section
+	parent::delete($object);
 		
 	}
 	
@@ -101,56 +101,56 @@ class Section extends DataMapper {
 	 **/
 	function attach( $object, $parent=NULL, $cell=NULL, $sort=NULL )
 	{
-			// synchronyze the cell and sort numbers
-			// to prevent paradox
-			if( is_null($cell)) 
-				$cell = $object->cell;
-			else
-				$object->cell = $cell;
-				
-			if( is_null($sort))
-				$sort = $object->sort;
-			else
-				$object->sort = $sort;
-				
-			if( is_null($parent))
-			{
-				$parent = new Content();
-				$parent->get_by_id( $object->parent_content );
-			}
+		// synchronyze the cell and sort numbers
+		// to prevent paradox
+		if( is_null($cell)) 
+			$cell = $object->cell;
+		else
+			$object->cell = $cell;
 			
-			// check if that place it took
-			$cont = new Content();
+		if( is_null($sort))
+			$sort = $object->sort;
+		else
+			$object->sort = $sort;
+			
+		if( is_null($parent))
+		{
+			$parent = new Content();
+			$parent->get_by_id( $object->parent_content );
+		}
+		
+		// check if that place it took
+		$cont = new Content();
+		//$cont->where('parent_section',$this->id);//same section
+		$cont->where( 'parent_content', $parent->id );//same parent
+		$cont->where( 'cell', $cell );// same cell
+		$cont->where( 'sort', $sort );//greater sort
+		$cont->get();//get them to process
+		
+		// if that content object exists then that place is taken
+		// so we have to get a place for it
+		if( $cont->exists() )
+		{
+			// put the content in it's place require change all it's 
+			// sisters that has a greater sort number to be increased
+			// get all this content belong to this parent and this section
+			// and the same cell and has a sort number greater that this
+			// sort number
 			//$cont->where('parent_section',$this->id);//same section
 			$cont->where( 'parent_content', $parent->id );//same parent
 			$cont->where( 'cell', $cell );// same cell
-			$cont->where( 'sort', $sort );//greater sort
+			$cont->where( 'sort >=', $sort) ;//greater sort
 			$cont->get();//get them to process
-			
-			// if that content object exists then that place is taken
-			// so we have to get a place for it
-			if( $cont->exists() )
+			foreach( $cont->all as $item )
 			{
-				// put the content in it's place require change all it's 
-				// sisters that has a greater sort number to be increased
-				// get all this content belong to this parent and this section
-				// and the same cell and has a sort number greater that this
-				// sort number
-				//$cont->where('parent_section',$this->id);//same section
-				$cont->where( 'parent_content', $parent->id );//same parent
-				$cont->where( 'cell', $cell );// same cell
-				$cont->where( 'sort >=', $sort) ;//greater sort
-				$cont->get();//get them to process
-				foreach( $cont->all as $item )
-				{
-					$item->sort++;
-					$item->save();
-				}
-				
+				$item->sort++;
+				$item->save();
 			}
 			
-			//save the object itself
-			$object->save();
+		}
+		
+		//save the object itself
+		$object->save();
 	}
 	
 	/**
@@ -160,26 +160,26 @@ class Section extends DataMapper {
 	 **/
 	function attach_section( $section='' )
 	{
-			// check if that place it took
-			$cont = new Section();
+		// check if that place it took
+		$cont = new Section();
+		$cont->where( 'parent_section', $this->id );//same section
+		$cont->where( 'sort', $section->sort );//greater sort
+		$cont->get();//get them to process
+		
+		if( $cont->exists() )
+		{
 			$cont->where( 'parent_section', $this->id );//same section
-			$cont->where( 'sort', $section->sort );//greater sort
+			$cont->where( 'sort >=', $section->sort );//greater sort
 			$cont->get();//get them to process
-			
-			if( $cont->exists() )
+			foreach( $cont->all as $item )
 			{
-				$cont->where( 'parent_section', $this->id );//same section
-				$cont->where( 'sort >=', $section->sort );//greater sort
-				$cont->get();//get them to process
-				foreach( $cont->all as $item )
-				{
-					$item->sort++;
-					$item->save();
-				}
-				
+				$item->sort++;
+				$item->save();
 			}
 			
-			$section->save();
+		}
+		
+		$section->save();
 	}
 	
 	/**
@@ -239,10 +239,7 @@ class Section extends DataMapper {
 	 **/
 	function can_view()
 	{
-		if( ! (empty($this->view)  or perm_chck( $this->view )) )
-			return FALSE;
-		else
-			return TRUE;
+		return (empty($this->view) or perm_chck( $this->view ));
 	}
 	
 	/**
