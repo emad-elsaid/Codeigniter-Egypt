@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>DataMapper ORM - User Guide</title>
+
+<style type="text/css" media="all">@import url('./css/userguide.css');</style>
+<link rel="shortcut icon" type="image/png" href="./images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="./css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta name="google-site-verification" content="WW-Yd27KfkLDM0Cx4GwtR1XZCNt3xZ4uzEYBfIYJRvI" />
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="./images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="./pages/toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+User Guide Home
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+<!-- START CONTENT -->
+<div id="content">
+
+<h1 id="mainlogo"><img src="./images/dmz.png" border="0" alt="DataMapper ORM" /></h1>
+
+<p>DataMapper is an <a href="http://en.wikipedia.org/wiki/Object-relational_mapping">Object Relational Mapper</a> written in <a href="http://php.net/">PHP</a> for <a href="http://codeigniter.com/">CodeIgniter</a>.  It is designed to map your Database tables into easy to work with objects, fully aware of the relationships between each other.</p>
+
+<h2>General Features</h2>
+
+<ul>
+	<li>Everything is an object!</li>
+	<li>Easy to setup, easy to use.</li>
+	<li>Custom <a href="pages/validation.html">Validation</a> on object properties.</li>
+	<li>Lazy Loading (related objects are only loaded upon access).</li>
+	<li>Relations and their integrity are automatically managed for you.</li>
+	<li><a class="def" href="pages/glossary.html#One.to.One">One to One</a>, <a class="def" href="pages/glossary.html#One.to.Many">One to Many</a>, and <a class="def" href="pages/glossary.html#Many.to.Many">Many to Many</a> relations fully supported.</li>
+	<li>Select data in the style of <a href="http://codeigniter.com/user_guide/database/active_record.html">Active Record</a> (with or without <a class="def" href="pages/glossary.html#Method.Chaining">Method Chaining</a>).</li>
+</ul>
+<p>If you are new to Datamapper ORM, <a href="pages/requirements.html">please start here</a> to get Datamapper ORM running on your server.  Then follow along with the <b>Next Topic</b> links at the bottom of each page.</p>
+<p>If you are an existing Datamapper ORM user, you will find <a href="pages/changelog.html">changes in new releases</a> and <a href="pages/upgrade.html">upgrade instructions</a>.
+
+<h2>DataMapper ORM</h2>
+
+<p>This is the latest incarnation of the Datamapper library. After Phil had indicated he no longer had the time available to support his OverZealous Edition, Datamapper ORM is now being developed and maintained by <a href="http://wanwizard.eu/">WanWizard</a>.</p>
+
+<h2>DataMapper, OverZealous Edition</h2>
+
+<p>This came from a desire to continue to enhance and develop DataMapper, and has been developed and maintained by <a href="http://www.overzealous.com/">Phil DeJarnett</a>.  DMZ is a near drop-in replacement if you are already using DataMapper 1.6.0 (and possibly older versions).</p>
+
+<h2>The Original DataMapper</h2>
+
+<p>DataMapper (for CodeIgniter) was originally developed by <a href="http://stensi.com/">Simon Stenhouse</a>.  The basic design and original development was by him.</p>
+
+<p>&nbsp;</p>
+
+<p>Some of the enhancements to the original DataMapper include:</p>
+<ul>
+	<li><a class="def" href="pages/glossary.html#In.Table.Foreign.Keys">In-table foreign-keys</a> for <a class="def" href="pages/glossary.html#Singular.Relationship">singular</a> relationships.</li>
+	<li>The ability to view, edit, and query using extra columns on relationship <a href="pages/joinfields.html">join tables</a>.</li>
+	<li>The ability to <a href="pages/getadvanced.html#include_related">include data</a> from <a class="def" href="pages/glossary.html#Singular.Relationship">singularly</a> related objects.</li>
+	<li>The ability to query and include data from <a class="def" href="pages/glossary.html#Deep.Relationship">deep relationships</a>.</li>
+	<li>Significantly <a href="pages/advancedrelations.html">enhanced relationships</a>, including multiple relationships between the same objects.</li>
+	<li>The ability to <a href="pages/extensions.html">extend Datamapper ORM through simple classes</a>, and share those extensions.</li>
+	<li>The ability to process <a href="pages/subqueries.html">subqueries</a>, work with <a href="pages/functions.html">SQL functions</a>.</li>
+	<li>Lots of little improvements, such as <a href="pages/get.html#Default.Order.By">default ordering</a>, <a href="pages/save.html#Save.Existing.As.New">saving objects with existing ids</a>, <a href="pages/get.html#Query.Grouping">query grouping</a>, performance improvements, <a href="pages/changelog.html">and much more</a>.</li>
+</ul>
+<p>If you would like to upgrade to Datamapper ORM from DMZ or the original DataMapper, please <a href="pages/upgrade.html#Upgrade.DataMapper">see the upgrade guide.</a></p>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p><a href="#top">Top of Page</a></p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="pages/license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="./js/mootools.js"></script>
+<script type="text/javascript" src="./js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: './',
+			pagespath: './pages/'
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Get (Alternatives) : DataMapper ORM - User Guide</title>
+
+<link rel="shortcut icon" type="image/png" href="../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Get (Alternatives)
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Get (Alternatives)</h1>
+<p>
+	Datamapper ORM includes a number of alternatives to the normal <var><u>get</u></var> methods.
+	These can be used to perform more advanced operations based on which one is used.
+</p>
+
+<p>Also see the <a href="extensions/simplecache.html">Simple Cache Extension</a> for another <var><u>get</u></var> variation.</p>
+
+<h4>Subsections:</h4>
+<ul>
+	<li><a href="#get_iterated">get_iterated</a> - Streams query results
+		<ul><li><a href="#When.To.Use.Get.Iterated">When To Use Get Iterated</a> - When <var><u>get_iterated</u></var> should be used over get.</li></ul>
+	</li>
+	<li><a href="#get_paged">get_paged</a> - Paginated Queries</li>
+	<li><a href="#get_paged_iterated">get_paged_iterated</a> - Paginated and Streamed Queries</li>
+	<li><a href="#get_raw">get_raw</a> - Gets the Raw CodeIgniter result</li>
+	<li><a href="#get_sql">get_sql</a> - Gets the raw SQL for the query</li>
+</ul>
+
+
+
+<h2 id="get_iterated">$object->get_iterated()</h2>
+<p>
+	This method can be used to reduce memory overhead and even increase performance if you know you only want to loop over the result set.
+	In fact, it is recommended in almost all cases where you expect more than one result, and don't need direct access to one or more results.
+</p>
+<p>
+	The <var><u>get_iterated</u></var> method works by creating a PHP Iterator.
+	The iterator creates each object as it is needed;
+	there is actually only one object that is shared as you loop over the set.
+</p>
+<p><em>Special thanks to <a href="http://codeigniter.com/forums/member/140472/">TheJim</a> for coming up with the prototype for this method.</em></p>
+<h3>Arguments</h3>
+<ul>
+	<li><b>$limit</b>: (Optional) Sets the limit on the query.</li>
+	<li><b>$offset</b>: (Optional) Sets the offset on the query.</li>
+</ul>
+
+<div class="note">
+	<p><strong><em>Note:</em></strong> The results of this method do not directly modify <var>$object</var>.</p>
+	<p>Therefore, the database fields are not set on <var>$object</var>, and the <var><i>$all</i></var> array will be empty.</p>
+	<p>However, you can still check the results of the query using <var><u>exists<kbd>()</kbd></u></var> and <var><u>result_count<kbd>()</kbd></u></var>.</p>
+</div>
+
+<h4>Common Usage</h4>
+<pre>
+<var>$countries </var><kbd>= new </kbd><var>Country</var><kbd>();
+</kbd><var>$countries</var><kbd>-&gt;</kbd><var><u>get_iterated</u></var><kbd>();
+if(!</kbd><var>$countries</var><kbd>-&gt;</kbd><var><u>exists</u></var><kbd>()) {
+    echo(</kbd><dfn>'No countries found'</dfn><kbd>);
+} else {
+    echo(</kbd><var>$countries</var><kbd>-&gt;</kbd><var><u>result_count</u></var><kbd>() . </kbd><dfn>' countries were found.'</dfn><kbd>);
+    foreach(</kbd><var>$countries </var><kbd>as </kbd><var>$country</var><kbd>) {
+        </kbd><samp>// process like normal
+    </samp><kbd>}
+}</kbd>
+</pre>
+
+<div class="highlight" id="When.To.Use.Get.Iterated">
+	<h3>When To Use Get Iterated (Over Get)</h3>
+	<p>There are several cases where you should always use <var><u>get</u></var>, and several cases where <var><u>get_iterated</u></var> is preferred.</p>
+	<ul>
+		<li>
+			If you are looking up just one object, or expect there to be one or zero results, you always use <var><u>get</u></var>.<br/>
+			Otherwise you cannot access the properties directly.
+		</li>
+		<li>
+			If you are planning to loop over a relatively small set of objects more than once, you should use <var><u>get</u></var>.<br/>
+			Otherwise, you are re-creating each object every time you loop.
+		</li>
+		<li>
+			If you are looping over a very large set of objects, you should use <var><u>get_iterated</u></var>.<br/>
+			In this case you should also avoid looping over the large set more than once.
+		</li>
+		<li>
+			If you need direct access to specific objects in the result set, you should use <var><u>get</u></var>.<br/>
+			For example, you need to specifically modify the third item in the results.
+		</li>
+		<li>
+			If you are getting a list of objects to <var><u>delete</u></var> or <var><u>save</u></var>, you must use <var><u>get</u></var>.<br/>
+			Then you pass the result as <var>$other_object</var><kbd>-&gt;</kbd><var><i>all</i></var> to the appropriate function.
+				(DataMapper must see the array to know to save multiple objects.)
+		</li>
+		<li>
+			Otherwise, as long as you are using <kbd>foreach</kbd> to loop over the results, you should always use <var><u>get_iterated</u></var>
+		</li>
+	</ul>
+</div>
+
+
+
+<h2 id="get_paged">$object->get_paged()</h2>
+<div class="example">
+	<h4>Example Application</h4>
+	<p>You can see this feature used in:</p>
+	<div class="paths">
+		ZIP/<b>examples/application/<br/>
+		&nbsp;&nbsp;&raquo;&nbsp;controllers/bugs.php<br/>
+		&nbsp;&nbsp;&raquo;&nbsp;views/bugs/paging.php</b>
+	</div>
+</div>
+<p>
+	This method is used to easily get a query that is broken up into pages,
+	as well as handle getting the <strong>total number of rows</strong>.
+</p>
+<p>You can use this method with <b>any</b> query parameters, and those parameters will automatically be used to determine the total number of rows.</p>
+<div class="exampleWrap">
+	<p class="note">
+		<strong><em>Note:</em></strong>
+		Each call to this method will result in <strong>two</strong> queries: one for the data set, and one to count the total number of rows.
+	</p>
+</div>
+<h3>Arguments</h3>
+<ul>
+	<li><b>$page</b>: (Optional) Which page to start on (or which row based on <var>$page_num_by_rows</var>).  Defaults to <kbd>1</kbd>.</li>
+	<li><b>$page_size</b>: (Optional) Sets the number of rows on each page.  Defaults to <kbd>50</kbd>.</li>
+	<li><b>$page_num_by_rows</b>: (Optional) If TRUE, changes the <var>$page</var> argument to be zero-based,
+			and be based on the row to start on. See below for more information</li>
+	<li><b>$info_object</b>: (Optional) Override the name for the pagination info object.  Defaults to <kbd>'paged'</kbd>.</li>
+</ul>
+
+<p>
+	When requesting a page number by row, <var><u>get_paged</u></var> converts the row number to the correct page for that row.
+	For example, if you had 10 rows per page, and requested row number 12, the page will be <strong>2</strong>, and
+	the starting row will be <strong>10</strong>.
+</p>
+
+<p>
+	This method will automatically prevent the request of a page that is outside the queries' boundaries.
+	If the requested page is less than 1, it reverts to the first page.
+	If the requested page is greater than the total number of pages, it reverts to the last page.
+</p>
+
+<p>
+	What makes this method so useful, however, is what <em>else</em> it returns.
+	Each call sets the following properties on an object, which is called <var>$paged</var> by default.
+</p>
+<p class="highlight">If you already have a field called <strong>paged</strong>, you can easily change the object to a different name with the last argument.</p>
+<ul>
+	<li><b>total_rows</b>: The total number of rows in the unpaged query.</li>
+	<li><b>total_pages</b>: The total number of pages, based on <var>$page_size</var>.</li>
+	<li><b>current_page</b>: The current page (usually passed in).</li>
+	<li><b>current_row</b>: The first row on the current page.</li>
+	<li><b>last_row</b>: The first row on the last page.</li>
+	<li><b>has_previous</b>: If TRUE, there are previous pages in the query.</li>
+	<li><b>previous_page</b>: The previous page or <dfn>1</dfn>, whichever is greater.</li>
+	<li><b>previous_row</b>: The previous page's first row or <dfn>0</dfn>, whichever is greater.</li>
+	<li><b>has_next</b>: If TRUE, there are more pages in the query.</li>
+	<li><b>next_page</b>: The next page or <var>total_pages</var>, whichever is less.</li>
+	<li><b>next_row</b>: The next page's first row or <var>last_row</var>, whichever is less.</li>
+	<li><b>page_size</b>: Number of items per page, might be useful for the view.</li>
+	<li><b>items_on_page</b>: Number of items on the current page, i.e., $object->result_count().</li>
+</ul>
+
+<h4>Example</h4>
+<pre>
+<samp>// IN THE CONTROLLER
+</samp><kbd>function </kbd><var>archive</var><kbd>(</kbd><var>$page </var><kbd>= </kbd><var>1</var><kbd>)
+{
+    </kbd><var>$posts </var><kbd>= new </kbd><var>Post</var><kbd>();
+    </kbd><samp>// show newest first
+    </samp><var>$posts</var><kbd>-&gt;</kbd><var><u>order_by</u></var><kbd>(</kbd><dfn>'created'</dfn><kbd>, </kbd><dfn>'DESC'</dfn><kbd>);
+    </kbd><samp>// show 10 posts per page
+    </samp><var>$posts</var><kbd>-&gt;</kbd><var><u>get_paged</u></var><kbd>(</kbd><var>$page</var><kbd>, </kbd><var>10</var><kbd>);
+
+    </kbd><samp>// send to view
+    </samp><var><b>$this</b></var><kbd>-&gt;</kbd><var>load</var><kbd>-&gt;</kbd><var>view</var><kbd>(</kbd><dfn>'posts/archive'</dfn><kbd>, array(</kbd><dfn>'posts' </dfn><kbd>=&gt; </kbd><var>$posts</var><kbd>));
+}
+
+</kbd><samp>// IN THE VIEW
+</samp><kbd>foreach(</kbd><var>$posts </var><kbd>as </kbd><var>$post</var><kbd>)
+{
+    </kbd><samp>// render the post
+</samp><kbd>}
+if(</kbd><var>$posts</var><kbd>-&gt;</kbd><var>paged</var><kbd>-&gt;</kbd><var>has_previous</var><kbd>)
+{
+    </kbd><var>?&gt;
+</var>&lt;a href="<var>&lt;?= site_url</var><kbd>(</kbd><dfn>'posts/archive/1' </dfn><var>?&gt;</var>"&gt;&amp;lt;&amp;lt; First&lt;/a&gt;
+&lt;a href="<var>&lt;?= site_url</var><kbd>(</kbd><dfn>'posts/archive/'</dfn><kbd>.</kbd><var>$posts</var><kbd>-&gt;</kbd><var>paged</var><kbd>-&gt;</kbd><var>previous_page</var><kbd>) </kbd><var>?&gt;</var>"&gt;&amp;lt; Prev&lt;/a&gt;
+    <var>&lt;?
+</var><kbd>}
+if(</kbd><var>$posts</var><kbd>-&gt;</kbd><var>paged</var><kbd>-&gt;</kbd><var>has_next</var><kbd>)
+{
+    </kbd><var>?&gt;
+</var>&lt;a href="<var>&lt;?= site_url</var><kbd>(</kbd><dfn>'posts/archive/'</dfn><kbd>.</kbd><var>$posts</var><kbd>-&gt;</kbd><var>paged</var><kbd>-&gt;</kbd><var>next_page ?&gt;</var>"&gt;Next &amp;gt;&lt;/a&gt;
+&lt;a href="<var>&lt;?= site_url</var><kbd>(</kbd><dfn>'posts/archive/'</dfn><kbd>.</kbd><var>$posts</var><kbd>-&gt;</kbd><var>paged</var><kbd>-&gt;</kbd><var>total_pages</var><kbd>) </kbd><var>?&gt;</var>"&gt;Last &amp;gt; &amp;gt;&lt;/a&gt;
+    <var>&lt;?
+</var><kbd>}</kbd>
+</pre>
+
+
+<h2 id="get_paged_iterated">$object->get_paged_iterated()</h2>
+<p>A simple combination of <var><u>get_paged</u></var> and <var><u>get_iterated</u></var>, allowing you to efficiently loop over the results of a paged query.</p>
+<p>Use the exact same as <var><u>get_paged</u></var>, except the results can only be looped over.  Strongly recommended in most cases.</p>
+
+
+<h2 id="get_raw">$object->get_raw()</h2>
+<p>This method runs the query, but returns the raw results from <a href="http://codeigniter.com/user_guide/database/results.html">CodeIgniter's database library</a>.  It also clears the current query immediately.</p>
+<h3>Arguments</h3>
+<ul>
+	<li><b>$limit</b>: (Optional) Sets the limit on the query.</li>
+	<li><b>$offset</b>: (Optional) Sets the offset on the query.</li>
+</ul>
+<pre>
+<var>$foo </var><kbd>= new </kbd><var>Foo</var><kbd>();
+</kbd><var>$foo</var><kbd>-&gt;</kbd><var><u>include_related</u></var><kbd>(</kbd><dfn>'bar'</dfn><kbd>, </kbd><dfn>'name'</dfn><kbd>);
+</kbd><var>$foo</var><kbd>-&gt;</kbd><var><u>where_related</u></var><kbd>(</kbd><dfn>'bar'</dfn><kbd>, </kbd><dfn>'name'</dfn><kbd>, </kbd><dfn>'baz'</dfn><kbd>);
+</kbd><var>$query </var><kbd>= </kbd><var>$foo</var><kbd>-&gt;</kbd><var><u>get_raw</u></var><kbd>();
+foreach(</kbd><var>$query</var><kbd>-&gt;</kbd><var>result</var><kbd>() as </kbd><var>$row</var><kbd>) {
+    echo </kbd><var>$row</var><kbd>-&gt;</kbd><var>bar_name</var><kbd>;
+}</kbd>
+</pre>
+
+
+<h2 id="get_sql">$object->get_sql()</h2>
+<p>This method returns the SQL for the currently built query, as if <var><u>get</u></var><kbd>()</kbd> was called.  It clears the current query immediately.</p>
+<h3>Arguments</h3>
+<ul>
+	<li><b>$limit</b>: (Optional) Sets the limit on the query.</li>
+	<li><b>$offset</b>: (Optional) Sets the offset on the query.</li>
+	<li><b>$handle_related</b>: (Optional) If TRUE, and this object is referenced from a parent object, the parent object will automatically to the where statement.</li>
+</ul>
+
+<pre>
+<var>$u </var><kbd>= new </kbd><var>User</var><kbd>();
+</kbd><var>$u</var><kbd>-&gt;</kbd><var><u>where</u></var><kbd>(</kbd><dfn>'name'</dfn><kbd>, </kbd><dfn>'Bob'</dfn><kbd>);
+echo </kbd><var>$u</var><kbd>-&gt;</kbd><var><u>get_sql</u></var><kbd>();
+</kbd><samp>// outputs the raw SQL</samp>
+</pre>
+
+<h4>Example with relationship</h4>
+<pre>
+<var>$group </var><kbd>= new </kbd><var>Group</var><kbd>(</kbd><var>1</var><kbd>); </kbd><samp>// load Group #1
+
+</samp><kbd>echo </kbd><var>$group</var><kbd>-&gt;</kbd><var>user</var><kbd>-&gt;</kbd><var><u>get_sql</u></var><kbd>();
+</kbd><samp>// SELECT `users`.*
+// FROM `users`
+
+</samp><kbd>echo </kbd><var>$group</var><kbd>-&gt;</kbd><var>user</var><kbd>-&gt;</kbd><var><u>get_sql</u></var><kbd>(</kbd><var><dfn>NULL</dfn></var><kbd>, </kbd><var><dfn>NULL</dfn></var><kbd>, </kbd><var><dfn>TRUE</dfn></var><kbd>);
+</kbd><samp>// SELECT `users`.*
+// FROM `users`
+// LEFT OUTER JOIN `groups` groups ON `users`.`group_id` = `groups.id`
+// WHERE `groups`.`id` = 1</samp>
+</pre>
+
+
+
+
+<p>&nbsp;</p>
+
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagespath: ''
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

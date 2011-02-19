@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Reserved Names : DataMapper ORM - User Guide</title>
+
+<link rel="shortcut icon" type="image/png" href="../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Reserved Names
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Reserved Names</h1>
+
+<p>
+	In order to help out, DataMapper uses a series of functions and variable names in its operation.
+	Because of this, some names cannot be used by a developer.
+</p>
+<p>
+	The following are variables that should only be used in your Models as described in this User Guide.
+</p>
+
+<h3>Variables</h3>
+
+<div class="important">
+	<p><strong><em>Important:</em></strong> The field names in your Database tables and relationships <strong><em>cannot</em></strong> be the same as these variables.</p>
+	<p>Take special care not to use these common names: <strong>all</strong>, <strong>common</strong>, <strong>config</strong>, <strong>db</strong>, <strong>error</strong>, <strong>lang</strong>, <strong>load</strong>, <strong>model</strong>, <strong>parent</strong>, <strong>prefix</strong>, <strong>stored</strong>, <strong>table</strong>, <strong>valid</strong>, <strong>validation</strong>.</p>
+</div>
+
+<ul>
+<!-- BEGIN VARIABLES -->
+	<li>$_dmz_config_defaults</li>
+	<li>$_field_tracking</li>
+	<li>$_force_save_as_new</li>
+	<li>$_include_join_fields</li>
+	<li>$_instantiations</li>
+	<li>$_query_related</li>
+	<li>$_validated</li>
+	<li>$_where_group_started</li>
+	<li>$all</li>
+	<li>$all_array_uses_ids</li>
+	<li>$auto_populate_has_many</li>
+	<li>$auto_populate_has_one</li>
+	<li>$auto_transaction</li>
+	<li>$common</li>
+	<li>$config</li>
+	<li>$created_field</li>
+	<li>$db</li>
+	<li>$db_params</li>
+	<li>$default_order_by</li>
+	<li>$error</li>
+	<li>$error_prefix</li>
+	<li>$error_suffix</li>
+	<li>$extensions</li>
+	<li>$extensions_path</li>
+	<li>$field_label_lang_format</li>
+	<li>$fields</li>
+	<li>$form_validation</li>
+	<li>$free_result_threshold</li>
+	<li>$global_extensions</li>
+	<li>$has_many</li>
+	<li>$has_one</li>
+	<li>$join_prefix</li>
+	<li>$lang</li>
+	<li>$lang_file_format</li>
+	<li>$load</li>
+	<li>$local_time</li>
+	<li>$model</li>
+	<li>$parent</li>
+	<li>$prefix</li>
+	<li>$production_cache</li>
+	<li>$stored</li>
+	<li>$table</li>
+	<li>$timestamp_format</li>
+	<li>$unix_timestamp</li>
+	<li>$updated_field</li>
+	<li>$valid</li>
+	<li>$validation</li>
+<!-- END VARIABLES -->
+</ul>
+
+<br/>
+
+<p>The following is a list of reserved names that cannot be used as function names in your model or field names in your Database tables, unless you are overriding them on purpose.</p>
+
+<h3>Functions</h3>
+<ul>
+<!-- BEGIN FUNCTIONS -->
+	<li>DataMapper</li>
+	<li>__call</li>
+	<li>__clone</li>
+	<li>__get</li>
+	<li>__toString</li>
+	<li>_add_related_table</li>
+	<li>_add_to_select_directly</li>
+	<li>_alpha_dash_dot</li>
+	<li>_alpha_slash_dot</li>
+	<li>_always_validate</li>
+	<li>_assign_libraries</li>
+	<li>_auto_trans_begin</li>
+	<li>_auto_trans_complete</li>
+	<li>_boolean</li>
+	<li>_clear_after_query</li>
+	<li>_count_related</li>
+	<li>_count_related_objects</li>
+	<li>_delete</li>
+	<li>_delete_relation</li>
+	<li>_dmz_assign_libraries</li>
+	<li>_encode_php_tags</li>
+	<li>_extension_method_exists</li>
+	<li>_field_func</li>
+	<li>_func</li>
+	<li>_get_by</li>
+	<li>_get_by_related</li>
+	<li>_get_generated_timestamp</li>
+	<li>_get_prepend_type</li>
+	<li>_get_related_properties</li>
+	<li>_get_relation</li>
+	<li>_get_relationship_table</li>
+	<li>_get_without_auto_populating</li>
+	<li>_handle_default_order_by</li>
+	<li>_handle_related</li>
+	<li>_having</li>
+	<li>_initiate_local_extensions</li>
+	<li>_join_field</li>
+	<li>_like</li>
+	<li>_load_extensions</li>
+	<li>_load_helpers</li>
+	<li>_load_languages</li>
+	<li>_matches</li>
+	<li>_max_date</li>
+	<li>_max_size</li>
+	<li>_min_date</li>
+	<li>_min_size</li>
+	<li>_parse_subquery_object</li>
+	<li>_prep_for_form</li>
+	<li>_prep_url</li>
+	<li>_process_function_arg</li>
+	<li>_process_query</li>
+	<li>_process_special_query_clause</li>
+	<li>_refresh_stored_values</li>
+	<li>_related</li>
+	<li>_related_max_size</li>
+	<li>_related_min_size</li>
+	<li>_related_required</li>
+	<li>_related_subquery</li>
+	<li>_remove_other_one_to_one</li>
+	<li>_run_get_rules</li>
+	<li>_save</li>
+	<li>_save_itfk</li>
+	<li>_save_related_recursive</li>
+	<li>_save_relation</li>
+	<li>_strip_image_tags</li>
+	<li>_subquery</li>
+	<li>_to_array</li>
+	<li>_to_object</li>
+	<li>_trim</li>
+	<li>_unique</li>
+	<li>_unique_pair</li>
+	<li>_valid_date</li>
+	<li>_valid_date_group</li>
+	<li>_valid_match</li>
+	<li>_where</li>
+	<li>_where_in</li>
+	<li>_xss_clean</li>
+	<li>add_table_name</li>
+	<li>autoload</li>
+	<li>check_last_query</li>
+	<li>clear</li>
+	<li>count</li>
+	<li>count_distinct</li>
+	<li>delete</li>
+	<li>delete_all</li>
+	<li>distinct</li>
+	<li>error_message</li>
+	<li>exists</li>
+	<li>flush_cache</li>
+	<li>func</li>
+	<li>get</li>
+	<li>getIterator</li>
+	<li>get_clone</li>
+	<li>get_copy</li>
+	<li>get_iterated</li>
+	<li>get_paged</li>
+	<li>get_paged_iterated</li>
+	<li>get_raw</li>
+	<li>get_sql</li>
+	<li>get_where</li>
+	<li>group_by</li>
+	<li>group_end</li>
+	<li>group_start</li>
+	<li>having</li>
+	<li>ilike</li>
+	<li>include_join_fields</li>
+	<li>include_related</li>
+	<li>include_related_count</li>
+	<li>is_related_to</li>
+	<li>join_related</li>
+	<li>like</li>
+	<li>limit</li>
+	<li>load_extension</li>
+	<li>localize_by_model</li>
+	<li>localize_label</li>
+	<li>not_group_start</li>
+	<li>not_ilike</li>
+	<li>not_like</li>
+	<li>offset</li>
+	<li>or_group_start</li>
+	<li>or_having</li>
+	<li>or_ilike</li>
+	<li>or_like</li>
+	<li>or_not_group_start</li>
+	<li>or_not_ilike</li>
+	<li>or_not_like</li>
+	<li>or_where</li>
+	<li>or_where_in</li>
+	<li>or_where_not_in</li>
+	<li>order_by</li>
+	<li>query</li>
+	<li>recursive_require_once</li>
+	<li>refresh_all</li>
+	<li>reinitialize_model</li>
+	<li>result_count</li>
+	<li>save</li>
+	<li>save_as_new</li>
+	<li>select</li>
+	<li>select_avg</li>
+	<li>select_max</li>
+	<li>select_min</li>
+	<li>select_sum</li>
+	<li>set_join_field</li>
+	<li>skip_validation</li>
+	<li>start_cache</li>
+	<li>stop_cache</li>
+	<li>trans_begin</li>
+	<li>trans_commit</li>
+	<li>trans_complete</li>
+	<li>trans_off</li>
+	<li>trans_rollback</li>
+	<li>trans_start</li>
+	<li>trans_status</li>
+	<li>trans_strict</li>
+	<li>update</li>
+	<li>update_all</li>
+	<li>validate</li>
+	<li>where</li>
+	<li>where_in</li>
+	<li>where_not_in</li>
+<!-- END FUNCTIONS -->
+</ul>
+
+
+</div>
+
+
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagespath: ''
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

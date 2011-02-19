@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Query Caching Methods : Included Extensions : DataMapper ORM - User Guide</title>
+
+<style type="text/css" media="all">@import url('../../css/userguide.css');</style>
+<link rel="shortcut icon" type="image/png" href="../../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+<a href="../extlist.html">Included Extensions</a> &nbsp;&#8250;&nbsp;
+Query Caching Methods
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Query Caching Methods (simplecache)</h1>
+<p class="note">To enable these methods, add <dfn>'simplecache'</dfn> to DataMapper's config, under <strong>'extensions'</strong>.</p>
+<p>Enables the usage of <a href="http://codeigniter.com/user_guide/database/caching.html">CodeIgniter's simple query caching</a> for large result sets.</p>
+<p>Note that this is different than the <var><u>start_cache</u></var> and <var><u>stop_cache</u></var> methods, which are only used to cache ActiveRecord queries, and it is also different than the <a href="../prodcache.html">Production Cache</a>, which is used to cache initialization information for models.</p>
+
+<h2>get_cached(...)</h2>
+<ul>
+	<li><b>Returns</b>: The DataMapper object for chaining.</li>
+</ul>
+<p>Gets the results of the current query.  If a cached version is available, it uses that one, otherwise it runs the query and saves it for later.  You can pass in any arguments that you would pass in to DataMapper's <var><u>get</u></var> method.</p>
+<p>Like CodeIgniter's caching, this method requires that the query always be on the exact same URL, and have the exact same structure.  It may or may not improve performance.  Please read the <a href="http://codeigniter.com/user_guide/database/caching.html">CodeIgniter Documentation</a> for more information.</p>
+
+<h3>General Usage</h3>
+<pre>
+<var>$post </var><kbd>= new </kbd><var>Post</var><kbd>();
+</kbd><samp>// There are a lot of posts, so cache if possible.
+</samp><var>$post</var><kbd>-&gt;</kbd><var><s>get_cached</s></var><kbd>();</kbd>
+</pre>
+
+<h2>clear_cache(...)</h2>
+<ul>
+	<li><b>Returns</b>: The DataMapper object for chaining.</li>
+</ul>
+<p>On the next call to <var><s>get_cached</s></var>, the cache will be cleared.  You can also forcibly clear the cache for a specific URI by passing in the URI segments.</p>
+
+<h3>General Usage:</h3>
+<pre>
+<var>$should_clear_cache </var><kbd>= </kbd>? <samp>// Look up whether or not this cache needs to be cleared
+</samp><kbd>if(</kbd><var>$should_clear_cache</var><kbd>)
+{
+    </kbd><var>$post</var><kbd>-&gt;</kbd><var>clear_cache</var><kbd>();
+}
+</kbd><var>$post</var><kbd>-&gt;</kbd><var><s>get_cached</s></var><kbd>();</kbd>
+</pre>
+
+<h3>Clearing the Cache on Save</h3>
+<pre>
+<var>$post</var><kbd>-&gt;</kbd><var><u>save</u></var><kbd>();
+
+</kbd><samp>// Need to clear the caches for large post queries
+</samp><var>$post</var><kbd>-&gt;</kbd><var>clear_cache</var><kbd>(</kbd><dfn>'welcome'</dfn><kbd>);      </kbd><samp>// index.php/welcome
+</samp><var>$post</var><kbd>-&gt;</kbd><var>clear_cache</var><kbd>(</kbd><dfn>'posts'</dfn><kbd>, </kbd><dfn>'all'</dfn><kbd>); </kbd><samp>// index.php/posts/all</samp>
+</pre>
+
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../../js/mootools.js"></script>
+<script type="text/javascript" src="../../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../../',
+			pagespath: '../',
+			last: 'extlist'
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

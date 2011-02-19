@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Production Cache : DataMapper ORM - User Guide</title>
+
+<link rel="shortcut icon" type="image/png" href="../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Production Cache
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Production Cache</h1>
+
+<div class="important">
+	<p><strong><em>Important:</em></strong></p>
+	<p>You <b>must</b> clear the cache for any model you make changes to, whether that is in the database or in the file.</p>
+	<p>The <b>entire</b> production cache will need to be cleared if you make any changes to your datamapper config.</p>
+	<p><strong><em>Failure to do so will most likely result in errors, and could possibly lead to data corruption.</em></strong></p>
+</div>
+
+<p>To help make DataMapper a little more efficient per-page, Datamapper ORM offers the ability to cache certain dynamically loaded data when deployed to a production server.</p>
+
+<h3>Tired of Seeing These Queries?</h3>
+<pre>SELECT * FROM tblname LIMIT 1</pre>
+
+<p>The first time a model is used on a request, DataMapper connects to the database server and loads in the columns for its table.  This can create a few extra queries per page.  Datamapper ORM also does a fair amount of set up on each class, determining things like relationship fields, tweaking the validation rules, and more.  All of this can be cached to a file, which is included directly as PHP code.</p>
+
+<h2>Enabling the Production Cache</h2>
+
+<p>There are three steps to enabling the production cache.</p>
+<ol>
+	<li>Create a writeable folder on the production server that can serve as the cache.
+	The default, and recommended folder, is <strong>application</strong>/<kbd>datamapper/cache</kbd>.</li>
+	<li>Edit your <strong>datamapper.php</strong> config file, and uncomment or add this line:
+		<pre><var>$config</var><kbd>[</kbd><dfn>'production_cache'</dfn><kbd>] = </kbd><dfn>'datamapper/cache'</dfn><kbd>;</kbd></pre>
+	</li>
+	<li>If necessary, change <kbd>datamapper/cache</kbd> to the directory you created.  Remember, it must be relative to the <strong>application</strong> directory, and it shouldn't have a trailing slash (/).</li>
+</ol>
+
+<p>Once enabled, the cache is created automatically, as models are first accessed.  After the cache has been created, it will be used instead of the database queries.</p>
+
+<p class="note">
+	Your cache directories might be outside the application directory. In that case, you can specify the fully qualified path to the production cache directory.
+</p>
+
+<h2>What is Cached?</h2>
+
+<p>Datamapper ORM creates a file for each model.  This allows it to be selective in what it loads.  Each file contains:</p>
+<ul>
+	<li>Generated Table Name</li>
+	<li>Database Columns</li>
+	<li>Modified Validation Array</li>
+	<li>Modified Relationship Arrays</li>
+	<li>Some Validation Meta Information</li>
+</ul>
+
+<h2>Clearing the Cache</h2>
+
+<p>If you make any changes to a model, simply delete the cache file.  The name of the file should be the same as the model's file name.</p>
+
+<p class="note">
+	It is not recommended that you enable the production cache unless you are done testing or developing.
+	The cache also may not provide a noticeable performance boost for small or simple websites, or when the database server is on the same host as the web server.
+	It is worth testing your website with and without the cache before deciding whether or not to use it.
+</p>
+
+<h2>Updating the Cache</h2>
+
+<p>As mentioned before, the cache is created automatically, and once it exists, it will be used, the database will not be checked for updates or modifications, for performance reasons.</p>
+<p>However, there are occasions where you would like to be able to recreate the cache, without manually clearing it. For example:</p>
+
+<ul>
+	<li>If your application contains code to dynamically update database tables</li>
+	<li>If your application creates dynamic relations using the has_one() or has_many() methods</li>
+</ul>
+
+<h3>Recreate the production cache</h3>
+<p>You can recreate the schema cache of a model by using</p>
+	<pre><var>$model</var><kbd>-></kbd><var>production_cache</var><kbd>();</kbd></pre>
+<p>Calling this method while the production cache has been disabled in the configuration has no effect. No cache will be created.</p>
+
+<h2>Disabling the Cache</h2>
+
+<p>To turn caching back off, comment out the line in the DataMapper config file.  I also recommend immediately deleting all cache files when disabling the cache.</p>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagespath: ''
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

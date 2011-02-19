@@ -1,0 +1,19 @@
+{
+	"name":"Content Inserter",
+	"ver":"1.0",
+	"author":"Blaze Boy",
+	"website":"http:\/\/blazeeboy.wordpress.com",
+	
+	"perm":"",
+	"pages":{
+		"index":"chooser"
+		,"Data Editor":"data"
+	},
+	"index":"index",
+	
+	"css_files":[],
+	"js_files":[],
+	
+	"show_toolbar":false,
+	"show_title":false
+}

@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Relationship Types : DataMapper ORM - User Guide</title>
+
+<link rel="shortcut icon" type="image/png" href="../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Relationship Types
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Relationship Types</h1>
+
+<p>There are 3 different types of relationships objects can have with one another.  These are:</p>
+
+<ul>
+	<li>One to One</li>
+	<li>One to Many</li>
+	<li>Many to Many</li>
+</ul>
+
+<p>To describe these relationships, we will use the following Database tables as an example to work with:</p>
+
+
+<h3>tools</h3>
+<table cellpadding="0" cellspacing="1" border="0" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>name</th>
+	<th>description</th>
+	<th>workplace_id</th>
+</tr>
+<tr>
+	<td>7</td>
+	<td>Small Red Hammer</td>
+	<td>Red hammer to hit things with, preferably nails.</td>
+	<td>42</td>
+</tr>
+<tr>
+	<td>8</td>
+	<td>Crowbar</td>
+	<td>Heavy crowbar, for busting open crates or zombie heads.</td>
+	<td>43</td>
+</tr>
+<tr>
+	<td>9</td>
+	<td>Axe</td>
+	<td>Nice shiny axe, for chopping down trees or inflated egos.</td>
+	<td>42</td>
+</tr>
+<tr>
+	<td>10</td>
+	<td>Drill</td>
+	<td>Large drill for breaking up large stones or doing delicate dentistry work (on giants).</td>
+	<td>43</td>
+</tr>
+<tr>
+	<td>11</td>
+	<td>Box of Nails</td>
+	<td>Yep, one box of nails is all we've got.</td>
+	<td>42</td>
+</tr>
+<tr>
+	<td>12</td>
+	<td>Big Hammer</td>
+	<td>Blacksmith's hammer for shaping metal into who knows what.</td>
+	<td>44</td>
+</tr>
+</table>
+
+<h3>workplaces</h3>
+<table cellpadding="0" cellspacing="1" border="0" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>location</th>
+</tr>
+<tr>
+	<td>42</td>
+	<td>Timber Mill</td>
+</tr>
+<tr>
+	<td>43</td>
+	<td>Old Stone Quarry</td>
+</tr>
+<tr>
+	<td>44</td>
+	<td>Blacksmith Hut</td>
+</tr>
+</table>
+
+<h3>workers</h3>
+<table cellpadding="0" cellspacing="1" border="0" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>firstname</th>
+	<th>lastname</th>
+	<th>workplace_id</th>
+</tr>
+<tr>
+	<td>1</td>
+	<td>Fred</td>
+	<td>Smith</td>
+	<td>44</td>
+</tr>
+<tr>
+	<td>2</td>
+	<td>Jayne</td>
+	<td>Doe</td>
+	<td>42</td>
+</tr>
+<tr>
+	<td>3</td>
+	<td>Joe</td>
+	<td>Public</td>
+	<td>43</td>
+</tr>
+</table>
+
+<h3>skills_workers</h3>
+<table cellpadding="0" cellspacing="1" border="0" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>skill_id</th>
+	<th>worker_id</th>
+</tr>
+<tr>
+	<td>1</td>
+	<td>22</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>2</td>
+	<td>27</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>3</td>
+	<td>23</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>4</td>
+	<td>25</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>5</td>
+	<td>25</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>6</td>
+	<td>26</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>7</td>
+	<td>27</td>
+	<td>3</td>
+</tr>
+</table>
+
+<h3>skills</h3>
+<table cellpadding="0" cellspacing="1" border="0" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>name</th>
+</tr>
+<tr>
+	<td>22</td>
+	<td>Blacksmith</td>
+</tr>
+<tr>
+	<td>23</td>
+	<td>Carpentry</td>
+</tr>
+<tr>
+	<td>24</td>
+	<td>Cabinet Maker</td>
+</tr>
+<tr>
+	<td>25</td>
+	<td>Builder</td>
+</tr>
+<tr>
+	<td>26</td>
+	<td>Stonemason</td>
+</tr>
+<tr>
+	<td>27</td>
+	<td>Zombie Slayer</td>
+</tr>
+</table>
+
+<br />
+
+<p>If you've read <a href="database.html">Database Tables</a>, you will recognise that <b>tools</b>, <b>workplaces</b>, <b>workers</b> and <b>skills</b> are all normal tables.  These are the tables that you would create a DataMapper model for, in order to tranform them into objects.</p>
+<p>The other tables, being <b>tools_workplaces</b>, <b>workers_workplaces</b> and <b>skills_workers</b>, are the joining tables which hold the relationship records between the normal tables.</p>
+
+<h2>One to One</h2>
+
+<p>One to One relationships occur when there is exactly one record in the first table that corresponds to exactly one record in the related table.</p>
+
+<p>For example, a worker can be assigned to only one workplace and a workplace can have only one worker. From the tables above we can see that:</p>
+
+<p><b>Fred Smith</b> works at the <b>Blacksmith Hut</b>.<br />
+<b>Jayne Doe</b> works at the <b>Timber Mill</b>.<br />
+<b>Joe Public</b> works at the <b>Old Stone Quarry</b>.</p>
+
+<p>Only Fred is allowed to work at the Blacksmith Hut. Similarly for the others, they can work only at their own workplace and no one else can work there. Sure, it's not very efficient to have one worker per workplace but it suits for this example.</p>
+
+<div class="note">
+	<p>Because this is a <b>One to One</b> relationship, the relationship could have been stored in three ways:</p>
+	<ol>
+		<li>As shown, on the workers table.</li>
+		<li>On the workplaces table, as <kbd>worker_id</kbd></li>
+		<li>On a dedicated <samp>workers_workplaces</samp> join table, with the columns <kbd>id</kbd>, <kbd>worker_id</kbd>, and <kbd>workplace_id</kbd></li>
+	</ol>
+</div>
+
+<h2>One to Many</h2>
+
+<p>One to Many relationships occur when each record in the first table has many linked records in the related table but each record in the related table has only one corresponding record in the first table.</p>
+
+<p>For example, a workplace can be equipped with many tools but a tool can be in only one workplace. From the tables above we can see that:</p>
+
+<p>The <b>Blacksmith Hut</b> has the <b>Big Hammer</b>.<br/>
+The <b>Timber Mill</b> has the <b>Small Red Hammer</b>, <b>Axe</b> and <b>Box of Nails</b>.<br/>
+The <b>Old Stone Quarry</b> has the <b>Crowbar</b> and <b>Drill</b>.</p>
+
+<div class="note">
+	<p>This relationship could also have been stored on its own table, as <samp>tools_workplaces</samp>, with the columns <kbd>id</kbd>, <kbd>tool_id</kbd>, and <kbd>workplace_id</kbd></p>
+</div>
+
+
+<h2>Many to Many</h2>
+
+<p>Many to Many relationships occur when each record in the first table has many linked records in the related table and vice-versa.  These are always stored using dedicated join tables.</p>
+
+<p>For example, a worker can have many skills and a skill can have many workers listed with it. From the tables above we can see that:</p>
+
+<p><b>Fred Smith</b> has the <b>Blacksmith</b> and <b>Zombie Slayer</b> skills.<br/>
+<b>Jayne Doe</b> has the <b>Carpentry</b> and <b>Builder</b> skills.<br/>
+<b>Joe Public</b> has the <b>Builder</b>, <b>Stonemason</b> and <b>Zombie Slayer</b> skills.</p>
+
+<p>So we can see that each of the workers have multiple skills, and in the case of the <b>Builder</b> and <b>Zombie Slayer</b> skills, we see there are multiple workers who have them.</p>
+<p>The <b>Builder</b> skill is listed against <b>Jayne Doe</b> and <b>Joe Public</b>.<br />
+The <b>Zombie Slayer</b> skill is listed against <b>Fred Smith</b> and <b>Joe Public</b>.</p>
+
+
+<h2>Self Referencing Relationships and Multiple Relationships to the Same Model</h2>
+<div class="important">
+	<p>These more advanced relationships are discussed after the next section, in <a href="advancedrelations.html">Advanced Relationships</a>.</p>
+</div>
+
+<br />
+
+<p>Now that you have a better understanding of the relationship types, you can continue on to read <a href="settingrelations.html">Setting up Relationships</a>.</p>
+
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagespath: ''
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

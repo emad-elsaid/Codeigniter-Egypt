@@ -1,0 +1,746 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Validation : DataMapper ORM - User Guide</title>
+
+<link rel="shortcut icon" type="image/png" href="../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Validation
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Validation</h1>
+
+<p>DataMapper comes with built in validation, borrowing some of the existing functionality from the CodeIgniter <a href="http://codeigniter.com/user_guide/libraries/form_validation.html">Form Validation</a> library. In fact, the validation is quite similar so you'll have no problems picking it up if you're already familiar with it.  However, there are enough differences that you should read on to take full advantage of it!</p>
+
+<p class="important"><strong>Note:</strong> validate() is automatically run whenever you perform a save().</p>
+
+<ul>
+	<li><a href="#Rules">Setting Validation Rules</a></li>
+	<li><a href="#Related.Rules">Setting Related Validation Rules</a></li>
+	<li><a href="#Multiple.Rules">Cascading Rules</a></li>
+	<li><a href="#Custom.Rules">Custom Validation</a></li>
+	<li><a href="#Custom.Related.Rules">Custom Related Validation</a></li>
+	<li><a href="#Built-In">Predefined Validation Functions</a></li>
+	<li><a href="#Built-In.Related">Predefined Related Validation Functions</a></li>
+	<li><a href="#Error.Messages">Error Messages</a></li>
+	<li><a href="#Custom.Error.Messages">Setting Custom Error Messages</a></li>
+	<li><a href="#Error.Delimiters">Changing the Error Delimiters</a></li>
+</ul>
+
+
+<h2 id="Rules">Setting Validation Rules</h2>
+
+<p>DataMapper lets you set as many validation rules as you need for a given field, cascading them in order, and it even lets you prep and pre-process the field data at the same time. Let's see it in action, we'll explain it afterwards.</p>
+
+<p>Using the <b>Basic Template</b> from the <a href="models.html">DataMapper Models</a> page, create a <b>User</b> model and add this code just above the class constructor:</p>
+
+<pre>
+<kbd>var </kbd><var><i>$validation</i> </var><kbd>= array(
+    </kbd><dfn>'username' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Username'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+    ),
+    </kbd><dfn>'password' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Password'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+    ),
+    </kbd><dfn>'email' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Email Address'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+    )
+);</kbd>
+</pre>
+
+<p>Your model should now look like this:</p>
+
+<pre><var>&lt;?php
+
+</var><kbd>class </kbd><var>User </var><kbd>extends </kbd><var><u>DataMapper</u> </var><kbd>{
+
+    var </kbd><var><i>$validation</i> </var><kbd>= array(
+        </kbd><dfn>'username' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Username'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+        ),
+        </kbd><dfn>'password' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Password'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+        ),
+        </kbd><dfn>'email' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Email Address'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+        )
+    );
+}
+
+</kbd><samp>/* End of file user.php */
+/* Location: ./application/models/user.php */</samp>
+</pre>
+
+<p>In the above, we have specified that the username, password, and email fields are all required.  When a developer attempts to save their user object to the database, these validation rules must be met in order for the save to be successful.</p>
+
+<ul>
+	<li><strong>array key</strong> - The field name in lowercase.</li>
+	<li><strong>label</strong> - The label you will give this field for use in error messages.</li>
+	<li><strong>rules</strong> - The validation rules the field value must pass in order to pass validation.</li>
+</ul>
+
+<p>Also, you can add validation rules for non-Database Table fields, such as <dfn>'Confirm Email Address'</dfn> or <dfn>'Confirm Password'</dfn>. For example:</p>
+
+<pre>
+<kbd>var </kbd><var><i>$validation</i> </var><kbd>= array(
+    </kbd><dfn>'username' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Username'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+    ),
+    </kbd><dfn>'password' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Password'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'encrypt'</dfn><kbd>)
+    ),
+<em class="new">    </kbd><dfn>'confirm_password' </dfn><kbd>=&gt; array( </kbd><samp>// accessed via $this-&gt;confirm_password
+        </samp><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Confirm Password'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'encrypt'</dfn><kbd>, </kbd><dfn>'matches' </dfn><kbd>=&gt; </kbd><dfn>'password'</dfn><kbd>)
+    ),</em>
+    </kbd><dfn>'email' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Email Address'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'valid_email'</dfn><kbd>)
+    ),
+<em class="new">        </kbd><dfn>'confirm_email' </dfn><kbd>=&gt; array( </kbd><samp>// accessed via $this-&gt;confirm_email
+        </samp><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Confirm Email Address'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'matches' </dfn><kbd>=&gt; </kbd><dfn>'email'</dfn><kbd>)
+    )</em>
+);</kbd>
+</pre>
+
+<h2 id="Related.Rules">Setting Related Validation Rules</h2>
+
+<p>DataMapper also lets you set validation rules for your relationships. Using <a href="save.html"><strong>save()</strong></a>, you can save both an object and its relationships at the same time.  This is useful if you, for example, have a requirement that a User must relate to a Group.  To validate this requirement, you would add rules for the Group relationship to the User <var><i>$validation</i></var> array in this way:</p>
+
+<pre>
+<kbd>var </kbd><var><i>$validation</i> </var><kbd>= array(
+    </kbd><dfn>'username' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Username'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+    ),
+    </kbd><dfn>'password' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Password'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+    ),
+    </kbd><dfn>'email' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Email Address'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+    ),
+<em class="new">    </kbd><dfn>'group' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Group'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+    )</em>
+);</kbd>
+</pre>
+
+<p>Now, whenever you attempt to save a new User, you will only be able to successfully save it if you are also saving it with a Group relationship.  If you are saving on an existing User, it will save if they are already related to a Group (otherwise you need to save with a Group relationship).</p>
+
+<h2 id="Multiple.Rules">Cascading Rules</h2>
+
+<p>DataMapper lets you set multiple rules on each field. Let's try it.  Change your <var><i>$validation</i></var> array like this:</p>
+
+<pre>
+<kbd>var </kbd><var><i>$validation</i> </var><kbd>= array(
+    </kbd><dfn>'username' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Username'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><em class="new"><kbd>, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'unique'</dfn><kbd>, </kbd><dfn>'min_length' </dfn><kbd>=&gt; </kbd><var>3</var><kbd>, </kbd><dfn>'max_length' </dfn><kbd>=&gt; </kbd><var>20</var></em><kbd>)
+    ),
+    </kbd><dfn>'password' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Password'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd><em class="new">, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'min_length' </dfn><kbd>=&gt; </kbd><var>3</var></em><kbd>)
+    ),
+    </kbd><dfn>'email' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Email Address'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd><em class="new">, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'unique'</dfn><kbd>, </kbd><dfn>'valid_email'</dfn></em><kbd>)
+    ),
+    </kbd><dfn>'group' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Group'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+    )
+);</kbd>
+</pre>
+
+<p>Now we have a mix of <b>pre-processing</b> and <b>prepping</b> validation functions.</p>
+
+<div class="important">
+	<p><strong><em>Important:</em></strong> When cascading rules, note that rules are <strong>not</strong> run on <strong>empty</strong> fields <em>unless</em> the <dfn>required</dfn> or <dfn>always_validate</dfn> rules are set.</p>
+	<p>This includes anything that evaluates to <dfn>TRUE</dfn> for the <var><b>empty</b></var><kbd>()</kbd> function, including: <kbd>''</kbd>, <dfn>FALSE</dfn>, or <dfn>0</dfn>.</p>
+</div>
+
+
+<h3>Pre-Processing</h3>
+
+<p>A pre-processing validation function is one that returns <dfn>TRUE</dfn> or <dfn>FALSE</dfn> depending on the field's value.  For example, the <var><u>required</u></var> function checks if the field value is empty.  If it is, it will return <dfn>FALSE</dfn> meaning the field value has not met the validation rule.</p>
+
+
+<h3>Prepping</h3>
+
+<p>A prepping validation function is one that directly modifies the value of the field.  For example, <var><b>trim</b></var> will remove any leading or trailing whitespace from the field value.</p>
+
+
+
+<h2 id="Custom.Rules">Custom Validation</h2>
+
+<p>You can create custom validation functions specific to the DataMapper model you put it in.  For example, here is an <var>encrypt</var> function which we'll put in our User model to encrypt the password.</p>
+
+<h3>Encrypt (prepping example)</h3>
+
+<pre>
+<samp>// Validation prepping function to encrypt passwords
+</samp><kbd>function </kbd><var>_encrypt</var><kbd>(</kbd><var>$field</var><kbd>) </kbd><samp>// optional second parameter is not used
+</samp><kbd>{
+    </kbd><samp>// Don't encrypt an empty string
+    </samp><kbd>if (!empty(</kbd><var><b>$this</b></var><kbd>-&gt;{</kbd><var>$field</var><kbd>}))
+    {
+        </kbd><samp>// Generate a random salt if empty
+        </samp><kbd>if (empty(</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>salt</var><kbd>))
+        {
+            </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>salt </var><kbd>= </kbd><var><b>md5</b></var><kbd>(</kbd><var><b>uniqid</b></var><kbd>(</kbd><var><b>rand</b></var><kbd>(), </kbd><var><dfn>true</dfn></var><kbd>));
+        }
+
+        </kbd><var><b>$this</b></var><kbd>-&gt;{</kbd><var>$field</var><kbd>} = </kbd><var><b>sha1</b></var><kbd>(</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>salt </var><kbd>. </kbd><var><b>$this</b></var><kbd>-&gt;{</kbd><var>$field</var><kbd>});
+    }
+}</kbd>
+</pre>
+
+<h3>Where to Store Custom Validation Rules</h3>
+<p>Custom rules should be stored in one of two locations: either directly on the model itself, or in an <a href="extensions.html">extension class</a>.  The naming and usage rules are different depending on where you store them.  You should always put rules that are used in multiple places in an extension class.</p>
+
+<h3>Rules</h3>
+
+<p>There are important rules you need to be aware of when setting up your custom validation functions.</p>
+
+<p>For in-class rules:</p>
+<ul>
+	<li>The function must be private and named in the format:
+		<var><u>_</u></var><var><s>{rule}</s></var><kbd>(</kbd><var>$field</var><kbd>, </kbd><var>$param</var><kbd> = </kbd><dfn>''</dfn><kbd>)</kbd></li>
+	<li>The function must never be called directly.</li>
+	<li>The first parameter contains the field name to be validated.</li>
+	<li>The optional second parameter contains a setting that can be used by the function. Whether you use this depends upon your function. For example, the <b>max_length</b> function uses the second parameter as a number signifying the maximum length to validate the field against.</li>
+</ul>
+
+<p>For extension-based rules:</p>
+<ul>
+	<li>The function must be named in the format:
+		<var><u>rule_</u></var><var><s>{rule}</s></var><kbd>(</kbd><var>$object</var><kbd>, </kbd><var>$field</var><kbd>, </kbd><var>$param</var><kbd> = </kbd><dfn>''</dfn><kbd>)</kbd></li>
+	<li>The first parameter contains the object being validated.</li>
+	<li>The second parameter contains the field name to be validated.</li>
+	<li>The optional third parameter contains a setting that can be used by the function. Whether you use this depends upon your function. For example, the <b>max_length</b> function uses the second parameter as a number signifying the maximum length to validate the field against.</li>
+</ul>
+
+<p>For an example of an extension-based rule, scroll down to <a href="#Extension.Rule">Exact Length</a></p>
+
+<p>DataMapper's validate function ensures the validation rules are only applied to a field if it has changed since the last time validate ran.
+	This prevents a field from having prepping functions applied to it multiple times, such as encryption,
+	and the main reason why you should not call the actual validation functions directly.
+	Calling an object's <var><u>validate</u></var><kbd>()</kbd> function is all that's needed to have the validation rules applied.
+	Note that validate is automatically run whenever you perform a <var><u>save</u></var><kbd>()</kbd> call without parameters.
+	You can also run or <var><u>validate</u></var><kbd>()-&gt;</kbd><var><u>get</u></var><kbd>()</kbd> on an object to get a matching record using the objects current field values.</p>
+
+<br />
+
+<p>Anyway, back to putting in our custom <var>encrypt</var> function.</p>
+
+<p>Add the <var>encrypt</var> function to your user model and the <b>encrypt</b> rule to the <var><i>$validation</i></var> array for the <b>password</b> field.  Your model should now look like this:</p>
+
+<pre class="full">
+<var>&lt;?php
+
+</var><kbd>class </kbd><var>User </var><kbd>extends </kbd><var><u>DataMapper</u> </var><kbd>{
+
+    var </kbd><var><i>$validation</i> </var><kbd>= array(
+        array(
+            </kbd><dfn>'field' </dfn><kbd>=&gt; </kbd><dfn>'username'</dfn><kbd>,
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Username'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'unique'</dfn><kbd>, </kbd><dfn>'min_length' </dfn><kbd>=&gt; </kbd><var>3</var><kbd>, </kbd><dfn>'max_length' </dfn><kbd>=&gt; </kbd><var>20</var><kbd>)
+        ),
+        array(
+            </kbd><dfn>'field' </dfn><kbd>=&gt; </kbd><dfn>'password'</dfn><kbd>,
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Password'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'min_length' </dfn><kbd>=&gt; </kbd><var>3</var><kbd>, </kbd><dfn>'encrypt'</dfn><kbd>)
+        ),
+        array(
+            </kbd><dfn>'field' </dfn><kbd>=&gt; </kbd><dfn>'email'</dfn><kbd>,
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Email Address'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'unique'</dfn><kbd>, </kbd><dfn>'valid_email'</dfn><kbd>)
+        )
+    );
+
+    function </kbd><var><dfn>__construct</dfn></var><kbd>(</kbd><var>$id </var><kbd>= </kbd><var>NULL</var><kbd>)
+    {
+        </kbd><var><dfn>parent</dfn></var><kbd>::</kbd><var><dfn>__construct</dfn></var><kbd>(</kbd><var>$id</var><kbd>);
+    }
+
+    </kbd><samp>// Validation prepping function to encrypt passwords
+    </samp><kbd>function </kbd><var>_encrypt</var><kbd>(</kbd><var>$field</var><kbd>)
+    {
+        </kbd><samp>// Don't encrypt an empty string
+        </samp><kbd>if (!empty(</kbd><var><b>$this</b></var><kbd>-&gt;{</kbd><var>$field</var><kbd>}))
+        {
+            </kbd><samp>// Generate a random salt if empty
+            </samp><kbd>if (empty(</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>salt</var><kbd>))
+            {
+                </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>salt </var><kbd>= </kbd><var><b>md5</b></var><kbd>(</kbd><var><b>uniqid</b></var><kbd>(</kbd><var><b>rand</b></var><kbd>(), </kbd><var><dfn>true</dfn></var><kbd>));
+            }
+
+            </kbd><var><b>$this</b></var><kbd>-&gt;{</kbd><var>$field</var><kbd>} = </kbd><var><b>sha1</b></var><kbd>(</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>salt </var><kbd>. </kbd><var><b>$this</b></var><kbd>-&gt;{</kbd><var>$field</var><kbd>});
+        }
+    }
+}
+
+</kbd><samp>/* End of file user.php */
+/* Location: ./application/models/user.php */</samp>
+</pre>
+
+<p>Now if you were to do the following:</p>
+
+<pre>
+<var>$u </var><kbd>= new </kbd><var>User</var><kbd>();
+</kbd><var>$u</var><kbd>-&gt;</kbd><var>username </var><kbd>= </kbd><dfn>"foo"</dfn><kbd>;
+</kbd><var>$u</var><kbd>-&gt;</kbd><var>password </var><kbd>= </kbd><dfn>"bar"</dfn><kbd>;
+</kbd><var>$u</var><kbd>-&gt;</kbd><var><u>save</u></var><kbd>();</kbd>
+</pre>
+
+<p>You would have a new user named foo saved to the database, with an encrypted password!</p>
+
+<br />
+
+<h3>Exact Length (pre-processing example)</h3>
+
+<p>Here is an example of a custom pre-processing function using a parameter:</p>
+
+<pre>
+<samp>// Validation prepping function to encrypt passwords
+</samp><kbd>function </kbd><var>_exact_length</var><kbd>(</kbd><var>$field</var><kbd>, </kbd><var>$param</var><kbd>)
+{
+    </kbd><samp>// Check if field value is the required length
+    </samp><kbd>if (</kbd><var><b>strlen</b></var><kbd>(</kbd><var><b>$this</b></var><kbd>-&gt;{</kbd><var>$field</var><kbd>}) == </kbd><var>$param</var><kbd>)
+    {
+        return </kbd><var><dfn>TRUE</dfn></var><kbd>;
+    }
+
+    </kbd><samp>// Field value is not the required length
+    </samp><kbd>return </kbd><var><dfn>FALSE</dfn></var><kbd>;
+}</kbd>
+</pre>
+
+<p>And we would add it to the validation array like this:</p>
+
+<pre>
+<var><i>$validation</i> </var><kbd>= array(
+    </kbd><dfn>'word' </dfn><kbd>=&gt; array(
+        </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Your Word'</dfn><kbd>,
+        </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'exact_length' </dfn><kbd>=&gt; </kbd><var>10</var><kbd>)
+    )
+);</kbd>
+</pre>
+
+<p>Now if <b>word</b> is not exactly 10 characters in length, it will fail validation.</p>
+
+<p><a name="Extension.Rule">Here is the same validation rule</a>, but stored in an <a href="extensions.html">Extension Class</a>:</p>
+
+<pre>
+<kbd>class </kbd><var>Custom_Rules </var><kbd>{
+    function </kbd><var><dfn>__construct</dfn></var><kbd>()
+    {
+        </kbd><var><b>$CI</b> </var><kbd>=&amp; </kbd><var><b>get_instance</b></var><kbd>();
+        </kbd><samp>// load in the custom rules language file.
+        </samp><var><b>$CI</b></var><kbd>-&gt;</kbd><var>lang</var><kbd>-&gt;</kbd><var>load</var><kbd>(</kbd><dfn>'custom_rules'</dfn><kbd>);
+    }
+
+    </kbd><samp>// Validation prepping function to encrypt passwords
+    </samp><kbd>function </kbd><var>rule_exact_length</var><kbd>(</kbd><var>$object</var><kbd>, </kbd><var>$field</var><kbd>, </kbd><var>$param</var><kbd>)
+    {
+        </kbd><samp>// Check if field value is the required length
+        </samp><kbd>if (</kbd><var><b>strlen</b></var><kbd>(</kbd><var>$object</var><kbd>-&gt;{</kbd><var>$field</var><kbd>}) == </kbd><var>$param</var><kbd>)
+        {
+            return </kbd><var><dfn>TRUE</dfn></var><kbd>;
+        }
+
+        </kbd><samp>// Field value is not the required length
+        </samp><kbd>return </kbd><var><dfn>FALSE</dfn></var><kbd>;
+    }
+}</kbd>
+</pre>
+
+<p class="important"><strong>Note:</strong> The <strong>exact_length</strong> validation function is already included in DataMapper.</p>
+
+
+<h2 id="Custom.Related.Rules">Custom Related Validation</h2>
+
+<p>You can create custom related validation functions specific to the DataMapper model you put it in.  For example, here is a <Var>max_size</var> function which we'll put in our Group model to restrict the size of each Group.</p>
+
+<h3>Max Size (pre-processing example)</h3>
+
+<pre>
+<samp>// Checks if the value of a property is at most the maximum size.
+</samp><kbd>function </kbd><var>_related_max_size</var><kbd>(</kbd><var>$object</var><kbd>, </kbd><var>$model</var><kbd>, </kbd><var>$param </var><kbd>= </kbd><var>0</var><kbd>)
+{
+    return (</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>_count_related</var><kbd>(</kbd><var>$model</var><kbd>, </kbd><var>$object</var><kbd>) &gt; </kbd><var>$size</var><kbd>) ? </kbd><var><dfn>FALSE</dfn> </var><kbd>: </kbd><var><dfn>TRUE</dfn></var><kbd>;
+}</kbd>
+</pre>
+
+<p class="important"><strong>Note:</strong> The <strong>max_size</strong> related validation function is already included in DataMapper.</p>
+
+<h3>Rules</h3>
+
+<p>There are important rules you need to be aware of when setting up your custom validation functions.</p>
+
+<ul>
+	<li>The function must be private and named in the format:
+		<var><u>_related_</u></var><var><s>{rule}</s></var><kbd>(</kbd><var>$related_objects</var><kbd>, </kbd><var>$related_field</var><kbd>, </kbd><var>$param</var><kbd> = </kbd><dfn>''</dfn><kbd>)</kbd> </li>
+	<li>The function should never be called directly.</li>
+	<li>The first parameter contains the related objects.</li>
+	<li>The second parameter contains the related field name for the related object. (ie: 'user', 'creator', or 'editor')</li>
+	<li>The optional third parameter contains a setting that can be used by the function. Whether you use this depends upon your function. For example, the <b>max_size</b> function uses the third parameter as a number signifying the maximum size to validate against.</li>
+</ul>
+
+<p>Finally, you can also store related validation functions in an extension class, with the these rules:</p>
+
+<ul>
+	<li>The function must be public and named in the format:
+		<var><u>rule_related_</u></var><var><s>{rule}</s></var><kbd>(</kbd><var>$object</var><kbd>, </kbd><var>$related_objects</var><kbd>, </kbd><var>$related_field</var><kbd>, </kbd><var>$param</var><kbd> = </kbd><dfn>''</dfn><kbd>)</kbd></li>
+	<li>The first parameter contains the object being validated.</li>
+	<li>The second parameter contains the related object.</li>
+	<li>The third parameter contains the related field name for the related object. (ie: 'user', 'creator', or 'editor')</li>
+	<li>The optional fourth parameter contains a setting that can be used by the function. Whether you use this depends upon your function. For example, the <b>max_size</b> function uses the third parameter as a number signifying the maximum size to validate against.</li>
+</ul>
+
+
+<br />
+
+
+<h2 id="Built-In">Predefined Validation Functions</h2>
+
+<p>DataMapper lets you use any of the validation functions in the CodeIgniter <a href="http://codeigniter.com/user_guide/libraries/form_validation.html">Form Validation</a> library, as well as any native <a href="http://php.net/">PHP</a> function that accepts one parameter.</p>
+
+<p>As well as those, DataMapper provides a few extra validation functions.</p>
+
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+<tr>
+<th>Rule</th>
+<th>Parameter</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+<tr>
+<td><strong>required</strong></td>
+<td>No</td>
+<td>Returns TRUE if the field is not <var><b>empty</b></var>.</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><strong>always_validate</strong></td>
+<td>No</td>
+<td>Does nothing, but notifies the validation routine to always run, even if the field is empty.</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><strong>alpha_dash_dot</strong></td>
+<td>No</td>
+<td>Returns FALSE if the property contains anything other than alpha-numeric characters, underscores, dashes or full-stops.</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><strong>alpha_slash_dot</strong></td>
+<td>No</td>
+<td>Returns FALSE if the property contains anything other than alpha-numeric characters, underscores, dashes, forward slashes or full-stops.</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><strong>boolean</strong></td>
+<td>No</td>
+<td>Forces the propert to be TRUE or FALSE, using PHP's built-in boolean conversion.</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><strong>unique</strong></td>
+<td>No</td>
+<td>Returns FALSE if the property is not unique.</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><strong>unique_pair</strong></td>
+<td>Yes</td>
+<td>Returns FALSE if the property, paired with another property, is not unique.</td>
+<td>'unique_pair' => 'other_property'</td>
+</tr>
+<tr>
+<td><strong>min_size</strong></td>
+<td>Yes</td>
+<td>Returns FALSE if the property is less than the specified size.</td>
+<td>'min_size' => 1</td>
+</tr>
+<tr>
+<td><strong>max_size</strong></td>
+<td>Yes</td>
+<td>Returns FALSE if the property is greater than the specified size.</td>
+<td>'max_size' => 10</td>
+</tr>
+<tr>
+<td><strong>min_date</strong></td>
+<td>Yes</td>
+<td>Returns FALSE if the property is less than the specified date.</td>
+<td>'min_date' => '1950-10-15'</td>
+</tr>
+<tr>
+<td><strong>max_date</strong></td>
+<td>Yes</td>
+<td>Returns FALSE if the property is greater than the specified date.</td>
+<td>'max_date' => '2050-12-25'</td>
+</tr>
+<tr>
+<td><strong>valid_date</strong></td>
+<td>No</td>
+<td>Returns FALSE if the property is not a valid date.</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><strong>valid_date_group</strong></td>
+<td>Yes</td>
+<td>Returns FALSE if the property, grouped with other properties, is not a valid date.</td>
+<td>'valid_date_group' => array('year' => 'property1', 'month' => 'property2', 'day' => 'property3')</td>
+</tr>
+<tr>
+<td><strong>valid_match</strong></td>
+<td>Yes</td>
+<td>Returns FALSE if the property does not match one of the specified array values.</td>
+<td>'valid_match' => array('value1', 'value2')</td>
+</tr>
+</table>
+
+<p>Any custom validation functions you would like to add, can be added to your DataMapper models, such as the example of the <b>encrypt</b> function.</p>
+
+
+<h2 id="Built-In.Related">Predefined Related Validation Functions</h2>
+
+<p>DataMapper has some specific validation rules used to validate relationships.  These are:</p>
+
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+<tr>
+<th>Rule</th>
+<th>Parameter</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+<tr>
+<td><strong>required</strong></td>
+<td>No</td>
+<td>Returns FALSE if the object is not being saved with a relationship and one does not already exist.</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td><strong>min_size</strong></td>
+<td>Yes</td>
+<td>Returns FALSE if the number of relationships is less than the specified size.</td>
+<td>'min_size' => 1</td>
+</tr>
+<tr>
+<td><strong>max_size</strong></td>
+<td>Yes</td>
+<td>Returns FALSE if the number of relationships is greater than the specified size.</td>
+<td>'max_size' => 10</td>
+</tr>
+</table>
+
+<p>Any custom related validation functions you would like to add, can be added to your DataMapper models, such as the example of the <b>max_size</b> function above.</p>
+
+
+<h2 id="Error.Messages">Error Messages</h2>
+
+<p>If any of the field values fail validation, the object will have its error property populated.  You can view loop through and show each error in the error's all list, show the specific error for each field, or show all errors in one string.  For example:</p>
+
+<h3>Viewing All Errors</h3>
+<pre>
+<kbd>foreach (</kbd><var>$object</var><kbd>-&gt;</kbd><var><i>error</i></var><kbd>-&gt;</kbd><var>all </var><kbd>as </kbd><var>$e</var><kbd>)
+{
+    echo </kbd><var>$e </var><kbd>. </kbd><dfn>"&lt;br /&gt;"</dfn><kbd>;
+}</kbd>
+</pre>
+
+<h3>Viewing Specific Field Errors</h3>
+<pre>
+<kbd>echo </kbd><var>$object</var><kbd>-&gt;</kbd><var><i>error</i></var><kbd>-&gt;</kbd><var>fieldname</var><kbd>;
+echo </kbd><var>$object</var><kbd>-&gt;</kbd><var><i>error</i></var><kbd>-&gt;</kbd><var>otherfieldname</var><kbd>;</kbd>
+</pre>
+
+<h3>Viewing All Errors as a Single String</h3>
+<pre>
+<kbd>echo </kbd><var>$object</var><kbd>-&gt;</kbd><var><i>error</i></var><kbd>-&gt;</kbd><var>string</var><kbd>;</kbd>
+</pre>
+
+<p>The save function will return FALSE if validation fails, so if that happens you can check the error object for the errors.</p>
+
+<p>Calling the validate() function will see a <strong>valid</strong> flag set to true or false. For example:</p>
+
+<pre>
+<var><b>$this</b></var><kbd>-&gt;</kbd><var><u>validate</u></var><kbd>();
+
+if (</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var><i>valid</i></var><kbd>)
+{
+    </kbd><samp>// Validation Passed
+</samp><kbd>}
+else
+{
+    </kbd><samp>// Validation Failed
+</samp><kbd>}</kbd>
+</pre>
+
+<h2 id="Custom.Error.Messages">Setting Custom Error Messages</h2>
+
+<p>With the option of creating custom validation functions or having custom methods specific to each DataMapper model, you'll at one time or another want to raise an error message.
+	There are three ways to handle custom error message.</p>
+
+<h3>Using the error_message function</h3>
+<p>The most generic, which works from anywhere, is to use the <var><u>error_message</u></var><kbd>()</kbd> method.  This method accepts accepts two parameters.</p>
+
+<p><strong>$field</strong> - This is the name by which you'll access the error in the error object.</p>
+<p><strong>$error</strong> - This is the error message itself.</p>
+
+<p>If you are using this from within a validation rule, don't return <dfn>FALSE</dfn>, as setting the error message is enough.  Here is an example of setting a custom error message and accessing it.</p>
+
+<pre>
+<var>$u </var><kbd>= new </kbd><var>User</var><kbd>();
+
+</kbd><var>$u</var><kbd>-&gt;</kbd><var><u>error_message</u></var><kbd>(</kbd><dfn>'custom'</dfn><kbd>, </kbd><dfn>'This is a custom error message.'</dfn><kbd>);
+
+echo </kbd><var>$u</var><kbd>-&gt;</kbd><var><i>error</i></var><kbd>-&gt;</kbd><var>custom</var><kbd>;</kbd>
+</pre>
+
+<h3>Using Language Files</h3>
+<p>From within custom validation rules, you can return a <dfn>FALSE</dfn> value if an error occurs.
+	If Datamapper ORM receives a <dfn>FALSE</dfn> value, it will attempt to look up the error based on the validation rule's name (ie: the <dfn>min_size</dfn> rule, stored under <var><u>_min_size</u></var>, needs a language string called <kbd>min_size</kbd>.
+	This string will be passed into <var><b>sprintf</b></var>, with two string arguments, the field label and (if available) the rule's parameters.</p>
+<p>For example, the min_size message looks like this:</p>
+<pre>
+<var>$lang</var><kbd>[</kbd><dfn>'min_size'</dfn><kbd>] = </kbd><dfn>'The %s field must be at least %s.'</dfn><kbd>;</kbd>
+</pre>
+<p>Which, with a parameter of 1 on the field user might render like this:</p>
+<pre>The User must be at least 1.</pre>
+
+
+<h3>Returning Highly-Customized Messages</h3>
+<p>If you need to manipulate the error message more than the label and parameter, you can build the error message from within the custom validation rule,
+	and return it instead of <dfn>FALSE</dfn>.  It will still be passed to <var><b>sprintf</b></var>.</p>
+<pre>
+<kbd>function </kbd><var>_special_rule</var><kbd>(</kbd><var>$field</var><kbd>, </kbd><var>$params</var><kbd>)
+{
+    </kbd><var>$valid </var><kbd>= ... </kbd><samp>// validate the field
+    </samp><kbd>if( ! </kbd><var>$valid</var><kbd>)
+    {
+        </kbd><var>$result </var><kbd>= </kbd><dfn>'For your account, you can have no more than ' </dfn><kbd>. </kbd><var>$useraccount</var><kbd>-&gt;</kbd><var>max_widgets </var><kbd>. </kbd><dfn>' widgets at a time.'</dfn><kbd>;
+        return </kbd><var>$result</var><kbd>;
+    }
+}</kbd>
+</pre>
+
+
+
+<h2 id="Error.Delimiters">Changing the Error Delimiters</h2>
+
+<p>By default, DataMapper adds a paragraph tag (&lt;p&gt;) around each individual error message. You can easily change these delimiters by setting the <var><i>$error_prefix</i></var> and <var><i>$error_suffix</i></var> class variables in your DataMapper model.  For example, we'll set them in our User model:</p>
+
+<pre><div class="lineNums"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ •
+ •</div><var>&lt;?php
+
+</var><kbd>class </kbd><var>User </var><kbd>extends </kbd><var><u>DataMapper</u> </var><kbd>{
+
+    var </kbd><var><i>$error_prefix</i> </var><kbd>= </kbd><dfn>'&lt;div class="error"&gt;'</dfn><kbd>;
+    var </kbd><var><i>$error_suffix</i> </var><kbd>= </kbd><dfn>'&lt;/div&gt;'</dfn><kbd>;
+
+    var </kbd><var><i>$validation</i> </var><kbd>= array(</kbd>
+
+    <samp>[...]</samp>
+</pre>
+
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagespath: ''
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

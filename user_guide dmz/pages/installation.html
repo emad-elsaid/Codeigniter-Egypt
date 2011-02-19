@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Installation Instructions : DataMapper ORM - User Guide</title>
+
+<link rel="shortcut icon" type="image/png" href="../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Installation Instructions
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Installation Instructions</h1>
+
+<h2>Short Version</h2>
+<p>Unzip and copy everything within <var>application</var> into your CodeIgniter installation's <var>application</var> folder, edit the config, and go map some data!</p>
+
+<h2>Long Version</h2>
+<p>DataMapper is installed in seven steps, with two optional steps:</p>
+
+<ol>
+	<li>Unzip the package.</li>
+	<li>Open the <var>application/config/datamapper.php</var> file with a text editor and set your <a href="config.html">preferred DataMapper settings</a>.</li>
+	<li>Upload the <var>application/config/datamapper.php</var> file to your CodeIgniter <kbd>application/config</kbd> folder.</li>
+	<li>Upload the <var>application/libraries/datamapper.php</var> file to your CodeIgniter <kbd>application/libraries</kbd> folder.</li>
+	<li>Upload the <var>application/languages/english/datamapper_lang.php</var> file to your CodeIgniter <kbd>application/language/english</kbd> folder.</li>
+	<li>Open your CodeIgniter <kbd>application/config/autoload.php</kbd> file with a text editor and add the <dfn>database</dfn> and <dfn>datamapper</dfn> libraries to the <var><i>autoload</i></var> libraries array.
+		<pre><var>$autoload</var><kbd>[</kbd><dfn>'libraries'</dfn><kbd>] = array(</kbd><dfn>'database'</dfn><kbd>, </kbd><dfn>'datamapper'</dfn><kbd>);</kbd></pre>
+		Also, make sure you clear the <dfn>models</dfn> array, because DataMapper automatically loads these.
+		<pre><var>$autoload</var><kbd>[</kbd><dfn>'models'</dfn><kbd>] = array();</kbd></pre>
+		For further information on auto-loading, read <a href="http://codeigniter.com/user_guide/general/autoloader.html">Auto-loading Resources</a>.</li>
+	<li>Open your CodeIgniter <var>application/config/database.php</var> file with a text editor and set your database settings, ensuring you set the <dfn>dbprefix</dfn> to an empty string.
+		<pre><var>$db</var><kbd>[</kbd><dfn>'default'</dfn><kbd>][</kbd><dfn>'dbprefix'</dfn><kbd>] = </kbd><dfn>""</dfn><kbd>;</kbd></pre>
+		For information on using table prefixes with DataMapper, read <a href="prefix.html">Setting up Table Prefixes</a>.
+	</li>
+	<li>Optionally, upload the <var>application/helpers/inflector_helper.php</var> file to your CodeIgniter <kbd>application/helpers</kbd> folder.</li>
+	<li>Optionally, upload the <var>application/datamapper</var> directory to your CodeIgniter <kbd>application</kbd> folder, to enable the use of extensions.  <strong>Highly Recommended</strong>! This doesn't have any performance penalty if you do not load the extensions.
+		<div class="note">
+			<p>Some extensions may require additional <b>views</b>, <b>libraries</b>, <b>helpers</b>, or other items to function correctly.  Please <a href="extlist.html">check the extensions</a> you plan on using.</p>
+		</div>
+	</li>
+</ol>
+
+<p>That's it!</p>
+
+<p>If you're new to DataMapper, please read the <a href="gettingstarted.html">Getting Started</a> section of the User Guide to begin learning how
+to use DataMapper. Enjoy!</p>
+
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagespath: ''
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

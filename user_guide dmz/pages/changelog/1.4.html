@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>1.4.x Change Log : DataMapper ORM - User Guide</title>
+
+<style type="text/css" media="all">@import url('../../css/userguide.css');</style>
+<link rel="shortcut icon" type="image/png" href="../../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+<a href="../changelog.html">Changelog</a> &nbsp;&#8250;&nbsp;
+1.4.x Change Log
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>1.4.x Change Log</h1>
+
+<p>For more information on upgrading to the latest release, please see <a href="../upgrade.html">Upgrade Instructions</a></p>
+
+<h2><a href="/DMZ_1.4.3.zip">Version 1.4.3</a></h2>
+<p>Release Date: August 9, 2009</p>
+<ul>
+	<li>
+		<strong>Bug Fixes</strong>
+		<ul>
+			<li>Fixed long-standing bug where the example method for validating a login would fail.
+				<p class="note">This change could adversely affect certain logins.  <a href="http://codeigniter.com/forums/viewreply/621723/">Please see this note here.</a>  The 1.5.0 update includes a new <var><u>trim</u></var> rule that should fix this problem.</p>
+			</li>
+		</ul>
+	</li>
+</ul>
+
+<h2><a href="/DMZ_1.4.2.zip">Version 1.4.2</a></h2>
+<p>Release Date: August 7, 2009</p>
+<ul>
+	<li>
+		<strong>Changes</strong>
+		<ul>
+			<li>Added code to allow looping over the object directly, so you don't have to loop over the <var><i>all</i></var> array.  This should prevent errors when one forgets to type <var><i>all</i></var>.  I wouldn't depend on this for now, in case it needs to be removed, but I thought I'd try it out.</li>
+		</ul>
+	</li>
+	<li>
+		<strong>Bug Fixes</strong>
+		<ul>
+			<li>Fixed a typo-bug that prevented model-only extensions from being loaded (thanks <a href="http://codeigniter.com/forums/member/53883/">pdswan</a> for finding this!).</li>
+		</ul>
+	</li>
+</ul>
+
+<h2><a href="/DMZ_1.4.1.zip">Version 1.4.1</a></h2>
+<p>Release Date: August 3, 2009</p>
+<ul>
+	<li>
+		<strong>Bug Fixes</strong>
+		<ul>
+			<li>Fixed fairly serious bug that prevented multiple extensions from being loaded at the same time (thanks <a href="http://codeigniter.com/forums/member/57691/">Daniel H</a> for finding this!).</li>
+			<li>Fixed minor bug in the example code.</li>
+		</ul>
+	</li>
+</ul>
+
+<h2><a href="/DMZ_1.4.0.zip">Version 1.4.0</a></h2>
+<p>Release Date: July 27, 2009</p>
+<p>Please look over these updates carefully, as there are a lot of new features.</p>
+<ul>
+	<li>
+		<strong>Core Changes</strong>
+		<ul>
+			<li>Added code to allow DataMapper models to be loaded when the object is created.  To use this, you'll need to <a href="../models.html#Basic.Template">update or remove the constructors in your models</a>.</li>
+			<li>Added a <var><u>save_as_new</u></var> method to enable <a href="../save.html#Save.Existing.As.New">saving objects with existing <strong>id</strong>s</a>.</li>
+			<li>Added a <var><u>skip_validation</u></var> method to enable a <a href="../save.html#Skip.Validation">save without validating</a>.</li>
+			<li>You can now query <a class="def" href="../glossary.html#Deep.Relationship"><b>deep relationships</b></a>, as deep as you need.  See <a href="../getadvanced.html#Deep.Relationship.Queries">Get (Advanced)</a> for examples.</li>
+			<li>You can now include columns from deep <var><i>$has_one</i></var> relationships.  See <a href="../getadvanced.html#Deep.Relationship.Include">Get (Advanced)</a> for examples.</li>
+			<li>Added <var><u class="faded">(or_)(not_)</u><u>ilike</u></var> methods to allow <a href="../get.html#ilike">case-insensitive like queries</a> (uses sql's <var><b>UPPER()</b></var> and PHP's <var><b>strtoupper</b></var>).</li>
+			<li>Added query grouping through <var><u class="faded">(or_)(not_)</u><u>group_start</u></var> and <var><u>group_end</u></var> methods.  This enables <a href="../get.html#Query.Grouping">more advanced queries</a>.</li>
+			<li>Added the ability to specify a <a href="../get.html#Default.Order.By">default order by clause</a>.  This will allow objects to always be sorted (unless overridden).</li>
+			<li>Created a brand-new, mostly functional <a href="../examples.html">example application</a>!  Feel free to install it and try it out.  Alternatively, just browse the code!</li>
+		</ul>
+	</li>
+	<li>
+		<strong>Extension Changes</strong>
+		<ul>
+			<li>Added the <var><s>array</s></var> extension class. <a href="../extensions/array.html">More Information.</a></li>
+			<li>Added the <var><s>csv</s></var> extension class. <a href="../extensions/csv.html">More Information.</a></li>
+			<li>Added the <var><s>htmlform</s></var> extension class. <a href="../extensions/htmlform.html">More Information.</a></li>
+			<li>Added the <var><s>simplecache</s></var> extension class. <a href="../extensions/simplecache.html">More Information.</a></li>
+			<li>Added a <var><u>all_to_json</u></var> method to the <var><s>json</s></var> extension class. <a href="../extensions/json.html">More Information.</a></li>
+			<li>Added the ability to dynamically load an extension as needed, through <var><u>load_extension</u></var>. <a href="../extensions.html">More Information.</a></li>
+			<li>Extensions can now receive support load-time options.</li>
+		</ul>
+	</li>
+	<li>
+		<strong>Improvements</strong>
+		<ul>
+			<li><strong>Smarter Saving</strong>: If an object is stored on an In-Table Foreign Key, it can now be saved in the same UPDATE query as the rest of the object, removing one query for every in-table foreign key.</li>
+			<li><strong>Plural Related Objects</strong>: Related object lookups now allow the plural form almost everywhere.  For example, <var>$user</var><kbd>-&gt;</kbd><var>bug</var><kbd>-&gt;</kbd><var><u>get</u></var><kbd>()</kbd> and <var>$user</var><kbd><kbd>-&gt;</kbd></kbd><var>bug<u>s</u></var>-&gt;<var><u>get</u></var><kbd>()</kbd> will both look up bugs related to <var>$user</var>.  This feature can even be used with <var>$user</var>-><var><u>where_related_</u></var><var><s>bugs</s></var>() queries.  If automatic conversion to singular fails, just fall back to always calling the singular form.</li>
+			<li><strong>Query Freeing</strong>: If you have a query that returns more than <dfn>100</dfn> items, it is now freed immediately.  This may reduce memory consumption.  The threshold is adjustable, simply overwrite <var>$object</var><kbd>-&gt;</kbd><var><i>free_result_threshold</i></var>.  <dfn>0</dfn> means free every time.</li>
+			<li>Datamapper ORM now only loads CodeIgniter's <var>form_validation</var> libary when it is first accessed.  (Recommended by <a href="http://codeigniter.com/forums/member/85622/">jpi</a>.)</li>
+			<li>Added a new Template model (under application/models/_template.php) to help in creating your own models.</li>
+			<li>Various minor performance enhancements.</li>
+		</ul>
+	</li>
+	<li>
+		<strong>Bug Fixes</strong>
+		<ul>
+			<li>Fixed two minor bugs in the way the built-in related validation rules were being counted, one of which was suggested by <a href="http://codeigniter.com/forums/member/79029/">MeanStudios</a>.</li>
+			<li>Fixed bug where <var><u>count</u></var> could return incorrect values when used on an in-table foreign key relationship stored on the parent table.</li>
+			<li>Fixed minor bug when calling this specific form of <a href="../getadvanced.html#_related_model">_related_model</a>: <var><i>{where}</i></var><var><u>_related_</u></var><var><s>{$model}</s></var>(<var>$object</var>).  For example:<var><i>where</i></var><var><u>_related_</u></var><var><s>editor</s></var>(<var>$user</var>).</li>
+			<li>Empty labels or validation rules no longer throw an error.  Also, the <strong>id</strong> field will now automatically have a validation label and rule configured, if it is not provided.</li>
+			<li>When querying a related object [e.g.: <var>$user</var><kbd>-></kbd><var>post</var><kbd>-></kbd><var><u>get</u></var><kbd>()</kbd> ], all user-provided where statements are automatically grouped.  This prevents unexpected results when <b>OR</b>ing statements.</li>
+		</ul>
+	<li>
+		<strong>Other Changes</strong>
+		<ul>
+			<li>Updated the way related validation rules work, to ensure that the <var><s>related field</s></var> was being passed into the rules.
+				Previously, the first argument would have been whatever was passed in to <var><u>save</u></var>.
+				Now, if the <var>$object</var> was saved with a specific <var><s>related_field</s></var>, the <var>$object</var> will be wrapped in a single-item array, with the <var><s>related field</s></var> as its key.</li></li>
+			<li>Added a method <var><u>_count_related_objects</u></var> to more accurately count related objects passed into <var><u>save</u></var>.</li>
+			<li>Added methods <var><u>_save_itfk</u></var> and <var><u>_save_related_recursive</u></var> to assist in smarter saving.</li>
+			<li>The <var><u>_like</u></var> methods no longer rely on CodeIgniter's code.  This was required to allow query grouping to work.</li>
+			<li>Added a <var><u>_boolean</u></var> rule to aid in forcing values as <dfn>TRUE</dfn> or <dfn>FALSE</dfn>.  See <a href="../validation.html#Built-In">Validation</a>.</li>
+			<li>Updated the <a href="../extlist.html">extensions documentation</a> to break out each extension into its own page.</li>
+			<li>Added a <a href="../glossary.html">Glossary</a> to define some Datamapper ORM-specific terms.</li>
+			<li>Converted all <strong>LEFT JOIN</strong>s into <strong>LEFT OUTER JOIN</strong>s, to make Datamapper ORM more &ldquo;correct&rdquo;.  Please leave a comment on the forums if this causes any issues.</li>
+			<li>Moved older changelogs onto their own pages (see below).</li>
+			<li><a href="../manual.html">Color coded all example PHP code</a>, making examples (hopefully) easier to read.</li>
+		</ul>
+	</li>
+</ul>
+
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../../js/mootools.js"></script>
+<script type="text/javascript" src="../../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../../',
+			pagespath: '../',
+			last: 'changelog'
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>
