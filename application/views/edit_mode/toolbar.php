@@ -12,9 +12,6 @@ $url = site_url('admin/app').'/';
 $logout = site_url( 'logout' );
 
 $links = array(
-"toggle images"=>"vunsyToggle('img:not(.trigger img,.panel img)');",
-"toggle links"=>"vunsyToggle('a:not(.trigger,.panel a)');",
-"toggle tables"=>"vunsyToggle('table:not(.trigger table, .panel table)');",
 "toggle vunsy edit buttons"=>"vunsyToggle('.vunsyCtrl').toggle();"
 );
 $links_text = '';
@@ -27,7 +24,7 @@ foreach( $links as $key=>$value )
 		>{$key}</a>";
 }
 
-$XHR_URL = site_url('admin/app/editmode/'.(($ci->vunsy->edit_mode())?'viewmode':'editmode'));
+$XHR_URL = site_url('editmode/'.(($ci->vunsy->edit_mode())?'view':'edit'));
 
 add( <<<EOT
 
@@ -88,14 +85,8 @@ EOT
 <a href="<?=$url?>user manager" class="iframe" title="Users manager" >
 	<img src="<?=$local?>users.png" /> User manager
 </a>
-<a href="<?=$url?>section manager" class="iframe"  title="Sections manager">
+<a href="<?=site_url('sectionEditor')?>" class="iframe"  title="Sections manager">
 	<img src="<?=$local?>section.png" /> Sections manager
-</a>
-<a href="<?=$url?>Package manager" class="iframe" title="Package manager" >
-	<img src="<?=$local?>software.png" /> Package manager
-</a>
-<a href="<?=$url?>software manager" class="iframe"  title="Software manager">
-	<img src="<?=$local?>software.png" /> Software manager
 </a>
 
 <br />

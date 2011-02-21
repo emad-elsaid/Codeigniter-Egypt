@@ -12,9 +12,9 @@ class User extends DataMapper {
 	var $table = 'user';
 	var $ci;
 	
-    function User()
+    function __construct($id=NULL)
     {
-        parent::DataMapper();
+        parent::__construct($id);
         $this->ci =& get_instance();
     }
 	

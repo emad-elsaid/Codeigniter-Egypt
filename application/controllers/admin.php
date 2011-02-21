@@ -31,7 +31,7 @@ class Admin extends CI_Controller {
 	 */
 	function app( $appname='', $page='' )
 	{
-		$config = array( 'name'=>$appname,'page'=>$page );
+		$config = array( 'name'=>urldecode($appname),'page'=>urldecode($page) );
 		$this->load->library( 'app',$config);
 		echo $this->app->render();
 	}

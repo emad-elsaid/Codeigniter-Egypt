@@ -12,9 +12,9 @@ class Content extends DataMapper {
 	var $table = 'content'; 
 	var $ci;
 	
-    function Content()
+    function __construct($id=NULL)
     {
-        parent::DataMapper();
+        parent::__construct($id);
         $this->ci =& get_instance();
     }
 	
@@ -214,7 +214,7 @@ class Content extends DataMapper {
 		return $this->ci->load->view(
 						'edit_mode/insert',
 						array(
-'url'=> site_url( "admin/app/content Inserter/index/{$this->ci->vunsy->section->id}/{$this->id}/{$cell}/0" )
+						'url'=> site_url( "editor/chooser/{$this->ci->vunsy->section->id}/{$this->id}/{$cell}/0" )
 							),
 						TRUE
 					);
@@ -386,6 +386,8 @@ class Content extends DataMapper {
 		
 		$filters_array = array_map( 'trim', explode( "\n", $this->filter ) );
 		foreach( $filters_array as $item )
+		{
+			if( trim($item)!='' )
 			$output = $this->ci->load->view( 
 							'filter/'.$item, 
 							array( 
@@ -394,6 +396,7 @@ class Content extends DataMapper {
 							),
 							 TRUE
 						);
+		}
 
 		return $output;
 	}

@@ -12,9 +12,9 @@ class Section extends DataMapper {
 	var $table = 'section';
 	var $ci;
 	
-    function Section()
+    function __construct($id=NULL)
     {
-        parent::DataMapper();
+        parent::__construct($id);
         $this->ci =& get_instance();
     }
 	
@@ -88,7 +88,7 @@ class Section extends DataMapper {
 		}
 	
 	//delete this section
-	parent::delete($object);
+	parent::delete();
 		
 	}
 	

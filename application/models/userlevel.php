@@ -11,8 +11,8 @@
 class Userlevel extends DataMapper {
 	var $table = 'userlevel';
 	
-    function Userlevel()
+    function __construct($id=NULL)
     {
-        parent::DataMapper();
+        parent::__construct($id);
     }
 }

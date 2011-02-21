@@ -83,9 +83,9 @@ class Gui {
 		
 		//preparing the paramters
 		if(!isset($param['root']))
-			$param['root'] =  APPPATH;
+			$param['root'] =  './';
 		else
-			$param['root'] =  APPPATH.$param['root'];
+			$param['root'] =  './'.$param['root'];
 			
 		if( ! is_dir( $param['root'] ) ) 
 			$param['root'] = str_replace( '/','\\',$param['root'] );
@@ -148,7 +148,7 @@ EOT;
 	 */
 	function model( $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
-		$param['root'] = 'system/application/models/';
+		$param['root'] = APPPATH.'models/';
 		return $this->activeTree(site_url('remote/file'), $NAME, $value,$attr,$param,$style);
 	}
 	
@@ -167,7 +167,7 @@ EOT;
 	 */
 	function app( $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
 	{
-		$param['root'] = 'system/application/views/apps/';
+		$param['root'] = APPPATH.'views/apps/';
 		return $this->activeTree(site_url('remote/dir'), $NAME, $value,$attr,$param,$style);
 	}
 	
