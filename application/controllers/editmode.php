@@ -5,7 +5,7 @@ class Editmode extends Application {
 	function __construct(){
 		parent::__construct();
 		
-		$this->perm = 'root';
+		$this->perm = 'admin';
 
 		$this->name 	= "Edit mode Changer";
 		$this->author 	= "Emad Elsaid";

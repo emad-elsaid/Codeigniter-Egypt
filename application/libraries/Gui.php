@@ -778,7 +778,7 @@ add( <<<EOT
 	.filter .list { 
 		float: left;
 		background-color: #E9E9E9;
-		width:40%;
+		width:44%;
 	}
 </style>
 <script type="text/javascript">

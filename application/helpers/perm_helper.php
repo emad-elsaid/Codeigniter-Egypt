@@ -21,18 +21,18 @@ if ( ! function_exists('perm_array')){
 						'not'		=> '!'
 			),
 			'boolVars' => array(
-						'root'		=> intval($CI->vunsy->user->is_root()).'=1',
-						'logged'	=> intval($CI->vunsy->user->logged()).'=1',
-						'guest'	=> intval($CI->vunsy->user->is_guest()).'=1',
+						'admin'		=> intval($CI->ion_auth->is_admin()).'=1',
+						'logged'	=> intval($CI->ion_auth->logged_in()).'=1',
+						'guest'		=> intval(!$CI->ion_auth->logged_in()).'=1',
 						'view'		=> intval($CI->vunsy->view_mode()).'=1',
 						'edit'		=> intval($CI->vunsy->edit_mode()).'=1'
 			),
 			'vars' => array(
-						'level'	=> $CI->session->userdata('level'),
+						'level'		=> $CI->session->userdata('level'),
 						'user'		=> $CI->session->userdata('id'),
 						'section'	=> $CI->vunsy->section->id,
 						'day'		=> date('j'),
-						'month'	=> date('n'),
+						'month'		=> date('n'),
 						'year'		=> date('Y')
 			)
 		);
@@ -45,8 +45,8 @@ if ( ! function_exists('perm_chck')){
 	function perm_chck($perms=''){
 		
 		$CI =& get_instance();
-		// if the user is root then the result would be TRUE
-		if($CI->session->userdata('level')==-1) return TRUE;
+		// if the user is admin then the result would be TRUE
+		if($CI->ion_auth->is_admin()) return TRUE;
 		
 		$perm_vars = perm_array();
 		

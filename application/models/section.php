@@ -10,6 +10,7 @@
  */
 class Section extends DataMapper {
 	var $table = 'section';
+	var $default_order_by = array('sort');
 	var $ci;
 	
     function __construct($id=NULL)
@@ -262,8 +263,8 @@ class Section extends DataMapper {
 			$page_body->get_by_info( 'PAGE_BODY_LOCKED' );
 			$page_body_text = $page_body->render();
 			
-			// adding the root toolbar
-			if( $this->ci->vunsy->user->is_root())
+			// adding the admin toolbar
+			if( $this->ci->ion_auth->is_admin())
 					$page_body_text .= $this->ci->load->view( 'edit_mode/toolbar', '', TRUE );
 			
 			$doctype_text = doctype( $this->ci->config->item('doctype') );

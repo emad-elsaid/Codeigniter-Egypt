@@ -36,21 +36,13 @@ class Vunsy {
 			$this->section = $this->get_section();
 			
 			//getting the current user data
-			$this->user = new User();
-			$this->user->from_session();
+			$this->user = $CI->ion_auth->get_user();
 			
 			// getting level
-			$this->level = new Userlevel();
-			if( $this->user->is_root())
-			{
-				$this->level->id = -1;
-				$this->level->level = -1;
-				$this->level->name = 'root';
-			}
+			if( $CI->ion_auth->logged_in())
+				$this->level = $CI->ion_auth->get_group($this->user->group_id);
 			else
-			{
-				$this->level->get_by_id( $this->user->level );
-			}
+				$this->level = NULL;
 			
 			// getting the site mode
 			$this->mode = $CI->session->userdata('mode');
@@ -107,38 +99,20 @@ class Vunsy {
 	function installed()
 	{
 		$CI =& get_instance();
-		$CI->load->dbforge();
-		
-		// loading objects;
-		$CI->config->load('objects');
-		$tables = $CI->config->item('objects');
-		$tables_keys = array_keys($tables);
-		
-		foreach( $tables_keys as $item)
-		{
-			if(! $CI->db->table_exists( $item ))
-				return FALSE;
-		}
-		return TRUE;
+		return ( count($CI->db->list_tables())>0 );
 	}
 	
 	
 	function install()
 	{
 		$CI =& get_instance();
-		$CI->load->dbforge();
+		$script = explode( ';', file_get_contents('mysql.sql') );
+		$script = array_map( 'trim', $script );
+		$script = array_filter( $script, 'count');
+		foreach( $script as $line )
+			if( $line!='' )
+				$CI->db->query($line);
 		
-		// loading objects;
-		$CI->config->load('objects');
-		$tables = $CI->config->item('objects');
-		
-		foreach( $tables as $table=>$fields )
-		{
-				$CI->dbforge->add_field('id');
-				$CI->dbforge->add_field($fields);
-				$CI->dbforge->create_table($table);
-		}
-	
 		$CI->load->library('datamapper');
 		//adding the default section
 		$index = new Section();

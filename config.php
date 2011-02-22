@@ -1,7 +1,5 @@
 <?php
 $config_site_name		= "siteName";
-$config_root			= "root";
-$config_root_password		= "toor";
 
 $db_hostname			= "localhost";
 $db_database			= "vunsy";

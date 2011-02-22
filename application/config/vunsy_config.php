@@ -22,11 +22,3 @@ $config["dojoStyle"] = "claro";
 $config["css"] = array();
 $config["js"] = array();
 
-/*
- * root user has all previllages
- * he the designer of the website
- * all components ignores privilages when 
- * the current logged user is the root
- */
-$config["root"] = $config_root;
-$config["root_password"] = $config_root_password;

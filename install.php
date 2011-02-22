@@ -8,8 +8,6 @@ if( count($_POST)>0 )
 	$db_database = $_POST['db_database'];
 	$db_dbdriver = $_POST['db_dbdriver'];
 	$config_site_name = $_POST['config_site_name'];
-	$config_root = $_POST['config_root'];
-	$config_root_password = $_POST['config_root_password'];
 }
 else
 {
@@ -20,8 +18,6 @@ if( count($_POST)>0 )
 {
 	$config_file = '<?php
 $config_site_name		= "'.$config_site_name.'";
-$config_root			= "'.$config_root.'";
-$config_root_password		= "'.$config_root_password.'";
 
 $db_hostname			= "'.$db_hostname.'";
 $db_database			= "'.$db_database.'";
@@ -138,10 +134,6 @@ hr
 		<h1>Site config variables</h1>
 			<div class="label">You site name :</div>
 		<input type="text" value="<?=$config_site_name ?>" name="config_site_name" /><br />
-			<div class="label" >Adminstrator user name :</div>
-		<input type="text" value="<?=$config_root ?>" name="config_root" /><br />
-			<div class="label" >Adminstrator password :</div>
-		<input type="password" value="<?=$config_root_password ?>"  name="config_root_password" /><br />
 		<hr />
 		
 		<h1>Database variables</h1>

@@ -5,7 +5,7 @@ class SectionEditor extends Application {
 	function __construct(){
 		parent::__construct();
 		
-		$this->perm = 'root';
+		$this->perm = 'admin';
 
 		$this->name 	= "Section Editor";
 		$this->author 	= "Emad Elsaid";

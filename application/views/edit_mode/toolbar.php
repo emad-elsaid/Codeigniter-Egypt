@@ -8,8 +8,7 @@ add( 'jquery/theme/ui.all.css' );
 add( 'assets/fancybox/jquery.fancybox.js' );
 add( 'assets/fancybox/jquery.fancybox.css' );
 $local = base_url().'/assets/admin/';
-$url = site_url('admin/app').'/';
-$logout = site_url( 'logout' );
+$logout = site_url( 'auth/logout' );
 
 $links = array(
 "toggle vunsy edit buttons"=>"vunsyToggle('.vunsyCtrl').toggle();"
@@ -52,7 +51,7 @@ $(
 	function()
 	{
 		$("a.iframe").fancybox({
-			frameWidth: 700,
+			frameWidth: 600,
 			frameHeight: 450,
 		}); 
 	}
@@ -82,17 +81,17 @@ EOT
 
 
 <div class="panel">
-<a href="<?=$url?>user manager" class="iframe" title="Users manager" >
-	<img src="<?=$local?>users.png" /> User manager
-</a>
+
 <a href="<?=site_url('sectionEditor')?>" class="iframe"  title="Sections manager">
 	<img src="<?=$local?>section.png" /> Sections manager
+</a>
+<a href="<?=site_url('auth')?>" class="iframe" title="Users manager" >
+	<img src="<?=$local?>users.png" /> User manager
 </a>
 
 <br />
 <?=$links_text?>
 
-<br />
 <a href="javascript:admin_editmode_toolbar()" >
 	<img src="<?=$local?>editmode.png" title="Editmode toggle" /> Toggle Edit mode
 </a>

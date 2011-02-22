@@ -14,11 +14,11 @@
 <?php
 $replaces = array(
 "@site"		=> $ci->config->item('site_name'),
-"@user"		=> $ci->vunsy->user->name,
-"@section"		=> $ci->vunsy->section->name,
-"@level"		=> $ci->vunsy->level->name,
+"@user"		=> $ci->vunsy->user->username,
+"@section"	=> $ci->vunsy->section->name,
+"@level"	=> $ci->vunsy->level->name,
 "@day"		=> date('j'),
-"@month"		=> date('n'),
+"@month"	=> date('n'),
 "@year"		=> date('Y')
 );
 $formatted = $info->text;

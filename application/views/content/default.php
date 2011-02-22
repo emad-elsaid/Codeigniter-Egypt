@@ -38,7 +38,7 @@ add_css('jquery/theme/ui.all.css'); ?>
 <?php 
 $ci =& get_instance();
 $ci->load->library( 'gui' );
-echo $ci->gui->info( 'if you want to start just login using root and remove that layout and enjoy' )
+echo $ci->gui->info( 'if you want to start just login using admin and remove that layout and enjoy' )
 ?>
 <br>
 		<img src="<?= base_url() ?>assets/admin/logo.png" >
@@ -87,11 +87,11 @@ built on it some applications accessible by a task bar like facebook one</li>
 	</li>
 </ol>
 
-<b>[ Root default logon ]</b><br>
+<b>[ admin default logon ]</b><br>
 <ol>
 	<li>
-		user name: <b>root</b><br>
-		password: <b>toor</b>
+		user name: <b>admin@admin.com</b><br>
+		password: <b>password</b>
 	</li>
 	<li>
 		can change it from:<br>

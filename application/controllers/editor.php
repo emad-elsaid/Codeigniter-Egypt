@@ -5,8 +5,8 @@ class Editor extends Application {
 	function __construct()
 	{
 		parent::__construct();
-		
-		$this->perm = 'root';
+
+		$this->perm = 'admin';
 
 		$this->name 	= "Content Editor";
 		$this->author 	= "Emad Elsaid";
@@ -21,7 +21,7 @@ class Editor extends Application {
 								"data"=>"Data Editor"
 								);
 
-		$this->load->library('gui');
+								$this->load->library('gui');
 	}
 
 	function addaction() {
@@ -32,7 +32,8 @@ class Editor extends Application {
 			$c->get_by_id( $this->input->post( "id" ) );
 			$old_edit = $c->can_edit();
 		}else if( $this->input->post( "id" )===FALSE ){
-			$c->user = $this->vunsy->user->id;
+			$c->user = $this->ion_auth->get_user();
+			$c->user = $c->user->id;
 		}
 
 		$c->parent_section 	= $this->input->post( "parent_section" );
@@ -253,34 +254,34 @@ if( dijit.byId('info_form')!=undefined )
 	dojo.query("[name='info']")[0].value = dojo.toJson(dijit.byId('info_form').getValues());
 }
 
-$submit_script
+		$submit_script
 </script>
 EOT;
 
-if( $edit === FALSE )
-$button = $this->gui->button( '','Add Content'.$script );
-else
-$button = $this->gui->button( '','Edit Content'.$script );
+		if( $edit === FALSE )
+		$button = $this->gui->button( '','Add Content'.$script );
+		else
+		$button = $this->gui->button( '','Edit Content'.$script );
 
-if( $this->vunsy->user->is_root() )
-$input = 'permission';
-else{
-	$input = 'hidden';
-}
+		if( $this->ion_auth->is_admin() )
+		$input = 'permission';
+		else{
+			$input = 'hidden';
+		}
 
-if( $edit === FALSE ){
-	$p_cont = new Content($hidden['parent_content']);
+		if( $edit === FALSE ){
+			$p_cont = new Content($hidden['parent_content']);
 
-	if( $this->vunsy->user->is_root() )
-	$input = 'permission';
-	else
-	{
-		$input = 'hidden';
-	}
+			if( $this->ion_auth->is_admin() )
+			$input = 'permission';
+			else
+			{
+				$input = 'hidden';
+			}
 
-	$Basic_Form = 	$this->gui->form(
-	site_url('editor/addaction')
-	,array(
+			$Basic_Form = 	$this->gui->form(
+			site_url('editor/addaction')
+			,array(
 		"Title : " => $this->gui->textbox('title'),
 		"Show in subsections : " => $this->gui->checkbox('subsection'),
 		"View permissions : " => $this->gui->$input('view', $p_cont->view),
@@ -289,14 +290,14 @@ if( $edit === FALSE ){
 		"Delete permissions : " => $this->gui->$input('del', $p_cont->del),
 		"Filters : "=> $this->gui->select_sort( 'filter',$filters_list ),
 		"" => $button
-	)
-	,array( 'id'=>'basic_form' )
-	,$hidden
-	);
-}else{
-	$Basic_Form = 	$this->gui->form(
-	site_url('editor/addaction')
-	,array(
+			)
+			,array( 'id'=>'basic_form' )
+			,$hidden
+			);
+		}else{
+			$Basic_Form = 	$this->gui->form(
+			site_url('editor/addaction')
+			,array(
 		"Title : " => $this->gui->textbox('title', $con->title ),
 		"Show in subsections : " => $this->gui->checkbox('subsection','subsection', $con->subsection),
 		"View permissions : " => $this->gui->$input('view', $con->view),
@@ -305,120 +306,120 @@ if( $edit === FALSE ){
 		"Delete permissions : " => $this->gui->$input('del', $con->del),
 		"Filters : "=> $this->gui->select_sort( 'filter', $filters_list, $con->filter ),
 		"" => $button
-	)
-	,array( 'id'=>'basic_form' )
-	,$hidden
-	);
-}
-//===============================================
-/*OUR JSON OBJECT LIKE THAT
+			)
+			,array( 'id'=>'basic_form' )
+			,$hidden
+			);
+		}
+		//===============================================
+		/*OUR JSON OBJECT LIKE THAT
 
-{
-"text":{
-"type":"editor"
-,"label":"Text Label"
-,"default":"default text"
-}
-,"title":{
-"type":"textbox"
-}
-,"titlecolor":"information to display"
-}
-**/
+		{
+		"text":{
+		"type":"editor"
+		,"label":"Text Label"
+		,"default":"default text"
+		}
+		,"title":{
+		"type":"textbox"
+		}
+		,"titlecolor":"information to display"
+		}
+		**/
 
-$Plugin_Data = $this->load->view( 'content/'.$hidden['path'], array( "mode"=>"config" ), TRUE );
-$Plugin_Data = json_decode( $Plugin_Data );
-$Plugin_Form_Data = array();
+		$Plugin_Data = $this->load->view( 'content/'.$hidden['path'], array( "mode"=>"config" ), TRUE );
+		$Plugin_Data = json_decode( $Plugin_Data );
+		$Plugin_Form_Data = array();
 
-// starting to make the form if it is exists
-if( is_object( $Plugin_Data ) ){
-	// building each field
-	foreach( $Plugin_Data as $key=>$value ){
+		// starting to make the form if it is exists
+		if( is_object( $Plugin_Data ) ){
+			// building each field
+			foreach( $Plugin_Data as $key=>$value ){
 
-		// build the field depending on the type
-		if( is_object( $value ) ){
-			// this line gets the default value if in insertion mode and the
-			// stored value if in the edit mode
-			$cVal = '';
-			$cVal = ( $edit===FALSE )? @$value->default: @$info->$key;
-			$current_field = $this->gui->textbox( $key, @$value->default );
+				// build the field depending on the type
+				if( is_object( $value ) ){
+					// this line gets the default value if in insertion mode and the
+					// stored value if in the edit mode
+					$cVal = '';
+					$cVal = ( $edit===FALSE )? @$value->default: @$info->$key;
+					$current_field = $this->gui->textbox( $key, @$value->default );
 
-			switch( $value->type ){
-				case "textbox":
-					$current_field = $this->gui->textbox( $key, $cVal );
-					break;
-				case "textarea":
-					$current_field = $this->gui->textarea( $key, $cVal );
-					break;
-				case "color":
-					$current_field = $this->gui->color( $key, $cVal );
-					break;
-				case "date":
-					$current_field = $this->gui->date( $key, $cVal );
-					break;
-				case "editor":
-					$current_field = $this->gui->editor( $key, $cVal );
-					break;
-				case "file":
-					$current_field = $this->gui->file( $key, $cVal );
-					break;
-				case "file list":
-					$current_field = $this->gui->file_list( $key, $cVal );
-					break;
-				case "folder":
-					$current_field = $this->gui->folder( $key, $cVal );
-					break;
-				case "model":
-					$current_field = $this->gui->model( $key, $cVal );
-					break;
-				case "app":
-					$current_field = $this->gui->app( $key, $cVal );
-					break;
-				case "number":
-					$current_field = $this->gui->number( $key, $cVal );
-					break;
-				case "password":
-					$current_field = $this->gui->password( $key, $cVal );
-					break;
-				case "time":
-					$current_field = $this->gui->time( $key, $cVal );
-					break;
-				case "checkbox":
-					$current_field = $this->gui->checkbox( $key,$key, $cVal );
-					break;
-				case "dropdown":
-					$current_field = $this->gui->dropdown( $key, $cVal,
-					@$value->options );
-					break;
-				case "section":
-					$current_field = $this->gui->section( $key, $cVal );
-					break;
-				case "permission":
-					$current_field = $this->gui->permission( $key, $cVal );
-					break;
-				case "smalleditor":
-					$current_field = $this->gui->smalleditor( $key, $cVal );
-					break;
+					switch( $value->type ){
+						case "textbox":
+							$current_field = $this->gui->textbox( $key, $cVal );
+							break;
+						case "textarea":
+							$current_field = $this->gui->textarea( $key, $cVal );
+							break;
+						case "color":
+							$current_field = $this->gui->color( $key, $cVal );
+							break;
+						case "date":
+							$current_field = $this->gui->date( $key, $cVal );
+							break;
+						case "editor":
+							$current_field = $this->gui->editor( $key, $cVal );
+							break;
+						case "file":
+							$current_field = $this->gui->file( $key, $cVal );
+							break;
+						case "file list":
+							$current_field = $this->gui->file_list( $key, $cVal );
+							break;
+						case "folder":
+							$current_field = $this->gui->folder( $key, $cVal );
+							break;
+						case "model":
+							$current_field = $this->gui->model( $key, $cVal );
+							break;
+						case "app":
+							$current_field = $this->gui->app( $key, $cVal );
+							break;
+						case "number":
+							$current_field = $this->gui->number( $key, $cVal );
+							break;
+						case "password":
+							$current_field = $this->gui->password( $key, $cVal );
+							break;
+						case "time":
+							$current_field = $this->gui->time( $key, $cVal );
+							break;
+						case "checkbox":
+							$current_field = $this->gui->checkbox( $key,$key, $cVal );
+							break;
+						case "dropdown":
+							$current_field = $this->gui->dropdown( $key, $cVal,
+							@$value->options );
+							break;
+						case "section":
+							$current_field = $this->gui->section( $key, $cVal );
+							break;
+						case "permission":
+							$current_field = $this->gui->permission( $key, $cVal );
+							break;
+						case "smalleditor":
+							$current_field = $this->gui->smalleditor( $key, $cVal );
+							break;
+					}
+				}else if( is_string( $value ) == TRUE ){
+					$current_field = $this->gui->info( $value );
+				}
+
+				// checking the existance of label
+				if( isset( $value->label )==TRUE )
+				$Plugin_Form_Data[$value->label] = $current_field;
+				else
+				$Plugin_Form_Data[$key] = $current_field;
+
 			}
-		}else if( is_string( $value ) == TRUE ){
-			$current_field = $this->gui->info( $value );
 		}
 
-		// checking the existance of label
-		if( isset( $value->label )==TRUE )
-		$Plugin_Form_Data[$value->label] = $current_field;
-		else
-		$Plugin_Form_Data[$key] = $current_field;
-
-	}
-}
-
-if( count($Plugin_Form_Data) > 0 ){
-	$Plugin_Form = $this->gui->form( '#', $Plugin_Form_Data, array("id"=>"info_form"));
-	$this->print_text( $this->gui->accordion( array("Basic Data"=>$Basic_Form,"Plugin Data"=>$Plugin_Form) ));
-}else{
-	$this->print_text( $this->gui->accordion( array("Basic Data"=>$Basic_Form) ));
-}
+		if( count($Plugin_Form_Data) > 0 ){
+			$Plugin_Form = $this->gui->form( '#', $Plugin_Form_Data, array("id"=>"info_form"));
+			$this->print_text( $this->gui->accordion( array("Basic Data"=>$Basic_Form,"Plugin Data"=>$Plugin_Form) ));
+		}else{
+			$this->print_text( $this->gui->accordion( array("Basic Data"=>$Basic_Form) ));
+		}
 
 	}
 
@@ -434,7 +435,7 @@ if( count($Plugin_Form_Data) > 0 ){
 				$children->delete_all();
 				$this->add_info( ' Children deleted' );
 			}else{
-				show_error( 'permission denied! please check your root adminstrator' );
+				show_error( 'permission denied! please check your adminstrator' );
 			}
 		}else{
 			show_error( 'Content not found' );
@@ -450,7 +451,7 @@ if( count($Plugin_Form_Data) > 0 ){
 				$c->delete();
 				$this->add_info( 'Content deleted' );
 			}else{
-				show_error( 'permission denied! please check your root adminstrator' );
+				show_error( 'permission denied! please check your adminstrator' );
 			}
 		}else{
 			show_error( 'Content not found' );
@@ -471,7 +472,7 @@ if( count($Plugin_Form_Data) > 0 ){
 					$this->add_info( 'Content i already the last' );
 				}
 			}else{
-				show_error( 'permission denied! please check your root adminstrator' );
+				show_error( 'permission denied! please check your adminstrator' );
 			}
 		}else{
 			show_error( 'Content not found' );
@@ -568,11 +569,7 @@ EOT
 
 		$parent_content = new Content($content_ins->parent_content);
 
-		$user = new User();
-		if( $content_ins->user == -1 )
-		$user->name = 'root';
-		else
-		$user->get_by_id( $content_ins->user );
+		$user =  $this->ion_auth->get_user($content_ins->user);
 
 		$parent_section = new Section($content_ins->parent_section);
 		$children = new Content();
@@ -584,7 +581,7 @@ EOT
 				'Content path'=>$content_ins->path,
 				'Section'=> empty($parent_section->name) ? 'Index':$parent_section->name,
 				'Subsections'=> $content_ins->subsection ? 'Yes':'No',
-				'User added it'=> $user->name,
+				'User added it'=> $user->username,
 				'Parent'=>$parent_content->path,
 				'Cell'=>$content_ins->cell,
 				'Sort'=>$content_ins->sort,
@@ -604,7 +601,7 @@ tr {
 }
 </style>
 EOT
-);
+		);
 	}
 
 	function recycle_children($id){
@@ -622,7 +619,7 @@ EOT
 				}
 				$this->add_info( 'Children has been removed to recycle bin' );
 			}else{
-				show_error( 'permission denied! please check your root adminstrator' );
+				show_error( 'permission denied! please check your adminstrator' );
 			}
 		}else{
 			show_error('Content not found');
@@ -641,7 +638,7 @@ EOT
 				$c->save();
 				$this->add_info( 'Content has been removed to recycle bin' );
 			}else{
-				show_error( 'permission denied! please check your root adminstrator' );
+				show_error( 'permission denied! please check your adminstrator' );
 			}
 		}else{
 			show_error( 'Content not found' );
@@ -679,7 +676,7 @@ EOT
 					$this->add_info( 'Content i already the first' );
 				}
 			}else{
-				show_error( 'permission denied! please check your root adminstrator' );
+				show_error( 'permission denied! please check your adminstrator' );
 			}
 		}else{
 			show_error( 'Content not found' );

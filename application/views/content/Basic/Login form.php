@@ -20,7 +20,7 @@
 
 <?php }else if( $mode=='view' ){
 //the real content of your plugin goes here ?>
-<?php if( $ci->vunsy->user->is_guest() or $info->replace==FALSE ): ?>
+<?php if( !$ci->ion_auth->logged_in() or $info->replace==FALSE ): ?>
 	<?php
 		if( $info->dojo ){
 			$ci->load->library('gui');
@@ -44,6 +44,6 @@
 
 <?=$submit_button?></form>
 <?php else: ?>
-<a href="<?=site_url('logout')?>" ><?=str_replace( '@user', $ci->vunsy->user->name, $info->logout )?></a>
+<a href="<?=site_url('logout')?>" ><?=str_replace( '@user', $ci->vunsy->user->username, $info->logout )?></a>
 <?php endif; ?>
 <?php } ?>
