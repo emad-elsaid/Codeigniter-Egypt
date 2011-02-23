@@ -36,6 +36,7 @@ class Vunsy {
 			$this->section = $this->get_section();
 			
 			//getting the current user data
+			$CI->load->library('ion_auth');
 			$this->user = $CI->ion_auth->get_user();
 			
 			// getting level
@@ -112,30 +113,6 @@ class Vunsy {
 		foreach( $script as $line )
 			if( $line!='' )
 				$CI->db->query($line);
-		
-		$CI->load->library('datamapper');
-		//adding the default section
-		$index = new Section();
-		$index->parent_section = 0;
-		$index->sort = 0;
-		$index->save();
-		
-		$page_body = new Content();
-		$page_body->sub_section = intval(TRUE);
-		$page_body->cell = 0;
-		$page_body->sort = 0;
-		$page_body->parent_section = $index->id;
-		$page_body->info = 'PAGE_BODY_LOCKED';
-		$page_body->save();
-		
-		$default_layout = new Content();
-		$default_layout->path = 'default.php';
-		$default_layout->parent_content = 1;
-		$default_layout->parent_section = 1;
-		$default_layout->subsection = 0;
-		$default_layout->cell = 0;
-		$default_layout->sort = 0;
-		$default_layout->save();
 	}
 	
 	function css_text()

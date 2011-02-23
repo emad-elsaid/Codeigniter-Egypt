@@ -9,7 +9,6 @@
  * @link			http://github.com/blazeeboy/vunsy
  */
 class Content extends DataMapper {
-	var $table = 'content';
 	var $default_order_by = array('sort');
 	var $ci;
 
@@ -294,23 +293,6 @@ class Content extends DataMapper {
 	}
 
 	/***************************************
-	 * delete all children objects and
-	 * then delete the layout, this should clean the website
-	 * of all the wedgits that has no relation
-	 ***************************************/
-	function delete( $object='' )
-	{
-		if( empty($object) )
-		{
-			$c = $this->children();
-			foreach( $c as $item )
-			$item->delete();
-		}
-		$this->deattach();
-		return parent::delete( $object );
-	}
-
-	/***************************************
 	 * query about the children of the current parent
 	 * you can specify the section or the cell or
 	 * simply query all the children of that parent or all
@@ -330,7 +312,7 @@ class Content extends DataMapper {
 		 *******************************/
 
 		// selecting all the content of that parent
-		$sql_stat = "SELECT * FROM `content` WHERE `parent_content`= {$this->id}";
+		$sql_stat = "SELECT * FROM `contents` WHERE `parent_content`= {$this->id}";
 			
 		// filter the objects to the requested cell
 		if( ! is_null( $cell ) )
@@ -364,7 +346,7 @@ class Content extends DataMapper {
 		$children->query($sql_stat);
 
 		// returning the final array of children
-		return $children->all;
+		return $children;
 	}
 
 	/**

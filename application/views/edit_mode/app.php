@@ -81,11 +81,6 @@
 	  
 <!-- \\\\\\\\\\\\\\\\\\\That is the PAGE HTML/////////////////// -->
 		<div dojoType="dijit.layout.ContentPane" region="center" id="mainSplit">
-		
-			<?php if($app->show_title){ ?>
-			<div class="dijitDialogTitleBar" >&nbsp;<?=$app->page?></div>
-			<?php } ?>
-		
 			<?= $app->error_text() ?>
 			<?= $app->info_text() ?>
 			<?= $content ?>

@@ -169,8 +169,8 @@ EOT;
 
 		$recycle = new Content();
 		$recycle->get_by_parent_content(0);
-		if( count($recycle->all) >0 ){
-			foreach ( $recycle->all as $item ){
+		if( $recycle->count >0 ){
+			foreach ( $recycle as $item ){
 				$s = new Section($item->parent_section);
 				$recycle_array->{$item->id} = $item->path.'('.$s->name.')';
 			}
@@ -585,7 +585,7 @@ EOT
 				'Parent'=>$parent_content->path,
 				'Cell'=>$content_ins->cell,
 				'Sort'=>$content_ins->sort,
-				'Children count'=>count($children->all)
+				'Children count'=>$children->result_count()
 		);
 
 		$this->add_info( 'Content information and the containers' );
@@ -612,7 +612,7 @@ EOT
 			if( $c->can_delete() ){
 				$children = new Content();
 				$children->get_by_parent_content($c->id);
-				foreach ($children->all as $child ){
+				foreach ($children as $child ){
 					$child->deattach();
 					$child->parent_content = 0;
 					$child->save();

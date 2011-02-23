@@ -24,7 +24,7 @@ function remove_denied($sec )
 	return $sec->can_view();
 }
 
-$secs = $sections->all;
+$secs = $sections;
 $secs = array_filter( $secs, 'remove_denied' );
 $hyperLinks = array();
 

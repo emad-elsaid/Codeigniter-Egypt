@@ -47,7 +47,7 @@ $children->where( 'parent_section', $ci->vunsy->section->id );
 // generate pagination
 $ci->load->library('pagination');
 $config['base_url'] 			= site_url( $ci->vunsy->section->id.'/'.$info->identifier );
-$config['total_rows'] 			= $children->count();
+$config['total_rows'] 			= $children->result_count();
 $config['per_page'] 			= $info->limit;
 if( $info->num_links>0 )
 	$config['num_links'] 			= $info->num_links;
@@ -94,9 +94,9 @@ $text = '';
 if( $info->page_up )
 	$text .= $links;
 
-if( count( $children->all ) > 0 )
+if( $children->result_count() > 0 )
 {
-	foreach ( $children->all as $child ) 
+	foreach ( $children as $child ) 
 	{
 		$text .= $child->render();
 	}

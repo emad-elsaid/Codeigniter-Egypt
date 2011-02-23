@@ -42,7 +42,7 @@ class SectionEditor extends Application {
 		$p = new Section();
 		$p->get_by_id( $s->parent_section );
 		$p->deattach_section( $s );
-		$s->delete_with_sub();
+		$s->delete();
 		
 		redirect( 'sectionEditor' );
 	}
@@ -95,7 +95,7 @@ ul{
 </style>
 EOT
 		);
-		foreach( $sections->all as $item ){
+		foreach( $sections as $item ){
 			$item->e = anchor( 'Edit', site_url( 'sectionEditor/edit' ) );
 			$item->d = anchor( 'Delete', site_url( 'sectionEditor/delete' ) );
 		}
@@ -136,10 +136,10 @@ EOT
 			$c->order_by( 'sort', 'asc' );
 			$c->get();
 			
-			if( count($c->all) > 0 ){
+			if( $c->result_count() > 0 ){
 				$output .= "<ul>";
 				
-				foreach( $c->all as $item ){
+				foreach( $c as $item ){
 					$output .= printS( $item->id );
 					$output .= "<li>".addS( $id, $item->sort+1 )."</li>";
 				}

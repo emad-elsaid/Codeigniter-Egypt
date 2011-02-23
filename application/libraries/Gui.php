@@ -436,7 +436,7 @@ EOT;
 				$sec = new Section();
 				$sec->order_by( 'sort', 'asc' );
 				$sec->get_by_parent_section( $id );
-				foreach( $sec->all as $item )
+				foreach( $sec as $item )
 				{
 					$op[ 's'.$item->id ] = $spacer.$item->name;
 					$op = array_merge( $op, rec_section( $item->id, $spacer.$spacer ) );

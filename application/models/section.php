@@ -9,7 +9,6 @@
  * @link	http://github.com/blazeeboy/vunsy
  */
 class Section extends DataMapper {
-	var $table = 'section';
 	var $default_order_by = array('sort');
 	var $ci;
 	
@@ -46,7 +45,7 @@ class Section extends DataMapper {
 			//$s->where( 'parent_section', $this->parent_section );
 			$s->get();
 			
-			foreach( $s->all as $item )
+			foreach( $s as $item )
 			{
 				$item->sort++;
 				$item->save();
@@ -60,21 +59,8 @@ class Section extends DataMapper {
 	/**
 	 * delete that section with all it's subsections
 	 **/
-	function delete_with_sub( )
-	{
-		// getting the subsections
-		$c = new Section();
-		$c->where( 'parent_section', $this->id );
-		$c->get();
-		// delete all subsections relations
-		foreach( $c->all as $item )
-			$item->delete_with_sub();
-			
-		// delete all children
-		$cont = new Content();
-		$cont->where( 'parent_section', $this->id)->get();
-		$cont->delete_all();
-		
+	function delete( $object = '', $related_field = '' )
+	{	
 		// update all the sections sort after that section
 		// that in the same parent section
 		$s = new Section();
@@ -82,14 +68,14 @@ class Section extends DataMapper {
 		$s->where( 'parent_section', $this->parent_section );
 		$s->get();
 		
-		foreach( $s->all as $item )
+		foreach( $s as $item )
 		{
 			$item->sort--;
 			$item->save();
 		}
 	
-	//delete this section
-	parent::delete();
+		//delete this section
+		parent::delete( $object, $related_field );
 		
 	}
 	
@@ -142,7 +128,7 @@ class Section extends DataMapper {
 			$cont->where( 'cell', $cell );// same cell
 			$cont->where( 'sort >=', $sort) ;//greater sort
 			$cont->get();//get them to process
-			foreach( $cont->all as $item )
+			foreach( $cont as $item )
 			{
 				$item->sort++;
 				$item->save();
@@ -172,7 +158,7 @@ class Section extends DataMapper {
 			$cont->where( 'parent_section', $this->id );//same section
 			$cont->where( 'sort >=', $section->sort );//greater sort
 			$cont->get();//get them to process
-			foreach( $cont->all as $item )
+			foreach( $cont as $item )
 			{
 				$item->sort++;
 				$item->save();
@@ -202,7 +188,7 @@ class Section extends DataMapper {
 		$cont->where( 'cell', $object->cell );// same cell
 		$cont->where( 'sort >', $object->sort );//greater sort
 		$cont->get();//get them to process
-		foreach( $cont->all as $item )
+		foreach( $cont as $item )
 		{
 			$item->sort--;
 			$item->save();
@@ -226,7 +212,7 @@ class Section extends DataMapper {
 		$cont->where( 'parent_section', $section->parent_section );//same section
 		$cont->where( 'sort >', $section->sort );//greater sort
 		$cont->get();//get them to process
-		foreach( $cont->all as $item )
+		foreach( $cont as $item )
 		{
 			$item->sort--;
 			$item->save();
