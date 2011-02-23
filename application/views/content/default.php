@@ -53,9 +53,9 @@ echo $ci->gui->info( 'if you want to start just login using admin and remove tha
 <ul>
 	<li>CodeIgniter PHP framework</li>
 	<li>Datamapper</li>
+	<li>Ion-Auth</li>
 	<li>Dojo+Dijit</li>
 	<li>Jquery</li>
-	<li>KFM file browser</li>
 </ul>
 <br>
 <b>[The idea]</b><br>
