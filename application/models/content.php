@@ -206,9 +206,7 @@ class Content extends DataMapper {
 	{
 		return $this->ci->load->view(
 						'edit_mode/insert',
-		array(
-						'url'=> site_url( "editor/chooser/{$this->ci->vunsy->section->id}/{$this->id}/{$cell}/0" )
-		),
+		array('url'=> site_url( "editor/chooser/{$this->ci->vunsy->section->id}/{$this->id}/{$cell}/0" )),
 		TRUE
 		);
 	}
@@ -248,7 +246,7 @@ class Content extends DataMapper {
 			$layout_content[ $i ] = '';
 
 			// adding the cell (add button)
-			if( $this->ci->vunsy->mode()=='edit' AND count( $c_children )==0 AND $this->can_addin() )
+			if( $this->ci->vunsy->mode()=='edit' AND $c_children->result_count()==0 AND $this->can_addin() )
 			$layout_content[ $i ] = $this->add_button( $i );
 
 			// rendering the cell content
