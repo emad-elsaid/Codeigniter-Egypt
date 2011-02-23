@@ -162,16 +162,6 @@ EOT;
 	}
 	
 	/**
-	 * generate application chooser HTML using activeTree with connector 
-	 * controller file remote/file function
-	 */
-	function app( $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
-	{
-		$param['root'] = APPPATH.'views/apps/';
-		return $this->activeTree(site_url('remote/dir'), $NAME, $value,$attr,$param,$style);
-	}
-	
-	/**
 	 * a color chooser field linked with a dojo color picker dialog
 	 */
 	function color( $NAME='',$value='', $attr=array() )

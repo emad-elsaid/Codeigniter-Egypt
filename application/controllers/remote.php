@@ -11,7 +11,7 @@
  * @author	Emad Elsaid
  * @link	http://github.com/blazeeboy/vunsy
  */
-class Remote extends CI_Controller {
+class Remote extends Application {
 	
 	/**
 	 * that controller serves the AJAX purpose
@@ -20,6 +20,8 @@ class Remote extends CI_Controller {
 	 * */
 	function __construct(){
 		parent::__construct();
+		$this->perm = 'admin';
+		$this->ajax = true;
 	}
 
 
@@ -50,77 +52,6 @@ class Remote extends CI_Controller {
 						);
 		
 	}
-	/* that's a model data grapper using ajax
-	 * you can use it to get data from model
-	 * send your paramters using POST method
-	 * @model : the model name you want to invstigate
-	 * @function : the function member you want to execute
-	 * @param : a JSON text with the paramters
-	 */
-	/*function model()
-	{
-		
-		//getting all the paramters
-		$mod = $this->input->post( 'model' );
-		$func = $this->input->post( 'function' );
-		$param = $this->input->post( 'param' );
-		$param = json_decode( $param );
-		$modName = split( '/', $mod );
-		$modName = $modName[-1] ;
-		
-		//load the model if not loaded
-		if(! isset($this->$modName) )
-		{
-			$this->load->model( $mod );
-		}
-		
-		$expression = "$result = $this->".$mod."->".$func."(".implode( ',',$param).");";
-		eval( $expression );
-		if ( isset( $result ) )
-			return json_encode($result);
-		
-	}*/
-	
-	/*function orm()
-	{
-		$mod = $this->input->post( 'model' );
-		$id = $this->input->post( 'id' );
-		$func = $this->input->post( 'function' );
-		$param = $this->input->post( 'param' );
-		$param = json_decode( $param );
-		echo( "cxvxcvxcvcxv" );
-		$obj = new $mod();
-		$obj->get_by_id( $id );
-		if( $obj->exists() )
-		{
-			$expression = "$result = $obj->".$func."(".implode( ',',$param).");";
-			eval( $expression );
-			if( isset( $result ) )
-				return json_encode( $result );
-		}
-	}*/
-	
-	
-	/*
-	 * loads returns the content information field
-	 * @param $id: the content id you want to retrieve it's information
-	 * you can use it via AJAX using the URL : site_url('remote/content/20');
-	 * */
-	/** i disabled it so that it could be considered as a security hole **/
-	/*function remote( $id=0 )
-	{
-		
-		if( $id==0 )
-			$id = $this->uri->post('id');
-			
-		if( $id != FALSE && $id != 0 && $id != '' )
-		{
-			$cont = new Content();
-			$cont->get_by_id( $id );
-			$this->load->view( 'text', array( 'text'=> $cont->info ) );
-		}
-	}
-	*/
 	
 	/**
 	 * that function you don't have to use it at all
@@ -129,8 +60,7 @@ class Remote extends CI_Controller {
 	 * */
 	function file()
 	{
-		if( ! perm_chck( 'edit' ) ) show_error("permission denied");
-		
+				
 		$this->load->helper('directory');
 		
 		$root = '';

@@ -372,9 +372,6 @@ EOT;
 						case "model":
 							$current_field = $this->gui->model( $key, $cVal );
 							break;
-						case "app":
-							$current_field = $this->gui->app( $key, $cVal );
-							break;
 						case "number":
 							$current_field = $this->gui->number( $key, $cVal );
 							break;
