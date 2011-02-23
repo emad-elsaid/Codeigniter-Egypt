@@ -100,7 +100,7 @@ class Content extends DataMapper {
 	function container( $text='' )
 	{
 
-		if( $this->ci->vunsy->edit_mode() AND $this->info!='PAGE_BODY_LOCKED' )
+		if( $this->ci->vunsy->mode()=='edit' AND $this->info!='PAGE_BODY_LOCKED' )
 		{
 			$text = $this->ci->load->view('edit_mode/container'
 			,array(
@@ -248,7 +248,7 @@ class Content extends DataMapper {
 			$layout_content[ $i ] = '';
 
 			// adding the cell (add button)
-			if( $this->ci->vunsy->edit_mode() AND count( $c_children )==0 AND $this->can_addin() )
+			if( $this->ci->vunsy->mode()=='edit' AND count( $c_children )==0 AND $this->can_addin() )
 			$layout_content[ $i ] = $this->add_button( $i );
 
 			// rendering the cell content

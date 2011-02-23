@@ -35,6 +35,9 @@ class Application extends CI_Controller {
 	
 	public $pages = array();
 	
+	/**
+	 * @var String : the current page title
+	 */
 	public $page = '';
 	
 	/**
@@ -73,6 +76,7 @@ class Application extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->library('vunsy');
 	}
 	
 	function _remap($method, $params = array())

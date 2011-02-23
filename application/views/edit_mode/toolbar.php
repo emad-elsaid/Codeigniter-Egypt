@@ -23,7 +23,7 @@ foreach( $links as $key=>$value )
 		>{$key}</a>";
 }
 
-$XHR_URL = site_url('editmode/'.(($ci->vunsy->edit_mode())?'view':'edit'));
+$XHR_URL = site_url('editmode/'.(($ci->vunsy->mode()=='edit')?'view':'edit'));
 
 add( <<<EOT
 

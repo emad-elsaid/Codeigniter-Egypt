@@ -13,7 +13,7 @@
  */
 class Gui {
 	
-	function Gui()
+	function __construct()
 	{
 		$CI =& get_instance();
 		$CI->load->helper('form');

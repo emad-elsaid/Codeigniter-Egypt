@@ -106,7 +106,7 @@ else
 	$ci->load->library('gui');
 	$c = new Content();
 	$c->get_by_id( $id );
-	if( $c->can_addin() and $ci->vunsy->edit_mode() )
+	if( $c->can_addin() and $ci->vunsy->mode()=='edit' )
 		$text .= $c->add_button(0);
 	if( !empty( $info->empty_msg ) )
 		$text .= $ci->gui->info( $info->empty_msg );
