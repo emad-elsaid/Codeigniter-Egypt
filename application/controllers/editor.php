@@ -54,11 +54,11 @@ class Editor extends Application {
 		$sec 	= new Section($c->parent_section);
 		$p 		= new Content($c->parent_content);
 
-		if(		( $p->can_addin() AND  $this->input->post( "id" )===FALSE )
-		OR  ( $this->input->post( "id" )!==FALSE AND $old_edit ) ){
+		if(	( $p->can_addin() AND  $this->input->post( "id" )===FALSE )
+			OR  ( $this->input->post( "id" )!==FALSE AND $old_edit ) ){
 
 			if( $this->input->post( "id" )===FALSE ){
-				$c->attach( $sec, $p, $c->cell, $c->sort );
+				$sec->attach( $c );
 				$this->add_info( 'Content added' );
 			}else{
 				$c->save();
@@ -168,8 +168,8 @@ EOT;
 		));
 
 		$recycle = new Content();
-		$recycle->get_by_parent_content(0);
-		if( $recycle->count >0 ){
+		$recycle->where('parent_content',NULL)->where('id !=',1)->get();
+		if( $recycle->result_count() >0 ){
 			foreach ( $recycle as $item ){
 				$s = new Section($item->parent_section);
 				$recycle_array->{$item->id} = $item->path.'('.$s->name.')';
@@ -443,8 +443,10 @@ EOT;
 	function delete($id){
 
 		$c = new Content($id);
+		$sec = new Section($c->parent_section);
 		if( $c->exists() ){
 			if( $c->can_delete() ){
+				$sec->deattach($c);
 				$c->delete();
 				$this->add_info( 'Content deleted' );
 			}else{
@@ -610,8 +612,9 @@ EOT
 				$children = new Content();
 				$children->get_by_parent_content($c->id);
 				foreach ($children as $child ){
-					$child->deattach();
-					$child->parent_content = 0;
+					$sec = new Section($child->parent_section);
+					$sec->deattach($child);
+					$child->parent_content = NULL;
 					$child->save();
 				}
 				$this->add_info( 'Children has been removed to recycle bin' );
@@ -627,11 +630,11 @@ EOT
 	function recycle($id){
 
 		$c = new Content($id);
-
+		$sec = new Section($c->parent_section);
 		if( $c->exists() ){
 			if( $c->can_delete() ){
-				$c->deattach();
-				$c->parent_content = 0;
+				$sec->deattach($c);
+				$c->parent_content = NULL;
 				$c->save();
 				$this->add_info( 'Content has been removed to recycle bin' );
 			}else{
@@ -653,7 +656,7 @@ EOT
 		$p = new Content($c->parent_content);
 
 		if(	$p->can_addin() ){
-			$c->attach( $sec, $p, $c->cell, $c->sort );
+			$sec->attach( $c );
 			$this->add_info( 'Content restored' );
 			$c->save();
 		}else{

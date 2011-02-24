@@ -12,38 +12,9 @@ class Content extends DataMapper {
 	var $default_order_by = array('sort');
 	var $ci;
 
-	function __construct($id=NULL)
-	{
+	function __construct($id=NULL){
 		parent::__construct($id);
 		$this->ci =& get_instance();
-	}
-
-	/**
-	 * attach the object to a section and a parent content
-	 * and a cell and an order as sort this will make it as a child
-	 * for those parents
-	 * @param	$section: parent section object or a section ID
-	 * @param	$parent: content parent to connect that object to is as a child
-	 * @param	$cell: the parent cell that will be the container of that object
-	 * @param	$sort: the order of object in the list of siblings in that cell starts from zero the top
-	 **/
-	function attach( $section=NULL, $parent=NULL, $cell=NULL, $sort=NULL)
-	{
-		// getting section object
-		if( $section==NULL )
-		$section = new Section($this->parent_section);
-
-		$section->attach( $this, $parent, $cell, $sort );
-	}
-
-	/**
-	 * deattach that content from it's parent and section
-	 **/
-	function deattach()
-	{
-		$sec = new Section();
-		$sec->get_by_id($this->parent_section );
-		$sec->deattach( $this );
 	}
 
 	/**
@@ -51,13 +22,12 @@ class Content extends DataMapper {
 	 * returns true if it moved and false if
 	 * faild to move it ... in case it's the first one
 	 **/
-	function move_up()
-	{
-		if( $this->sort > 0 and isset($this->id) )
-		{
-			$this->deattach();
+	function move_up(){
+		$sec = new Section($this->parent_section);
+		if( $this->sort > 0 and isset($this->id) ){
+			$sec->deattach($this);
 			$this->sort--;
-			$this->attach();
+			$sec->attach($this);
 			return TRUE;
 		}
 
@@ -69,8 +39,7 @@ class Content extends DataMapper {
 	 * moves the current content down in it's cell
 	 * return true on success and false on failure
 	 **/
-	function move_down()
-	{
+	function move_down(){
 		$cont = new Content();
 		//$cont->where('parent_section',$this->parent_section );//same section
 		$cont->where('parent_content',$this->parent_content );//same parent
@@ -80,11 +49,11 @@ class Content extends DataMapper {
 
 		// if that content object exists then that content is not the last
 		// and we'll move it down
-		if( $cont->exists() )
-		{
-			$this->deattach();
+		$sec = new Section($this->parent_section);
+		if( $cont->exists() ){
+			$sec->deattach($this);
 			$this->sort ++;
-			$this->attach();
+			$sec->attach($this);
 			return TRUE;
 		}
 
@@ -97,14 +66,12 @@ class Content extends DataMapper {
 	 *
 	 * returns the edit button + the content HTML
 	 **/
-	function container( $text='' )
-	{
+	function container( $text='' ){
 
-		if( $this->ci->vunsy->mode()=='edit' AND $this->info!='PAGE_BODY_LOCKED' )
-		{
+		if( $this->ci->vunsy->mode()=='edit' AND $this->info!='PAGE_BODY_LOCKED' ){
 			$text = $this->ci->load->view('edit_mode/container'
 			,array(
-					'text'=>$text
+			'text'=>$text
 			,'path'=>$this->path
 			,'parent'=>$this->parent_content
 			,'id'=>$this->id
@@ -124,16 +91,14 @@ class Content extends DataMapper {
 	 * true if the user can view that content
 	 * false if the user not permitted to see it
 	 **/
-	function can_view()
-	{
+	function can_view(){
 		return  (empty($this->view)  or perm_chck( $this->view ));
 	}
 
 	/**
 	 * returns if the user can edit the content or not
 	 **/
-	function can_edit()
-	{
+	function can_edit(){
 		return perm_chck( $this->edit );
 	}
 
@@ -141,16 +106,14 @@ class Content extends DataMapper {
 	 * returns if the user can add content in that
 	 * content or not
 	 **/
-	function can_addin()
-	{
+	function can_addin(){
 		return perm_chck( $this->addin );
 	}
 
 	/**
 	 * returns if the user can delete it or not
 	 **/
-	function can_delete()
-	{
+	function can_delete(){
 		return perm_chck( $this->del );
 	}
 
@@ -160,10 +123,9 @@ class Content extends DataMapper {
 	 * the layout should return the number of cells
 	 * if the layout is not exist it'll return 1 cell
 	 **/
-	function cells()
-	{
-		if( $this->path !='' )
-		{
+	function cells(){
+
+		if( $this->path !='' ){
 			$c = $this->load->view(
 						'content/'.$this->path,
 			array(
@@ -184,13 +146,11 @@ class Content extends DataMapper {
 	/**
 	 * get the content information as an object
 	 **/
-	function get_info()
-	{
+	function get_info(){
+
 		$info = json_decode( $this->info );
-		if( is_object($info) )
-		{
-			foreach( $info as $key=>$value )
-			{
+		if( is_object($info) ){
+			foreach( $info as $key=>$value ){
 				if( is_array( $value ) )
 				$info->$key = intval(count($value)==1);
 			}
@@ -202,8 +162,8 @@ class Content extends DataMapper {
 	 * generate add button to that cell
 	 * in this content object
 	 **/
-	function add_button( $cell='' )
-	{
+	function add_button( $cell='' ){
+
 		return $this->ci->load->view(
 						'edit_mode/insert',
 		array('url'=> site_url( "editor/chooser/{$this->ci->vunsy->section->id}/{$this->id}/{$cell}/0" )),
@@ -217,8 +177,7 @@ class Content extends DataMapper {
 	 * taking in consideration the edit mode to display
 	 * the control buttons in every cell
 	 **/
-	function render()
-	{
+	function render(){
 
 		/***************************************
 		 *  the main render code
@@ -238,8 +197,7 @@ class Content extends DataMapper {
 		/***************************************
 		 *  starting to render the cells
 		 ***************************************/
-		for( $i=0; $i<$cell_number; $i++ )
-		{
+		for( $i=0; $i<$cell_number; $i++ ){
 			// getting the content in that cell and current section
 			$c_children = $this->children( $this->ci->vunsy->get_section(), $i );
 
@@ -259,22 +217,19 @@ class Content extends DataMapper {
 		 * if the layout exists render the layout with the corresponding
 		 * cells text if not just pass the first cell value
 		 **/
-		if( !empty($this->path) and !is_null($this->path) )
-		{
+		if( !empty($this->path) and !is_null($this->path) ){
 			$text = $this->load->view(
 								'content/'.$this->path,
 			array(
-										'id'=>$this->id,
-										'ci'=> $this->ci,
-										'cell'=> $layout_content,
-										'info'=>$this->get_info(),
-										'mode'=> 'view'
-										),
-										TRUE
-										);
-		}
-		else
-		{
+					'id'=>$this->id,
+					'ci'=> $this->ci,
+					'cell'=> $layout_content,
+					'info'=>$this->get_info(),
+					'mode'=> 'view'
+					),
+					TRUE
+					);
+		}else{
 			/**
 			 * if the layout not exists then but the 1st cell as
 			 * the content it self
@@ -298,8 +253,8 @@ class Content extends DataMapper {
 	 * section
 	 * you must pass objects to the function
 	 ***************************************/
-	function children($section=NULL , $cell=NULL, $limit=0, $offset=0 )
-	{
+	function children($section=NULL , $cell=NULL, $limit=0, $offset=0 ){
+
 		// getting the section path to the main index page
 		if( ! is_null($section) )
 		$par_sec = $section->get_parents();
@@ -321,8 +276,7 @@ class Content extends DataMapper {
 		 * and all the parent sections that the content requested to be
 		 * shared in the sub sections ordered in ascending with sort field
 		 * **************************************/
-		if( ! is_null($section) )
-		{
+		if( ! is_null($section) ){
 			$sql_stat .= " AND
 			(
 				(`parent_section`={$section->id})";
@@ -351,17 +305,14 @@ class Content extends DataMapper {
 	 * apply filters to $input and return
 	 * the effected text
 	 **/
-	function apply_filters($input)
-	{
+	function apply_filters($input){
 
 		$output = $input;
-
 		$filters_array = array_map( 'trim', explode( "\n", $this->filter ) );
 		foreach( $filters_array as $item )
-			if( trim($item)!='' )
-				$output = $this->ci->load->view( 'filter/'.$item, array('text'=>$output,'id'=>$this->id), TRUE);
+		if( trim($item)!='' )
+		$output = $this->ci->load->view( 'filter/'.$item, array('text'=>$output,'id'=>$this->id), TRUE);
 
 		return $output;
 	}
-
 }
