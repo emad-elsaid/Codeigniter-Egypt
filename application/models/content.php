@@ -253,52 +253,33 @@ class Content extends DataMapper {
 	 * section
 	 * you must pass objects to the function
 	 ***************************************/
-	function children($section=NULL , $cell=NULL, $limit=0, $offset=0 ){
+	function children($section=NULL , $cell=NULL ){
 
 		// getting the section path to the main index page
 		if( ! is_null($section) )
 		$par_sec = $section->get_parents();
 
-		/*******************************
-		 * a VERY COMPLEX SQL statment
-		 * i have to simplify that statment generator somehow
-		 *******************************/
-
-		// selecting all the content of that parent
-		$sql_stat = "SELECT * FROM `contents` WHERE `parent_content`= {$this->id}";
-			
-		// filter the objects to the requested cell
-		if( ! is_null( $cell ) )
-		$sql_stat .= " AND `cell`=$cell";
-			
-		/***************************************
-		 * filter the objects to the requested section
-		 * and all the parent sections that the content requested to be
-		 * shared in the sub sections ordered in ascending with sort field
-		 * **************************************/
-		if( ! is_null($section) ){
-			$sql_stat .= " AND
-			(
-				(`parent_section`={$section->id})";
-			if( count($par_sec) >0 )
-			$sql_stat .= sprintf(
-								" OR (`parent_section` IN (%s) AND `subsection`=%s)",
-			implode(',',$par_sec),
-			intval(TRUE)
-			);
-			$sql_stat .= ") ORDER BY `sort` ASC";
-		}
-
-		//adding the limit and offset
-		if( $limit!=0)
-		$sql_stat .= " LIMIT $limit OFFSET $offset";
-
-		// submit the query
-		$children = new Content();
-		$children->query($sql_stat);
+		$contents = new Content();
+		
+		$contents->where( 'parent_content', $this->id );
+		
+		if( ! is_null( $cell ) ) 
+			$contents->where( 'cell', $cell );
+		
+		$contents	->group_start()
+						->where( 'parent_section', $section->id );
+						
+		if( count($par_sec)>0  )
+		$contents	->or_group_start()
+						->where_in( 'parent_section', $par_sec )
+						->where( 'subsection', 1 )
+					->group_end();
+					
+		$contents	->group_end()
+					->get();
 
 		// returning the final array of children
-		return $children;
+		return $contents;
 	}
 
 	/**

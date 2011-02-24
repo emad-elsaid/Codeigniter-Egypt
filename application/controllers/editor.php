@@ -16,10 +16,7 @@ class Editor extends Application {
 		$this->show_statusbar 	= FALSE;
 		$this->show_title 		= FALSE;
 		$this->show_toolbar 	= FALSE;
-		$this->pages 			= array(
-								"chooser"=>"Choose a Component",
-								"data"=>"Data Editor"
-								);
+		$this->pages 			= array();
 
 								$this->load->library('gui');
 	}
@@ -55,7 +52,7 @@ class Editor extends Application {
 		$p 		= new Content($c->parent_content);
 
 		if(	( $p->can_addin() AND  $this->input->post( "id" )===FALSE )
-			OR  ( $this->input->post( "id" )!==FALSE AND $old_edit ) ){
+		OR  ( $this->input->post( "id" )!==FALSE AND $old_edit ) ){
 
 			if( $this->input->post( "id" )===FALSE ){
 				$sec->attach( $c );
@@ -188,14 +185,8 @@ EOT;
 
 	}
 
-	function data($edit=NULL){
+	function data($edit=NULL,$sec=NULL){
 
-		$this->load->helper('directory');
-
-		function remove_ext($item)
-		{ return substr( $item, 0, strrpos($item,'.') ); }
-		$filters_list = directory_map(APPPATH.'views/filter');
-		$filters_list = array_map( 'remove_ext', $filters_list );
 
 		/********************************************
 		 * checking if the page has a ID get paramter
@@ -206,6 +197,43 @@ EOT;
 		$edit = FALSE;
 		else
 		$info = json_decode( $con->info );
+
+		if( $edit )
+		{
+			$this->show_toolbar = TRUE;
+			$this->pages = array();
+	
+			$parent = $con->parent_content;
+			$p = new Content($con->parent_content);
+	
+			if( $con->can_edit() ){
+				$this->pages['up/'.$con->id] = 'Move Up';
+				$this->pages['down/'.$con->id] = 'Move Down';
+			}
+			if( $p->can_addin() ){
+				$this->pages['chooser/'.$sec.'/'.$parent.'/'.$con->cell.'/'.$con->sort] = 'Add Before';
+				$this->pages['chooser/'.$sec.'/'.$parent.'/'.$con->cell.'/'.($con->sort+1)] = 'Add After'; 
+			}
+			if( $con->can_delete() ){
+				$this->pages['delete/'.$con->id] = 'Delete'; 
+				$this->pages['recycle/'.$con->id] = 'Put in Recycle'; 
+				$this->pages['delete_children/'.$con->id] = 'Delete Children'; 
+				$this->pages['recycle_children/'.$con->id] = 'Recycle Children'; 
+				
+			}
+			$this->pages['info/'.$con->id] = 'Information';
+		} 
+
+		
+		$this->load->helper('directory');
+		add('dijit.Dialog');
+
+		function remove_ext($item)
+		{ return substr( $item, 0, strrpos($item,'.') ); }
+		$filters_list = directory_map(APPPATH.'views/filter');
+		$filters_list = array_map( 'remove_ext', $filters_list );
+
+
 
 		$hidden = array();
 
@@ -238,10 +266,21 @@ EOT;
          preventCache: true,               
          content: dojo.formToObject("basic_form"),
          load: function(response, args) {
-				alert( response );
+			        Dlg = new dijit.Dialog({
+			            title: "Programatic Dialog Creation",
+			            style: "width: 300px",
+			            content : response
+			        });
+			        Dlg.show();
+			        
 			 },
          error: function(response, args) {
-				alert( response );
+					Dlg = new dijit.Dialog({
+			            title: "Programatic Dialog Creation",
+			            style: "width: 300px",
+			            content : response
+			        });
+			        Dlg.show();
 			 }
     });
 EOT;
@@ -254,34 +293,34 @@ if( dijit.byId('info_form')!=undefined )
 	dojo.query("[name='info']")[0].value = dojo.toJson(dijit.byId('info_form').getValues());
 }
 
-		$submit_script
+$submit_script
 </script>
 EOT;
 
-		if( $edit === FALSE )
-		$button = $this->gui->button( '','Add Content'.$script );
-		else
-		$button = $this->gui->button( '','Edit Content'.$script );
+if( $edit === FALSE )
+$button = $this->gui->button( '','Add Content'.$script );
+else
+$button = $this->gui->button( '','Edit Content'.$script );
 
-		if( $this->ion_auth->is_admin() )
-		$input = 'permission';
-		else{
-			$input = 'hidden';
-		}
+if( $this->ion_auth->is_admin() )
+$input = 'permission';
+else{
+	$input = 'hidden';
+}
 
-		if( $edit === FALSE ){
-			$p_cont = new Content($hidden['parent_content']);
+if( $edit === FALSE ){
+	$p_cont = new Content($hidden['parent_content']);
 
-			if( $this->ion_auth->is_admin() )
-			$input = 'permission';
-			else
-			{
-				$input = 'hidden';
-			}
+	if( $this->ion_auth->is_admin() )
+	$input = 'permission';
+	else
+	{
+		$input = 'hidden';
+	}
 
-			$Basic_Form = 	$this->gui->form(
-			site_url('editor/addaction')
-			,array(
+	$Basic_Form = 	$this->gui->form(
+	site_url('editor/addaction')
+	,array(
 		"Title : " => $this->gui->textbox('title'),
 		"Show in subsections : " => $this->gui->checkbox('subsection'),
 		"View permissions : " => $this->gui->$input('view', $p_cont->view),
@@ -290,14 +329,14 @@ EOT;
 		"Delete permissions : " => $this->gui->$input('del', $p_cont->del),
 		"Filters : "=> $this->gui->select_sort( 'filter',$filters_list ),
 		"" => $button
-			)
-			,array( 'id'=>'basic_form' )
-			,$hidden
-			);
-		}else{
-			$Basic_Form = 	$this->gui->form(
-			site_url('editor/addaction')
-			,array(
+	)
+	,array( 'id'=>'basic_form' )
+	,$hidden
+	);
+}else{
+	$Basic_Form = 	$this->gui->form(
+	site_url('editor/addaction')
+	,array(
 		"Title : " => $this->gui->textbox('title', $con->title ),
 		"Show in subsections : " => $this->gui->checkbox('subsection','subsection', $con->subsection),
 		"View permissions : " => $this->gui->$input('view', $con->view),
@@ -306,117 +345,117 @@ EOT;
 		"Delete permissions : " => $this->gui->$input('del', $con->del),
 		"Filters : "=> $this->gui->select_sort( 'filter', $filters_list, $con->filter ),
 		"" => $button
-			)
-			,array( 'id'=>'basic_form' )
-			,$hidden
-			);
-		}
-		//===============================================
-		/*OUR JSON OBJECT LIKE THAT
+	)
+	,array( 'id'=>'basic_form' )
+	,$hidden
+	);
+}
+//===============================================
+/*OUR JSON OBJECT LIKE THAT
 
-		{
-		"text":{
-		"type":"editor"
-		,"label":"Text Label"
-		,"default":"default text"
-		}
-		,"title":{
-		"type":"textbox"
-		}
-		,"titlecolor":"information to display"
-		}
-		**/
+{
+"text":{
+"type":"editor"
+,"label":"Text Label"
+,"default":"default text"
+}
+,"title":{
+"type":"textbox"
+}
+,"titlecolor":"information to display"
+}
+**/
 
-		$Plugin_Data = $this->load->view( 'content/'.$hidden['path'], array( "mode"=>"config" ), TRUE );
-		$Plugin_Data = json_decode( $Plugin_Data );
-		$Plugin_Form_Data = array();
+$Plugin_Data = $this->load->view( 'content/'.$hidden['path'], array( "mode"=>"config" ), TRUE );
+$Plugin_Data = json_decode( $Plugin_Data );
+$Plugin_Form_Data = array();
 
-		// starting to make the form if it is exists
-		if( is_object( $Plugin_Data ) ){
-			// building each field
-			foreach( $Plugin_Data as $key=>$value ){
+// starting to make the form if it is exists
+if( is_object( $Plugin_Data ) ){
+	// building each field
+	foreach( $Plugin_Data as $key=>$value ){
 
-				// build the field depending on the type
-				if( is_object( $value ) ){
-					// this line gets the default value if in insertion mode and the
-					// stored value if in the edit mode
-					$cVal = '';
-					$cVal = ( $edit===FALSE )? @$value->default: @$info->$key;
-					$current_field = $this->gui->textbox( $key, @$value->default );
+		// build the field depending on the type
+		if( is_object( $value ) ){
+			// this line gets the default value if in insertion mode and the
+			// stored value if in the edit mode
+			$cVal = '';
+			$cVal = ( $edit===FALSE )? @$value->default: @$info->$key;
+			$current_field = $this->gui->textbox( $key, @$value->default );
 
-					switch( $value->type ){
-						case "textbox":
-							$current_field = $this->gui->textbox( $key, $cVal );
-							break;
-						case "textarea":
-							$current_field = $this->gui->textarea( $key, $cVal );
-							break;
-						case "color":
-							$current_field = $this->gui->color( $key, $cVal );
-							break;
-						case "date":
-							$current_field = $this->gui->date( $key, $cVal );
-							break;
-						case "editor":
-							$current_field = $this->gui->editor( $key, $cVal );
-							break;
-						case "file":
-							$current_field = $this->gui->file( $key, $cVal );
-							break;
-						case "file list":
-							$current_field = $this->gui->file_list( $key, $cVal );
-							break;
-						case "folder":
-							$current_field = $this->gui->folder( $key, $cVal );
-							break;
-						case "model":
-							$current_field = $this->gui->model( $key, $cVal );
-							break;
-						case "number":
-							$current_field = $this->gui->number( $key, $cVal );
-							break;
-						case "password":
-							$current_field = $this->gui->password( $key, $cVal );
-							break;
-						case "time":
-							$current_field = $this->gui->time( $key, $cVal );
-							break;
-						case "checkbox":
-							$current_field = $this->gui->checkbox( $key,$key, $cVal );
-							break;
-						case "dropdown":
-							$current_field = $this->gui->dropdown( $key, $cVal,
-							@$value->options );
-							break;
-						case "section":
-							$current_field = $this->gui->section( $key, $cVal );
-							break;
-						case "permission":
-							$current_field = $this->gui->permission( $key, $cVal );
-							break;
-						case "smalleditor":
-							$current_field = $this->gui->smalleditor( $key, $cVal );
-							break;
-					}
-				}else if( is_string( $value ) == TRUE ){
-					$current_field = $this->gui->info( $value );
-				}
-
-				// checking the existance of label
-				if( isset( $value->label )==TRUE )
-				$Plugin_Form_Data[$value->label] = $current_field;
-				else
-				$Plugin_Form_Data[$key] = $current_field;
-
+			switch( $value->type ){
+				case "textbox":
+					$current_field = $this->gui->textbox( $key, $cVal );
+					break;
+				case "textarea":
+					$current_field = $this->gui->textarea( $key, $cVal );
+					break;
+				case "color":
+					$current_field = $this->gui->color( $key, $cVal );
+					break;
+				case "date":
+					$current_field = $this->gui->date( $key, $cVal );
+					break;
+				case "editor":
+					$current_field = $this->gui->editor( $key, $cVal );
+					break;
+				case "file":
+					$current_field = $this->gui->file( $key, $cVal );
+					break;
+				case "file list":
+					$current_field = $this->gui->file_list( $key, $cVal );
+					break;
+				case "folder":
+					$current_field = $this->gui->folder( $key, $cVal );
+					break;
+				case "model":
+					$current_field = $this->gui->model( $key, $cVal );
+					break;
+				case "number":
+					$current_field = $this->gui->number( $key, $cVal );
+					break;
+				case "password":
+					$current_field = $this->gui->password( $key, $cVal );
+					break;
+				case "time":
+					$current_field = $this->gui->time( $key, $cVal );
+					break;
+				case "checkbox":
+					$current_field = $this->gui->checkbox( $key,$key, $cVal );
+					break;
+				case "dropdown":
+					$current_field = $this->gui->dropdown( $key, $cVal,
+					@$value->options );
+					break;
+				case "section":
+					$current_field = $this->gui->section( $key, $cVal );
+					break;
+				case "permission":
+					$current_field = $this->gui->permission( $key, $cVal );
+					break;
+				case "smalleditor":
+					$current_field = $this->gui->smalleditor( $key, $cVal );
+					break;
 			}
+		}else if( is_string( $value ) == TRUE ){
+			$current_field = $this->gui->info( $value );
 		}
 
-		if( count($Plugin_Form_Data) > 0 ){
-			$Plugin_Form = $this->gui->form( '#', $Plugin_Form_Data, array("id"=>"info_form"));
-			$this->print_text( $this->gui->accordion( array("Basic Data"=>$Basic_Form,"Plugin Data"=>$Plugin_Form) ));
-		}else{
-			$this->print_text( $this->gui->accordion( array("Basic Data"=>$Basic_Form) ));
-		}
+		// checking the existance of label
+		if( isset( $value->label )==TRUE )
+		$Plugin_Form_Data[$value->label] = $current_field;
+		else
+		$Plugin_Form_Data[$key] = $current_field;
+
+	}
+}
+
+if( count($Plugin_Form_Data) > 0 ){
+	$Plugin_Form = $this->gui->form( '#', $Plugin_Form_Data, array("id"=>"info_form"));
+	$this->print_text( $this->gui->accordion( array("Basic Data"=>$Basic_Form,"Plugin Data"=>$Plugin_Form) ));
+}else{
+	$this->print_text( $this->gui->accordion( array("Basic Data"=>$Basic_Form) ));
+}
 
 	}
 
@@ -477,87 +516,6 @@ EOT;
 			show_error( 'Content not found' );
 		}
 
-	}
-
-	function edit($id,$sec){
-
-		$cont = new Content($id);
-		$can_edit = $cont->can_edit();
-		$can_delete = $cont->can_delete();
-		$parent = $cont->parent_content;
-		$cell = $cont->cell;
-		$sort = $cont->sort;
-		$p = new Content($cont->parent_content);
-		$img_url = base_url().'assets/admin/images/';
-		add(<<<EOT
-<style>
-.links div {
-	display: inline-block;
-	padding: 10px;
-	width: 200px;
-}
-
-.links div a {
-	font-size: 1.5em;
-	text-decoration: none;
-	color: black;
-	display: block;
-}
-
-.links div a:hover {
-	color: #003A49;
-}
-
-.links img {
-	float: left;
-	margin-right: 10px;
-}
-</style>
-EOT
-		);
-		$this->print_text('<div class="links">');
-		if( $can_edit ){
-			$this->print_text('
-		<div><a href="'.site_url("editor/data/$id").'"> 
-			<img src="'.$img_url.'edit.png">Edit Properties 
-		</a></div>
-		<div><a href="'.site_url("editor/up/$id").'">
-			<img src="'.$img_url.'move up.png">Move Up 
-		</a></div>
-		<div><a href="'.site_url("editor/down/$id").'">
-			<img src="'.$img_url.'move down.png">Move Down 
-		</a></div>');
-		}
-		if( $p->can_addin() ){
-			$this->print_text('
-		<div><a	href="'.site_url("editor/chooser/{$sec}/$parent/$cell/$sort" ).'"> 
-			<img src="'.$img_url.'add before.png">Add Before 
-		</a></div>
-		<div><a href="'. site_url("editor/chooser/{$sec}/$parent/$cell/".($sort+1)).'">
-			<img src="'.$img_url.'add after.png">Add After 
-		</a></div>');
-		}
-		if( $can_delete ){
-			$this->print_text('
-			<div><a href="'. site_url("editor/delete/$id") .'"> 
-				<img src="'.$img_url.'delete.png">Delete 
-			</a></div>
-			<div><a href="'. site_url("editor/recycle/$id") .'">
-				<img src="'.$img_url.'recycle.png">Put in Recycle 
-			</a></div>
-			<div><a href="'. site_url("editor/delete_children/$id") .'">
-				<img src="'.$img_url.'delete children.png">Delete Children 
-			</a></div>
-			<div><a href="'. site_url("editor/recycle_children/$id") .'"> 
-				<img src="'.$img_url.'recycle children.png">Recycle Children 
-			</a></div>');
-		}
-
-		$this->print_text('
-		<div><a class="iframe" href="'. site_url("editor/info/$id") .'">
-			<img src="'.$img_url.'info.png">Information 
-		</a></div>
-	</div>');
 	}
 
 	function info($content_id){
