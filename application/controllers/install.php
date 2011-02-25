@@ -8,7 +8,7 @@ class Install extends CI_Controller{
 	}
 	
 	function index(){
-		if( count($this->CI->db->list_tables())==0 ){
+		if( count($this->db->list_tables())==0 ){
 			$script = explode( ';', file_get_contents('mysql.sql') );
 			$script = array_map( 'trim', $script );
 			$script = array_filter( $script, 'count');
