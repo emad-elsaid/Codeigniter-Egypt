@@ -28,9 +28,7 @@ class SectionEditor extends Application {
 		$s->name = $this->input->post( 'name' );
 		$s->sort = $this->input->post( 'sort' );
 		$s->view = $this->input->post( 'view' );
-		
-		$p = new Section($s->parent_section);
-		$p->attach_section( $s );
+		$s->save();
 		
 		redirect( 'sectionEditor' );
 	}
@@ -39,9 +37,6 @@ class SectionEditor extends Application {
 	{
 		$this->load->library( 'gui' );
 		$s = new Section($id);
-		$p = new Section();
-		$p->get_by_id( $s->parent_section );
-		$p->deattach_section( $s );
 		$s->delete();
 		
 		redirect( 'sectionEditor' );

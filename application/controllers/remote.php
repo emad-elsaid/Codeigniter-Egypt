@@ -23,35 +23,6 @@ class Remote extends Application {
 		$this->perm = 'admin';
 		$this->ajax = true;
 	}
-
-
-	/**
-	 * function that load a view file from directory ajax
-	 * and return the result.
-	 * it's mainly made for ajax purposes
-	 * 
-	 * */
-	function ajax($file='')
-	{
-		if( empty( $file ) )
-			show_404('');
-		if( strpos( $file, '..' )!==FALSE )
-			show_error( '.. characters not allwed' );
-		
-		$file = str_replace( '.', '/', $file );
-		$file = 'ajax/'. $file;
-		
-		if( count($_POST)>0 )
-			$info = json_decode( json_encode( $_POST ) );
-		else
-			$info = FALSE;
-		
-		$this->load->view(
-						$file,
-						array( 'info'=>$info )
-						);
-		
-	}
 	
 	/**
 	 * that function you don't have to use it at all

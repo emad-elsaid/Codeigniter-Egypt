@@ -1,16 +1,18 @@
-<?php if( $mode=='config' ){
+<?php if( $mode=='config' ):
 //the plugin requirements as a JSON object is here ?>
 {
 	
 }
 
 
-<?php }else if( $mode=='layout' ){ 
+<?php elseif( $mode=='layout' ): 
 //replace 0 with number of cells your plugin has ?>
 0
 
 
-<?php }else if( $mode=='view' ){
+<?php elseif( $mode=='view' ):
 //the real content of your plugin goes here ?>
 
-<?php } ?>
+
+
+<?php endif; ?>

@@ -49,7 +49,7 @@ built on it some applications accessible by a task bar like facebook one
 			
 * 3- to install database : 
 	open the vunsy website 
-	ex: http://localhost/vunsy/
+	ex: http://localhost/vunsy/index.php/install
 	you can use install.php but config.php must be writable
 -----------------------------------------------------------------
 [ Running ]
@@ -69,7 +69,7 @@ built on it some applications accessible by a task bar like facebook one
 * 1- user name: admin@admin.com
 	password: password
 * you can change it from:
-	vunsy/config.php
+	http://localhost/vunsy/index.php/auth/change_password
 -----------------------------------------------------------------
 [ How to help us ]
 ---

@@ -121,8 +121,8 @@ hr
 	<?php if( count($_POST)>0 ): ?>
 	<div class="info" >
 		configuration file written, you have to enter 
-		<a href="<?=$config_base_url?>index.php" target="_blank" >your site index</a>
-		to check if there is any error, 
+		<a href="<?=$config_base_url?>index.php/install" target="_blank" >to installation page</a>,
+		if any error appear
 		you can resubmit configuration tell you get the right values
 	</div>
 	<div class="error" >

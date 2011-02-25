@@ -73,7 +73,7 @@ built on it some applications accessible by a task bar like facebook one</li>
 	<li>
 	normal site: <br>
 		<i>vunsyURL/index.php</i><br>
-		<i>ex: http://localhost/vunsy/index.php/install</i>
+		<i>ex: http://localhost/vunsy/index.php</i>
 	</li>
 	<li>
 	login page:<br>
@@ -95,7 +95,7 @@ built on it some applications accessible by a task bar like facebook one</li>
 	</li>
 	<li>
 		can change it from:<br>
-		<i>vunsy/system/application/config/vunsy_config.php</i>
+		<i>http://localhost/vunsy/index.php/auth/change_password</i>
 	</li>
 </ol>
 

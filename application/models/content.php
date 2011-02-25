@@ -23,11 +23,11 @@ class Content extends DataMapper {
 	 * faild to move it ... in case it's the first one
 	 **/
 	function move_up(){
-		$sec = new Section($this->parent_section);
+
 		if( $this->sort > 0 and isset($this->id) ){
-			$sec->deattach($this);
+			$this->deattach();
 			$this->sort--;
-			$sec->attach($this);
+			$this->attach();
 			return TRUE;
 		}
 
@@ -41,7 +41,6 @@ class Content extends DataMapper {
 	 **/
 	function move_down(){
 		$cont = new Content();
-		//$cont->where('parent_section',$this->parent_section );//same section
 		$cont->where('parent_content',$this->parent_content );//same parent
 		$cont->where('cell',$this->cell);// same cell
 		$cont->where('sort >',$this->sort);//greater sort
@@ -49,11 +48,10 @@ class Content extends DataMapper {
 
 		// if that content object exists then that content is not the last
 		// and we'll move it down
-		$sec = new Section($this->parent_section);
 		if( $cont->exists() ){
-			$sec->deattach($this);
+			$this->deattach();
 			$this->sort ++;
-			$sec->attach($this);
+			$this->attach();
 			return TRUE;
 		}
 
@@ -125,22 +123,19 @@ class Content extends DataMapper {
 	 **/
 	function cells(){
 
-		if( $this->path !='' ){
-			$c = $this->load->view(
+		if( $this->path =='' )
+			return 1;
+			
+		return intval($this->load->view(
 						'content/'.$this->path,
-			array(
+					array(
 							'id'=> $this->id,
 							'ci'=> $this->ci,
 							'info'=>$this->get_info(),
 							'mode'=>'layout'
 							),
 							TRUE
-							);
-		} else {
-			$c = 1;
-		}
-
-		return intval($c);
+							));
 	}
 
 	/**
@@ -148,13 +143,16 @@ class Content extends DataMapper {
 	 **/
 	function get_info(){
 
+		if( !is_null($this->_cached_info_obj) )
+			return $this->_cached_info_obj;
+
 		$info = json_decode( $this->info );
-		if( is_object($info) ){
-			foreach( $info as $key=>$value ){
+		if( is_object($info) )
+			foreach( $info as $key=>$value )
 				if( is_array( $value ) )
 				$info->$key = intval(count($value)==1);
-			}
-		}
+
+		$this->_cached_info_obj = $info;
 		return $info;
 	}
 
@@ -192,27 +190,21 @@ class Content extends DataMapper {
 		 * of all the cell content
 		 **/
 		$cell_number = $this->cells();
-		$layout_content = array();
-
-		/***************************************
-		 *  starting to render the cells
-		 ***************************************/
-		for( $i=0; $i<$cell_number; $i++ ){
-			// getting the content in that cell and current section
-			$c_children = $this->children( $this->ci->vunsy->get_section(), $i );
-
-			$layout_content[ $i ] = '';
-
-			// adding the cell (add button)
-			if( $this->ci->vunsy->mode()=='edit' AND $c_children->result_count()==0 AND $this->can_addin() )
-			$layout_content[ $i ] = $this->add_button( $i );
-
-			// rendering the cell content
-			foreach( $c_children as $item )
-			$layout_content[ $i ] .= $item->render();
+		$layout_content = NULL;
+		if( $cell_number>0 )
+		{
+			$layout_content = array_fill(0,$cell_number,'');
+			
+			// getting the content in current section
+			$c_children = $this->children( $this->ci->vunsy->section );
+			
+			foreach( $c_children as $child )
+				$layout_content[$child->cell] .= $child->render();
+				
+			foreach( $layout_content as $k=>$v )
+				if($this->ci->vunsy->mode()=='edit' AND $v=='' AND $this->can_addin())
+					$layout_content[ $k ] = $this->add_button( $k );
 		}
-
-
 		/**
 		 * if the layout exists render the layout with the corresponding
 		 * cells text if not just pass the first cell value
@@ -253,7 +245,7 @@ class Content extends DataMapper {
 	 * section
 	 * you must pass objects to the function
 	 ***************************************/
-	function children($section=NULL , $cell=NULL ){
+	function children($section=NULL ){
 
 		// getting the section path to the main index page
 		if( ! is_null($section) )
@@ -262,9 +254,6 @@ class Content extends DataMapper {
 		$contents = new Content();
 		
 		$contents->where( 'parent_content', $this->id );
-		
-		if( ! is_null( $cell ) ) 
-			$contents->where( 'cell', $cell );
 		
 		$contents	->group_start()
 						->where( 'parent_section', $section->id );
@@ -280,6 +269,48 @@ class Content extends DataMapper {
 
 		// returning the final array of children
 		return $contents;
+	}
+	
+	function attach(){
+		$cont = new Content();
+		$cont->where( 'parent_content', $this->parent_content );//same parent
+		$cont->where( 'cell', $this->cell );// same cell
+		$cont->where( 'sort >=', $this->sort) ;//greater sort
+		$cont->get();//get them to process
+		foreach( $cont as $item ){
+			$item->sort++;
+			$item->save();
+		}
+	}
+	
+	function deattach(){
+		$cont = new Content();
+		$cont->where( 'parent_content', $this->parent_content );//same parent
+		$cont->where( 'cell', $this->cell );// same cell
+		$cont->where( 'sort >', $this->sort );//greater sort
+		$cont->get();//get them to process
+		foreach( $cont as $item ){
+			$item->sort--;
+			$item->save();
+		}
+	}
+	
+	function save($object = '', $related_field = ''){
+		if( empty($this->id) and empty($object) )
+			$this->attach();
+			
+		parent::save($object, $related_field);
+	}
+	
+	//=========================
+	//normalize the  sort numbers
+	//=========================
+	// we have to push all the content up to fill that hole
+	// these content must me in the same section,parent,cell
+	// and have sort nubmer greater than that content
+	function delete($object = '', $related_field = ''){
+		$this->deattach();
+		parent::delete($object, $related_field);
 	}
 
 	/**

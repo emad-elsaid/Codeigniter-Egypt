@@ -30,9 +30,6 @@ class Vunsy {
 		$this->CI->load->library(array('datamapper','session','ion_auth'));
 		$this->CI->load->helper(array('perm', 'html','url','page'));
 
-		if( ! $this->installed() )
-		$this->install();
-
 		// getting the current section
 		$this->section = $this->get_section();
 
@@ -71,22 +68,9 @@ class Vunsy {
 		$sec = new Section($this->CI->uri->rsegment(3));
 
 		if(!$sec->exists())
-		$sec->get_by_id('1');
+		$sec->get_by_id(1);
 			
 		return $sec;
-	}
-
-	function installed(){
-		return ( count($this->CI->db->list_tables())>0 );
-	}
-
-	function install(){
-		$script = explode( ';', file_get_contents('mysql.sql') );
-		$script = array_map( 'trim', $script );
-		$script = array_filter( $script, 'count');
-		foreach( $script as $line )
-		if( $line!='' )
-		$this->CI->db->query($line);
 	}
 
 	function css_text(){

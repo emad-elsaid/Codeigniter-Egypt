@@ -11,6 +11,7 @@
 class Section extends DataMapper {
 	var $default_order_by = array('sort');
 	var $ci;
+	static $parents = NULL;
 
 	function __construct($id=NULL){
 		parent::__construct($id);
@@ -23,21 +24,26 @@ class Section extends DataMapper {
 	 **/
 	function get_parents(){
 
+		if( !is_null(Section::$parents) )
+			return Section::$parents;
+			
 		$c = new Section($this->id);
 
 		$parents = array();
 		while( !empty($c->parent_section) ){
 			$c = $c->get_by_id( $c->parent_section );
-			array_push( $parents, $c->id );
+			$parents[] = $c->id;
 		}
+		Section::$parents = $parents;
 		return $parents;
 	}
 
-	function save( $object= '' ){
+	function save( $object = '', $related_field = '' ){
 
 		if( empty($this->id) and empty($object) ){
 			$s = new Section();
 			$s->where( 'sort >=', $this->sort );
+			$s->where( 'parent_section', $this->parent_section );
 			$s->get();
 
 			foreach( $s as $item ){
@@ -46,7 +52,7 @@ class Section extends DataMapper {
 			}
 		}
 
-		parent::save($object);
+		parent::save($object, $related_field );
 	}
 
 	/**
@@ -54,125 +60,23 @@ class Section extends DataMapper {
 	 **/
 	function delete( $object = '', $related_field = '' ){
 
-		// update all the sections sort after that section
-		// that in the same parent section
-		$s = new Section();
-		$s->where( 'sort >', $this->sort );
-		$s->where( 'parent_section', $this->parent_section );
-		$s->get();
-
-		foreach( $s as $item ){
-			$item->sort--;
-			$item->save();
+		if( empty($object) ){
+			// update all the sections sort after that section
+			// that in the same parent section
+			$s = new Section();
+			$s->where( 'sort >', $this->sort );
+			$s->where( 'parent_section', $this->parent_section );
+			$s->get();
+	
+			foreach( $s as $item ){
+				$item->sort--;
+				$item->save();
+			}
 		}
 
 		//delete this section
 		parent::delete( $object, $related_field );
 
-	}
-
-	/**
-	 * attach the object to that section and under the parent in cell with order sort
-	 * @param	$object: content object we want to attach
-	 * @param	$parent: content parent object
-	 * @param	$cell: cell in parent content we want to attach in it
-	 * @param	$sort: order of the content in it's cell
-	 **/
-	function attach( $object ){
-
-		$cont = new Content();
-		// put the content in it's place require change all it's
-		// sisters that has a greater sort number to be increased
-		// get all this content belong to this parent and this section
-		// and the same cell and has a sort number greater that this
-		// sort number
-		$cont->where( 'parent_content', $object->parent_content );//same parent
-		$cont->where( 'cell', $object->cell );// same cell
-		$cont->where( 'sort >=', $object->sort) ;//greater sort
-		$cont->get();//get them to process
-		foreach( $cont as $item ){
-			$item->sort++;
-			$item->save();
-		}
-
-		//save the object itself
-		$object->save();
-	}
-
-	/**
-	 * attach $section to the current section object
-	 * @param	$section: 	section object we want to attach
-	 * 					as a child to current section
-	 **/
-	function attach_section( $section='' ){
-
-		// check if that place it took
-		$cont = new Section();
-		$cont->where( 'parent_section', $this->id );//same section
-		$cont->where( 'sort', $section->sort );//greater sort
-		$cont->get();//get them to process
-
-		if( $cont->exists() ){
-				
-			$cont->where( 'parent_section', $this->id );//same section
-			$cont->where( 'sort >=', $section->sort );//greater sort
-			$cont->get();//get them to process
-			foreach( $cont as $item ){
-				$item->sort++;
-				$item->save();
-			}
-
-		}
-
-		$section->save();
-	}
-
-	/**
-	 * deattach the content object from current section object
-	 * and it's parent
-	 * @param	$object: content object we want to deattach
-	 **/
-	function deattach( $object='' ){
-
-		//=========================
-		//normalize the  sort numbers
-		//=========================
-		$cont = new Content();
-		// we have to push all the content up to fill that hole
-		// these content must me in the same section,parent,cell
-		// and have sort nubmer greater than that content
-		$cont->where( 'parent_content', $object->parent_content );//same parent
-		$cont->where( 'cell', $object->cell );// same cell
-		$cont->where( 'sort >', $object->sort );//greater sort
-		$cont->get();//get them to process
-		foreach( $cont as $item ){
-			$item->sort--;
-			$item->save();
-		}
-			
-	}
-
-	/**
-	 * deattach section object from current section
-	 * @param	$section: section we want to deattach
-	 **/
-	function deattach_section( $section='' ){
-
-		//=========================
-		//normalize the  sort numbers
-		//=========================
-		$cont = new Section();
-		// we have to push all the content up to fill that hole
-		// these content must me in the same section,parent,cell
-		// and have sort nubmer greater than that content
-		$cont->where( 'parent_section', $section->parent_section );//same section
-		$cont->where( 'sort >', $section->sort );//greater sort
-		$cont->get();//get them to process
-		foreach( $cont as $item ){
-			$item->sort--;
-			$item->save();
-		}
-			
 	}
 
 	/**
