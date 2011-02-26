@@ -8,7 +8,6 @@ add( 'assets/fancybox/jquery.fancybox.js' );
 add( 'assets/fancybox/jquery.fancybox.css' );
 $local = base_url().'/assets/admin/';
 $logout = site_url( 'auth/logout' );
-var_dump($ci->system->mode());
 $XHR_URL = site_url('editmode/'.($ci->system->mode()=='view'? 'edit':'view'));
 
 add( <<<EOT

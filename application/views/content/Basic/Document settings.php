@@ -35,7 +35,7 @@ if( $ci->system->mode()=='edit' )
 	$c = new Content();
 	$c->get_by_id( $id );
 	
-	if( $c->can_edit() or $c->can_delete() )
+	if( $ci->ion_auth->is_admin() )
 	{
 		$ci->load->library( 'gui' );
 		echo $ci->gui->info( 'Document settings here' );

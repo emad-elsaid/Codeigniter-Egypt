@@ -43,7 +43,7 @@ echo $ci->gui->info( 'if you want to start just login using admin and remove tha
 <br>
 		<img src="<?= base_url() ?>assets/admin/logo.png" >
 		<br><h1 class="ui-helper-reset title" >Codeigniter-Egypt</h1>
-		<h2 class="ui-helper-reset title2" >Virtual Univeral System</h2>
+		<h2 class="ui-helper-reset title2" >Another Codeigniter Based CMS, with some Love</h2>
 		<div class="sep"></div>
 	</td>
 </tr>

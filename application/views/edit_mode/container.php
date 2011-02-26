@@ -3,17 +3,13 @@ $ci =& get_instance();
 
 add( 'assets/admin/edit/edit.css' );
 
-$p = new Content();
-$p->get_by_id($parent);
+$p = new Content($parent);
 $title = ( strrpos($path,'/')!=NULL)?
 		substr( $path, strrpos($path,'/')+1,strrpos($path,'.')-strrpos($path,'/')-1 ):
 		substr( $path, 0,strrpos($path,'.') );
 $url = site_url("editor/data/$id/{$ci->system->section->id}");
-if( $can_edit OR $p->can_addin() OR $can_delete ){
 ?>
-
 <div class="editCtrl systemCtrl"  >
 	<a class="iframe " href="<?=$url?>" title="<?=$title?>" ></a>
 </div>
-<?php } ?>
 <?= $text ?>

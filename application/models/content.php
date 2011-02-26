@@ -75,9 +75,6 @@ class Content extends DataMapper {
 			,'id'=>$this->id
 			,'cell'=>$this->cell
 			,'sort'=>$this->sort
-			,'can_delete'=>$this->can_delete()
-			,'can_addin'=>$this->can_addin()
-			,'can_edit'=>$this->can_edit()
 			)
 			, TRUE);
 		}
@@ -91,28 +88,6 @@ class Content extends DataMapper {
 	 **/
 	function can_view(){
 		return  (empty($this->view)  or perm_chck( $this->view ));
-	}
-
-	/**
-	 * returns if the user can edit the content or not
-	 **/
-	function can_edit(){
-		return perm_chck( $this->edit );
-	}
-
-	/**
-	 * returns if the user can add content in that
-	 * content or not
-	 **/
-	function can_addin(){
-		return perm_chck( $this->addin );
-	}
-
-	/**
-	 * returns if the user can delete it or not
-	 **/
-	function can_delete(){
-		return perm_chck( $this->del );
 	}
 
 	/**
@@ -202,7 +177,7 @@ class Content extends DataMapper {
 				$layout_content[$child->cell] .= $child->render();
 				
 			foreach( $layout_content as $k=>$v )
-				if($this->ci->system->mode()=='edit' AND $v=='' AND $this->can_addin())
+				if($this->ci->system->mode()=='edit' AND $v=='' AND $this->ci->ion_auth->is_admin())
 					$layout_content[ $k ] = $this->add_button( $k );
 		}
 		/**

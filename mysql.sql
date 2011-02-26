@@ -1,6 +1,5 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
-DROP TABLE IF EXISTS `contents`;
 CREATE TABLE `contents` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `parent_content` int(9) DEFAULT NULL,
@@ -12,9 +11,6 @@ CREATE TABLE `contents` (
   `sort` int(11) DEFAULT NULL,
   `path` varchar(100) DEFAULT NULL,
   `view` longtext,
-  `addin` longtext,
-  `edit` longtext,
-  `del` longtext,
   `filter` longtext,
   `info` longtext,
   PRIMARY KEY (`id`),
@@ -23,11 +19,10 @@ CREATE TABLE `contents` (
   KEY `user` (`user`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-INSERT INTO `contents` (`id`, `parent_content`, `parent_section`, `title`, `user`, `subsection`, `cell`, `sort`, `path`, `view`, `addin`, `edit`, `del`, `filter`, `info`) VALUES
-(1, NULL, 1, NULL, 1, 1, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 'PAGE_BODY_LOCKED'),
-(2, 1, 1, NULL, 1, 0, 0, 0, 'default.php', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `contents` (`id`, `parent_content`, `parent_section`, `title`, `user`, `subsection`, `cell`, `sort`, `path`, `view`, `filter`, `info`) VALUES
+(1, NULL, 1, NULL, 1, 1, 0, 0, NULL, NULL, NULL, 'PAGE_BODY_LOCKED'),
+(2, 1, 1, NULL, 1, 0, 0, 0, 'default.php', NULL, NULL, NULL);
 
-DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
@@ -39,7 +34,6 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 (1, 'admin', 'Administrator'),
 (2, 'members', 'General User');
 
-DROP TABLE IF EXISTS `meta`;
 CREATE TABLE `meta` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `user_id` int(9) DEFAULT NULL,
@@ -54,7 +48,6 @@ CREATE TABLE `meta` (
 INSERT INTO `meta` (`id`, `user_id`, `first_name`, `last_name`, `company`, `phone`) VALUES
 (1, 1, 'Admin', 'istrator', 'ADMIN', '0');
 
-DROP TABLE IF EXISTS `sections`;
 CREATE TABLE `sections` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `parent_section` int(9) DEFAULT NULL,
@@ -68,7 +61,6 @@ CREATE TABLE `sections` (
 INSERT INTO `sections` (`id`, `parent_section`, `name`, `sort`, `view`) VALUES
 (1, NULL, NULL, 0, NULL);
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `group_id` int(9) NOT NULL,
@@ -92,9 +84,9 @@ INSERT INTO `users` (`id`, `group_id`, `ip_address`, `username`, `password`, `sa
 
 
 ALTER TABLE `contents`
-  ADD CONSTRAINT `contents_ibfk_3` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `contents_ibfk_1` FOREIGN KEY (`parent_content`) REFERENCES `contents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `contents_ibfk_2` FOREIGN KEY (`parent_section`) REFERENCES `sections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `contents_ibfk_2` FOREIGN KEY (`parent_section`) REFERENCES `sections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `contents_ibfk_3` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `meta`
   ADD CONSTRAINT `meta_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

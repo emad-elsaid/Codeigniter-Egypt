@@ -91,7 +91,6 @@ class Editor extends Application {
 
 		if( $this->input->post( "id" )!==FALSE ){
 			$c->get_by_id( $this->input->post( "id" ) );
-			$old_edit = $c->can_edit();
 		}else if( $this->input->post( "id" )===FALSE ){
 			$c->user = $this->ion_auth->get_user();
 			$c->user = $c->user->id;
@@ -106,28 +105,19 @@ class Editor extends Application {
 		$c->type 			= $this->input->post( "type" );
 		$c->subsection 		= $this->input->post ( "subsection" )==FALSE? FALSE:TRUE;
 		$c->view 			= $this->input->post( "view" );
-		$c->addin 			= $this->input->post( "addin" );
-		$c->edit 			= $this->input->post( "edit" );
-		$c->del 			= $this->input->post( "del" );
 		$c->info 			= $this->input->post( "info" );
 		$c->filter 			= $this->input->post( "filter" );
 
 		$p 		= new Content($c->parent_content);
 
-		if(	( $p->can_addin() AND  $this->input->post( "id" )===FALSE )
-		OR  ( $this->input->post( "id" )!==FALSE AND $old_edit ) ){
-
-			if( $this->input->post( "id" )===FALSE ){
-				$this->add_info( 'Content added' );
-			}else{
-				$this->ajax = TRUE;
-				$this->print_text( "Content Edited" );
-			}
-			$c->save();
-
+		if( $this->input->post( "id" )===FALSE ){
+			$this->add_info( 'Content added' );
 		}else{
-			show_error( 'Permission denied' );
+			$this->ajax = TRUE;
+			$this->print_text( "Content Edited" );
 		}
+		$c->save();
+
 	}
 
 	function data($edit=NULL,$sec=NULL){
@@ -156,18 +146,12 @@ class Editor extends Application {
 			$parent = $con->parent_content;
 			$p = new Content($con->parent_content);
 
-			if( $con->can_edit() ){
-				$this->pages['up/'.$con->id] = 'Move Up';
-				$this->pages['down/'.$con->id] = 'Move Down';
-			}
-			if( $p->can_addin() ){
-				$this->pages['chooser/'.$sec.'/'.$parent.'/'.$con->cell.'/'.$con->sort] = 'Add Before';
-				$this->pages['chooser/'.$sec.'/'.$parent.'/'.$con->cell.'/'.($con->sort+1)] = 'Add After';
-			}
-			if( $con->can_delete() ){
-				$this->pages['delete/'.$con->id] = 'Delete';
-				$this->pages['delete_children/'.$con->id] = 'Delete Children';
-			}
+			$this->pages['up/'.$con->id] = 'Move Up';
+			$this->pages['down/'.$con->id] = 'Move Down';
+			$this->pages['chooser/'.$sec.'/'.$parent.'/'.$con->cell.'/'.$con->sort] = 'Add Before';
+			$this->pages['chooser/'.$sec.'/'.$parent.'/'.$con->cell.'/'.($con->sort+1)] = 'Add After';
+			$this->pages['delete/'.$con->id] = 'Delete';
+			$this->pages['delete_children/'.$con->id] = 'Delete Children';
 			$this->pages['info/'.$con->id] = 'Information';
 		}
 
@@ -241,7 +225,6 @@ if( dijit.byId('info_form')!=undefined )
 </script>
 EOT;
 
-		$input =  $this->ion_auth->is_admin()? 'permission' : 'hidden';
 
 		if( $edit === FALSE ){
 			
@@ -252,10 +235,7 @@ EOT;
 			,array(
 		"Title : " 					=> $this->gui->textbox('title'),
 		"Show in subsections : " 	=> $this->gui->checkbox('subsection'),
-		"View permissions : " 		=> $this->gui->$input('view', $p_cont->view),
-		"Add in permissions : " 	=> $this->gui->$input('addin', $p_cont->addin),
-		"Edit permissions : " 		=> $this->gui->$input('edit', $p_cont->edit),
-		"Delete permissions : " 	=> $this->gui->$input('del', $p_cont->del),
+		"View permissions : " 		=> $this->gui->permission('view', $p_cont->view),
 		"Filters : "				=> $this->gui->select_sort( 'filter',$filters_list ),
 		"" 							=> $this->gui->button( '','Save'.$script )
 			)
@@ -268,10 +248,7 @@ EOT;
 			,array(
 		"Title : " 					=> $this->gui->textbox('title', $con->title ),
 		"Show in subsections : " 	=> $this->gui->checkbox('subsection','subsection', $con->subsection),
-		"View permissions : " 		=> $this->gui->$input('view', $con->view),
-		"Add in permissions : " 	=> $this->gui->$input('addin', $con->addin),
-		"Edit permissions : " 		=> $this->gui->$input('edit', $con->edit),
-		"Delete permissions : "		=> $this->gui->$input('del', $con->del),
+		"View permissions : " 		=> $this->gui->permission('view', $con->view),
 		"Filters : "				=> $this->gui->select_sort( 'filter', $filters_list, $con->filter ),
 		"" 							=> $this->gui->button( '','Save'.$script )
 			)
@@ -391,14 +368,10 @@ EOT;
 		$c = new Content($id);
 
 		if( $c->exists() ){
-			if( $c->can_delete() ){
-				$children = new Content();
-				$children->get_by_parent_content( $c->id );
-				$children->delete_all();
-				$this->add_info( 'Children deleted' );
-			}else{
-				show_error( 'permission denied! please check your adminstrator' );
-			}
+			$children = new Content();
+			$children->get_by_parent_content( $c->id );
+			$children->delete_all();
+			$this->add_info( 'Children deleted' );
 		}else{
 			show_error( 'Content not found' );
 		}
@@ -409,12 +382,8 @@ EOT;
 
 		$c = new Content($id);
 		if( $c->exists() ){
-			if( $c->can_delete() ){
-				$c->delete();
-				$this->add_info( 'Content deleted' );
-			}else{
-				show_error( 'permission denied! please check your administrator' );
-			}
+			$c->delete();
+			$this->add_info( 'Content deleted' );
 		}else{
 			show_error( 'Content not found' );
 		}
@@ -426,14 +395,10 @@ EOT;
 		$c = new Content($id);
 
 		if( $c->exists() ){
-			if( $c->can_edit() ){
-				if( $c->move_down() ){
-					$this->add_info( 'Content moved down' );
-				}else{
-					$this->add_info( 'Content i already the last' );
-				}
+			if( $c->move_down() ){
+				$this->add_info( 'Content moved down' );
 			}else{
-				show_error( 'permission denied! please check your adminstrator' );
+				$this->add_info( 'Content i already the last' );
 			}
 		}else{
 			show_error( 'Content not found' );
@@ -485,14 +450,10 @@ EOT
 		$c = new Content($id);
 
 		if( $c->exists() ){
-			if( $c->can_edit() ){
-				if( $c->move_up() ){
-					$this->add_info( 'Content moved up' );
-				}else{
-					$this->add_info( 'Content i already the first' );
-				}
+			if( $c->move_up() ){
+				$this->add_info( 'Content moved up' );
 			}else{
-				show_error( 'permission denied! please check your adminstrator' );
+				$this->add_info( 'Content i already the first' );
 			}
 		}else{
 			show_error( 'Content not found' );
