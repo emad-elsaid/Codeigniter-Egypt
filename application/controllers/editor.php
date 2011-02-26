@@ -21,6 +21,70 @@ class Editor extends Application {
 		$this->load->library('gui');
 	}
 
+	function chooser($section, $content, $cell, $sort){
+		$this->show_toolbar = TRUE;
+		add('dojo.data.ItemFileReadStore');
+		add('dijit.tree.ForestStoreModel');
+		add('dijit.Tree');
+		add('jquery/jquery.js');
+		
+		$this->print_text('<div dojoType="dojo.data.ItemFileReadStore" url="'.site_url('editor/queryTree').'" jsId="ordJson"></div>');
+		$this->print_text('<div dojoType="dijit.tree.ForestStoreModel" childrenAttrs="line" rootLabel="Order" store="ordJson" jsId="ordModel"></div>');
+		$this->print_text('<div dojoType="dijit.Tree" id="ordTree" model="ordModel">
+		<script type="dojo/method" event="onClick" args="item">
+		if(item.path!=undefined){
+			$("input[name=path]").val(item.path[0]);
+			$("form").submit();
+		}	
+		</script>
+		</div>');
+		$hidden = array('parent_section'=>$section,'parent_content'=>$content, 'cell'=>$cell,'sort'=>$sort,'path'=>'');
+		$this->print_text( $this->gui->form(site_url('editor/data'),array(),'',	$hidden	));
+	}
+	
+	
+	/*
+	 * this method need to be enhanced
+	 * it generate JSON object for Dojo tree of previous method,
+	 * you can generate the object with json_encode
+	 */ 
+	function queryTree(){
+		$this->ajax = TRUE;
+		$this->load->helper('directory');
+		$contents = directory_map( APPPATH.'views/content' );
+		$folders = array_keys($contents);
+		$output = "{ identifier: 'id', label: 'description',items: [";
+		$k=0;
+		foreach( $contents as $name=>$directory ){
+			$k++;
+			if( is_array($directory)){
+				$output .= "{ id: '$k', description:\"$name\" ,line:[";
+				
+				for( $i=0; $i<count($directory); $i++ ){
+					$k++;
+					if( $directory[$i]!='index.html'){
+						$output .= "{ id: '$k', path:'$name\/{$directory[$i]}', description: '{$directory[$i]}'}";
+						if( $i<count($directory)-1 )
+							$output .= ',';
+					}
+				}
+				
+				$output .= ']}';
+			}else{
+				if( $directory!='index.html')
+				$output .= "{ id: '$k', path:'$directory', description:'$directory' }";
+				
+			}
+			
+			if( $name!=$folders[count($folders)-1] and (is_array($directory) or $directory!='index.html') )
+					$output .= ',';
+		}
+		$output .= "]}";
+		
+		$this->print_text($output);
+		
+	}
+	
 	function addaction() {
 
 		$c = new content();
@@ -66,117 +130,24 @@ class Editor extends Application {
 		}
 	}
 
-	function chooser($section,$content,$cell,$sort)
-	{
-		add('jquery/jquery.js');
-		add(<<<EOT
-<script language="javascript" >
-$(function(){
-	$('.links div').click(function(){
-		v = $(this).attr('rel');
-		$(this).siblings('input').val(v);
-		$(this).parents('form').submit();
-	});	
-});
-</script>
-EOT
-		);
-		add(<<<EOT
-<style>
-.links div {
-display:inline-block;
-padding:10px;
-width:190px;
-}
-.links div a {
-font-size:1.2em;
-text-decoration:none;
-color: black;
-display: block;
-}
-
-.links div a:hover {
-	color: #003A49;
-}
-.links img {
-float:left;
-margin-right:10px;
-}
-</style>
-EOT
-		);
-
-
-		$this->load->helper('directory');
-		$contents = directory_map( APPPATH.'views/content' );
-
-		function icon( $icon, $text, $path ){
-
-			$path = ($path=='')? '' : substr( $path, 1).'/';
-			$text = substr( $text, 0, strrpos($text, '.') );
-			$base = base_url();
-			return <<<EOT
-	<div rel="{$path}{$text}.php" ><a href="#">
-	<img src="$base$icon" >$text
-	</a></div>
-EOT;
-		}
-
-		function render( $path, $arr ){
-
-			$header = substr( $path, 1);
-			$txt =  "<hr /><h3>$header</h3>";
-			foreach ($arr as $key=>$value){
-				if( is_string($value) and $value!='index.html' ){
-					$img = substr( $value, 0, strrpos($value, '.') ).'.png';
-					$img_p = 'assets/admin/content/'.$path.'/';
-					if( file_exists( $img_p.$img ) ){
-						$txt .= icon( $img_p.$img, $value, $path );
-					}else{
-						$txt .= icon( 'assets/admin/content/template.png', $value, $path );
-					}
-				}
-
-			}
-			foreach ($arr as $key=>$value){
-				if( is_array($value) ){
-					$txt .= render( $path.'/'.$key, $value );
-				}
-			}
-
-			return $txt;
-		}
-		$chooser = '<div class="links" >'.$this->gui->hidden( 'path' ).render( '', $contents).'</div>';
-
-		$hidden = array(
-				'parent_section'=>$section
-		,'parent_content'=>$content
-		,'cell'=>$cell
-		,'sort'=>$sort
-		);
-
-		$this->print_text( $this->gui->form(
-		site_url('editor/data'),
-		array(""=>$chooser),
-		'',
-		$hidden
-		));
-
-	}
-
 	function data($edit=NULL,$sec=NULL){
-
 
 		/********************************************
 		 * checking if the page has a ID get paramter
 		 * for edit purposes
 		 ********************************************/
+		$this->load->helper('directory');
+		add('dijit.Dialog');
+		
+		// getting the content
 		$con = new Content($edit);
 		if(! $con->exists() )
 		$edit = FALSE;
 		else
 		$info = json_decode( $con->info );
 
+		
+		// creating menu if editing a content
 		if( $edit )
 		{
 			$this->show_toolbar = TRUE;
@@ -200,17 +171,15 @@ EOT;
 			$this->pages['info/'.$con->id] = 'Information';
 		}
 
-
-		$this->load->helper('directory');
-		add('dijit.Dialog');
-
+		
+		// getting the filter names
 		function remove_ext($item)
 		{ return substr( $item, 0, strrpos($item,'.') ); }
 		$filters_list = directory_map(APPPATH.'views/filter');
 		$filters_list = array_map( 'remove_ext', $filters_list );
 
-
-
+		
+		// creating hidden properties
 		$hidden = array();
 
 		if( $edit === FALSE ){
@@ -230,11 +199,11 @@ EOT;
 			$hidden['info'] = $con->info;
 		}
 
-		// determine the contetn type
+		// action of the form button
 		$form_ajax_url = site_url( 'editor/addaction' );
-		if( $edit === FALSE ){
+		if( $edit === FALSE )
 			$submit_script = "dijit.byId('basic_form').submit();";
-		}else{
+		else{
 			$submit_script = <<<EOT
 	dojo.xhrPost({           
          url: "$form_ajax_url",
@@ -243,7 +212,7 @@ EOT;
          content: dojo.formToObject("basic_form"),
          load: function(response, args) {
 			        Dlg = new dijit.Dialog({
-			            title: "Programatic Dialog Creation",
+			            title: "Saved Successfully",
 			            style: "width: 300px",
 			            content : response
 			        });
@@ -252,7 +221,7 @@ EOT;
 			 },
          error: function(response, args) {
 					Dlg = new dijit.Dialog({
-			            title: "Programatic Dialog Creation",
+			            title: "An error Occured",
 			            style: "width: 300px",
 			            content : response
 			        });
@@ -261,82 +230,66 @@ EOT;
     });
 EOT;
 		}
+		
 		$script  = <<<EOT
-
 <script type="dojo/method" event="onClick" args="evt">
 if( dijit.byId('info_form')!=undefined )
 {
 	dojo.query("[name='info']")[0].value = dojo.toJson(dijit.byId('info_form').getValues());
 }
-
 		$submit_script
 </script>
 EOT;
 
-		if( $edit === FALSE )
-		$button = $this->gui->button( '','Add Content'.$script );
-		else
-		$button = $this->gui->button( '','Edit Content'.$script );
-
-		if( $this->ion_auth->is_admin() )
-		$input = 'permission';
-		else{
-			$input = 'hidden';
-		}
+		$input =  $this->ion_auth->is_admin()? 'permission' : 'hidden';
 
 		if( $edit === FALSE ){
+			
 			$p_cont = new Content($hidden['parent_content']);
-
-			if( $this->ion_auth->is_admin() )
-			$input = 'permission';
-			else
-			{
-				$input = 'hidden';
-			}
-
+			
 			$Basic_Form = 	$this->gui->form(
 			site_url('editor/addaction')
 			,array(
-		"Title : " => $this->gui->textbox('title'),
-		"Show in subsections : " => $this->gui->checkbox('subsection'),
-		"View permissions : " => $this->gui->$input('view', $p_cont->view),
-		"Add in permissions : " => $this->gui->$input('addin', $p_cont->addin),
-		"Edit permissions : " => $this->gui->$input('edit', $p_cont->edit),
-		"Delete permissions : " => $this->gui->$input('del', $p_cont->del),
-		"Filters : "=> $this->gui->select_sort( 'filter',$filters_list ),
-		"" => $button
+		"Title : " 					=> $this->gui->textbox('title'),
+		"Show in subsections : " 	=> $this->gui->checkbox('subsection'),
+		"View permissions : " 		=> $this->gui->$input('view', $p_cont->view),
+		"Add in permissions : " 	=> $this->gui->$input('addin', $p_cont->addin),
+		"Edit permissions : " 		=> $this->gui->$input('edit', $p_cont->edit),
+		"Delete permissions : " 	=> $this->gui->$input('del', $p_cont->del),
+		"Filters : "				=> $this->gui->select_sort( 'filter',$filters_list ),
+		"" 							=> $this->gui->button( '','Save'.$script )
 			)
 			,array( 'id'=>'basic_form' )
 			,$hidden
 			);
-		}else{
+		}else
 			$Basic_Form = 	$this->gui->form(
 			site_url('editor/addaction')
 			,array(
-		"Title : " => $this->gui->textbox('title', $con->title ),
-		"Show in subsections : " => $this->gui->checkbox('subsection','subsection', $con->subsection),
-		"View permissions : " => $this->gui->$input('view', $con->view),
-		"Add in permissions : " => $this->gui->$input('addin', $con->addin),
-		"Edit permissions : " => $this->gui->$input('edit', $con->edit),
-		"Delete permissions : " => $this->gui->$input('del', $con->del),
-		"Filters : "=> $this->gui->select_sort( 'filter', $filters_list, $con->filter ),
-		"" => $button
+		"Title : " 					=> $this->gui->textbox('title', $con->title ),
+		"Show in subsections : " 	=> $this->gui->checkbox('subsection','subsection', $con->subsection),
+		"View permissions : " 		=> $this->gui->$input('view', $con->view),
+		"Add in permissions : " 	=> $this->gui->$input('addin', $con->addin),
+		"Edit permissions : " 		=> $this->gui->$input('edit', $con->edit),
+		"Delete permissions : "		=> $this->gui->$input('del', $con->del),
+		"Filters : "				=> $this->gui->select_sort( 'filter', $filters_list, $con->filter ),
+		"" 							=> $this->gui->button( '','Save'.$script )
 			)
 			,array( 'id'=>'basic_form' )
 			,$hidden
 			);
-		}
+		
 		//===============================================
 		/*OUR JSON OBJECT LIKE THAT
 
 		{
 		"text":{
-		"type":"editor"
-		,"label":"Text Label"
-		,"default":"default text"
+			"type":"editor"
+			,"label":"Text Label"
+			,"default":"default text"
 		}
 		,"title":{
-		"type":"textbox"
+			"type":"textbox"
 		}
 		,"titlecolor":"information to display"
 		}
@@ -413,9 +366,8 @@ EOT;
 							$current_field = $this->gui->smalleditor( $key, $cVal );
 							break;
 					}
-				}else if( is_string( $value ) == TRUE ){
+				}else if( is_string( $value ) == TRUE )
 					$current_field = $this->gui->info( $value );
-				}
 
 				// checking the existance of label
 				if( isset( $value->label )==TRUE )
@@ -429,14 +381,12 @@ EOT;
 		if( count($Plugin_Form_Data) > 0 ){
 			$Plugin_Form = $this->gui->form( '#', $Plugin_Form_Data, array("id"=>"info_form"));
 			$this->print_text( $this->gui->accordion( array("Basic Data"=>$Basic_Form,"Plugin Data"=>$Plugin_Form) ));
-		}else{
+		}else
 			$this->print_text( $this->gui->accordion( array("Basic Data"=>$Basic_Form) ));
-		}
-
+		
 	}
 
 	function delete_children($id){
-
 
 		$c = new Content($id);
 
@@ -445,7 +395,7 @@ EOT;
 				$children = new Content();
 				$children->get_by_parent_content( $c->id );
 				$children->delete_all();
-				$this->add_info( ' Children deleted' );
+				$this->add_info( 'Children deleted' );
 			}else{
 				show_error( 'permission denied! please check your adminstrator' );
 			}
@@ -472,7 +422,6 @@ EOT;
 	}
 
 	function down($id){
-
 
 		$c = new Content($id);
 
@@ -523,13 +472,8 @@ EOT;
 		$this->print_text( $this->gui->form( '#', $data_table ) );
 		add(<<<EOT
 <style>
-label {
-	font-weight: bold;
-}
-
-tr {
-	border-bottom: 1px solid black;
-}
+label {font-weight: bold;}
+tr {border-bottom: 1px solid black;}
 </style>
 EOT
 		);

@@ -15,13 +15,12 @@ $links = array(
 );
 $links_text = '';
 foreach( $links as $key=>$value )
-{
 	$links_text .= "<a href=\"#\" onclick=\"{$value}\" >
 	<img 
 		src=\"{$local}jquery/{$key}.png\" 
 		title=\"{$key}\"
 		>{$key}</a>";
-}
+
 
 $XHR_URL = site_url('editmode/'.(($ci->vunsy->mode()=='edit')?'view':'edit'));
 
@@ -85,6 +84,7 @@ EOT
 <a href="<?=site_url('sectionEditor')?>" class="iframe"  title="Sections manager">
 	<img src="<?=$local?>section.png" /> Sections manager
 </a>
+
 <a href="<?=site_url('auth')?>" class="iframe" title="Users manager" >
 	<img src="<?=$local?>users.png" /> User manager
 </a>
@@ -97,6 +97,9 @@ EOT
 </a>
 <a href="<?=$logout?>" >
 	<img src="<?=$local?>logout.png" title="Logout" /> Logout
+</a>
+<a href="<?=site_url('auth/change_password')?>" >
+	<img src="<?=$local?>logout.png" title="Change Password" />Change Password
 </a>
 </div>
 <a class="ui-draggable trigger" href="#"></a>
