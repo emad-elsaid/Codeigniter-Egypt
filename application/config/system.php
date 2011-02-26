@@ -1,12 +1,12 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * Vunsy config file
+ * Codeigniter-Egypt config file
  *
- * @package	Vunsy
- * @subpackage	Vunsy
+ * @package	Codeigniter-Egypt
+ * @subpackage	Codeigniter-Egypt
  * @category	Config file
  * @author	Emad Elsaid
- * @link	http://github.com/blazeeboy/vunsy
+ * @link	http://github.com/blazeeboy/Codeigniter-Egypt
  */
 include( 'config.php' );
 

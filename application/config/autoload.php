@@ -80,7 +80,7 @@ $autoload['helper'] = array();
 |
 */
 
-$autoload['config'] = array('vunsy_config');
+$autoload['config'] = array('system');
 
 
 /*

@@ -20,7 +20,7 @@ $c->get_by_id( $id );
 
 $u = ( empty($info->externel) )? site_url($info->section) :	$info->externel;
 
-if( ($ci->vunsy->mode()=='edit') and ($c->can_edit() or $c->can_delete()) )
+if( ($ci->system->mode()=='edit') and ($c->can_edit() or $c->can_delete()) )
 {
 	$ci->load->library('gui');
 	echo $ci->gui->info( 'Redirect content here to this '. anchor( $u, 'Page' ) );

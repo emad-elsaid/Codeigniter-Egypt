@@ -2,11 +2,11 @@
 /**  \addtogroup Models
  * Section class: a datamapper class that holds page data from the database
  *
- * @package	Vunsy
- * @subpackage	Vunsy
+ * @package	Codeigniter-Egypt
+ * @subpackage	Codeigniter-Egypt
  * @category	model file
  * @author	Emad Elsaid
- * @link	http://github.com/blazeeboy/vunsy
+ * @link	http://github.com/blazeeboy/Codeigniter-Egypt
  */
 class Section extends DataMapper {
 	var $default_order_by = array('sort');
@@ -94,7 +94,7 @@ class Section extends DataMapper {
 	 **/
 	function render(){
 
-		if($this->ci->vunsy->section->can_view()){
+		if($this->ci->system->section->can_view()){
 			/*********************************************
 			 *  redering the page BODY content
 			 * here i open the edit mode so the widgets got the
@@ -122,13 +122,13 @@ class Section extends DataMapper {
 	<head>
 	<title>{$this->ci->config->item('site_name')} {$this->name}</title>
 	<meta http-equiv="content-type" content="text/html;charset={$this->ci->config->item('charset')}" />
-	<meta name="generator" content="VUNSY system" />
-	{$this->ci->vunsy->css_text()}
-	{$this->ci->vunsy->js_text()}
-	{$this->ci->vunsy->dojo_text()}
-	{$this->ci->vunsy->header_text()}
+	<meta name="generator" content="Codeigniter-Egypt system" />
+	{$this->ci->system->css_text()}
+	{$this->ci->system->js_text()}
+	{$this->ci->system->dojo_text()}
+	{$this->ci->system->header_text()}
 	</head>
-	<body class="{$this->ci->vunsy->dojoStyle}">
+	<body class="{$this->ci->system->dojoStyle}">
 	{$page_body_text}
 	</body>
 </html>

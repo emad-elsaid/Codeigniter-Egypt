@@ -1,13 +1,13 @@
 <?php
 /** \addtogroup Controllers
  * Page controller that shows current
- * section from vunsy object
+ * section from system object
  *
- * @package	Vunsy
- * @subpackage	Vunsy
+ * @package	Codeigniter-Egypt
+ * @subpackage	Codeigniter-Egypt
  * @category	controller file
  * @author	Emad Elsaid
- * @link	http://github.com/blazeeboy/vunsy
+ * @link	http://github.com/blazeeboy/Codeigniter-Egypt
  */
 
 class Page extends CI_Controller{
@@ -17,15 +17,15 @@ class Page extends CI_Controller{
 	 * */
 	function __construct(){
 		parent::__construct();
-		$this->load->library('vunsy');
+		$this->load->library('system');
 	}
 	
 	/**
-	 * that function loads the vunsy current section and print it
+	 * that function loads the system current section and print it
 	 * if that user has the permission to view it or display
 	 * a permission denied message
 	 * */
 	function index(){
-		echo $this->vunsy->section->render();
+		echo $this->system->section->render();
 	}
 }

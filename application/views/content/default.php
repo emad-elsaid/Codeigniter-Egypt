@@ -42,7 +42,7 @@ echo $ci->gui->info( 'if you want to start just login using admin and remove tha
 ?>
 <br>
 		<img src="<?= base_url() ?>assets/admin/logo.png" >
-		<br><h1 class="ui-helper-reset title" >VUnSy</h1>
+		<br><h1 class="ui-helper-reset title" >Codeigniter-Egypt</h1>
 		<h2 class="ui-helper-reset title2" >Virtual Univeral System</h2>
 		<div class="sep"></div>
 	</td>
@@ -72,18 +72,15 @@ built on it some applications accessible by a task bar like facebook one</li>
 <ol>
 	<li>
 	normal site: <br>
-		<i>vunsyURL/index.php</i><br>
-		<i>ex: http://localhost/vunsy/index.php</i>
+		<i>example.com/index.php</i><br>
 	</li>
 	<li>
 	login page:<br>
-		<i>vunsyURL/index.php/login</i><br>
-		<i>ex: http://localhost/vunsy/index.php/login</i>
+		<i>example.com/index.php/login</i><br>
 	</li>
 	<li>
 	logout page:<br>
-		<i>vunsyURL/index.php/logout</i><br>
-		<i>ex: http://localhost/vunsy/index.php/logout</i>
+		<i>example.com/index.php/logout</i><br>
 	</li>
 </ol>
 
@@ -95,7 +92,7 @@ built on it some applications accessible by a task bar like facebook one</li>
 	</li>
 	<li>
 		can change it from:<br>
-		<i>http://localhost/vunsy/index.php/auth/change_password</i>
+		<i>example.com/index.php/auth/change_password</i>
 	</li>
 </ol>
 

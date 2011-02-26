@@ -5,11 +5,11 @@
  * generating forms, tables, titlepanels, splitters, error messages,
  * information messages, colorpickers and a lot more
  *
- * @package	Vunsy
- * @subpackage	Vunsy
+ * @package	Codeigniter-Egypt
+ * @subpackage	Codeigniter-Egypt
  * @category	library file
  * @author	Emad Elsaid
- * @link	http://github.com/blazeeboy/vunsy
+ * @link	http://github.com/blazeeboy/Codeigniter-Egypt
  */
 class Gui {
 

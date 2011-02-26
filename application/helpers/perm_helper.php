@@ -2,11 +2,11 @@
 /**
  * permission helper functions
  *
- * @package	Vunsy
- * @subpackage	Vunsy
+ * @package	Codeigniter-Egypt
+ * @subpackage	Codeigniter-Egypt
  * @category	helper file
  * @author	Emad Elsaid
- * @link	http://github.com/blazeeboy/vunsy
+ * @link	http://github.com/blazeeboy/Codeigniter-Egypt
  */
 if ( ! function_exists('perm_array')){
 	function perm_array()
@@ -24,13 +24,13 @@ if ( ! function_exists('perm_array')){
 						'admin'		=> intval($CI->ion_auth->is_admin()).'=1',
 						'logged'	=> intval($CI->ion_auth->logged_in()).'=1',
 						'guest'		=> intval(!$CI->ion_auth->logged_in()).'=1',
-						'view'		=> intval($CI->vunsy->mode()=='view').'=1',
-						'edit'		=> intval($CI->vunsy->mode()=='edit').'=1'
+						'view'		=> intval($CI->system->mode()=='view').'=1',
+						'edit'		=> intval($CI->system->mode()=='edit').'=1'
 			),
 			'vars' => array(
 						'level'		=> $CI->session->userdata('level'),
 						'user'		=> $CI->session->userdata('id'),
-						'section'	=> $CI->vunsy->section->id,
+						'section'	=> $CI->system->section->id,
 						'day'		=> date('j'),
 						'month'		=> date('n'),
 						'year'		=> date('Y')

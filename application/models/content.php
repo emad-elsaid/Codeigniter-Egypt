@@ -2,11 +2,11 @@
 /** \addtogroup Models
  * Content class that holds the content data from the database
  *
- * @package		Vunsy
- * @subpackage	Vunsy
+ * @package		Codeigniter-Egypt
+ * @subpackage	Codeigniter-Egypt
  * @category		model file
  * @author		Emad Elsaid
- * @link			http://github.com/blazeeboy/vunsy
+ * @link			http://github.com/blazeeboy/Codeigniter-Egypt
  */
 class Content extends DataMapper {
 	var $default_order_by = array('sort');
@@ -66,7 +66,7 @@ class Content extends DataMapper {
 	 **/
 	function container( $text='' ){
 
-		if( $this->ci->vunsy->mode()=='edit' AND $this->info!='PAGE_BODY_LOCKED' ){
+		if( $this->ci->system->mode()=='edit' AND $this->info!='PAGE_BODY_LOCKED' ){
 			$text = $this->ci->load->view('edit_mode/container'
 			,array(
 			'text'=>$text
@@ -164,7 +164,7 @@ class Content extends DataMapper {
 
 		return $this->ci->load->view(
 						'edit_mode/insert',
-		array('url'=> site_url( "editor/chooser/{$this->ci->vunsy->section->id}/{$this->id}/{$cell}/0" )),
+		array('url'=> site_url( "editor/chooser/{$this->ci->system->section->id}/{$this->id}/{$cell}/0" )),
 		TRUE
 		);
 	}
@@ -196,13 +196,13 @@ class Content extends DataMapper {
 			$layout_content = array_fill(0,$cell_number,'');
 			
 			// getting the content in current section
-			$c_children = $this->children( $this->ci->vunsy->section );
+			$c_children = $this->children( $this->ci->system->section );
 			
 			foreach( $c_children as $child )
 				$layout_content[$child->cell] .= $child->render();
 				
 			foreach( $layout_content as $k=>$v )
-				if($this->ci->vunsy->mode()=='edit' AND $v=='' AND $this->can_addin())
+				if($this->ci->system->mode()=='edit' AND $v=='' AND $this->can_addin())
 					$layout_content[ $k ] = $this->add_button( $k );
 		}
 		/**

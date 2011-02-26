@@ -30,7 +30,7 @@
 
 <?php 
 $ci =& get_instance();
-if( $ci->vunsy->mode()=='edit' )
+if( $ci->system->mode()=='edit' )
 {
 	$c = new Content();
 	$c->get_by_id( $id );

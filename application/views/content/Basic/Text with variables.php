@@ -14,9 +14,9 @@
 <?php
 $replaces = array(
 "@site"		=> $ci->config->item('site_name'),
-"@user"		=> $ci->vunsy->user->username,
-"@section"	=> $ci->vunsy->section->name,
-"@level"	=> $ci->vunsy->level->name,
+"@user"		=> $ci->system->user->username,
+"@section"	=> $ci->system->section->name,
+"@level"	=> $ci->system->level->name,
 "@day"		=> date('j'),
 "@month"	=> date('n'),
 "@year"		=> date('Y')

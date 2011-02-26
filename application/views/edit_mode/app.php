@@ -19,11 +19,11 @@
 	<head>
 		<title><?= $app->name ?> <?= $app->page ?> </title>
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-		<meta name="generator" content="VUNSY system" />
-		<?= $this->vunsy->css_text() ?>
-		<?= $this->vunsy->js_text() ?>
-		<?= $this->vunsy->dojo_text() ?>
-		<?= $this->vunsy->header_text() ?>
+		<meta name="generator" content="Codeigniter-EGYPT system" />
+		<?= $this->system->css_text() ?>
+		<?= $this->system->js_text() ?>
+		<?= $this->system->dojo_text() ?>
+		<?= $this->system->header_text() ?>
 		
 	<style>
 	html,body{
@@ -45,7 +45,7 @@
 	}
 	</style>
 	</head>
-	<body class="<?= $app->vunsy->dojoStyle ?>">
+	<body class="<?= $app->system->dojoStyle ?>">
 
 <div dojoType="dijit.layout.BorderContainer" gutters="false" id="borderContainerTwo" style="width: 100%;height:100%;">
 	

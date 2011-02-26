@@ -1,14 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /** \addtogroup Libraries
- * Vunsy main Class that store user , section, level, and all other main data
+ * Codeigniter-Egypt main Class that store user , section, level, and all other main data
  *
- * @package	Vunsy
- * @subpackage	Vunsy
+ * @package	Codeigniter-Egypt
+ * @subpackage	Codeigniter-Egypt
  * @category	library file
  * @author	Emad Elsaid
- * @link	http://github.com/blazeeboy/vunsy
+ * @link	http://github.com/blazeeboy/Codeigniter-Egypt
  */
-class Vunsy {
+class System {
 
 	var $CI 		= NULL;
 	var $js 		= array();

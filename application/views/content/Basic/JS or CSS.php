@@ -15,7 +15,7 @@
 <?php
 add( explode( "\n", $info->resourceFiles) );
 
-if( $ci->vunsy->mode()=='edit' )
+if( $ci->system->mode()=='edit' )
 {
 	$c = new Content();
 	$c->get_by_id( $id );

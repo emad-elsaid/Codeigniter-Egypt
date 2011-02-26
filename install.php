@@ -34,7 +34,7 @@ file_put_contents( 'config.php', $config_file );
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-	<title>Vunsy websites kernel installer</title>
+	<title>Codeigniter Egypt websites kernel installer</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<link  href="assets/style/reset.css" rel="stylesheet" type="text/css" />
 	<link  href="assets/style/text.css" rel="stylesheet" type="text/css" />
@@ -108,7 +108,7 @@ hr
 <body>
 	<div class="header" >
 		<img src="assets/admin/logo.png" style="float:left;" />
-		Vunsy Installer
+		Codeigniter Egypt Installer
 	</div>
 	<div class="content" >
 	
@@ -156,6 +156,6 @@ hr
 	<?php endif; ?>
 	
 	</div>
-	<div class="foot" >Vunsy is an opensource application built on codeigniter, dojo, jquery</div>
+	<div class="foot" >Codeigniter-Egypt is an opensource application built on codeigniter, dojo, jquery</div>
 </body>
 </html>

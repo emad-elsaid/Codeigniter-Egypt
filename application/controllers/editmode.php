@@ -23,7 +23,7 @@ class Editmode extends Application {
 	
 	function edit()
 	{
-		$this->vunsy->mode( 'edit' );
+		$this->system->mode( 'edit' );
 		$this->load->library( 'gui' );
 		$text = anchor( site_url('editmode/view') , 'Go to View Mode' );
 		$this->print_text('<center>'.$text.'</center>');
@@ -31,7 +31,7 @@ class Editmode extends Application {
 	
 	function view()
 	{
-		$this->vunsy->mode( 'view' );
+		$this->system->mode( 'view' );
 		$this->load->library( 'gui' );
 		$text = anchor( site_url('editmode/edit') , 'Go to Edit Mode' );
 		$this->print_text('<center>'.$text.'</center>');

@@ -44,6 +44,6 @@
 
 <?=$submit_button?></form>
 <?php else: ?>
-<a href="<?=site_url('logout')?>" ><?=str_replace( '@user', $ci->vunsy->user->username, $info->logout )?></a>
+<a href="<?=site_url('logout')?>" ><?=str_replace( '@user', $ci->system->user->username, $info->logout )?></a>
 <?php endif; ?>
 <?php } ?>

@@ -5,11 +5,11 @@
  * , it provide the files , content, directory widgets with
  * the information needed through AJAX
  * 
- * @package	Vunsy
- * @subpackage	Vunsy
+ * @package	Codeigniter-Egypt
+ * @subpackage	Codeigniter-Egypt
  * @category	controller file
  * @author	Emad Elsaid
- * @link	http://github.com/blazeeboy/vunsy
+ * @link	http://github.com/blazeeboy/Codeigniter-Egypt
  */
 class Remote extends Application {
 	

@@ -5,11 +5,11 @@
  * to add javascripts ans css links 
  * to the page header
  *
- * @package	Vunsy
- * @subpackage	Vunsy
+ * @package	Codeigniter-Egypt
+ * @subpackage	Codeigniter-Egypt
  * @category	helper file
  * @author	Emad Elsaid
- * @link	http://github.com/blazeeboy/vunsy
+ * @link	http://github.com/blazeeboy/Codeigniter-Egypt
  */
 if ( ! function_exists('add_js')){
 	function add_js( $script = '' )
@@ -26,7 +26,7 @@ if ( ! function_exists('add_js')){
 		}
 		
 		/* is the paramter not an array then it's a string
-		 * we add it to vunsy javascript array
+		 * we add it to system javascript array
 		 * */
 		else
 		{
@@ -40,9 +40,9 @@ if ( ! function_exists('add_js')){
 				$script = base_url().$script;
 			}
 			
-			// push script to vunsy JS array . 
-			if(! in_array($script, $CI->vunsy->js))
-				array_push( $CI->vunsy->js, $script );
+			// push script to system JS array . 
+			if(! in_array($script, $CI->system->js))
+				array_push( $CI->system->js, $script );
 		}
 	}
 }
@@ -71,7 +71,7 @@ if ( ! function_exists('add_css')){
 		}
 		
 		/* is the paramter not an array then it's a string
-		 * we add it to vunsy javascript array
+		 * we add it to system javascript array
 		 * */
 		else
 		{
@@ -81,16 +81,16 @@ if ( ! function_exists('add_css')){
 			switch( $position )
 			{
 				case 'first':
-					if(! in_array($style, $CI->vunsy->css_first))
-						array_push( $CI->vunsy->css_first, $style );
+					if(! in_array($style, $CI->system->css_first))
+						array_push( $CI->system->css_first, $style );
 					break;
 				case 'last':
-					if(! in_array($style, $CI->vunsy->css_last))
-						array_push( $CI->vunsy->css_last, $style );
+					if(! in_array($style, $CI->system->css_last))
+						array_push( $CI->system->css_last, $style );
 					break;
 				default:
-					if(! in_array($style, $CI->vunsy->css))
-						array_push( $CI->vunsy->css, $style );
+					if(! in_array($style, $CI->system->css))
+						array_push( $CI->system->css, $style );
 			}
 		}
 	}
@@ -110,15 +110,15 @@ if ( ! function_exists('add_dojo')){
 		}
 		
 		/* is the paramter not an array then it's a string
-		 * we add it to vunsy javascript array
+		 * we add it to system javascript array
 		 * */
 		else
 		{
 			$req	=	trim($req);
 			$CI	=&	get_instance();
 			
-			if(! in_array($req, $CI->vunsy->dojo))
-				array_push( $CI->vunsy->dojo, $req );
+			if(! in_array($req, $CI->system->dojo))
+				array_push( $CI->system->dojo, $req );
 				
 		}
 	}
@@ -139,15 +139,15 @@ if ( ! function_exists('add_header')){
 		
 		/**
 		 *  is the paramter not an array then it's a string
-		 * we add it to vunsy javascript array
+		 * we add it to system javascript array
 		 * */
 		else
 		{
 			$block	=	trim($block);
 			$CI		=&	get_instance();
 			
-			if(! in_array($block, $CI->vunsy->header))
-				array_push( $CI->vunsy->header, $block );
+			if(! in_array($block, $CI->system->header))
+				array_push( $CI->system->header, $block );
 				
 		}
 	}

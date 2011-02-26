@@ -2,11 +2,11 @@
 /** \addtogroup Libraries 
  * application class: application class that loads and render application pages
  *
- * @package	Vunsy
- * @subpackage	Vunsy
+ * @package	Codeigniter-Egypt
+ * @subpackage	Codeigniter-Egypt
  * @category	Core Class
  * @author	Emad Elsaid
- * @link	http://github.com/blazeeboy/vunsy
+ * @link	http://github.com/blazeeboy/Codeigniter-Egypt
  */
 class Application extends CI_Controller {
 	
@@ -76,7 +76,7 @@ class Application extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->library('vunsy');
+		$this->load->library('system');
 	}
 	
 	function _remap($method, $params = array())

@@ -1,4 +1,4 @@
-Vunsy system
+Codeigniter-Egypt system
 =====================
 if you are a website developer then you know the amount of work getting the site components together you  have to make a database base minimal structure and 
 1.users table: holding users information
@@ -9,14 +9,14 @@ if you are a website developer then you know the amount of work getting the site
 
 
 and you need to get your javascript frameworks and some minimal backend pages.
-We take about 20% of overall projects work hours in preperations. If you are tired of that then vunsy is for you.
+We take about 20% of overall projects work hours in preperations. If you are tired of that then Codeigniter-Egypt is for you.
 
-Vunsy is a very easy CMS that built on a very simple idea like HTML and all the XML languages 
+Codeigniter-Egypt is a very easy CMS that built on a very simple idea like HTML and all the XML languages 
 every website is consisting of pages every page may have subpages and so 
 every page has a permissions to determine  it's displayable for that user or under any other conditions 
 every page contain widgets inside widgets , the widget display data and may have cells that can contain another set of widgets and so on. 
 Every widget may have properties and children , the widget is like a function that takes paramters make a process on them and return an HTML result 
-vunsy support the idea of applications on the website every application has a JSON defination file and permissions to use 
+Codeigniter-Egypt support the idea of applications on the website every application has a JSON defination file and permissions to use 
 
 
 [program built on]
@@ -39,37 +39,37 @@ built on it some applications accessible by a task bar like facebook one
 -----------------------------------------------------------------
 [ Installation ]
 ---
-* 1- copy the vunsy folder to your web folder
-* 2- files needed to be configured vunsy/config.php  or make it writable by server and open the install.php in your browser
+* 1- copy the Codeigniter-Egypt folder to your web folder
+* 2- files needed to be configured Codeigniter-Egypt/config.php  or make it writable by server and open the install.php in your browser
 	
 	if you want to make more configuration modify
-			vunsy/system/application/config/config.php
-			vunsy/system/application/config/database.php
-			vunsy/system/application/config/vunsy_config.php
+			Codeigniter-Egypt/system/application/config/config.php
+			Codeigniter-Egypt/system/application/config/database.php
+			Codeigniter-Egypt/system/application/config/system.php
 			
 * 3- to install database : 
-	open the vunsy website 
-	ex: http://localhost/vunsy/index.php/install
+	open the Codeigniter-Egypt website 
+	ex: http://localhost/Codeigniter-Egypt/index.php/install
 	you can use install.php but config.php must be writable
 -----------------------------------------------------------------
 [ Running ]
 ---
 * 1- normal site: 
-	vunsyURL/index.php
-	ex: http://localhost/vunsy/index.php
+	Codeigniter-EgyptURL/index.php
+	ex: http://localhost/Codeigniter-Egypt/index.php
 * 2- login page:
-	vunsyURL/index.php/login
-	ex: http://localhost/vunsy/index.php/login
+	Codeigniter-EgyptURL/index.php/login
+	ex: http://localhost/Codeigniter-Egypt/index.php/login
 * 3- logout page:
-	vunsyURL/index.php/logout
-	ex: http://localhost/vunsy/index.php/logout
+	Codeigniter-EgyptURL/index.php/logout
+	ex: http://localhost/Codeigniter-Egypt/index.php/logout
 -----------------------------------------------------------------
 [ Root default logon ]
 ---
 * 1- user name: admin@admin.com
 	password: password
 * you can change it from:
-	http://localhost/vunsy/index.php/auth/change_password
+	http://localhost/Codeigniter-Egypt/index.php/auth/change_password
 -----------------------------------------------------------------
 [ How to help us ]
 ---

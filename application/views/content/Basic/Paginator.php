@@ -5,7 +5,7 @@
 	"page_up" : { "type":"checkbox", "default":true, "label":"Show page numbers Before" },
 	"page_down" : { "type":"checkbox", "default":true, "label":"Show page numbers After" },
 	"empty_msg" : { "type":"textbox", "label":"If paginator empty display", "default":"No children available"},
-	"info" : "identifier will let vunsy identify your paginator in case of inserting more than one paginator in your page",
+	"info" : "identifier will let system identify your paginator in case of inserting more than one paginator in your page",
 	"identifier":{ "type":"textbox", "default":"p" },
 	"reverse":{ "type":"checkbox", "label":"Reverse content order"  },
 	"pagination config" : "these variables are the config of pagination items see codeigniter pagination library",
@@ -42,11 +42,11 @@
 <?php
 $children = new Content();
 $children->where( 'parent_content', $id );
-$children->where( 'parent_section', $ci->vunsy->section->id );
+$children->where( 'parent_section', $ci->system->section->id );
 
 // generate pagination
 $ci->load->library('pagination');
-$config['base_url'] 			= site_url( $ci->vunsy->section->id.'/'.$info->identifier );
+$config['base_url'] 			= site_url( $ci->system->section->id.'/'.$info->identifier );
 $config['total_rows'] 			= $children->result_count();
 $config['per_page'] 			= $info->limit;
 if( $info->num_links>0 )
@@ -75,7 +75,7 @@ $ci->pagination->initialize($config);//++++
 $links = $ci->pagination->create_links();//+++
 
 $children->where( 'parent_content', $id );
-$children->where( 'parent_section', $ci->vunsy->section->id );
+$children->where( 'parent_section', $ci->system->section->id );
 
 if( $ci->uri->segment(2)==$info->identifier ) 
 	$children->limit( $info->limit, intval($ci->uri->segment(3)) );
@@ -106,7 +106,7 @@ else
 	$ci->load->library('gui');
 	$c = new Content();
 	$c->get_by_id( $id );
-	if( $c->can_addin() and $ci->vunsy->mode()=='edit' )
+	if( $c->can_addin() and $ci->system->mode()=='edit' )
 		$text .= $c->add_button(0);
 	if( !empty( $info->empty_msg ) )
 		$text .= $ci->gui->info( $info->empty_msg );
