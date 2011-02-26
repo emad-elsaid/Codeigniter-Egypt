@@ -13,8 +13,6 @@ class Editor extends Application {
 		$this->website 	= "http://blazeeboy.blogspot.com";
 		$this->version 	= "0.1";
 
-		$this->show_statusbar 	= FALSE;
-		$this->show_title 		= FALSE;
 		$this->show_toolbar 	= FALSE;
 		$this->pages 			= array();
 

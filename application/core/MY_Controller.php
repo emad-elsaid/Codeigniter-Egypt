@@ -55,15 +55,6 @@ class Application extends CI_Controller {
 	 */ 
 	public $show_toolbar = TRUE;
 	
-	/**
-	 *  show hide titlebar
-	 */
-	public $show_title = TRUE;
-	
-	/**
-	 *  show hide statusbar
-	 */
-	public $show_statusbar = TRUE;
 	
 	/**
 	 * detemine if the page rendered as ajax page or not

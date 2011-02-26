@@ -12,8 +12,6 @@ class Editmode extends Application {
 		$this->website 	= "http://blazeeboy.blogspot.com";
 		$this->version 	= "0.1";
 
-		$this->show_statusbar 	= FALSE;
-		$this->show_toolbar 	= TRUE;
 		$this->pages 			= array(
 									'edit'=>'Edit Mode'
 									,'view'=>'View Mode'
