@@ -1,17 +1,14 @@
-<?php if( $mode=='config' ){
-//the plugin requirements as a JSON object is here ?>
-{
-	"feed_url" : { "type":"textbox", "label":"RSS URL" }
-}
+<?php if( $mode=='config' ): ?>
 
+feed_url :  
+	type:textbox 
+	label:RSS URL 
 
-<?php }else if( $mode=='layout' ){ 
-//replace 0 with number of cells your plugin has ?>
+<?php elseif( $mode=='layout' ): ?>
 0
 
 
-<?php }else if( $mode=='view' ){
-//the real content of your plugin goes here ?>
+<?php elseif( $mode=='view' ): ?>
 <?php
 if( isset($info->feed_url) and $info->feed_url!='' )
 {
@@ -30,4 +27,4 @@ else
 	echo $ci->gui->error( 'feed URL field is empty, please write a valid RSS feed URL' );
 }
 ?>
-<?php } ?>
+<?php endif; ?>

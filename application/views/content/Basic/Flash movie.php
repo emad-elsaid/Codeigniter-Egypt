@@ -1,34 +1,36 @@
-<?php if( $mode=='config' ){
-//the plugin requirements as a JSON object is here ?>
-{
-	"flash":{"type":"file","label":"flash file"},
-	"width":{"type":"number"},
-	"height":{"type":"number"},
-	"bg":{"type":"color","label":"background color" },
-	"quality":{"type":"dropdown","options":{
-							"best":"best",
-							"high":"high",
-							"medium":"medium",
-							"low":"low"
-							}},
-	"align":{"type":"dropdown","options":{
-							"left":"left",
-							"right":"right",
-							"top":"top",
-							"bottom":"bottom"
-							}},
-	"loop":{"type":"checkbox", "default":true},
-	"transparent":{"type":"checkbox"}
-}
-
-
-<?php }else if( $mode=='layout' ){ 
-//replace 0 with number of cells your plugin has ?>
+<?php if( $mode=='config' ): ?>
+flash:
+	type:file
+	label:flash file
+width:
+	type:number
+height:
+	type:number
+bg:
+	type:color
+	label:background color 
+quality:
+	type:dropdown
+	options:
+		best:best
+		high:high
+		medium:medium
+		low:low
+align:
+	type:dropdown
+	options:
+		left:left
+		right:right
+		top:top
+		bottom:bottom	
+loop:
+	type:checkbox 
+	default:true
+transparent:
+	type:checkbox
+<?php elseif( $mode=='layout' ): ?>
 0
-
-
-<?php }else if( $mode=='view' ){
-//the real content of your plugin goes here ?>
+<?php elseif( $mode=='view' ): ?>
 <OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0"
  width="<?=$info->width?>"
  height="<?=$info->height?>"
@@ -55,4 +57,4 @@
  >
 </EMBED>
 </OBJECT> 
-<?php } ?>
+<?php endif; ?>

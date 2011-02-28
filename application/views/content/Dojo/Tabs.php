@@ -1,16 +1,16 @@
-<?php if($mode=='config'){ ?>
-{
-	"titles":{"type":"textarea"},
-	"height":{"type":"textbox", "default":"300px"},
-	"width":{"type":"textbox", "default":"100%"}
-}
-<?php } ?>
-
-<?php if($mode=='layout'){ ?>
+<?php if( $mode=='config' ): ?>
+titles:
+	type:textarea
+height:
+	type:textbox 
+	default:300px
+width:
+	type:textbox 
+	default:100%
+<?php elseif( $mode=='layout' ): ?>
 <?= count( explode( "\n", $info->titles ) ); ?>
-<?php } ?>
+<?php elseif( $mode=='view' ): ?>
 
-<?php if($mode=='view'){ ?>
 	
 	<?php
 	$ci->load->library( 'gui' );
@@ -21,4 +21,4 @@
 			array('width'=>$info->width,'height'=>$info->height)
 			);
 	?>
-<?php } ?>
+<?php endif; ?>

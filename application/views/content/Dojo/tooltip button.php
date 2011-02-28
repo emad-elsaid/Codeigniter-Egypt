@@ -1,16 +1,12 @@
-<?php if($mode=='config'){ ?>
-{
-	"title":{"type":"textbox"}
-}
-<?php } ?>
-
-<?php if($mode=='layout'){ ?>
+<?php if( $mode=='config' ): ?>
+title:
+	type:textbox
+<?php elseif( $mode=='layout' ): ?>
 1
-<?php } ?>
+<?php elseif( $mode=='view' ): ?>
 
-<?php if($mode=='view'){ ?>
 <?php
 $ci->load->library( 'gui' );
 echo $ci->gui->tooltipbutton( $info->title, $cell[0] );
 ?>
-<?php } ?>
+<?php endif; ?>

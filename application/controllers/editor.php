@@ -269,25 +269,24 @@ EOT;
 		,"titlecolor":"information to display"
 		}
 		**/
-
+		$this->load->helper('spyc');
 		$Plugin_Data = $this->load->view( 'content/'.$hidden['path'], array( "mode"=>"config" ), TRUE );
-		$Plugin_Data = json_decode( $Plugin_Data );
+		$Plugin_Data = spyc_load( $Plugin_Data );
 		$Plugin_Form_Data = array();
 
 		// starting to make the form if it is exists
-		if( is_object( $Plugin_Data ) ){
+		if( !empty( $Plugin_Data ) ){
 			// building each field
 			foreach( $Plugin_Data as $key=>$value ){
-
 				// build the field depending on the type
-				if( is_object( $value ) ){
+				if( is_array( $value ) ){
 					// this line gets the default value if in insertion mode and the
 					// stored value if in the edit mode
 					$cVal = '';
-					$cVal = ( $edit===FALSE )? @$value->default: @$info->$key;
-					$current_field = $this->gui->textbox( $key, @$value->default );
-
-					switch( $value->type ){
+					$cVal = ( $edit===FALSE )? @$value['default']: @$info->$key;
+					$current_field = $this->gui->textbox( $key, @$value['default'] );
+					
+					switch( $value['type'] ){
 						case "textbox":
 							$current_field = $this->gui->textbox( $key, $cVal );
 							break;
@@ -329,7 +328,7 @@ EOT;
 							break;
 						case "dropdown":
 							$current_field = $this->gui->dropdown( $key, $cVal,
-							@$value->options );
+							@$value['options'] );
 							break;
 						case "section":
 							$current_field = $this->gui->section( $key, $cVal );
@@ -345,8 +344,8 @@ EOT;
 					$current_field = $this->gui->info( $value );
 
 				// checking the existance of label
-				if( isset( $value->label )==TRUE )
-				$Plugin_Form_Data[$value->label] = $current_field;
+				if( is_array($value) and array_key_exists('label',$value)==TRUE )
+				$Plugin_Form_Data[$value['label']] = $current_field;
 				else
 				$Plugin_Form_Data[$key] = $current_field;
 

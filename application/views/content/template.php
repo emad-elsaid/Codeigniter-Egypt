@@ -1,8 +1,6 @@
 <?php if( $mode=='config' ):
-//the plugin requirements as a JSON object is here ?>
-{
-	
-}
+//the plugin requirements as a YAML object is here ?>
+
 
 
 <?php elseif( $mode=='layout' ): 

@@ -1,16 +1,15 @@
-<?php if($mode=='config'){ ?>
-{
-	"columns":{"type":"number","default":1},
-	"rows":{"type":"number","default":1},
-	"style":{"type":"textarea"}
-}
-<?php } ?>
-
-<?php if($mode=='layout'){ ?>
+<?php if( $mode=='config' ): ?>
+columns:
+	type:number
+	default:1
+rows:
+	type:number
+	default:1
+style:
+	type:textarea
+<?php elseif( $mode=='layout' ): ?>
 <?= $info->columns*$info->rows ?>
-<?php } ?>
-
-<?php if($mode=='view'){ ?>
+<?php elseif( $mode=='view' ): ?>
 <table style="<?= $info->style ?>">
 <?php for( $i=0; $i<$info->rows; $i++ ){ ?>
 	 <tr>
@@ -22,4 +21,4 @@
 	 </tr>
 <?php } ?>
  </table>
-<?php } ?>
+<?php endif; ?>

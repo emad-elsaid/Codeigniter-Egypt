@@ -1,19 +1,14 @@
-<?php if( $mode=='config' ){
-//the plugin requirements as a JSON object is here ?>
-{
-	"parent":{"type":"section"},
-	"separator":{"type":"textbox", "default":" | "},
-	"style":{"type":"textarea"}
-}
-
-
-<?php }else if( $mode=='layout' ){ 
-//replace 0 with number of cells your plugin has ?>
+<?php if( $mode=='config' ): ?>	
+parent:
+	type:section
+separator:
+	type:textbox 
+	default: "|"
+style:
+	type:textarea
+<?php elseif( $mode=='layout' ): ?>
 0
-
-
-<?php }else if( $mode=='view' ){
-//the real content of your plugin goes here ?>
+<?php elseif( $mode=='view' ): ?>
 <?php 
 $sections = new Section();
 $sections->order_by( 'sort', 'asc' );
@@ -36,4 +31,4 @@ foreach( $secs as $item )
 
 echo implode( $info->separator, $hyperLinks );
 ?>
-<?php } ?>
+<?php endif; ?>

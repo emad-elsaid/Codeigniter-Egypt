@@ -1,4 +1,4 @@
-<?php if( $mode=='view' ){
+<?php if( $mode=='view' ):
 add(<<<EOT
 <style>
 body{
@@ -106,4 +106,4 @@ built on it some applications accessible by a task bar like facebook one</li>
 	</td>
 </tr>
 </table>
-<?php } ?>
+<?php endif; ?>

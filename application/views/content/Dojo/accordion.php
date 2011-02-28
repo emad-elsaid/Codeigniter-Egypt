@@ -1,15 +1,12 @@
-<?php if($mode=='config'){ ?>
-{
-	"titles":{"type":"textarea"},
-	"style":{"type":"textarea"}
-}
-<?php } ?>
-
-<?php if($mode=='layout'){ ?>
+<?php if( $mode=='config' ): ?>
+titles:
+	type:textarea
+style:
+	type:textarea
+<?php elseif( $mode=='layout' ): ?>
 <?= count( explode( "\n", $info->titles ) ); ?>
-<?php } ?>
+<?php elseif( $mode=='view' ): ?>
 
-<?php if($mode=='view'){ ?>
 <?php
 $ci =& get_instance();
 $ci->load->library( 'gui' );
@@ -28,4 +25,4 @@ foreach( $info->titles as $item )
 // printing the accordion
 echo $ci->gui->accordion( $content, '', $info->style );
 ?>
-<?php } ?>
+<?php endif; ?>

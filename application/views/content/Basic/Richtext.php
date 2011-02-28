@@ -1,8 +1,6 @@
-<?php if( $mode=='config' ){ ?>
-{
-	"Text":{"type":"editor"}
-}
-<?php } ?>
-<?php if( $mode=='view' ){ ?>
+<?php if( $mode=='config' ): ?>
+Text:
+	type:editor
+<?php elseif( $mode=='view' ): ?>
 <?= $info->Text ?>
-<?php } ?>
+<?php endif; ?>
