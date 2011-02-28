@@ -27,8 +27,8 @@ class Editor extends Application {
 		add('jquery/jquery.js');
 		
 		$this->print_text('<div dojoType="dojo.data.ItemFileReadStore" url="'.site_url('editor/queryTree').'" jsId="ordJson"></div>');
-		$this->print_text('<div dojoType="dijit.tree.ForestStoreModel" childrenAttrs="line" rootLabel="Order" store="ordJson" jsId="ordModel"></div>');
-		$this->print_text('<div dojoType="dijit.Tree" id="ordTree" model="ordModel">
+		$this->print_text('<div dojoType="dijit.tree.ForestStoreModel" childrenAttrs="line" store="ordJson" jsId="ordModel"></div>');
+		$this->print_text('<div dojoType="dijit.Tree" id="ordTree" model="ordModel" showRoot="false" >
 		<script type="dojo/method" event="onClick" args="item">
 		if(item.path!=undefined){
 			$("input[name=path]").val(item.path[0]);

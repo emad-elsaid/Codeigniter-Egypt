@@ -13,7 +13,7 @@ class SectionEditor extends Application {
 		$this->version 	= "0.1";
 
 		$this->pages 	= array(
-							'index'=>'Pages',
+							'index'=>'Sections',
 							'add'=>'New Section'
 							);
 
@@ -27,8 +27,8 @@ class SectionEditor extends Application {
 		add('dijit.Tree');
 		
 		$this->print_text('<div dojoType="dojo.data.ItemFileReadStore" url="'.site_url('sectionEditor/queryTree').'" jsId="ordJson"></div>');
-		$this->print_text('<div dojoType="dijit.tree.ForestStoreModel" childrenAttrs="line" rootLabel="Index Page" store="ordJson" jsId="ordModel"></div>');
-		$this->print_text('<div dojoType="dijit.Tree" id="ordTree" model="ordModel">
+		$this->print_text('<div dojoType="dijit.tree.ForestStoreModel" childrenAttrs="line" store="ordJson" jsId="ordModel"></div>');
+		$this->print_text('<div dojoType="dijit.Tree" id="ordTree" model="ordModel" showRoot="false" >
 		<script type="dojo/method" event="onClick" args="item">
 		if( item.id!=undefined )
 			document.location.href = "'.site_url('sectionEditor/edit').'/"+item.id;	
