@@ -89,6 +89,8 @@ dojo.addOnLoad( null, function(){
 
       
     <?php echo form_close();?>
+    <a href="<?=site_url('auth/forgot_password')?>" >Forgot Password</a><br/>
+    <a href="<?=site_url('auth/create_user')?>" >New user registeration</a>
 
 </div>
 		</div>

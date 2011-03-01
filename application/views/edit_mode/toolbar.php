@@ -48,7 +48,7 @@ EOT
 		<img src="<?=$local?>link.png" /> Sections manager
 	</a>
 	
-	<a href="<?=site_url('auth')?>" class="iframe" title="Users manager" >
+	<a href="<?=site_url('usersEditor')?>" class="iframe" title="Users manager" >
 		<img src="<?=$local?>link.png" /> User manager
 	</a>
 	
