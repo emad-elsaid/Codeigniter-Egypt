@@ -16,7 +16,7 @@ every website is consisting of pages every page may have subpages and so
 every page has a permissions to determine  it's displayable for that user or under any other conditions 
 every page contain widgets inside widgets , the widget display data and may have cells that can contain another set of widgets and so on. 
 Every widget may have properties and children , the widget is like a function that takes paramters make a process on them and return an HTML result 
-Codeigniter-Egypt support the idea of applications on the website every application has a JSON defination file and permissions to use 
+Codeigniter-Egypt support the idea of applications
 
 
 [program built on]
@@ -30,11 +30,10 @@ Codeigniter-Egypt support the idea of applications on the website every applicat
 [The idea]
 ---
 * the idea is to make a site with fast way debending on the widgets and layouts
-giving permissions to evey content for several things
-viewing, deleting and so.
+giving permissions to evey content for viewing.
 
 * so as the section has the same thing
-built on it some applications accessible by a task bar like facebook one
+built on it some applications accessible by a task bar
 
 -----------------------------------------------------------------
 [ Installation ]
