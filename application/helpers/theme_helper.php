@@ -204,7 +204,7 @@ if( ! function_exists('theme_dojo') ){
 		if ( is_null($input) ){
 			if( count($CI->config->item('dojo_files'))==0 )
 				return '';
-			$dojoText = '<script type="text/javascript">dojo.require("dojo.parser");';
+			$dojoText = '<script type="text/javascript">';
 			$dojoArray = $CI->config->item('dojo_files');
 			foreach( $dojoArray as $item )
 				$dojoText .= 'dojo.require("'.$item.'");';
