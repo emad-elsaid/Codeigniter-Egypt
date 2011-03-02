@@ -1,5 +1,5 @@
 <?php
-$config_site_name		= "siteName";
+$config_site_name		= "Site Name";
 
 $db_hostname			= "localhost";
 $db_database			= "egypt";

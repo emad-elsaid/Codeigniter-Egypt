@@ -1,8 +1,9 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require 'config.php';
 
 $config['doctype'] 					= 'xhtml1-trans';
 $config['charset'] 					= 'UTF-8';
-$config['site_name'] 				= 'Site Name';
+$config['site_name'] 				= $config_site_name;
 $config["dojo_style"]				= "claro";
 
 $config['page_title'] 				= '';
