@@ -169,9 +169,10 @@ if( ! function_exists('theme_js') ){
 			$jsText = '';
 			$jsArray = $CI->config->item('js_files');
 			foreach( $jsArray as $item )
-			if( $item[0]!='<' )
-			$jsText .= "<script type=\"text/javascript\" src=\"$item\"></script>\n";
-			else
+			if( $item[0]!='<' ){
+				$param = ($item==$CI->config->slash_item('base_url').'dojo/dojo/dojo.js')? 'djConfig="parseOnLoad:true"':'';
+				$jsText .= "<script type=\"text/javascript\" src=\"$item\" $param ></script>\n";
+			}else
 			$jsText .= $item."\n";
 			return $jsText;
 		}
@@ -181,6 +182,13 @@ if( ! function_exists('theme_js') ){
 
 		if( ! in_array($input, $CI->config->config['js_files']) )
 		array_push( $CI->config->config['js_files'], $input);
+	}
+}
+
+if( ! function_exists('theme_dojotheme') ){
+	function theme_dojotheme(){
+		$CI =& get_instance();
+		return $CI->config->config['dojo_style'];
 	}
 }
 
@@ -196,7 +204,7 @@ if( ! function_exists('theme_dojo') ){
 		if ( is_null($input) ){
 			if( count($CI->config->item('dojo_files'))==0 )
 				return '';
-			$dojoText = '<script type="text/javascript">dojo.require("dojo.parser");dojo.addOnLoad(function(){dojo.addClass(dojo.query("body")[0],"'.$CI->config->config['dojo_style'].'");dojo.parser.parse();});';
+			$dojoText = '<script type="text/javascript">dojo.require("dojo.parser");';
 			$dojoArray = $CI->config->item('dojo_files');
 			foreach( $dojoArray as $item )
 				$dojoText .= 'dojo.require("'.$item.'");';

@@ -4,7 +4,7 @@
 <?=theme_head()?>
 </head>
 
-<body>
+<body class="<?=theme_dojotheme()?>" >
 <?=$body?>
 <?=theme_foot()?>
 </body>

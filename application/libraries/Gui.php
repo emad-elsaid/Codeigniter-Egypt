@@ -754,13 +754,31 @@ EOT;
 
 		theme_add( <<<EOT
 <style type="text/css">
-	.filter .list { 
-		float: left;
-		background-color: #E9E9E9;
-		width:44%;
-	}
+.filter .list { 
+	float: left;
+	background-color: #E9E9E9;
+	width:44%;
+}
 </style>
-
+EOT
+);
+		theme_add( <<<EOT
+<script type="text/javascript">
+$(function(){
+	$(".filterBox")
+	.hide('fast')
+	.siblings(".list")
+		.sortable({connectWith: 'div',})
+		.bind('sortupdate', function(event, ui) {
+			x = Array();
+			$('.list:last').find('div').each(function(){
+			    x.push( $(this).text() );
+			});
+			x = x.join( "\\n" );
+			$(this).siblings('.filterBox').val(x);
+		});
+});
+</script>
 EOT
 		);
 		$output = '
@@ -789,22 +807,7 @@ Selected items';
 
 		$output .= '
 	</div>
-</div>
-
-<script type="text/javascript">
-		$(".filterBox")
-			.hide(\'fast\')
-			.siblings(".list")
-				.sortable({connectWith: \'div\',})
-				.bind(\'sortupdate\', function(event, ui) {
-					x = Array();
-					$(\'.list:last\').find(\'div\').each(function(){
-					    x.push( $(this).text() );
-					});
-					x = x.join( "\\n" );
-					$(this).siblings(\'.filterBox\').val(x);
-				});
-</script>';
+</div>';
 		return $output;
 	}
 

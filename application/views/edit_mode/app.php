@@ -39,7 +39,7 @@
 	}
 	</style>
 	</head>
-	<body>
+	<body class="<?=theme_dojotheme()?>" >
 
 <div dojoType="dijit.layout.BorderContainer" gutters="false" id="borderContainerTwo" style="width: 100%;height:100%;">
 	
