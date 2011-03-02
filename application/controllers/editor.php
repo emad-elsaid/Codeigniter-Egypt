@@ -46,39 +46,28 @@ class Editor extends Application {
 	 * you can generate the object with json_encode
 	 */ 
 	function queryTree(){
+		
 		$this->ajax = TRUE;
 		$this->load->helper('directory');
-		$contents = directory_map( APPPATH.'views/content' );
-		$folders = array_keys($contents);
-		$output = "{ identifier: 'id', label: 'description',items: [";
-		$k=0;
-		foreach( $contents as $name=>$directory ){
-			$k++;
-			if( is_array($directory)){
-				$output .= "{ id: '$k', description:\"$name\" ,line:[";
-				
-				for( $i=0; $i<count($directory); $i++ ){
-					$k++;
-					if( $directory[$i]!='index.html'){
-						$output .= "{ id: '$k', path:'$name\/{$directory[$i]}', description: '{$directory[$i]}'}";
-						if( $i<count($directory)-1 )
-							$output .= ',';
-					}
-				}
-				
-				$output .= ']}';
-			}else{
-				if( $directory!='index.html')
-				$output .= "{ id: '$k', path:'$directory', description:'$directory' }";
-				
-			}
-			
-			if( $name!=$folders[count($folders)-1] and (is_array($directory) or $directory!='index.html') )
-					$output .= ',';
-		}
-		$output .= "]}";
 		
-		$this->print_text($output);
+		function getTree($parent=NULL){
+			$contents = directory_map( APPPATH.'views/content'.$parent, 1 );
+			$line = array();
+			// if the input was a file
+			if( $contents===FALSE )
+				return array();
+				
+			foreach( $contents as $item ){
+				$children = getTree($parent.'/'.$item);
+				
+				$line[] = count($children)>0
+							? array('id'=>$parent.'/'.$item, 'description'=>$item, 'line'=>$children)
+							: array('id'=>$parent.'/'.$item, 'description'=>$item, 'path'=>$parent.'/'.$item);
+			}
+			return $line;
+		}
+		
+		$this->print_text( json_encode(array( 'identifier'=>'id', 'label'=>'description','items'=>getTree(''))) );
 		
 	}
 	
