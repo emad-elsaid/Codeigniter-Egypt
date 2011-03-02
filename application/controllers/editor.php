@@ -291,16 +291,16 @@ EOT;
 							$current_field = $this->gui->editor( $key, $cVal );
 							break;
 						case "file":
-							$current_field = $this->gui->file( $key, $cVal );
+							$current_field = $this->gui->file_chooser( site_url('editor/file_query'), $key, $cVal );
 							break;
 						case "file list":
-							$current_field = $this->gui->file_list( $key, $cVal );
+							$current_field = $this->gui->file_list( site_url('editor/file_query'), $key, $cVal );
 							break;
 						case "folder":
-							$current_field = $this->gui->folder( $key, $cVal );
+							$current_field = $this->gui->folder_chooser( site_url('editor/folder_query'), $key, $cVal );
 							break;
 						case "model":
-							$current_field = $this->gui->model( $key, $cVal );
+							$current_field = $this->gui->file_chooser( site_url('editor/model_query'), $key, $cVal );
 							break;
 						case "number":
 							$current_field = $this->gui->number( $key, $cVal );
@@ -443,5 +443,77 @@ EOT
 		}else{
 			show_error( 'Content not found' );
 		}
+	}
+	
+	
+	function file_query(){
+		$this->ajax = TRUE;
+		$this->load->helper('directory');
+		
+		function getTree($prefix='.', $parent=NULL){
+			$contents = directory_map( $prefix.'/'.$parent, 1 );
+			$line = array();
+			// if the input was a file
+			if( $contents===FALSE )
+				return array();
+				
+			foreach( $contents as $item ){
+				$children = getTree( $prefix, $parent.'/'.$item );
+				$id = trim( $parent.'/'.$item, '/');
+				$line[] = count($children)>0
+							? array('i'=>$id, 'l'=>$item, 'c'=>$children)
+							: array('i'=>$id, 'l'=>$item );
+			}
+			return $line;
+		}
+		
+		$this->print_text( json_encode(array( 'identifier'=>'i', 'label'=>'l','items'=>getTree('.'))) );
+	}
+	
+	function model_query(){
+		$this->ajax = TRUE;
+		$this->load->helper('directory');
+		
+		function getTree($prefix='.', $parent=NULL){
+			$contents = directory_map( $prefix.'/'.$parent, 1 );
+			$line = array();
+			// if the input was a file
+			if( $contents===FALSE )
+				return array();
+				
+			foreach( $contents as $item ){
+				$children = getTree( $prefix, $parent.'/'.$item );
+				$id = trim( $parent.'/'.$item, '/');
+				$line[] = count($children)>0
+							? array('i'=>$id, 'l'=>$item, 'c'=>$children)
+							: array('i'=>$id, 'l'=>$item );
+			}
+			return $line;
+		}
+		
+		$this->print_text( json_encode(array( 'identifier'=>'i', 'label'=>'l','items'=>getTree(APPPATH.'models'))) );
+	}
+	
+	function folder_query(){
+		$this->ajax = TRUE;
+		$this->load->helper('directory');
+		
+		function getTree($prefix='.', $parent=NULL){
+			$contents = directory_map( $prefix.'/'.$parent, 1 );
+			$line = array();
+			// if the input was a file
+			if( $contents===FALSE )
+				return array();
+				
+			foreach( $contents as $item ){
+				$children = getTree( $prefix, $parent.'/'.$item );
+				$id = trim( $parent.'/'.$item, '/');
+				if( is_dir($prefix.'/'.$id) )
+				$line[] = array('i'=>$id, 'l'=>$item, 'c'=>$children);
+			}
+			return $line;
+		}
+		
+		$this->print_text( json_encode(array( 'identifier'=>'i', 'label'=>'l','items'=>getTree('.'))) );
 	}
 }

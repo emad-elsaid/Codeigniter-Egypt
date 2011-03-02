@@ -13,8 +13,7 @@
  */
 class Gui {
 
-	function __construct()
-	{
+	function __construct(){
 		$CI =& get_instance();
 		$CI->load->helper('form');
 	}
@@ -27,8 +26,7 @@ class Gui {
 	 * @param $attributes: array or object of key(attribute)=>value(value of the attribute)
 	 * @param $hidden: array of hiden fields and values as key=>value
 	 */
-	function form($action = '', $data=array(), $attributes = array(), $hidden = array())
-	{
+	function form($action = '', $data=array(), $attributes = array(), $hidden = array()){
 
 		theme_add( 'dijit.form.Form' );
 		$attributes = $this->attribute( $attributes, 'dojoType', 'dijit.form.Form') ;
@@ -36,10 +34,9 @@ class Gui {
 
 		$text =	form_open( $action, $attributes, $hidden).
 					'<table>';
-		foreach( $data as $key=>$value )
-		{
+		foreach( $data as $key=>$value ){
 			$text .=	'<tr>
-						<td width="1%" >'.form_label( $key ).'</td>
+						<th width="1%" >'.form_label( $key ).'</th>
 						<td>'.$value.'</td>
 						</tr>';
 		}
@@ -53,9 +50,10 @@ class Gui {
 	 * @param $NAME: hidden field name
 	 * @param $value: hidden field value
 	 */
-	function hidden($NAME='', $value='' )
-	{
+	function hidden($NAME='', $value='' ){
+		
 		return form_hidden( $NAME, $value );
+		
 	}
 
 	/**
@@ -68,102 +66,81 @@ class Gui {
 	 * @param $param: sfbrowser config object paramter->value associative array
 	 * @param $style: property->value associative array
 	 */
-	function activeTree( $connector='', $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
-	{
+	function file_chooser( $connector='', $NAME='',$value='', $attr=array(), $style=array() ){
 
-		//adding the nessecery javascripts and CSSs
-		theme_add	( 'jquery/jquery.js');
-		theme_add	( 'jquery/fileTree/jqueryFileTree.js' );
-		theme_add	( 'jquery/easing.js' );
-		theme_add	( 'jquery/fileTree/jqueryFileTree.css' );
-		theme_add	( 'jquery/theme/ui.all.css');
-		theme_add	( 'dijit.Dialog' );
-
-		//preparing the paramters
-		if(!isset($param['root']))
-		$param['root'] =  './';
-		else
-		$param['root'] =  './'.$param['root'];
-			
-		if( ! is_dir( $param['root'] ) )
-		$param['root'] = str_replace( '/','\\',$param['root'] );
-			
-		$root		= $param['root'];
-		$script	= $connector;
-
-		$param	= $this->_params_to_js($param);
-
-		// adding the styles if not there
-
-		$style = $this->style( $style, 'width', '400px', FALSE );
-		$style = $this->style( $style, 'height', '300px', FALSE );
-		$style = $this->style( $style, 'overflow', 'auto', FALSE );
-		$style = $this->_array_to_style( $style );
-
-		$attr = $this->attribute( $attr, 'id',  $NAME.'dlg' );
-		$attr = $this->attribute( $attr, 'dojoType',  'dijit.Dialog' );
-		$attr = $this->attribute( $attr, 'title',  'Choose an Item' );
-		$attr = $this->_attributes_to_string( $attr );
-
-		//the output is here
-		$root = addslashes( $root );
-		$t = $this->textbox( $NAME, $value,
-		array(
-					'onclick'=>"dijit.byId('{$NAME}dlg').show();"
-		,'id' => $NAME
-		)
-		);
+		theme_add('dojo.data.ItemFileReadStore');
+		theme_add('dijit.tree.ForestStoreModel');
+		theme_add('dijit.Tree');
+		theme_add('dijit.Dialog');
+		
+		$attr = $this->attribute( $attr, 'onclick', "dijit.byId('filedlg_$NAME').show();");
+		$attr = $this->attribute( $attr, 'id', $NAME );
+		
+		$txtBox = $this->textbox( $NAME, $value, $attr, $style );
+		
 		return <<<EOT
-		$t
-		<div {$attr} >
-			<div id="{$NAME}DIV" style="$style" ></div>
-		</div>
-		<script language="javascript" >
-		$(document).ready( function() {
-    	$('#{$NAME}DIV').fileTree({script:'$script' $param }, 
-		function(file) {
-			file = file.split( '{$root}')[1];
-        	dijit.byId('$NAME').setValue( file );
-			dijit.byId('{$NAME}dlg').hide();
-    	});
-		});
-		</script>
+<div dojoType="dojo.data.ItemFileReadStore" url="$connector" jsId="ordJson_$NAME"></div>
+<div dojoType="dijit.tree.ForestStoreModel" childrenAttrs="c" store="ordJson_$NAME" jsId="ordModel_$NAME"></div>
+<div id="filedlg_$NAME" dojoType="dijit.Dialog" title="Choose...">
+	<div style="width:400px;height:300px;overflow:auto;" ><div dojoType="dijit.Tree" id="ordTree_$NAME" model="ordModel_$NAME" showRoot="false" >
+	<script type="dojo/method" event="onClick" args="item">
+	if(item.c==undefined){
+	dijit.byId('$NAME').setValue(item.i[0]);
+	dijit.byId('filedlg_$NAME').hide();
+	}	
+	</script>
+	</div></div>
+</div>
+$txtBox
 EOT;
-	}
 
-	/**
-	 * generate file chooser HTML using activeTree with connector
-	 * controller file remote/file function
-	 */
-	function file( $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
-	{
-		return $this->activeTree(site_url('remote/file'), $NAME, $value,$attr,$param,$style);
 	}
-
+	
 	/**
-	 * generate model chooser HTML using activeTree with connector
-	 * controller file remote/file function
+	 * Folder chooser using the fsbrowser, use it with CAUTION
+	 * it makes a dojo text input linked with a jquery fsbrowser
+	 * @param $connector: path to php file to use as ajax backend
+	 * @param $NAME: text input name and id
+	 * @param $value: text input value
+	 * @param $attr: attributes->value associative array
+	 * @param $param: sfbrowser config object paramter->value associative array
+	 * @param $style: property->value associative array
 	 */
-	function model( $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
-	{
-		$param['root'] = APPPATH.'models/';
-		return $this->activeTree(site_url('remote/file'), $NAME, $value,$attr,$param,$style);
-	}
+	function folder_chooser( $connector='', $NAME='',$value='', $attr=array(), $style=array() ){
 
-	/**
-	 * generate folder chooser HTML using activeTree with connector
-	 * controller file remote/file function
-	 */
-	function folder( $NAME='',$value='', $attr=array(), $param=array(), $style=array() )
-	{
-		return $this->activeTree(site_url('remote/dir'), $NAME, $value,$attr,$param,$style);
+		theme_add('dojo.data.ItemFileReadStore');
+		theme_add('dijit.tree.ForestStoreModel');
+		theme_add('dijit.Tree');
+		theme_add('dijit.Dialog');
+		
+		$attr = $this->attribute( $attr, 'onclick', "dijit.byId('filedlg_$NAME').show();");
+		$attr = $this->attribute( $attr, 'id', $NAME );
+		
+		$txtBox = $this->textbox( $NAME, $value, $attr, $style );
+		
+		return <<<EOT
+<div dojoType="dojo.data.ItemFileReadStore" url="$connector" jsId="ordJson_$NAME"></div>
+<div dojoType="dijit.tree.ForestStoreModel" childrenAttrs="c" store="ordJson_$NAME" jsId="ordModel_$NAME"></div>
+<div id="filedlg_$NAME" dojoType="dijit.Dialog" title="Choose...">
+	<div style="width:400px;height:300px;overflow:auto;" ><div dojoType="dijit.Tree" id="ordTree_$NAME" model="ordModel_$NAME" showRoot="false" >
+	<script type="dojo/method" event="onClick" args="item">
+	if(item.c!=undefined){
+	dijit.byId('$NAME').setValue(item.i[0]);
+	dijit.byId('filedlg_$NAME').hide();
+	}	
+	</script>
+	</div></div>
+</div>
+$txtBox
+EOT;
+
 	}
 
 	/**
 	 * a color chooser field linked with a dojo color picker dialog
 	 */
-	function color( $NAME='',$value='', $attr=array() )
-	{
+	function color( $NAME='',$value='', $attr=array() ){
+		
 		theme_add( 'dojox.widget.ColorPicker' );
 		theme_add( 'dijit.Dialog' );
 		theme_add( 'dijit.form.TextBox' );
@@ -194,13 +171,13 @@ EOT;
 		</div></div>
 EOT;
 		return $text;
+		
 	}
 
 	/**
 	 * a date field picker using dojo
 	 */
-	function date( $NAME='', $value='', $attr=array() )
-	{
+	function date( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.form.DateTextBox');
 
@@ -209,13 +186,13 @@ EOT;
 
 		$text = '<input type="text" dojoType="dijit.form.DateTextBox" name="'.$NAME.'" value="'.$value.'" '.$attr.' >';
 		return $text;
+		
 	}
 
 	/**
 	 * a Time chooser input field
 	 */
-	function time( $NAME='', $value='', $attr=array() )
-	{
+	function time( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.form.TimeTextBox');
 
@@ -224,13 +201,14 @@ EOT;
 
 		$text = '<input type="text" dojoType="dijit.form.TimeTextBox" name="'.$NAME.'" value="'.$value.'" $attr >';
 		return $text;
+		
 	}
 
 	/**
 	 * an input field with dojo
 	 */
-	function textbox( $NAME='', $value='', $attr=array() )
-	{
+	function textbox( $NAME='', $value='', $attr=array() ){
+		
 		theme_add('dijit.form.TextBox');
 
 		$value = form_prep( $value );
@@ -238,13 +216,13 @@ EOT;
 
 		$text = '<input type="text" dojoType="dijit.form.TextBox" name="'.$NAME.'" value="'.$value.'" '.$attr.' >';
 		return $text;
+		
 	}
 
 	/**
 	 * an button with dojo
 	 */
-	function button( $NAME='', $value='', $attr=array() )
-	{
+	function button( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.form.Button');
 
@@ -252,6 +230,7 @@ EOT;
 
 		$text = '<button dojoType="dijit.form.Button" name="'.$NAME.'" '.$attr.' >'.$value.'</button>';
 		return $text;
+		
 	}
 
 	/**
@@ -259,8 +238,7 @@ EOT;
 	 * @param $text: button text
 	 * @param $dialog: tooltip dialog content text
 	 */
-	function tooltipbutton( $text='', $dialog='', $attr=array() )
-	{
+	function tooltipbutton( $text='', $dialog='', $attr=array() ){
 
 		theme_add('dijit.form.Button');
 		theme_add( 'dijit.Dialog' );
@@ -275,13 +253,13 @@ EOT;
   </div>
 </div>
 EOT;
+
 	}
 
 	/**
 	 * an password field with dojo
 	 */
-	function password( $NAME='', $value='', $attr=array() )
-	{
+	function password( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.form.TextBox');
 
@@ -290,13 +268,13 @@ EOT;
 
 		$text = '<input type="password" dojoType="dijit.form.TextBox" name="'.$NAME.'" value="'.$value.'" '.$attr.' >';
 		return $text;
+		
 	}
 
 	/**
 	 * an input number spinner with dojo
 	 */
-	function number( $NAME='', $value='', $attr=array() )
-	{
+	function number( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.form.NumberSpinner');
 
@@ -305,13 +283,13 @@ EOT;
 
 		$text = '<input type="text" dojoType="dijit.form.NumberSpinner"name="'.$NAME.'" value="'.$value.'" '.$attr.' >';
 		return $text;
+		
 	}
 
 	/**
 	 * a textarea field auto grown
 	 */
-	function textarea( $NAME='', $value='', $attr=array() )
-	{
+	function textarea( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.form.Textarea');
 
@@ -320,13 +298,13 @@ EOT;
 
 		$text = '<textarea  dojoType="dijit.form.Textarea" name="'.$NAME.'" '.$attr.' >'.$value.'</textarea>';
 		return $text;
+		
 	}
 
 	/**
 	 * a permission field auto grow textarea
 	 */
-	function permission( $NAME='', $value='', $attr=array() )
-	{
+	function permission( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.form.Textarea');
 
@@ -345,13 +323,13 @@ EOT;
 		$text = $this->textarea( $NAME, $value, $attr)
 		.$this->tooltip($id_g, $t_text );
 		return $text;
+		
 	}
 
 	/**
 	 * an richtext editor with dojo
 	 */
-	function editor( $NAME='', $value='', $attr=array() )
-	{
+	function editor( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.Editor');
 		theme_add('dijit._editor.plugins.AlwaysShowToolbar');
@@ -369,13 +347,13 @@ EOT;
 		$value
 		</div>';
 		return $text;
+		
 	}
 
 	/**
 	 * an simple richtext editor with dojo
 	 */
-	function smalleditor( $NAME='', $value='', $attr=array() )
-	{
+	function smalleditor( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.Editor');
 
@@ -386,14 +364,14 @@ EOT;
 		'.$value.'
 		</div>';
 		return $text;
+		
 	}
 
 	/**
 	 * a dropdown menu using dojo
 	 * @param: options[ 'Label'=>'value' ]
 	 */
-	function dropdown( $NAME='', $value='', $options=array(), $attr=array() )
-	{
+	function dropdown( $NAME='', $value='', $options=array(), $attr=array() ){
 
 		theme_add('dijit.form.FilteringSelect');
 		foreach( $options as $key=>$item )
@@ -407,24 +385,22 @@ EOT;
 
 		$text = form_dropdown($NAME, $options, $value, $attr);
 		return $text;
+		
 	}
 
 	/**
 	 * a section chooser dropdown field
 	 */
-	function section( $NAME='', $value='', $attr=array() )
-	{
+	function section( $NAME='', $value='', $attr=array() ){
+		
 		$options = array('s1'=>'index');
-		if( ! function_exists( 'rec_section' ) )
-		{
-			function rec_section( $id, $spacer='--' )
-			{
+		if( ! function_exists( 'rec_section' ) ){
+			function rec_section( $id, $spacer='--' ){
 				$op = array();
 				$sec = new Section();
 				$sec->order_by( 'sort', 'asc' );
 				$sec->get_by_parent_section( $id );
-				foreach( $sec as $item )
-				{
+				foreach( $sec as $item ){
 					$op[ 's'.$item->id ] = $spacer.$item->name;
 					$op = array_merge( $op, rec_section( $item->id, $spacer.$spacer ) );
 				}
@@ -441,46 +417,45 @@ EOT;
 			
 		$total_sections = array_combine( $total_sections_keys, $total_sections_values );
 		return $this->dropdown( $NAME, $value, $total_sections, $attr );
+		
 	}
 
 	/**
 	 * a checkbox using dojo
 	 */
-	function checkbox( $NAME='', $value='', $checked=FALSE, $attr=array() )
-	{
+	function checkbox( $NAME='', $value='', $checked=FALSE, $attr=array() ){
 
 		theme_add('dijit.form.CheckBox');
 		$attr = $this->attribute( $attr, 'dojoType', 'dijit.form.CheckBox');
 		$attr = $this->_attributes_to_string( $attr );
 
-
 		return form_checkbox($NAME, $value, $checked, $attr);
+		
 	}
 
 	/**
 	 * a radio button using dojo
 	 */
-	function radio( $NAME='', $value='', $checked=FALSE, $attr=array() )
-	{
+	function radio( $NAME='', $value='', $checked=FALSE, $attr=array() ){
 
 		theme_add('dijit.form.CheckBox');
 		$attr = $this->attribute( $attr, 'dojoType', 'dijit.form.RadioButton');
 		$attr = $this->_attributes_to_string( $attr );
 
-
 		return form_radio($NAME, $value, $checked, $attr);
+		
 	}
 
 	/**
 	 * a Tooltip using dojo
 	 */
-	function tooltip( $NAME='', $value='', $attr=array() )
-	{
+	function tooltip( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.Tooltip');
 		$attr = $this->attribute( $attr, 'position', 'below', FALSE );
 		$attr = _attributes_to_string( $attr );
 		return '<div dojoType="dijit.Tooltip" connectId="'.$NAME.'" '.$attr.'>'.$value.'</div>';
+		
 	}
 
 	/**
@@ -488,8 +463,8 @@ EOT;
 	 * @param
 	 * 		$data: associative array of title=>panelHTML
 	 */
-	function accordion( $data=array(), $attr=array(), $style=array() )
-	{
+	function accordion( $data=array(), $attr=array(), $style=array() ){
+		
 		theme_add( 'dijit.layout.AccordionContainer' );
 		$style = $this->style( $style, 'width', '100%' , FALSE);
 		$style = $this->style( $style, 'height', '300px', FALSE );
@@ -504,6 +479,7 @@ EOT;
 			
 		$text .= "</div>";
 		return $text;
+		
 	}
 
 	/**
@@ -511,8 +487,8 @@ EOT;
 	 * @param
 	 * 		$data: associative array of tabTitle->panelHTML
 	 */
-	function tab( $data=array(), $attr=array(), $style=array() )
-	{
+	function tab( $data=array(), $attr=array(), $style=array() ){
+		
 		theme_add( 'dijit.layout.TabContainer' );
 		theme_add( 'dijit.layout.ContentPane' );
 		$style = $this->style( $style, 'width', '100%', FALSE );
@@ -528,6 +504,7 @@ EOT;
 			
 		$text .= '</div>';
 		return $text;
+		
 	}
 
 	/**
@@ -535,8 +512,7 @@ EOT;
 	 * @param $headers: associative array of member->columnTitle
 	 * @param $body: array of (arrays or objects) to extract information members spcified in head from them
 	 */
-	function grid( $headers = array(), $body=array(), $attr=array() )
-	{
+	function grid( $headers = array(), $body=array(), $attr=array() ){
 
 		theme_add( 'jquery/theme/ui.all.css' );
 
@@ -551,26 +527,23 @@ EOT;
 	<tr>';
 
 		foreach( $headers as $item=>$value )
-		{
 			$text .= "\n\t<th>$value</th>";
-		}
 
 		$text .= '
 	</tr>
 	</thead>
 	<tbody>';
 		$even = TRUE;
-		foreach( $body as $item )
-		{
+		foreach( $body as $item ){
 			$even = !$even;
 			if( $even )
 			$text .= "\n\t<tr style=\"background-color:white\">";
 			else
 			$text .= "\n\t<tr>";
+			
 			foreach( $headers as $key=>$value )
-			{
 				$text .= (is_object($item))? "<td>{$item->$key}</td>":"<td>{$item[$key]}</td>";
-			}
+			
 			$text .= "\n\t</tr>";
 		}
 
@@ -579,6 +552,7 @@ EOT;
 </table>';
 
 		return $text;
+		
 	}
 
 	/**
@@ -586,40 +560,43 @@ EOT;
 	 * @param $titel: panel title
 	 * @param $body: panel contents
 	 */
-	function titlepane( $title='', $body='', $attr=array() )
-	{
+	function titlepane( $title='', $body='', $attr=array() ){
+		
 		theme_add( 'dijit.TitlePane' );
 		$attr = $this->_attributes_to_string( $attr );
 		return '<div dojoType="dijit.TitlePane" title="'.$title.'" '.$attr.' >'.$body.'</div>';
+		
 	}
 
 	/**
 	 * a error box using jquery
 	 */
-	function error( $text='', $attr=array() )
-	{
+	function error( $text='', $attr=array() ){
+		
 		theme_add( 'assets/style/style.css' );
 		$attr = $this->_attributes_to_string( $attr );
 
 		return '<div class="error" '.$attr.' >'.$text.'</div>';
+		
 	}
 
 	/**
 	 * an Info box using jquery
 	 */
-	function info( $text='', $attr=array() )
-	{
+	function info( $text='', $attr=array() ){
+		
 		theme_add( 'assets/style/style.css' );
 		$attr = $this->_attributes_to_string( $attr );
 
 		return '<div class="info" '.$attr.' >'.$text.'</div>';
+		
 	}
 
 	/**
 	 * a horizontal spliter box with dojo
 	 */
-	function hbox( $content='', $attr=array(), $style=array() )
-	{
+	function hbox( $content='', $attr=array(), $style=array() ){
+		
 		theme_add( 'dijit.layout.SplitContainer' );
 		theme_add( 'dijit.layout.ContentPane' );
 
@@ -630,20 +607,21 @@ EOT;
 		$attr = $this->_attributes_to_string( $attr );
 
 		$text = '<div dojoType="dijit.layout.SplitContainer" orientation="horizontal" '.$attr.' style="'.$style.'" >';
+		
 		foreach( $content as $item )
-		{
 			$text .= '<div dojoType="dijit.layout.ContentPane" >'.$item.'</div>';
-		}
+		
 		$text .= '</div>';
 
 		return $text;
+		
 	}
 
 	/**
 	 * a vertical splitter box with dojo
 	 */
-	function vbox( $content='', $attr=array(), $style=array() )
-	{
+	function vbox( $content='', $attr=array(), $style=array() ){
+		
 		theme_add( 'dijit.layout.SplitContainer' );
 		theme_add( 'dijit.layout.ContentPane' );
 
@@ -654,13 +632,14 @@ EOT;
 		$attr = $this->_attributes_to_string( $attr );
 
 		$text = '<div dojoType="dijit.layout.SplitContainer" orientation="vertical" '.$attr.' style="'.$style.'" >';
+		
 		foreach( $content as $item )
-		{
 			$text .= '<div dojoType="dijit.layout.ContentPane" >'.$item.'</div>';
-		}
+		
 		$text .= '</div>';
 
 		return $text;
+		
 	}
 
 	/**
@@ -672,19 +651,17 @@ EOT;
 	 * @param $replace: will replace current attribute value if exists or add it if not otherwise will it will add attribute of not exists only
 	 */
 	function attribute( $attr=array(), $key='', $value='', $replace=TRUE ){
-		if( is_array($attr) )
-		{
+		
+		if( is_array($attr) ){
 			if( !isset($attr[$key]) or (isset($attr[$key]) and $replace) ) $attr[$key] = $value;
-		}
-		else if( is_object($attr) )
-		{
+		}else if( is_object($attr) ){
 			if( !isset($attr->$key) or (isset($attr->$key) and $replace) ) $attr->$key =  $value;
-		}
-		else if( is_string($attr) ){
+		}else if( is_string($attr) ){
 			$attr .= " $key=\"$value\"";
 		}
 
 		return $attr;
+		
 	}
 
 	/**
@@ -703,8 +680,7 @@ EOT;
 	 * @param $list: the original list of items
 	 * @param $value: the selected items
 	 * */
-	function select_sort($NAME, $list=array(), $value=array(), $attr=array() )
-	{
+	function select_sort($NAME, $list=array(), $value=array(), $attr=array() ){
 
 		theme_add(array(
 		'jquery/jquery.js',
@@ -714,39 +690,28 @@ EOT;
 
 		$attr = $this->_attributes_to_string( $attr );
 
-		if( is_string( $list ) )
-		{
+		if( is_string( $list ) ){
 			$list = array_map( 'trim', explode( "\n", trim($list) ));
-		}
-		else if( is_array($list) )
-		{
+		}else if( is_array($list) ){
 			array_map( 'trim', $list );
-		}
-		else
-		{
+		}else{
 			$list = array();
 		}
 
-		if( is_string( $value ) )
-		{
+		if( is_string( $value ) ){
 			$value = trim($value);
 			if( ! empty($value) )
 			$value = array_map( 'trim', explode( "\n", $value));
 			else
 			$value = array();
-		}
-		else if( is_array($value) )
-		{
+		}else if( is_array($value) ){
 			$value = array_map( 'trim', $value );
-		}
-		else
-		{
+		}else{
 			$value = array();
 		}
 
 		$values = array();
-		foreach( $list as $item )
-		{
+		foreach( $list as $item ){
 			if( !in_array( $item, $value ) )
 			array_push( $values, $item );
 		}
@@ -792,31 +757,28 @@ EOT
 Available items';
 
 		foreach( $list as $item)
-		{
 			$output .= '<div class="dijitTitlePaneTitle">'.$item.'</div>';
-		}
 
 		$output .= '</div>
 <div class="list dijitTitlePaneContentInner">
 Selected items';
 
 		foreach( $value as $item)
-		{
 			$output .= '<div class="dijitTitlePaneTitle">'.$item.'</div>';
-		}
 
 		$output .= '
 	</div>
 </div>';
 		return $output;
+		
 	}
 
 	/**
 	 * a file list chooser that return a text with some lines every line is
 	 * a choosen file ( it's a textarea interface with jquery)
 	 **/
-	function file_list($NAME='',$value='', $attr=array(), $param=array(), $style=array())
-	{
+	function file_list( $connector, $NAME='',$value='', $attr=array(), $param=array(), $style=array()){
+		
 		theme_add('jquery/jquery.js');
 		$ci =& get_instance();
 		$ci->load->library('gui');
@@ -892,7 +854,7 @@ $(function(){
 EOT
 		);
 
-		$input = $this->file('d'.rand(1,10000), '', $attr, $param, $style);
+		$input = $this->file_chooser( $connector, 'd'.rand(1,10000), '', $attr, $param, $style);
 		$textarea = $this->textarea($NAME, $value);
 		$base_url = base_url();
 		return <<<EOT
@@ -904,23 +866,20 @@ EOT
 <img class="del" src="{$base_url}assets/admin/edit/delete.png" >
 </div>
 EOT;
+
 	}
 	/**
 	 * just like attribute function but for style paramter
 	 */
 	function style( $attr=array(), $key='', $value='', $replace=TRUE ){
-		if( is_array($attr) )
-		{
+		
+		if( is_array($attr) ){
 			if( !isset($attr[$key]) or (isset($attr[$key]) and $replace) )
 			$attr[$key] = $value;
-		}
-		else if( is_object($attr) )
-		{
+		}else if( is_object($attr) ){
 			if( !isset($attr->$key) or (isset($attr->$key) and $replace) )
 			$attr->$key =  $value;
-		}
-		else if( is_string($attr) )
-		{
+		}else if( is_string($attr) ){
 			if( $replace )
 			$attr .= " $key:$value;";
 			else
@@ -928,13 +887,14 @@ EOT;
 		}
 
 		return $attr;
+		
 	}
 
 	/**
 	 * helper function to convert the attribute array to HTML attributes
 	 */
-	function _attributes_to_string( $attr= array() )
-	{
+	function _attributes_to_string( $attr= array() ){
+		
 		if( is_string($attr) ) return $attr;
 
 		$att = '';
@@ -942,37 +902,36 @@ EOT;
 		$att .= $key . '="' . str_replace('"','\"',$val) . '" ';
 
 		return $att;
+		
 	}
 
 	/**
 	 * helper function to convert the paramters array to javascript object
 	 */
-	function _params_to_js( $param=array() )
-	{
+	function _params_to_js( $param=array() ){
+		
 		$att = '';
 
 		foreach ($param as $key => $val)
-		{
-			if( $val[0]=='[' and $val[strlen($val)-1]==']' )
-			$att .= ', ' . $key . ': ' . addslashes(str_replace('"','\"',$val)) .' ';
-			else
-			$att .= ', ' . $key . ':\'' . addslashes(str_replace('"','\"',$val)) . '\' ';
-		}
+			$att .= ( $val[0]=='[' and $val[strlen($val)-1]==']' )
+					?', ' . $key . ': ' . addslashes(str_replace('"','\"',$val)) .' '
+					:', ' . $key . ':\'' . addslashes(str_replace('"','\"',$val)) . '\' ';
 
 		return $att;
+		
 	}
 
 	/**
 	 * helper function to convert style array to CSS text
 	 */
-	function _array_to_style( $style=array() )
-	{
+	function _array_to_style( $style=array() ){
+		
 		if( is_string( $style ) ) return $style;
 		$arr = array();
 		foreach( $style as $key=>$value )
-		{
 			array_push( $arr, $key.':'.$value.';');
-		}
+		
 		return implode( '', $arr );
+		
 	}
 }
