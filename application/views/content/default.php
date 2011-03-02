@@ -1,5 +1,5 @@
 <?php if( $mode=='view' ):
-add(<<<EOT
+theme_add(<<<EOT
 <style>
 body{
 	background-color: #C6C6C6;
@@ -31,7 +31,7 @@ body{
 EOT
 );
 
-add_css('jquery/theme/ui.all.css'); ?>
+theme_add('jquery/theme/ui.all.css'); ?>
 <table class="ui-corner-all ui-widget-content page" align="center" >
 <tr>
 	<td align="center" >

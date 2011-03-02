@@ -17,7 +17,6 @@ class Gui {
 	{
 		$CI =& get_instance();
 		$CI->load->helper('form');
-		add_dojo( "dojo.parser" );
 	}
 
 
@@ -31,7 +30,7 @@ class Gui {
 	function form($action = '', $data=array(), $attributes = array(), $hidden = array())
 	{
 
-		add_dojo( 'dijit.form.Form' );
+		theme_add( 'dijit.form.Form' );
 		$attributes = $this->attribute( $attributes, 'dojoType', 'dijit.form.Form') ;
 		$attributes = $this->_attributes_to_string( $attributes );
 
@@ -73,12 +72,12 @@ class Gui {
 	{
 
 		//adding the nessecery javascripts and CSSs
-		add_js	( 'jquery/jquery.js');
-		add_js	( 'jquery/fileTree/jqueryFileTree.js' );
-		add_js	( 'jquery/easing.js' );
-		add_css	( 'jquery/fileTree/jqueryFileTree.css' );
-		add_css	( 'jquery/theme/ui.all.css');
-		add_dojo	( 'dijit.Dialog' );
+		theme_add	( 'jquery/jquery.js');
+		theme_add	( 'jquery/fileTree/jqueryFileTree.js' );
+		theme_add	( 'jquery/easing.js' );
+		theme_add	( 'jquery/fileTree/jqueryFileTree.css' );
+		theme_add	( 'jquery/theme/ui.all.css');
+		theme_add	( 'dijit.Dialog' );
 
 		//preparing the paramters
 		if(!isset($param['root']))
@@ -165,11 +164,11 @@ EOT;
 	 */
 	function color( $NAME='',$value='', $attr=array() )
 	{
-		add_dojo( 'dojox.widget.ColorPicker' );
-		add_dojo( 'dijit.Dialog' );
-		add_dojo( 'dijit.form.TextBox' );
-		add_js( 'jquery/jquery.js' );
-		add_css( 'dojo/dojox/widget/ColorPicker/ColorPicker.css' );
+		theme_add( 'dojox.widget.ColorPicker' );
+		theme_add( 'dijit.Dialog' );
+		theme_add( 'dijit.form.TextBox' );
+		theme_add( 'jquery/jquery.js' );
+		theme_add( 'dojo/dojox/widget/ColorPicker/ColorPicker.css' );
 
 		$value = form_prep( $value );
 
@@ -203,7 +202,7 @@ EOT;
 	function date( $NAME='', $value='', $attr=array() )
 	{
 
-		add_dojo('dijit.form.DateTextBox');
+		theme_add('dijit.form.DateTextBox');
 
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
@@ -218,7 +217,7 @@ EOT;
 	function time( $NAME='', $value='', $attr=array() )
 	{
 
-		add_dojo('dijit.form.TimeTextBox');
+		theme_add('dijit.form.TimeTextBox');
 
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
@@ -232,7 +231,7 @@ EOT;
 	 */
 	function textbox( $NAME='', $value='', $attr=array() )
 	{
-		add_dojo('dijit.form.TextBox');
+		theme_add('dijit.form.TextBox');
 
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
@@ -247,7 +246,7 @@ EOT;
 	function button( $NAME='', $value='', $attr=array() )
 	{
 
-		add_dojo('dijit.form.Button');
+		theme_add('dijit.form.Button');
 
 		$attr = $this->_attributes_to_string( $attr );
 
@@ -263,8 +262,8 @@ EOT;
 	function tooltipbutton( $text='', $dialog='', $attr=array() )
 	{
 
-		add_dojo('dijit.form.Button');
-		add_dojo( 'dijit.Dialog' );
+		theme_add('dijit.form.Button');
+		theme_add( 'dijit.Dialog' );
 
 		$attr = $this->_attributes_to_string( $attr );
 
@@ -284,7 +283,7 @@ EOT;
 	function password( $NAME='', $value='', $attr=array() )
 	{
 
-		add_dojo('dijit.form.TextBox');
+		theme_add('dijit.form.TextBox');
 
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
@@ -299,7 +298,7 @@ EOT;
 	function number( $NAME='', $value='', $attr=array() )
 	{
 
-		add_dojo('dijit.form.NumberSpinner');
+		theme_add('dijit.form.NumberSpinner');
 
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
@@ -314,7 +313,7 @@ EOT;
 	function textarea( $NAME='', $value='', $attr=array() )
 	{
 
-		add_dojo('dijit.form.Textarea');
+		theme_add('dijit.form.Textarea');
 
 		$value = form_prep( $value );
 		$attr = $this->_attributes_to_string( $attr );
@@ -329,7 +328,7 @@ EOT;
 	function permission( $NAME='', $value='', $attr=array() )
 	{
 
-		add_dojo('dijit.form.Textarea');
+		theme_add('dijit.form.Textarea');
 
 		$ci =& get_instance();
 		$ci->load->helper('perm');
@@ -354,13 +353,13 @@ EOT;
 	function editor( $NAME='', $value='', $attr=array() )
 	{
 
-		add_dojo('dijit.Editor');
-		add_dojo('dijit._editor.plugins.AlwaysShowToolbar');
-		add_dojo('dijit._editor.plugins.EnterKeyHandling');
-		add_dojo('dijit._editor.plugins.TextColor');
-		add_dojo('dijit._editor.plugins.LinkDialog');
-		add_dojo('dijit._editor.plugins.FontChoice');
-		add_dojo('dijit._editor.plugins.ToggleDir');
+		theme_add('dijit.Editor');
+		theme_add('dijit._editor.plugins.AlwaysShowToolbar');
+		theme_add('dijit._editor.plugins.EnterKeyHandling');
+		theme_add('dijit._editor.plugins.TextColor');
+		theme_add('dijit._editor.plugins.LinkDialog');
+		theme_add('dijit._editor.plugins.FontChoice');
+		theme_add('dijit._editor.plugins.ToggleDir');
 
 		$attr['plugins'] = "['undo','redo','|','cut','delete','copy','paste','|','bold','italic','underline','strikethrough','|','justifyLeft','justifyCenter','justifyRight','justifyFull','|','toggleDir','|','createLink','foreColor','hiliteColor','|','selectAll','removeFormat','|','insertUnorderedList','insertOrderedList','|','indent','outdent','|','subscript','superscript','|','fontName','fontSize','formatBlock']";
 		$attr = $this->_attributes_to_string( $attr );
@@ -378,7 +377,7 @@ EOT;
 	function smalleditor( $NAME='', $value='', $attr=array() )
 	{
 
-		add_dojo('dijit.Editor');
+		theme_add('dijit.Editor');
 
 		$attr = $this->_attributes_to_string( $attr );
 
@@ -396,7 +395,7 @@ EOT;
 	function dropdown( $NAME='', $value='', $options=array(), $attr=array() )
 	{
 
-		add_dojo('dijit.form.FilteringSelect');
+		theme_add('dijit.form.FilteringSelect');
 		foreach( $options as $key=>$item )
 		if( is_array($options) )
 		$options[$key] = form_prep( $item );
@@ -450,7 +449,7 @@ EOT;
 	function checkbox( $NAME='', $value='', $checked=FALSE, $attr=array() )
 	{
 
-		add_dojo('dijit.form.CheckBox');
+		theme_add('dijit.form.CheckBox');
 		$attr = $this->attribute( $attr, 'dojoType', 'dijit.form.CheckBox');
 		$attr = $this->_attributes_to_string( $attr );
 
@@ -464,7 +463,7 @@ EOT;
 	function radio( $NAME='', $value='', $checked=FALSE, $attr=array() )
 	{
 
-		add_dojo('dijit.form.CheckBox');
+		theme_add('dijit.form.CheckBox');
 		$attr = $this->attribute( $attr, 'dojoType', 'dijit.form.RadioButton');
 		$attr = $this->_attributes_to_string( $attr );
 
@@ -478,7 +477,7 @@ EOT;
 	function tooltip( $NAME='', $value='', $attr=array() )
 	{
 
-		add_dojo('dijit.Tooltip');
+		theme_add('dijit.Tooltip');
 		$attr = $this->attribute( $attr, 'position', 'below', FALSE );
 		$attr = _attributes_to_string( $attr );
 		return '<div dojoType="dijit.Tooltip" connectId="'.$NAME.'" '.$attr.'>'.$value.'</div>';
@@ -491,7 +490,7 @@ EOT;
 	 */
 	function accordion( $data=array(), $attr=array(), $style=array() )
 	{
-		add_dojo( 'dijit.layout.AccordionContainer' );
+		theme_add( 'dijit.layout.AccordionContainer' );
 		$style = $this->style( $style, 'width', '100%' , FALSE);
 		$style = $this->style( $style, 'height', '300px', FALSE );
 		$style = $this->_array_to_style( $style );
@@ -514,8 +513,8 @@ EOT;
 	 */
 	function tab( $data=array(), $attr=array(), $style=array() )
 	{
-		add_dojo( 'dijit.layout.TabContainer' );
-		add_dojo( 'dijit.layout.ContentPane' );
+		theme_add( 'dijit.layout.TabContainer' );
+		theme_add( 'dijit.layout.ContentPane' );
 		$style = $this->style( $style, 'width', '100%', FALSE );
 		$style = $this->style( $style, 'height', '300px', FALSE );
 
@@ -539,7 +538,7 @@ EOT;
 	function grid( $headers = array(), $body=array(), $attr=array() )
 	{
 
-		add_css( 'jquery/theme/ui.all.css' );
+		theme_add( 'jquery/theme/ui.all.css' );
 
 		$attr = $this->attribute( $attr, 'align', 'center', FALSE );
 		$attr = $this->attribute( $attr, 'width', '100%', FALSE );
@@ -589,7 +588,7 @@ EOT;
 	 */
 	function titlepane( $title='', $body='', $attr=array() )
 	{
-		add_dojo( 'dijit.TitlePane' );
+		theme_add( 'dijit.TitlePane' );
 		$attr = $this->_attributes_to_string( $attr );
 		return '<div dojoType="dijit.TitlePane" title="'.$title.'" '.$attr.' >'.$body.'</div>';
 	}
@@ -599,7 +598,7 @@ EOT;
 	 */
 	function error( $text='', $attr=array() )
 	{
-		add_css( 'assets/style/style.css' );
+		theme_add( 'assets/style/style.css' );
 		$attr = $this->_attributes_to_string( $attr );
 
 		return '<div class="error" '.$attr.' >'.$text.'</div>';
@@ -610,7 +609,7 @@ EOT;
 	 */
 	function info( $text='', $attr=array() )
 	{
-		add_css( 'assets/style/style.css' );
+		theme_add( 'assets/style/style.css' );
 		$attr = $this->_attributes_to_string( $attr );
 
 		return '<div class="info" '.$attr.' >'.$text.'</div>';
@@ -621,8 +620,8 @@ EOT;
 	 */
 	function hbox( $content='', $attr=array(), $style=array() )
 	{
-		add_dojo( 'dijit.layout.SplitContainer' );
-		add_dojo( 'dijit.layout.ContentPane' );
+		theme_add( 'dijit.layout.SplitContainer' );
+		theme_add( 'dijit.layout.ContentPane' );
 
 		$style = $this->style( $style, 'width', '100%', FALSE);
 		$style = $this->style( $style, 'height', '300px', FALSE);
@@ -645,8 +644,8 @@ EOT;
 	 */
 	function vbox( $content='', $attr=array(), $style=array() )
 	{
-		add_dojo( 'dijit.layout.SplitContainer' );
-		add_dojo( 'dijit.layout.ContentPane' );
+		theme_add( 'dijit.layout.SplitContainer' );
+		theme_add( 'dijit.layout.ContentPane' );
 
 		$style = $this->style( $style, 'width', '100%', FALSE);
 		$style = $this->style( $style, 'height', '300px', FALSE);
@@ -707,7 +706,7 @@ EOT;
 	function select_sort($NAME, $list=array(), $value=array(), $attr=array() )
 	{
 
-		add(array(
+		theme_add(array(
 		'jquery/jquery.js',
 		'jquery/jquery-ui.js',
 		'jquery/theme/ui.all.css'
@@ -753,7 +752,7 @@ EOT;
 		}
 		$list = $values;
 
-		add( <<<EOT
+		theme_add( <<<EOT
 <style type="text/css">
 	.filter .list { 
 		float: left;
@@ -761,22 +760,7 @@ EOT;
 		width:44%;
 	}
 </style>
-<script type="text/javascript">
-	$(function() {
-		$(".filterBox")
-			.hide('fast')
-			.siblings(".list")
-				.sortable({connectWith: 'div',})
-				.bind('sortupdate', function(event, ui) {
-					x = Array();
-					$('.list:last').find('div').each(function(){
-					    x.push( $(this).text() );
-					});
-					x = x.join( "\\n" );
-					$(this).siblings('.filterBox').val(x);
-				});
-	});
-</script>
+
 EOT
 		);
 		$output = '
@@ -785,6 +769,7 @@ EOT
 <textarea class="filterBox" name="'.$NAME.'" '.$attr.' >'.
 		implode( "\n", $value ).
 '</textarea>
+
 <div  class="list dijitTitlePaneContentInner">
 Available items';
 
@@ -804,7 +789,22 @@ Selected items';
 
 		$output .= '
 	</div>
-</div>';
+</div>
+
+<script type="text/javascript">
+		$(".filterBox")
+			.hide(\'fast\')
+			.siblings(".list")
+				.sortable({connectWith: \'div\',})
+				.bind(\'sortupdate\', function(event, ui) {
+					x = Array();
+					$(\'.list:last\').find(\'div\').each(function(){
+					    x.push( $(this).text() );
+					});
+					x = x.join( "\\n" );
+					$(this).siblings(\'.filterBox\').val(x);
+				});
+</script>';
 		return $output;
 	}
 
@@ -814,10 +814,10 @@ Selected items';
 	 **/
 	function file_list($NAME='',$value='', $attr=array(), $param=array(), $style=array())
 	{
-		add('jquery/jquery.js');
+		theme_add('jquery/jquery.js');
 		$ci =& get_instance();
 		$ci->load->library('gui');
-		add(<<<EOT
+		theme_add(<<<EOT
 <script language="javascript" >
 function updateList(list)
 {

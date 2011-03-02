@@ -115,24 +115,9 @@ class Section extends DataMapper {
 			 * i sum all the page content text
 			 * before page + CSS + JS + head + body + after page
 			 * *******************************************************/
+			theme_pagetitle($this->name);
 			// Rendering the page
-			echo <<<EOT
-			{$doctype_text}
-<html xmlns="http://www.w3.org/1999/xhtml" >
-	<head>
-	<title>{$this->ci->config->item('site_name')} {$this->name}</title>
-	<meta http-equiv="content-type" content="text/html;charset={$this->ci->config->item('charset')}" />
-	<meta name="generator" content="Codeigniter-Egypt system" />
-	{$this->ci->system->css_text()}
-	{$this->ci->system->js_text()}
-	{$this->ci->system->dojo_text()}
-	{$this->ci->system->header_text()}
-	</head>
-	<body class="{$this->ci->system->dojoStyle}">
-	{$page_body_text}
-	</body>
-</html>
-EOT;
+			$this->ci->load->view('xhtml',array('body'=>$page_body_text));
 		}else{
 			show_error( 'Access denied' );
 		}

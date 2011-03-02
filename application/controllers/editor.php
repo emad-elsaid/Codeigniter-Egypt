@@ -20,11 +20,10 @@ class Editor extends Application {
 	}
 
 	function chooser($section, $content, $cell, $sort){
-		$this->show_toolbar = TRUE;
-		add('dojo.data.ItemFileReadStore');
-		add('dijit.tree.ForestStoreModel');
-		add('dijit.Tree');
-		add('jquery/jquery.js');
+		theme_add('dojo.data.ItemFileReadStore');
+		theme_add('dijit.tree.ForestStoreModel');
+		theme_add('dijit.Tree');
+		theme_add('jquery/jquery.js');
 		
 		$this->print_text('<div dojoType="dojo.data.ItemFileReadStore" url="'.site_url('editor/queryTree').'" jsId="ordJson"></div>');
 		$this->print_text('<div dojoType="dijit.tree.ForestStoreModel" childrenAttrs="line" store="ordJson" jsId="ordModel"></div>');
@@ -125,7 +124,7 @@ class Editor extends Application {
 		 * for edit purposes
 		 ********************************************/
 		$this->load->helper('directory');
-		add('dijit.Dialog');
+		theme_add('dijit.Dialog');
 		
 		// getting the content
 		$con = new Content($edit);
@@ -432,7 +431,7 @@ EOT;
 
 		$this->add_info( 'Content information and the containers' );
 		$this->print_text( $this->gui->form( '#', $data_table ) );
-		add(<<<EOT
+		theme_add(<<<EOT
 <style>
 label {font-weight: bold;}
 tr {border-bottom: 1px solid black;}

@@ -26,9 +26,9 @@ class UsersEditor extends Application {
 
 	function index(){
 
-		add('dojo.data.ItemFileReadStore');
-		add('dijit.tree.ForestStoreModel');
-		add('dijit.Tree');
+		theme_add('dojo.data.ItemFileReadStore');
+		theme_add('dijit.tree.ForestStoreModel');
+		theme_add('dijit.Tree');
 		
 		$this->print_text('<div dojoType="dojo.data.ItemFileReadStore" url="'.site_url('usersEditor/queryGroups').'" jsId="ordJson"></div>');
 		$this->print_text('<div dojoType="dijit.tree.ForestStoreModel" childrenAttrs="line" store="ordJson" jsId="ordModel"></div>');
@@ -66,9 +66,9 @@ class UsersEditor extends Application {
 	
 	function inactive(){
 
-		add('dojo.data.ItemFileReadStore');
-		add('dijit.tree.ForestStoreModel');
-		add('dijit.Tree');
+		theme_add('dojo.data.ItemFileReadStore');
+		theme_add('dijit.tree.ForestStoreModel');
+		theme_add('dijit.Tree');
 		
 		$this->print_text('<div dojoType="dojo.data.ItemFileReadStore" url="'.site_url('usersEditor/queryInactiveGroups').'" jsId="ordJson"></div>');
 		$this->print_text('<div dojoType="dijit.tree.ForestStoreModel" childrenAttrs="line" store="ordJson" jsId="ordModel"></div>');

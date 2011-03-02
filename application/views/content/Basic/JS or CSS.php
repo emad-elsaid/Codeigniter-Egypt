@@ -7,7 +7,7 @@ resourceFiles:
 
 <?php elseif( $mode=='view' ): ?>
 <?php
-add( explode( "\n", $info->resourceFiles) );
+theme_add( explode( "\n", $info->resourceFiles) );
 
 if( $ci->system->mode()=='edit' )
 {

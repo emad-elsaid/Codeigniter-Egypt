@@ -22,9 +22,9 @@ class SectionEditor extends Application {
 	
 	function index(){
 
-		add('dojo.data.ItemFileReadStore');
-		add('dijit.tree.ForestStoreModel');
-		add('dijit.Tree');
+		theme_add('dojo.data.ItemFileReadStore');
+		theme_add('dijit.tree.ForestStoreModel');
+		theme_add('dijit.Tree');
 		
 		$this->print_text('<div dojoType="dojo.data.ItemFileReadStore" url="'.site_url('sectionEditor/queryTree').'" jsId="ordJson"></div>');
 		$this->print_text('<div dojoType="dijit.tree.ForestStoreModel" childrenAttrs="line" store="ordJson" jsId="ordModel"></div>');

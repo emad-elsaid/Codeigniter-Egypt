@@ -61,11 +61,11 @@ if( $ci->system->mode()=='edit' )
 <?php
 	$local = base_url();
 	
-	if( $info->Resetstyle ) add( 'assets/style/reset.css' );
-	if( $info->Textstyle ) add( 'assets/style/text.css' );
-	if( !empty($info->favIcon) ) add('<link rel="icon" href="'.base_url().$info->favIcon.'">');
-	add(explode("\n",$info->javascript_files));
-	add(explode("\n",$info->css_files));
+	if( $info->Resetstyle ) theme_add( 'assets/style/reset.css' );
+	if( $info->Textstyle ) theme_add( 'assets/style/text.css' );
+	if( !empty($info->favIcon) ) theme_add('<link rel="icon" href="'.base_url().$info->favIcon.'">');
+	theme_add(explode("\n",$info->javascript_files));
+	theme_add(explode("\n",$info->css_files));
 	
 	$style = '';
 	if( $info->background_image != '' )
@@ -78,7 +78,7 @@ if( $ci->system->mode()=='edit' )
 	$style .= $info->style;
 	if( $style!='' )
 	{
-		add("
+		theme_add("
 <style>
 body{
 	{$style}
@@ -88,8 +88,8 @@ body{
 		");
 		if(!empty($info->class))
 		{ 
-			add('jquery/jquery.js');
-			add(
+			theme_add('jquery/jquery.js');
+			theme_add(
 <<<EOT
 <script language="javascript" >
 	$(function(){

@@ -7,7 +7,7 @@ Text:
 <?php elseif( $mode=='view' ): ?>
 <?php
 if( $info->add==TRUE )
-	add($info->Text);
+	theme_add($info->Text);
 else
 	echo $info->Text;
 ?>

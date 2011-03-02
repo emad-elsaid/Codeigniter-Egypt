@@ -1,29 +1,23 @@
 <?php
-	add_css("assets/style/reset.css");
-	add_css("assets/style/text.css");
-	add_css("jquery/theme/ui.all.css");
-	add_css("assets/style/style.css");
+	theme_add("assets/style/reset.css");
+	theme_add("assets/style/text.css");
+	theme_add("jquery/theme/ui.all.css");
+	theme_add("assets/style/style.css");
 	
-	add_dojo("dojo.parser"); 
-	add_dojo("dijit.Menu");
-	add_dojo("dijit.MenuBar");
-	add_dojo("dijit.PopupMenuBarItem");
+	theme_add("dijit.Menu");
+	theme_add("dijit.MenuBar");
+	theme_add("dijit.PopupMenuBarItem");
 
 
 	// layouts used in page
-	add_dojo("dijit.layout.ContentPane");
-	add_dojo("dijit.layout.BorderContainer");
-	add_dojo("dijit.Dialog");
+	theme_add("dijit.layout.ContentPane");
+	theme_add("dijit.layout.BorderContainer");
+	theme_add("dijit.Dialog");
 ?>
+<?=theme_doctype()?>
 <html>
 	<head>
-		<title><?= $app->name ?> <?= $app->page ?> </title>
-		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-		<meta name="generator" content="Codeigniter-EGYPT system" />
-		<?= $this->system->css_text() ?>
-		<?= $this->system->js_text() ?>
-		<?= $this->system->dojo_text() ?>
-		<?= $this->system->header_text() ?>
+		<?= theme_head() ?>
 		
 	<style>
 	html,body{
@@ -45,7 +39,7 @@
 	}
 	</style>
 	</head>
-	<body class="<?= $app->system->dojoStyle ?>">
+	<body>
 
 <div dojoType="dijit.layout.BorderContainer" gutters="false" id="borderContainerTwo" style="width: 100%;height:100%;">
 	
@@ -99,6 +93,6 @@
 			</p>
 		</div>
 <!-- \\\\\\\\\\\\\\\\\\\That is the help dialog HTML/////////////// -->	
-		
+		<?=theme_foot()?>
 	</body>
 </html>

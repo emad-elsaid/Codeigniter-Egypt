@@ -90,7 +90,7 @@ class Application extends CI_Controller {
 	 */
 	function _output( $output )
 	{
-		
+		theme_pagetitle($this->name);
 		if( $this->ajax )
 			echo $output;
 		else

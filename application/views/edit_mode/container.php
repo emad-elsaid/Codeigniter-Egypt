@@ -1,7 +1,7 @@
 <?php
 $ci =& get_instance();
 
-add( 'assets/admin/edit/edit.css' );
+theme_add( 'assets/admin/edit/edit.css' );
 
 $p = new Content($parent);
 $title = ( strrpos($path,'/')!=NULL)?

@@ -1,16 +1,16 @@
 <?php
 $ci =& get_instance();
-add( 'assets/admin/edit panel/style.css' );
-add( 'jquery/jquery.js' );
-add( 'jquery/jquery-ui.js' );
-add( 'jquery/theme/ui.all.css' );
-add( 'assets/fancybox/jquery.fancybox.js' );
-add( 'assets/fancybox/jquery.fancybox.css' );
+theme_add( 'assets/admin/edit panel/style.css' );
+theme_add( 'jquery/jquery.js' );
+theme_add( 'jquery/jquery-ui.js' );
+theme_add( 'jquery/theme/ui.all.css' );
+theme_add( 'assets/fancybox/jquery.fancybox.js' );
+theme_add( 'assets/fancybox/jquery.fancybox.css' );
 $local = base_url().'/assets/admin/';
 $logout = site_url( 'auth/logout' );
 $XHR_URL = site_url('editmode/'.($ci->system->mode()=='edit'? 'view':'edit'));
 
-add( <<<EOT
+theme_add( <<<EOT
 
 <script type="text/javascript">
 
