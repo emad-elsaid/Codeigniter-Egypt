@@ -2,8 +2,6 @@
 $ci =& get_instance();
 theme_add( 'assets/admin/edit panel/style.css' );
 theme_add( 'jquery/jquery.js' );
-theme_add( 'jquery/jquery-ui.js' );
-theme_add( 'jquery/theme/ui.all.css' );
 theme_add( 'assets/fancybox/jquery.fancybox.js' );
 theme_add( 'assets/fancybox/jquery.fancybox.css' );
 $local = base_url().'/assets/admin/';
@@ -22,7 +20,6 @@ function systemButtonToggler(){
 
 $(function (){
 	$(".trigger").click(systemButtonToggler);
-	$('.trigger').draggable({axis:'y'});
 	$("a.iframe").fancybox({
 			frameWidth: 600,
 			frameHeight: 450,

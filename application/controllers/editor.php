@@ -30,8 +30,8 @@ class Editor extends Application {
 		$this->print_text('<div dojoType="dijit.Tree" id="ordTree" model="ordModel" showRoot="false" >
 		<script type="dojo/method" event="onClick" args="item">
 		if(item.path!=undefined){
-			$("input[name=path]").val(item.path[0]);
-			$("form").submit();
+			dojo.query("input[name=path]")[0].value = item.path[0];
+			dojo.query("form")[0].submit();
 		}	
 		</script>
 		</div>');
@@ -89,18 +89,22 @@ class Editor extends Application {
 		$c->sort 			= $this->input->post( "sort" );
 		$c->path 			= $this->input->post( "path" );
 		$c->type 			= $this->input->post( "type" );
-		$c->subsection 		= $this->input->post ( "subsection" )==FALSE? FALSE:TRUE;
+		$c->subsection 		= $this->input->post( "subsection" )==FALSE? FALSE:TRUE;
 		$c->view 			= $this->input->post( "view" );
 		$c->info 			= $this->input->post( "info" );
 		$c->filter 			= $this->input->post( "filter" );
-
+		
+		// this is a workaround, cuz it makes 2 newline characters
+		// and i don't know what the hell is wrong with it.
+		$c->filter = str_replace( "\n\n", "\n", $c->filter );
+		
 		$p 		= new Content($c->parent_content);
 
 		if( $this->input->post( "id" )===FALSE ){
 			$this->add_info( 'Content added' );
 		}else{
 			$this->ajax = TRUE;
-			$this->print_text( "Content Edited" );
+			$this->print_text( 'Content Edited' );
 		}
 		$c->save();
 
@@ -140,13 +144,6 @@ class Editor extends Application {
 			$this->pages['delete_children/'.$con->id] = 'Delete Children';
 			$this->pages['info/'.$con->id] = 'Information';
 		}
-
-		
-		// getting the filter names
-		function remove_ext($item)
-		{ return substr( $item, 0, strrpos($item,'.') ); }
-		$filters_list = directory_map(APPPATH.'views/filter');
-		$filters_list = array_map( 'remove_ext', $filters_list );
 
 		
 		// creating hidden properties
@@ -203,8 +200,7 @@ EOT;
 		
 		$script  = <<<EOT
 <script type="dojo/method" event="onClick" args="evt">
-if( dijit.byId('info_form')!=undefined )
-{
+if( dijit.byId('info_form')!=undefined ){
 	dojo.query("[name='info']")[0].value = dojo.toJson(dijit.byId('info_form').getValues());
 }
 		$submit_script
@@ -222,7 +218,7 @@ EOT;
 		"Title : " 					=> $this->gui->textbox('title'),
 		"Show in subsections : " 	=> $this->gui->checkbox('subsection'),
 		"View permissions : " 		=> $this->gui->permission('view', $p_cont->view),
-		"Filters : "				=> $this->gui->select_sort( 'filter',$filters_list ),
+		"Filters : "				=> $this->gui->file_list( site_url('editor/filter_query'), 'filter' ),
 		"" 							=> $this->gui->button( '','Save'.$script )
 			)
 			,array( 'id'=>'basic_form' )
@@ -235,7 +231,7 @@ EOT;
 		"Title : " 					=> $this->gui->textbox('title', $con->title ),
 		"Show in subsections : " 	=> $this->gui->checkbox('subsection','subsection', $con->subsection),
 		"View permissions : " 		=> $this->gui->permission('view', $con->view),
-		"Filters : "				=> $this->gui->select_sort( 'filter', $filters_list, $con->filter ),
+		"Filters : "				=> $this->gui->file_list( site_url('editor/filter_query'),'filter', $con->filter ),
 		"" 							=> $this->gui->button( '','Save'.$script )
 			)
 			,array( 'id'=>'basic_form' )
@@ -280,9 +276,6 @@ EOT;
 							break;
 						case "textarea":
 							$current_field = $this->gui->textarea( $key, $cVal );
-							break;
-						case "color":
-							$current_field = $this->gui->color( $key, $cVal );
 							break;
 						case "date":
 							$current_field = $this->gui->date( $key, $cVal );
@@ -492,6 +485,30 @@ EOT
 		}
 		
 		$this->print_text( json_encode(array( 'identifier'=>'i', 'label'=>'l','items'=>getTree(APPPATH.'models'))) );
+	}
+	
+	function filter_query(){
+		$this->ajax = TRUE;
+		$this->load->helper('directory');
+		
+		function getTree($prefix='.', $parent=NULL){
+			$contents = directory_map( $prefix.'/'.$parent, 1 );
+			$line = array();
+			// if the input was a file
+			if( $contents===FALSE )
+				return array();
+				
+			foreach( $contents as $item ){
+				$children = getTree( $prefix, $parent.'/'.$item );
+				$id = trim( $parent.'/'.$item, '/');
+				$line[] = count($children)>0
+							? array('i'=>$id, 'l'=>$item, 'c'=>$children)
+							: array('i'=>$id, 'l'=>$item );
+			}
+			return $line;
+		}
+		
+		$this->print_text( json_encode(array( 'identifier'=>'i', 'label'=>'l','items'=>getTree(APPPATH.'views/filter'))) );
 	}
 	
 	function folder_query(){

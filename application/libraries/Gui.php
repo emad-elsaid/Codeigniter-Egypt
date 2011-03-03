@@ -137,44 +137,6 @@ EOT;
 	}
 
 	/**
-	 * a color chooser field linked with a dojo color picker dialog
-	 */
-	function color( $NAME='',$value='', $attr=array() ){
-		
-		theme_add( 'dojox.widget.ColorPicker' );
-		theme_add( 'dijit.Dialog' );
-		theme_add( 'dijit.form.TextBox' );
-		theme_add( 'jquery/jquery.js' );
-		theme_add( 'dojo/dojox/widget/ColorPicker/ColorPicker.css' );
-
-		$value = form_prep( $value );
-
-		$attr = $this->attribute( $attr, 'type', 'text');
-		$attr = $this->attribute( $attr, 'id', $NAME );
-		$attr = $this->attribute( $attr, 'name', $NAME );
-		$attr = $this->attribute( $attr, 'dojoType', 'dijit.form.TextBox' );
-		$attr = $this->attribute( $attr, 'onclick', "dijit.byId('{$NAME}dlg').show()" );
-		$attr = $this->attribute( $attr, 'value', $value );
-
-		$attr = $this->_attributes_to_string( $attr );
-
-		$text = <<< EOT
-		<input $attr >
-		<span id="{$NAME}box" class="ui.helper.reset ui-corner-all" style="width:20px;height:20px;background-color:$value" >&nbsp;&nbsp;&nbsp;&nbsp;</span>
-		<div id="{$NAME}dlg" dojoType="dijit.Dialog" title="Choose a color" >
-		<div  dojoType="dojox.widget.ColorPicker"
-		showHsv="false"
-  		showRgb="false" 
-		hexCode="$value"
-		liveUpdate="true"
-		 onChange="dijit.byId('{$NAME}').setValue(this.value);$('#{$NAME}box').css('background-color',this.value);" class="ui.helper.clearfix" >
-		</div></div>
-EOT;
-		return $text;
-		
-	}
-
-	/**
 	 * a date field picker using dojo
 	 */
 	function date( $NAME='', $value='', $attr=array() ){
@@ -506,55 +468,7 @@ EOT;
 		return $text;
 		
 	}
-
-	/**
-	 * a jquery styled grid
-	 * @param $headers: associative array of member->columnTitle
-	 * @param $body: array of (arrays or objects) to extract information members spcified in head from them
-	 */
-	function grid( $headers = array(), $body=array(), $attr=array() ){
-
-		theme_add( 'jquery/theme/ui.all.css' );
-
-		$attr = $this->attribute( $attr, 'align', 'center', FALSE );
-		$attr = $this->attribute( $attr, 'width', '100%', FALSE );
-		$attr = $this->attribute( $attr, 'class', "ui-widget-content");
-		$attr = $this->_attributes_to_string( $attr );
-
-		$text = '
-<table '.$attr.' >
-	<thead class="ui-widget-header" >
-	<tr>';
-
-		foreach( $headers as $item=>$value )
-			$text .= "\n\t<th>$value</th>";
-
-		$text .= '
-	</tr>
-	</thead>
-	<tbody>';
-		$even = TRUE;
-		foreach( $body as $item ){
-			$even = !$even;
-			if( $even )
-			$text .= "\n\t<tr style=\"background-color:white\">";
-			else
-			$text .= "\n\t<tr>";
-			
-			foreach( $headers as $key=>$value )
-				$text .= (is_object($item))? "<td>{$item->$key}</td>":"<td>{$item[$key]}</td>";
-			
-			$text .= "\n\t</tr>";
-		}
-
-		$text .= '
-	</tbody>
-</table>';
-
-		return $text;
-		
-	}
-
+	
 	/**
 	 * title panel with dojo
 	 * @param $titel: panel title
@@ -663,116 +577,7 @@ EOT;
 		return $attr;
 		
 	}
-
-	/**
-	 * make a selectable sortable two linked lists one have the
-	 * list array an the other have the values array
-	 * the values will be extracted before rendreing from the
-	 * list array
-	 * you can use it to allow the user to select some items
-	 * from a group and sort them
-	 * in a specific order
-	 * all that linked with textarea input that get the values list in
-	 * every change
-	 * the values are line break separated you can handle them with
-	 * explode then
-	 * @param $NAME: the textarea name
-	 * @param $list: the original list of items
-	 * @param $value: the selected items
-	 * */
-	function select_sort($NAME, $list=array(), $value=array(), $attr=array() ){
-
-		theme_add(array(
-		'jquery/jquery.js',
-		'jquery/jquery-ui.js',
-		'jquery/theme/ui.all.css'
-		));
-
-		$attr = $this->_attributes_to_string( $attr );
-
-		if( is_string( $list ) ){
-			$list = array_map( 'trim', explode( "\n", trim($list) ));
-		}else if( is_array($list) ){
-			array_map( 'trim', $list );
-		}else{
-			$list = array();
-		}
-
-		if( is_string( $value ) ){
-			$value = trim($value);
-			if( ! empty($value) )
-			$value = array_map( 'trim', explode( "\n", $value));
-			else
-			$value = array();
-		}else if( is_array($value) ){
-			$value = array_map( 'trim', $value );
-		}else{
-			$value = array();
-		}
-
-		$values = array();
-		foreach( $list as $item ){
-			if( !in_array( $item, $value ) )
-			array_push( $values, $item );
-		}
-		$list = $values;
-
-		theme_add( <<<EOT
-<style type="text/css">
-.filter .list { 
-	float: left;
-	background-color: #E9E9E9;
-	width:44%;
-}
-</style>
-EOT
-);
-		theme_add( <<<EOT
-<script type="text/javascript">
-$(function(){
-	$(".filterBox")
-	.hide('fast')
-	.siblings(".list")
-		.sortable({connectWith: 'div',})
-		.bind('sortupdate', function(event, ui) {
-			x = Array();
-			$('.list:last').find('div').each(function(){
-			    x.push( $(this).text() );
-			});
-			x = x.join( "\\n" );
-			$(this).siblings('.filterBox').val(x);
-		});
-});
-</script>
-EOT
-		);
-		$output = '
-<div class="filter">
-
-<textarea class="filterBox" name="'.$NAME.'" '.$attr.' >'.
-		implode( "\n", $value ).
-'</textarea>
-
-<div  class="list dijitTitlePaneContentInner">
-Available items';
-
-		foreach( $list as $item)
-			$output .= '<div class="dijitTitlePaneTitle">'.$item.'</div>';
-
-		$output .= '</div>
-<div class="list dijitTitlePaneContentInner">
-Selected items';
-
-		foreach( $value as $item)
-			$output .= '<div class="dijitTitlePaneTitle">'.$item.'</div>';
-
-		$output .= '
-	</div>
-</div>';
-		return $output;
-		
-	}
-
+	
 	/**
 	 * a file list chooser that return a text with some lines every line is
 	 * a choosen file ( it's a textarea interface with jquery)
@@ -784,12 +589,11 @@ Selected items';
 		$ci->load->library('gui');
 		theme_add(<<<EOT
 <script language="javascript" >
-function updateList(list)
-{
+function updateList(list){
+
 	$(list).each(function(){
 		i = $(this).children('textarea').val();
-		if( i!="" )
-		{
+		if( i!="" ){
 			i = i.split("\\n");
 			i = '<div class="item dijitTitlePaneTitle" >'+i.join('</div><div class="item dijitTitlePaneTitle" >')+'</div>';
 		}
@@ -812,7 +616,7 @@ $(function(){
 			$(this).children('.add').click(function(){
 				input = $(this).parent().find('input');
 				textarea = $(this).siblings('textarea');
-				if( textarea.val()!='')
+				if( textarea.val().length>0)
 					i = "\\n"+input.val();
 				else
 					i = input.val();
@@ -843,13 +647,8 @@ $(function(){
 });
 </script>
 <style>
-.filelist .items .item{
-	border-bottom: 1px solid;
-	padding: 3px;
-}
-.filelist img{
-	padding-top: 5px;
-}
+.filelist .items .item{padding: 3px;}
+.filelist img{padding-top: 5px;}
 </style>
 EOT
 		);

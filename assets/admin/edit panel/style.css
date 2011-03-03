@@ -1,6 +1,6 @@
 .panel {
 position: fixed;
-top: 50px;
+bottom: 0px;
 left: 0;
 display: none;
 background: #000000;
@@ -46,43 +46,22 @@ text-decoration: none;
 a.trigger{
 position: fixed;
 text-decoration: none;
-top: 80px; left: 0;
+bottom: 0px; left: 0;
 font-size: 15px;
 letter-spacing:-1px;
 font-family: verdana, helvetica, arial, sans-serif;
 color:#fff;
-padding: 20px 10px 20px 20px;
+padding: 25px 25px 20px 20px;
 font-weight: 700;
 background:#333333 url(images/plus.png) 20% 55% no-repeat;
 border:1px solid #444444;
--moz-border-radius-topright: 20px;
--webkit-border-top-right-radius: 20px;
--moz-border-radius-bottomright: 20px;
--webkit-border-bottom-right-radius: 20px;
--moz-border-radius-bottomleft: 0px;
--webkit-border-bottom-left-radius: 0px;
+-moz-border-radius-topright: 50px;
+-webkit-border-top-right-radius: 5px;
 display: block;
 }
 
 a.trigger:hover{
-position: fixed;
-text-decoration: none;
-top: 80px; left: 0;
-font-size: 15px;
-letter-spacing:-1px;
-font-family: verdana, helvetica, arial, sans-serif;
-color:#fff;
-padding: 20px 10px 20px 20px;
-font-weight: 700;
 background:#222222 url(images/plus.png) 20% 55% no-repeat;
-border:1px solid #444444;
--moz-border-radius-topright: 20px;
--webkit-border-top-right-radius: 20px;
--moz-border-radius-bottomright: 20px;
--webkit-border-bottom-right-radius: 20px;
--moz-border-radius-bottomleft: 0px;
--webkit-border-bottom-left-radius: 0px;
-display: block;
 }
 
 a.active.trigger {
