@@ -9,7 +9,7 @@ body{
 .page{
 	font-size: 13px;
 	padding: 30px;
-
+	background-color: #eee;
 	width: 70%;
 	
 }
@@ -31,8 +31,8 @@ body{
 EOT
 );
 
-theme_add('jquery/theme/ui.all.css'); ?>
-<table class="ui-corner-all ui-widget-content page" align="center" >
+?>
+<table class="page" align="center" >
 <tr>
 	<td align="center" >
 <?php 

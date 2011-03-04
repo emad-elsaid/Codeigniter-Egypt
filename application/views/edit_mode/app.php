@@ -1,7 +1,6 @@
 <?php
 	theme_add("assets/style/reset.css");
 	theme_add("assets/style/text.css");
-	theme_add("jquery/theme/ui.all.css");
 	theme_add("assets/style/style.css");
 	
 	theme_add("dijit.Menu");

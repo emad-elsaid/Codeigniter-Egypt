@@ -6,7 +6,6 @@
 	<title> Forgot Password</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="generator" content="Geany 0.15" />
-	<link rel="stylesheet" href="<?= base_url() ?>jquery/theme/ui.all.css" type="text/css" />
 	<link  href="<?= base_url() ?>dojo/dijit/themes/claro/claro.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="<?= base_url() ?>dojo/dojo/dojo.js"
 	djConfig="parseOnLoad:true"></script>
