@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /** \addtogroup Libraries
- * Codeigniter-Egypt main Class that store user , section, level, and all other main data
+ * Codeigniter-Egypt main Class that store user , section, group, and all other main data
  *
  * @package	Codeigniter-Egypt
  * @subpackage	Codeigniter-Egypt
@@ -13,7 +13,7 @@ class System {
 	public $CI 			= NULL;
 	public $section 	= NULL;
 	public $user 		= NULL;
-	public $level		= NULL;
+	public $group		= NULL;
 	public $mode 		= 'view';
 
 	public function __construct(){
@@ -31,8 +31,8 @@ class System {
 		if( $this->CI->ion_auth->logged_in()){
 			//getting the current user data
 			$this->user = $this->CI->ion_auth->get_user();
-			// getting level
-			$this->level = $this->CI->ion_auth->get_group($this->user->group_id);
+			// getting group
+			$this->group = $this->CI->ion_auth->get_group($this->user->group_id);
 		}
 
 		// getting the site mode

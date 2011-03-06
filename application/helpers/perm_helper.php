@@ -29,8 +29,8 @@ if ( ! function_exists('perm_array')){
 						'edit'		=> intval($CI->system->mode=='edit').'=1'
 			),
 			'vars' => array(
-						'level'		=> $CI->session->userdata('level'),
-						'user'		=> $CI->session->userdata('id'),
+						'group'		=> $CI->system->group->id,
+						'user'		=> $CI->system->user->id,
 						'section'	=> $CI->system->section->id,
 						'day'		=> date('j'),
 						'month'		=> date('n'),
