@@ -70,7 +70,7 @@ class Content extends DataMapper {
 	 **/
 	public function container( $text='' ){
 
-		if( $this->ci->system->mode()=='edit' AND $this->info!='PAGE_BODY_LOCKED' ){
+		if( $this->ci->system->mode=='edit' AND $this->info!='PAGE_BODY_LOCKED' ){
 			$text = $this->ci->load->view('edit_mode/container'
 			,array(
 			'text'=>$text
@@ -185,7 +185,7 @@ class Content extends DataMapper {
 				$layout_content[$child->cell] .= $child->render();
 				
 			foreach( $layout_content as $k=>$v )
-				if($this->ci->system->mode()=='edit' AND $v=='' AND $this->ci->ion_auth->is_admin())
+				if($this->ci->system->mode=='edit' AND $v=='' AND $this->ci->ion_auth->is_admin())
 					$layout_content[ $k ] = $this->add_button( $k );
 		}
 		/**

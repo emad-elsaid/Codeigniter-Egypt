@@ -6,7 +6,7 @@ theme_add( 'assets/fancybox/jquery.fancybox.js' );
 theme_add( 'assets/fancybox/jquery.fancybox.css' );
 $local = base_url().'/assets/admin/';
 $logout = site_url( 'auth/logout' );
-$XHR_URL = site_url('editmode/'.($ci->system->mode()=='edit'? 'view':'edit'));
+$XHR_URL = site_url('editmode/'.($ci->system->mode=='edit'? 'view':'edit'));
 
 theme_add( <<<EOT
 

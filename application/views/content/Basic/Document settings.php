@@ -44,7 +44,7 @@ css_files :
 
 <?php 
 $ci =& get_instance();
-if( $ci->system->mode()=='edit' )
+if( $ci->system->mode=='edit' )
 {
 	$c = new Content();
 	$c->get_by_id( $id );

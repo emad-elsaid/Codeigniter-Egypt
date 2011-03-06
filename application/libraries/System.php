@@ -24,7 +24,9 @@ class System {
 		$this->CI->load->helper(array('perm', 'html','url','theme'));
 
 		// getting the current section
-		$this->section = $this->get_section();
+		$this->section = new Section($this->CI->uri->rsegment(3));
+		if(!$this->section->exists())
+		$this->section->get_by_id(1);
 
 		if( $this->CI->ion_auth->logged_in()){
 			//getting the current user data
@@ -35,30 +37,6 @@ class System {
 
 		// getting the site mode
 		$this->mode = $this->CI->session->userdata('mode');
-	}
-
-	/**
-	 *  function of checking site mode
-	 *
-	 * */
-	public function mode($mode=''){
-
-		if( !empty($mode) ){
-			$this->CI->session->set_userdata( 'mode', $mode );
-			$this->mode = $mode ;
-		}
-		return $this->mode;
-		
-	}
-
-	public function get_section(){
-
-		$sec = new Section($this->CI->uri->rsegment(3));
-
-		if(!$sec->exists())
-		$sec->get_by_id(1);
-			
-		return $sec;
 	}
 }
 

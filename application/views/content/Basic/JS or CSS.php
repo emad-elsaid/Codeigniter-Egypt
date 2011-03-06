@@ -9,7 +9,7 @@ resourceFiles:
 <?php
 theme_add( explode( "\n", $info->resourceFiles) );
 
-if( $ci->system->mode()=='edit' )
+if( $ci->system->mode=='edit' )
 {
 	$c = new Content();
 	$c->get_by_id( $id );
