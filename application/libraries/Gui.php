@@ -31,7 +31,7 @@ class Gui {
 	public function form($action = '', $data=array(), $attributes = array(), $hidden = array()){
 
 		theme_add( 'dijit.form.Form' );
-		$attributes = $this->attribute( $attributes, 'dojoType', 'dijit.form.Form') ;
+		$this->attribute( $attributes, 'dojoType', 'dijit.form.Form') ;
 		$attributes = $this->_attributes_to_string( $attributes );
 
 		$text =	form_open( $action, $attributes, $hidden).
@@ -75,8 +75,8 @@ class Gui {
 		theme_add('dijit.Tree');
 		theme_add('dijit.Dialog');
 		
-		$attr = $this->attribute( $attr, 'onclick', "dijit.byId('filedlg_$NAME').show();");
-		$attr = $this->attribute( $attr, 'id', $NAME );
+		$this->attribute( $attr, 'onclick', "dijit.byId('filedlg_$NAME').show();");
+		$this->attribute( $attr, 'id', $NAME );
 		
 		$txtBox = $this->textbox( $NAME, $value, $attr, $style );
 		
@@ -115,8 +115,8 @@ EOT;
 		theme_add('dijit.Tree');
 		theme_add('dijit.Dialog');
 		
-		$attr = $this->attribute( $attr, 'onclick', "dijit.byId('filedlg_$NAME').show();");
-		$attr = $this->attribute( $attr, 'id', $NAME );
+		$this->attribute( $attr, 'onclick', "dijit.byId('filedlg_$NAME').show();");
+		$this->attribute( $attr, 'id', $NAME );
 		
 		$txtBox = $this->textbox( $NAME, $value, $attr, $style );
 		
@@ -281,7 +281,7 @@ EOT;
 		$value = form_prep( $value );
 		$id_g = 'p'.microtime();
 
-		$attr = $this->attribute( $attr, 'id', $id_g , FALSE);
+		$this->attribute( $attr, 'id', $id_g , FALSE);
 		$id_g = $attr['id'];
 
 		$text = $this->textarea( $NAME, $value, $attr)
@@ -339,7 +339,7 @@ EOT;
 		else
 		$options->$key = form_prep( $item );
 
-		$attr = $this->attribute( $attr, 'dojoType', 'dijit.form.FilteringSelect');
+		$this->attribute( $attr, 'dojoType', 'dijit.form.FilteringSelect');
 		$attr = $this->_attributes_to_string( $attr );
 
 		$text = form_dropdown($NAME, $options, $value, $attr);
@@ -385,7 +385,7 @@ EOT;
 	public function checkbox( $NAME='', $value='', $checked=FALSE, $attr=array() ){
 
 		theme_add('dijit.form.CheckBox');
-		$attr = $this->attribute( $attr, 'dojoType', 'dijit.form.CheckBox');
+		$this->attribute( $attr, 'dojoType', 'dijit.form.CheckBox');
 		$attr = $this->_attributes_to_string( $attr );
 
 		return form_checkbox($NAME, $value, $checked, $attr);
@@ -398,7 +398,7 @@ EOT;
 	public function radio( $NAME='', $value='', $checked=FALSE, $attr=array() ){
 
 		theme_add('dijit.form.CheckBox');
-		$attr = $this->attribute( $attr, 'dojoType', 'dijit.form.RadioButton');
+		$this->attribute( $attr, 'dojoType', 'dijit.form.RadioButton');
 		$attr = $this->_attributes_to_string( $attr );
 
 		return form_radio($NAME, $value, $checked, $attr);
@@ -411,7 +411,7 @@ EOT;
 	public function tooltip( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.Tooltip');
-		$attr = $this->attribute( $attr, 'position', 'below', FALSE );
+		$this->attribute( $attr, 'position', 'below', FALSE );
 		$attr = _attributes_to_string( $attr );
 		return '<div dojoType="dijit.Tooltip" connectId="'.$NAME.'" '.$attr.'>'.$value.'</div>';
 		
@@ -425,8 +425,8 @@ EOT;
 	public function accordion( $data=array(), $attr=array(), $style=array() ){
 		
 		theme_add( 'dijit.layout.AccordionContainer' );
-		$style = $this->style( $style, 'width', '100%' , FALSE);
-		$style = $this->style( $style, 'height', '300px', FALSE );
+		$this->style( $style, 'width', '100%' , FALSE);
+		$this->style( $style, 'height', '300px', FALSE );
 		$style = $this->_array_to_style( $style );
 
 		$attr = $this->_attributes_to_string( $attr );
@@ -450,8 +450,8 @@ EOT;
 		
 		theme_add( 'dijit.layout.TabContainer' );
 		theme_add( 'dijit.layout.ContentPane' );
-		$style = $this->style( $style, 'width', '100%', FALSE );
-		$style = $this->style( $style, 'height', '300px', FALSE );
+		$this->style( $style, 'width', '100%', FALSE );
+		$this->style( $style, 'height', '300px', FALSE );
 
 		$style = $this->_array_to_style( $style );
 		$attr = $this->_attributes_to_string( $attr );
@@ -511,8 +511,8 @@ EOT;
 		theme_add( 'dijit.layout.SplitContainer' );
 		theme_add( 'dijit.layout.ContentPane' );
 
-		$style = $this->style( $style, 'width', '100%', FALSE);
-		$style = $this->style( $style, 'height', '300px', FALSE);
+		$this->style( $style, 'width', '100%', FALSE);
+		$this->style( $style, 'height', '300px', FALSE);
 		$style = $this->_array_to_style( $style );
 
 		$attr = $this->_attributes_to_string( $attr );
@@ -536,8 +536,8 @@ EOT;
 		theme_add( 'dijit.layout.SplitContainer' );
 		theme_add( 'dijit.layout.ContentPane' );
 
-		$style = $this->style( $style, 'width', '100%', FALSE);
-		$style = $this->style( $style, 'height', '300px', FALSE);
+		$this->style( $style, 'width', '100%', FALSE);
+		$this->style( $style, 'height', '300px', FALSE);
 		$style = $this->_array_to_style( $style );
 
 		$attr = $this->_attributes_to_string( $attr );
@@ -561,7 +561,7 @@ EOT;
 	 * @param $value: value of the attribute to set
 	 * @param $replace: will replace current attribute value if exists or add it if not otherwise will it will add attribute of not exists only
 	 */
-	public function attribute( $attr=array(), $key='', $value='', $replace=TRUE ){
+	public function attribute( &$attr=array(), $key='', $value='', $replace=TRUE ){
 		
 		if( is_array($attr) ){
 			if( !isset($attr[$key]) or (isset($attr[$key]) and $replace) ) $attr[$key] = $value;
@@ -570,9 +570,7 @@ EOT;
 		}else if( is_string($attr) ){
 			$attr .= " $key=\"$value\"";
 		}
-
-		return $attr;
-		
+				
 	}
 	
 	/**
@@ -667,7 +665,7 @@ EOT;
 	/**
 	 * just like attribute function but for style paramter
 	 */
-	public function style( $attr=array(), $key='', $value='', $replace=TRUE ){
+	public function style( &$attr=array(), $key='', $value='', $replace=TRUE ){
 		
 		if( is_array($attr) ){
 			if( !isset($attr[$key]) or (isset($attr[$key]) and $replace) )
@@ -680,10 +678,7 @@ EOT;
 			$attr .= " $key:$value;";
 			else
 			$attr = " $key:$value;".$attr;
-		}
-
-		return $attr;
-		
+		}		
 	}
 
 	/**
