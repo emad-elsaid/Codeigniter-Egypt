@@ -306,12 +306,7 @@ EOT;
 		$attr['plugins'] = "['undo','redo','|','cut','delete','copy','paste','|','bold','italic','underline','strikethrough','|','justifyLeft','justifyCenter','justifyRight','justifyFull','|','toggleDir','|','createLink','foreColor','hiliteColor','|','selectAll','removeFormat','|','insertUnorderedList','insertOrderedList','|','indent','outdent','|','subscript','superscript','|','fontName','fontSize','formatBlock']";
 		$attr = $this->_attributes_to_string( $attr );
 
-		$text =
-		'<div  dojoType="dijit.Editor" name="'.$NAME.'" '.$attr.'  >
-		$value
-		</div>';
-		return $text;
-		
+		return '<div  dojoType="dijit.Editor" name="'.$NAME.'" '.$attr.'  >'.$value.'</div>';
 	}
 
 	/**
