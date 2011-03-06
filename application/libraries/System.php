@@ -37,6 +37,13 @@ class System {
 
 		// getting the site mode
 		$this->mode = $this->CI->session->userdata('mode');
+		if($this->mode!='view' and $this->mode!='edit')
+		$this->mode = 'view';
+	}
+	
+	public function set_mode($mode){
+		$this->mode = $mode;
+		$this->CI->session->set_userdata('mode', $mode);
 	}
 }
 
