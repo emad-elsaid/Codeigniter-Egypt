@@ -64,14 +64,15 @@ class Application extends CI_Controller {
 	 * */
 	public $ajax = FALSE;
 	
-	function __construct()
-	{
+	public function __construct(){
+		
 		parent::__construct();
 		$this->load->library('system');
+		
 	}
 	
-	function _remap($method, $params = array())
-	{
+	public function _remap($method, $params = array()){
+		
 		if( !perm_chck($this->perm) )
 			show_error('Permission Denied');
 		
@@ -84,12 +85,13 @@ class Application extends CI_Controller {
 	        return call_user_func_array(array($this, $method), $params);
 	    }
     		show_404();
+    		
 	}
 	/**
 	 *  render the application page and return the produced HTML
 	 */
-	function _output( $output )
-	{
+	public function _output( $output ){
+		
 		theme_pagetitle($this->name);
 		if( $this->ajax )
 			echo $output;
@@ -102,57 +104,52 @@ class Application extends CI_Controller {
 		
 	}
 	
-	function print_text( $text )
-	{
+	public function print_text( $text ){
+		
 		$this->load->view( 'text', array('text'=>$text) );
+		
 	}
 	
 	/**
 	 * check if the that user can use the application
 	 */
-	function can_view()
-	{
+	public function can_view(){
+		
 		return perm_chck( $this->perm );
+		
 	}
 	
 	/**
 	 * add information message to application, to be displyed at top of the page
 	 */
-	function add_info( $text='' )
-	{
+	public function add_info( $text='' ){
+		
 		if( is_array($text) )
-		{
 			foreach( $text as $item )
 				$this->add_info( $item );
-		}
 		else
-		{		
 			array_push( $this->info_msg, $text);
-		}
+			
 	}
 	
 	/**
 	 * add Error message to application, to be displyed at top of the page
 	 */
-	function add_error( $text='' )
-	{
+	public function add_error( $text='' ){
+		
 		if( is_array($text) )
-		{
 			foreach( $text as $item )
 				$this->add_error( $item );
-		}
 		else
-		{
 			array_push( $this->error_msg, $text);
-		}
 	}
 	
 	/**
 	 * generate the HTML of information 
 	 * messages to be added at the top of the page
 	 */
-	function info_text()
-	{
+	public function info_text(){
+		
 		$t = '';
 		$this->load->library('gui');
 		foreach( $this->info_msg as $item )
@@ -165,8 +162,8 @@ class Application extends CI_Controller {
 	 * generate the HTML of error
 	 * messages to be added at the top of the page
 	 */
-	function error_text()
-	{
+	public function error_text(){
+		
 		$t = '';
 		if( ! isset($this->gui) ) $this->load->library( 'gui' );
 		foreach( $this->error_msg as $item )

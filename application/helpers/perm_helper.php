@@ -9,8 +9,9 @@
  * @link	http://github.com/blazeeboy/Codeigniter-Egypt
  */
 if ( ! function_exists('perm_array')){
-	function perm_array()
-	{
+	
+	function perm_array(){
+		
 		$CI =& get_instance();
 		return array(
 			'opers' => array(

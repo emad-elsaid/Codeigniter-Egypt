@@ -14,8 +14,10 @@
 class Gui {
 
 	function __construct(){
+		
 		$CI =& get_instance();
 		$CI->load->helper('form');
+		
 	}
 
 
@@ -26,7 +28,7 @@ class Gui {
 	 * @param $attributes: array or object of key(attribute)=>value(value of the attribute)
 	 * @param $hidden: array of hiden fields and values as key=>value
 	 */
-	function form($action = '', $data=array(), $attributes = array(), $hidden = array()){
+	public function form($action = '', $data=array(), $attributes = array(), $hidden = array()){
 
 		theme_add( 'dijit.form.Form' );
 		$attributes = $this->attribute( $attributes, 'dojoType', 'dijit.form.Form') ;
@@ -50,7 +52,7 @@ class Gui {
 	 * @param $NAME: hidden field name
 	 * @param $value: hidden field value
 	 */
-	function hidden($NAME='', $value='' ){
+	public function hidden($NAME='', $value='' ){
 		
 		return form_hidden( $NAME, $value );
 		
@@ -66,7 +68,7 @@ class Gui {
 	 * @param $param: sfbrowser config object paramter->value associative array
 	 * @param $style: property->value associative array
 	 */
-	function file_chooser( $connector='', $NAME='',$value='', $attr=array(), $style=array() ){
+	public function file_chooser( $connector='', $NAME='',$value='', $attr=array(), $style=array() ){
 
 		theme_add('dojo.data.ItemFileReadStore');
 		theme_add('dijit.tree.ForestStoreModel');
@@ -106,7 +108,7 @@ EOT;
 	 * @param $param: sfbrowser config object paramter->value associative array
 	 * @param $style: property->value associative array
 	 */
-	function folder_chooser( $connector='', $NAME='',$value='', $attr=array(), $style=array() ){
+	public function folder_chooser( $connector='', $NAME='',$value='', $attr=array(), $style=array() ){
 
 		theme_add('dojo.data.ItemFileReadStore');
 		theme_add('dijit.tree.ForestStoreModel');
@@ -139,7 +141,7 @@ EOT;
 	/**
 	 * a date field picker using dojo
 	 */
-	function date( $NAME='', $value='', $attr=array() ){
+	public function date( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.form.DateTextBox');
 
@@ -154,7 +156,7 @@ EOT;
 	/**
 	 * a Time chooser input field
 	 */
-	function time( $NAME='', $value='', $attr=array() ){
+	public function time( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.form.TimeTextBox');
 
@@ -169,7 +171,7 @@ EOT;
 	/**
 	 * an input field with dojo
 	 */
-	function textbox( $NAME='', $value='', $attr=array() ){
+	public function textbox( $NAME='', $value='', $attr=array() ){
 		
 		theme_add('dijit.form.TextBox');
 
@@ -184,7 +186,7 @@ EOT;
 	/**
 	 * an button with dojo
 	 */
-	function button( $NAME='', $value='', $attr=array() ){
+	public function button( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.form.Button');
 
@@ -200,7 +202,7 @@ EOT;
 	 * @param $text: button text
 	 * @param $dialog: tooltip dialog content text
 	 */
-	function tooltipbutton( $text='', $dialog='', $attr=array() ){
+	public function tooltipbutton( $text='', $dialog='', $attr=array() ){
 
 		theme_add('dijit.form.Button');
 		theme_add( 'dijit.Dialog' );
@@ -221,7 +223,7 @@ EOT;
 	/**
 	 * an password field with dojo
 	 */
-	function password( $NAME='', $value='', $attr=array() ){
+	public function password( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.form.TextBox');
 
@@ -236,7 +238,7 @@ EOT;
 	/**
 	 * an input number spinner with dojo
 	 */
-	function number( $NAME='', $value='', $attr=array() ){
+	public function number( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.form.NumberSpinner');
 
@@ -251,7 +253,7 @@ EOT;
 	/**
 	 * a textarea field auto grown
 	 */
-	function textarea( $NAME='', $value='', $attr=array() ){
+	public function textarea( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.form.Textarea');
 
@@ -266,7 +268,7 @@ EOT;
 	/**
 	 * a permission field auto grow textarea
 	 */
-	function permission( $NAME='', $value='', $attr=array() ){
+	public function permission( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.form.Textarea');
 
@@ -291,7 +293,7 @@ EOT;
 	/**
 	 * an richtext editor with dojo
 	 */
-	function editor( $NAME='', $value='', $attr=array() ){
+	public function editor( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.Editor');
 		theme_add('dijit._editor.plugins.AlwaysShowToolbar');
@@ -315,7 +317,7 @@ EOT;
 	/**
 	 * an simple richtext editor with dojo
 	 */
-	function smalleditor( $NAME='', $value='', $attr=array() ){
+	public function smalleditor( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.Editor');
 
@@ -333,7 +335,7 @@ EOT;
 	 * a dropdown menu using dojo
 	 * @param: options[ 'Label'=>'value' ]
 	 */
-	function dropdown( $NAME='', $value='', $options=array(), $attr=array() ){
+	public function dropdown( $NAME='', $value='', $options=array(), $attr=array() ){
 
 		theme_add('dijit.form.FilteringSelect');
 		foreach( $options as $key=>$item )
@@ -353,7 +355,7 @@ EOT;
 	/**
 	 * a section chooser dropdown field
 	 */
-	function section( $NAME='', $value='', $attr=array() ){
+	public function section( $NAME='', $value='', $attr=array() ){
 		
 		$options = array('s1'=>'index');
 		if( ! function_exists( 'rec_section' ) ){
@@ -385,7 +387,7 @@ EOT;
 	/**
 	 * a checkbox using dojo
 	 */
-	function checkbox( $NAME='', $value='', $checked=FALSE, $attr=array() ){
+	public function checkbox( $NAME='', $value='', $checked=FALSE, $attr=array() ){
 
 		theme_add('dijit.form.CheckBox');
 		$attr = $this->attribute( $attr, 'dojoType', 'dijit.form.CheckBox');
@@ -398,7 +400,7 @@ EOT;
 	/**
 	 * a radio button using dojo
 	 */
-	function radio( $NAME='', $value='', $checked=FALSE, $attr=array() ){
+	public function radio( $NAME='', $value='', $checked=FALSE, $attr=array() ){
 
 		theme_add('dijit.form.CheckBox');
 		$attr = $this->attribute( $attr, 'dojoType', 'dijit.form.RadioButton');
@@ -411,7 +413,7 @@ EOT;
 	/**
 	 * a Tooltip using dojo
 	 */
-	function tooltip( $NAME='', $value='', $attr=array() ){
+	public function tooltip( $NAME='', $value='', $attr=array() ){
 
 		theme_add('dijit.Tooltip');
 		$attr = $this->attribute( $attr, 'position', 'below', FALSE );
@@ -425,7 +427,7 @@ EOT;
 	 * @param
 	 * 		$data: associative array of title=>panelHTML
 	 */
-	function accordion( $data=array(), $attr=array(), $style=array() ){
+	public function accordion( $data=array(), $attr=array(), $style=array() ){
 		
 		theme_add( 'dijit.layout.AccordionContainer' );
 		$style = $this->style( $style, 'width', '100%' , FALSE);
@@ -449,7 +451,7 @@ EOT;
 	 * @param
 	 * 		$data: associative array of tabTitle->panelHTML
 	 */
-	function tab( $data=array(), $attr=array(), $style=array() ){
+	public function tab( $data=array(), $attr=array(), $style=array() ){
 		
 		theme_add( 'dijit.layout.TabContainer' );
 		theme_add( 'dijit.layout.ContentPane' );
@@ -474,7 +476,7 @@ EOT;
 	 * @param $titel: panel title
 	 * @param $body: panel contents
 	 */
-	function titlepane( $title='', $body='', $attr=array() ){
+	public function titlepane( $title='', $body='', $attr=array() ){
 		
 		theme_add( 'dijit.TitlePane' );
 		$attr = $this->_attributes_to_string( $attr );
@@ -485,7 +487,7 @@ EOT;
 	/**
 	 * a error box using jquery
 	 */
-	function error( $text='', $attr=array() ){
+	public function error( $text='', $attr=array() ){
 		
 		theme_add( 'assets/style/style.css' );
 		$attr = $this->_attributes_to_string( $attr );
@@ -497,7 +499,7 @@ EOT;
 	/**
 	 * an Info box using jquery
 	 */
-	function info( $text='', $attr=array() ){
+	public function info( $text='', $attr=array() ){
 		
 		theme_add( 'assets/style/style.css' );
 		$attr = $this->_attributes_to_string( $attr );
@@ -509,7 +511,7 @@ EOT;
 	/**
 	 * a horizontal spliter box with dojo
 	 */
-	function hbox( $content='', $attr=array(), $style=array() ){
+	public function hbox( $content='', $attr=array(), $style=array() ){
 		
 		theme_add( 'dijit.layout.SplitContainer' );
 		theme_add( 'dijit.layout.ContentPane' );
@@ -534,7 +536,7 @@ EOT;
 	/**
 	 * a vertical splitter box with dojo
 	 */
-	function vbox( $content='', $attr=array(), $style=array() ){
+	public function vbox( $content='', $attr=array(), $style=array() ){
 		
 		theme_add( 'dijit.layout.SplitContainer' );
 		theme_add( 'dijit.layout.ContentPane' );
@@ -564,7 +566,7 @@ EOT;
 	 * @param $value: value of the attribute to set
 	 * @param $replace: will replace current attribute value if exists or add it if not otherwise will it will add attribute of not exists only
 	 */
-	function attribute( $attr=array(), $key='', $value='', $replace=TRUE ){
+	public function attribute( $attr=array(), $key='', $value='', $replace=TRUE ){
 		
 		if( is_array($attr) ){
 			if( !isset($attr[$key]) or (isset($attr[$key]) and $replace) ) $attr[$key] = $value;
@@ -582,7 +584,7 @@ EOT;
 	 * a file list chooser that return a text with some lines every line is
 	 * a choosen file ( it's a textarea interface with jquery)
 	 **/
-	function file_list( $connector, $NAME='',$value='', $attr=array(), $param=array(), $style=array()){
+	public function file_list( $connector, $NAME='',$value='', $attr=array(), $param=array(), $style=array()){
 		
 		theme_add('jquery/jquery.js');
 		$ci =& get_instance();
@@ -670,7 +672,7 @@ EOT;
 	/**
 	 * just like attribute function but for style paramter
 	 */
-	function style( $attr=array(), $key='', $value='', $replace=TRUE ){
+	public function style( $attr=array(), $key='', $value='', $replace=TRUE ){
 		
 		if( is_array($attr) ){
 			if( !isset($attr[$key]) or (isset($attr[$key]) and $replace) )
@@ -692,7 +694,7 @@ EOT;
 	/**
 	 * helper function to convert the attribute array to HTML attributes
 	 */
-	function _attributes_to_string( $attr= array() ){
+	protected function _attributes_to_string( $attr= array() ){
 		
 		if( is_string($attr) ) return $attr;
 
@@ -707,7 +709,7 @@ EOT;
 	/**
 	 * helper function to convert the paramters array to javascript object
 	 */
-	function _params_to_js( $param=array() ){
+	protected function _params_to_js( $param=array() ){
 		
 		$att = '';
 
@@ -723,7 +725,7 @@ EOT;
 	/**
 	 * helper function to convert style array to CSS text
 	 */
-	function _array_to_style( $style=array() ){
+	protected function _array_to_style( $style=array() ){
 		
 		if( is_string( $style ) ) return $style;
 		$arr = array();

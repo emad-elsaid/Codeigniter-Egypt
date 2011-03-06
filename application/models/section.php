@@ -9,20 +9,23 @@
  * @link	http://github.com/blazeeboy/Codeigniter-Egypt
  */
 class Section extends DataMapper {
-	var $default_order_by = array('sort');
-	var $ci;
+	
+	public $default_order_by = array('sort');
+	public $ci;
 	static $parents = NULL;
 
-	function __construct($id=NULL){
+	public function __construct($id=NULL){
+		
 		parent::__construct($id);
 		$this->ci =& get_instance();
+		
 	}
 
 	/**
 	 * get all the parent of that section up to
 	 * the index page as an array of IDs
 	 **/
-	function get_parents(){
+	public function get_parents(){
 
 		if( !is_null(Section::$parents) )
 			return Section::$parents;
@@ -35,10 +38,11 @@ class Section extends DataMapper {
 			$parents[] = $c->id;
 		}
 		Section::$parents = $parents;
+		
 		return $parents;
 	}
 
-	function save( $object = '', $related_field = '' ){
+	public function save( $object = '', $related_field = '' ){
 
 		if( empty($this->id) and empty($object) ){
 			$s = new Section();
@@ -58,7 +62,7 @@ class Section extends DataMapper {
 	/**
 	 * delete that section with all it's subsections
 	 **/
-	function delete( $object = '', $related_field = '' ){
+	public function delete( $object = '', $related_field = '' ){
 
 		if( empty($object) ){
 			// update all the sections sort after that section
@@ -83,8 +87,10 @@ class Section extends DataMapper {
 	 * return true if that user can view the section
 	 * and false if cannot view it
 	 **/
-	function can_view(){
+	public function can_view(){
+		
 		return (empty($this->view) or perm_chck( $this->view ));
+		
 	}
 
 	/**
@@ -92,7 +98,7 @@ class Section extends DataMapper {
 	 * that function works if that section is the current
 	 * section of the user
 	 **/
-	function render(){
+	public function render(){
 
 		if($this->ci->system->section->can_view()){
 			/*********************************************

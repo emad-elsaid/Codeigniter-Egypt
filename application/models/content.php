@@ -9,12 +9,15 @@
  * @link			http://github.com/blazeeboy/Codeigniter-Egypt
  */
 class Content extends DataMapper {
-	var $default_order_by = array('sort');
-	var $ci;
+	
+	public $default_order_by = array('sort');
+	public $ci;
 
-	function __construct($id=NULL){
+	public function __construct($id=NULL){
+		
 		parent::__construct($id);
 		$this->ci =& get_instance();
+		
 	}
 
 	/**
@@ -22,7 +25,7 @@ class Content extends DataMapper {
 	 * returns true if it moved and false if
 	 * faild to move it ... in case it's the first one
 	 **/
-	function move_up(){
+	public function move_up(){
 
 		if( $this->sort > 0 and isset($this->id) ){
 			$this->deattach();
@@ -39,7 +42,8 @@ class Content extends DataMapper {
 	 * moves the current content down in it's cell
 	 * return true on success and false on failure
 	 **/
-	function move_down(){
+	public function move_down(){
+		
 		$cont = new Content();
 		$cont->where('parent_content',$this->parent_content );//same parent
 		$cont->where('cell',$this->cell);// same cell
@@ -64,7 +68,7 @@ class Content extends DataMapper {
 	 *
 	 * returns the edit button + the content HTML
 	 **/
-	function container( $text='' ){
+	public function container( $text='' ){
 
 		if( $this->ci->system->mode()=='edit' AND $this->info!='PAGE_BODY_LOCKED' ){
 			$text = $this->ci->load->view('edit_mode/container'
@@ -86,8 +90,10 @@ class Content extends DataMapper {
 	 * true if the user can view that content
 	 * false if the user not permitted to see it
 	 **/
-	function can_view(){
+	public function can_view(){
+		
 		return  (empty($this->view)  or perm_chck( $this->view ));
+		
 	}
 
 	/**
@@ -96,7 +102,7 @@ class Content extends DataMapper {
 	 * the layout should return the number of cells
 	 * if the layout is not exist it'll return 1 cell
 	 **/
-	function cells(){
+	public function cells(){
 
 		if( $this->path =='' )
 			return 1;
@@ -116,7 +122,7 @@ class Content extends DataMapper {
 	/**
 	 * get the content information as an object
 	 **/
-	function get_info(){
+	public function get_info(){
 
 		if( !is_null($this->_cached_info_obj) )
 			return $this->_cached_info_obj;
@@ -128,6 +134,7 @@ class Content extends DataMapper {
 				$info->$key = intval(count($value)==1);
 
 		$this->_cached_info_obj = $info;
+		
 		return $info;
 	}
 
@@ -135,13 +142,14 @@ class Content extends DataMapper {
 	 * generate add button to that cell
 	 * in this content object
 	 **/
-	function add_button( $cell='' ){
+	public function add_button( $cell='' ){
 
 		return $this->ci->load->view(
 						'edit_mode/insert',
 		array('url'=> site_url( "editor/chooser/{$this->ci->system->section->id}/{$this->id}/{$cell}/0" )),
 		TRUE
 		);
+		
 	}
 
 	/**
@@ -150,7 +158,7 @@ class Content extends DataMapper {
 	 * taking in consideration the edit mode to display
 	 * the control buttons in every cell
 	 **/
-	function render(){
+	public function render(){
 
 		/***************************************
 		 *  the main render code
@@ -220,7 +228,7 @@ class Content extends DataMapper {
 	 * section
 	 * you must pass objects to the function
 	 ***************************************/
-	function children($section=NULL ){
+	public function children($section=NULL ){
 
 		// getting the section path to the main index page
 		if( ! is_null($section) )
@@ -246,7 +254,8 @@ class Content extends DataMapper {
 		return $contents;
 	}
 	
-	function attach(){
+	public function attach(){
+		
 		$cont = new Content();
 		$cont->where( 'parent_content', $this->parent_content );//same parent
 		$cont->where( 'cell', $this->cell );// same cell
@@ -256,9 +265,11 @@ class Content extends DataMapper {
 			$item->sort++;
 			$item->save();
 		}
+		
 	}
 	
-	function deattach(){
+	public function deattach(){
+		
 		$cont = new Content();
 		$cont->where( 'parent_content', $this->parent_content );//same parent
 		$cont->where( 'cell', $this->cell );// same cell
@@ -268,9 +279,11 @@ class Content extends DataMapper {
 			$item->sort--;
 			$item->save();
 		}
+		
 	}
 	
-	function save($object = '', $related_field = ''){
+	public function save($object = '', $related_field = ''){
+		
 		if( empty($this->id) and empty($object) )
 			$this->attach();
 			
@@ -283,16 +296,18 @@ class Content extends DataMapper {
 	// we have to push all the content up to fill that hole
 	// these content must me in the same section,parent,cell
 	// and have sort nubmer greater than that content
-	function delete($object = '', $related_field = ''){
+	public function delete($object = '', $related_field = ''){
+		
 		$this->deattach();
 		parent::delete($object, $related_field);
+		
 	}
 
 	/**
 	 * apply filters to $input and return
 	 * the effected text
 	 **/
-	function apply_filters($input){
+	public function apply_filters($input){
 
 		$output = $input;
 		$filters_array = array_map( 'trim', explode( "\n", $this->filter ) );

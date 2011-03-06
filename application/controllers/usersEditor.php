@@ -2,17 +2,15 @@
 
 class UsersEditor extends Application {
 
-	function __construct()
-	{
+	public function __construct(){
+		
 		parent::__construct();
 
-		$this->perm = 'admin';
-
-		$this->name 	= "Users Editor";
-		$this->author 	= "Emad Elsaid";
-		$this->website 	= "http://blazeeboy.blogspot.com";
-		$this->version 	= "0.1";
-
+		$this->perm 			= 'admin';
+		$this->name 			= "Users Editor";
+		$this->author 			= "Emad Elsaid";
+		$this->website 			= "http://blazeeboy.blogspot.com";
+		$this->version 			= "0.1";
 		$this->show_toolbar 	= TRUE;
 		$this->pages 			= array(
 					'index'=>'Active Users',
@@ -24,7 +22,7 @@ class UsersEditor extends Application {
 		$this->load->library('gui');
 	}
 
-	function index(){
+	public function index(){
 
 		theme_add('dojo.data.ItemFileReadStore');
 		theme_add('dijit.tree.ForestStoreModel');
@@ -40,9 +38,11 @@ class UsersEditor extends Application {
 			document.location.href = "'.site_url('usersEditor/editUser').'/"+item.id;
 		</script>
 		</div>');
+		
 	}
 	
-	function queryGroups(){
+	public function queryGroups(){
+		
 		$this->ajax = TRUE;
 		$groups = $this->ion_auth->get_groups();
 		foreach( $groups as $key=>$group ){
@@ -62,9 +62,10 @@ class UsersEditor extends Application {
 		}
 		
 		$this->print_text( json_encode(array( 'identifier'=>'ident', 'label'=>'name','items'=>$groups)) );
+		
 	}
 	
-	function inactive(){
+	public function inactive(){
 
 		theme_add('dojo.data.ItemFileReadStore');
 		theme_add('dijit.tree.ForestStoreModel');
@@ -80,11 +81,14 @@ class UsersEditor extends Application {
 			document.location.href = "'.site_url('usersEditor/editUser').'/"+item.id;
 		</script>
 		</div>');
+		
 	}
 	
-	function queryInactiveGroups(){
+	public function queryInactiveGroups(){
+		
 		$this->ajax = TRUE;
 		$groups = $this->ion_auth->get_groups();
+		
 		foreach( $groups as $key=>$group ){
 			$groups[$key]->type = 'group';
 			$groups[$key]->ident = 'g'.$group->id;
@@ -102,9 +106,11 @@ class UsersEditor extends Application {
 		}
 		
 		$this->print_text( json_encode(array( 'identifier'=>'ident', 'label'=>'name','items'=>$groups)) );
+		
 	}
 	
-	function newGroup(){
+	public function newGroup(){
+		
 		$this->print_text(
 			$this->gui->form('usersEditor/newGroupAction',
 			array(
@@ -113,9 +119,11 @@ class UsersEditor extends Application {
 				''=>$this->gui->button('submit','Save',array('type'=>'submit'))
 			)
 		));
+		
 	}
 	
-	function newGroupAction(){
+	public function newGroupAction(){
+		
 		if(is_object($this->ion_auth->get_group_by_name($this->input->post('name'))))
 			$this->add_error('This Group already Exists');
 		else{
@@ -128,7 +136,7 @@ class UsersEditor extends Application {
 		
 	}
 	
-	function editGroup($id){
+	public function editGroup($id){
 		
 		$group = new Group($id);
 		if( !$group->exists() )
@@ -145,15 +153,19 @@ class UsersEditor extends Application {
 			'',
 			array('id'=>$id)
 		));
+		
 	}
 	
-	function deleteGroup($id){
+	public function deleteGroup($id){
+		
 		$group = new Group($id);
 		$group->delete();
+		
 		redirect('usersEditor');
+		
 	}
 	
-	function editGroupAction(){
+	public function editGroupAction(){
 		
 		$group = new Group($this->input->post('id'));
 		if( !$group->exists() )
@@ -166,7 +178,7 @@ class UsersEditor extends Application {
 		
 	}
 	
-	function newUser(){
+	public function newUser(){
 
 		$this->load->library('form_validation');
 		//validate form input
@@ -198,9 +210,7 @@ class UsersEditor extends Application {
 			//redirect them back to the admin page
 			$this->session->set_flashdata('message', "User Created");
 			redirect("usersEditor");
-		}
-		else
-		{ //display the create user form
+		}else{ //display the create user form
 			//set the flash data error message if there is one
 			$groups = new Group();
 			$groups->get();
@@ -227,8 +237,8 @@ class UsersEditor extends Application {
 		}
 	}
 	
-	function editUser($id)
-	{
+	public function editUser($id){
+		
 		$groups = new Group();
 		$groups->get();
 		$groups_array = array();
@@ -260,15 +270,19 @@ class UsersEditor extends Application {
 				array('id'=>$user->id)
 			)
 		);
+		
 	}
 	
-	function deleteUser($id){
+	public function deleteUser($id){
+		
 		$user = new User($id);
 		$user->delete();
 		redirect('usersEditor');
+		
 	}
 	
-	function editUserAction(){
+	public function editUserAction(){
+		
 		$user = new User($this->input->post('id'));
 		$user->group_id = $this->input->post('group');
 		$user->active = ($this->input->post('active')===false)? 0:1;
@@ -289,5 +303,6 @@ class UsersEditor extends Application {
 			redirect('usersEditor');
 		else
 			$this->add_error($this->ion_auth->errors());
+			
 	}
 }

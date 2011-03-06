@@ -2,16 +2,14 @@
 
 class SectionEditor extends Application {
 	
-	function __construct(){
+	public function __construct(){
 		parent::__construct();
 		
 		$this->perm = 'admin';
-
 		$this->name 	= "Section Editor";
 		$this->author 	= "Emad Elsaid";
 		$this->website 	= "http://blazeeboy.blogspot.com";
 		$this->version 	= "0.1";
-
 		$this->pages 	= array(
 							'index'=>'Sections',
 							'add'=>'New Section'
@@ -20,7 +18,7 @@ class SectionEditor extends Application {
 		$this->load->library('gui');
 	}
 	
-	function index(){
+	public function index(){
 
 		theme_add('dojo.data.ItemFileReadStore');
 		theme_add('dijit.tree.ForestStoreModel');
@@ -36,7 +34,7 @@ class SectionEditor extends Application {
 		</div>');
 	}
 	
-	function queryTree(){
+	public function queryTree(){
 		
 		$this->ajax = TRUE;
 		
@@ -55,9 +53,10 @@ class SectionEditor extends Application {
 		}
 		
 		$this->print_text( json_encode(array( 'identifier'=>'id', 'label'=>'description','items'=>getTree(1))) );
+		
 	}
 	
-	function add(){
+	public function add(){
 		
 		$this->print_text( $this->gui->form(
 			site_url( 'sectionEditor/addaction' )
@@ -68,9 +67,10 @@ class SectionEditor extends Application {
 					,''=>$this->gui->button( '', 'Add Section', array('type'=>'submit') )
 			)
 		));
+		
 	}
 	
-	function addaction(){
+	public function addaction(){
 		
 		$sort = new Section();
 		$sort	->where('parent_section',$this->input->post('parent_section'))
@@ -87,15 +87,16 @@ class SectionEditor extends Application {
 		redirect( 'sectionEditor' );
 	}
 	
-	function delete($id){
+	public function delete($id){
 		
 		$s = new Section($id);
 		$s->delete();
 				
 		redirect( 'sectionEditor' );
+		
 	}
 	
-	function edit($id){
+	public function edit($id){
 		
 		$this->load->library( 'gui' );
 		
@@ -119,9 +120,10 @@ class SectionEditor extends Application {
 			,''
 			,$hidden
 		));
+		
 	}
 	
-	function editaction(){
+	public function editaction(){
 		
 		$s 			= new Section($this->input->post( 'id' ));
 		$s->name 	= $this->input->post( 'name' );
@@ -129,6 +131,7 @@ class SectionEditor extends Application {
 		$s->save();
 		
 		redirect( 'sectionEditor' );
+		
 	}
 	
 }

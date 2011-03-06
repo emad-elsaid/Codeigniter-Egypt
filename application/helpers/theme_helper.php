@@ -40,11 +40,13 @@ if( ! function_exists('theme_sitename') ){
 
 if( ! function_exists('theme_pagetitle') ){
 	function theme_pagetitle( $pagetitle=NULL ){
+		
 		$CI =& get_instance();
 		if( $pagetitle!==NULL )
 		$CI->config->set_item( 'page_title', $pagetitle );
 			
 		return $CI->config->item('page_title');
+		
 	}
 }
 
@@ -95,6 +97,7 @@ if( ! function_exists('theme_add') ){
 
 if( ! function_exists('theme_doctype') ){
 	function theme_doctype(){
+		
 		global $_doctypes;
 		$CI =& get_instance();
 		$type = $CI->config->item('doctype');
@@ -107,6 +110,7 @@ if( ! function_exists('theme_doctype') ){
 			return $_doctypes[$type]."\n";
 		else
 			return FALSE;
+			
 	}
 }
 
@@ -124,11 +128,13 @@ if( ! function_exists('theme_meta') ){
 
 		if( ! in_array($input, $CI->config->config['meta'] ) )
 		array_push( $CI->config->config['meta'], $input);
+		
 	}
 }
 
 if( ! function_exists('theme_css') ){
 	function theme_css( $input=NULL ){
+		
 		if( is_array($input) ){
 			foreach( $input as $item )
 			theme_css($item);
@@ -153,11 +159,13 @@ if( ! function_exists('theme_css') ){
 			
 		if( ! in_array($input, $CI->config->config['css_files']) )
 		array_push( $CI->config->config['css_files'], $input);
+		
 	}
 }
 
 if( ! function_exists('theme_js') ){
 	function theme_js( $input=NULL ){
+		
 		if( is_array($input) ){
 			foreach( $input as $item )
 			theme_js($item);
@@ -187,13 +195,16 @@ if( ! function_exists('theme_js') ){
 
 if( ! function_exists('theme_dojotheme') ){
 	function theme_dojotheme(){
+		
 		$CI =& get_instance();
 		return $CI->config->config['dojo_style'];
+		
 	}
 }
 
 if( ! function_exists('theme_dojo') ){
 	function theme_dojo( $input=NULL ){
+		
 		if( is_array($input) ){
 			foreach( $input as $item )
 			theme_dojo($item);
@@ -235,17 +246,20 @@ if( ! function_exists('theme_head')){
 		$head .= theme_js().theme_dojo();
 
 		return $head;
+		
 	}
 }
 
 if( ! function_exists('theme_foot')){
 	function theme_foot(){
+		
 		$CI =& get_instance();
 
 		if( $CI->config->item('js_at_foot') )
 		return theme_js().theme_dojo();
 
 		return '';
+		
 	}
 }
 ?>

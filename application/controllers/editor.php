@@ -2,24 +2,23 @@
 
 class Editor extends Application {
 
-	function __construct()
-	{
+	public function __construct(){
+		
 		parent::__construct();
 
-		$this->perm = 'admin';
-
-		$this->name 	= "Content Editor";
-		$this->author 	= "Emad Elsaid";
-		$this->website 	= "http://blazeeboy.blogspot.com";
-		$this->version 	= "0.1";
-
+		$this->perm 			= 'admin';
+		$this->name 			= "Content Editor";
+		$this->author 			= "Emad Elsaid";
+		$this->website 			= "http://blazeeboy.blogspot.com";
+		$this->version 			= "0.1";
 		$this->show_toolbar 	= FALSE;
 		$this->pages 			= array();
 
 		$this->load->library('gui');
 	}
 
-	function chooser($section, $content, $cell, $sort){
+	public function chooser($section, $content, $cell, $sort){
+		
 		theme_add('dojo.data.ItemFileReadStore');
 		theme_add('dijit.tree.ForestStoreModel');
 		theme_add('dijit.Tree');
@@ -37,6 +36,7 @@ class Editor extends Application {
 		</div>');
 		$hidden = array('parent_section'=>$section,'parent_content'=>$content, 'cell'=>$cell,'sort'=>$sort,'path'=>'');
 		$this->print_text( $this->gui->form(site_url('editor/data'),array(),'',	$hidden	));
+		
 	}
 	
 	
@@ -45,7 +45,7 @@ class Editor extends Application {
 	 * it generate JSON object for Dojo tree of previous method,
 	 * you can generate the object with json_encode
 	 */ 
-	function queryTree(){
+	public function queryTree(){
 		
 		$this->ajax = TRUE;
 		$this->load->helper('directory');
@@ -71,7 +71,7 @@ class Editor extends Application {
 		
 	}
 	
-	function addaction() {
+	public function addaction() {
 
 		$c = new content();
 
@@ -110,7 +110,7 @@ class Editor extends Application {
 
 	}
 
-	function data($edit=NULL,$sec=NULL){
+	public function data($edit=NULL,$sec=NULL){
 
 		/********************************************
 		 * checking if the page has a ID get paramter
@@ -239,20 +239,18 @@ EOT;
 			);
 		
 		//===============================================
-		/*OUR JSON OBJECT LIKE THAT
+		/*OUR YAML OBJECT LIKE THAT
 
-		{
-		"text":{
-			"type":"editor"
-			,"label":"Text Label"
-			,"default":"default text"
-		}
-		,"title":{
-			"type":"textbox"
-		}
-		,"titlecolor":"information to display"
-		}
-		**/
+		variableName1:
+			type: varType
+			default: varDefaultValue
+			label: varHumanizedName	
+		variableName2:
+			type: varType
+			default: varDefaultValue
+			label: varHumanizedName	
+				
+		*/
 		$this->load->helper('spyc');
 		$Plugin_Data = $this->load->view( 'content/'.$hidden['path'], array( "mode"=>"config" ), TRUE );
 		$Plugin_Data = spyc_load( $Plugin_Data );
@@ -341,7 +339,7 @@ EOT;
 		
 	}
 
-	function delete_children($id){
+	public function delete_children($id){
 
 		$c = new Content($id);
 
@@ -350,25 +348,23 @@ EOT;
 			$children->get_by_parent_content( $c->id );
 			$children->delete_all();
 			$this->add_info( 'Children deleted' );
-		}else{
+		}else
 			show_error( 'Content not found' );
-		}
 
 	}
 
-	function delete($id){
+	public function delete($id){
 
 		$c = new Content($id);
 		if( $c->exists() ){
 			$c->delete();
 			$this->add_info( 'Content deleted' );
-		}else{
+		}else
 			show_error( 'Content not found' );
-		}
 
 	}
 
-	function down($id){
+	public function down($id){
 
 		$c = new Content($id);
 
@@ -384,7 +380,7 @@ EOT;
 
 	}
 
-	function info($content_id){
+	public function info($content_id){
 
 		$content_ins = new Content($content_id);
 		if( ! $content_ins->exists() )
@@ -423,7 +419,7 @@ EOT
 	}
 
 
-	function up($id){
+	public function up($id){
 
 		$c = new Content($id);
 
@@ -436,10 +432,12 @@ EOT
 		}else{
 			show_error( 'Content not found' );
 		}
+		
 	}
 	
 	
-	function file_query(){
+	public function file_query(){
+		
 		$this->ajax = TRUE;
 		$this->load->helper('directory');
 		
@@ -461,9 +459,11 @@ EOT
 		}
 		
 		$this->print_text( json_encode(array( 'identifier'=>'i', 'label'=>'l','items'=>getTree('.'))) );
+		
 	}
 	
-	function model_query(){
+	public function model_query(){
+		
 		$this->ajax = TRUE;
 		$this->load->helper('directory');
 		
@@ -485,9 +485,11 @@ EOT
 		}
 		
 		$this->print_text( json_encode(array( 'identifier'=>'i', 'label'=>'l','items'=>getTree(APPPATH.'models'))) );
+		
 	}
 	
-	function filter_query(){
+	public function filter_query(){
+		
 		$this->ajax = TRUE;
 		$this->load->helper('directory');
 		
@@ -509,9 +511,11 @@ EOT
 		}
 		
 		$this->print_text( json_encode(array( 'identifier'=>'i', 'label'=>'l','items'=>getTree(APPPATH.'views/filter'))) );
+		
 	}
 	
-	function folder_query(){
+	public function folder_query(){
+		
 		$this->ajax = TRUE;
 		$this->load->helper('directory');
 		
@@ -532,5 +536,6 @@ EOT
 		}
 		
 		$this->print_text( json_encode(array( 'identifier'=>'i', 'label'=>'l','items'=>getTree('.'))) );
+		
 	}
 }

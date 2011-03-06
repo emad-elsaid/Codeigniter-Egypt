@@ -1,13 +1,16 @@
 <?php
 class Install extends CI_Controller{
 
-	function __construct(){
+	public function __construct(){
+		
 		parent::__construct();
 		$this->load->database();
 		$this->load->helper('url');
+		
 	}
 	
-	function index(){
+	public function index(){
+		
 		if( count($this->db->list_tables())==0 ){
 			$script = explode( ';', file_get_contents('mysql.sql') );
 			$script = array_map( 'trim', $script );
@@ -17,6 +20,7 @@ class Install extends CI_Controller{
 			$this->db->query($line);
 		}
 		redirect('');
+		
 	}
 }
 

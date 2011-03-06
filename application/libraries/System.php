@@ -10,13 +10,13 @@
  */
 class System {
 
-	var $CI 		= NULL;
-	var $section 	= NULL;
-	var $user 		= NULL;
-	var $level		= NULL;
-	var $mode 		= 'view';
+	public $CI 			= NULL;
+	public $section 	= NULL;
+	public $user 		= NULL;
+	public $level		= NULL;
+	public $mode 		= 'view';
 
-	function __construct(){
+	public function __construct(){
 
 		$this->CI =& get_instance();
 		$this->CI->load->database();
@@ -41,7 +41,7 @@ class System {
 	 *  function of checking site mode
 	 *
 	 * */
-	function mode($mode=''){
+	public function mode($mode=''){
 
 		if( !empty($mode) ){
 			$this->CI->session->set_userdata( 'mode', $mode );
@@ -51,7 +51,7 @@ class System {
 		
 	}
 
-	function get_section(){
+	public function get_section(){
 
 		$sec = new Section($this->CI->uri->rsegment(3));
 

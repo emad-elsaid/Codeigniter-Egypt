@@ -15,7 +15,7 @@ class Page extends CI_Controller{
 	 * Page controller it's just like the Admin controller, it loads the current
 	 * page and render it or display the permission denied mesage
 	 * */
-	function __construct(){
+	public function __construct(){
 		parent::__construct();
 		$this->load->library('system');
 	}
@@ -25,7 +25,7 @@ class Page extends CI_Controller{
 	 * if that user has the permission to view it or display
 	 * a permission denied message
 	 * */
-	function index(){
-		echo $this->system->section->render();
+	public function index(){
+		$this->system->section->render();
 	}
 }
