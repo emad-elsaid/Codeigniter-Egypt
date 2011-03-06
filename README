@@ -38,18 +38,9 @@ built on it some applications accessible by a task bar
 -----------------------------------------------------------------
 [ Installation ]
 ---
-* 1- copy the Codeigniter-Egypt folder to your web folder
-* 2- files needed to be configured Codeigniter-Egypt/config.php  or make it writable by server and open the install.php in your browser
-	
-	if you want to make more configuration modify
-			Codeigniter-Egypt/system/application/config/config.php
-			Codeigniter-Egypt/system/application/config/database.php
-			Codeigniter-Egypt/system/application/config/system.php
-			
-* 3- to install database : 
-	open the Codeigniter-Egypt website 
-	ex: http://localhost/Codeigniter-Egypt/index.php/install
-	you can use install.php but config.php must be writable
+* 1- download and extract Codeigniter Egypt
+* 2- edit "config.php" or open "install.php"
+* 3- open "index.php/install" to install database
 -----------------------------------------------------------------
 [ Running ]
 ---
@@ -72,6 +63,7 @@ built on it some applications accessible by a task bar
 -----------------------------------------------------------------
 [ How to help us ]
 ---
-* contact me and tell you want to help on github
+* like Codeigniter-Egypt on facebook [http://www.facebook.com/pages/Codeigniter-Egypt/92287906354] 
 * watch that repo to tell me that you are intersted [ click the watch button ]
+* contact me and tell you want to help on github [blazeeboy[at]gmail[dot]com]
 * fork that repo [ click the fork button ]
