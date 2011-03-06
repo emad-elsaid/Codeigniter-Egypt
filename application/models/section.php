@@ -100,32 +100,20 @@ class Section extends DataMapper {
 	 **/
 	public function render(){
 
-		if($this->ci->system->section->can_view()){
-			/*********************************************
-			 *  redering the page BODY content
-			 * here i open the edit mode so the widgets got the
-			 * container box and the controller buttons
-			 * and the admin toolbar
-			 * ********************************************/
-			$page_body = new Content();
-			$page_body->get_by_info( 'PAGE_BODY_LOCKED' );
-			$page_body_text = $page_body->render();
-
-			// adding the admin toolbar
-			if( $this->ci->ion_auth->is_admin())
-			$page_body_text .= $this->ci->load->view( 'edit_mode/toolbar', '', TRUE );
-
-			$doctype_text = doctype( $this->ci->config->item('doctype') );
-			/*********************************************************
-			 * display the page content
-			 * i sum all the page content text
-			 * before page + CSS + JS + head + body + after page
-			 * *******************************************************/
-			theme_pagetitle($this->name);
-			// Rendering the page
-			$this->ci->load->view('xhtml',array('body'=>$page_body_text));
-		}else{
+		if(!$this->ci->system->section->can_view())
 			show_error( 'Access denied' );
-		}
+
+		$page_body = new Content(1);
+		$page_body_text = $page_body->render();
+
+		// adding the admin toolbar
+		if( $this->ci->ion_auth->is_admin())
+		$page_body_text .= $this->ci->load->view( 'edit_mode/toolbar', '', TRUE );
+
+		
+		theme_pagetitle($this->name);
+		// Rendering the page
+		$this->ci->load->view('xhtml',array('body'=>$page_body_text));
+		
 	}
 }
