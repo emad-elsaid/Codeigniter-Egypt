@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs for page theme_helper.php</title>
+			<link rel="stylesheet" href="styles/phpdoc.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="file-name"><img src="images/Page_logo.png" alt="File" style="vertical-align: middle">/application/helpers/theme_helper.php</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-functions">Functions</a>
+			</div>
+	<div class="info-box-body">	
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">codeigniter helper responsible of assets and page properties</p>
+<p class="description"><p>enable you to add javascript, cascading stylsheet, meta text and dojo files  to page header plus creating page title in a good manner</p></p>
+	<ul class="tags">
+				<li><span class="field">copyright:</span> 2011 Emad Elsaid a.k.a Blaze Boy</li>
+				<li><span class="field">link:</span> <a href="https://github.com/blazeeboy/Codeigniter-Egypt">https://github.com/blazeeboy/Codeigniter-Egypt</a></li>
+				<li><span class="field">license:</span> <a href="http://www.gnu.org/licenses/gpl-2.0.txt">GPL License 2.0</a></li>
+			</ul>
+		
+			</div>
+</div>
+		
+
+	
+	
+	
+	<a name="sec-functions"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Functions</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<span class="disabled">Functions</span>
+		</div>
+		<div class="info-box-body">	
+			<a name="functiontheme_add" id="functiontheme_add"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<img src="images/Function.png" />
+		<span class="method-title">theme_add</span> (line <span class="line-number">96</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">add files and text to the required files array</p>
+<p class="description"><p>it could be used for adding css files, javascript files,  dojo required components or even meta tags or any string  to the page header, that function is smart enaugh to know the type  of text (meta tag, script tag, file path, plain text) and  add it to the suitable place.</p></p>
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			theme_add
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$input</span> = <span class="var-default">NULL</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$input</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functiontheme_css" id="functiontheme_css"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<img src="images/Function.png" />
+		<span class="method-title">theme_css</span> (line <span class="line-number">193</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">add/get page CSS string to be added to the head tag</p>
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			theme_css
+		</span>
+					([<span class="var-type">string/array</span>&nbsp;<span class="var-name">$input</span> = <span class="var-default">NULL</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string/array</span>
+				<span class="var-name">$input</span><span class="var-description">: to be added to the page CSS string</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functiontheme_doctype" id="functiontheme_doctype"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<img src="images/Function.png" />
+		<span class="method-title">theme_doctype</span> (line <span class="line-number">146</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">return the corrent doctype configured in the theme configuration file</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> doctype tag string.</li>
+			</ul>
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			theme_doctype
+		</span>
+				()
+			</div>
+
+		
+	
+</div>
+<a name="functiontheme_dojo" id="functiontheme_dojo"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<img src="images/Function.png" />
+		<span class="method-title">theme_dojo</span> (line <span class="line-number">281</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">add/get dojo required components by require() function</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> script tag contains dojo require()  for all dojo reuired components</li>
+			</ul>
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			theme_dojo
+		</span>
+					([<span class="var-type">string/array</span>&nbsp;<span class="var-name">$input</span> = <span class="var-default">NULL</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string/array</span>
+				<span class="var-name">$input</span><span class="var-description">: to be added to the page meta string</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functiontheme_dojotheme" id="functiontheme_dojotheme"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<img src="images/Function.png" />
+		<span class="method-title">theme_dojotheme</span> (line <span class="line-number">265</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">get dojo theme name specified in theme config file</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> dojo style folder name</li>
+			</ul>
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			theme_dojotheme
+		</span>
+				()
+			</div>
+
+		
+	
+</div>
+<a name="functiontheme_foot" id="functiontheme_foot"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<img src="images/Function.png" />
+		<span class="method-title">theme_foot</span> (line <span class="line-number">343</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">get theme footer text before the end of body tag  that will get teh javasript text if js_at_foot is On  in the theme config file</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> collection of script tags  to be added before body tag close (or empty text if js_on_foot is Off)</li>
+			</ul>
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			theme_foot
+		</span>
+				()
+			</div>
+
+		
+	
+</div>
+<a name="functiontheme_head" id="functiontheme_head"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<img src="images/Function.png" />
+		<span class="method-title">theme_head</span> (line <span class="line-number">319</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">get HTML page header depending on current required files meta  and dojo required components</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> header tag contents (without the header tag itself)</li>
+			</ul>
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			theme_head
+		</span>
+				()
+			</div>
+
+		
+	
+</div>
+<a name="functiontheme_js" id="functiontheme_js"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<img src="images/Function.png" />
+		<span class="method-title">theme_js</span> (line <span class="line-number">230</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">add/get page javascript string to be added to the head tag</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> collection of script tags to be added to header tag</li>
+			</ul>
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			theme_js
+		</span>
+					([<span class="var-type">string/array</span>&nbsp;<span class="var-name">$input</span> = <span class="var-default">NULL</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string/array</span>
+				<span class="var-name">$input</span><span class="var-description">: to be added to the page javascript string</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functiontheme_meta" id="functiontheme_meta"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<img src="images/Function.png" />
+		<span class="method-title">theme_meta</span> (line <span class="line-number">170</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">add/get page meta string to be added to the head tag</p>
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			theme_meta
+		</span>
+					([<span class="var-type">string/array</span>&nbsp;<span class="var-name">$input</span> = <span class="var-default">NULL</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string/array</span>
+				<span class="var-name">$input</span><span class="var-description">: to be added to the page meta string</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functiontheme_pagetitle" id="functiontheme_pagetitle"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<img src="images/Function.png" />
+		<span class="method-title">theme_pagetitle</span> (line <span class="line-number">73</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">set/get current page title</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the current page name</li>
+			</ul>
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			theme_pagetitle
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$pagetitle</span> = <span class="var-default">NULL</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$pagetitle</span><span class="var-description">: the page title to be set</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functiontheme_sitename" id="functiontheme_sitename"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<img src="images/Function.png" />
+		<span class="method-title">theme_sitename</span> (line <span class="line-number">57</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">get/set website name, the default returned value is  site name in theme config file</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the website name</li>
+			</ul>
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			theme_sitename
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$sitename</span> = <span class="var-default">NULL</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sitename</span><span class="var-description">: website name if not null it'll be set  as current website title</span>			</li>
+				</ul>
+		
+	
+</div>
+<a name="functiontheme_title" id="functiontheme_title"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<img src="images/Function.png" />
+		<span class="method-title">theme_title</span> (line <span class="line-number">23</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">get current page title</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the title as [&lt;title&gt; tag or plain title value]</li>
+			</ul>
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			theme_title
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$title</span> = <span class="var-default">&#039;html&#039;</span>])
+			</div>
+
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$title</span><span class="var-description">: [html or text] type or returned output</span>			</li>
+				</ul>
+		
+	
+</div>
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Tue, 08 Mar 2011 01:03:50 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

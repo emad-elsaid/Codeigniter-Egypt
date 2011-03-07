@@ -1,0 +1,11 @@
+D:\websites\Codeigniter-Egypt\application\libraries\Gui.php,
+D:\websites\Codeigniter-Egypt\application\libraries\System.php,
+D:\websites\Codeigniter-Egypt\application\core\My_Controller.php,
+D:\websites\Codeigniter-Egypt\application\helpers\perm_helper.php,
+D:\websites\Codeigniter-Egypt\application\helpers\theme_helper.php,
+D:\websites\Codeigniter-Egypt\application\models\content.php,
+D:\websites\Codeigniter-Egypt\application\models\group.php,
+D:\websites\Codeigniter-Egypt\application\models\section.php,
+D:\websites\Codeigniter-Egypt\application\models\user.php,
+
+output format: HTML:frames/Extjs:default
