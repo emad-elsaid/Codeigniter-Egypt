@@ -13,7 +13,7 @@ text:
 
 <?php
 $ci->load->library( "gui" );
-$f = $info->type;
-echo $ci->gui->$f( $info->text );
+$f = $type;
+echo $ci->gui->$f( $text );
 ?>
 <?php endif; ?>

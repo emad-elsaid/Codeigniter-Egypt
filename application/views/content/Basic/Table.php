@@ -8,14 +8,14 @@ rows:
 style:
 	type:textarea
 <?php elseif( $mode=='layout' ): ?>
-<?= $info->columns*$info->rows ?>
+<?= $columns*$rows ?>
 <?php elseif( $mode=='view' ): ?>
-<table style="<?= $info->style ?>">
-<?php for( $i=0; $i<$info->rows; $i++ ){ ?>
+<table style="<?= $style ?>">
+<?php for( $i=0; $i<$rows; $i++ ){ ?>
 	 <tr>
-	<?php for( $j=0; $j<$info->columns; $j++ ){ ?>
+	<?php for( $j=0; $j<$columns; $j++ ){ ?>
 		 <td>
-		 <?= $cell[$i*$info->columns+$j] ?>
+		 <?= $cell[$i*$columns+$j] ?>
 		 </td>
 	<?php } ?>
 	 </tr>

@@ -8,7 +8,7 @@ id:
 <?php elseif( $mode=='view' ): ?>
 <?php 
 $instance = new Content();
-$instance->get_by_id( $info->id );
+$instance->get_by_id( $id );
 if( $instance->exists() )
 	echo $instance->render();
 else

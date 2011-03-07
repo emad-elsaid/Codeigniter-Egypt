@@ -46,8 +46,6 @@ css_files :
 $ci =& get_instance();
 if( $ci->system->mode=='edit' )
 {
-	$c = new Content();
-	$c->get_by_id( $id );
 	
 	if( $ci->ion_auth->is_admin() )
 	{
@@ -61,21 +59,21 @@ if( $ci->system->mode=='edit' )
 <?php
 	$local = base_url();
 	
-	if( $info->Resetstyle ) theme_add( 'assets/style/reset.css' );
-	if( $info->Textstyle ) theme_add( 'assets/style/text.css' );
-	if( !empty($info->favIcon) ) theme_add('<link rel="icon" href="'.base_url().$info->favIcon.'">');
-	theme_add(explode("\n",$info->javascript_files));
-	theme_add(explode("\n",$info->css_files));
+	if( $Resetstyle ) theme_add( 'assets/style/reset.css' );
+	if( $Textstyle ) theme_add( 'assets/style/text.css' );
+	if( !empty($favIcon) ) theme_add('<link rel="icon" href="'.base_url().$favIcon.'">');
+	theme_add(explode("\n",$javascript_files));
+	theme_add(explode("\n",$css_files));
 	
 	$style = '';
-	if( $info->background_image != '' )
+	if( $background_image != '' )
 	{
-		$style .= "background-image: url({$local}{$info->background_image});";
-		$style .= "background-position: {$info->horizontal_position} {$info->vertical_position};";
-		$style .= "background-repeat: {$info->repeat};";
-		$style .= "background-attachment: {$info->attachment};";
+		$style .= "background-image: url({$local}{$background_image});";
+		$style .= "background-position: {$horizontal_position} {$vertical_position};";
+		$style .= "background-repeat: {$repeat};";
+		$style .= "background-attachment: {$attachment};";
 	}
-	$style .= $info->style;
+	$style .= $style;
 	if( $style!='' )
 	{
 		theme_add("
@@ -86,14 +84,14 @@ body{
 </style>
 
 		");
-		if(!empty($info->class))
+		if(!empty($class))
 		{ 
 			theme_add('jquery/jquery.js');
 			theme_add(
 <<<EOT
 <script language="javascript" >
 	$(function(){
-		$(document).addClass('{$info->class}');
+		$(document).addClass('{$class}');
 	});
 </script>
 EOT

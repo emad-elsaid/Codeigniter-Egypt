@@ -2,5 +2,5 @@
 Text:
 	type:editor
 <?php elseif( $mode=='view' ): ?>
-<?= $info->Text ?>
+<?= $Text ?>
 <?php endif; ?>

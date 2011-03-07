@@ -12,10 +12,8 @@ externel:
 
 <?php elseif( $mode=='view' ): ?>
 <?php
-$c = new Content();
-$c->get_by_id( $id );
 
-$u = ( empty($info->externel) )? site_url($info->section) :	$info->externel;
+$u = ( empty($externel) )? site_url($section) :	$externel;
 
 if( ($ci->system->mode=='edit') and $ci->ion_auth->is_admin() )
 {

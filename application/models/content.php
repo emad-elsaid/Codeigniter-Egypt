@@ -107,16 +107,12 @@ class Content extends DataMapper {
 		if( $this->path =='' )
 			return 1;
 			
-		return intval($this->load->view(
-						'content/'.$this->path,
-					array(
-							'id'=> $this->id,
-							'ci'=> $this->ci,
-							'info'=>$this->get_info(),
-							'mode'=>'layout'
-							),
-							TRUE
-							));
+		$info 			= &$this->get_info();
+		$info->content 	= &$this;
+		$info->ci 		= &$this->ci;
+		$info->mode 	= 'layout';
+		
+		return intval($this->load->view('content/'.$this->path, $info, TRUE));
 	}
 
 	/**
@@ -193,17 +189,13 @@ class Content extends DataMapper {
 		 * cells text if not just pass the first cell value
 		 **/
 		if( !empty($this->path) and !is_null($this->path) ){
-			$text = $this->load->view(
-								'content/'.$this->path,
-			array(
-					'id'=>$this->id,
-					'ci'=> $this->ci,
-					'cell'=> $layout_content,
-					'info'=>$this->get_info(),
-					'mode'=> 'view'
-					),
-					TRUE
-					);
+			
+			$info 			= &$this->get_info();
+			$info->content 	= &$this;
+			$info->ci 		= &$this->ci;
+			$info->cell 	= &$layout_content;
+			$info->mode 	= 'view';
+			$text = $this->load->view( 'content/'.$this->path, $info, TRUE );
 		}else{
 			/**
 			 * if the layout not exists then but the 1st cell as

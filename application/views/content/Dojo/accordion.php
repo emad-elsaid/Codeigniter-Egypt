@@ -4,7 +4,7 @@ titles:
 style:
 	type:textarea
 <?php elseif( $mode=='layout' ): ?>
-<?= count( explode( "\n", $info->titles ) ); ?>
+<?= count( explode( "\n", $titles ) ); ?>
 <?php elseif( $mode=='view' ): ?>
 
 <?php
@@ -12,17 +12,14 @@ $ci =& get_instance();
 $ci->load->library( 'gui' );
 
 //assign every key to it's value
-$info->titles = explode( "\n", $info->titles );
+$titles = explode( "\n", $titles );
 $content = array();
 
 $i=0;
-foreach( $info->titles as $item )
-{
+foreach( $titles as $item )
 	$content[ $item ] = $cell[$i++];
-	
-}
 
 // printing the accordion
-echo $ci->gui->accordion( $content, '', $info->style );
+echo $ci->gui->accordion( $content, '', $style );
 ?>
 <?php endif; ?>

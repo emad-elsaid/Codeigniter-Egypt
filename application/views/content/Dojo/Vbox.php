@@ -1,16 +1,16 @@
 <?php if( $mode=='config' ): ?>
-cells:
+cellsno:
 	type:number
 	default:1
 style:
 	type:textarea
 <?php elseif( $mode=='layout' ): ?>
-<?= $info->cells ?>
+<?= $cellsno ?>
 <?php elseif( $mode=='view' ): ?>
 
 <?php
 $ci =& get_instance();
 $ci->load->library( 'gui' );
-echo $ci->gui->vbox( $cell, '', $info->style );
+echo $ci->gui->vbox( $cell, '', $style );
 ?>
 <?php endif; ?>

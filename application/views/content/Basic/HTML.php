@@ -6,9 +6,9 @@ Text:
 	type:textarea
 <?php elseif( $mode=='view' ): ?>
 <?php
-if( $info->add==TRUE )
-	theme_add($info->Text);
+if( $add==TRUE )
+	theme_add($Text);
 else
-	echo $info->Text;
+	echo $Text;
 ?>
 <?php endif; ?>

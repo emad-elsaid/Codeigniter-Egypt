@@ -7,7 +7,7 @@ width:
 height:
 	type:number
 bg:
-	type:color
+	type:text
 	label:background color 
 quality:
 	type:dropdown
@@ -32,26 +32,26 @@ transparent:
 0
 <?php elseif( $mode=='view' ): ?>
 <OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0"
- width="<?=$info->width?>"
- height="<?=$info->height?>"
- align="<?=$info->align?>" >
-<param name=movie value="<?=base_url().$info->flash?>">
-<param name=quality value=<?=$info->quality?>> 
-<?php if($info->transparent ): ?>
+ width="<?=$width?>"
+ height="<?=$height?>"
+ align="<?=$align?>" >
+<param name=movie value="<?=base_url().$flash?>">
+<param name=quality value=<?=$quality?>> 
+<?php if($transparent ): ?>
 <param name=wmode value=transparent> 
 <?php endif; ?>
-<param name=bgcolor value=<?=$info->bg?>>
-<param name="loop" value="<?= ($info->loop)?'true':'false' ?>">
+<param name=bgcolor value=<?=$bg?>>
+<param name="loop" value="<?= ($loop)?'true':'false' ?>">
 <EMBED 
-		src="<?=base_url().$info->flash?>" 
-		quality="<?=$info->quality?>"
-		bgcolor="<?=$info->bg?>"
-		width="<?=$info->width?>"
-		height="<?=$info->height?>"
-		loop="<?= ($info->loop)?'true':'false' ?>"
+		src="<?=base_url().$flash?>" 
+		quality="<?=$quality?>"
+		bgcolor="<?=$bg?>"
+		width="<?=$width?>"
+		height="<?=$height?>"
+		loop="<?= ($loop)?'true':'false' ?>"
 		type="application/x-shockwave-flash"
-		align="<?=$info->align?>"
-		<?php if($info->transparent){?>wmode="transparent" <?php } ?>
+		align="<?=$align?>"
+		<?php if($transparent){?>wmode="transparent" <?php } ?>
 		
 		pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
  >

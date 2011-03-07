@@ -7,17 +7,14 @@ resourceFiles:
 
 <?php elseif( $mode=='view' ): ?>
 <?php
-theme_add( explode( "\n", $info->resourceFiles) );
+theme_add( explode( "\n", $resourceFiles) );
 
 if( $ci->system->mode=='edit' )
-{
-	$c = new Content();
-	$c->get_by_id( $id );
-	
+{	
 	if( $ci->ion_auth->is_admin() )
 	{
 		$ci->load->library( 'gui' );
-		echo $ci->gui->info( 'Resource '.nl2br($info->resourceFiles) );
+		echo $ci->gui->info( 'Resource '.nl2br($resourceFiles) );
 	}
 }
 ?>

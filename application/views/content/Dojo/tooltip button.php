@@ -7,6 +7,6 @@ title:
 
 <?php
 $ci->load->library( 'gui' );
-echo $ci->gui->tooltipbutton( $info->title, $cell[0] );
+echo $ci->gui->tooltipbutton( $title, $cell[0] );
 ?>
 <?php endif; ?>

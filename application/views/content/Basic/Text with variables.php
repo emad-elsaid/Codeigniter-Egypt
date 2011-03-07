@@ -15,7 +15,7 @@ $replaces = array(
 "@month"	=> date('n'),
 "@year"		=> date('Y')
 );
-$formatted = $info->text;
+$formatted = $text;
 foreach ($replaces as $key=>$value) 
 {
 	$formatted = str_replace( $key, $value, $formatted );
