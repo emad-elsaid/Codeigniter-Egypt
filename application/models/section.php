@@ -1,13 +1,16 @@
-<?php
-/**  \addtogroup Models
- * Section class: a datamapper class that holds page data from the database
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * section datamapper model 
  *
- * @package	Codeigniter-Egypt
- * @subpackage	Codeigniter-Egypt
- * @category	model file
- * @author	Emad Elsaid
- * @link	http://github.com/blazeeboy/Codeigniter-Egypt
- */
+ * that is the main model, it has the ability
+ * to render all the page by just calling render()
+ * and has the ability to attach itself to a parent at
+ * the correct sort and preventing collision
+ * 
+ * @copyright  2011 Emad Elsaid a.k.a Blaze Boy
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt   GPL License 2.0
+ * @link       https://github.com/blazeeboy/Codeigniter-Egypt
+ */ 
 class Section extends DataMapper {
 	
 	public $default_order_by = array('sort');
@@ -42,6 +45,10 @@ class Section extends DataMapper {
 		return $parents;
 	}
 
+	/**
+	 * save current section 
+	 * and prevent collision if it is a new object
+	 */
 	public function save( $object = '', $related_field = '' ){
 
 		if( empty($this->id) and empty($object) ){
@@ -61,6 +68,7 @@ class Section extends DataMapper {
 
 	/**
 	 * delete that section with all it's subsections
+	 * plus eliminate the gap between it's siblings sort
 	 **/
 	public function delete( $object = '', $related_field = '' ){
 
@@ -86,6 +94,8 @@ class Section extends DataMapper {
 	/**
 	 * return true if that user can view the section
 	 * and false if cannot view it
+	 * 
+	 * @return boolean if this section could be rendered for current user or not
 	 **/
 	public function can_view(){
 		

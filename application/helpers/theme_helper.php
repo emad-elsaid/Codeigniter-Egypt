@@ -1,9 +1,24 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * codeigniter helper responsible of assets and page properties 
+ *
+ * enable you to add javascript, cascading stylsheet, meta text and dojo files
+ * to page header plus creating page title in a good manner 
+ *
+ * @copyright  2011 Emad Elsaid a.k.a Blaze Boy
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt   GPL License 2.0
+ * @link       https://github.com/blazeeboy/Codeigniter-Egypt
+ */ 
 $CI =& get_instance();
 $CI->load->config('theme');
 
 if( ! function_exists('theme_title') ){
+	/**
+	 * get current page title 
+	 * 
+	 * @param string $title [html or text] type or returned output
+	 * @return string the title as [<title> tag or plain title value]
+	 */
 	function theme_title( $title='html' ){
 
 		$CI =& get_instance();
@@ -29,6 +44,15 @@ if( ! function_exists('theme_title') ){
 }
 
 if( ! function_exists('theme_sitename') ){
+	/**
+	 * get/set website name, the default returned value is 
+	 * site name in theme config file
+	 * 
+	 * @param string $sitename website name if not null it'll be set 
+	 * as current website title
+	 * 
+	 * @return string the website name
+	 */
 	function theme_sitename( $sitename=NULL ){
 		$CI =& get_instance();
 		if( $sitename!==NULL )
@@ -39,6 +63,12 @@ if( ! function_exists('theme_sitename') ){
 }
 
 if( ! function_exists('theme_pagetitle') ){
+	/**
+	 * set/get current page title 
+	 * 
+	 * @param string $pagetitle the page title to be set
+	 * @return string the current page name
+	 */
 	function theme_pagetitle( $pagetitle=NULL ){
 		
 		$CI =& get_instance();
@@ -51,6 +81,17 @@ if( ! function_exists('theme_pagetitle') ){
 }
 
 if( ! function_exists('theme_add') ){
+	/**
+	 * add files and text to the required files array
+	 * 
+	 * it could be used for adding css files, javascript files, 
+	 * dojo required components or even meta tags or any string
+	 * to the page header, that function is smart enaugh to know the type
+	 * of text (meta tag, script tag, file path, plain text) and
+	 * add it to the suitable place.
+	 * 
+	 * @param string $input 
+	 */
 	function theme_add( $input=NULL ){
 
 		if( is_array($input) ){
@@ -96,6 +137,11 @@ if( ! function_exists('theme_add') ){
 }
 
 if( ! function_exists('theme_doctype') ){
+	/**
+	 * return the corrent doctype configured in the theme configuration file
+	 * 
+	 * @return string doctype tag string.
+	 */
 	function theme_doctype(){
 		
 		global $_doctypes;
@@ -115,6 +161,11 @@ if( ! function_exists('theme_doctype') ){
 }
 
 if( ! function_exists('theme_meta') ){
+	/**
+	 * add/get page meta string to be added to the head tag
+	 * 
+	 * @param string/array $input to be added to the page meta string
+	 */
 	function theme_meta( $input=NULL ){
 
 		$CI =& get_instance();
@@ -133,6 +184,11 @@ if( ! function_exists('theme_meta') ){
 }
 
 if( ! function_exists('theme_css') ){
+	/**
+	 * add/get page CSS string to be added to the head tag
+	 * 
+	 * @param string/array $input to be added to the page CSS string
+	 */
 	function theme_css( $input=NULL ){
 		
 		if( is_array($input) ){
@@ -164,6 +220,12 @@ if( ! function_exists('theme_css') ){
 }
 
 if( ! function_exists('theme_js') ){
+	/**
+	 * add/get page javascript string to be added to the head tag
+	 * 
+	 * @param string/array $input to be added to the page javascript string
+	 * @return string collection of script tags to be added to header tag
+	 */
 	function theme_js( $input=NULL ){
 		
 		if( is_array($input) ){
@@ -194,6 +256,11 @@ if( ! function_exists('theme_js') ){
 }
 
 if( ! function_exists('theme_dojotheme') ){
+	/**
+	 * get dojo theme name specified in theme config file 
+	 * 
+	 * @return string dojo style folder name
+	 */
 	function theme_dojotheme(){
 		
 		$CI =& get_instance();
@@ -203,6 +270,13 @@ if( ! function_exists('theme_dojotheme') ){
 }
 
 if( ! function_exists('theme_dojo') ){
+	/**
+	 * add/get dojo required components by require() function
+	 * 
+	 * @param string/array $input to be added to the page meta string
+	 * @return string script tag contains dojo require() 
+	 * for all dojo reuired components
+	 */
 	function theme_dojo( $input=NULL ){
 		
 		if( is_array($input) ){
@@ -235,6 +309,12 @@ if( ! function_exists('theme_dojo') ){
 }
 
 if( ! function_exists('theme_head')){
+	/**
+	 * get HTML page header depending on current required files meta
+	 * and dojo required components
+	 * 
+	 * @return string header tag contents (without the header tag itself)
+	 */
 	function theme_head(){
 
 		$CI =& get_instance();
@@ -251,6 +331,14 @@ if( ! function_exists('theme_head')){
 }
 
 if( ! function_exists('theme_foot')){
+	/**
+	 * get theme footer text before the end of body tag
+	 * that will get teh javasript text if js_at_foot is On
+	 * in the theme config file
+	 * 
+	 * @return string collection of script tags 
+	 * to be added before body tag close (or empty text if js_on_foot is Off)
+	 */
 	function theme_foot(){
 		
 		$CI =& get_instance();

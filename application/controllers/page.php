@@ -1,15 +1,14 @@
-<?php
-/** \addtogroup Controllers
- * Page controller that shows current
- * section from system object
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * the main system controller that view current section
  *
- * @package	Codeigniter-Egypt
- * @subpackage	Codeigniter-Egypt
- * @category	controller file
- * @author	Emad Elsaid
- * @link	http://github.com/blazeeboy/Codeigniter-Egypt
- */
-
+ * that controller contains one page, it get currrent section
+ * and render it to client
+ *
+ * @copyright  2011 Emad Elsaid a.k.a Blaze Boy
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt   GPL License 2.0
+ * @link       https://github.com/blazeeboy/Codeigniter-Egypt
+ */ 
 class Page extends CI_Controller{
 	/**
 	 * Page controller it's just like the Admin controller, it loads the current

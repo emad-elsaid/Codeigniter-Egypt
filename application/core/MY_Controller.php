@@ -1,13 +1,14 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/** \addtogroup Libraries 
- * application class: application class that loads and render application pages
+/**
+ * System Application class
  *
- * @package	Codeigniter-Egypt
- * @subpackage	Codeigniter-Egypt
- * @category	Core Class
- * @author	Emad Elsaid
- * @link	http://github.com/blazeeboy/Codeigniter-Egypt
- */
+ * enable you to render pages as Dojo application with menubars 
+ * and about box plus secure appplication through permission system
+ *
+ * @copyright  2011 Emad Elsaid a.k.a Blaze Boy
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt   GPL License 2.0
+ * @link       https://github.com/blazeeboy/Codeigniter-Egypt
+ */ 
 class Application extends CI_Controller {
 	
 	/**
@@ -61,7 +62,7 @@ class Application extends CI_Controller {
 	 * if true the page return will be printed only without HTML
 	 * default application container(html,head,body,js,css)
 	 * else all the HTML page will be returned
-	 * */
+	 */
 	public $ajax = FALSE;
 	
 	public function __construct(){
@@ -71,6 +72,12 @@ class Application extends CI_Controller {
 		
 	}
 	
+	/**
+	 * remaps the coming requested page if the permission is valid
+	 * 
+	 * @param string $method the required method to be executed
+	 * @param array $params the rest of URI string segments as array
+	 */
 	public function _remap($method, $params = array()){
 		
 		if( !perm_chck($this->perm) )
@@ -87,8 +94,11 @@ class Application extends CI_Controller {
     		show_404();
     		
 	}
+	
 	/**
 	 *  render the application page and return the produced HTML
+	 *  
+	 *  @param string $output the requested method output string
 	 */
 	public function _output( $output ){
 		
@@ -104,6 +114,13 @@ class Application extends CI_Controller {
 		
 	}
 	
+	/**
+	 * render the passed text, it is alternative to echo
+	 * please use it to add the passed text to codeigniter output
+	 * it uses a view file names text.php to print the $text
+	 * 
+	 * @param string $text the required text to be printed
+	 */
 	public function print_text( $text ){
 		
 		$this->load->view( 'text', array('text'=>$text) );
@@ -121,6 +138,8 @@ class Application extends CI_Controller {
 	
 	/**
 	 * add information message to application, to be displyed at top of the page
+	 * 
+	 * @param string $text text to added as message in aplication header
 	 */
 	public function add_info( $text='' ){
 		
@@ -134,6 +153,8 @@ class Application extends CI_Controller {
 	
 	/**
 	 * add Error message to application, to be displyed at top of the page
+	 * 
+	 * @param string $text text to be added as error in application header
 	 */
 	public function add_error( $text='' ){
 		

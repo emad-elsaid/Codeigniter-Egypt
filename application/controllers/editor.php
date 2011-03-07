@@ -1,5 +1,17 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * page editing application for adding/update/delete contents
+ * 
+ * that class is a system application, 
+ * it is responsible for adding, update, delete, and show information
+ * of contents, it reads the content file and parse teh requirements
+ * to show a variables sheet for user, then serialise all values
+ * and store in database. 
+ *
+ * @copyright  2011 Emad Elsaid a.k.a Blaze Boy
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt   GPL License 2.0
+ * @link       https://github.com/blazeeboy/Codeigniter-Egypt
+ */ 
 class Editor extends Application {
 
 	public function __construct(){

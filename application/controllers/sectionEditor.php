@@ -1,5 +1,14 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * this system application view/edit/remove pages 
+ *
+ * that application view pages as tree and can add, remove and edit 
+ * pages, it could make you build all your website heirarchy 
+ *
+ * @copyright  2011 Emad Elsaid a.k.a Blaze Boy
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt   GPL License 2.0
+ * @link       https://github.com/blazeeboy/Codeigniter-Egypt
+ */ 
 class SectionEditor extends Application {
 	
 	public function __construct(){
@@ -18,6 +27,11 @@ class SectionEditor extends Application {
 		$this->load->library('gui');
 	}
 	
+	/**
+	 * shows a tree of system sections
+	 * 
+	 * @return void
+	 */
 	public function index(){
 
 		theme_add('dojo.data.ItemFileReadStore');
@@ -34,6 +48,11 @@ class SectionEditor extends Application {
 		</div>');
 	}
 	
+	/**
+	 * get tree of sections and serialize them into JSON object
+	 * 
+	 * @return void
+	 */
 	public function queryTree(){
 		
 		$this->ajax = TRUE;
@@ -56,6 +75,11 @@ class SectionEditor extends Application {
 		
 	}
 	
+	/**
+	 * add section to system
+	 * 
+	 * @return void
+	 */
 	public function add(){
 		
 		$this->print_text( $this->gui->form(
@@ -70,6 +94,11 @@ class SectionEditor extends Application {
 		
 	}
 	
+	/**
+	 * add section to system (the action page)
+	 * 
+	 * @return void
+	 */
 	public function addaction(){
 		
 		$sort = new Section();
@@ -87,6 +116,11 @@ class SectionEditor extends Application {
 		redirect( 'sectionEditor' );
 	}
 	
+	/**
+	 * delete section from system
+	 * 
+	 * @return void
+	 */
 	public function delete($id){
 		
 		$s = new Section($id);
@@ -96,6 +130,11 @@ class SectionEditor extends Application {
 		
 	}
 	
+	/**
+	 * edit section in system
+	 * 
+	 * @return void
+	 */
 	public function edit($id){
 		
 		$this->load->library( 'gui' );
@@ -123,6 +162,11 @@ class SectionEditor extends Application {
 		
 	}
 	
+	/**
+	 * edit section in system (the action page)
+	 * 
+	 * @return void
+	 */
 	public function editaction(){
 		
 		$s 			= new Section($this->input->post( 'id' ));

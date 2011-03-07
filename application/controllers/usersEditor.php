@@ -1,5 +1,14 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * system application add/edit/delete users and users groups
+ *
+ * it has the ability of creating users, activate/deactivate users
+ * and create/modify/delete users groups
+ *
+ * @copyright  2011 Emad Elsaid a.k.a Blaze Boy
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt   GPL License 2.0
+ * @link       https://github.com/blazeeboy/Codeigniter-Egypt
+ */ 
 class UsersEditor extends Application {
 
 	public function __construct(){
@@ -22,6 +31,10 @@ class UsersEditor extends Application {
 		$this->load->library('gui');
 	}
 
+	/**
+	 * view users groups tree and redirect to edit page when click
+	 * on any node depending on it's type
+	 */
 	public function index(){
 
 		theme_add('dojo.data.ItemFileReadStore');
@@ -41,6 +54,9 @@ class UsersEditor extends Application {
 		
 	}
 	
+	/**
+	 * get JSON tree of users groups and it's users
+	 */
 	public function queryGroups(){
 		
 		$this->ajax = TRUE;
@@ -65,6 +81,9 @@ class UsersEditor extends Application {
 		
 	}
 	
+	/**
+	 * shows the inactive users tree
+	 */
 	public function inactive(){
 
 		theme_add('dojo.data.ItemFileReadStore');
@@ -84,6 +103,9 @@ class UsersEditor extends Application {
 		
 	}
 	
+	/**
+	 * get a tree of groups and its inactive users
+	 */
 	public function queryInactiveGroups(){
 		
 		$this->ajax = TRUE;
@@ -109,6 +131,9 @@ class UsersEditor extends Application {
 		
 	}
 	
+	/**
+	 * create new users group page
+	 */
 	public function newGroup(){
 		
 		$this->print_text(
@@ -122,6 +147,9 @@ class UsersEditor extends Application {
 		
 	}
 	
+	/**
+	 * create new users group page action 
+	 */
 	public function newGroupAction(){
 		
 		if(is_object($this->ion_auth->get_group_by_name($this->input->post('name'))))
@@ -136,6 +164,12 @@ class UsersEditor extends Application {
 		
 	}
 	
+	/**
+	 * edit group information page 
+	 * it contains a form with group data
+	 * 
+	 * @param integer $id group id which needs to be edited
+	 */
 	public function editGroup($id){
 		
 		$group = new Group($id);
@@ -156,15 +190,9 @@ class UsersEditor extends Application {
 		
 	}
 	
-	public function deleteGroup($id){
-		
-		$group = new Group($id);
-		$group->delete();
-		
-		redirect('usersEditor');
-		
-	}
-	
+	/**
+	 * edit group action pagge
+	 */
 	public function editGroupAction(){
 		
 		$group = new Group($this->input->post('id'));
@@ -178,6 +206,26 @@ class UsersEditor extends Application {
 		
 	}
 	
+	/**
+	 * delete group from system with all it's users and all related data
+	 * 
+	 * @param integer $id the group needed to be deleted
+	 */
+	public function deleteGroup($id){
+		
+		$group = new Group($id);
+		$group->delete();
+		
+		redirect('usersEditor');
+		
+	}
+	
+	/**
+	 * create new user page, and it has one form 
+	 * with needed data
+	 * and it has already the action itself,
+	 * that is copied from ion-auth Auth controller
+	 */
 	public function newUser(){
 
 		$this->load->library('form_validation');
@@ -237,6 +285,11 @@ class UsersEditor extends Application {
 		}
 	}
 	
+	/**
+	 * edit user information
+	 * 
+	 * @param integer $id the user id needed to be edited
+	 */
 	public function editUser($id){
 		
 		$groups = new Group();
@@ -273,6 +326,11 @@ class UsersEditor extends Application {
 		
 	}
 	
+	/**
+	 * delete user page
+	 * 
+	 * @param integer $id the user that will be deleted
+	 */
 	public function deleteUser($id){
 		
 		$user = new User($id);
@@ -281,6 +339,9 @@ class UsersEditor extends Application {
 		
 	}
 	
+	/**
+	 * edit user information action page
+	 */
 	public function editUserAction(){
 		
 		$user = new User($this->input->post('id'));

@@ -1,13 +1,14 @@
-<?php
-/** \addtogroup Models
- * Content class that holds the content data from the database
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * Content datamapper model
+ * 
+ * it could be used for creating contents, update, delete and render 
+ * the content into HTML string
  *
- * @package		Codeigniter-Egypt
- * @subpackage	Codeigniter-Egypt
- * @category		model file
- * @author		Emad Elsaid
- * @link			http://github.com/blazeeboy/Codeigniter-Egypt
- */
+ * @copyright  2011 Emad Elsaid a.k.a Blaze Boy
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt   GPL License 2.0
+ * @link       https://github.com/blazeeboy/Codeigniter-Egypt
+ */ 
 class Content extends DataMapper {
 	
 	public $default_order_by = array('sort');
@@ -64,9 +65,8 @@ class Content extends DataMapper {
 
 	/**
 	 * render the object edit button
-	 * @param	$text: the content generated HTML
-	 *
-	 * returns the edit button + the content HTML
+	 * @param string $text: the content generated HTML
+	 * @return the edit button + the content HTML
 	 **/
 	public function container( $text='' ){
 
@@ -89,6 +89,9 @@ class Content extends DataMapper {
 	/**
 	 * true if the user can view that content
 	 * false if the user not permitted to see it
+	 * 
+	 * @return boolean if that content could be viewed or not ,
+	 * depending on the current system conditions 
 	 **/
 	public function can_view(){
 		
@@ -101,6 +104,8 @@ class Content extends DataMapper {
 	 * it loads the layout in config mode
 	 * the layout should return the number of cells
 	 * if the layout is not exist it'll return 1 cell
+	 * 
+	 * @return number cells number the content requires
 	 **/
 	public function cells(){
 
@@ -117,6 +122,7 @@ class Content extends DataMapper {
 
 	/**
 	 * get the content information as an object
+	 * @return object where key is the variable name and value as variable value
 	 **/
 	public function get_info(){
 
@@ -137,6 +143,8 @@ class Content extends DataMapper {
 	/**
 	 * generate add button to that cell
 	 * in this content object
+	 * @param number/string $cell create an add button for the cell
+	 * @return string HTML string of the add button
 	 **/
 	public function add_button( $cell='' ){
 
@@ -153,6 +161,9 @@ class Content extends DataMapper {
 	 * layout then return all of that
 	 * taking in consideration the edit mode to display
 	 * the control buttons in every cell
+	 * 
+	 * @return string the content output also 
+	 * contains the content children output recursively
 	 **/
 	public function render(){
 
@@ -212,14 +223,17 @@ class Content extends DataMapper {
 		return $text;
 	}
 
-	/***************************************
+	/**
 	 * query about the children of the current parent
 	 * you can specify the section or the cell or
 	 * simply query all the children of that parent or all
 	 * the children of the current parent and a specific
 	 * section
 	 * you must pass objects to the function
-	 ***************************************/
+	 * 
+	 * @param Section $section current section object
+	 * @return Content it contains all teh children objects
+	 */
 	public function children($section=NULL ){
 
 		// getting the section path to the main index page
@@ -246,6 +260,13 @@ class Content extends DataMapper {
 		return $contents;
 	}
 	
+	/**
+	 * attach current content to it's section,
+	 * it increases the sort of siblings that has higher
+	 * sort value, that will prevent collision
+	 *  
+	 * @return void
+	 */
 	public function attach(){
 		
 		$cont = new Content();
@@ -260,6 +281,10 @@ class Content extends DataMapper {
 		
 	}
 	
+	/**
+	 * deattaching this content from it's parent plus
+	 * remove teh sort gap from it's siblings
+	 */
 	public function deattach(){
 		
 		$cont = new Content();
@@ -274,30 +299,44 @@ class Content extends DataMapper {
 		
 	}
 	
+	/**
+	 * save current content ot the system
+	 * it attach the content automatically
+	 * 
+	 * @param unknown_type $object
+	 * @param unknown_type $related_field
+	 * @return boolean
+	 */
 	public function save($object = '', $related_field = ''){
 		
 		if( empty($this->id) and empty($object) )
 			$this->attach();
 			
-		parent::save($object, $related_field);
+		return parent::save($object, $related_field);
 	}
 	
-	//=========================
-	//normalize the  sort numbers
-	//=========================
-	// we have to push all the content up to fill that hole
-	// these content must me in the same section,parent,cell
-	// and have sort nubmer greater than that content
+	/**
+	 * delete this content from database
+	 * that will deattach the content from it's parent 
+	 * and remove the sort gab between siblings 
+	 * 
+	 * @param $object
+	 * @param $related_field
+	 * @return boolean
+	 */
 	public function delete($object = '', $related_field = ''){
 		
 		$this->deattach();
-		parent::delete($object, $related_field);
+		return parent::delete($object, $related_field);
 		
 	}
 
 	/**
 	 * apply filters to $input and return
 	 * the effected text
+	 * 
+	 * @param string $input the content output from render()
+	 * @return string the content output after applying the filters 
 	 **/
 	public function apply_filters($input){
 

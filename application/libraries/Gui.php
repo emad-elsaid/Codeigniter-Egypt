@@ -1,16 +1,15 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*! \addtogroup Libraries
- * Gui class:  used to generate multiple HTML text
- * used with content, applications, it's very useful with
- * generating forms, tables, titlepanels, splitters, error messages,
- * information messages, colorpickers and a lot more
+/**
+ * codeigniter library for creating UI controls 
  *
- * @package	Codeigniter-Egypt
- * @subpackage	Codeigniter-Egypt
- * @category	library file
- * @author	Emad Elsaid
- * @link	http://github.com/blazeeboy/Codeigniter-Egypt
- */
+ * that library uses dojo to create controlles for applications and 
+ * website, and it needs also theme_helper.php for recording 
+ * the css, js, dojo, requirements
+ *
+ * @copyright  2011 Emad Elsaid a.k.a Blaze Boy
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt   GPL License 2.0
+ * @link       https://github.com/blazeeboy/Codeigniter-Egypt
+ */ 
 class Gui {
 
 	function __construct(){
@@ -23,10 +22,12 @@ class Gui {
 
 	/**
 	 * a form maker
-	 * @param $action: target page of the form
-	 * @param $data: array of key( label text )=>value(corresponding input HTML ), values can be generated with functions like textbox,color,file,folder,app.etc
-	 * @param $attributes: array or object of key(attribute)=>value(value of the attribute)
-	 * @param $hidden: array of hiden fields and values as key=>value
+	 * 
+	 * @param string $action: target page of the form
+	 * @param array $data: array of key( label text )=>value(corresponding input HTML ), values can be generated with functions like textbox,color,file,folder,app.etc
+	 * @param array/object $attributes: array or object of key(attribute)=>value(value of the attribute)
+	 * @param array $hidden: array of hiden fields and values as key=>value
+	 * @return string form HTML string wich will be added directly to page
 	 */
 	public function form($action = '', $data=array(), $attributes = array(), $hidden = array()){
 
@@ -49,8 +50,10 @@ class Gui {
 
 	/**
 	 * generate hidden field HTML
+	 * 
 	 * @param $NAME: hidden field name
 	 * @param $value: hidden field value
+	 * @return string hidden input tag string
 	 */
 	public function hidden($NAME='', $value='' ){
 		
@@ -59,14 +62,26 @@ class Gui {
 	}
 
 	/**
-	 * File chooser using the fsbrowser, use it with CAUTION
-	 * it makes a dojo text input linked with a jquery fsbrowser
-	 * @param $connector: path to php file to use as ajax backend
-	 * @param $NAME: text input name and id
-	 * @param $value: text input value
-	 * @param $attr: attributes->value associative array
-	 * @param $param: sfbrowser config object paramter->value associative array
-	 * @param $style: property->value associative array
+	 * File chooser using dojo tree, use it with
+	 * it makes a dojo text input linked with a dojo dialog contains dojo tree
+	 * it's just like the upload input tag, but serverside
+	 * be aware that tree will load all the tree as JSON string
+	 * from the connector URL
+	 * 
+	 * @param string $connector: URL to php file to use as ajax backend, with object like this
+	 * <pre>
+	 * {"identifier":"id","label":"description","items":[
+	 * 	{"id":2,"description":"leaf1"},{"id":3,"description":"category","c":[
+	 * 		{"id":4,"description":"subleaf1"},
+	 * 		{"id":5,"description":"subleaf2"}
+	 * 	]}
+	 * ]}
+	 * </pre>
+	 * @param string $NAME: text input name and id
+	 * @param strin $value: text input value
+	 * @param array/object/string $attr: attributes->value associative array
+	 * @param array/object/string $style: property->value associative array
+	 * @return string HTML string for the chooser
 	 */
 	public function file_chooser( $connector='', $NAME='',$value='', $attr=array(), $style=array() ){
 
@@ -99,14 +114,26 @@ EOT;
 	}
 	
 	/**
-	 * Folder chooser using the fsbrowser, use it with CAUTION
-	 * it makes a dojo text input linked with a jquery fsbrowser
-	 * @param $connector: path to php file to use as ajax backend
-	 * @param $NAME: text input name and id
-	 * @param $value: text input value
-	 * @param $attr: attributes->value associative array
-	 * @param $param: sfbrowser config object paramter->value associative array
-	 * @param $style: property->value associative array
+	 * Folder chooser using dojo tree, use it with
+	 * it makes a dojo text input linked with a dojo dialog contains dojo tree
+	 * it's just like the upload input tag, but serverside
+	 * be aware that tree will load all the tree as JSON string
+	 * from the connector URL
+	 * 
+	 * @param string $connector: URL to php file to use as ajax backend, with object like this
+	 * <pre>
+	 * {"identifier":"id","label":"description","items":[
+	 * 	{"id":2,"description":"leaf1"},{"id":3,"description":"category","c":[
+	 * 		{"id":4,"description":"subleaf1"},
+	 * 		{"id":5,"description":"subleaf2"}
+	 * 	]}
+	 * ]}
+	 * </pre>
+	 * @param string $NAME: text input name and id
+	 * @param strin $value: text input value
+	 * @param array/object/string $attr: attributes->value associative array
+	 * @param array/object/string $style: property->value associative array
+	 * @return string HTML string for the chooser
 	 */
 	public function folder_chooser( $connector='', $NAME='',$value='', $attr=array(), $style=array() ){
 
@@ -139,7 +166,12 @@ EOT;
 	}
 
 	/**
-	 * a date field picker using dojo
+	 * create a date chooser field using dojo
+	 * 
+	 * @param string $NAME field name
+	 * @param string $value field current value
+	 * @param array/object/string $attr attribute to be added to the field
+	 * @return string HTML tag of the field
 	 */
 	public function date( $NAME='', $value='', $attr=array() ){
 
@@ -154,7 +186,12 @@ EOT;
 	}
 
 	/**
-	 * a Time chooser input field
+	 * create a time chooser field using dojo
+	 * 
+	 * @param string $NAME field name
+	 * @param string $value field current value
+	 * @param array/object/string $attr attribute to be added to the field
+	 * @return string HTML tag of the field
 	 */
 	public function time( $NAME='', $value='', $attr=array() ){
 
@@ -169,7 +206,12 @@ EOT;
 	}
 
 	/**
-	 * an input field with dojo
+	 * create a text field using dojo
+	 * 
+	 * @param string $NAME field name
+	 * @param string $value field current value
+	 * @param array/object/string $attr attribute to be added to the field
+	 * @return string HTML tag of the field
 	 */
 	public function textbox( $NAME='', $value='', $attr=array() ){
 		
@@ -184,7 +226,12 @@ EOT;
 	}
 
 	/**
-	 * an button with dojo
+	 * create a dojo button
+	 * 
+	 * @param string $NAME field name
+	 * @param string $value field current value
+	 * @param array/object/string $attr attribute to be added to the field
+	 * @return string HTML tag of the field
 	 */
 	public function button( $NAME='', $value='', $attr=array() ){
 
@@ -198,9 +245,14 @@ EOT;
 	}
 
 	/**
-	 * an tooltipbutton with dojo
-	 * @param $text: button text
-	 * @param $dialog: tooltip dialog content text
+	 * create tooltip button with dojo, it is a button
+	 * that has an associated tooltip dialog you can add any 
+	 * HTML text in it
+	 * 
+	 * @param string $text: button value text
+	 * @param string $dialog: tooltip dialog content text
+	 * @param array/object/string attributes to be added to the button
+	 * @return string button HTML string
 	 */
 	public function tooltipbutton( $text='', $dialog='', $attr=array() ){
 
@@ -221,7 +273,12 @@ EOT;
 	}
 
 	/**
-	 * an password field with dojo
+	 * create a password field using dojo
+	 * 
+	 * @param string $NAME field name
+	 * @param string $value field current value
+	 * @param array/object/string $attr attribute to be added to the field
+	 * @return string HTML tag of the field
 	 */
 	public function password( $NAME='', $value='', $attr=array() ){
 
@@ -236,7 +293,12 @@ EOT;
 	}
 
 	/**
-	 * an input number spinner with dojo
+	 * create a number field using dojo
+	 * 
+	 * @param string $NAME field name
+	 * @param string $value field current value
+	 * @param array/object/string $attr attribute to be added to the field
+	 * @return string HTML tag of the field
 	 */
 	public function number( $NAME='', $value='', $attr=array() ){
 
@@ -251,7 +313,12 @@ EOT;
 	}
 
 	/**
-	 * a textarea field auto grown
+	 * create an auto expandable textarea using dojo
+	 * 
+	 * @param string $NAME field name
+	 * @param string $value field current value
+	 * @param array/object/string $attr attribute to be added to the field
+	 * @return string HTML tag of the field
 	 */
 	public function textarea( $NAME='', $value='', $attr=array() ){
 
@@ -266,7 +333,14 @@ EOT;
 	}
 
 	/**
-	 * a permission field auto grow textarea
+	 * create a permission textarea using dojo
+	 * and add a tooltip with the variables/booleans/operators 
+	 * that could be used in the expression
+	 * 
+	 * @param string $NAME field name
+	 * @param string $value field current value
+	 * @param array/object/string $attr attribute to be added to the field
+	 * @return string HTML tag of the field
 	 */
 	public function permission( $NAME='', $value='', $attr=array() ){
 
@@ -291,7 +365,12 @@ EOT;
 	}
 
 	/**
-	 * an richtext editor with dojo
+	 * create a WYSIWYG editor using dojo
+	 * 
+	 * @param string $NAME field name
+	 * @param string $value field current value
+	 * @param array/object/string $attr attribute to be added to the field
+	 * @return string HTML tag of the field
 	 */
 	public function editor( $NAME='', $value='', $attr=array() ){
 
@@ -310,7 +389,13 @@ EOT;
 	}
 
 	/**
-	 * an simple richtext editor with dojo
+	 * create a text field using dojo but a small one
+	 * with the nessesary basic editing controls
+	 * 
+	 * @param string $NAME field name
+	 * @param string $value field current value
+	 * @param array/object/string $attr attribute to be added to the field
+	 * @return string HTML tag of the field
 	 */
 	public function smalleditor( $NAME='', $value='', $attr=array() ){
 
@@ -327,8 +412,13 @@ EOT;
 	}
 
 	/**
-	 * a dropdown menu using dojo
-	 * @param: options[ 'Label'=>'value' ]
+	 * create a select dropdown menu control using dojo
+	 * 
+	 * @param string $NAME field name
+	 * @param string $value field default value
+	 * @param array $options assoc array of options in the form [value=>label]
+	 * @param array/object/string $attr
+	 * @return string the field HTML string
 	 */
 	public function dropdown( $NAME='', $value='', $options=array(), $attr=array() ){
 
@@ -348,7 +438,13 @@ EOT;
 	}
 
 	/**
-	 * a section chooser dropdown field
+	 * create a select dropdown menu control using dojo
+	 * with the options set automatically to the system sections
+	 * 
+	 * @param string $NAME field name
+	 * @param string $value field default value
+	 * @param array/object/string $attr
+	 * @return string the field HTML string
 	 */
 	public function section( $NAME='', $value='', $attr=array() ){
 		
@@ -380,7 +476,13 @@ EOT;
 	}
 
 	/**
-	 * a checkbox using dojo
+	 * create a checkbox element using dojo
+	 * 
+	 * @param string $NAME field name
+	 * @param string $value field value
+	 * @param boolean $checked field current check state
+	 * @param array/object/string $attr attributes to be added to the field
+	 * @return string the HTML string of the element
 	 */
 	public function checkbox( $NAME='', $value='', $checked=FALSE, $attr=array() ){
 
@@ -393,7 +495,13 @@ EOT;
 	}
 
 	/**
-	 * a radio button using dojo
+	 * create a radio button element using dojo
+	 * 
+	 * @param string $NAME field name
+	 * @param string $value field value
+	 * @param boolean $checked field current check state
+	 * @param array/object/string $attr attributes to be added to the field
+	 * @return string the HTML string of the element
 	 */
 	public function radio( $NAME='', $value='', $checked=FALSE, $attr=array() ){
 
@@ -406,7 +514,13 @@ EOT;
 	}
 
 	/**
-	 * a Tooltip using dojo
+	 * create a dojo tooltip an associate it to
+	 * another HTML element
+	 * 
+	 * @param string $NAME HTML element ID to associate the tooltip to
+	 * @param string $value HTML content of teh tooltip
+	 * @param array/object/string $attr attributes to be added to the element
+	 * @return string the HTML string of the tooltip
 	 */
 	public function tooltip( $NAME='', $value='', $attr=array() ){
 
@@ -418,9 +532,15 @@ EOT;
 	}
 
 	/**
-	 * an accordion of dojo toolkit
-	 * @param
-	 * 		$data: associative array of title=>panelHTML
+	 * create a dojo accordion contains the elements 
+	 * of $data as tabs where $data keys are  the accordion
+	 * titles, and $data values are the accordion contents
+	 * 
+	 * @param array $data assoc array of accordion titles as
+	 * key and accordion content as values
+	 * @param array/object/string $attr accordion attributes
+	 * @param array/object/string $style accordion style
+	 * @return string HTML tag of the accordion
 	 */
 	public function accordion( $data=array(), $attr=array(), $style=array() ){
 		
@@ -442,9 +562,15 @@ EOT;
 	}
 
 	/**
-	 * a Tab container of dojo toolkit
-	 * @param
-	 * 		$data: associative array of tabTitle->panelHTML
+	 * create a dojo tab contains the elements 
+	 * of $data as tabs where $data keys are  the tab
+	 * titles, and $data values are the tab contents
+	 * 
+	 * @param array $data assoc array of tab titles as
+	 * key and accordion content as values
+	 * @param array/object/string $attr tab attributes
+	 * @param array/object/string $style tab style
+	 * @return string HTML tag of the tab
 	 */
 	public function tab( $data=array(), $attr=array(), $style=array() ){
 		
@@ -467,9 +593,12 @@ EOT;
 	}
 	
 	/**
-	 * title panel with dojo
-	 * @param $titel: panel title
-	 * @param $body: panel contents
+	 * create a dojo title panel 
+	 * 
+	 * @param string $title title panel title
+	 * @param string $body title panel HTML content
+	 * @param array/object/string $attr title panel attributes
+	 * @return string the HTML string of teh element
 	 */
 	public function titlepane( $title='', $body='', $attr=array() ){
 		
@@ -480,7 +609,11 @@ EOT;
 	}
 
 	/**
-	 * a error box using jquery
+	 * create an error div , it's a normal 
+	 * DIV with class=error
+	 * 
+	 * @param string $text error message, it could be HTML if you want
+	 * @param object/array/string $attr div extra attributes
 	 */
 	public function error( $text='', $attr=array() ){
 		
@@ -492,7 +625,12 @@ EOT;
 	}
 
 	/**
-	 * an Info box using jquery
+	 * create an information div , it's a normal 
+	 * DIV with class=info
+	 * 
+	 * @param string $text information message, it could be HTML if you want
+	 * @param object/array/string $attr div extra attributes
+	 * @return string the HTML tag of the div
 	 */
 	public function info( $text='', $attr=array() ){
 		
@@ -504,9 +642,14 @@ EOT;
 	}
 
 	/**
-	 * a horizontal spliter box with dojo
+	 * horizontal splitted box using dojo
+	 * 
+	 * @param array $content content of every hbox cell
+	 * @param array/object/string $attr tag attributes
+	 * @param array/object/string $style style of tag
+	 * @return string HTML of the Hbox tag
 	 */
-	public function hbox( $content='', $attr=array(), $style=array() ){
+	public function hbox( $content=array(), $attr=array(), $style=array() ){
 		
 		theme_add( 'dijit.layout.SplitContainer' );
 		theme_add( 'dijit.layout.ContentPane' );
@@ -529,7 +672,12 @@ EOT;
 	}
 
 	/**
-	 * a vertical splitter box with dojo
+	 * vertical splitted box using dojo
+	 * 
+	 * @param array $content content of every vbox cell
+	 * @param array/object/string $attr tag attributes
+	 * @param array/object/string $style style of tag
+	 * @return string HTML of the vbox tag
 	 */
 	public function vbox( $content='', $attr=array(), $style=array() ){
 		
@@ -555,11 +703,11 @@ EOT;
 
 	/**
 	 * used to manipulate attributes paramter in other functions
-	 * return the result attributes object or array
 	 * @param $attr: object or array of attributes wanted to be manipulated
 	 * @param $key: attribute to set
 	 * @param $value: value of the attribute to set
 	 * @param $replace: will replace current attribute value if exists or add it if not otherwise will it will add attribute of not exists only
+	 * @return void
 	 */
 	public function attribute( &$attr=array(), $key='', $value='', $replace=TRUE ){
 		
@@ -576,7 +724,22 @@ EOT;
 	/**
 	 * a file list chooser that return a text with some lines every line is
 	 * a choosen file ( it's a textarea interface with jquery)
-	 **/
+	 * 
+	 * @param string $connector: URL to php file to use as ajax backend, with object like this
+	 * <pre>
+	 * {"identifier":"id","label":"description","items":[
+	 * 	{"id":2,"description":"leaf1"},{"id":3,"description":"category","c":[
+	 * 		{"id":4,"description":"subleaf1"},
+	 * 		{"id":5,"description":"subleaf2"}
+	 * 	]}
+	 * ]}
+	 * </pre>
+	 * @param string $NAME: text input name and id
+	 * @param strin $value: text input value
+	 * @param array/object/string $attr: attributes->value associative array
+	 * @param array/object/string $style: property->value associative array
+	 * @return string HTML string for the chooser
+	 */
 	public function file_list( $connector, $NAME='',$value='', $attr=array(), $param=array(), $style=array()){
 		
 		theme_add('jquery/jquery.js');
@@ -662,8 +825,14 @@ EOT
 EOT;
 
 	}
+	
 	/**
 	 * just like attribute function but for style paramter
+	 * 
+	 * @param object/array/string $attr
+	 * @param string $key the css attribute you want to add/modify
+	 * @param string $value the attribute value
+	 * @param boolean $replace if you want to replace the value or not if exists in teh $attr
 	 */
 	public function style( &$attr=array(), $key='', $value='', $replace=TRUE ){
 		
@@ -682,7 +851,10 @@ EOT;
 	}
 
 	/**
-	 * helper function to convert the attribute array to HTML attributes
+	 * function to convert the attribute array to HTML attributes
+	 * 
+	 * @param array/object $attr the attributes array you want to convert
+	 * @return string HTML attibute="value" string sequence 
 	 */
 	protected function _attributes_to_string( $attr= array() ){
 		
@@ -697,23 +869,10 @@ EOT;
 	}
 
 	/**
-	 * helper function to convert the paramters array to javascript object
-	 */
-	protected function _params_to_js( $param=array() ){
-		
-		$att = '';
-
-		foreach ($param as $key => $val)
-			$att .= ( $val[0]=='[' and $val[strlen($val)-1]==']' )
-					?', ' . $key . ': ' . addslashes(str_replace('"','\"',$val)) .' '
-					:', ' . $key . ':\'' . addslashes(str_replace('"','\"',$val)) . '\' ';
-
-		return $att;
-		
-	}
-
-	/**
-	 * helper function to convert style array to CSS text
+	 * function to convert the style array to CSS attributes
+	 * 
+	 * @param array/object $attr the attributes array you want to convert
+	 * @return string HTML key: value; string sequence 
 	 */
 	protected function _array_to_style( $style=array() ){
 		

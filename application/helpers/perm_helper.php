@@ -1,21 +1,26 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * permission helper functions
+ * permission helper
  *
- * @package	Codeigniter-Egypt
- * @subpackage	Codeigniter-Egypt
- * @category	helper file
- * @author	Emad Elsaid
- * @link	http://github.com/blazeeboy/Codeigniter-Egypt
- */
+ * it is responsible for check all system permissions
+ *
+ * @copyright  2011 Emad Elsaid a.k.a Blaze Boy
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt   GPL License 2.0
+ * @link       https://github.com/blazeeboy/Codeigniter-Egypt
+ */ 
 if ( ! function_exists('perm_array')){
 	
+	/**
+	 * create all permission variables array and return it
+	 * 
+	 * @return array 3 keys (opers : the operators, boolVars: the boolean variables, vars: the numeric variables
+	 */
 	function perm_array(){
 		
 		$CI =& get_instance();
 		return array(
 			'opers' => array(
-						'='		=> '==',
+						'='			=> '==',
 						'>=='		=> '>=',
 						'<=='		=> '<=',
 						'!=='		=> '!=',
@@ -43,6 +48,11 @@ if ( ! function_exists('perm_array')){
 
 if ( ! function_exists('perm_chck')){
 	
+	/**
+	 * check permission validation using current system settings
+	 * 
+	 * @param string $perms the permission boolean expression
+	 */
 	function perm_chck($perms=''){
 		
 		$CI =& get_instance();
