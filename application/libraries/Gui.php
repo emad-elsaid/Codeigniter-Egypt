@@ -9,6 +9,7 @@
  * @copyright  2011 Emad Elsaid a.k.a Blaze Boy
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt   GPL License 2.0
  * @link       https://github.com/blazeeboy/Codeigniter-Egypt
+ * @package Libraries
  */ 
 class Gui {
 
@@ -23,10 +24,10 @@ class Gui {
 	/**
 	 * a form maker
 	 * 
-	 * @param string $action: target page of the form
-	 * @param array $data: array of key( label text )=>value(corresponding input HTML ), values can be generated with functions like textbox,color,file,folder,app.etc
+	 * @param string $action target page of the form
+	 * @param array $data array of key( label text )=>value(corresponding input HTML ), values can be generated with functions like textbox,color,file,folder,app.etc
 	 * @param array/object $attributes: array or object of key(attribute)=>value(value of the attribute)
-	 * @param array $hidden: array of hiden fields and values as key=>value
+	 * @param array $hidden array of hiden fields and values as key=>value
 	 * @return string form HTML string wich will be added directly to page
 	 */
 	public function form($action = '', $data=array(), $attributes = array(), $hidden = array()){
@@ -51,8 +52,8 @@ class Gui {
 	/**
 	 * generate hidden field HTML
 	 * 
-	 * @param $NAME: hidden field name
-	 * @param $value: hidden field value
+	 * @param $NAME hidden field name
+	 * @param $value hidden field value
 	 * @return string hidden input tag string
 	 */
 	public function hidden($NAME='', $value='' ){
@@ -68,7 +69,7 @@ class Gui {
 	 * be aware that tree will load all the tree as JSON string
 	 * from the connector URL
 	 * 
-	 * @param string $connector: URL to php file to use as ajax backend, with object like this
+	 * @param string $connector URL to php file to use as ajax backend, with object like this
 	 * <pre>
 	 * {"identifier":"id","label":"description","items":[
 	 * 	{"id":2,"description":"leaf1"},{"id":3,"description":"category","c":[
@@ -77,10 +78,10 @@ class Gui {
 	 * 	]}
 	 * ]}
 	 * </pre>
-	 * @param string $NAME: text input name and id
-	 * @param strin $value: text input value
-	 * @param array/object/string $attr: attributes->value associative array
-	 * @param array/object/string $style: property->value associative array
+	 * @param string $NAME text input name and id
+	 * @param strin $value text input value
+	 * @param array/object/string $attr attributes->value associative array
+	 * @param array/object/string $style property->value associative array
 	 * @return string HTML string for the chooser
 	 */
 	public function file_chooser( $connector='', $NAME='',$value='', $attr=array(), $style=array() ){
@@ -120,7 +121,7 @@ EOT;
 	 * be aware that tree will load all the tree as JSON string
 	 * from the connector URL
 	 * 
-	 * @param string $connector: URL to php file to use as ajax backend, with object like this
+	 * @param string $connector URL to php file to use as ajax backend, with object like this
 	 * <pre>
 	 * {"identifier":"id","label":"description","items":[
 	 * 	{"id":2,"description":"leaf1"},{"id":3,"description":"category","c":[
@@ -129,10 +130,10 @@ EOT;
 	 * 	]}
 	 * ]}
 	 * </pre>
-	 * @param string $NAME: text input name and id
-	 * @param strin $value: text input value
-	 * @param array/object/string $attr: attributes->value associative array
-	 * @param array/object/string $style: property->value associative array
+	 * @param string $NAME text input name and id
+	 * @param strin $value text input value
+	 * @param array/object/string $attr attributes->value associative array
+	 * @param array/object/string $style property->value associative array
 	 * @return string HTML string for the chooser
 	 */
 	public function folder_chooser( $connector='', $NAME='',$value='', $attr=array(), $style=array() ){
@@ -249,8 +250,8 @@ EOT;
 	 * that has an associated tooltip dialog you can add any 
 	 * HTML text in it
 	 * 
-	 * @param string $text: button value text
-	 * @param string $dialog: tooltip dialog content text
+	 * @param string $text button value text
+	 * @param string $dialog tooltip dialog content text
 	 * @param array/object/string attributes to be added to the button
 	 * @return string button HTML string
 	 */
@@ -703,10 +704,10 @@ EOT;
 
 	/**
 	 * used to manipulate attributes paramter in other functions
-	 * @param $attr: object or array of attributes wanted to be manipulated
-	 * @param $key: attribute to set
-	 * @param $value: value of the attribute to set
-	 * @param $replace: will replace current attribute value if exists or add it if not otherwise will it will add attribute of not exists only
+	 * @param $attr object or array of attributes wanted to be manipulated
+	 * @param $key attribute to set
+	 * @param $value value of the attribute to set
+	 * @param $replace will replace current attribute value if exists or add it if not otherwise will it will add attribute of not exists only
 	 * @return void
 	 */
 	public function attribute( &$attr=array(), $key='', $value='', $replace=TRUE ){
@@ -725,7 +726,7 @@ EOT;
 	 * a file list chooser that return a text with some lines every line is
 	 * a choosen file ( it's a textarea interface with jquery)
 	 * 
-	 * @param string $connector: URL to php file to use as ajax backend, with object like this
+	 * @param string $connector URL to php file to use as ajax backend, with object like this
 	 * <pre>
 	 * {"identifier":"id","label":"description","items":[
 	 * 	{"id":2,"description":"leaf1"},{"id":3,"description":"category","c":[
@@ -734,10 +735,10 @@ EOT;
 	 * 	]}
 	 * ]}
 	 * </pre>
-	 * @param string $NAME: text input name and id
-	 * @param strin $value: text input value
-	 * @param array/object/string $attr: attributes->value associative array
-	 * @param array/object/string $style: property->value associative array
+	 * @param string $NAME text input name and id
+	 * @param strin $value text input value
+	 * @param array/object/string $attr attributes->value associative array
+	 * @param array/object/string $style property->value associative array
 	 * @return string HTML string for the chooser
 	 */
 	public function file_list( $connector, $NAME='',$value='', $attr=array(), $param=array(), $style=array()){
@@ -872,7 +873,7 @@ EOT;
 	 * function to convert the style array to CSS attributes
 	 * 
 	 * @param array/object $attr the attributes array you want to convert
-	 * @return string HTML key: value; string sequence 
+	 * @return string HTML key value; string sequence 
 	 */
 	protected function _array_to_style( $style=array() ){
 		
