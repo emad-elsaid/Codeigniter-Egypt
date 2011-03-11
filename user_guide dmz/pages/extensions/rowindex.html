@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Row Index Finder : Included Extensions : DataMapper ORM - User Guide</title>
+
+<style type="text/css" media="all">@import url('../../css/userguide.css');</style>
+<link rel="shortcut icon" type="image/png" href="../../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+<a href="../extlist.html">Included Extensions</a> &nbsp;&#8250;&nbsp;
+Row Index Finder
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Row Index Finder (rowindex)</h1>
+<p class="note">To enable these methods, add <dfn>'rowindex'</dfn> to DataMapper's config, under <strong>'extensions'</strong>.</p>
+<p>This extension allows you to determine on which row a specific item is found across a non-LIMITed query.</p>
+<p>This can be very useful for switching to the correct page of a long list of results after adding or editing a new item.</p>
+
+<h2 id="row_index">row_index($id, <i>$leave_select</i>, <i>$distinct_on</i>)</h2>
+<ul>
+	<li><dfn>$id</dfn>: Either a DataMapper object, or the ID of one, to look up.</li>
+	<li><dfn>$leave_select</dfn>: (Optional) If provided, make sure these items are not removed from the SELECT part of the query..</li>
+	<li><dfn>$distinct_on</dfn>: (Optional) If <dfn>TRUE</dfn>, use DISTINCT ON when running the query. See below.</li>
+	<li><b>Returns</b>: The index of the item, or FALSE if the item was not found..</li>
+</ul>
+
+<p>
+	The <var>$leave_select</var> and <var>$distinct_on</var> arguments are used to assist in complex queries.
+</p>
+<ul>
+	<li>If you know that certain selected columns <strong>must</strong> be selected in order for the query to run, list them here.</li>
+	<li>If your database supports it, using <var>DISTINCT ON()</var> ensures that you get a distinct set of results, even over multiple columns.</li>
+</ul>
+
+<p class="note">This method will clone your object, so you can use the existing query to load the content.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$widgets </var><kbd>= new </kbd><var>Widget</var><kbd>();
+
+</kbd><samp>// user sorting
+</samp><var>$widgets</var><kbd>-&gt;</kbd><var><u>order_by</u></var><kbd>(</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>session</var><kbd>-&gt;</kbd><var>userdata</var><kbd>(</kbd><dfn>'widget_sort_column'</dfn><kbd>), </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>session</var><kbd>-&gt;</kbd><var>userdata</var><kbd>(</kbd><dfn>'widget_sort_dir'</dfn><kbd>));
+
+</kbd><var>$edited_item </var><kbd>= </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>session</var><kbd>-&gt;</kbd><var>userdata</var><kbd>(</kbd><dfn>'last_edited_widget'</dfn><kbd>);
+
+</kbd><samp>// which row?
+</samp><var>$widgets</var><kbd>-&gt;</kbd><var><u>load_extension</u></var><kbd>(</kbd><dfn>'rowindex'</dfn><kbd>);
+</kbd><var>$index </var><kbd>= </kbd><var>$widgets</var><kbd>-&gt;</kbd><var><s>row_index</s></var><kbd>(</kbd><var>$edited_item</var><kbd>);
+
+</kbd><samp>// now load that page (you could redirect instead)
+</samp><var>$widgets</var><kbd>-&gt;</kbd><var><u>get_paged</u></var><kbd>(</kbd><var>$index</var><kbd>, </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>session</var><kbd>-&gt;</kbd><var>userdata</var><kbd>(</kbd><dfn>'widget_page_size'</dfn><kbd>), </kbd><var><dfn>TRUE</dfn></var><kbd>);</kbd>
+</pre>
+
+<h2 id="row_indices">row_indices($ids, <i>$leave_select</i>, <i>$distinct_on</i>)</h2>
+<ul>
+	<li><dfn>$ids</dfn>: Either a DataMapper object, the ID of one, to look up, or an array of either.</li>
+	<li><dfn>$leave_select</dfn>: (Optional) If provided, make sure these items are not removed from the SELECT part of the query..</li>
+	<li><dfn>$distinct_on</dfn>: (Optional) If <dfn>TRUE</dfn>, use DISTINCT ON when running the query. See below.</li>
+	<li><b>Returns</b>: An array of row => id that contained one of the <var>$ids</var>.</li>
+</ul>
+
+<p>A simple variation of the above, but this can be used to find multiple IDs in one pass.</p>
+<p>The results are an array are associative.  The key is the row number, and the value is the row's ID.  This allows for non-distinct queries.</p>
+
+<h4>Example</h4>
+<pre>
+<var>$widgets </var><kbd>= new </kbd><var>Widget</var><kbd>();
+</kbd><var>$widgets</var><kbd>-&gt;</kbd><var><u>load_extension</u></var><kbd>(</kbd><dfn>'rowindex'</dfn><kbd>);
+</kbd><var>$indices </var><kbd>= </kbd><var>$widgets</var><kbd>-&gt;</kbd><var><s>row_indices</s></var><kbd>(array(</kbd><var>1</var><kbd>, </kbd><var>3</var><kbd>, </kbd><var>22</var><kbd>));
+</kbd><var><b>print_r</b></var><kbd>(</kbd><var>$indices</var><kbd>);
+</kbd><samp>// echos something like:
+</samp><kbd>array(
+</kbd><samp>// row -- ID
+    </samp><var>5  </var><kbd>=&gt; </kbd><var>3</var><kbd>,
+    </kbd><var>14 </var><kbd>=&gt; </kbd><var>1</var><kbd>,
+    </kbd><var>16 </var><kbd>=&gt; </kbd><var>22
+</var><kbd>)</kbd>
+</pre>
+
+
+
+<p>&nbsp;</p>
+
+<div class="highlight">
+	<h3>How it Works</h3>
+	<p>
+		This extension uses some fairly complex methods to try and generate the simplest query needed
+		to get the index of every item in proper order.  It does this by eliminating all unnecessary SELECTS.
+	</p>
+	<p>
+		Then the result set is looped over, and the ID or IDS are looked for.
+		If any are found, they are returned.
+	</p>
+	<p>It's not super efficient, but there aren't any cross-DB patterns that I know of to do this.</p>
+</div>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../../js/mootools.js"></script>
+<script type="text/javascript" src="../../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../../',
+			pagespath: '../',
+			last: 'extlist'
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Writing an Extension : DataMapper ORM - User Guide</title>
+
+<link rel="shortcut icon" type="image/png" href="../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Writing an Extension
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Writing an Extension</h1>
+
+<p>It is incredibly simple to write your own extension.  This will walk you through the basic process, by recreating the included extension for JSON encoding and decoding.</p>
+
+<div class="highlight">
+	<h3>Sharing Your Extension</h3>
+	<p>If you'd like to share your own extensions with others, please <a href="http://codeigniter.com/wiki/DMZ_Extensions%3A_How_To_Add_Yours/">add them to the repository</a>!</p>
+</div>
+
+<h2>Planning an Extension</h2>
+
+<p>An extension is simply a class with one or more exposed methods.  These methods have a few minor rules.</p>
+
+<ul>
+	<li>Extension methods must be <b>public</b>.</li>
+	<li>They <b>can not</b> start with an underscore (_).</li>
+	<li>They will not <b>overwrite</b> a DataMapper method, or a previously loaded local extension's method.  A global extension cannot overwrite a local <em>or</em> global extension.</li>
+</ul>
+
+<p>You can include private methods simply by prepending the method with an underscore (_).  These methods will not be exposed in the DataMapper model, but will be available for your use.</p>
+
+<h2>Creating the Extension Class</h2>
+
+<p>
+	The class is a normal PHP class.
+	The file should follow the same naming rules as a CodeIgniter Library,
+	naming the file the <strong>lowercase form of the extension name</strong>, ending with <strong>.php</strong>.
+	Store the class definition in <b>application</b>/<kbd>datamapper</kbd>.
+</p>
+<div class="note">
+	<p>The name of the extension class can be exactly like the extension (ie: <b>Json</b>), or you can use a prefix to prevent naming collisions, which is <b>highly</b> recommended.</p>
+	<p>
+		The prefixes can be <b>Datamapper ORM_</b>, <b>DataMapper_</b>, <b><i>MY_</i></b> (the CodeIgniter <dfn>'subclass_prefix'</dfn> config parameter), or <b>CI_</b>.
+		The last two should only be used for libraries.
+		The order given is the order they are checked.  If you use the <b><i>MY_</i></b> prefix, Datamapper ORM will load the library it is based on, as well.
+	</p>
+	<p>The recommended prefix is <b>DMZ_</b>, simply because it is short.</p>
+</div>
+
+<h3>application/datamapper/json.php</h3>
+<pre><div class="lineNums"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7</div><var>&lt;?php
+</var><kbd>class </kbd><var>DMZ_Json </var><kbd>{
+
+}
+
+</kbd><samp>/* End of file json.php */
+/* Location: ./application/datamapper/json.php */</samp>
+</pre>
+
+<h2 id="Public.Methods">Adding Public Methods</h2>
+<p>We want to be able to easily convert a DataMapper model into a JSON object.  We'll use PHP5's <var><b>json_encode</b></var> for the heavy lifting, but we need to get the data out of the large and complex DataMapper model first.</p>
+
+<p>The first argument to each public method is always the <var>$object</var> in use.</p>
+
+<h3>application/datamapper/json.php</h3>
+<pre><div class="lineNums"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</div><var>&lt;?php
+</var><kbd>class </kbd><var>DMZ_Json </var><kbd>{
+    function </kbd><var><s>to_json</s></var><kbd>(</kbd><var>$object</var><kbd>)
+    {
+        </kbd><var>$fields </var><kbd>= </kbd><var>$object</var><kbd>-&gt;</kbd><var><i>fields</i></var><kbd>;
+        </kbd><var>$result </var><kbd>= array();
+        foreach(</kbd><var>$fields </var><kbd>as </kbd><var>$f</var><kbd>)
+        {
+            </kbd><var>$result</var><kbd>[</kbd><var>$f</var><kbd>] = </kbd><var>$object</var><kbd>-&gt;{</kbd><var>$f</var><kbd>};
+        }
+        </kbd><var>$json </var><kbd>= </kbd><var><b>json_encode</b></var><kbd>(</kbd><var>$result</var><kbd>);
+        if(</kbd><var>$result </var><kbd>=== </kbd><var><dfn>FALSE</dfn></var><kbd>)
+        {
+            return </kbd><var><dfn>FALSE</dfn></var><kbd>;
+        }
+        return </kbd><var>$json</var><kbd>;
+    }
+}
+
+</kbd><samp>/* End of file json.php */
+/* Location: ./application/datamapper/json.php */</samp>
+</pre>
+
+<p>Now we can call <var>$object</var><kbd>-&gt;</kbd><var><s>to_json</s></var><kbd>()</kbd>, and we'll get a JSON encoded view of <var>$object</var>.</p>
+
+<h2 id="Custom.Rules">Creating Custom Validation Rules</h2>
+
+<p>Extensions can also be used to collect custom validation rules.</p>
+
+<p class="note">See <a href="validation.html#Custom.Rules">Validation - Custom Validation</a> for more information about custom validation rules.</p>
+
+<h3>application/datamapper/custom_rules.php</h3>
+<pre class="full"><div class="lineNums"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</div><var>&lt;?php
+</var><kbd>class </kbd><var>DMZ_Custom_Rules </var><kbd>{
+    function </kbd><var><dfn>__construct</dfn></var><kbd>()
+    {
+        </kbd><var><b>$CI</b> </var><kbd>=&amp; </kbd><var><b>get_instance</b></var><kbd>();
+        </kbd><samp>// load in the custom rules language file.
+        </samp><var><b>$CI</b></var><kbd>-&gt;</kbd><var>lang</var><kbd>-&gt;</kbd><var>load</var><kbd>(</kbd><dfn>'custom_rules'</dfn><kbd>);
+    }
+
+    </kbd><samp>// Validation prepping function to encrypt passwords
+    </samp><kbd>function </kbd><var>rule_exact_length</var><kbd>(</kbd><var>$object</var><kbd>, </kbd><var>$field</var><kbd>, </kbd><var>$param</var><kbd>)
+    {
+        </kbd><samp>// Check if field value is the required length
+        </samp><kbd>if (</kbd><var><b>strlen</b></var><kbd>(</kbd><var>$object</var><kbd>-&gt;{</kbd><var>$field</var><kbd>}) == </kbd><var>$param</var><kbd>)
+        {
+            return </kbd><var><dfn>TRUE</dfn></var><kbd>;
+        }
+
+        </kbd><samp>// Field value is not the required length
+        </samp><kbd>return </kbd><var><dfn>FALSE</dfn></var><kbd>;
+    }
+}
+
+</kbd><samp>/* End of file custom_rules.php */
+/* Location: ./application/datamapper/custom_rules.php */</samp>
+</pre>
+
+<p>To use this rule, we have to add <dfn>'custom_rules'</dfn> to our config or <var><i>$extensions</i></var> variable on a specific class.  Then simply add <dfn>'exact_length'</dfn> to a field's rules.</p>
+
+<h2>Accepting Load-Time Options</h2>
+<p>If you want to allow load-time options, simple accept a value in the constructor.</p>
+<pre><div class="lineNums"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</div><var>&lt;?php</var>
+<samp>// $options contains the options passed when the extension is loaded, or NULL if no options are defined</samp>
+<samp>// $object contains the object that is loading this extension. it allows access to the objects properties</samp>
+<kbd>class </kbd><var>DMZ_Custom_Rules </var><kbd>{
+    function </kbd><var><dfn>__construct</dfn></var><kbd>(</kbd><var>$options</var><kbd>, </kbd><var>$object</var><kbd>)
+    {
+        foreach(</kbd><var>$options </var><kbd>as </kbd><var>$k </var><kbd>=&gt; </kbd><var>$v</var><kbd>)
+        {
+            </kbd><var><b>$this</b></var><kbd>-&gt;{</kbd><var>$k</var><kbd>} = </kbd><var>$v</var><kbd>;
+        }
+        </kbd><var><b>$CI</b> </var><kbd>=&amp; </kbd><var><b>get_instance</b></var><kbd>();
+        </kbd><samp>// load in the custom rules language file.
+        </samp><var><b>$CI</b></var><kbd>-&gt;</kbd><var>lang</var><kbd>-&gt;</kbd><var>load</var><kbd>(</kbd><dfn>'custom_rules'</dfn><kbd>);
+    }
+    </kbd><samp>// ...</samp>
+</pre>
+
+<p>&nbsp;</p>
+<p>To learn more, take a look a the <a href="extlist.html">included extensions</a>.
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagespath: ''
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

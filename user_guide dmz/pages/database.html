@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Database Tables : DataMapper ORM - User Guide</title>
+
+<link rel="shortcut icon" type="image/png" href="../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Database Tables
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Database Tables</h1>
+
+<p>DataMapper ORM is implemented with <a href="http://en.wikipedia.org/wiki/Database_normalization">Database normalization</a> <a href="http://en.wikipedia.org/wiki/Third_normal_form">Third normal form</a> in mind.  In short, that means every table is aware only of itself, with fields relevant only to itself, as well as optional fields describing <var><i>$has_one</i></var> relationships.  If a table has a <strong>many</strong> relationship with another table, it is represented by a special joining table.  In either case, the same two objects can only <a href="troubleshooting.html#Relationships.NtoM">have one relationship between them</a>.</p>
+
+<p>(This is different from original DM, because it doesn't require a dedicated table for every relationship join.)</p>
+
+<p>Lets take a look at the below example.</p>
+
+<h3>countries</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:25%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>code</th>
+	<th>name</th>
+</tr>
+<tr>
+	<td>12</td>
+	<td>AM</td>
+	<td>Armenia</td>
+</tr>
+<tr>
+	<td>13</td>
+	<td>AW</td>
+	<td>Aruba</td>
+</tr>
+<tr>
+	<td>14</td>
+	<td>AU</td>
+	<td>Australia</td>
+</tr>
+<tr>
+	<td>15</td>
+	<td>AT</td>
+	<td>Austria</td>
+</tr>
+</table>
+
+<h3>countries_users</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:20%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>country_id</th>
+	<th>user_id</th>
+</tr>
+<tr>
+	<td>1</td>
+	<td>14</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>2</td>
+	<td>12</td>
+	<td>8</td>
+</tr>
+</table>
+
+<h3>users</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:25%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>username</th>
+	<th>password</th>
+	<th>email</th>
+
+</tr>
+<tr>
+	<td>7</td>
+	<td>Foo</td>
+	<td>ec773c1da6f96b0265d76fa0a53db697e66a8eea</td>
+	<td>foo@bar.com</td>
+</tr>
+<tr>
+	<td>8</td>
+	<td>Baz</td>
+	<td>383f27f548397ea123ec444505ef4c7cd993dbf6</td>
+	<td>baz@qux.com</td>
+</tr>
+</table>
+
+<p>Here we have 3 tables.  Tables <b>countries</b> and <b>users</b> are normal tables.  Table <b>countries_users</b> is the joining table that stores the relations between the records of countries and users.</p>
+
+<p>The joining table shows that country ID 14 (Australia) has a relationship with user ID 7 (Foo).  Country ID 12 (Armenia) has a relationship with user ID 8 (Baz).</p>
+
+<h2>Table Naming Rules</h2>
+
+<p class="note">Please read this section carefully, as these rules are the foundation of Datamapper ORM's <a class="def" href="glossary.html#ORM">ORM</a> methods.</p>
+
+<ul>
+	<li><strong>Every</strong> table must have a primary numeric key named <b>id</b> that by default is automatically generated. You can <a href="save.html#Save.Existing.As.New">override</a> this behaviour.</li>
+	<li>Normal tables must be named the lowercase, pluralised version of the object name. So for a user object of <b>User</b>, the table would be named <b>users</b>.  For <b>Country</b>, it would be <b>countries</b>. (<a href="troubleshooting.html#General.Plural.Unusual">For odd pluralizations</a>, you may need to hard code the <var><i>$table</i></var> or <var><i>$model</i></var> fields.)</li>
+	<li>A joining table must exist between each <kbd>$has_many</kbd> related normal tables.  You can also use a joining table for any <var><i>$has_one</i></var> relationships.</li>
+	<li>For in-table foreign keys, the column <b>must</b> allow <dfn>NULL</dfn>s, because DataMapper saves the object first, and relationships later.</li>
+	<li>Joining tables must be named with both of the table names it is joining, in <em>alphabetical order</em>, separated by an underscore (_). For example, the joining table for <b>users</b> and <b>countries</b> is <b>countries_users</b>.</li>
+	<li>Joining tables must have a specially name id field for each of the tables it is joining, named as the singular of the table name, followed by an underscore (_) and the word <b>id</b>. For example, the joining id field name for table <b>users</b> would be <b>user_id</b>.  The joining id field name for table <b>countries</b> would be <b>country_id</b>.  This same column name could be used for in-table foreign keys.</li>
+</ul>
+
+<div class="important">
+	<p>For more advanced relationships, including self-relationships, and multiple relationships between the same models, there are a few other rules.  These are outlined in <a href="advancedrelations.html">Advanced Relationships</a>.</p>
+</div>
+
+<div class="highlight">
+<h3>In-Table Foreign Keys</h3>
+<p>The way DataMapper originally required all relationships to have dedicated join tables.  Datamapper ORM is a little more flexible and allows in-table foreign keys as well.</p>
+
+<p>For this example, let's look at the same data, but when there is only one country for each user.</p>
+
+<h3>countries</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:25%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>code</th>
+	<th>name</th>
+</tr>
+<tr>
+	<td>12</td>
+	<td>AM</td>
+	<td>Armenia</td>
+</tr>
+<tr>
+	<td>13</td>
+	<td>AW</td>
+	<td>Aruba</td>
+</tr>
+<tr>
+	<td>14</td>
+	<td>AU</td>
+	<td>Australia</td>
+</tr>
+<tr>
+	<td>15</td>
+	<td>AT</td>
+	<td>Austria</td>
+</tr>
+</table>
+
+<h3>users</h3>
+<table cellpadding="0" cellspacing="1" border="0" style="width:25%" class="tableborder">
+<tr>
+	<th>id</th>
+	<th>username</th>
+	<th>password</th>
+	<th>email</th>
+	<th>country_id</th>
+</tr>
+<tr>
+	<td>7</td>
+	<td>Foo</td>
+	<td>ec773c1da6f96b0265d76fa0a53db697e66a8eea</td>
+	<td>foo@bar.com</td>
+	<td>14</td>
+</tr>
+<tr>
+	<td>8</td>
+	<td>Baz</td>
+	<td>383f27f548397ea123ec444505ef4c7cd993dbf6</td>
+	<td>baz@qux.com</td>
+	<td>12</td>
+</tr>
+</table>
+
+<p>Notice we've removed the joining table, and added the column <strong>country_id</strong> directly to the table <strong>users</strong>.  Now the relationships are preserved, but we have less clutter in the database, and slightly faster queries as well.</p>
+</div>
+
+
+<p>That's pretty much it as far as your normal tables go.  The setting to signify if tables are joined with a One to One, One to Many, or Many to Many relationship is setup in the <a href="models.html">DataMapper models</a>.</p>
+
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagespath: ''
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Automated Timestamps : DataMapper ORM - User Guide</title>
+
+<link rel="shortcut icon" type="image/png" href="../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Automated Timestamps
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Automated Timestamps</h1>
+
+<p>DataMapper has the ability to automattically manage your Created and Updated timestamps, if your tables have the Created and Updated fields. By default, DataMapper looks for fields names <var><i>created</i></var> and <var><i>updated</i></var>.  If they exist, it looks after the values for these fields without you ever needing to set them.</p>
+
+<p class="important"><strong>Note:</strong> By default, the Created and Updated fields are of the <strong>DateTime</strong> type, and GMT/UTC time is used.</p>
+
+<p>If you would like to change the name of the Created and Updated fields, you can do so by setting the <var><i>$created_field</i></var> and <var><i>$updated_field</i></var> class variables in your DataMapper model.  For example, we'll set them in our User model:</p>
+
+<pre><div class="lineNums"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</div><var>&lt;?php
+
+</var><kbd>class </kbd><var>User </var><kbd>extends </kbd><var><u>DataMapper</u> </var><kbd>{
+
+    var </kbd><var><i>$created_field</i> </var><kbd>= </kbd><dfn>'created_on'</dfn><kbd>;
+    var </kbd><var><i>$updated_field</i> </var><kbd>= </kbd><dfn>'updated_on'</dfn><kbd>;
+
+    function </kbd><var><dfn>__construct</dfn></var><kbd>(</kbd><var>$id </var><kbd>= </kbd><var>NULL</var><kbd>)
+    {
+        </kbd><var><dfn>parent</dfn></var><kbd>::</kbd><var><dfn>__construct</dfn></var><kbd>(</kbd><var>$id</var><kbd>);
+    }
+}
+
+</kbd><samp>/* End of file user.php */
+/* Location: ./application/models/user.php */</samp>
+</pre>
+
+<p>If you'd prefer to use Unix Timestamps or if you'd like to use Local Time instead of GMT/UTC, you can do so by setting the <var><i>$unix_timestamp</i></var> and <var><i>$local_time</i></var> class variables respectively.  For example:</p>
+
+<pre><div class="lineNums"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</div><var>&lt;?php
+
+</var><kbd>class </kbd><var>User </var><kbd>extends </kbd><var><u>DataMapper</u> </var><kbd>{
+
+    var </kbd><var><i>$created_field</i> </var><kbd>= </kbd><dfn>'created_on'</dfn><kbd>;
+    var </kbd><var><i>$updated_field</i> </var><kbd>= </kbd><dfn>'updated_on'</dfn><kbd>;
+    var </kbd><var><i>$local_time</i> </var><kbd>= </kbd><var><dfn>TRUE</dfn></var><kbd>;
+    var </kbd><var><i>$unix_timestamp</i> </var><kbd>= </kbd><var><dfn>TRUE</dfn></var><kbd>;
+
+    function </kbd><var><dfn>__construct</dfn></var><kbd>(</kbd><var>$id </var><kbd>= </kbd><var>NULL</var><kbd>)
+    {
+        </kbd><var><dfn>parent</dfn></var><kbd>::</kbd><var><dfn>__construct</dfn></var><kbd>(</kbd><var>$id</var><kbd>);
+    }
+}
+
+</kbd><samp>/* End of file user.php */
+/* Location: ./application/models/user.php */</samp>
+</pre>
+
+<p>Alternatively, you can set this up globally for all your DataMapper models by setting them in the <a href="config.html">Configuration</a>.</p>
+
+<h2>Timestamp Format</h2>
+<p>New to Datamapper ORM 1.7.0, you can now specify the <a href="config.html">timestamp format.</a></p>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagespath: ''
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

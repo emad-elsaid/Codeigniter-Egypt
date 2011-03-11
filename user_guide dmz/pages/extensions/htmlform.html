@@ -1,0 +1,780 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>HTML Form Generation Methods : Included Extensions : DataMapper ORM - User Guide</title>
+
+<style type="text/css" media="all">@import url('../../css/userguide.css');</style>
+<link rel="shortcut icon" type="image/png" href="../../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+<a href="../extlist.html">Included Extensions</a> &nbsp;&#8250;&nbsp;
+HTML Form Generation Methods
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>HTML Form Generation Methods (htmlform)</h1>
+
+<div class="important">
+	<strong><em>No Longer Supported</em></strong>
+	<p>
+		As of Datamapper ORM 1.7, this extension is not supported.
+		It is almost as complicated as Datamapper ORM itself, and I no longer have the time to maintain it.
+		It is fully functional, but use at your own risk.
+	</p>
+	<p>
+		You may be able to find support on the CodeIgniter forums, but I am not planning on updating this extension anymore.
+		Feel free to modify this extension directly, and please change the templates to suit your needs.
+	</p>
+</div>
+
+<div class="note">
+	<p>To enable these methods, add <dfn>'htmlform'</dfn> to DataMapper's config, under <strong>'extensions'</strong>.</p>
+	<ul>
+		<li>You will also have to copy over the <kbd>views/dmz_htmlform</kbd> folder from the source to use the default templates.  This is recommended as a starting point, even if you plan on customizing them.</li>
+		<li>You will want to update your models to include the <strong>label</strong>, <strong>type</strong>, and, where applicable, <strong>values</strong> validation fields.</li>
+	</ul>
+</div>
+<p>Uses properties from a DataMapper object to quickly generate forms.  This method is highly customizable, both in a broad sense, and on a field-by-field basis.  When combined with the <a href="array.html">Associative Array Conversion Methods</a>, this extension can make creating simple content mangement tools very easy.</p>
+
+<div class="highlight">
+	<p><b>Why doesn't this extension use the CodeIgniter Form Helper?</b></p>
+	<p>The simple reason is that there is a lot of information available when the input methods are able to look at the DataMapper object directly.  Using those methods would have required yet another libary be loaded, and wouldn't have provided much benefit.</p>
+	<p>Also, I don't think they really do that much, other than output some basic HTML.  This extension provides the means to output an entire, ready-to-use HTML form with very little customization.</p>
+</div>
+
+<h2>Load-Time Options</h2>
+<p><a href="../extensions.html#Options">Set these when loading the extension</a>, to change the default behavior.</p>
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+	<tr>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Description</th>
+		<th>Default</th>
+	</tr>
+	<tr>
+		<td><strong>form_template</strong></td>
+		<td><em>View</em></td>
+		<td>Override the default template for the overall form structure.</td>
+		<td>'dmz_htmlform/form'</td>
+	</tr>
+	<tr>
+		<td><strong>row_template</strong></td>
+		<td><em>View</em></td>
+		<td>Override the default template for the row structure.</td>
+		<td>'dmz_htmlform/row'</td>
+	</tr>
+	<tr>
+		<td><strong>section_template</strong></td>
+		<td><em>View</em></td>
+		<td>Override the default template for form sections.</td>
+		<td>'dmz_htmlform/section'</td>
+	</tr>
+</table>
+
+
+
+
+<p>&nbsp;</p>
+
+<h1 id="Getting.Started">Getting Started</h1>
+<p>HTML Form was designed to be highly flexible, while still allowing the simplest cases to require very little coding.</p>
+<h2>HTML Form Uses the Validation Array</h2>
+<p>HTML Form can use information already stored in the validation array to significantly automate form generation.  The following elements are used as described.  Some of these elements are not defined for standard DataMapper usage.  All can be overridden on a per-form and per-field basis.</p>
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+	<tr>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Description</th>
+		<th>Default</th>
+	</tr>
+	<tr>
+		<td><strong>label</strong></td>
+		<td>String</td>
+		<td>The label is used to provide a label for the field.</td>
+		<td>$field</td>
+	</tr>
+	<tr>
+		<td><strong>type</strong>*</td>
+		<td>String</td>
+		<td>The type is used to determine what type of field is being edited.<br/>
+			For example, 'text', 'password', or 'dropdown'.  See below for the <a href="#Types">built-in types.</a></td>
+		<td>'text'</td>
+	</tr>
+	<tr>
+		<td><strong>values</strong>*</td>
+		<td>Array</td>
+		<td>Used to provide a set of possible keys and values for multiple-choice fields, such as dropdowns, radio buttons, and checkbox lists.</td>
+		<td>NULL</td>
+	</tr>
+	<tr>
+		<td><strong>rules</strong></td>
+		<td>Array</td>
+		<td>Some of the rules can affect the rendering of the input field.<br/>
+			For example, 'required' will add a 'required' class to the row, while 'max_length' might be used to limit the size of a text field.</td>
+		<td>Empty Array</td>
+	</tr>
+</table>
+<p>* Not a standard DataMapper validation field.</p>
+
+<div class="example">
+	<h4>Example Application</h4>
+	<p>A complete example can be found
+	<a href="../examples/htmlform.html">in the examples section.</a></p>
+</div>
+<p>For the most simple forms, all that is need is:</p>
+<ol>
+	<li>Ensure that every field and related field has a label.</li>
+	<li>Add <b>type</b> to all non-single line text fields.  Relationship fields will automatically be generated as a dropdown or checkbox list.</li>
+	<li>Create an array of field names to edit, in the order you want them to appear.  Don't forget <kbd>id</kbd> if you are editing an item!</li>
+	<li>Pass this array into <strong>$object->render_form</strong>, along with the submit url if it is not the current url.</li>
+	<li>Echo the result of the method out.</li>
+</ol>
+<p>That's all that is needed to render out a complete form with inputs for text, textareas, even single and multiple relationships!  The form will also include a block of errors if any occurred while saving.</p>
+<p class="note"><strong><em>Note:</em></strong> If you are outputting related fields, you need to implement <var><b>__toString</b></var> on your related classes.  The result of <var><b>__toString</b></var> is used to determine the name to show for dropdowns, checkboxes, and radio buttons.</p>
+<p class="important">Relationship fields can only be used with <dfn>checkbox</dfn>, <dfn>radio</dfn>, or <dfn>dropdown</dfn> input types.</p>
+
+<p>Continue reading on for more details of how to enhance this output.</p>
+
+
+
+<p>&nbsp;</p>
+
+<h1 id="Methods">Methods</h1>
+<p>All of the power of this class can be accessed through these three methods.</p>
+
+<h2 id="render_form">render_form($fields, <i>$url</i>, <i>$options</i>, <i>$template</i>, <i>$row_template</i>)</h2>
+<ul>
+	<li><b>$fields</b>: An array containing the instructions for the renderers.  (Details below.)</li>
+	<li><b>$url</b>: (Optional) The url to submit the form to.  Defaults to the current URL.  The default template will automatically call <var><b>$CI</b><kbd>-&gt;</kbd>config<kbd>-&gt;</kbd>site_url<kbd>()</kbd></var> on it.</li>
+	<li><b>$options</b>: (Optional) An associative array of options for the form renderer only.</li>
+	<li><b>$template</b>: (Optional) Override the default form template for just this form.</li>
+	<li><b>$row_template</b>: (Optional) Override the default row template for just this form.</li>
+	<li><b>Returns</b>: A string containing the form rendered out.</li>
+</ul>
+
+<p>Takes a collection of fields, text, and custom inputs and converts them into a submittable form.</p>
+
+<div class="highlight">
+<h3>Fields Array</h3>
+<p>All of the work for the form is specified by the <b>$fields</b> array.  Each item in the fields can be specified in one of several ways:</p>
+<ul>
+	<li>As just the <dfn>{field name}</dfn>, using the defaults for everything.</li>
+	<li>As the <dfn>{field name}</dfn> => <var><i>{type}</i></var>, to override the default type.</li>
+	<li>As the <dfn>{field name}</dfn> => <var><u>{options array}</u></var>, to customize the field.</li>
+	<li>As any <var><i>{string of text}</i></var>, to be output directly.</li>
+	<li>As any <var><i>{string of text}</i></var> => '<strong>section</strong>', to be rendered as a form section header.</li>
+	<li>As any <dfn>{non-field id}</dfn> => <var><u>{options array}</u></var>, to render a custom, non-<var>$object</var> field html input.</li>
+	<li>As just an array (no key) to render out multiple fields in one row (such as [First Name] [Last Name]).  In this case, the special key <b>row_options</b> can be used to set the row label and id.</li>
+</ul>
+
+<p>There is a lot of power in these options.  <a href="#Examples">Many examples are shown below.</a></p>
+
+<p>Each of the <samp>{options array}</samp>s can accept any of these standard options:</p>
+
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+	<tr>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Description</th>
+		<th>Default</th>
+	</tr>
+	<tr>
+		<td><strong>label</strong></td>
+		<td>String</td>
+		<td>The label is used on the row template to provide a label for the field.</td>
+		<td>See <a href="#Getting.Started">Getting Started</a></td>
+	</tr>
+	<tr>
+		<td><strong>type</strong></td>
+		<td>String</td>
+		<td>Override the default type for the input field.</td>
+		<td><a href="#render_field">Varies</a></td>
+	</tr>
+	<tr>
+		<td><strong>value</strong></td>
+		<td>Mixed</td>
+		<td>Override the value for fields and related fields.  Set the value for custom fields.</td>
+		<td>See <a href="#Getting.Started">Getting Started</a></td>
+	</tr>
+	<tr>
+		<td><strong>default_value</strong></td>
+		<td>Mixed</td>
+		<td>Set the initial value for custom fields. Ignored (and passed to the renderer) for object-based fields.</td>
+		<td><dfn>NULL</dfn></td>
+	</tr>
+	<tr>
+		<td><strong>list</strong></td>
+		<td>Array</td>
+		<td>A set of value/label pairs to be used for multiple-item input fields (dropdown, checkbox, radio).<br/>
+			This can also be a DataMapper object.  In this case, <kbd>$all</kbd> will be used to create the list.<br/>
+			The list is automatically generated for related objects if you don't specify one. <a href="#Related.Lists">See below for details.</a></td>
+		<td>Based on the related field, or<br/>
+			<var><i>validation</i></var><kbd>[</kbd><dfn>'values'</dfn><kbd>]</kbd></td>
+	</tr>
+	<tr>
+		<td><strong>input_separator</strong></td>
+		<td>String</td>
+		<td>Override the default separator used in checkboxes, radio sets, and multiple-inputs.</td>
+		<td><dfn>'&lt;br/&gt;'</dfn> on checkboxes<br/>
+			<dfn>' '</dfn> on multiple-inputs</td>
+	</tr>
+	<tr>
+		<td><strong>template</strong></td>
+		<td><i>View</i></td>
+		<td>Override the default row (or section) template for just this row (or section).</td>
+		<td><dfn>'dmz_htmlform/row'</dfn> or<br/>
+			<dfn>'dmz_htmlform/section'</dfn></td>
+	</tr>
+	<tr>
+		<td><strong>row_options</strong></td>
+		<td>Array</td>
+		<td>Options passed to the render_row method.  This is <strong>only used if multiple fields are rendered in one row</strong>.</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="4" style="text-align: center">Also acceptable: any options that the <a href="#render_row">render_row</a> method accepts.</td>
+	</tr>
+</table>
+<br/>
+<p>All other items in the <var><u>{options array}</u></var> are passed directly to the <var><s>render_row</s></var> method.</p>
+</div>
+
+<br/>
+
+<h3>Default Form Template Options</h3>
+<div class="example">
+	<h4>Example Application</h4>
+	<p>The login view contains an example of these options.</p>
+	<div class="paths">ZIP/<b>examples/application/<wbr/>views/<wbr/>login.php</b></div>
+</div>
+<p>The default form template can take these options.  If you customize the template, you can accept any options you want.</p>
+<div class="exampleWrap">
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+	<tr>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Description</th>
+		<th>Default</th>
+	</tr>
+	<tr>
+		<td><strong>save_button</strong></td>
+		<td>String</td>
+		<td>The label to use on the save button.</td>
+		<td><strong>Save</strong></td>
+	</tr>
+	<tr>
+		<td><strong>reset_button</strong></td>
+		<td>Mixed</td>
+		<td>If TRUE, show a reset button labled 'Reset';  If <em>not</em> FALSE, use that as the label for a reset button.</td>
+		<td><dfn>FALSE</dfn></td>
+	</tr>
+</table>
+</div>
+
+<p>&nbsp;</p>
+
+<h2 id="render_row">render_row($field, <i>$type</i>, <i>$options</i>, <i>$row_template</i>)</h2>
+<ul>
+	<li><b>$field</b>: The name of the field or relationship (or the id of a non-field) to render.</li>
+	<li><b>$type</b>: (Optional) The type of field to render (such as <i>text</i> or <i>dropdown</i>).</li>
+	<li><b>$options</b>: (Optional) An associative array of options for the renderer.  Most will be passed directly to <b>render_field</b>.</li>
+	<li><b>$row_template</b>: (Optional) Override the default row template for just this row.</li>
+	<li><b>Returns</b>: A string containing the row rendered out.</li>
+</ul>
+
+<p>Takes a field (or set of options) and converts it into an HTML form input widget, wrapped in a template containing the field label and more.  This method isn't called directly very often; instead use <b>render_form</b>.</p>
+<p>It is this method that determines whether to render rows with input fields, section headers, or output the content directly.</p>
+
+<h3>Default Row Template Options</h3>
+<p>The default row template can take these options.  If you customize the template, you can accept any options you want.  (<kbd>$id</kbd> is the id of the field.)</p>
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+	<tr>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Description</th>
+		<th>Default</th>
+	</tr>
+	<tr>
+		<td><strong>label</strong></td>
+		<td>String</td>
+		<td>The label to show for the input(s).</td>
+		<td><dfn>''</dfn></td>
+	</tr>
+	<tr>
+		<td><strong>row_id</strong></td>
+		<td>String</td>
+		<td>The id of the row.</td>
+		<td><b>row_</b><kbd>$id</kbd></td>
+	</tr>
+	<tr>
+		<td><strong>label_for</strong></td>
+		<td>String</td>
+		<td>The id of the field, so clicking the label focuses that field..</td>
+		<td><kbd>$id</kbd></td>
+	</tr>
+	<tr>
+		<td><strong>row_class</strong></td>
+		<td>String</td>
+		<td>The base class for the row.  The class will automatically include <b>required</b> and <b>error</b> as applicable, even if you provide one.</td>
+		<td><dfn>''</dfn></td>
+	</tr>
+</table>
+
+<p>&nbsp;</p>
+
+<h2 id="render_field">render_field($field, <i>$type</i>, <i>$options</i>)</h2>
+<ul>
+	<li><b>$field</b>: The name of the field or relationship (or the id of a non-field) to render.</li>
+	<li><b>$type</b>: (Optional) The type of field to render (such as <i>text</i> or <i>dropdown</i>).</li>
+	<li><b>$options</b>: (Optional) An associative array of options for the renderer.</li>
+	<li><b>Returns</b>: The rendered html form input string.</li>
+</ul>
+<p>Takes a field (or set of options) and converts it into an HTML form input widget.  This function is the meat of the automation.  The method outputs different information based on whether the field is a <var><i>$has_one</i></var> or <var><i>$has_many</i></var> relationship, a DataMapper field, or none of the above.</p>
+<ul>
+	<li>If the field is a $has_one, the default output is a dropdown box listing every item of a given type in the database.</li>
+	<li>For $has_many, the default output is a list of checkboxes if there are 6 or less items, or a multiple-selection dropdown box for more items.</li>
+	<li>For fields, the default is a text, except for id which defaults to hidden.</li>
+	<li>For all others, there is no default, you have to specify the type.</li>
+</ul>
+
+<h3>Common Input Field Options</h3>
+<p>These are common options for input fields.  Anything not explicitly defined here is output directly to the html as <kbd>$name</kbd>="<samp>$value</samp>".</p>
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+	<tr>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Description</th>
+		<th>Default</th>
+	</tr>
+	<tr>
+		<td><strong>value</strong></td>
+		<td>Mixed</td>
+		<td>Override the initial value for fields and related fields.  Set the initial value for custom fields.</td>
+		<td>See <a href="#Getting.Started">Getting Started</a></td>
+	</tr>
+	<tr>
+		<td><strong>default_value</strong></td>
+		<td>Mixed</td>
+		<td>Set the initial value for custom fields. Ignored (and passed to the renderer) for object-based fields.</td>
+		<td><dfn>NULL</dfn></td>
+	</tr>
+	<tr>
+		<td><strong>list</strong></td>
+		<td>Array</td>
+		<td>A set of value/label pairs to be used for multiple-item input fields (dropdown, checkbox, radio).<br/>
+			This can also be a DataMapper object.  In this case, <kbd>$all</kbd> will be used to create the list.<br/>
+			The list is automatically generated for related objects if you don't specify one. <a href="#Related.Lists">See below for details.</a></td>
+		<td>Based on the related field, or<br/>
+			<var><i>validation</i></var><kbd>[</kbd><dfn>'values'</dfn><kbd>]</kbd></td>
+	</tr>
+	<tr>
+		<td><strong>id</strong></td>
+		<td>String</td>
+		<td>HTML id attribute.</td>
+		<td><var>$field</var></td>
+	</tr>
+	<tr>
+		<td><strong>class</strong></td>
+		<td>String</td>
+		<td>The base HTML class attribute.</td>
+		<td><dfn>''</dfn></td>
+	</tr>
+	<tr>
+		<td><strong>size</strong></td>
+		<td>Integer</td>
+		<td>The size of a text field or dropdown box.</td>
+		<td><dfn>30</dfn> for text, or <br/>
+			<var><b>min</b></var><kbd>(</kbd><dfn>8</dfn><kbd>, </kbd><var><b>count</b></var><kbd>(</kbd><var>$list</var><kbd>))</kbd></td>
+	</tr>
+	<tr>
+		<td><strong>maxlength</strong></td>
+		<td>Integer</td>
+		<td>The maximum accepted length of a text field.</td>
+		<td><var><i>validation</i></var><kbd>[</kbd><dfn>'rules'</dfn><kbd>][</kbd><dfn>'max_length'</dfn><kbd>]</kbd></td>
+	</tr>
+</table>
+
+<br />
+
+<div class="highlight">
+<h3 id="Related.Lists">Related Lists</h3>
+<p>If you specify a related field, and do not provide a list of items, this method will attempt to automatically generate a list of items.  It does this by loading every item of the related class.</p>
+<p>If you decide to use the built-in list generator, you probably want to implement <a href="../get.html#Default.Order.By">default order by</a>.</p>
+<p>If you decide that you do not want every item listed, then there are two options:</p>
+<ul>
+	<li>Override the <var>'list'</var> parameter in the field's <dfn>$options</dfn>.</li>
+	<li>Create a method called <kbd>get_htmlform_list</kbd>, with <dfn>$object</dfn> and <dfn>$field</dfn> arguments.  This method does not return anything, but instead handles generating and running the get query.</li>
+</ul>
+<h4>Custom Method Example</h4>
+<pre>
+<kbd>class </kbd><var>User </var><kbd>extends </kbd><var><u>DataMapper</u> </var><kbd>{
+
+    </kbd><samp>// ...
+
+    </samp><kbd>function </kbd><var>get_htmlform_list</var><kbd>(</kbd><var>$object</var><kbd>, </kbd><var>$field</var><kbd>)
+    {
+        </kbd><samp>// Only return enabled users
+        </samp><var><b>$this</b></var><kbd>-&gt;</kbd><var><u>where</u></var><kbd>(</kbd><dfn>'disabled'</dfn><kbd>, </kbd><var><dfn>FALSE</dfn></var><kbd>)-&gt;</kbd><var><u>get</u></var><kbd>();
+    }
+}</kbd>
+</pre>
+</div>
+
+
+<p>&nbsp;</p>
+
+<h1 id="Types">Types</h1>
+
+<p>Different types of input help shape what the user is allowed to submit.  You can use one of the built-in types, or <a href="#Custom.Types">create your own type renderers</a>.</p>
+
+<h2>Built-In Types</h2>
+<p>All of the built-in functions will update based on the validation rules.  They also will accept almost any key/value pair in the options array, and output them as HTML.</p>
+
+<p>For the examples below:</p>
+<ul>
+	<li><kbd>$id</kbd>: The field name ('firstname')</li>
+	<li><var><s>$value</s></var>: The current value of the field ('Bob')</li>
+	<li><dfn>$listkey#</dfn>: The key from a list of possible values.</li>
+	<li><var>$listvalue#</var>: The value from a list of possible values.</li>
+</ul>
+
+<h3>Single-Value Types</h3>
+<p>These input types only accept a single value, and the user can enter input as text.</p>
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Sample Output</th>
+	</tr>
+
+	<tr>
+		<td><strong>hidden</strong></td>
+		<td>A special input used for hidden fields.  It is never rendered in a row, even within forms.</td>
+		<td class="td code">&lt;input type="hidden" id="<kbd>$id</kbd>" name="<kbd>$id</kbd>" value="<var><s><var><s>$value</s></var></s></var>" /&gt;</td>
+	</tr>
+
+	<tr>
+		<td><strong>text</strong></td>
+		<td>The default type.  A single-line text box.  <kbd>max_length</kbd> translates to <var><s>maxlength</s></var>, and if it is less than <var>30</var>, it will also be used to limit the size of the box.</td>
+		<td class="td code">&lt;input type="text" id="<kbd>$id</kbd>" name="<kbd>$id</kbd>" value="<var><s><var><s>$value</s></var></s></var>" /&gt;</td>
+	</tr>
+
+	<tr>
+		<td><strong>password</strong></td>
+		<td>A password field that works similar to <b>text</b>, except the value is never returned by default.  Set <kbd>send_value</kbd> to <var>TRUE</var> to force the value to be sent back to the client.</td>
+		<td class="td code">&lt;input type="password" id="<kbd>$id</kbd>" name="<kbd>$id</kbd>" /&gt;</td>
+	</tr>
+
+	<tr>
+		<td><strong>textarea</strong></td>
+		<td>A larger, multi-line text input field.</td>
+		<td class="td code">&lt;textarea id="<kbd>$id</kbd>" name="<kbd>$id</kbd>"&gt;<var><s><var><s>$value</s></var></s></var>&lt;/textarea&gt;</td>
+	</tr>
+
+	<tr>
+		<td><strong>checkbox</strong></td>
+		<td>A single checkbox.  If rendered in a row, the label is rendered on the label.  Otherwise, it is rendered beside the checkbox.  The value of the field is assumed to be TRUE or FALSE.</td>
+		<td class="td code">&lt;input type="checkbox" id="<kbd>$id</kbd>" name="<kbd>$id</kbd>" value="<kbd>$id</kbd>" checked="{<var><s><var><s>$value</s></var></s></var>}" /&gt;</td>
+	</tr>
+
+	<tr>
+		<td><strong>file</strong></td>
+		<td>File upload field.  The initial value parameter is ignored by this input.</td>
+		<td class="td code">&lt;input type="file" id="<kbd>$id</kbd>" name="<kbd>$id</kbd>" /&gt;</td>
+	</tr>
+</table>
+
+<h3>Limited-Selection Single-Value Types</h3>
+<p>These input types only accept a single value.  The options the user can select are limited by the <kbd>values</kbd> validation property, the <kbd>list</kbd> property, or auto-generated for related items.</p>
+<p class="note">You will need to implement the <var><b>__toString</b></var> PHP method on related models, to get a label for these.</p>
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Sample Output</th>
+	</tr>
+
+	<tr>
+		<td><strong>dropdown</strong></td>
+		<td>A selection box that allows the user to select one of many options.</td>
+		<td class="td code">&lt;select id="<kbd>$id</kbd>" name="<kbd>$id</kbd>" &gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="<dfn>$listkey1</dfn>"&gt;<var>$listvalue1</var>&lt;/option&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="<dfn>$listkey2</dfn>" selected="selected"&gt;<var>$listvalue2</var>&lt;/option&gt;<br/>
+			&lt;/select&gt;
+		</td>
+	</tr>
+
+	<tr>
+		<td><strong>radio</strong></td>
+		<td>Renders a list of radio items a user can choose between.</td>
+		<td class="td code">&lt;input type="radio" id="<kbd>$id</kbd>_<dfn>$listkey1</dfn>" name="<kbd>$id</kbd>" value="<dfn>$listkey1</dfn>" /&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;label for="<kbd>$id</kbd>_<dfn>$listkey1</dfn>"&gt;<var>$listvalue1</var>&lt;/label&gt;&lt;br/&gt;<br/>
+			&lt;input type="radio" id="<kbd>$id</kbd>_<dfn>$listkey2</dfn>" name="<kbd>$id</kbd>" value="<dfn>$listkey2</dfn>" checked="checked" /&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;label for="<kbd>$id</kbd>_<dfn>$listkey2</dfn>"&gt;<var>$listvalue2</var>&lt;/label&gt;</td>
+	</tr>
+</table>
+
+<h3>Limited-Selection Multiple-Value Types</h3>
+<p>These input types accept multiple values.  The options the user can select are limited by the <kbd>values</kbd> validation property, the <kbd>list</kbd> property, or auto-generated for related items.</p>
+<p class="note">You will need to implement the <var><b>__toString</b></var> PHP method on related models, to get a label for these.</p>
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Sample Output</th>
+	</tr>
+
+	<tr>
+		<td><strong>dropdown</strong></td>
+		<td>A selection box that allows the user to select one or more of many options.</td>
+		<td class="td code">&lt;select id="<kbd>$id</kbd>" name="<kbd>$id</kbd>" &gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="<dfn>$listkey1</dfn>" selected="selected"&gt;<var>$listvalue1</var>&lt;/option&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="<dfn>$listkey2</dfn>"&gt;<var>$listvalue2</var>&lt;/option&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="<dfn>$listkey3</dfn>" selected="selected"&gt;<var>$listvalue3</var>&lt;/option&gt;<br/>
+			&lt;/select&gt;
+		</td>
+	</tr>
+
+	<tr>
+		<td><strong>checkbox</strong></td>
+		<td>Renders a list of checkbox items a user can choose between.</td>
+		<td class="td code">&lt;input type="checkbox" id="<kbd>$id</kbd>_<dfn>$listkey1</dfn>" name="<kbd>$id</kbd>" value="<dfn>$listkey1</dfn>" /&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;label for="<kbd>$id</kbd>_<dfn>$listkey1</dfn>"&gt;<var>$listvalue1</var>&lt;/label&gt;&lt;br/&gt;<br/>
+			&lt;input type="checkbox" id="<kbd>$id</kbd>_<dfn>$listkey2</dfn>" name="<kbd>$id</kbd>" value="<dfn>$listkey2</dfn>" checked="checked" /&gt;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&lt;label for="<kbd>$id</kbd>_<dfn>$listkey2</dfn>"&gt;<var>$listvalue2</var>&lt;/label&gt;</td>
+	</tr>
+</table>
+
+
+<h2 id="Custom.Types">Custom Types</h2>
+
+<p>HTML Form includes several types (listed below).  You can also add any type by simply creating a helper function to render it.</p>
+<p>The helper function must be named <dfn>input_</dfn><var><s>{$type}</s></var>, and must take these arguments:</p>
+<ul>
+	<li><b>$object</b>: The DataMapper object being rendered.</li>
+	<li><b>$field</b>: The field, related field, or id to be rendered.</li>
+	<li><b>$value</b>: The current value for the field.  This is updated automatically based on what was submitted.</li>
+	<li><b>$options</b>: An associative array of options for the field.</li>
+</ul>
+<h3>Example</h3>
+<pre>
+<samp>// Render a JavaScript Calendar
+</samp><kbd>function </kbd><var>input_calendar</var><kbd>(</kbd><var>$object</var><kbd>, </kbd><var>$field</var><kbd>, </kbd><var>$value</var><kbd>, </kbd><var>$options</var><kbd>)
+{
+    return </kbd><dfn>"&lt;input type=\"text\" id=\"<var>$field</var>\" name=\"<var>$field</var>\" value=\"<var>$value</var>\" onFocus=\"showCalendar(this);\" onBlur=\"hideCalendar(this);\" /&gt;"</dfn><kbd>;
+}</kbd>
+</pre>
+
+<p>Then simply set the <samp>type</samp> of any object to <var>calendar</var> to use this input type.</p>
+
+
+
+<p>&nbsp;</p>
+
+<h1 id="Custom.Templates">Custom Templates</h1>
+<p>It is easy to customize the templates in use.  A template is simply a view, and all <var><s>$options</s></var> are passed into it directly as variables.  There are three default templates:</p>
+<ul>
+	<li>The <b>form</b> template is expected to wrap the <kbd>$rows</kbd> with a <em>form</em> element, as well as provide the submit button.</li>
+	<li>The <b>row</b> template lays out the <tt>[<var><s>$label</s></var>: <kbd>$content</kbd>]</tt> structure, where <kbd>$content</kbd> is one or more fields.  It is called for every row.</li>
+	<li>The <b>section</b> template is used specifically for labeling form sections.  It usually only uses the <kbd>$content</kbd> attribute.</li>
+</ul>
+<p>You can easily override or specify different templates in several ways:</p>
+<ul>
+	<li>You can override the default templates globally by specifying them in the options.</li>
+	<li>You can override the default form and row template when calling <dfn>render_form</dfn>.</li>
+	<li>You can override a row or section template within the <b>$fields</b> array for <dfn>render_form</dfn>.</li>
+	<li>You can override the row template when calling it manually.</li>
+</ul>
+
+
+
+<p>&nbsp;</p>
+
+<h1 id="Examples">Code Examples</h1>
+
+<p>For all examples, assume $u is a User.</p>
+
+<h3>Basic Form</h3>
+<p>This outputs a complete, ready-to-use HTML form including grouping the fields, and errors messages.</p>
+<pre>
+<kbd>echo </kbd><var>$u</var><kbd>-&gt;</kbd><var><s>render_form</s></var><kbd>(array(
+        </kbd><dfn>'id'</dfn><kbd>,
+        </kbd><samp>// Section header
+        </samp><dfn>'Contact Information' </dfn><kbd>=&gt; </kbd><dfn>'section'</dfn><kbd>,
+        </kbd><dfn>'name'</dfn><kbd>,
+        </kbd><dfn>'email'</dfn><kbd>,
+        </kbd><dfn>'phone'</dfn><kbd>,
+
+        </kbd><samp>// Section header
+        </samp><dfn>'Login Information' </dfn><kbd>=&gt; </kbd><dfn>'section'</dfn><kbd>,
+        </kbd><dfn>'username'</dfn><kbd>,
+        </kbd><dfn>'password'</dfn><kbd>,
+        </kbd><dfn>'confirm_password'</dfn><kbd>,
+
+        </kbd><samp>// Since user can only have one group, this will render out as a standard drop-down of all Groups.
+        </samp><dfn>'group'
+    </dfn><kbd>),
+    </kbd><dfn>'users/save' </dfn><samp>// form submit URL
+</samp><kbd>);</kbd>
+</pre>
+
+
+<h3>Overriding the Default Type</h3>
+<p>A simple change converts the name into a multi-line textarea.</p>
+<pre>
+<kbd>echo </kbd><var>$u</var><kbd>-&gt;</kbd><var><s>render_form</s></var><kbd>(array(
+        </kbd><dfn>'id'</dfn><kbd>,
+        </kbd><samp>// Section header
+        </samp><dfn>'Contact Information' </dfn><kbd>=&gt; </kbd><dfn>'section'</dfn><kbd>,
+        </kbd><dfn>'name' </dfn><em class="new"><kbd>=&gt; </kbd><dfn>'textarea'</dfn></em><kbd>,
+        </kbd><dfn>'email'</dfn><kbd>,
+        </kbd><dfn>'phone'</dfn><kbd>,
+
+        </kbd><samp>// Section header
+        </samp><dfn>'Login Information' </dfn><kbd>=&gt; </kbd><dfn>'section'</dfn><kbd>,
+        </kbd><dfn>'username'</dfn><kbd>,
+        </kbd><dfn>'password'</dfn><kbd>,
+        </kbd><dfn>'confirm_password'</dfn><kbd>,
+
+        </kbd><dfn>'group'
+    </dfn><kbd>),
+    </kbd><dfn>'users/save' </dfn><samp>// form submit URL
+</samp><kbd>);</kbd>
+</pre>
+
+
+<h3>Customizing the Output</h3>
+<p>Changing the label, field-level styling, changing options on a dropdown, and custom button labels are shown below.</p>
+<pre class="full">
+<em class="new"><var>$g </var><kbd>= new </kbd><var>Group</var><kbd>();
+</kbd><samp>// Don't include groups that only admins can see
+</samp><var>$g</var><kbd>-&gt;</kbd><var><u>where</u></var><kbd>(</kbd><dfn>'admin_only'</dfn><kbd>, </kbd><var><dfn>FALSE</dfn></var><kbd>)-&gt;</kbd><var><u>get</u></var><kbd>();</kbd></em><kbd>
+
+echo </kbd><var>$u</var><kbd>-&gt;</kbd><var><s>render_form</s></var><kbd>(array(
+        </kbd><dfn>'id'</dfn><kbd>,
+        </kbd><samp>// Section header
+        </samp><dfn>'Contact Information' </dfn><kbd>=&gt; </kbd><dfn>'section'</dfn><kbd>,
+
+        </kbd><samp>// Override label and size, add custom styling
+        </samp><dfn>'name' </dfn><em class="new"><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Your Name'</dfn><kbd>,
+            </kbd><dfn>'size' </dfn><kbd>=&gt; </kbd><dfn>'40'</dfn><kbd>,
+            </kbd><dfn>'style' </dfn><kbd>=&gt; </kbd><dfn>'color: Green; font-weight: bold;'
+        </dfn><kbd>)</kbd></em><kbd>,
+        </kbd><dfn>'email'</dfn><kbd>,
+        </kbd><dfn>'phone'</dfn><kbd>,
+
+        </kbd><samp>// Section header
+        </samp><dfn>'Login Information' </dfn><kbd>=&gt; </kbd><dfn>'section'</dfn><kbd>,
+        </kbd><dfn>'username'</dfn><kbd>,
+        </kbd><dfn>'password'</dfn><kbd>,
+        </kbd><dfn>'confirm_password'</dfn><kbd>,
+
+        </kbd><samp>// We want to limit the groups visible
+        </samp><dfn>'group' </dfn><em class="new"><kbd>=&gt; array(
+            </kbd><dfn>'list' </dfn><kbd>=&gt; </kbd><var>$g
+        </var><kbd>)</kbd></em><kbd>
+    ),
+    </kbd><dfn>'users/save'</dfn><em class="new"><kbd>, </kbd></em><samp>// form submit URL
+    // Customize the form</samp>
+<em class="new">    <kbd>array(</kbd><dfn>'save_button' </dfn><kbd>=&gt; </kbd><dfn>'Save this form NOW'</dfn><kbd>, </kbd><dfn>'reset_button' </dfn><kbd>=&gt; </kbd><dfn>'Clear'</dfn><kbd>)</kbd></em><kbd>
+);</kbd>
+</pre>
+
+
+<h3>Multi-Field Row</h3>
+<p>Use this format to place more than one field on a line.</p>
+<pre>
+<kbd>echo </kbd><var>$u</var><kbd>-&gt;</kbd><var><s>render_form</s></var><kbd>(array(
+        </kbd><dfn>'id'</dfn><kbd>,
+        </kbd><samp>// output:
+        // Name: [firstname] [middlename] [lastname]
+        </samp><kbd>array(
+            </kbd><dfn>'row_options' </dfn><kbd>=&gt; array(
+                </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Name' </dfn><samp>// the row's Label
+            </samp><kbd>),
+            </kbd><dfn>'firstname'</dfn><kbd>,
+            </kbd><dfn>'middlename'</dfn><kbd>,
+            </kbd><dfn>'lastname'
+        </dfn><kbd>),
+        </kbd><dfn>'email'</dfn><kbd>,
+        </kbd><samp>// ...</samp>
+</pre>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../../js/mootools.js"></script>
+<script type="text/javascript" src="../../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../../',
+			pagespath: '../',
+			last: 'extlist'
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

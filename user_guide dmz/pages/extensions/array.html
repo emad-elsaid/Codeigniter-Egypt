@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Associative Array Conversion Methods : Included Extensions : DataMapper ORM - User Guide</title>
+
+<style type="text/css" media="all">@import url('../../css/userguide.css');</style>
+<link rel="shortcut icon" type="image/png" href="../../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+<a href="../extlist.html">Included Extensions</a> &nbsp;&#8250;&nbsp;
+Associative Array Conversion Methods
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Associative Array Conversion Methods (array)</h1>
+<p class="note">To enable these methods, add <dfn>'array'</dfn> to DataMapper's config, under <strong>'extensions'</strong>.</p>
+<p>Converts an object to and from associative arrays.  The <b>to_array</b> method can be used directly with <samp>$_POST</samp> for rapid saving of HTML forms.  When combined with the <a href="htmlform.html">HTML Form Generation Methods</a>, this extension can make creating simple content mangement tools very easy.</p>
+
+<h2>to_array(<i>$fields</i>)</h2>
+<ul>
+	<li><dfn>$fields</dfn>: (Optional) If provided, only these fields will be included.  If empty or not provided, only the database columns will be included.</li>
+	<li><b>Returns</b>: An associative array containing the specified fields.</li>
+</ul>
+<p>Converts the <var>$object</var> into an associative array.  If <dfn>$fields</dfn> includes any related objects, the <samp>id</samp>s from the objects are collected into an array and stored on that key.  This method does not recursively add objects.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$u </var><kbd>= new </kbd><var>User</var><kbd>();
+</kbd><var>$u</var><kbd>-&gt;</kbd><var><u>get_by_id</u></var><kbd>(</kbd><var>$user_id</var><kbd>);
+</kbd><var>$u_array </var><kbd>= </kbd><var>$u</var><kbd>-&gt;</kbd><var><s>to_array</s></var><kbd>(array(</kbd><dfn>'id'</dfn><kbd>, </kbd><dfn>'name'</dfn><kbd>, </kbd><dfn>'email'</dfn><kbd>));</kbd>
+</pre>
+
+<h2>all_to_array(<i>$fields</i>)</h2>
+<ul>
+	<li><dfn>$fields</dfn>: (Optional) If provided, only these fields will be included.  If empty or not provided, only the database columns will be included.</li>
+	<li><b>Returns</b>: An array of associative arrays of <var>$object<kbd>-></kbd><i>all</i></var>.</li>
+</ul>
+<p>Converts <var>$object<kbd>-></kbd><i>all</i></var> into an array of associative arrays, using the <var><s>to_array</s></var> method.</p>
+
+<h2>from_array($data, <i>$fields</i>, <i>$save</i>)</h2>
+<ul>
+	<li><dfn>$data</dfn>: An associative array of key/value pairs to set on the object.</li>
+	<li><dfn>$fields</dfn>: (Optional) If provided, only these fields will be saved.  If empty or not provided, only the database columns will be saved.</li>
+	<li><dfn>$save</dfn>: (Optional) If set to <dfn>TRUE</dfn>, the object will be immediately saved.  The result of the save will be returned.  Defaults to <dfn>FALSE</dfn>.</li>
+	<li><b>Returns</b>: The result of the save, or an array of newly related objects.</li>
+</ul>
+<div class="example">
+	<h4>Example Application</h4>
+	<p>A usage example of <em>from_array</em> can be found
+	<a href="../examples/htmlform.html">in the examples section.</a></p>
+</div>
+<p>Stores values from an associative array back on the <var>$object</var>.</p>
+<p>The function works very differently if <dfn>$fields</dfn> is provided.  If <dfn>$fields</dfn> is provided, it is assumed that every field should be in the <dfn>$data</dfn> array.  If a field is missing, it is assumed to be <dfn>FALSE</dfn> (like an HTML checkbox), or an empty array (for related items).</p>
+<p>You can include <var><i>$has_one</i></var> or <var><i>$has_many</i></var> relationships.  In this case, the data should be one or more <strong>id</strong>s (multiple items should be in an array).  <strong>The method will delete any missing items</strong>, and either return or save the new items.</p>
+<p class="important"><strong><em>Warning:</em></strong> This method assumes you are going to save immediately afterward.  When including related objects in the fields array, please make sure you are inside a transaction, to prevent data loss if an error occurs.</p>
+
+<h3>Simple Usage</h3>
+<pre>
+<var>$data </var><kbd>= array(
+    </kbd><dfn>'message' </dfn><kbd>=&gt; </kbd><dfn>'Hello World'</dfn><kbd>,
+    </kbd><dfn>'date' </dfn><kbd>=&gt; </kbd><var><b>time</b></var><kbd>()
+);
+
+</kbd><samp>// create a blank note
+</samp><var>$n </var><kbd>= new </kbd><var>Note</var><kbd>();
+
+</kbd><samp>// save the new note automatically
+</samp><kbd>if(</kbd><var>$n</var><kbd>-&gt;</kbd><var><s>from_array</s></var><kbd>(</kbd><var>$data</var><kbd>, </kbd><dfn>''</dfn><kbd>, </kbd><var><dfn>TRUE</dfn></var><kbd>))
+{
+    </kbd><samp>// redirect after save
+</samp><kbd>}
+else
+{
+    </kbd><var>show_error</var><kbd>(</kbd><dfn>'Invalid input'</dfn><kbd>);
+}</kbd>
+</pre>
+
+<h3>Quickly Saving Form Data</h3>
+<pre>
+<var>$n </var><kbd>= new </kbd><var>Note</var><kbd>();
+</kbd><samp>// It is highly recommended you load the note before saving.
+</samp><var>$n</var><kbd>-&gt;</kbd><var><u>get_by_id</u></var><kbd>(</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>input</var><kbd>-&gt;</kbd><var>post</var><kbd>(</kbd><dfn>'id'</dfn><kbd>));
+
+</kbd><var>$related </var><kbd>= </kbd><var>$n</var><kbd>-&gt;</kbd><var><s>from_array</s></var><kbd>(</kbd><var><b>$_POST</b></var><kbd>, array(</kbd><dfn>'message'</dfn><kbd>, </kbd><dfn>'date'</dfn><kbd>, </kbd><dfn>'category'</dfn><kbd>));
+</kbd><samp>// $related includes any new categories that need to be saved.  At this point, $n may have had some old categories deleted.
+
+// add a related editor
+</samp><var>$related</var><kbd>[</kbd><dfn>'editor'</dfn><kbd>] = </kbd><var>$logged_in_user</var><kbd>;
+
+</kbd><samp>// save with the related objects
+</samp><kbd>if(</kbd><var>$n</var><kbd>-&gt;</kbd><var><u>save</u></var><kbd>(</kbd><var>$related</var><kbd>))
+{
+    </kbd><samp>// redirect after save
+</samp><kbd>}
+else
+{
+    </kbd><var>show_error</var><kbd>(</kbd><dfn>'Invalid input'</dfn><kbd>);
+}</kbd>
+</pre>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../../js/mootools.js"></script>
+<script type="text/javascript" src="../../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../../',
+			pagespath: '../',
+			last: 'extlist'
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

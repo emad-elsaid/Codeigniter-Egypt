@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Counting : DataMapper ORM - User Guide</title>
+
+<link rel="shortcut icon" type="image/png" href="../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Counting
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Counting</h1>
+<p>There are several methods available to get the number of rows or results in a query.</p>
+
+
+
+<h4>Subsections:</h4>
+<ul>
+	<li><a href="#result_count">result_count</a> - Number of rows after a query has already been run.</li>
+	<li><a href="#count">count</a> - Run a <var>COUNT(*)</var> query.
+		<ul><li><a href="#Excluding.Ids">Excluding IDs from the Count</a></li></ul>
+	</li>
+	<li><a href="#count_disinct">count_disinct</a> - Run a <var>COUNT( DISTINCT id)</var> query.</li>
+	<li><a href="#Counting.Related">Counting Related Items</a> - Getting the number of related items.
+		<ul><li><a href="#Including.Related.Count">Including a Related Count</a></li></ul>
+	</li>
+	<li><a href="#is_related_to">is_related_to</a> - Seeing if two existing objects are related</li>
+</ul>
+
+<h2 id="result_count">$object->result_count()</h2>
+<p>Returns the number of results from the last <var><u>get</u></var>.  This is the recommended way of counting the number of results from a query.</p>
+<p>This is a simple convenience method for <var><u>count</u></var><kbd>(</kbd><var>$object</var><kbd>-&gt;</kbd><var><i>all</i></var><kbd>)</kbd>,
+	but it also returns the number of rows when using <var><u>get_iterated</u></var>.</p>
+<p>The main purpose of this method is that it makes for easy switching between a normal <a href="get.html#get">get</a> and <a href="getalt.html#get_iterated">get_iterated</a>.</p>
+
+<h2 id="count">$object->count()</h2>
+<p>Count has a different result depending on the object you use it on and whether you have setup any query clauses. If you use it directly on an object, it returns the total number of records of that object type, that you have in the database. For example, let's say we have 10 users:</p>
+<pre>
+<samp>// Create user object
+</samp><var>$u </var><kbd>= new </kbd><var>User</var><kbd>();
+
+</kbd><samp>// Outputs: 10
+</samp><kbd>echo </kbd><var>$u</var><kbd>-&gt;</kbd><var><u>count</u></var><kbd>();</kbd>
+</pre>
+
+
+<p>Now, lets say you wanted to get a specific count of only active users, and we knew we only had 7 of them.  You can use query clauses to help with this.  For example:</p>
+<pre>
+<samp>// Create user object
+</samp><var>$u </var><kbd>= new </kbd><var>User</var><kbd>();
+
+</kbd><samp>// Outputs: 7
+</samp><kbd>echo </kbd><var>$u</var><kbd>-&gt;</kbd><var><u>where</u></var><kbd>(</kbd><dfn>'active'</dfn><kbd>, </kbd><var><dfn>TRUE</dfn></var><kbd>)-&gt;</kbd><var><u>count</u></var><kbd>();</kbd>
+</pre>
+
+
+<p>Count behaves slightly differently when used on a related object, as the count will be based on the total number of related records. For example, let's say we wanted to see how many active Users were in the Moderator Group:</p>
+<pre>
+<samp>// Create user object
+</samp><var>$u </var><kbd>= new </kbd><var>User</var><kbd>();
+
+</kbd><samp>// Create group object
+</samp><var>$g </var><kbd>= new </kbd><var>Group</var><kbd>();
+</kbd><var>$g</var><kbd>-&gt;</kbd><var><u>get_by_name</u></var><kbd>(</kbd><dfn>'Moderator'</dfn><kbd>);
+
+</kbd><samp>// Outputs: 2 out of 7 users are moderators.
+</samp><kbd>echo </kbd><var>$g</var><kbd>-&gt;</kbd><var>user</var><kbd>-&gt;</kbd><var><u>where</u></var><kbd>(</kbd><dfn>'active'</dfn><kbd>, </kbd><var><dfn>TRUE</dfn></var><kbd>)-&gt;</kbd><var><u>count</u></var><kbd>() . </kbd><dfn>' out of ' </dfn><kbd>. </kbd><var>$u</var><kbd>-&gt;</kbd><var><u>where</u></var><kbd>(</kbd><dfn>'active'</dfn><kbd>, </kbd><var><dfn>TRUE</dfn></var><kbd>)-&gt;</kbd><var><u>count</u></var><kbd>() . </kbd><dfn>' ' </dfn><kbd>. </kbd><var>plural</var><kbd>(</kbd><var>$u</var><kbd>) . </kbd><dfn>' are ' </dfn><kbd>. </kbd><var>plural</var><kbd>(</kbd><var>$g</var><kbd>) . </kbd><dfn>'.'</dfn><kbd>;</kbd>
+</pre>
+
+<div class="highlight" id="Excluding.Ids">
+	<h3>Excluding IDs from the Count</h3>
+	<p>If you want to count all objects <i>except</i> one or more IDs, <var><u>count</u></var> can accept an optional array of IDs to exclude.</p>
+	<p>Continuing from above, lets say that we want all active users, except user #1 and user #2:</p>
+<pre>
+<samp>// Create user object
+</samp><var>$u </var><kbd>= new </kbd><var>User</var><kbd>();
+
+</kbd><samp>// We want to exclude these users from the result
+</samp><var>$excluded_ids </var><kbd>= array(</kbd><var>1</var><kbd>, </kbd><var>2</var><kbd>);
+
+</kbd><samp>// Outputs: 5
+</samp><kbd>echo </kbd><var>$u</var><kbd>-&gt;</kbd><var><u>where</u></var><kbd>(</kbd><dfn>'active'</dfn><kbd>, </kbd><var><dfn>TRUE</dfn></var><kbd>)-&gt;</kbd><var><u>count</u></var><kbd>(</kbd><var>$excluded_ids</var><kbd>);</kbd>
+</pre>
+
+	<p>This works even if ids in the list were not in the result set, so you can exclude users that may or may not be active.</p>
+</div>
+
+<h2 id="count_distinct">$object->count_distinct()</h2>
+<p>If you know your query may have duplicate rows, you can use <var><u>count_distinct</u></var> to only count distinct rows.</p>
+<p>
+	This method accepts the same <var>$exclude_ids</var> parameter as count.
+	It also has a second parameter, which is <em>rarely</em> needed, but allows you to override the distinct column.  (By default, <var>id</var>.)
+</p>
+<p class="note">
+	<strong><em>Note:</em></strong> <tt>COUNT(DISTINCT `id`)</tt> is not supported on all databases.
+	Please make sure your database supports this function.
+</p>
+
+
+<h2 id="Counting.Related">Counting related items</h2>
+<p>If you just want the number of related items for an already retrieved object, you can use <var><u>count</u></var> like above:</p>
+<pre>
+<var>$user </var><kbd>= new </kbd><var>User</var><kbd>(</kbd><var>$user_id</var><kbd>);
+</kbd><var>$number_of_bugs </var><kbd>= </kbd><var>$user</var><kbd>-&gt;</kbd><var>bug</var><kbd>-&gt;</kbd><var><u>count</u></var><kbd>();</kbd>
+</pre>
+
+<div class="highlight">
+	<h3 id="Including.Related.Count">Including a Related Count</h3>
+	<p>If you want to get the related count in the same query as the parent object, please see <a href="getadvanced.html#include_related_count">include_related_count</a>.</p>
+</div>
+
+<h2 id="is_related_to">$object->is_related_to($related, <em>$id</em>)</h2>
+<p>If you want to check to see if two objects are related in the database, you can use this convenience method.</p>
+<p>You can call it either with an already-retrieved object, or with just the relationship name and ID.</p>
+
+<h3>Already Retrieved Object</h3>
+<pre>
+<var>$group </var><kbd>= new </kbd><var>Group</var><kbd>(</kbd><var>$group_id</var><kbd>);
+</kbd><var>$user </var><kbd>= new </kbd><var>User</var><kbd>(</kbd><var>$user_id</var><kbd>);
+
+</kbd><samp>// Is this user already in the group?
+</samp><kbd>if(</kbd><var>$group</var><kbd>-&gt;</kbd><var><u>is_related_to</u></var><kbd>(</kbd><var>$user</var><kbd>)) {
+    </kbd><samp>// do something
+</samp><kbd>}</kbd>
+</pre>
+
+<h3>Using the Related Field</h3>
+<pre>
+<var>$user </var><kbd>= new </kbd><var>User</var><kbd>(</kbd><var>$user_id</var><kbd>);
+
+if(</kbd><var>$user</var><kbd>-&gt;</kbd><var><u>is_related_to</u></var><kbd>(</kbd><dfn>'group'</dfn><kbd>, </kbd><var>$group_id</var><kbd>)) {
+    </kbd><samp>// do something
+</samp><kbd>}</kbd>
+</pre>
+
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagespath: ''
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

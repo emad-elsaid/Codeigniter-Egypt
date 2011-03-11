@@ -1,0 +1,745 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Getting Started : DataMapper ORM - User Guide</title>
+
+<link rel="shortcut icon" type="image/png" href="../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Getting Started
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Getting Started</h1>
+
+<p>The first step is to <a href="installation.html">install</a> Datamapper ORM, then read
+all the topics in the <strong>General Topics</strong> section of the Table of Contents.  You should read them in order as each topic builds on the previous one, and may include code examples that you are encouraged to try.</p>
+
+<p>Once you understand the basics you'll be ready to explore the magic that is <b>DataMapper ORM</b>. Below is a glimpse of what's to come!</p>
+
+<h2>Models</h2>
+
+<p>Here's a simple example of a few DataMapper models setup with relationships between each other.  DataMapper models do the work of transforming your Database tables into easy to use objects.  Further down in the Controllers section, you'll see just how easy it is to use them.</p>
+
+<h3>User</h3>
+
+<pre class="full"><div class="lineNums"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79</div><var>&lt;?php
+
+</var><kbd>class </kbd><var>User </var><kbd>extends </kbd><var><u>DataMapper</u> </var><kbd>{
+
+    var </kbd><var><i>$has_many</i> </var><kbd>= array(</kbd><dfn>'book'</dfn><kbd>);
+    var </kbd><var><i>$has_one</i> </var><kbd>= array(</kbd><dfn>'country'</dfn><kbd>);
+
+    var </kbd><var><i>$validation</i> </var><kbd>= array(
+        </kbd><dfn>'username' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Username'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'unique'</dfn><kbd>, </kbd><dfn>'alpha_dash'</dfn><kbd>, </kbd><dfn>'min_length' </dfn><kbd>=&gt; </kbd><var>3</var><kbd>, </kbd><dfn>'max_length' </dfn><kbd>=&gt; </kbd><var>20</var><kbd>),
+        ),
+        </kbd><dfn>'password' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Password'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'min_length' </dfn><kbd>=&gt; </kbd><var>6</var><kbd>, </kbd><dfn>'encrypt'</dfn><kbd>),
+        ),
+        </kbd><dfn>'confirm_password' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Confirm Password'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'encrypt'</dfn><kbd>, </kbd><dfn>'matches' </dfn><kbd>=&gt; </kbd><dfn>'password'</dfn><kbd>),
+        ),
+        </kbd><dfn>'email' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Email Address'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'valid_email'</dfn><kbd>)
+        )
+    );
+
+    function </kbd><var>login</var><kbd>()
+    {
+        </kbd><samp>// Create a temporary user object
+        </samp><var>$u </var><kbd>= new </kbd><var>User</var><kbd>();
+
+        </kbd><samp>// Get this users stored record via their username
+        </samp><var>$u</var><kbd>-&gt;</kbd><var><u>where</u></var><kbd>(</kbd><dfn>'username'</dfn><kbd>, </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>username</var><kbd>)-&gt;</kbd><var><u>get</u></var><kbd>();
+
+        </kbd><samp>// Give this user their stored salt
+        </samp><var><b>$this</b></var><kbd>-&gt;</kbd><var>salt </var><kbd>= </kbd><var>$u</var><kbd>-&gt;</kbd><var>salt</var><kbd>;
+
+        </kbd><samp>// Validate and get this user by their property values,
+        // this will see the 'encrypt' validation run, encrypting the password with the salt
+        </samp><var><b>$this</b></var><kbd>-&gt;</kbd><var><u>validate</u></var><kbd>()-&gt;</kbd><var><u>get</u></var><kbd>();
+
+        </kbd><samp>// If the username and encrypted password matched a record in the database,
+        // this user object would be fully populated, complete with their ID.
+
+        // If there was no matching record, this user would be completely cleared so their id would be empty.
+        </samp><kbd>if (empty(</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>id</var><kbd>))
+        {
+            </kbd><samp>// Login failed, so set a custom error message
+            </samp><var><b>$this</b></var><kbd>-&gt;</kbd><var><u>error_message</u></var><kbd>(</kbd><dfn>'login'</dfn><kbd>, </kbd><dfn>'Username or password invalid'</dfn><kbd>);
+
+            return </kbd><var><dfn>FALSE</dfn></var><kbd>;
+        }
+        else
+        {
+            </kbd><samp>// Login succeeded
+            </samp><kbd>return </kbd><var><dfn>TRUE</dfn></var><kbd>;
+        }
+    }
+
+    </kbd><samp>// Validation prepping function to encrypt passwords
+    // If you look at the $validation array, you will see the password field will use this function
+    </samp><kbd>function </kbd><var>_encrypt</var><kbd>(</kbd><var>$field</var><kbd>)
+    {
+        </kbd><samp>// Don't encrypt an empty string
+        </samp><kbd>if (!empty(</kbd><var><b>$this</b></var><kbd>-&gt;{</kbd><var>$field</var><kbd>}))
+        {
+            </kbd><samp>// Generate a random salt if empty
+            </samp><kbd>if (empty(</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>salt</var><kbd>))
+            {
+                </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>salt </var><kbd>= </kbd><var><b>md5</b></var><kbd>(</kbd><var><b>uniqid</b></var><kbd>(</kbd><var><b>rand</b></var><kbd>(), </kbd><var><dfn>true</dfn></var><kbd>));
+            }
+
+            </kbd><var><b>$this</b></var><kbd>-&gt;{</kbd><var>$field</var><kbd>} = </kbd><var><b>sha1</b></var><kbd>(</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>salt </var><kbd>. </kbd><var><b>$this</b></var><kbd>-&gt;{</kbd><var>$field</var><kbd>});
+        }
+    }
+}
+
+</kbd><samp>/* End of file user.php */
+/* Location: ./application/models/user.php */</samp>
+</pre>
+
+
+<h3>Country</h3>
+<pre><div class="lineNums"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</div><var>&lt;?php
+
+</var><kbd>class </kbd><var>Country </var><kbd>extends </kbd><var><u>DataMapper</u> </var><kbd>{
+
+    var </kbd><var><i>$table</i> </var><kbd>= </kbd><dfn>'countries'</dfn><kbd>;
+
+    var </kbd><var><i>$has_many</i> </var><kbd>= array(</kbd><dfn>'user'</dfn><kbd>);
+
+    var </kbd><var><i>$validation</i> </var><kbd>= array(
+        </kbd><dfn>'name' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Country'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'unique'</dfn><kbd>, </kbd><dfn>'alpha_dash'</dfn><kbd>, </kbd><dfn>'min_length' </dfn><kbd>=&gt; </kbd><var>1</var><kbd>, </kbd><dfn>'max_length' </dfn><kbd>=&gt; </kbd><var>50</var><kbd>),
+        );
+}
+
+</kbd><samp>/* End of file country.php */
+/* Location: ./application/models/country.php */</samp>
+</pre>
+
+<h3>Book</h3>
+<pre class="full"><div class="lineNums"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</div><var>&lt;?php
+
+</var><kbd>class </kbd><var>Book </var><kbd>extends </kbd><var><u>DataMapper</u> </var><kbd>{
+
+    var </kbd><var><i>$has_many</i> </var><kbd>= array(</kbd><dfn>'user'</dfn><kbd>);
+
+    var </kbd><var><i>$validation</i> </var><kbd>= array(
+        </kbd><dfn>'title' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Title'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'unique'</dfn><kbd>, </kbd><dfn>'alpha_dash'</dfn><kbd>, </kbd><dfn>'min_length' </dfn><kbd>=&gt; </kbd><var>1</var><kbd>, </kbd><dfn>'max_length' </dfn><kbd>=&gt; </kbd><var>50</var><kbd>),
+        ),
+        </kbd><dfn>'description' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Description'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'alpha_slash_dot'</dfn><kbd>, </kbd><dfn>'min_length' </dfn><kbd>=&gt; </kbd><var>10</var><kbd>, </kbd><dfn>'max_length' </dfn><kbd>=&gt; </kbd><var>200</var><kbd>),
+        ),
+        </kbd><dfn>'year' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Year'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'numeric'</dfn><kbd>, </kbd><dfn>'exact_length' </dfn><kbd>=&gt; </kbd><var>4</var><kbd>),
+        )
+    );
+}
+
+</kbd><samp>/* End of file book.php */
+/* Location: ./application/models/book.php */</samp>
+</pre>
+
+
+
+<h2>Controllers</h2>
+
+<p>Here's a quick example of a Controller handling the creation of a user, setting up and accessing some related objects, and logging a user in.  To keep it simple, we'll echo the results from the Controller rather than setting up a View.</p>
+
+<h3>Users</h3>
+
+<pre class="full"><div class="lineNums">  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191</div><var>&lt;?php
+
+</var><kbd>class </kbd><var>Users </var><kbd>extends </kbd><var><b>Controller</b> </var><kbd>{
+
+    function </kbd><var>Users</var><kbd>()
+    {
+        </kbd><var><dfn>parent</dfn></var><kbd>::</kbd><var><b>Controller</b></var><kbd>();
+    }
+
+    function </kbd><var>index</var><kbd>()
+    {
+        </kbd><samp>// Let's create a user
+        </samp><var>$u </var><kbd>= new </kbd><var>User</var><kbd>();
+        </kbd><var>$u</var><kbd>-&gt;</kbd><var>username </var><kbd>= </kbd><dfn>'Fred Smith'</dfn><kbd>;
+        </kbd><var>$u</var><kbd>-&gt;</kbd><var>password </var><kbd>= </kbd><dfn>'apples'</dfn><kbd>;
+        </kbd><var>$u</var><kbd>-&gt;</kbd><var>email </var><kbd>= </kbd><dfn>'fred@smith.com'</dfn><kbd>;
+
+        </kbd><samp>// And save them to the database (validation rules will run)
+        </samp><kbd>if (</kbd><var>$u</var><kbd>-&gt;</kbd><var><u>save</u></var><kbd>())
+        {
+            </kbd><samp>// User object now has an ID
+            </samp><kbd>echo </kbd><dfn>'ID: ' </dfn><kbd>. </kbd><var>$u</var><kbd>-&gt;</kbd><var>id </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+            echo </kbd><dfn>'Username: ' </dfn><kbd>. </kbd><var>$u</var><kbd>-&gt;</kbd><var>username </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+            echo </kbd><dfn>'Email: ' </dfn><kbd>. </kbd><var>$u</var><kbd>-&gt;</kbd><var>email </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+
+            </kbd><samp>// Not that we'd normally show the password, but when we do, you'll see it has been automatically encrypted
+            // since the User model is setup with an encrypt rule in the $validation array for the password field
+            </samp><kbd>echo </kbd><dfn>'Password: ' </dfn><kbd>. </kbd><var>$u</var><kbd>-&gt;</kbd><var>password </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+        }
+        else
+        {
+            </kbd><samp>// If validation fails, we can show the error for each property
+            </samp><kbd>echo </kbd><var>$u</var><kbd>-&gt;</kbd><var><i>error</i></var><kbd>-&gt;</kbd><var>username</var><kbd>;
+            echo </kbd><var>$u</var><kbd>-&gt;</kbd><var><i>error</i></var><kbd>-&gt;</kbd><var>password</var><kbd>;
+            echo </kbd><var>$u</var><kbd>-&gt;</kbd><var><i>error</i></var><kbd>-&gt;</kbd><var>email</var><kbd>;
+
+            </kbd><samp>// or we can loop through the error's all list
+            </samp><kbd>foreach (</kbd><var>$u</var><kbd>-&gt;</kbd><var><i>error</i></var><kbd>-&gt;</kbd><var><i>all</i> </var><kbd>as </kbd><var>$error</var><kbd>)
+            {
+                echo </kbd><var>$error</var><kbd>;
+            }
+
+            </kbd><samp>// or we can just show all errors in one string!
+            </samp><kbd>echo </kbd><var>$u</var><kbd>-&gt;</kbd><var><i>error</i></var><kbd>-&gt;</kbd><var>string</var><kbd>;
+
+            </kbd><samp>// Each individual error is automatically wrapped with an error_prefix and error_suffix, which you can change (default: &lt;p&gt;error message&lt;/p&gt;)
+        </samp><kbd>}
+
+        </kbd><samp>// Let's now get the first 5 books from our database
+        </samp><var>$b </var><kbd>= new </kbd><var>Book</var><kbd>();
+        </kbd><var>$b</var><kbd>-&gt;</kbd><var><u>limit</u></var><kbd>(</kbd><var>5</var><kbd>)-&gt;</kbd><var><u>get</u></var><kbd>();
+
+        </kbd><samp>// Let's look at the first book
+        </samp><kbd>echo </kbd><dfn>'ID: ' </dfn><kbd>. </kbd><var>$b</var><kbd>-&gt;</kbd><var>id </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+        echo </kbd><dfn>'Name: ' </dfn><kbd>. </kbd><var>$b</var><kbd>-&gt;</kbd><var>title </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+        echo </kbd><dfn>'Description: ' </dfn><kbd>. </kbd><var>$b</var><kbd>-&gt;</kbd><var>description </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+        echo </kbd><dfn>'Year: ' </dfn><kbd>. </kbd><var>$b</var><kbd>-&gt;</kbd><var>year </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+
+        </kbd><samp>// Now let's look through all of them
+        </samp><kbd>foreach (</kbd><var>$b</var> <kbd>as </kbd><var>$book</var><kbd>)
+        {
+            echo </kbd><dfn>'ID: ' </dfn><kbd>. </kbd><var>$book</var><kbd>-&gt;</kbd><var>id </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+            echo </kbd><dfn>'Name: ' </dfn><kbd>. </kbd><var>$book</var><kbd>-&gt;</kbd><var>title </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+            echo </kbd><dfn>'Description: ' </dfn><kbd>. </kbd><var>$book</var><kbd>-&gt;</kbd><var>description </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+            echo </kbd><dfn>'Year: ' </dfn><kbd>. </kbd><var>$book</var><kbd>-&gt;</kbd><var>year </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+            echo </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+        }
+
+        </kbd><samp>// Let's relate the user to these books
+        </samp><var>$u</var><kbd>-&gt;</kbd><var><u>save</u></var><kbd>(</kbd><var>$b</var><kbd>-&gt;</kbd><var><i>all</i></var><kbd>);
+
+        </kbd><samp>// Yes, it's as simple as that!  You can add relations in several ways, even different types of relations at the same time
+
+        // Get the Country with an ID of 10
+        </samp><var>$c </var><kbd>= new </kbd><var>Country</var><kbd>();
+        </kbd><var>$c</var><kbd>-&gt;</kbd><var><u>where</u></var><kbd>(</kbd><dfn>'id'</dfn><kbd>, </kbd><var>10</var><kbd>)-&gt;</kbd><var><u>get</u></var><kbd>();
+
+        </kbd><samp>// Get all Books from the year 2000
+        </samp><var>$b </var><kbd>= new </kbd><var>Book</var><kbd>();
+        </kbd><var>$b</var><kbd>-&gt;</kbd><var><u>where</u></var><kbd>(</kbd><dfn>'year'</dfn><kbd>, </kbd><var>2000</var><kbd>)-&gt;</kbd><var><u>get</u></var><kbd>();
+
+        </kbd><samp>// Relate the user to them
+        </samp><var>$u</var><kbd>-&gt;</kbd><var><u>save</u></var><kbd>(array(</kbd><var>$c</var><kbd>, </kbd><var>$b</var><kbd>-&gt;</kbd><var><i>all</i></var><kbd>));
+
+        </kbd><samp>// Now let's access those relations from the user
+
+        // First we'll get all related books
+        </samp><var>$u</var><kbd>-&gt;</kbd><var>book</var><kbd>-&gt;</kbd><var><u>get</u></var><kbd>();
+
+        </kbd><samp>// You can just show the first related book
+        </samp><kbd>echo </kbd><dfn>'ID: ' </dfn><kbd>. </kbd><var>$u</var><kbd>-&gt;</kbd><var>book</var><kbd>-&gt;</kbd><var>id </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+        echo </kbd><dfn>'Name: ' </dfn><kbd>. </kbd><var>$u</var><kbd>-&gt;</kbd><var>book</var><kbd>-&gt;</kbd><var>title </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+        echo </kbd><dfn>'Description: ' </dfn><kbd>. </kbd><var>$u</var><kbd>-&gt;</kbd><var>book</var><kbd>-&gt;</kbd><var>description </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+        echo </kbd><dfn>'Year: ' </dfn><kbd>. </kbd><var>$u</var><kbd>-&gt;</kbd><var>book</var><kbd>-&gt;</kbd><var>year </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+
+        </kbd><samp>// Or if you're expecting more than one, which we are, loop through all the books!
+        </samp><kbd>foreach (</kbd><var>$u</var><kbd>-&gt;</kbd><var>book</var> <kbd>as </kbd><var>$book</var><kbd>)
+        {
+            echo </kbd><dfn>'ID: ' </dfn><kbd>. </kbd><var>$book</var><kbd>-&gt;</kbd><var>id </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+            echo </kbd><dfn>'Name: ' </dfn><kbd>. </kbd><var>$book</var><kbd>-&gt;</kbd><var>title </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+            echo </kbd><dfn>'Description: ' </dfn><kbd>. </kbd><var>$book</var><kbd>-&gt;</kbd><var>description </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+            echo </kbd><dfn>'Year: ' </dfn><kbd>. </kbd><var>$book</var><kbd>-&gt;</kbd><var>year </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+            echo </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+
+            </kbd><samp>// And there's no need to stop there,
+            // we can see what other users are related to each book! (and you can chain the get() of related users if you don't want to do it on its own, before the loop)
+            </samp><kbd>foreach (</kbd><var>$book</var><kbd>-&gt;</kbd><var>user</var><kbd>-&gt;</kbd><var><u>get</u></var><kbd>() </kbd><kbd>as </kbd><var>$user</var><kbd>)
+            {
+                </kbd><samp>// Show user if it's not the original user as we want to show him the other users
+                </samp><kbd>if (</kbd><var>$user</var><kbd>-&gt;</kbd><var>id </var><kbd>!= </kbd><var>$u</var><kbd>-&gt;</kbd><var>id</var><kbd>)
+                {
+                    echo </kbd><dfn>'User ' </dfn><kbd>. </kbd><var>$user</var><kbd>-&gt;</kbd><var>username </var><kbd>. </kbd><dfn>' also likes this book&lt;br &gt;'</dfn><kbd>;
+                }
+            }
+        }
+
+        </kbd><samp>// We know there was only one country so we'll access the first record rather than loop through $u-&gt;country-&gt;all
+
+        // Get related country
+        </samp><var>$u</var><kbd>-&gt;</kbd><var>country</var><kbd>-&gt;</kbd><var><u>get</u></var><kbd>();
+
+        echo </kbd><dfn>'User is from Country: ' </dfn><kbd>. </kbd><var>$u</var><kbd>-&gt;</kbd><var>country</var><kbd>-&gt;</kbd><var>name </var><kbd>. </kbd><dfn>'&lt;br /&gt;'</dfn><kbd>;
+
+        </kbd><samp>// One of the great things about related records is that they're only loaded when you access them!
+
+        // Lets say the user no longer likes the first book from his year 2000 list, removing that relation is as easy as adding one!
+
+        // This will remove the users relation to the first record in the $b object (supplying $b-&gt;all would remove relations to all books in the books current all list)
+        </samp><var>$u</var><kbd>-&gt;</kbd><var><u>delete</u></var><kbd>(</kbd><var>$b</var><kbd>);
+
+        </kbd><samp>// You can delete multiple relations of different types in the same way you can save them
+
+        // Now that we're done with the user, let's delete him
+        </samp><var>$u</var><kbd>-&gt;</kbd><var><u>delete</u></var><kbd>();
+
+        </kbd><samp>// When you delete the user, you delete all his relations with other objects.  DataMapper does all the tidying up for you :)
+    </samp><kbd>}
+
+    function </kbd><var>register</var><kbd>()
+    {
+        </kbd><samp>// Create user object
+        </samp><var>$u </var><kbd>= new </kbd><var>User</var><kbd>();
+
+        </kbd><samp>// Put user supplied data into user object
+        // (no need to validate the post variables in the controller,
+        // if you've set your DataMapper models up with validation rules)
+        </samp><var>$u</var><kbd>-&gt;</kbd><var>username </var><kbd>= </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>input</var><kbd>-&gt;</kbd><var>post</var><kbd>(</kbd><dfn>'username'</dfn><kbd>);
+        </kbd><var>$u</var><kbd>-&gt;</kbd><var>password </var><kbd>= </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>input</var><kbd>-&gt;</kbd><var>post</var><kbd>(</kbd><dfn>'password'</dfn><kbd>);
+        </kbd><var>$u</var><kbd>-&gt;</kbd><var>confirm_password </var><kbd>= </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>input</var><kbd>-&gt;</kbd><var>post</var><kbd>(</kbd><dfn>'confirm_password'</dfn><kbd>);
+        </kbd><var>$u</var><kbd>-&gt;</kbd><var>email </var><kbd>= </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>input</var><kbd>-&gt;</kbd><var>post</var><kbd>(</kbd><dfn>'email'</dfn><kbd>);
+
+        </kbd><samp>// Attempt to save the user into the database
+        </samp><kbd>if (</kbd><var>$u</var><kbd>-&gt;</kbd><var><u>save</u></var><kbd>())
+        {
+            echo </kbd><dfn>'&lt;p&gt;You have successfully registered&lt;/p&gt;'</dfn><kbd>;
+        }
+        else
+        {
+            </kbd><samp>// Show all error messages
+            </samp><kbd>echo </kbd><dfn>'&lt;p&gt;' </dfn><kbd>. </kbd><var>$u</var><kbd>-&gt;</kbd><var><i>error</i></var><kbd>-&gt;</kbd><var>string </var><kbd>. </kbd><dfn>'&lt;/p&gt;'</dfn><kbd>;
+        }
+    }
+
+    function </kbd><var>login</var><kbd>()
+    {
+        </kbd><samp>// Create user object
+        </samp><var>$u </var><kbd>= new </kbd><var>User</var><kbd>();
+
+        </kbd><samp>// Put user supplied data into user object
+        // (no need to validate the post variables in the controller,
+        // if you've set your DataMapper models up with validation rules)
+        </samp><var>$u</var><kbd>-&gt;</kbd><var>username </var><kbd>= </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>input</var><kbd>-&gt;</kbd><var>post</var><kbd>(</kbd><dfn>'username'</dfn><kbd>);
+        </kbd><var>$u</var><kbd>-&gt;</kbd><var>password </var><kbd>= </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>input</var><kbd>-&gt;</kbd><var>post</var><kbd>(</kbd><dfn>'password'</dfn><kbd>);
+
+        </kbd><samp>// Attempt to log user in with the data they supplied, using the login function setup in the User model
+        // You might want to have a quick look at that login function up the top of this page to see how it authenticates the user
+        </samp><kbd>if (</kbd><var>$u</var><kbd>-&gt;</kbd><var>login</var><kbd>())
+        {
+            echo </kbd><dfn>'&lt;p&gt;Welcome ' </dfn><kbd>. </kbd><var>$u</var><kbd>-&gt;</kbd><var>username </var><kbd>. </kbd><dfn>'!&lt;/p&gt;'</dfn><kbd>;
+            echo </kbd><dfn>'&lt;p&gt;You have successfully logged in so now we know that your email is ' </dfn><kbd>. </kbd><var>$u</var><kbd>-&gt;</kbd><var>email </var><kbd>. </kbd><dfn>'.&lt;/p&gt;'</dfn><kbd>;
+        }
+        else
+        {
+            </kbd><samp>// Show the custom login error message
+            </samp><kbd>echo </kbd><dfn>'&lt;p&gt;' </dfn><kbd>. </kbd><var>$u</var><kbd>-&gt;</kbd><var><i>error</i></var><kbd>-&gt;</kbd><var>login </var><kbd>. </kbd><dfn>'&lt;/p&gt;'</dfn><kbd>;
+        }
+    }
+}
+
+</kbd><samp>/* End of file users.php */
+/* Location: ./application/controllers/users.php */</samp>
+</pre>
+
+
+<br />
+
+<h2>Cool huh?</h2>
+<p>I hope that's enough to wet your appetite!  It's hard to show the full benefits of DataMapper in one simple page but I'm sure you've glimpsed the power DataMapper can give you and in such a simple and logical way!</p>
+<p>Please continue on with the General Topics to learn more.</p>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagespath: ''
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

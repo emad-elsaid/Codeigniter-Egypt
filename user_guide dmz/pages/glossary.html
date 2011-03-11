@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Glossary : DataMapper ORM - User Guide</title>
+
+<link rel="shortcut icon" type="image/png" href="../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Glossary
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Glossary</h1>
+<p>Definitions of some terms used throughout the docs.</p>
+
+<dl>
+	<dt><a name="Advanced.Relationship">Advanced Relationship</a></dt>
+	<dd>
+		<p>A relationship between two objects that is more complicated than the traditional DataMapper relationship.  This includes multiple relationships between the same two objects, and self-relationships.</p>
+		<p class="see">See: <a href="advancedrelations.html">Advanced Relationships</a></p>
+	</dd>
+
+	<dt><a name="Deep.Relationship">Deep Relationship</a></dt>
+	<dd>
+		<p>A deep relationship is any object that is not related <em>directly</em> to the current object.  It is usually specified as a string in the format <dfn>'direct<var><u>/indirect</u></var><var><i>/indirect</i></var><var><i>/...</i></var>'</dfn>.</p>
+		<p class="see">See: <a href="getadvanced.html">Get (Advanced)</a></p>
+	</dd>
+
+	<dt><a name="DMZ">DMZ</a></dt>
+	<dd>
+		<p>Short for <u>D</u>ata<u>M</u>apper Over<u>Z</u>ealous Edition.  The version on which Datamapper ORM continues to build.</p>
+	</dd>
+
+	<dt><a name="Extension">Extension</a></dt>
+	<dd>
+		<p>A class that can be used to add functionality to Datamapper ORM without modifying the source code.</p>
+		<p class="see">See: <a href="extensions.html">Extensions</a>, <a href="extlist.html">Included Extensions</a></p>
+	</dd>
+
+	<dt><a name="Has.Many">Has Many ($has_many)</a></dt>
+	<dd>
+		<p>A relationship where there can be more than one of the related objects.</p>
+		<p class="see">See: <a href="database.html">Database Tables</a>, <a href="models.html">DataMapper Models</a>, <a class="def" href="#Many.to.Many">Many-to-Many Relationship</a>, <a class="def" href="#One.to.Many">One-to-Many Relationship</a></p>
+	</dd>
+
+	<dt><a name="Has.One">Has One ($has_one)</a></dt>
+	<dd>
+		<p>A relationship where there can only be one of the related objects.</p>
+		<p class="see">See: <a href="database.html">Database Tables</a>, <a href="models.html">DataMapper Models</a>, <a class="def" href="#One.to.Many">One-to-Many Relationship</a>, <a class="def" href="#One.to.One">One-to-One Relationship</a></p>
+	</dd>
+
+	<dt><a name="In.Table.Foreign.Keys">In-Table Foreign Keys (ITFK)</a></dt>
+	<dd>
+		<p>A way of joining <a class="def" class="def" href="#Has.One">has one</a> relationships without using a dedicated table.</p>
+		<p class="see">See: <a href="database.html">Database Tables</a></p>
+	</dd>
+
+	<dt><a name="Join.Field">Join Field</a></dt>
+	<dd>
+		<p>Extra columns on a <a class="def" href="#Join.Table">join table</a> that are used to store information about the relationship.</p>
+		<p class="see">See: <a href="joinfields.html">Working with Join Fields</a></p>
+	</dd>
+
+	<dt><a name="Join.Table">Join Table</a></dt>
+	<dd>
+		<p>A dedicated database table used to join two related objects.</p>
+		<p class="see">See: <a href="database.html">Database Tables</a></p>
+	</dd>
+
+	<dt><a name="Many.to.Many">Many-to-Many Relationship</a></dt>
+	<dd>
+		<p>A relationship where each object can have many of the other object.  An example would be <kbd>User</kbd> &lt;-&gt; <kbd>Task</kbd>.  Each user can have many tasks, and each task can have many users.</p>
+		<p class="see">See: <a href="relationtypes.html">Relationship Types</a></p>
+	</dd>
+
+	<dt><a name="Many.to.One">Many-to-One Relationship</a> - <span class="see">See <a class="def" href="#One.to.Many">One-to-Many Relationship</a></dt>
+
+	<dt><a name="Method.Chainging">Method Chaining</a></dt>
+	<dd>
+		<p>A feature of PHP5 and DataMapper that allows you to call multiple methods in a chain, instead of having each on their own line.</p>
+		<p class="see">See: <a href="get.html#Method.Chaining">Get</a></p>
+	</dd>
+
+	<dt><a name="One.to.Many">One-to-Many Relationship</a></dt>
+	<dd>
+		<p>A relationship where one object A has can only have one B, but object B can have many A's.  This is the most common type of relationship.  An example would be <var>User</var> &lt;-&gt; <kbd>Group</kbd>.  Groups can have many users, but each user belongs to just one group.</p>
+		<p class="see">See: <a href="relationtypes.html">Relationship Types</a></p>
+	</dd>
+
+	<dt><a name="One.to.One">One-to-One Relationship</a></dt>
+	<dd>
+		<p>A relationship where each object is related to just one of the other type.  This is often used to separate out information that isn't used as often from one of the objects.  An example would be <var>User</var> &lt;-&gt; <var>UserPreferences</var>.</p>
+		<p class="see">See: <a href="relationtypes.html">Relationship Types</a></p>
+	</dd>
+
+	<dt><a name="ORM">ORM</a></dt>
+	<dd>
+		<p>Object-Relational Mapping.  What DataMapper does.</p>
+		<p class="see">See: <a href="http://en.wikipedia.org/wiki/Object-relational_mapping">Wikipedia</a></p>
+	</dd>
+
+	<dt><a name="Query.Grouping">Query Grouping</a></dt>
+	<dd>
+		<p>Usually, adding parentheses around sections of your query to ensure that the elements are tested in the correct order.</p>
+		<p class="see">See: <a href="get.html#Query.Grouping">Get</a></p>
+	</dd>
+
+	<dt><a name="Rules">Rules</a> - <span class="see">See <a class="def" href="#Validation.Rules">Validation Rules</a></span></dt>
+
+	<dt><a name="Self.Relationship">Self Relationship</a></dt>
+	<dd>
+		<p>An <a class="def" href="#Advanced.Relationship">advanced relationship</a> where an object has a relationship with itself.  An example would be a corporate organizational chart.</p>
+		<p class="see">See: <a href="advancedrelations.html">Advanced Relationships</a></p>
+	</dd>
+
+	<dt><a name="Singular.Relationship">Singular Relationship</a> - <span class="see">See <a class="def" href="#Has.One">Has One</a></span></dt>
+
+	<dt><a name="Validation.Rules">Validation Rules</a></dt>
+	<dd>
+		<p>A series of commands that DataMapper can use to verify that correct data was input.</p>
+		<p class="see">See: <a href="validation.html">Validation</a></p>
+	</dd>
+</dl>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../js/mootools.js"></script>
+<script type="text/javascript" src="../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../',
+			pagespath: ''
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

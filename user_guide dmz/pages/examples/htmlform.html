@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>HTML Form Examples : Example Application : DataMapper ORM - User Guide</title>
+
+<style type="text/css" media="all">@import url('../../css/userguide.css');</style>
+<link rel="shortcut icon" type="image/png" href="../../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+<a href="../examples.html">Example Application</a> &nbsp;&#8250;&nbsp;
+HTML Form Examples
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>HTML Form Examples</h1>
+
+<div class="important">
+	<strong><em>No Longer Supported</em></strong>
+	<p>
+		As of Datamapper ORM 1.7.0, this extension is not supported.
+		It is almost as complicated as Datamapper ORM itself, and I no longer have the time to maintain it.
+		It is fully functional, but use at your own risk.
+	</p>
+</div>
+
+<p>These examples show how the form was generated and processed to edit a bug in the example application, using the <a href="../extensions/htmlform.html">HTML Form</a> and <a href="../extensions/array.html">Array</a> extensions.</p>
+
+<h2>Application / Models / Bug.php</h2>
+<p>This is the validation array that Bug uses.  Notice how <b>label</b> is specified on all fields.  <b>Type</b> has also been specified on non-text, non-relationship fields.  Finally, because the <em>priority</em> column can only take a limited set of values, <b>values</b> was set on it to list the possible options.</p>
+
+<pre><div class="lineNums"> 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102</div>    <kbd>var </kbd><var>$validation </var><kbd>= array(
+        </kbd><dfn>'title' </dfn><kbd>=&gt; array(
+            </kbd><dfn><em class="new">'label'</em> </dfn><kbd>=&gt; </kbd><dfn>'Title'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'max_length' </dfn><kbd>=&gt; </kbd><var>100</var><kbd>)
+        ),
+        </kbd><dfn>'description' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Description'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'xss_clean'</dfn><kbd>),
+            </kbd><dfn><em class="new">'type'</em> </dfn><kbd>=&gt; </kbd><dfn>'textarea'
+        </dfn><kbd>),
+        </kbd><dfn>'priority' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Priority'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'integer'</dfn><kbd>, </kbd><dfn>'min_size' </dfn><kbd>=&gt; </kbd><var>0</var><kbd>, </kbd><dfn>'max_size' </dfn><kbd>=&gt; </kbd><var>3</var><kbd>),
+            </kbd><dfn>'type' </dfn><kbd>=&gt; </kbd><dfn>'dropdown'</dfn><kbd>,
+            </kbd><dfn><em class="new">'values'</em> </dfn><kbd>=&gt; array(
+                </kbd><dfn>'0' </dfn><kbd>=&gt; </kbd><dfn>'None'</dfn><kbd>,
+                </kbd><dfn>'1' </dfn><kbd>=&gt; </kbd><dfn>'Low'</dfn><kbd>,
+                </kbd><dfn>'2' </dfn><kbd>=&gt; </kbd><dfn>'Medium'</dfn><kbd>,
+                </kbd><dfn>'3' </dfn><kbd>=&gt; </kbd><dfn>'High'
+            </dfn><kbd>)
+        ),
+        </kbd><dfn>'creator' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Creator'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+        ),
+        </kbd><dfn>'editor' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Editor'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+        ),
+        </kbd><dfn>'status' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Status'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>)
+        ),
+        </kbd><dfn>'category' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Categories'
+        </dfn><kbd>),
+        </kbd><dfn>'user' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Assigned Users'
+        </dfn><kbd>),
+        </kbd><dfn>'dependency' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'This bug depends on'
+        </dfn><kbd>),
+        </kbd><dfn>'dependents' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Other bugs that depend on this'
+        </dfn><kbd>)
+    );</kbd>
+</pre>
+
+<h2>Application / Controllers / Bugs.php</h2>
+
+<p>
+	The controller sets up the form by specifying which fields to render.
+	It also will process the form when submitted, and attempt a save.
+	Unsuccessful saves will return to the form, and print out the errors.
+</p>
+<p>
+	The saving of the form is handled through the <b>array</b> <em>from_array</em> method.
+	It handles processing all of the fields submitted by the form.
+	However, because the creator and editor of the bug are not defined by the form (but by the logged in user), we handle these separately.
+</p>
+<p><em>Note that this method is called by both the <b>report</b> and <b>edit</b> methods of the bugs controller, because they work almost exactly the same.</em>
+
+<pre><div class="lineNums"> 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124</div>    <samp>/**
+     * Called by the edit and report segments.
+     *
+     * @param string $title For the header
+     * @param string $section For the header
+     * @param object $bug Bug to edit or a blank bug
+     * @param string $url The url to save on
+     * @param boolean $save If TRUE, then attempt a save.
+     */
+    </samp><kbd>function </kbd><var>_edit</var><kbd>(</kbd><var>$title</var><kbd>, </kbd><var>$section</var><kbd>, </kbd><var>$bug</var><kbd>, </kbd><var>$url</var><kbd>, </kbd><var>$save</var><kbd>)
+    {
+        if(</kbd><var>$save</var><kbd>)
+        {
+            </kbd><samp>// attempt to save the bug
+            </samp><var>$bug</var><kbd>-&gt;</kbd><var><u>trans_start</u></var><kbd>();
+            </kbd><samp>// Use the (already-loaded) array extension to process the POSTed values.
+            </samp><var>$rel </var><kbd>= </kbd><var>$bug</var><kbd>-&gt;</kbd><var><s>from_array</s></var><kbd>(</kbd><var><b>$_POST</b></var><kbd>, array(
+                </kbd><dfn>'title'</dfn><kbd>,
+                </kbd><dfn>'description'</dfn><kbd>,
+                </kbd><dfn>'priority'</dfn><kbd>,
+                </kbd><dfn>'status'</dfn><kbd>,
+                </kbd><dfn>'category'</dfn><kbd>,
+                </kbd><dfn>'user'
+            </dfn><kbd>));
+
+            </kbd><samp>// We also have to specify the editor...
+            </samp><var>$rel</var><kbd>[</kbd><dfn>'editor'</dfn><kbd>] = </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>login_manager</var><kbd>-&gt;</kbd><var>get_user</var><kbd>();
+            if( ! </kbd><var>$bug</var><kbd>-&gt;</kbd><var><u>exists</u></var><kbd>())
+            {
+                </kbd><samp>// ...and creator for new bugs
+                </samp><var>$rel</var><kbd>[</kbd><dfn>'creator'</dfn><kbd>] = </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>login_manager</var><kbd>-&gt;</kbd><var>get_user</var><kbd>();
+            }
+            </kbd><var>$exists </var><kbd>= </kbd><var>$bug</var><kbd>-&gt;</kbd><var><u>exists</u></var><kbd>();
+            if(</kbd><var>$bug</var><kbd>-&gt;</kbd><var><u>save</u></var><kbd>(</kbd><var>$rel</var><kbd>))
+            {
+                </kbd><samp>// saved successfully, so commit and redirect
+                </samp><var>$bug</var><kbd>-&gt;</kbd><var><u>trans_complete</u></var><kbd>();
+                </kbd><samp>// Store a message
+                </samp><kbd>if(</kbd><var>$exists</var><kbd>)
+                {
+                    </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>session</var><kbd>-&gt;</kbd><var>set_flashdata</var><kbd>(</kbd><dfn>'message'</dfn><kbd>, </kbd><dfn>'This bug was updated successfully.'</dfn><kbd>);
+                }
+                else
+                {
+                    </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>session</var><kbd>-&gt;</kbd><var>set_flashdata</var><kbd>(</kbd><dfn>'message'</dfn><kbd>, </kbd><dfn>'This bug was created successfully.'</dfn><kbd>);
+                }
+                </kbd><var>redirect</var><kbd>(</kbd><dfn>'bugs/view/' </dfn><kbd>. </kbd><var>$bug</var><kbd>-&gt;</kbd><var>id</var><kbd>);
+            }
+        }
+
+        </kbd><samp>// Load the htmlform extension, so we can generate the form.
+        </samp><var>$bug</var><kbd>-&gt;</kbd><var><u>load_extension</u></var><kbd>(</kbd><dfn>'htmlform'</dfn><kbd>);
+
+        </kbd><samp>// We want to limit the users to those who are assignable (not simply bug reporters)
+        </samp><var>$users </var><kbd>= new </kbd><var>User</var><kbd>();
+        </kbd><var>$users</var><kbd>-&gt;</kbd><var>get_assignable</var><kbd>();
+
+        </kbd><samp>// This is how are form will be rendered
+        </samp><var>$form_fields </var><kbd>= array(
+            </kbd><dfn>'id'</dfn><kbd>, </kbd><samp>// Hidden id field
+            </samp><dfn>'title'</dfn><kbd>, </kbd><samp>// Title field
+            </samp><dfn>'description' </dfn><kbd>=&gt; array(  </kbd><samp>// multi-line field for description
+                </samp><dfn>'rows' </dfn><kbd>=&gt; </kbd><var>6</var><kbd>, </kbd><samp>// height and width could be specified using CSS instead
+                </samp><dfn>'cols' </dfn><kbd>=&gt; </kbd><var>40
+            </var><kbd>),
+            </kbd><dfn>'priority'</dfn><kbd>, </kbd><samp>// Priority (a dropdown containing 4 items)
+            </samp><dfn>'status'</dfn><kbd>, </kbd><samp>// Status (a dropdown with all known statuses)
+            </samp><dfn>'category'</dfn><kbd>, </kbd><samp>// A checkbox or select list of categories
+            </samp><dfn>'user' </dfn><kbd>=&gt; array( </kbd><samp>// A checkbox or select list of users
+                </samp><dfn>'list' </dfn><kbd>=&gt; </kbd><var>$users </var><samp>// limit the users to the list above
+            </samp><kbd>)
+        );
+
+        </kbd><samp>// Send the results to the views
+        </samp><var><b>$this</b></var><kbd>-&gt;</kbd><var>output</var><kbd>-&gt;</kbd><var>enable_profiler</var><kbd>(</kbd><var><dfn>TRUE</dfn></var><kbd>);
+        </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>load</var><kbd>-&gt;</kbd><var>view</var><kbd>(</kbd><dfn>'template_header'</dfn><kbd>, array(</kbd><dfn>'title' </dfn><kbd>=&gt; </kbd><var>$title</var><kbd>, </kbd><dfn>'section' </dfn><kbd>=&gt; </kbd><var>$section</var><kbd>));
+        </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>load</var><kbd>-&gt;</kbd><var>view</var><kbd>(</kbd><dfn>'bugs/edit'</dfn><kbd>, array(</kbd><dfn>'bug' </dfn><kbd>=&gt; </kbd><var>$bug</var><kbd>, </kbd><dfn>'form_fields' </dfn><kbd>=&gt; </kbd><var>$form_fields</var><kbd>, </kbd><dfn>'url' </dfn><kbd>=&gt; </kbd><var>$url</var><kbd>));
+        </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>load</var><kbd>-&gt;</kbd><var>view</var><kbd>(</kbd><dfn>'template_footer'</dfn><kbd>);
+    }</kbd>
+</pre>
+
+<h2>Application / Views / Bugs / Edit.php</h2>
+<p>This view is very simple, although you could easily add instructions and other non-form information.</p>
+<pre><div class="lineNums"> 1
+ 2
+ 3
+ 4
+ 5</div><var>&lt;?php
+
+    </var><kbd>echo </kbd><var>$bug</var><kbd>-&gt;</kbd><var><s>render_form</s></var><kbd>(</kbd><var>$form_fields</var><kbd>, </kbd><var>$url</var><kbd>);
+
+</kbd><var>?&gt;</var>
+</pre>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../../js/mootools.js"></script>
+<script type="text/javascript" src="../../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../../',
+			pagespath: '../',
+			last: 'examples'
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

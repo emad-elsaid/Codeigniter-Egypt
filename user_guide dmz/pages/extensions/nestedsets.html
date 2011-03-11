@@ -1,0 +1,751 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Nested Set Methods : Included Extensions : DataMapper ORM - User Guide</title>
+
+<style type="text/css" media="all">@import url('../../css/userguide.css');</style>
+<link rel="shortcut icon" type="image/png" href="../../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+<a href="../extlist.html">Included Extensions</a> &nbsp;&#8250;&nbsp;
+Nested Set Methods
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Nested Set Methods (nestedsets)</h1>
+<p class="note">To enable these methods, add <dfn>'nestedsets'</dfn> to DataMapper's config, under <strong>'extensions'</strong>.</p>
+<p>Adds methods to a Datamapper ORM object to work with nested tree database structures.</p>
+
+<h2>Introduction to nested sets</h2>
+
+<p>The nested set model is a particular technique for representing nested sets (also known as trees or hierarchies) in relational databases.
+The term was apparently introduced by Joe Celko; others describe the same technique without naming it or using different terms. (<i>source: <a href="http://en.wikipedia.org/wiki/Nested_set_model">Wikipedia</a></i>)</p>
+<p>A typical example of a tree structure is an organigram of an organisation. We'll be using this to explain how nested sets work.</p>
+<div style="text-align:center;"><img src="../../images/nestedsets.gif" border="0" alt="Nested Sets Example" /></div>
+<p>The above diagram is indicating that each node is aware of all its descendents, and vice versa.
+For example, we can see easily enough from the diagram that Ben and Angela are children of Bill.
+We can also see that Tim And James are children of Ben.
+This ultimately gives us a link between each member of the hierarchy.</p>
+<p>For us to represent this we need to store two more values per node, that define the relationship between the nodes of the tree structure.
+These are shown on the diagram in blue and red. </p>
+<p>We call these Left (Red Values) and Right (Blue Values) pointers.
+These values are stored on the table, this is all we need to fully represent a nested sets hierarchy.</p>
+
+<h3>Storing multiple tree structures</h3>
+
+<p>This Datamapper extension allows you to store multiple tree structures into a single database table.
+To make this possible, you can add a root pointer column to the table. The root pointer is the ID that identifies the tree the node belongs to.</p>
+
+<h3>Node symlinking</h3>
+
+<p>This Datamapper extension allows you to link nodes together using symlinks. This is particularly usefull to link multiple trees together into a single big tree.
+To make this possible, you can add a symlink pointer column to the table. The symlink pointer is the id of the node that is linked to.</p>
+
+<p class="note"><strong><em>Note:</em></strong> Currently, symlink functionality is not implemented yet.</p>
+
+<p class="important">Note that because of the left and right pointers, it is absolutely essential that you use the nested sets methods defined below to add or delete node objects.<br />
+Do <dfn>NOT</dfn> use the regular Datamapper methods <var>save()</var> or <var>delete()</var>. Doing so will break the pointer chain, and will render your tree useless.</p>
+
+<h2>tree_config(<i>$options</i>)</h2>
+
+<ul>
+	<li><dfn>$options</dfn>: Array of options to configure the nested sets extension for a specific model.</li>
+</ul>
+<p>You can also define the nested sets configuration inside the model.  Here's how to set that up.</p>
+<pre>
+<kbd>class </kbd><var>Organization </var><kbd>extends </kbd><var><u>DataMapper</u> </var><kbd>{
+    </kbd><var><i>$nestedsets</i> </var><kbd>= array(
+        </kbd>'name' <kbd>=&gt; </kbd><dfn><var><s>'user_name'</s></var></dfn><kbd>,
+        </kbd>'follow' <kbd>=&gt; </kbd><dfn>FALSE
+    </dfn><kbd>);
+}</kbd>
+</pre>
+<p>The following options can be set:</p>
+<table cellpadding="0" cellspacing="1" border="0" class="tableborder">
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+<tr>
+<td><strong>name</strong></td>
+<td>String</td>
+<td>Name of the column in the nested sets table that contains a name used in the path methods.</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td><strong>symlink</strong></td>
+<td>String</td>
+<td>Name of the column in the nested sets table that is used to symlink tree nodes to other nodes.</td>
+<td>"symlink_id"</td>
+</tr>
+<tr>
+<td><strong>left</strong></td>
+<td>String</td>
+<td>Name of the column in the nested sets table that is used to for the nodes left pointer.</td>
+<td>"left_id"</td>
+</tr>
+<tr>
+<td><strong>right</strong></td>
+<td>String</td>
+<td>Name of the column in the nested sets table that is used to for the nodes right pointer.</td>
+<td>"right_id"</td>
+</tr>
+<tr>
+<td><strong>root</strong></td>
+<td>String</td>
+<td>Name of the column in the nested sets table that is used to for the nodes tree root pointer.</td>
+<td>"root_id"</td>
+</tr>
+<tr>
+<td><strong>value</strong></td>
+<td>Integer</td>
+<td>If the table contains multiple trees, this value with select the tree identified by this value.</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td><strong>follow</strong></td>
+<td>Boolean</td>
+<td>If the table nodes contain symlink pointer, set this to TRUE to follow symlink, FALSE to ignore them.</td>
+<td>TRUE</td>
+</tr>
+</table>
+
+<h2>select_root(<i>$tree_id</i>)</h2>
+<ul>
+	<li><dfn>$tree_id</dfn>: ID value of the tree you want to select.</li>
+	<li><b>Returns</b>: <var>$object</var>, so you can chain other methods.</li>
+</ul>
+<p>Use this method to select the desired tree if your model supports multiple trees within a single table.
+To enable multi-tree support, your table must contain a tree <var>root_id</var> field, which must be defined as integer.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>select_root</u></var><kbd>(</kbd><var>1</var><kbd>);</kbd><samp> // select tree with root_id 1</samp>
+</pre>
+
+<h2>new_root()</h2>
+<ul>
+	<li><b>Returns</b>: <var>$object</var>, the newly created root object. You can use the normal Datamapper methods to check if the object was succesfully created.</li>
+</ul>
+<p>Creating a new root is the first action you have to execute to define a new tree.</p>
+<p class="important"><strong><em>Note: </em></strong>If you have enabled multi-tree support, make sure you have selected a new tree first by using the <dfn>select_tree()</dfn> method, passing a new <var>root_id</var>. Currently, this doesn't happen automatically.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>select_root</u></var><kbd>(</kbd><var>99</var><kbd>);</kbd><samp> // make sure root_id 99 doesn't exist yet!</samp>
+<var>$tree</var><kbd>-&gt;</kbd><var><u>new_root</u></var><kbd>();
+</kbd></pre>
+
+<h2>new_first_child(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object for with you want to add a new first child.</li>
+	<li><b>Returns</b>: <var>$object</var>, the newly created child object. You can use the normal Datamapper methods to check if the object was succesfully created.</li>
+</ul>
+<p>The parameter <var>$node</var> is optional. If you specify it, after the call the current object will contain the new child record created.
+If you don't specify it, the current object is used as reference to create a new first child, and will be overwritten with the newly created object.</p>
+<p>You can add a new first child node to any valid tree node just by calling this method. If the current node already has children, the new child node will be inserted in front of the current first child node.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>new_first_child</u></var><kbd>();</kbd><samp> // the root node now has a new first child</samp>
+</pre>
+
+<h2>new_last_child(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object for with you want to add a new last child.</li>
+	<li><b>Returns</b>: <var>$object</var>, the newly created child object. You can use the normal Datamapper methods to check if the object was succesfully created.</li>
+</ul>
+<p>The parameter <var>$node</var> is optional. If you specify it, after the call the current object will contain the new child record created.
+If you don't specify it, the current object is used as reference to create a new last child, and will be overwritten with the newly created object.</p>
+<p>You can add a new last child node to any valid tree node just by calling this method. If the current node already has children, the new child node will be inserted after the current last child node.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>new_last_child</u></var><kbd>();</kbd><samp> // the root node now has a new last child</samp>
+</pre>
+
+<h2>new_previous_sibling(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object for with you want to add a new previous sibling.</li>
+	<li><b>Returns</b>: <var>$object</var>, the newly created sibling object. You can use the normal Datamapper methods to check if the object was succesfully created.</li>
+</ul>
+<p>The parameter <var>$node</var> is optional. If you specify it, after the call the current object will contain the new sibling record created.
+If you don't specify it, the current object is used as reference to create a new previous sibling, and will be overwritten with the newly created object.</p>
+<p>You can add a new previous sibling node to any valid tree node just by calling this method.</p>
+<p class="important"><strong><em>Note: </em></strong>You can not add a new previous silbling to a root node.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_first_child</u></var><kbd>();</kbd><samp> // we need a non-root node</samp>
+<var>$tree</var><kbd>-&gt;</kbd><var><u>new_previous_silbing</u></var><kbd>();</kbd><samp> // the root node now has a new first child</samp>
+</pre>
+
+<h2>new_next_sibling(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object for with you want to add a new previous sibling.</li>
+	<li><b>Returns</b>: <var>$object</var>, the newly created sibling object. You can use the normal Datamapper methods to check if the object was succesfully created.</li>
+</ul>
+<p>The parameter <var>$node</var> is optional. If you specify it, after the call the current object will contain the new sibling record created.
+If you don't specify it, the current object is used as reference to create a new next sibling, and will be overwritten with the newly created object.</p>
+<p>You can add a new next sibling node to any valid tree node just by calling this method.</p>
+<p class="important"><strong><em>Note: </em></strong>You can not add a new next silbling to a root node.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
+<samp>// you can use object chaining on most nestedsets methods</samp>
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>()<kbd>-&gt;</kbd><var><u>get_last_child</u></var><kbd>()</kbd><kbd>-&gt;</kbd><var><u>new_next_silbing</u></var><kbd>();
+</kbd></pre>
+
+<h2>get_root()</h2>
+<ul>
+	<li><b>Returns</b>: <var>$object</var>, the loaded root object.</li>
+</ul>
+<p>If your model supports multi-tree, make sure to select the desired tree first using <dfn>select_tree()</dfn>. If you don't, or you have the tree selection explictly disabled by calling <dfn>select_tree(<var> NULL </var>)</dfn>, all tree root will be returned. You can iterate through the results the same way as will every other Datamapper resultset.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>();
+</kbd><kbd>if (</kbd> <var><var>$tree</var><kbd>-&gt;</kbd><var><u>exists</u></var><kbd>()</kbd> <kbd>)</kbd>
+<kbd>{</kbd>
+    <samp>// the root node was found</samp>
+<kbd>}</kbd>
+</pre>
+
+<h2>get_parent(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object whose parent you want to retrieve.</li>
+	<li><b>Returns</b>: <var>$object</var>, so you can chain other methods.</li>
+</ul>
+<p>The parameter <var>$node</var> is optional. If you specify it, after the call the current object will contain the record of the parent of the object passed.
+If you don't specify it, the parent of the current object will be loaded, which means you will loose the content of the current object.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_first_child</u></var><kbd>();</kbd><samp> // we need a non-root node</samp>
+<var>$tree</var><kbd>-&gt;</kbd><var><u>get_parent</u></var><kbd>();</kbd><samp> // $tree should now contain the root again</samp>
+
+<samp>// alternatively, you can pass an object</samp>
+
+<var>$child </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$child</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>()<kbd>-&gt;</kbd><var><u>get_first_child</u></var><kbd>();</kbd><samp> // we need a non-root node</samp>
+<var>$parent </var><kbd>= new </kbd><var>Tree</var><kbd>();
+<var>$parent</var><kbd>-&gt;</kbd><var><u>get_parent</u></var><kbd>(<var> $child </var>);</kbd><samp> // $parent should contain the root, $child is unmodified</samp>
+</pre>
+
+<h2>get_node_where_left(<i>$left_id</i>)</h2>
+<ul>
+	<li><dfn>$left_id</dfn>: value of left pointer of the tree node you want to select.</li>
+	<li><b>Returns</b>: <var>$object</var>, so you can chain other methods.</li>
+</ul>
+<p>Use this method to select a tree tree directly by left pointer. If your model supports multiple trees within a single table, make sure you select a tree first.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>select_root</u></var><kbd>(</kbd><var>1</var><kbd>);</kbd><samp> // select tree with root_id 1</samp>
+<var>$tree</var><kbd>-&gt;</kbd><var><u>get_node_where_left</u></var><kbd>(</kbd><var>1</var><kbd>);</kbd><samp> // select node with left pointer 1 (tree root)</samp>
+</pre>
+
+
+<h2>get_node_where_right(<i>$right_id</i>)</h2>
+<ul>
+	<li><dfn>$right_id</dfn>: value of right pointer of the tree node you want to select.</li>
+	<li><b>Returns</b>: <var>$object</var>, so you can chain other methods.</li>
+</ul>
+<p>Use this method to select a tree tree directly by right pointer. If your model supports multiple trees within a single table, make sure you select a tree first.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>select_root</u></var><kbd>(</kbd><var>1</var><kbd>);</kbd><samp> // select tree with root_id 1</samp>
+<var>$tree</var><kbd>-&gt;</kbd><var><u>get_node_where_right</u></var><kbd>(</kbd><var>1</var><kbd>);</kbd><samp> // select node with right pointer 1 (never exists!)</samp>
+</pre>
+
+<h2>get_first_child(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object whose first child you want to retrieve.</li>
+	<li><b>Returns</b>: <var>$object</var>, so you can chain other methods.</li>
+</ul>
+<p>The parameter <var>$node</var> is optional. If you specify it, after the call the current object will contain the record of the first child of the object passed.
+If you don't specify it, the first child of the current object will be loaded, which means you will loose the content of the current object.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>();</kbd><samp> // get the root</samp>
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_first_child</u></var><kbd>();</kbd><samp> // $tree now contains the child requested</samp>
+
+<samp>// alternatively, you can pass an object</samp>
+
+<var>$root </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$root</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>();</kbd><samp> // get the root</samp>
+<var>$child </var><kbd>= new </kbd><var>Tree</var><kbd>();
+<var>$child</var><kbd>-&gt;</kbd><var><u>get_first_child</u></var><kbd>(<var> $root </var>);</kbd><samp> // $child should contain the child requested, $root is unmodified</samp>
+</pre>
+
+<h2>get_last_child(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object whose last child you want to retrieve.</li>
+	<li><b>Returns</b>: <var>$object</var>, so you can chain other methods.</li>
+</ul>
+<p>The parameter <var>$node</var> is optional. If you specify it, after the call the current object will contain the record of the last child of the object passed.
+If you don't specify it, the last child of the current object will be loaded, which means you will loose the content of the current object.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>();</kbd><samp> // get the root</samp>
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_last_child</u></var><kbd>();</kbd><samp> // $tree now contains the child requested</samp>
+
+<samp>// alternatively, you can pass an object</samp>
+
+<var>$root </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$root</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>();</kbd><samp> // get the root</samp>
+<var>$child </var><kbd>= new </kbd><var>Tree</var><kbd>();
+<var>$child</var><kbd>-&gt;</kbd><var><u>get_last_child</u></var><kbd>(<var> $root </var>);</kbd><samp> // $child should contain the child requested, $root is unmodified</samp>
+</pre>
+
+<h2>get_previous_sibling(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object whose previous sibling you want to retrieve.</li>
+	<li><b>Returns</b>: <var>$object</var>, so you can chain other methods.</li>
+</ul>
+<p>The parameter <var>$node</var> is optional. If you specify it, after the call the current object will contain the record of the previous sibling of the object passed.
+If you don't specify it, the previous sibling of the current object will be loaded, which means you will loose the content of the current object.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>();</kbd><samp> // get the root</samp>
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_last_child</u></var><kbd>()<kbd>-&gt;</kbd><var><u>get_previous_sibling</u></var><kbd>();</kbd><samp> // $tree now contains the second to last child of the root</samp>
+
+<samp>// alternatively, you can pass an object</samp>
+
+<var>$root </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$root</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>();</kbd><samp> // get the root</samp>
+<var>$lastchild </var><kbd>= new </kbd><var>Tree</var><kbd>();</kbd>
+<var>$lastchild</var><kbd>-&gt;</kbd><var><u>get_last_child</u></var><kbd>(<var> $root </var>);</kbd>
+<var>$sibling</var><kbd>= new </kbd><var>Tree</var><kbd>();</kbd>
+<var>$sibling</var><kbd>-&gt;</kbd><var><u>get_previous_sibling</u></var><kbd>(<var> $lastchild </var>);</kbd><samp> // $sibling should contain the node requested, $root and $lastchild are unmodified</samp>
+</pre>
+
+<h2>get_next_sibling(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object whose next sibling you want to retrieve.</li>
+	<li><b>Returns</b>: <var>$object</var>, so you can chain other methods.</li>
+</ul>
+<p>The parameter <var>$node</var> is optional. If you specify it, after the call the current object will contain the record of the next sibling of the object passed.
+If you don't specify it, the next sibling of the current object will be loaded, which means you will loose the content of the current object.</p>
+
+<h3>Usage</h3>
+<pre>
+<var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>();</kbd><samp> // get the root</samp>
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_first_child</u></var><kbd>()<kbd>-&gt;</kbd><var><u>get_next_sibling</u></var><kbd>();</kbd><samp> // $tree now contains the second child of the root</samp>
+
+<samp>// alternatively, you can pass an object</samp>
+
+<var>$root </var><kbd>= new </kbd><var>Tree</var><kbd>();
+</kbd><var>$root</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>();</kbd><samp> // get the root</samp>
+<var>$firstchild </var><kbd>= new </kbd><var>Tree</var><kbd>();</kbd>
+<var>$firstchild</var><kbd>-&gt;</kbd><var><u>get_first_child</u></var><kbd>(<var> $root </var>);</kbd>
+<var>$sibling</var><kbd>= new </kbd><var>Tree</var><kbd>();</kbd>
+<var>$sibling</var><kbd>-&gt;</kbd><var><u>get_next_sibling</u></var><kbd>(<var> $firstchild </var>);</kbd><samp> // $sibling should contain the node requested, $root and $firstchild are unmodified</samp>
+</pre>
+
+<h2>is_valid_node()</h2>
+<ul>
+	<li><b>Returns</b>: <dfn>TRUE</dfn> or <dfn>FALSE</dfn> if the object is not a valid nested sets node.</li>
+</ul>
+<p>An object is considered to be a valid node if:</p>
+<ul>
+	<li>the object has valid content ( i.e. <var>$object</var><kbd>-&gt;</kbd><var>exists</var><kbd>()</kbd> returns <dfn>TRUE</dfn> ).</li>
+	<li>the object has a column whose name is defined by the config value 'left'.</li>
+	<li>the object has a column whose name is defined by the config value 'right'.</li>
+	<li>the 'left' and 'right' columns contain positive integers, and the value of the 'right' column is larger than the value of the 'left' column.</li>
+	<li>And in case the model has multi-tree support:
+	<ul>
+		<li>the object has a column whose name is defined by the config value 'root'.</li>
+		<li>the 'root' column contain a positive integer.</li>
+	</ul>
+	</li>
+</ul>
+
+<h3>Usage</h3>
+<pre>
+</kbd><kbd>if (</kbd> <var><var>$node</var><kbd>-&gt;</kbd><var><u>is_valid_node</u></var><kbd>()</kbd> <kbd>)</kbd>
+<kbd>{</kbd>
+    <samp>// the node was a valid nested sets node</samp>
+<kbd>}</kbd>
+</pre>
+
+<h2>is_root()</h2>
+<ul>
+	<li><b>Returns</b>: <dfn>TRUE</dfn> or <dfn>FALSE</dfn> if the node is not a valid node, or not a tree root.</li>
+</ul>
+<p>A tree root node is identified by the fact that it's left pointer is always <dfn>1</dfn>.</p>
+
+<h3>Usage</h3>
+<pre>
+</kbd><kbd>if (</kbd> <var><var>$node</var><kbd>-&gt;</kbd><var><u>is_root</u></var><kbd>()</kbd> <kbd>)</kbd>
+<kbd>{</kbd>
+    <samp>// the node is a nested sets tree root node</samp>
+<kbd>}</kbd>
+</pre>
+
+<h2>is_leaf()</h2>
+<ul>
+	<li><b>Returns</b>: <dfn>TRUE</dfn> or <dfn>FALSE</dfn> if the node is not a valid node, or not a leaf node.</li>
+</ul>
+<p>A tree leaf node is identified by the fact that it's doesn't have any children, which means that the difference between the 'right' and 'left' pointers is always <dfn>1</dfn>.</p>
+
+<h3>Usage</h3>
+<pre>
+</kbd><kbd>if (</kbd> <var><var>$node</var><kbd>-&gt;</kbd><var><u>is_leaf</u></var><kbd>()</kbd> <kbd>)</kbd>
+<kbd>{</kbd>
+    <samp>// the node is a nested sets tree node that doesn't have any children</samp>
+<kbd>}</kbd>
+</pre>
+
+<h2>is_child()</h2>
+<ul>
+	<li><b>Returns</b>: <dfn>TRUE</dfn> or <dfn>FALSE</dfn> if the node is not a valid node, or not a child node.</li>
+</ul>
+<p>A child node is identified by the fact that it's 'left' pointer is larger than <dfn>1</dfn>. Note that besides the root node, all nodes are children.</p>
+
+<h3>Usage</h3>
+<pre>
+</kbd><kbd>if (</kbd> <var><var>$node</var><kbd>-&gt;</kbd><var><u>is_child</u></var><kbd>()</kbd> <kbd>)</kbd>
+<kbd>{</kbd>
+    <samp>// the node is a nested sets tree node is a child node</samp>
+<kbd>}</kbd>
+</pre>
+
+<h2>is_child_of(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object for which you want to check if it's the parent.</li>
+	<li><b>Returns</b>: <dfn>TRUE</dfn> or <dfn>FALSE</dfn> if <var>$node</var> is not the parent of the current node object.</li>
+</ul>
+<p>Checks if the current object is a child of the object passed as a parameter.</p>
+
+<h3>Usage</h3>
+<pre>
+</kbd><kbd>if (</kbd> <var><var>$child</var><kbd>-&gt;</kbd><var><u>is_child_of</u></var><kbd>( <var>$parent</var> )</kbd> <kbd>)</kbd>
+<kbd>{</kbd>
+    <samp>// $child is a child of the $parent node</samp>
+<kbd>}</kbd>
+</pre>
+
+<h2>is_parent_of(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object for which you want to check if it's a child.</li>
+	<li><b>Returns</b>: <dfn>TRUE</dfn> or <dfn>FALSE</dfn> if <var>$node</var> is not a child of the current node object.</li>
+</ul>
+<p>Checks if the current object is the parent of the object passed as a parameter.</p>
+
+<h3>Usage</h3>
+<pre>
+</kbd><kbd>if (</kbd> <var><var>$parent</var><kbd>-&gt;</kbd><var><u>is_parent_of</u></var><kbd>( <var>$child</var> )</kbd> <kbd>)</kbd>
+<kbd>{</kbd>
+    <samp>// $parent is the parent of the $child node</samp>
+<kbd>}</kbd>
+</pre>
+
+<h2>has_parent()</h2>
+<p>This method is an alias for <var>is_child()</var>.</p>
+
+<h2>has_children()</h2>
+<p>This method is an alias for <kbd>! </kbd><var>is_leaf()</var> (a leaf node doesn't have any children).</p>
+
+<h2>has_previous_sibling()</h2>
+<ul>
+	<li><b>Returns</b>: <dfn>TRUE</dfn> or <dfn>FALSE</dfn> if the current node object has a previous sibling.</li>
+</ul>
+<p>Checks if the current object has a previous silbing (i.e. is not the first child).</p>
+
+<h3>Usage</h3>
+<pre>
+</kbd><kbd>if (</kbd> <var><var>$child</var><kbd>-&gt;</kbd><var><u>has_previous_sibling</u></var><kbd>()</kbd> <kbd>)</kbd>
+<kbd>{</kbd>
+    <samp>// $child is not the first child node</samp>
+<kbd>}</kbd>
+</pre>
+
+<h2>has_next_sibling()</h2>
+<ul>
+	<li><b>Returns</b>: <dfn>TRUE</dfn> or <dfn>FALSE</dfn> if the current node object has a next sibling.</li>
+</ul>
+<p>Checks if the current object has a next silbing (i.e. is not the last child).</p>
+
+<h3>Usage</h3>
+<pre>
+</kbd><kbd>if (</kbd> <var><var>$child</var><kbd>-&gt;</kbd><var><u>has_next_sibling</u></var><kbd>()</kbd> <kbd>)</kbd>
+<kbd>{</kbd>
+    <samp>// $child is not the last child node</samp>
+<kbd>}</kbd>
+</pre>
+
+<h2>count_children()</h2>
+<ul>
+	<li><b>Returns</b>: the number of children of the current node object.</li>
+</ul>
+<p>Note that this method counts all child nodes, not only the direct descendants of the current node object!</p>
+
+<h3>Usage</h3>
+<pre>
+</kbd><kbd>if (</kbd> <var><var>$parent</var><kbd>-&gt;</kbd><var><u>count_children</u></var><kbd>()</kbd> == <dfn>0</dfn><kbd> )</kbd>
+<kbd>{</kbd>
+    <samp>// $parent doesn't have any children</samp>
+<kbd>}</kbd>
+</pre>
+
+<h2>level()</h2>
+<ul>
+	<li><b>Returns</b>: an integer value indicating the nesting level of the current object, or <dfn>FALSE</dfn> if the object is not a valid node.</li>
+</ul>
+<p>This method calculates the tree depth of the current object. The tree root will have level <dfn>0</dfn>, every level of children adds one to the nesting level. So grandchildren of the root node will have level <dfn>2</dfn>.</p>
+
+<h3>Usage</h3>
+<pre>
+</kbd><kbd>if (</kbd> <var><var>$node</var><kbd>-&gt;</kbd><var><u>level</u></var><kbd>()</kbd> == <dfn>2</dfn><kbd> )</kbd>
+<kbd>{</kbd>
+    <samp>// $node is a grandchild of the tree root</samp>
+<kbd>}</kbd>
+</pre>
+
+<h2>make_next_sibling_of(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object where you want to move the current object to.</li>
+	<li><b>Returns</b>: <var>$object</var>, so you can chain other methods.</li>
+</ul>
+<p>This method allows you to move the current node object from it's location in the tree as the next sibling of the node object passed as parameter.</p>
+<p class="important"><strong><em>Note: </em></strong>If you have enabled multi-tree support, both <var>$object</var> and <var>$node</var> must be part of the same tree. If not, this method returns <dfn>FALSE</dfn>.</p>
+
+<h3>Usage</h3>
+<pre>
+<samp>// move child A as sibling next to child B</samp>
+</kbd><var>$child_a</var><kbd>-&gt;</kbd><var><u>make_next_sibling_of</u></var><kbd>( <var>$child_b</var> <kbd>);
+</kbd></pre>
+
+<h2>make_previous_sibling_of(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object where you want to move the current object to.</li>
+	<li><b>Returns</b>: <var>$object</var>, so you can chain other methods.</li>
+</ul>
+<p>This method allows you to move the current node object from it's location in the tree as the previous sibling of the node object passed as parameter.</p>
+<p class="important"><strong><em>Note: </em></strong>If you have enabled multi-tree support, both <var>$object</var> and <var>$node</var> must be part of the same tree. If not, this method returns <dfn>FALSE</dfn>.</p>
+
+<h3>Usage</h3>
+<pre>
+<samp>// move child A as sibling previous to child B</samp>
+</kbd><var>$child_a</var><kbd>-&gt;</kbd><var><u>make_previous_sibling_of</u></var><kbd>( <var>$child_b</var> <kbd>);
+</kbd></pre>
+
+<h2>make_first_child_of(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object where you want to move the current object to.</li>
+	<li><b>Returns</b>: <var>$object</var>, so you can chain other methods.</li>
+</ul>
+<p>This method allows you to move the current node object from it's location in the tree as the first child of the node object passed as parameter.</p>
+<p class="important"><strong><em>Note: </em></strong>If you have enabled multi-tree support, both <var>$object</var> and <var>$node</var> must be part of the same tree. If not, this method returns <dfn>FALSE</dfn>.</p>
+
+<h3>Usage</h3>
+<pre>
+<samp>// move child A as first child of parent B</samp>
+</kbd><var>$child_a</var><kbd>-&gt;</kbd><var><u>make_first_child_of</u></var><kbd>( <var>$parent_b</var> <kbd>);
+</kbd></pre>
+
+<h2>make_last_child_of(<i>$node</i>)</h2>
+<ul>
+	<li><dfn>$node</dfn>: tree object where you want to move the current object to.</li>
+	<li><b>Returns</b>: <var>$object</var>, so you can chain other methods.</li>
+</ul>
+<p>This method allows you to move the current node object from it's location in the tree as the last child of the node object passed as parameter.</p>
+<p class="important"><strong><em>Note: </em></strong>If you have enabled multi-tree support, both <var>$object</var> and <var>$node</var> must be part of the same tree. If not, this method returns <dfn>FALSE</dfn>.</p>
+
+<h3>Usage</h3>
+<pre>
+<samp>// move child A as last child of parent B</samp>
+<var>$child_a</var><kbd>-&gt;</kbd><var><u>make_last_child_of</u></var><kbd>( <var>$parent_b</var> <kbd>);
+</kbd></pre>
+
+<h2>dump_tree(<i>$fields</i>, <i>$type</i>, <i>$skip_root</i>)</h2>
+<ul>
+	<li><dfn>$fields</dfn>: array of column names to be included in the result.</li>
+	<li><dfn>$type</dfn>: type of output this method should produce.</li>
+	<li><dfn>$skip_root</dfn>: default <dfn>TRUE</dfn>, if <dfn>FALSE</dfn>, the object itself will also be part of the result.</li>
+	<li><b>Returns</b>: <var>$object</var>, so you can chain other methods.</li>
+</ul>
+<p>You can use this method to dump the tree into different types of ouput, starting with the current object as root of the tree to dump.
+You can use the <var>$fields</var> array to specify which columns should be part of the result. If you want to include all column names, use the value <dfn>NULL</dfn>.
+If you pass an empty array, only the ID fields, and the 'name' field (if defined in the config) will be included in the result.</p>
+<p>The following output types are defined:</p>
+<table cellpadding="0" cellspacing="1" border="0" class="tableborder">
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><strong>'array'</strong></td>
+<td>All nodes in the resultset will be returned as array elements. If no nodes were found, an empty array is returned.</td>
+</tr>
+<tr>
+<td><strong>'html'</strong></td>
+<td>Returns a string containing a dump of the tree structure with indentation in HTML format.</td>
+</tr>
+<tr>
+<td><strong>'tab'</strong></td>
+<td>Returns a string containing a dump of the tree structure with indentation using tab characters.</td>
+</tr>
+<tr>
+<td><strong>'csv'</strong></td>
+<td>Returns a string. Per node a line is returned, with the column values separated by commas.</td>
+</tr>
+</table>
+
+<h3>Usage</h3>
+<pre>
+<samp>// output the tree structure in html, including the root</samp>
+<kbd>echo </kbd><var>$root</var><kbd>-&gt;</kbd><var><u>dump_tree</u></var><kbd>( array(<var><s>'title'</s></var><kbd>, </kbd><var><s>'description'</s></var><kbd>), <var><s>'html'</s></var> <kbd>, </kbd><dfn>FALSE</dfn> <kbd>);
+</kbd></pre>
+
+
+<h2>dump_dropdown(<i>$field</i>, <i>$skip_root</i>)</h2>
+<ul>
+	<li><dfn>$field</dfn>: name of the column that contains the dropdown description.</li>
+	<li><dfn>$skip_root</dfn>: default <dfn>TRUE</dfn>, if <dfn>FALSE</dfn>, the object itself will also be part of the result.</li>
+	<li><b>Returns</b>: an array with key-value pairs, with the records 'id' field as key.</li>
+</ul>
+<p class="note">If <var>$field</var> is not specified, the 'name' field configured will be used as description. If no 'name' is configured, this method returns <dfn>FALSE</dfn>.</p>
+
+<h3>Usage</h3>
+<pre>
+<samp>// generate the html for an html dropdown</samp>
+<var>$dropdown</var><kbd> = </kbd><var>$root</var><kbd>-&gt;</kbd><var><u>dump_dropdown</u></var><kbd>( <var><s>'title'</s></var><kbd>);</kbd>
+
+<kbd>echo </kbd><var><s>"&lt;select name='dropdown' value='0'&gt;\n";</s></var>
+<kbd>foreach ( </kbd><var>$dropdown</var><kbd> as </kbd><var>$key</var> <kbd>=></kbd> <var>$value</var> <kbd>)
+{
+    echo </kbd><var><s>"&lt;option value='", $key, "'&gt;", $value, "&lt;/option&gt;\n";</s></var><kbd>
+}
+echo </kbd><var><s>"&lt;/select&gt;\n";</s></var>
+</pre>
+
+<h2>remove_tree(<i>$root_id</i>)</h2>
+<ul>
+	<li><dfn>$root_id</dfn>: if multi-tree support is enabled, the id of the tree that will be removed.</li>
+	<li><b>Returns</b>: a cleared <var>$object</var>.</li>
+</ul>
+<p>You use this method to delete a single tree, or all trees in the table. If multi-tree support is not enabled for the model, all records will be removed from the table, since they will all belong to the same tree.
+If multi-tree is enabled, and no parameter is passed, the tree selected using the <dfn>select_tree()</dfn> method will be removed.</p>
+<p class="important">If the model is multi-tree enabled, and <var>NO</var> tree id is passed as parameter, the tree the current node belongs to will be deleted. If no 'root' column name is defined in the config, all trees will be removed!</p>
+
+<h3>Usage</h3>
+<pre>
+<samp>// delete tree with ID 16</samp>
+<var>$object</var><kbd>-&gt;</kbd><var><u>remove_tree</u></var><kbd>(</kbd> <dfn>16</dfn> <kbd>);</kbd>
+</pre>
+
+<h2>remove_node()</h2>
+<ul>
+	<li><b>Returns</b>: a cleared <var>$object</var>.</li>
+</ul>
+<p>Deletes the current node object.</p>
+<p class="important">Note that you should <dfn>NOT</dfn> use the standard Datamapper <var>delete()</var> methods to delete a nested tree node. If you do that, the pointer sequence is broken and tree navigation no longer works.</p>
+
+<h3>Usage</h3>
+<pre>
+<samp>// delete the current node</samp>
+<var>$node</var><kbd>-&gt;</kbd><var><u>remove_node</u></var><kbd>();</kbd>
+</pre>
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../../js/mootools.js"></script>
+<script type="text/javascript" src="../../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../../',
+			pagespath: '../',
+			last: 'extlist'
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>

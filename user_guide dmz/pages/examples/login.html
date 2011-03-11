@@ -1,0 +1,443 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Handling Logins : Example Application : DataMapper ORM - User Guide</title>
+
+<style type="text/css" media="all">@import url('../../css/userguide.css');</style>
+<link rel="shortcut icon" type="image/png" href="../../images/favicon.png" />
+<link rel="stylesheet" type="text/css" media="all" href="../../css/userguide.css" />
+<link rel="alternate" type="application/rss+xml" title="Datamapper ORM Updates Feed" href="/rss.xml" />
+
+<meta http-equiv="expires" content="-1" />
+<meta http-equiv= 'pragma' content="no-cache" />
+<meta name="robots" content="all" />
+
+</head>
+
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a><a id="nav_toggle" href="#"><img src="../../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>DataMapper ORM</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+<a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
+<a href="../../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+<a href="../examples.html">Example Application</a> &nbsp;&#8250;&nbsp;
+Handling Logins
+</td>
+</tr>
+
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+
+<h1>Handling Logins</h1>
+
+<p>
+	The example application includes a fairly simple login manager.
+	It doesn't handle anything fancy, such as registering users, emailing passwords, or allowing users to reset their password.
+	But it does provide a foundation to see how to create users, securely encrypt their passwords, and validate logins.
+</p>
+
+
+<h2> Application / Models / User.php</h2>
+<p>The model handles the heavy work of hashing the password, as well as validating the login.</p>
+<p><em>Some sections of the file have been trimmed for brevity, and replaced with ellipsis.</em>
+<pre><div class="lineNums"> 43
+  •
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+  •
+ 70
+  •
+  •
+  •
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166</div>    <kbd>var </kbd><var>$validation </var><kbd>= array(</kbd>
+        <samp>[...]</samp>
+        <dfn>'password' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Password'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'trim'</dfn><kbd>, </kbd><dfn>'min_length' </dfn><kbd>=&gt; </kbd><var>3</var><kbd>, </kbd><dfn>'max_length' </dfn><kbd>=&gt; </kbd><var>40</var><kbd>, </kbd><dfn>'encrypt'</dfn><kbd>),
+            </kbd><dfn>'type' </dfn><kbd>=&gt; </kbd><dfn>'password'
+        </dfn><kbd>),
+        </kbd><dfn>'confirm_password' </dfn><kbd>=&gt; array(
+            </kbd><dfn>'label' </dfn><kbd>=&gt; </kbd><dfn>'Confirm Password'</dfn><kbd>,
+            </kbd><dfn>'rules' </dfn><kbd>=&gt; array(</kbd><dfn>'required'</dfn><kbd>, </kbd><dfn>'encrypt'</dfn><kbd>, </kbd><dfn>'matches' </dfn><kbd>=&gt; </kbd><dfn>'password'</dfn><kbd>, </kbd><dfn>'min_length' </dfn><kbd>=&gt; </kbd><var>3</var><kbd>, </kbd><dfn>'max_length' </dfn><kbd>=&gt; </kbd><var>40</var><kbd>),
+            </kbd><dfn>'type' </dfn><kbd>=&gt; </kbd><dfn>'password'
+        </dfn><kbd>),</kbd>
+        <samp>[...]</samp>
+    <var>);</var>
+
+    <samp>[...]</samp>
+
+    <samp>/**
+     * Login
+     *
+     * Authenticates a user for logging in.
+     *
+     * @access    public
+     * @return    bool
+     */
+    </samp><kbd>function </kbd><var>login</var><kbd>()
+    {
+        </kbd><samp>// backup username for invalid logins
+        </samp><var>$uname </var><kbd>= </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>username</var><kbd>;
+
+        </kbd><samp>// Create a temporary user object
+        </samp><var>$u </var><kbd>= new </kbd><var>User</var><kbd>();
+
+        </kbd><samp>// Get this users stored record via their username
+        </samp><var>$u</var><kbd>-&gt;</kbd><var><u>where</u></var><kbd>(</kbd><dfn>'username'</dfn><kbd>, </kbd><var>$uname</var><kbd>)-&gt;</kbd><var><u>get</u></var><kbd>();
+
+        </kbd><samp>// Give this user their stored salt
+        </samp><var><b>$this</b></var><kbd>-&gt;</kbd><var>salt </var><kbd>= </kbd><var>$u</var><kbd>-&gt;</kbd><var>salt</var><kbd>;
+
+        </kbd><samp>// Validate and get this user by their property values,
+        // this will see the 'encrypt' validation run, encrypting the password with the salt
+        </samp><var><b>$this</b></var><kbd>-&gt;</kbd><var><u>validate</u></var><kbd>()-&gt;</kbd><var><u>get</u></var><kbd>();
+
+        </kbd><samp>// If the username and encrypted password matched a record in the database,
+        // this user object would be fully populated, complete with their ID.
+
+        // If there was no matching record, this user would be completely cleared so their id would be empty.
+        </samp><kbd>if (</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var><u>exists</u></var><kbd>())
+        {
+            </kbd><samp>// Login succeeded
+            </samp><kbd>return </kbd><var><dfn>TRUE</dfn></var><kbd>;
+        }
+        else
+        {
+            </kbd><samp>// Login failed, so set a custom error message
+            </samp><var><b>$this</b></var><kbd>-&gt;</kbd><var><u>error_message</u></var><kbd>(</kbd><dfn>'login'</dfn><kbd>, </kbd><dfn>'Username or password invalid'</dfn><kbd>);
+
+            </kbd><samp>// restore username for login field
+            </samp><var><b>$this</b></var><kbd>-&gt;</kbd><var>username </var><kbd>= </kbd><var>$uname</var><kbd>;
+
+            return </kbd><var><dfn>FALSE</dfn></var><kbd>;
+        }
+    }
+
+    </kbd><samp>// --------------------------------------------------------------------
+
+    /**
+     * Encrypt (prep)
+     *
+     * Encrypts this objects password with a random salt.
+     *
+     * @access    private
+     * @param    string
+     * @return    void
+     */
+    </samp><kbd>function </kbd><var>_encrypt</var><kbd>(</kbd><var>$field</var><kbd>)
+    {
+        if (!empty(</kbd><var><b>$this</b></var><kbd>-&gt;{</kbd><var>$field</var><kbd>}))
+        {
+            if (empty(</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>salt</var><kbd>))
+            {
+                </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>salt </var><kbd>= </kbd><var><b>md5</b></var><kbd>(</kbd><var><b>uniqid</b></var><kbd>(</kbd><var><b>rand</b></var><kbd>(), </kbd><var><dfn>true</dfn></var><kbd>));
+            }
+
+            </kbd><var><b>$this</b></var><kbd>-&gt;{</kbd><var>$field</var><kbd>} = </kbd><var><b>sha1</b></var><kbd>(</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>salt </var><kbd>. </kbd><var><b>$this</b></var><kbd>-&gt;{</kbd><var>$field</var><kbd>});
+        }
+    }</kbd>
+</pre>
+
+<h2>Application / Controllers / Login.php</h2>
+<p>The login controller simply renders out the login form (below).  If the form was submitted, it attempts to process the login.</p>
+<pre><div class="lineNums">11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</div>    <kbd>function </kbd><var>index</var><kbd>()
+    {
+        </kbd><var>$user </var><kbd>= </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>login_manager</var><kbd>-&gt;</kbd><var>get_user</var><kbd>();
+        if(</kbd><var>$user </var><kbd>!== </kbd><var><dfn>FALSE</dfn></var><kbd>)
+        {
+            </kbd><samp>// already logged in, redirect to welcome page
+            </samp><var>redirect</var><kbd>(</kbd><dfn>'welcome'</dfn><kbd>);
+        }
+        </kbd><samp>// Create a user to store the login validation
+        </samp><var>$user </var><kbd>= new </kbd><var>User</var><kbd>();
+        if(</kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>input</var><kbd>-&gt;</kbd><var>post</var><kbd>(</kbd><dfn>'username'</dfn><kbd>) !== </kbd><var><dfn>FALSE</dfn></var><kbd>)
+        {
+            </kbd><samp>// A login was attempted, load the user data
+            </samp><var>$user</var><kbd>-&gt;</kbd><var><s>from_array</s></var><kbd>(</kbd><var><b>$_POST</b></var><kbd>, array(</kbd><dfn>'username'</dfn><kbd>, </kbd><dfn>'password'</dfn><kbd>));
+            </kbd><samp>// get the result of the login request
+            </samp><var>$login_redirect </var><kbd>= </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>login_manager</var><kbd>-&gt;</kbd><var>process_login</var><kbd>(</kbd><var>$user</var><kbd>);
+            if(</kbd><var>$login_redirect</var><kbd>)
+            {
+                if(</kbd><var>$login_redirect </var><kbd>=== </kbd><var><dfn>TRUE</dfn></var><kbd>)
+                {
+                    </kbd><samp>// if the result was simply TRUE, redirect to the welcome page.
+                    </samp><var>redirect</var><kbd>(</kbd><dfn>'welcome'</dfn><kbd>);
+                }
+                else
+                {
+                    </kbd><samp>// otherwise, redirect to the stored page that was last accessed.
+                    </samp><var>redirect</var><kbd>(</kbd><var>$login_redirect</var><kbd>);
+                }
+            }
+        }
+
+        </kbd><var>$user</var><kbd>-&gt;</kbd><var><u>load_extension</u></var><kbd>(</kbd><dfn>'htmlform'</dfn><kbd>);
+
+        </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>output</var><kbd>-&gt;</kbd><var>enable_profiler</var><kbd>(</kbd><var><dfn>TRUE</dfn></var><kbd>);
+        </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>load</var><kbd>-&gt;</kbd><var>view</var><kbd>(</kbd><dfn>'template_header'</dfn><kbd>, array(</kbd><dfn>'title' </dfn><kbd>=&gt; </kbd><dfn>'Login'</dfn><kbd>, </kbd><dfn>'hide_nav' </dfn><kbd>=&gt; </kbd><var><dfn>TRUE</dfn></var><kbd>));
+        </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>load</var><kbd>-&gt;</kbd><var>view</var><kbd>(</kbd><dfn>'login'</dfn><kbd>, array(</kbd><dfn>'user' </dfn><kbd>=&gt; </kbd><var>$user</var><kbd>));
+        </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>load</var><kbd>-&gt;</kbd><var>view</var><kbd>(</kbd><dfn>'template_footer'</dfn><kbd>);
+    }</kbd>
+</pre>
+
+<h2>Application / Libraries / Login_Manager.php</h2>
+<p>
+	The login_manager library was created to make it easier to prevent unchecked access to the website.
+	By default, when it is loaded, it will redirect to the login page if there is no login.
+	It also contains options to restrict the access based on the user's assigned group.
+</p>
+<p>
+	This snippet below shows the method used to validate the login.
+	The session variable <dfn>login_redirect</dfn> was stored at an earlier time, if the user attempted to visit a page without being logged in (or, if the session had timed out).
+</p>
+<pre><div class="lineNums">59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84</div>    <samp>/**
+     * process_login
+     * Validates that a username and password are correct.
+     *
+     * @param object $user The user containing the login information.
+     * @return FALSE if invalid, TRUE or a redirect string if valid.
+     */
+    </samp><kbd>function </kbd><var>process_login</var><kbd>(</kbd><var>$user</var><kbd>)
+    {
+        </kbd><samp>// attempt the login
+        </samp><var>$success </var><kbd>= </kbd><var>$user</var><kbd>-&gt;</kbd><var>login</var><kbd>();
+        if(</kbd><var>$success</var><kbd>)
+        {
+            </kbd><samp>// store the userid if the login was successful
+            </samp><var><b>$this</b></var><kbd>-&gt;</kbd><var>session</var><kbd>-&gt;</kbd><var>set_userdata</var><kbd>(</kbd><dfn>'logged_in_id'</dfn><kbd>, </kbd><var>$user</var><kbd>-&gt;</kbd><var>id</var><kbd>);
+            </kbd><samp>// store the user for this request
+            </samp><var><b>$this</b></var><kbd>-&gt;</kbd><var>logged_in_user </var><kbd>= </kbd><var>$user</var><kbd>;
+            </kbd><samp>// if a redirect is necessary, return it.
+            </samp><var>$redirect </var><kbd>= </kbd><var><b>$this</b></var><kbd>-&gt;</kbd><var>session</var><kbd>-&gt;</kbd><var>userdata</var><kbd>(</kbd><dfn>'login_redirect'</dfn><kbd>);
+            if(</kbd><var>$redirect </var><kbd>!== </kbd><var><dfn>FALSE</dfn></var><kbd>)
+            {
+                </kbd><var>$success </var><kbd>= </kbd><var>$redirect</var><kbd>;
+            }
+        }
+        return </kbd><var>$success</var><kbd>;
+    }</kbd>
+</pre>
+
+<h2>Application / Controllers / Bugs.php</h2>
+<p>Finally, to show how login_manager is used to prevent access for non-logged-in users, this is from the top of a controller.</p>
+<pre><div class="lineNums"> 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+ •
+ •</div><kbd>class </kbd><var>Bugs </var><kbd>extends </kbd><var><b>Controller</b> </var><kbd>{
+
+    function </kbd><var><dfn>__construct</dfn></var><kbd>()
+    {
+        </kbd><var><dfn>parent</dfn></var><kbd>::</kbd><var><dfn>__construct</dfn></var><kbd>();
+        </kbd><samp>// prevent non-logged-in access
+        </samp><var><b>$this</b></var><kbd>-&gt;</kbd><var>load</var><kbd>-&gt;</kbd><var>library</var><kbd>(</kbd><dfn>'login_manager'</dfn><kbd>);
+    }</kbd>
+
+    <samp>[...]</samp>
+</pre>
+
+</div>
+<!-- END CONTENT -->
+
+
+<div id="footer">
+<p>
+<span id="footer_previous">Previous Topic:&nbsp;&nbsp;<a href=""></a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../../index.html">User Guide Home</a>
+<span id="footer_next">&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href=""></a></span>
+</p>
+<div id="copyrights">
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="license.html">Other License Information</a></p>
+</div>
+</div>
+
+<script type="text/javascript" src="../../js/mootools.js"></script>
+<script type="text/javascript" src="../../js/menu.js"></script>
+<script type="text/javascript">
+<!--
+	window.addEvent('domready', function() {
+
+		// Create Menu
+		var menu = new Menu({
+			basepath: '../../',
+			pagespath: '../',
+			last: 'examples'
+		});
+
+	});
+//-->
+</script>
+</body>
+</html>
