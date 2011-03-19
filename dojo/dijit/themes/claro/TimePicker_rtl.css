@@ -3,7 +3,7 @@
 .dj_ie .claro .dijitTimePickerRtl .dijitTimePickerMarkerHover,
 .dj_ie .claro .dijitTimePickerRtl .dijitTimePickerMarkerSelected,
 .dj_ie .claro .dijitTimePickerRtl .dijitTimePickerTickSelected {
-	margin-left:-6px;
-	margin-right:-8px;
-	width: 114%;	
+  margin-left: -6px;
+  margin-right: -8px;
+  width: 114%;
 }
