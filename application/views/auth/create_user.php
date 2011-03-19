@@ -1,21 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
+<?=theme_doctype()?>
+<?php
+theme_pagetitle('Register');
+theme_add('dijit.form.Button');
+theme_add('dijit.Dialog');
+theme_add('dijit.form.TextBox');
+theme_add('dijit.form.Button');
+?>
+<html>
 <head>
-	<title> Register</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-	<meta name="generator" content="Geany 0.15" />
-	<link  href="<?= base_url() ?>dojo/dijit/themes/claro/claro.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="<?= base_url() ?>dojo/dojo/dojo.js"
-	djConfig="parseOnLoad:true"></script>
-	<script type="text/javascript">
-		dojo.require("dojo.parser");
-		dojo.require("dijit.form.Button");
-		dojo.require("dijit.Dialog");
-		dojo.require("dijit.form.TextBox");
-		dojo.require("dijit.form.Button");
-	</script>
+	<?=theme_head()?>
 <style>
 body{
 	font-size: 12px;
@@ -81,7 +74,7 @@ dojo.addOnLoad( null, function(){
       </p>
       
       <p>Phone:<br />
-      <?php echo form_input($phone1);?>-<?php echo form_input($phone2);?>-<?php echo form_input($phone3);?>
+      <?php echo form_input($phone1);?>
       </p>
       
       <p>Password:<br />
@@ -100,5 +93,6 @@ dojo.addOnLoad( null, function(){
 
 </div>
 		</div>
+		<?=theme_foot()?>
 </body>
 </html> 

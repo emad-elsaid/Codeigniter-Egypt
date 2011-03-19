@@ -10,27 +10,13 @@ class Auth extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->database();
 		$this->load->helper('url');
+		$this->load->helper('theme');
 		
 	}
 
 	//redirect if needed, otherwise display the user list
 	public function index(){
-		
-		if (!$this->ion_auth->logged_in()){
-			//redirect them to the login page
-			redirect('auth/login', 'refresh');
-		}elseif (!$this->ion_auth->is_admin()){
-			//redirect them to the home page because they must be an administrator to view this
-			redirect($this->config->item('base_url'), 'refresh');
-		}else{
-			//set the flash data error message if there is one
-			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-
-			//list the users
-			$this->data['users'] = $this->ion_auth->get_users_array();
-			$this->load->view('auth/index', $this->data);
-		}
-		
+		redirect('');
 	}
 
 	//log the user in
@@ -192,40 +178,6 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	//deactivate the user
-	public function deactivate($id = NULL){
-		
-		// no funny business, force to integer
-		$id = (int) $id;
-
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('confirm', 'confirmation', 'required');
-		$this->form_validation->set_rules('id', 'user ID', 'required|is_natural');
-
-		if ($this->form_validation->run() == FALSE){
-			// insert csrf check
-			$this->data['csrf'] = $this->_get_csrf_nonce();
-			$this->data['user'] = $this->ion_auth->get_user($id);
-			$this->load->view('auth/deactivate_user', $this->data);
-		}else{
-			// do we really want to deactivate?
-			if ($this->input->post('confirm') == 'yes'){
-				// do we have a valid request?
-				if ($this->_valid_csrf_nonce() === FALSE || $id != $this->input->post('id'))
-					show_404();
-				
-
-				// do we have the right userlevel?
-				if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin())
-					$this->ion_auth->deactivate($id);
-				
-			}
-
-			//redirect them back to the auth page
-			redirect('auth', 'refresh');
-		}
-	}
-
 	//create a new user
 	public function create_user(){
 		
@@ -239,9 +191,7 @@ class Auth extends CI_Controller {
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
-		$this->form_validation->set_rules('phone1', 'First Part of Phone', 'required|xss_clean|min_length[3]|max_length[3]');
-		$this->form_validation->set_rules('phone2', 'Second Part of Phone', 'required|xss_clean|min_length[3]|max_length[3]');
-		$this->form_validation->set_rules('phone3', 'Third Part of Phone', 'required|xss_clean|min_length[4]|max_length[4]');
+		$this->form_validation->set_rules('phone1', 'First Part of Phone', 'required|xss_clean|min_length[3]|max_length[20]');
 		$this->form_validation->set_rules('company', 'Company Name', 'required|xss_clean');
 		$this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
 		$this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'required');
@@ -254,7 +204,7 @@ class Auth extends CI_Controller {
 			$additional_data = array('first_name' => $this->input->post('first_name'),
 				'last_name' => $this->input->post('last_name'),
 				'company' => $this->input->post('company'),
-				'phone' => $this->input->post('phone1') . '-' . $this->input->post('phone2') . '-' . $this->input->post('phone3'),
+				'phone' => $this->input->post('phone1') ,
 			);
 		}
 		
@@ -290,16 +240,6 @@ class Auth extends CI_Controller {
 				'id' => 'phone1',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('phone1'),
-			);
-			$this->data['phone2'] = array('name' => 'phone2',
-				'id' => 'phone2',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('phone2'),
-			);
-			$this->data['phone3'] = array('name' => 'phone3',
-				'id' => 'phone3',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('phone3'),
 			);
 			$this->data['password'] = array('name' => 'password',
 				'id' => 'password',

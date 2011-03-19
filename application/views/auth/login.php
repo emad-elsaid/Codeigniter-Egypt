@@ -1,21 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
+<?=theme_doctype()?>
+<?php
+theme_pagetitle('Login');
+theme_add('dijit.form.Button');
+theme_add('dijit.Dialog');
+theme_add('dijit.form.TextBox');
+theme_add('dijit.form.Button');
+?>
+<html>
 <head>
-	<title>LOGIN</title>
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-	<meta name="generator" content="Geany 0.15" />
-	<link  href="<?= base_url() ?>dojo/dijit/themes/claro/claro.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="<?= base_url() ?>dojo/dojo/dojo.js"
-	djConfig="parseOnLoad:true"></script>
-	<script type="text/javascript">
-		dojo.require("dojo.parser");
-		dojo.require("dijit.form.Button");
-		dojo.require("dijit.Dialog");
-		dojo.require("dijit.form.TextBox");
-		dojo.require("dijit.form.Button");
-	</script>
+	<?=theme_head()?>
 <style>
 body{
 	font-size: 12px;
@@ -54,7 +47,7 @@ dojo.addOnLoad( null, function(){
 });
 </script>
 </head>
-	<body class="claro">
+	<body class="<?=theme_dojotheme()?>">
 
 		<div id="loginD" dojoType="dijit.Dialog" title="Login" >
 		
@@ -67,31 +60,27 @@ dojo.addOnLoad( null, function(){
 	<div id="infoMessage"><?php echo $message;?></div>
 	
     <?php echo form_open("auth/login");?>
-    	
       <p>
       	<label for="email">Email:</label>
       	<?php echo form_input($email);?>
       </p>
-      
       <p>
       	<label for="password">Password:</label>
       	<?php echo form_input($password);?>
       </p>
-      
       <p>
 	      <label for="remember">Remember Me:</label>
 	      <?php echo form_checkbox('remember', '1', FALSE);?>
 	  </p>
-      
-      
+            
       <p><?php echo form_submit('submit', 'Login');?></p>
-
-      
     <?php echo form_close();?>
     <a href="<?=site_url('auth/forgot_password')?>" >Forgot Password</a><br/>
     <a href="<?=site_url('auth/create_user')?>" >New user registeration</a>
 
 </div>
 		</div>
+		<?=theme_foot()?>
+		
 </body>
 </html> 

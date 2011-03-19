@@ -211,7 +211,7 @@ if( ! function_exists('theme_css') ){
 			return $cssText;
 		}
 
-		if( $input[0]!='<' )
+		if( $input[0]!='<' and substr($input,0,4)!='http' )
 			$input = $CI->config->slash_item('base_url').$input;
 			
 		if( ! in_array($input, $CI->config->config['css_files']) )
@@ -241,14 +241,14 @@ if( ! function_exists('theme_js') ){
 			$jsArray = $CI->config->item('js_files');
 			foreach( $jsArray as $item )
 			if( $item[0]!='<' ){
-				$param = ($item==$CI->config->slash_item('base_url').'dojo/dojo/dojo.js')? 'djConfig="parseOnLoad:true"':'';
+				$param = (substr($item,strlen($item)-7)=='dojo.js' or substr($item,strlen($item)-10)=='dojo.xd.js')? 'djConfig="parseOnLoad:true"':'';
 				$jsText .= "<script type=\"text/javascript\" src=\"$item\" $param ></script>\n";
 			}else
 			$jsText .= $item."\n";
 			return $jsText;
 		}
 
-		if( $input[0]!='<')
+		if( $input[0]!='<' and substr($input,0,4)!='http')
 			$input = $CI->config->slash_item('base_url').$input;
 
 		if( ! in_array($input, $CI->config->config['js_files']) )
@@ -300,8 +300,14 @@ if( ! function_exists('theme_dojo') ){
 		}
 		
 		if( count($CI->config->config['dojo_files'])==0 ){
-			theme_css('dojo/dijit/themes/'.$CI->config->config['dojo_style'].'/'.$CI->config->config['dojo_style'].'.css');
-			theme_js('dojo/dojo/dojo.js');
+			if( $CI->config->config['dojo_CDN'] ){
+				theme_css('http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/'.$CI->config->config['dojo_style'].'/'.$CI->config->config['dojo_style'].'.css');
+				theme_js('http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js');
+			} else {
+				theme_css('dojo/dijit/themes/'.$CI->config->config['dojo_style'].'/'.$CI->config->config['dojo_style'].'.css');
+				theme_js('dojo/dojo/dojo.js');
+				
+			}
 		}
 		
 		if( ! in_array($input, $CI->config->config['dojo_files']) )

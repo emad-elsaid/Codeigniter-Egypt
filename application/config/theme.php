@@ -16,3 +16,8 @@ $config['js_files'] 				= array();
 $config['dojo_files'] 				= array();
 $config['js_at_foot'] 				= FALSE;
 
+/* if TRUE then you can delete dojo and save space
+ * and HTTP requests, then dojo and dijit will be requested from 
+ * google CDN automatically
+ */
+$config['dojo_CDN']					= FALSE;
