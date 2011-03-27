@@ -41,24 +41,24 @@ EOT
 
 <div class="panel">
 
-	<a href="<?=site_url('sectionEditor')?>" class="iframe"  title="Sections manager">
-		<img src="<?=$local?>link.png" /> Sections manager
+	<a href="<?=site_url('sectionEditor')?>" class="iframe"  title="<?=lang('system_sections_editor')?>">
+		<img src="<?=$local?>link.png" /> <?=lang('system_sections_editor')?>
 	</a>
 	
-	<a href="<?=site_url('usersEditor')?>" class="iframe" title="Users manager" >
-		<img src="<?=$local?>link.png" /> User manager
+	<a href="<?=site_url('usersEditor')?>" class="iframe" title="<?=lang('system_users_editor')?>" >
+		<img src="<?=$local?>link.png" /> <?=lang('system_users_editor')?>
 	</a>
 	
 	<a href="javascript:admin_editmode_toolbar()" >
-		<img src="<?=$local?>link.png" title="Editmode toggle" /> Toggle Edit mode
+		<img src="<?=$local?>link.png" title="<?=lang('system_toggle_editmode')?>" /> <?=lang('system_toggle_editmode')?>
 	</a>
 	
 	<a href="<?=site_url('auth/change_password')?>" class="iframe" >
-		<img src="<?=$local?>link.png" title="Change Password" />Change Password
+		<img src="<?=$local?>link.png" title="<?=lang('system_change_password')?>" /> <?=lang('system_change_password')?>
 	</a>
 	
 	<a href="<?=$logout?>" >
-		<img src="<?=$local?>link.png" title="Logout" /> Logout
+		<img src="<?=$local?>link.png" title="<?=lang('system_logout')?>" /> <?=lang('system_logout')?>
 	</a>
 
 </div>

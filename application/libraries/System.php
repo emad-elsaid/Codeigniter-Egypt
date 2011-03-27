@@ -23,7 +23,8 @@ class System {
 		$this->CI =& get_instance();
 		$this->CI->load->database();
 		$this->CI->load->library(array('datamapper','session','ion_auth'));
-		$this->CI->load->helper(array('perm', 'html','url','theme'));
+		$this->CI->load->helper(array('perm', 'html','url','theme','language'));
+		$this->CI->lang->load('system');
 
 		// getting the current section
 		$this->section = new Section($this->CI->uri->rsegment(3));

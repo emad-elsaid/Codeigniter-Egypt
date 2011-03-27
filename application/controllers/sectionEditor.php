@@ -14,14 +14,14 @@ class SectionEditor extends Application {
 	public function __construct(){
 		parent::__construct();
 		
-		$this->perm = 'admin';
-		$this->name 	= "Section Editor";
+		$this->perm 	= 'admin';
+		$this->name 	= lang('system_sections_editor');
 		$this->author 	= "Emad Elsaid";
 		$this->website 	= "http://blazeeboy.blogspot.com";
 		$this->version 	= "0.1";
 		$this->pages 	= array(
-							'index'=>'Sections',
-							'add'=>'New Section'
+							'index' => lang('system_sections'),
+							'add' => lang('system_new_section')
 							);
 
 		$this->load->library('gui');
@@ -85,10 +85,10 @@ class SectionEditor extends Application {
 		$this->print_text( $this->gui->form(
 			site_url( 'sectionEditor/addaction' )
 			,array(
-					'Parent :'=>$this->gui->section( 'parent_section')
-					,'Name :'=>$this->gui->textbox( 'name' )
-					,'View Permission :'=>$this->gui->permission( 'view' )
-					,''=>$this->gui->button( '', 'Add Section', array('type'=>'submit') )
+					lang('system_parent_section') => $this->gui->section( 'parent_section')
+					,lang('system_name_label') => $this->gui->textbox( 'name' )
+					,lang('system_view_perm') => $this->gui->permission( 'view' )
+					,''=>$this->gui->button( '', lang('system_add_section'), array('type'=>'submit') )
 			)
 		));
 		
@@ -150,11 +150,11 @@ class SectionEditor extends Application {
 		$this->print_text( $this->gui->form(
 			site_url( 'sectionEditor/editaction' )
 			,array(
-				'Name :'	=>$this->gui->textbox( 'name', $s->name )
-				,'view'		=>$this->gui->permission( 'view', $s->view )
-				,''			=>$this->gui->button( '', 'Edit Section', array('type'=>'submit') )
+				lang('system_name_label')	=>$this->gui->textbox( 'name', $s->name )
+				,lang('system_view_perm')	=>$this->gui->permission( 'view', $s->view )
+				,''			=>$this->gui->button( '', lang('system_edit_section'), array('type'=>'submit') )
 							.anchor('sectionEditor/delete/'.$id,
-							'I want to delete That Section','onclick="return confirm(\'Are You Sure ?\');"')
+							lang('system_delete_section'),'onclick="return confirm(\''.lang('system_are_you_sure').'\');"')
 			)
 			,''
 			,$hidden

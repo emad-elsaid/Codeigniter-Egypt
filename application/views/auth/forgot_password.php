@@ -48,19 +48,19 @@ dojo.addOnLoad( null, function(){
 </head>
 	<body class="claro">
 
-		<div id="loginD" dojoType="dijit.Dialog" title="Forgot Password" >
+		<div id="loginD" dojoType="dijit.Dialog" title="<?=lang('system_forgot')?>" >
 		
-<p>Please enter your email address so we can send you an email to reset your password.</p>
+<p><?=lang('system_please_enter_email')?></p>
 
 <div id="infoMessage"><?php echo $message;?></div>
 
 <?php echo form_open("auth/forgot_password");?>
 
-      <p>Email Address:<br />
+      <p><?=lang('system_email')?><br />
       <?php echo form_input($email);?>
       </p>
       
-      <p><?php echo form_submit('submit', 'Submit');?></p>
+      <p><?php echo form_submit('submit', lang('system_submit'));?></p>
       
 <?php echo form_close();?>
 		</div>

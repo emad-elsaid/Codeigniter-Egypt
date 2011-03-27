@@ -49,34 +49,34 @@ dojo.addOnLoad( null, function(){
 </head>
 	<body class="<?=theme_dojotheme()?>">
 
-		<div id="loginD" dojoType="dijit.Dialog" title="Login" >
+		<div id="loginD" dojoType="dijit.Dialog" title="<?=lang('system_login')?>" >
 		
 		<div class='mainInfo'>
 
     <div class="pageTitleBorder"></div>
     <center><img src="<?= base_url() ?>assets/admin/logo.png" align="center" ></center>
-	<p>Please login with your email address and password below.</p>
+	<p><?=lang('system_please_login')?></p>
 	
 	<div id="infoMessage"><?php echo $message;?></div>
 	
     <?php echo form_open("auth/login");?>
       <p>
-      	<label for="email">Email:</label>
+      	<label for="email"><?=lang('system_email')?></label>
       	<?php echo form_input($email);?>
       </p>
       <p>
-      	<label for="password">Password:</label>
+      	<label for="password"><?=lang('system_password')?></label>
       	<?php echo form_input($password);?>
       </p>
       <p>
-	      <label for="remember">Remember Me:</label>
+	      <label for="remember"><?=lang('system_rememberme')?></label>
 	      <?php echo form_checkbox('remember', '1', FALSE);?>
 	  </p>
             
-      <p><?php echo form_submit('submit', 'Login');?></p>
+      <p><?php echo form_submit('submit', lang('system_login'));?></p>
     <?php echo form_close();?>
-    <a href="<?=site_url('auth/forgot_password')?>" >Forgot Password</a><br/>
-    <a href="<?=site_url('auth/create_user')?>" >New user registeration</a>
+    <a href="<?=site_url('auth/forgot_password')?>" ><?=lang('system_forgot')?></a><br/>
+    <a href="<?=site_url('auth/create_user')?>" ><?=lang('system_new_user_register')?></a>
 
 </div>
 		</div>

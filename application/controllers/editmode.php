@@ -18,13 +18,13 @@ class Editmode extends Application {
 		parent::__construct();
 		
 		$this->perm 	= 'admin';
-		$this->name 	= "Edit mode Changer";
-		$this->author 	= "Emad Elsaid";
-		$this->website 	= "http://blazeeboy.blogspot.com";
-		$this->version 	= "0.1";
+		$this->name 	= lang('system_edit_mode_changer');
+		$this->author 	= 'Emad Elsaid';
+		$this->website 	= 'http://blazeeboy.blogspot.com';
+		$this->version 	= '0.1';
 		$this->pages 	= array(
-						'edit'=>'Edit Mode'
-						,'view'=>'View Mode'
+						'edit' => lang('system_edit_mode')
+						,'view' => lang('system_view_mode')
 						);
 
 	}
@@ -38,7 +38,7 @@ class Editmode extends Application {
 		
 		$this->system->set_mode ('edit');
 		$this->load->library( 'gui' );
-		$text = anchor( site_url('editmode/view') , 'Go to View Mode' );
+		$text = anchor( site_url('editmode/view') , lang('system_switch_to_view_mode') );
 		$this->print_text('<center>'.$text.'</center>');
 		
 	}
@@ -52,7 +52,7 @@ class Editmode extends Application {
 		
 		$this->system->set_mode('view');
 		$this->load->library( 'gui' );
-		$text = anchor( site_url('editmode/edit') , 'Go to Edit Mode' );
+		$text = anchor( site_url('editmode/edit') , lang('system_switch_to_view_mode') );
 		$this->print_text('<center>'.$text.'</center>');
 	
 	}

@@ -48,45 +48,45 @@ dojo.addOnLoad( null, function(){
 </head>
 	<body class="claro">
 
-		<div id="loginD" dojoType="dijit.Dialog" title="Register" >
+		<div id="loginD" dojoType="dijit.Dialog" title="<?=lang('system_register')?>" >
 		
 		<div class='mainInfo'>
 		
-	<p>Please enter the users information below.</p>
+	<p><?=lang('system_please_enter_info')?></p>
 	
 	<div id="infoMessage"><?php echo $message;?></div>
 	
     <?php echo form_open("auth/create_user");?>
-      <p>First Name:<br />
+      <p><?=lang('system_first_name')?><br />
       <?php echo form_input($first_name);?>
       </p>
       
-      <p>Last Name:<br />
+      <p><?=lang('system_first_name')?><br />
       <?php echo form_input($last_name);?>
       </p>
       
-      <p>Company Name:<br />
+      <p><?=lang('system_company')?><br />
       <?php echo form_input($company);?>
       </p>
       
-      <p>Email:<br />
+      <p><?=lang('system_email')?><br />
       <?php echo form_input($email);?>
       </p>
       
-      <p>Phone:<br />
-      <?php echo form_input($phone1);?>
+      <p><?=lang('system_phone')?><br />
+      <?php echo form_input($phone);?>
       </p>
       
-      <p>Password:<br />
+      <p><?=lang('system_password')?><br />
       <?php echo form_input($password);?>
       </p>
       
-      <p>Confirm Password:<br />
+      <p><?=lang('system_password_conf')?><br />
       <?php echo form_input($password_confirm);?>
       </p>
       
       
-      <p><?php echo form_submit('submit', 'Create User');?></p>
+      <p><?php echo form_submit('submit', lang('system_register'));?></p>
 
       
     <?php echo form_close();?>

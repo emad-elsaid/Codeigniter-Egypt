@@ -46,7 +46,7 @@
 	  <div dojoType="dijit.layout.ContentPane" region="top" splitter="false">
 		<div  dojoType="dijit.MenuBar" >
 			<div dojoType="dijit.PopupMenuBarItem" >
-				<span>Menu</span>
+				<span><?=lang('system_menu')?></span>
 				<div dojoType="dijit.Menu">
 				
 					<?php foreach( $app->pages as $key=>$item ){ ?>
@@ -59,10 +59,10 @@
 			</div>
 			
 			<div dojoType="dijit.PopupMenuBarItem" >
-				<span>Help</span>
+				<span><?=lang('system_help')?></span>
 				<div dojoType="dijit.Menu">
-					<div dojoType="dijit.MenuItem" onclick="dijit.byId( 'aboutDlg' ).show();" >About</div>
-					<div dojoType="dijit.MenuItem" onclick="window.location.href='<?=$app->website ?>'" >Author website</div>
+					<div dojoType="dijit.MenuItem" onclick="dijit.byId( 'aboutDlg' ).show();" ><?=lang('system_about')?></div>
+					<div dojoType="dijit.MenuItem" onclick="window.location.href='<?=$app->website ?>'" ><?=lang('system_author_website')?></div>
 						
 				</div>
 			</div>
@@ -83,11 +83,11 @@
 
 
 <!-- \\\\\\\\\\\\\\\\\\\That is the help dialog HTML/////////////// -->
-		<div  dojoType="dijit.Dialog" id="aboutDlg" title="About">
-			<p><strong>App Name: </strong><?= $app->name ?></p>
-			<p><strong>App Version: </strong><?= $app->version ?></p>
-			<p><strong>App Author: </strong><?= $app->author ?></p>
-			<p><strong>Website: </strong>
+		<div  dojoType="dijit.Dialog" id="aboutDlg" title="<?=lang('system_about')?>">
+			<p><strong><?=lang('system_app_name')?></strong> <?= $app->name ?></p>
+			<p><strong><?=lang('system_app_ver')?></strong> <?= $app->version ?></p>
+			<p><strong><?=lang('system_app_author')?></strong> <?= $app->author ?></p>
+			<p><strong><?=lang('system_author_website')?></strong>
 				<a target="_blank" href="<?= $app->website ?>"><?=$app->website ?></a>
 			</p>
 		</div>

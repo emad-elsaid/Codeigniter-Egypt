@@ -17,7 +17,8 @@ class Gui {
 		
 		$CI =& get_instance();
 		$CI->load->helper('form');
-		
+		$CI->load->helper('language');
+		$CI->lang->load('system');
 	}
 
 
@@ -350,8 +351,8 @@ EOT;
 		$ci =& get_instance();
 		$ci->load->helper('perm');
 		$p_arr = perm_array();
-		$t_text = 	'<b>Boolean variables : </b>'.implode('|', array_keys($p_arr['boolVars']) )
-		.'<br><b>Variables : </b>'.implode('|', array_keys($p_arr['vars']) );
+		$t_text = 	'<b>'.lang('system_boolean_vars').' : </b>'.implode('|', array_keys($p_arr['boolVars']) )
+		.'<br><b>'.lang('system_vars').' : </b>'.implode('|', array_keys($p_arr['vars']) );
 
 		$value = form_prep( $value );
 		$id_g = 'p'.microtime();

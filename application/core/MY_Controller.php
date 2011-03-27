@@ -82,7 +82,7 @@ class Application extends CI_Controller {
 	public function _remap($method, $params = array()){
 		
 		if( !perm_chck($this->perm) )
-			show_error('Permission Denied');
+			show_error( lang('system_permission_denied') );
 		
 		$this->page = array_key_exists($method,$this->pages)
 						? $this->pages[$method]

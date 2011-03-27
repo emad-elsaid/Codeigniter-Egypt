@@ -19,10 +19,10 @@ class Editor extends Application {
 		parent::__construct();
 
 		$this->perm 			= 'admin';
-		$this->name 			= "Content Editor";
-		$this->author 			= "Emad Elsaid";
-		$this->website 			= "http://blazeeboy.blogspot.com";
-		$this->version 			= "0.1";
+		$this->name 			= lang('system_content_editor');
+		$this->author 			= 'Emad Elsaid';
+		$this->website 			= 'http://blazeeboy.blogspot.com';
+		$this->version 			= '0.1';
 		$this->show_toolbar 	= FALSE;
 		$this->pages 			= array();
 
@@ -113,10 +113,10 @@ class Editor extends Application {
 		$p 		= new Content($c->parent_content);
 
 		if( $this->input->post( "id" )===FALSE ){
-			$this->add_info( 'Content added' );
+			$this->add_info( lang('system_content_added') );
 		}else{
 			$this->ajax = TRUE;
-			$this->print_text( 'Content Edited' );
+			$this->print_text( lang('system_content_edited') );
 		}
 		$c->save();
 
@@ -148,13 +148,13 @@ class Editor extends Application {
 			$parent = $con->parent_content;
 			$p = new Content($con->parent_content);
 
-			$this->pages['up/'.$con->id] = 'Move Up';
-			$this->pages['down/'.$con->id] = 'Move Down';
-			$this->pages['chooser/'.$sec.'/'.$parent.'/'.$con->cell.'/'.$con->sort] = 'Add Before';
-			$this->pages['chooser/'.$sec.'/'.$parent.'/'.$con->cell.'/'.($con->sort+1)] = 'Add After';
-			$this->pages['delete/'.$con->id] = 'Delete';
-			$this->pages['delete_children/'.$con->id] = 'Delete Children';
-			$this->pages['info/'.$con->id] = 'Information';
+			$this->pages['up/'.$con->id] 		= lang('system_move_up');
+			$this->pages['down/'.$con->id] 		= lang('system_move_down');
+			$this->pages['chooser/'.$sec.'/'.$parent.'/'.$con->cell.'/'.$con->sort] 		= lang('system_add_before');
+			$this->pages['chooser/'.$sec.'/'.$parent.'/'.$con->cell.'/'.($con->sort+1)] 	= lang('system_add_after');
+			$this->pages['delete/'.$con->id] 	= lang('system_delete');
+			$this->pages['delete_children/'.$con->id] = lang('system_delete_children');
+			$this->pages['info/'.$con->id] 		= lang('system_information');
 		}
 
 		
@@ -183,6 +183,8 @@ class Editor extends Application {
 		if( $edit === FALSE )
 			$submit_script = "dijit.byId('basic_form').submit();";
 		else{
+			$saved_title = lang('system_save_success');
+			$error_occured = lang('system_error_occured');
 			$submit_script = <<<EOT
 	dojo.xhrPost({           
          url: "$form_ajax_url",
@@ -191,7 +193,7 @@ class Editor extends Application {
          content: dojo.formToObject("basic_form"),
          load: function(response, args) {
 			        Dlg = new dijit.Dialog({
-			            title: "Saved Successfully",
+			            title: "$saved_title",
 			            style: "width: 300px",
 			            content : response
 			        });
@@ -200,7 +202,7 @@ class Editor extends Application {
 			 },
          error: function(response, args) {
 					Dlg = new dijit.Dialog({
-			            title: "An error Occured",
+			            title: "$error_occured",
 			            style: "width: 300px",
 			            content : response
 			        });
@@ -227,11 +229,11 @@ EOT;
 			$Basic_Form = 	$this->gui->form(
 			site_url('editor/addaction')
 			,array(
-		"Title : " 					=> $this->gui->textbox('title'),
-		"Show in subsections : " 	=> $this->gui->checkbox('subsection'),
-		"View permissions : " 		=> $this->gui->permission('view', $p_cont->view),
-		"Filters : "				=> $this->gui->file_list( site_url('editor/filter_query'), 'filter' ),
-		"" 							=> $this->gui->button( '','Save'.$script )
+		lang('system_title')		=> $this->gui->textbox('title'),
+		lang('show_in_subsection') 	=> $this->gui->checkbox('subsection'),
+		lang('system_view_perm')	=> $this->gui->permission('view', $p_cont->view),
+		lang('system_filters')		=> $this->gui->file_list( site_url('editor/filter_query'), 'filter' ),
+		"" 							=> $this->gui->button( '',lang('system_save').$script )
 			)
 			,array( 'id'=>'basic_form' )
 			,$hidden
@@ -240,11 +242,11 @@ EOT;
 			$Basic_Form = 	$this->gui->form(
 			site_url('editor/addaction')
 			,array(
-		"Title : " 					=> $this->gui->textbox('title', $con->title ),
-		"Show in subsections : " 	=> $this->gui->checkbox('subsection','subsection', $con->subsection),
-		"View permissions : " 		=> $this->gui->permission('view', $con->view),
-		"Filters : "				=> $this->gui->file_list( site_url('editor/filter_query'),'filter', $con->filter ),
-		"" 							=> $this->gui->button( '','Save'.$script )
+		lang('system_title') 		=> $this->gui->textbox('title', $con->title ),
+		lang('system_show_in_subsection') 	=> $this->gui->checkbox('subsection','subsection', $con->subsection),
+		lang('system_view_perm')	=> $this->gui->permission('view', $con->view),
+		lang('system_filters')		=> $this->gui->file_list( site_url('editor/filter_query'),'filter', $con->filter ),
+		"" 							=> $this->gui->button( '',lang('system_save').$script )
 			)
 			,array( 'id'=>'basic_form' )
 			,$hidden
@@ -345,9 +347,9 @@ EOT;
 
 		if( count($Plugin_Form_Data) > 0 ){
 			$Plugin_Form = $this->gui->form( '#', $Plugin_Form_Data, array("id"=>"info_form"));
-			$this->print_text( $this->gui->accordion( array("Basic Data"=>$Basic_Form,"Plugin Data"=>$Plugin_Form) ));
+			$this->print_text( $this->gui->accordion( array(lang('system_basic_data')=>$Basic_Form,lang('system_plugin_data')=>$Plugin_Form) ));
 		}else
-			$this->print_text( $this->gui->accordion( array("Basic Data"=>$Basic_Form) ));
+			$this->print_text( $this->gui->accordion( array(lang('system_basic_data')=>$Basic_Form) ));
 		
 	}
 
@@ -359,9 +361,9 @@ EOT;
 			$children = new Content();
 			$children->get_by_parent_content( $c->id );
 			$children->delete_all();
-			$this->add_info( 'Children deleted' );
+			$this->add_info( lang('system_children_deleted') );
 		}else
-			show_error( 'Content not found' );
+			show_404();
 
 	}
 
@@ -370,9 +372,9 @@ EOT;
 		$c = new Content($id);
 		if( $c->exists() ){
 			$c->delete();
-			$this->add_info( 'Content deleted' );
+			$this->add_info( lang('system_content_deleted') );
 		}else
-			show_error( 'Content not found' );
+			show_404();
 
 	}
 
@@ -382,12 +384,12 @@ EOT;
 
 		if( $c->exists() ){
 			if( $c->move_down() ){
-				$this->add_info( 'Content moved down' );
+				$this->add_info( lang('system_content_moved_down') );
 			}else{
-				$this->add_info( 'Content i already the last' );
+				$this->add_info( lang('system_content_already_last') );
 			}
 		}else{
-			show_error( 'Content not found' );
+			show_404();
 		}
 
 	}
@@ -396,7 +398,7 @@ EOT;
 
 		$content_ins = new Content($content_id);
 		if( ! $content_ins->exists() )
-		show_error( 'content not found' );
+			show_404();
 
 		$parent_content = new Content($content_ins->parent_content);
 
@@ -407,19 +409,18 @@ EOT;
 		$children->get_by_parent_section( $content_ins->id );
 
 		$data_table = array(
-				'Content ID'=>$content_ins->id,
-				'Content Title'=>$content_ins->title,
-				'Content path'=>$content_ins->path,
-				'Section'=> empty($parent_section->name) ? 'Index':$parent_section->name,
-				'Subsections'=> $content_ins->subsection ? 'Yes':'No',
-				'User added it'=> $user->username,
-				'Parent'=>$parent_content->path,
-				'Cell'=>$content_ins->cell,
-				'Sort'=>$content_ins->sort,
-				'Children count'=>$children->result_count()
+				lang('system_content_id')=>$content_ins->id,
+				lang('system_content_title')=>$content_ins->title,
+				lang('system_content_path')=>$content_ins->path,
+				lang('system_section')=> empty($parent_section->name) ? 'Index':$parent_section->name,
+				lang('system_show_in_subsection')=> $content_ins->subsection ? lang('system_yes'):lang('system_no'),
+				lang('system_owner')=> $user->username,
+				lang('system_cell')=>$content_ins->cell,
+				lang('system_sort')=>$content_ins->sort,
+				lang('system_children_count')=>$children->result_count()
 		);
 
-		$this->add_info( 'Content information and the containers' );
+		$this->add_info( lang('system_content_info') );
 		$this->print_text( $this->gui->form( '#', $data_table ) );
 		theme_add(<<<EOT
 <style>
@@ -437,12 +438,12 @@ EOT
 
 		if( $c->exists() ){
 			if( $c->move_up() ){
-				$this->add_info( 'Content moved up' );
+				$this->add_info( lang('system_content_moved_up') );
 			}else{
-				$this->add_info( 'Content i already the first' );
+				$this->add_info( lang('system_content_already_first') );
 			}
 		}else{
-			show_error( 'Content not found' );
+			show_404();
 		}
 		
 	}

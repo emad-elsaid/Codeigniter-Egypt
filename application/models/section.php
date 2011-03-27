@@ -112,7 +112,7 @@ class Section extends DataMapper {
 	public function render(){
 
 		if(!$this->ci->system->section->can_view())
-			show_error( 'Access denied' );
+			show_error( lang('system_access_denied') );
 
 		$page_body = new Content(1);
 		$page_body_text = $page_body->render();
