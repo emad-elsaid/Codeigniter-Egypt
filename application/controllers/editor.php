@@ -230,7 +230,7 @@ EOT;
 			site_url('editor/addaction')
 			,array(
 		lang('system_title')		=> $this->gui->textbox('title'),
-		lang('show_in_subsection') 	=> $this->gui->checkbox('subsection'),
+		lang('system_show_in_subsection') 	=> $this->gui->checkbox('subsection'),
 		lang('system_view_perm')	=> $this->gui->permission('view', $p_cont->view),
 		lang('system_filters')		=> $this->gui->file_list( site_url('editor/filter_query'), 'filter' ),
 		"" 							=> $this->gui->button( '',lang('system_save').$script )
@@ -347,7 +347,7 @@ EOT;
 
 		if( count($Plugin_Form_Data) > 0 ){
 			$Plugin_Form = $this->gui->form( '#', $Plugin_Form_Data, array("id"=>"info_form"));
-			$this->print_text( $this->gui->accordion( array(lang('system_basic_data')=>$Basic_Form,lang('system_plugin_data')=>$Plugin_Form) ));
+			$this->print_text( $this->gui->accordion( array(lang('system_basic_data')=>$Basic_Form,lang('system_plugin_data')=>'<p>'.$Plugin_Form.'</p>') ));
 		}else
 			$this->print_text( $this->gui->accordion( array(lang('system_basic_data')=>$Basic_Form) ));
 		
