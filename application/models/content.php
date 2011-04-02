@@ -80,6 +80,7 @@ class Content extends DataMapper {
 			,'id'=>$this->id
 			,'cell'=>$this->cell
 			,'sort'=>$this->sort
+			,'title'=>$this->title
 			)
 			, TRUE);
 		}
