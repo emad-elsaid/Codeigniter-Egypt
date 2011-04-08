@@ -10,8 +10,8 @@ CREATE TABLE `contents` (
   `cell` tinyint(4) DEFAULT NULL,
   `sort` int(11) DEFAULT NULL,
   `path` varchar(100) DEFAULT NULL,
-  `view` longtext,
-  `filter` longtext,
+  `view` text,
+  `filter` text,
   `info` longtext,
   PRIMARY KEY (`id`),
   KEY `parent_content` (`parent_content`),
@@ -53,7 +53,7 @@ CREATE TABLE `sections` (
   `parent_section` int(9) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `sort` int(11) DEFAULT NULL,
-  `view` longtext,
+  `view` text,
   PRIMARY KEY (`id`),
   KEY `parent_section` (`parent_section`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
