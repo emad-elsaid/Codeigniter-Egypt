@@ -1,6 +1,6 @@
 <?=theme_doctype()?>
 <?php
-theme_pagetitle('Login');
+theme_pagetitle(lang('system_login'));
 theme_add('dijit.form.Button');
 theme_add('dijit.Dialog');
 theme_add('dijit.form.TextBox');

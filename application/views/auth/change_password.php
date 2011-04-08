@@ -1,6 +1,6 @@
 <?=theme_doctype()?>
 <?php
-theme_pagetitle('Change Password');
+theme_pagetitle(lang('system_change_password'));
 theme_add('dijit.form.Button');
 theme_add('dijit.Dialog');
 theme_add('dijit.form.TextBox');

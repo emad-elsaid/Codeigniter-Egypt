@@ -1,6 +1,6 @@
 <?=theme_doctype()?>
 <?php
-theme_pagetitle('Register');
+theme_pagetitle(lang('system_register'));
 theme_add('dijit.form.Button');
 theme_add('dijit.Dialog');
 theme_add('dijit.form.TextBox');
