@@ -24,6 +24,9 @@ $lang['regex_match']		= "حقل %s ليس بالصيغة الصحيحة.";
 $lang['matches']			= "حقل %s ليس مماثل لحقل %s .";
 $lang['is_natural']			= "حقل %s يجب أن يحتوي فقط على اعداد موجبة فقط.";
 $lang['is_natural_no_zero']	= "حقل %s يجب أن يحتوي على أعداد أكبر من صفر فقط.";
+$lang['decimal']			= "الحقل  %s يجب ان يكون عدد عشرى";
+$lang['less_than']			= "الحقل %s يجب ان يحتوى على عدد اقل من %s.";
+$lang['greater_than']		= "الحقل %s يجب ان يحتوى على عدد اكبر من  %s.";
 
 /* End of file form_validation_lang.php */
 /* Location: ./system/language/arabic/form_validation_lang.php */

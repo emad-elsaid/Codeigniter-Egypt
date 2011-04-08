@@ -6328,7 +6328,7 @@ class DataMapper implements IteratorAggregate {
 		$this->load->helper('inflector');
 
 		// Load security helper for prepping functions
-		$this->load->helper('security');
+		//$this->load->helper('security');
 	}
 }
 
