@@ -28,7 +28,7 @@
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.0.0</h1></td>
+<td><h1>CodeIgniter User Guide Version 2.0.2</h1></td>
 <td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
 </tr>
 </table>
@@ -74,6 +74,12 @@ variables at the top of the file with the new name you've chosen.</p>
 
 <p>After moving them, open your main <kdb>index.php</kbd> file and set the <samp>$system_folder</samp> and <samp>$application_folder</samp> variables, preferably with a full path, e.g. '<dfn>/www/MyUser/system</dfn>'.</p>
 
+<p>
+    One additional measure to take in production environments is to disable
+    PHP error reporting and any other development-only functionality. In CodeIgniter,
+    this can be done by setting the <kbd>ENVIRONMENT</kbd> constant, which is
+    more fully described on the <a href="../general/security.html">security page</a>.
+</p>
 
 <p>That's it!</p>
 

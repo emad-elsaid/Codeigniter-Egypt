@@ -3,7 +3,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Typography Helper : CodeIgniter User Guide</title>
+<title>Running via the CLI : CodeIgniter User Guide</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -42,7 +42,7 @@
 <td id="breadcrumb">
 <a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
 <a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-Typography Helper
+Running via the CLI
 </td>
 <td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="codeigniter.com/user_guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
@@ -55,41 +55,80 @@ Typography Helper
 <!-- START CONTENT -->
 <div id="content">
 
+<h1>Running via the CLI</h1>
 
-<h1>Typography Helper</h1>
-
-<p>The Typography Helper file contains functions that help your format text in semantically relevant ways.</p>
-
-
-<h2>Loading this Helper</h2>
-
-<p>This helper is loaded using the following code:</p>
-<code>$this->load->helper('typography');</code>
-
-<p>The following functions are available:</p>
+<p>
+	As well as calling an applications <a href="./controllers.html">Controllers</a> via the URL in a browser they can also be loaded via the command-line interface (CLI).
+</p>
 
 
-<h2>auto_typography()</h2>
-
-<p>Formats text so that it is semantically and typographically correct HTML.  Please see the <a href="../libraries/typography.html">Typography Class</a> for more info.</p>
-
-<p>Usage example:</p>
-
-<code>$string = auto_typography($string);</code>
-
-<p><strong>Note:</strong> Typographic formatting can be processor intensive, particularly if you have a lot of content being formatted.
-If you choose to use this function you may want to consider
-<a href="../general/caching.html">caching</a> your pages.</p>
+<ul>
+<li><a href="#what">What is the CLI?</a></li>
+<li><a href="#why">Why use this method?</a></li>
+<li><a href="#how">How does it work?</a></li>
+</ul>
 
 
-<h2>nl2br_except_pre()</h2>
+<a name="what"></a>
+<h2>What is the CLI?</h2>
 
-<p>Converts newlines to &lt;br /&gt; tags unless they appear within &lt;pre&gt; tags.
-This function is identical to the native PHP <dfn>nl2br()</dfn> function, except that it ignores &lt;pre&gt; tags.</p>
+<p><dfn>The command-line interface is a text-based method of interacting with computers that looks like what most people remember as DOS.</dfn></p>
 
-<p>Usage example:</p>
+<a name="why"></a>
 
-<code>$string = nl2br_except_pre($string);</code>
+<h2>Why run via the command-line?</h2>
+
+<p>
+	There are many reasons for running CodeIgniter from the command-line, but they are not always obvious.</p>
+
+<ul>
+	<li>Run your cron-jobs without needing to use wget or curl</li>
+	<li>Make your cron-jobs inaccessible from being loaded in the URL by checking for <kbd>IS_CLI</kbd></li>
+	<li>Make interactive "tasks" that can do things like set permissions, prune cache folders, run backups, etc.</li>
+	<li>Integrate with other applications in other languages. For example, a random C++ script could call one command and run code in your models!</li>
+</ul>
+
+<a name="how"></a>
+<h2>Let's try it:&nbsp; Hello World!</h2>
+
+<p>Let's create a simple controller so you can see it in action. Using your text editor, create a file called <dfn>tools.php</dfn>, and put the following code in it:</p>
+
+<textarea class="textarea" style="width:100%" cols="50" rows="10">
+&lt;?php
+class Tools extends CI_Controller {
+
+	public function message($to = 'World')
+	{
+		echo "Hello {$to}!".PHP_EOL;
+	}
+}
+?&gt;
+</textarea>
+
+<p>Then save the file to your <dfn>application/controllers/</dfn> folder.</p>
+
+<p>Now normally you would visit the your site using a URL similar to this:</p>
+
+<code>example.com/index.php/<var>tools</var>/<var>message</var>/<var>to</var></code>
+
+<p>Instead, we are going to open Terminal in Mac/Lunix or go to Run > "cmd" in Windows and navigate to our CodeIgniter project.</p>
+
+<blockquote>
+	$ cd /path/to/project;<br/>
+	$ php index.php tools message
+</blockquote>
+
+<p>If you did it right, you should see <samp>Hello World!</samp>.</p>
+
+<blockquote>
+	$ php index.php tools message "John Smith"
+</blockquote>
+
+<p>Here we are passing it a argument in the same way that URL parameters work. "John Smith" is passed as a argument and output is: <samp>Hello John Smith!</samp>.</p>
+
+<h2>That's it!</h2>
+
+<p>That, in a nutshell, is all there is to know about controllers on the command line. Remember that this is just a normal controller, so routing and _remap works fine.</p>
 
 
 
@@ -99,12 +138,11 @@ This function is identical to the native PHP <dfn>nl2br()</dfn> function, except
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="text_helper.html">Text Helper</a>
+Previous Topic:&nbsp;&nbsp;<a href="urls.html">CodeIgniter URLs</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
 <a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
 <a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="url_helper.html">URL Helper</a>
-</p>
+Next Topic:&nbsp;&nbsp;<a href="reserved_names.html">Reserved Names</a></p>
 <p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2011 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 

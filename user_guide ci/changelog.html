@@ -28,7 +28,7 @@
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.0.0</h1></td>
+<td><h1>CodeIgniter User Guide Version 2.0.2</h1></td>
 <td id="breadcrumb_right"><a href="./toc.html">Table of Contents Page</a></td>
 </tr>
 </table>
@@ -58,6 +58,85 @@ Change Log
 <h1>Change Log</h1>
 
 <p>The <img src="images/reactor-bullet.png" width="16" height="16" alt="Reactor Marker" /> indicates items that were contributed to CodeIgniter via CodeIgniter Reactor.</p>
+
+<h2>Version 2.0.2</h2>
+<p>Release Date: April 7, 2011<br />
+Hg Tag: v2.0.2</p>
+
+<ul>
+	<li>General changes
+		<ul>
+			<li>The <a href="./libraries/security.html">Security library</a> was moved to the core and is now loaded automatically. Please remove your loading calls.</li>
+			<li>The CI_SHA class is now deprecated. All supported versions of PHP provide a <kbd>sha1()</kbd> function.</li>
+			<li class="reactor"><kbd>constants.php</kbd> will now be loaded from the environment folder if available.</li>
+			<li class="reactor">Added language key error logging</li>
+			<li class="reactor">Made Environment Support optional. Comment out or delete the constant to stop environment checks.</li>
+			<li class="reactor">Added Environment Support for Hooks.</li>
+			<li class="reactor">Added CI_ Prefix to the <a href="libraries/caching.html">Cache driver</a>.</li>
+		</ul>
+	</li>
+	<li>Helpers
+		<ul>
+			<li>Removed the previously deprecated <kbd>dohash()</kbd> from the <a href="./helpers/security_helper.html">Security helper</a>; use <kbd>do_hash()</kbd> instead.</li>
+			<li class="reactor">Changed the 'plural' function so that it doesn't ruin the captalization of your string. It also take into consideration acronyms which are all caps.</li>
+		</ul>
+	</li>
+	<li>Database
+		<ul>
+			<li class="reactor"><kbd>$this->db->count_all_results()</kbd> will now return an integer instead of a string.</li>
+		</ul>
+	</li>
+</ul>
+
+<h3>Bug fixes for 2.0.2</h3>
+<ul>
+	<li class="reactor">Fixed a bug (Reactor #145) where the Output Library had parse_exec_vars set to protected.</li>
+	<li class="reactor">Fixed a bug (Reactor #80) where is_really_writable would create an empty file when on Windows or with safe_mode enabled.</li>
+	<li class="reactor">Fixed various bugs with User Guide.</li>
+	<li class="reactor">Added is_cli_request() method to documentation for <a href="libraries/input.html">Input class</a>.</li>
+	<li class="reactor">Added form_validation_lang entries for <kbd>decimal</kbd>, <kbd>less_than</kbd> and <kbd>greater_than</kbd>.</li>
+	<li class="reactor"><a href="https://bitbucket.org/ellislab/codeigniter-reactor/issue/153/escape-str-bug-in-mssql-driver">Fixed issue #153</a> Escape Str Bug in MSSQL driver.</li>
+	<li class="reactor"><a href="https://bitbucket.org/ellislab/codeigniter-reactor/issue/172/bug-in-chrome-and-form_open-in-201">Fixed issue #172</a> Google Chrome 11 posts incorrectly when action is empty.</li>
+
+</ul>
+
+<h2>Version 2.0.1</h2>
+<p>Release Date: March 15, 2011<br />
+Hg Tag: v2.0.1</p>
+
+<ul>
+	<li>General changes
+		<ul>
+			<li>Added <kbd>$config['cookie_secure']</kbd> to the config file to allow requiring a secure (HTTPS) in order to set cookies.</li>
+			<li class="reactor">Added the constant <kbd>CI_CORE</kbd> to help differentiate between Core: TRUE and Reactor: FALSE.</li>
+			<li class="reactor">Added an <kbd>ENVIRONMENT</kbd> constant in index.php, which affects PHP error reporting settings, and optionally,
+                which configuration files are loaded (see below). Read more on the <a href="general/environments.html">Handling Environments</a> page.</li>
+			<li class="reactor">Added support for <a href="libraries/config.html#environments">environment-specific</a> configuration files.</li>
+		</ul>
+	</li>
+	<li>Libraries
+		<ul>
+			<li class="reactor">Added <kbd>decimal</kbd>, <kbd>less_than</kbd> and <kbd>greater_than</kbd> rules to the <a href="libraries/form_validation.html">Form validation Class</a>.</li>
+			<li class="reactor"><a href="libraries/input.html">Input Class</a> methods <kbd>post()</kbd> and <kbd>get()</kbd> will now return a full array if the first argument is not provided.</li>
+			<li class="reactor">Secure cookies can now be made with the <kbd>set_cookie()</kbd> helper and <a href="libraries/input.html">Input Class</a> method.</li>
+			<li class="reactor">Added <kbd>set_content_type()</kbd> to <a href="libraries/output.html">Output Class</a> to set the output <kbd>Content-Type</kbd> HTTP header based on a MIME Type or a config/mimes.php array key.</li>
+			<li class="reactor"><a href="libraries/output.html">Output Class</a> will now support method chaining.</li>
+		</ul>
+	</li>
+	<li>Helpers
+		<ul>
+			<li class="reactor">Changed the logic for <kbd>form_open()</kbd> in <a href="helpers/form_helper.html">Form helper</a>. If no value is passed it will submit to the current URL.</li>
+		</ul>
+	</li>
+</ul>
+
+<h3>Bug fixes for 2.0.1</h3>
+<ul>
+	<li class="reactor">CLI requests can now be run from any folder, not just when CD'ed next to index.php.</li>
+	<li class="reactor">Fixed issue #41: Added audio/mp3 mime type to mp3.</li>
+	<li class="reactor">Fixed a bug (Core #329) where the file caching driver referenced the incorrect cache directory.</li>
+	<li class="reactor">Fixed a bug (Reactor #69) where the SHA1 library was named incorrectly.</li>
+</ul>
 
 <h2>Version 2.0.0</h2>
 <p>Release Date: January 28, 2011<br />
@@ -120,6 +199,7 @@ Hg Tag: v2.0.0</p>
 			<li>Altered Email Library to allow for method chaining.</li>
 			<li>Added <kbd>request_headers()</kbd>, <kbd>get_request_header()</kbd> and <kbd>is_ajax_request()</kbd> to the input class.</li>
 			<li class="reactor">Altered <a href="libraries/user_agent.html">User agent library</a> so that <kbd>is_browser()</kbd>, <kbd>is_mobile()</kbd> and <kbd>is_robot()</kbd> can optionally check for a specific browser or mobile device.</li>
+			<li class="reactor">Altered <a href="libraries/input.html">Input library</a> so that <kbd>post()</kbd> and <kbd>get()</kbd> will return all POST and GET items (respectively) if there are no parameters passed in.</li>
 		</ul>
 	</li>
 	<li>Database
