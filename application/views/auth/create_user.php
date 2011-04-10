@@ -61,7 +61,7 @@ dojo.addOnLoad( null, function(){
       <?php echo form_input($first_name);?>
       </p>
       
-      <p><?=lang('system_first_name')?><br />
+      <p><?=lang('system_last_name')?><br />
       <?php echo form_input($last_name);?>
       </p>
       
