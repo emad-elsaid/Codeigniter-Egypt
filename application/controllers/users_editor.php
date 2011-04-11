@@ -9,7 +9,7 @@
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt   GPL License 2.0
  * @link       https://github.com/blazeeboy/Codeigniter-Egypt
  */ 
-class UsersEditor extends Application {
+class Users_editor extends Application {
 
 	public function __construct(){
 		
@@ -41,14 +41,14 @@ class UsersEditor extends Application {
 		theme_add('dijit.tree.ForestStoreModel');
 		theme_add('dijit.Tree');
 		
-		$this->print_text('<div dojoType="dojo.data.ItemFileReadStore" url="'.site_url('usersEditor/queryGroups').'" jsId="ordJson"></div>');
+		$this->print_text('<div dojoType="dojo.data.ItemFileReadStore" url="'.site_url('users_editor/queryGroups').'" jsId="ordJson"></div>');
 		$this->print_text('<div dojoType="dijit.tree.ForestStoreModel" childrenAttrs="line" store="ordJson" jsId="ordModel"></div>');
 		$this->print_text('<div dojoType="dijit.Tree" id="ordTree" model="ordModel" showRoot="false" >
 		<script type="dojo/method" event="onClick" args="item">
 		if( item.type=="group" )
-			document.location.href = "'.site_url('usersEditor/editGroup').'/"+item.id;
+			document.location.href = "'.site_url('users_editor/editGroup').'/"+item.id;
 		else
-			document.location.href = "'.site_url('usersEditor/editUser').'/"+item.id;
+			document.location.href = "'.site_url('users_editor/editUser').'/"+item.id;
 		</script>
 		</div>');
 		
@@ -90,14 +90,14 @@ class UsersEditor extends Application {
 		theme_add('dijit.tree.ForestStoreModel');
 		theme_add('dijit.Tree');
 		
-		$this->print_text('<div dojoType="dojo.data.ItemFileReadStore" url="'.site_url('usersEditor/queryInactiveGroups').'" jsId="ordJson"></div>');
+		$this->print_text('<div dojoType="dojo.data.ItemFileReadStore" url="'.site_url('users_editor/queryInactiveGroups').'" jsId="ordJson"></div>');
 		$this->print_text('<div dojoType="dijit.tree.ForestStoreModel" childrenAttrs="line" store="ordJson" jsId="ordModel"></div>');
 		$this->print_text('<div dojoType="dijit.Tree" id="ordTree" model="ordModel" showRoot="false" >
 		<script type="dojo/method" event="onClick" args="item">
 		if( item.type=="group" )
-			document.location.href = "'.site_url('usersEditor/editGroup').'/"+item.id;
+			document.location.href = "'.site_url('users_editor/editGroup').'/"+item.id;
 		else
-			document.location.href = "'.site_url('usersEditor/editUser').'/"+item.id;
+			document.location.href = "'.site_url('users_editor/editUser').'/"+item.id;
 		</script>
 		</div>');
 		
@@ -137,7 +137,7 @@ class UsersEditor extends Application {
 	public function newGroup(){
 		
 		$this->print_text(
-			$this->gui->form('usersEditor/newGroupAction',
+			$this->gui->form('users_editor/newGroupAction',
 			array(
 				lang('system_name_label') => $this->gui->textbox('name'),
 				lang('system_description_label') => $this->gui->textbox('description'),
@@ -177,12 +177,12 @@ class UsersEditor extends Application {
 			show_error(lang('system_group_not_found'));
 		
 		$this->print_text(
-			$this->gui->form('usersEditor/editGroupAction',
+			$this->gui->form('users_editor/editGroupAction',
 			array(
 				lang('system_name_label')=>$this->gui->textbox('name',$group->name),
 				lang('system_description_label')=>$this->gui->textbox('description',$group->description),
 				''=>$this->gui->button('submit',lang('system_save'),array('type'=>'submit')).
-					anchor('usersEditor/deleteGroup/'.$id,lang('system_delete_group'))
+					anchor('users_editor/deleteGroup/'.$id,lang('system_delete_group'))
 			),
 			'',
 			array('id'=>$id)
@@ -202,7 +202,7 @@ class UsersEditor extends Application {
 		$group->name = $this->input->post('name');
 		$group->description = $this->input->post('description');
 		$group->save();
-		redirect('usersEditor');
+		redirect('users_editor');
 		
 	}
 	
@@ -216,7 +216,7 @@ class UsersEditor extends Application {
 		$group = new Group($id);
 		$group->delete();
 		
-		redirect('usersEditor');
+		redirect('users_editor');
 		
 	}
 	
@@ -257,7 +257,7 @@ class UsersEditor extends Application {
 		{ //check to see if we are creating the user
 			//redirect them back to the admin page
 			$this->session->set_flashdata('message', lang('system_user_created'));
-			redirect("usersEditor");
+			redirect("users_editor");
 		}else{ //display the create user form
 			//set the flash data error message if there is one
 			$groups = new Group();
@@ -267,7 +267,7 @@ class UsersEditor extends Application {
 				$groups_array[$group->name] = $group->name;
 				
 			$this->print_text(
-				$this->gui->form('usersEditor/newUser',
+				$this->gui->form('users_editor/newUser',
 					array(
 					' ' => (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'))),
 					lang('system_group_label') => $this->gui->dropdown('group','',$groups_array),
@@ -300,7 +300,7 @@ class UsersEditor extends Application {
 			
 		$user = $this->ion_auth->get_user($id);
 		$this->print_text(
-			$this->gui->form('usersEditor/editUserAction',
+			$this->gui->form('users_editor/editUserAction',
 				array(
 					lang('system_group_label') => $this->gui->dropdown('group',$user->group_id,$groups_array),
 					lang('system_group_desc_label') => $user->group_description,
@@ -318,7 +318,7 @@ class UsersEditor extends Application {
 					lang('system_first_name') => $this->gui->textbox('first_name',$user->first_name),
 					lang('system_last_name') => $this->gui->textbox('last_name',$user->last_name),
 					'' => $this->gui->button('submit', lang('system_update_user'), array('type'=>'submit')).
-						anchor('usersEditor/deleteUser/'.$id,lang('system_delete_user'))
+						anchor('users_editor/deleteUser/'.$id,lang('system_delete_user'))
 				),'',
 				array('id'=>$user->id)
 			)
@@ -335,7 +335,7 @@ class UsersEditor extends Application {
 		
 		$user = new User($id);
 		$user->delete();
-		redirect('usersEditor');
+		redirect('users_editor');
 		
 	}
 	
@@ -361,7 +361,7 @@ class UsersEditor extends Application {
 					'password'=>$this->input->post('password')
 				));
 		if($result)
-			redirect('usersEditor');
+			redirect('users_editor');
 		else
 			$this->add_error($this->ion_auth->errors());
 			

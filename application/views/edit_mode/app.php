@@ -50,7 +50,7 @@
 				<div dojoType="dijit.Menu">
 				
 					<?php foreach( $app->pages as $key=>$item ){ ?>
-						<div dojoType="dijit.MenuItem" onclick="window.location.href='<?=site_url(get_class($app).'/'.$key) ?>'" >
+					<div dojoType="dijit.MenuItem" onclick="window.location.href='<?=site_url(strtolower(get_class($app)).'/'.$key) ?>'" >
 							<?=$item?>
 						</div>
 					<?php } ?>

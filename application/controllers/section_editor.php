@@ -9,7 +9,7 @@
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt   GPL License 2.0
  * @link       https://github.com/blazeeboy/Codeigniter-Egypt
  */ 
-class SectionEditor extends Application {
+class Section_editor extends Application {
 	
 	public function __construct(){
 		parent::__construct();
@@ -38,12 +38,12 @@ class SectionEditor extends Application {
 		theme_add('dijit.tree.ForestStoreModel');
 		theme_add('dijit.Tree');
 		
-		$this->print_text('<div dojoType="dojo.data.ItemFileReadStore" url="'.site_url('sectionEditor/queryTree').'" jsId="ordJson"></div>');
+		$this->print_text('<div dojoType="dojo.data.ItemFileReadStore" url="'.site_url('section_editor/queryTree').'" jsId="ordJson"></div>');
 		$this->print_text('<div dojoType="dijit.tree.ForestStoreModel" childrenAttrs="line" store="ordJson" jsId="ordModel"></div>');
 		$this->print_text('<div dojoType="dijit.Tree" id="ordTree" model="ordModel" showRoot="false" >
 		<script type="dojo/method" event="onClick" args="item">
 		if( item.id!=undefined )
-			document.location.href = "'.site_url('sectionEditor/edit').'/"+item.id;	
+			document.location.href = "'.site_url('section_editor/edit').'/"+item.id;
 		</script>
 		</div>');
 	}
@@ -83,7 +83,7 @@ class SectionEditor extends Application {
 	public function add(){
 		
 		$this->print_text( $this->gui->form(
-			site_url( 'sectionEditor/addaction' )
+			site_url( 'section_editor/addaction' )
 			,array(
 					lang('system_parent_section') => $this->gui->section( 'parent_section')
 					,lang('system_name_label') => $this->gui->textbox( 'name' )
@@ -113,7 +113,7 @@ class SectionEditor extends Application {
 		$s->view = $this->input->post( 'view' );
 		$s->save();
 		
-		redirect( 'sectionEditor' );
+		redirect( 'section_editor' );
 	}
 	
 	/**
@@ -126,7 +126,7 @@ class SectionEditor extends Application {
 		$s = new Section($id);
 		$s->delete();
 				
-		redirect( 'sectionEditor' );
+		redirect( 'section_editor' );
 		
 	}
 	
@@ -148,12 +148,12 @@ class SectionEditor extends Application {
 		);
 		
 		$this->print_text( $this->gui->form(
-			site_url( 'sectionEditor/editaction' )
+			site_url( 'section_editor/editaction' )
 			,array(
 				lang('system_name_label')	=>$this->gui->textbox( 'name', $s->name )
 				,lang('system_view_perm')	=>$this->gui->permission( 'view', $s->view )
 				,''			=>$this->gui->button( '', lang('system_edit_section'), array('type'=>'submit') )
-							.anchor('sectionEditor/delete/'.$id,
+							.anchor('section_editor/delete/'.$id,
 							lang('system_delete_section'),'onclick="return confirm(\''.lang('system_are_you_sure').'\');"')
 			)
 			,''
@@ -174,7 +174,7 @@ class SectionEditor extends Application {
 		$s->view 	= $this->input->post( 'view' );
 		$s->save();
 		
-		redirect( 'sectionEditor' );
+		redirect( 'section_editor' );
 		
 	}
 	

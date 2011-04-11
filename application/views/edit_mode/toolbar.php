@@ -41,11 +41,11 @@ EOT
 
 <div class="panel">
 
-	<a href="<?=site_url('sectionEditor')?>" class="iframe"  title="<?=lang('system_sections_editor')?>">
+	<a href="<?=site_url('section_editor')?>" class="iframe"  title="<?=lang('system_sections_editor')?>">
 		<img src="<?=$local?>link.png" /> <?=lang('system_sections_editor')?>
 	</a>
 	
-	<a href="<?=site_url('usersEditor')?>" class="iframe" title="<?=lang('system_users_editor')?>" >
+	<a href="<?=site_url('users_editor')?>" class="iframe" title="<?=lang('system_users_editor')?>" >
 		<img src="<?=$local?>link.png" /> <?=lang('system_users_editor')?>
 	</a>
 	
