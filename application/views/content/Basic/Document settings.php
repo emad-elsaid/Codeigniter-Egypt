@@ -44,11 +44,9 @@ css_files :
 
 <?php 
 $ci =& get_instance();
-if( $ci->system->mode=='edit' )
-{
+if( $ci->system->mode=='edit' ){
 	
-	if( $ci->ion_auth->is_admin() )
-	{
+	if( $ci->ion_auth->is_admin() ){
 		$ci->load->library( 'gui' );
 		echo $ci->gui->info( 'Document settings here' );
 	}
@@ -66,16 +64,14 @@ if( $ci->system->mode=='edit' )
 	theme_add(explode("\n",$css_files));
 	
 	$style = '';
-	if( $background_image != '' )
-	{
+	if( $background_image != '' ){
 		$style .= "background-image: url({$local}{$background_image});";
 		$style .= "background-position: {$horizontal_position} {$vertical_position};";
 		$style .= "background-repeat: {$repeat};";
 		$style .= "background-attachment: {$attachment};";
 	}
 	$style .= $style;
-	if( $style!='' )
-	{
+	if( $style!='' ){
 		theme_add("
 <style>
 body{
