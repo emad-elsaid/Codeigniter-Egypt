@@ -39,7 +39,7 @@ built on it some applications accessible by a task bar
 [ Installation ]
 ---
 * 1- download and extract Codeigniter Egypt
-* 2- edit "config.php" or open "install.php"
+* 2- edit "config.php"
 * 3- open "index.php/install" to install database
 -----------------------------------------------------------------
 [ Running ]

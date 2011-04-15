@@ -2,7 +2,7 @@ INSTALLATION :
 ----------------
 1- upload files
 2- create database
-3- open install.php in your browser OR edit config.php for your values
+3- edit config.php
 4- open www.example.com/index.php/install
 
 Simple isn't it :D , any Questions are welcome blazeeboy[at]gmail[dot]com
