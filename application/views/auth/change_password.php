@@ -5,42 +5,13 @@ theme_add('dijit.form.Button');
 theme_add('dijit.Dialog');
 theme_add('dijit.form.TextBox');
 theme_add('dijit.form.Button');
+theme_add('assets/style/auth_style.css');
+theme_add('assets/style/style.css');
 ?>
 <html>
 <head>
 	<?=theme_head()?>
-<style>
-body{
-	font-size: 12px;
-}
-
-label{
-	text-align: left;
-	display: block;
-	vertical-align: text-top;
-}
-input[type="text"],input[type="password"]
-{
-	color: #555555;
-	background:#FBFBFB none repeat scroll 0% 0%;
-	border:1px solid #E5E5E5;
-	font-size:24px;
-	margin-bottom: 9px;
-	margin-right:6px;
-	margin-top:2px;
-	padding:3px;
-	width:97%;
-	border-color:#DFDFDF;
-	font-family: \"Lucida Grande\",Verdana,Arial,\"Bitstream Vera Sans\",sans-serif;
-	
-	font-size-adjust:none;
-	font-style:normal;
-	font-variant:normal;
-	font-weight:normal;
-	line-height:normal
-}
-</style>
-<script language="javascript" >
+<script type="text/javascript" >
 dojo.addOnLoad( null, function(){
 	dijit.byId( 'loginD' ).show();
 });
@@ -50,8 +21,9 @@ dojo.addOnLoad( null, function(){
 
 		<div id="loginD" dojoType="dijit.Dialog" title="<?=lang('system_change_password')?>" >
 		
-
-<div id="infoMessage"><?php echo $message;?></div>
+<?php if(strlen($message)>0 ): ?>
+<div class="info"><?php echo $message;?></div>
+<?php endif; ?>
 
 <?php echo form_open("auth/change_password");?>
 
