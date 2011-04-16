@@ -54,13 +54,13 @@
 	 * Columns in your meta table,
 	 * id not required.
 	 **/
-	$config['columns']             = array('first_name', 'last_name', 'company', 'phone');
+	$config['columns']             = array('first_name', 'last_name');
 	
 	/**
 	 * A database column which is used to
 	 * login with.
 	 **/
-	$config['identity']            = 'email';
+	$config['identity']            = 'username';
 		 
 	/**
 	 * Minimum Required Length of Password
@@ -138,22 +138,22 @@
 	/**
 	 * Message Start Delimiter
 	 **/
-	$config['message_start_delimiter'] = '<p>';
+	$config['message_start_delimiter'] = '<div class="info">';
 	
 	/**
 	 * Message End Delimiter
 	 **/
-	$config['message_end_delimiter'] = '</p>';
+	$config['message_end_delimiter'] = '</div>';
 	
 	/**
 	 * Error Start Delimiter
 	 **/
-	$config['error_start_delimiter'] = '<p>';
+	$config['error_start_delimiter'] = '<div class="error">';
 	
 	/**
 	 * Error End Delimiter
 	 **/
-	$config['error_end_delimiter'] = '</p>';
+	$config['error_end_delimiter'] = '</div>';
 	
 /* End of file ion_auth.php */
 /* Location: ./system/application/config/ion_auth.php */

@@ -9,7 +9,7 @@ theme_add('dijit.form.Button');
 <html>
 <head>
 	<?=theme_head()?>
-<style>
+<style type="text/css" >
 body{
 	font-size: 12px;
 }
@@ -32,16 +32,15 @@ input[type="text"],input[type="password"]
 	padding:3px;
 	width:97%;
 	border-color:#DFDFDF;
-	font-family: \"Lucida Grande\",Verdana,Arial,\"Bitstream Vera Sans\",sans-serif;
+	font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
 	
-	font-size-adjust:none;
 	font-style:normal;
 	font-variant:normal;
 	font-weight:normal;
 	line-height:normal
 }
 </style>
-<script language="javascript" >
+	<script type="text/javascript">
 dojo.addOnLoad( null, function(){
 	dijit.byId( 'loginD' ).show();
 });
@@ -54,15 +53,15 @@ dojo.addOnLoad( null, function(){
 		<div class='mainInfo'>
 
     <div class="pageTitleBorder"></div>
-    <center><img src="<?= base_url() ?>assets/admin/logo.png" align="center" ></center>
+    <center><img alt=""  src="<?= base_url() ?>assets/admin/logo.png" align="center" ></center>
 	<p><?=lang('system_please_login')?></p>
 	
 	<div id="infoMessage"><?php echo $message;?></div>
 	
     <?php echo form_open("auth/login");?>
       <p>
-      	<label for="email"><?=lang('system_email')?></label>
-      	<?php echo form_input($email);?>
+      	<label for="email"><?=lang('system_username')?></label>
+      	<?php echo form_input($username);?>
       </p>
       <p>
       	<label for="password"><?=lang('system_password')?></label>

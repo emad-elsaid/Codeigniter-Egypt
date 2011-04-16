@@ -24,8 +24,7 @@ class Users_editor extends Application {
 		$this->pages 			= array(
 					'index'=>lang('system_active_users'),
 					'inactive'=>lang('system_inactive_users'),
-					'newGroup'=>lang('system_new_group'),
-					'newUser'=>lang('system_new_user')
+					'newGroup'=>lang('system_new_group')
 		);
 
 		$this->load->library('gui');
@@ -221,61 +220,6 @@ class Users_editor extends Application {
 	}
 	
 	/**
-	 * create new user page, and it has one form 
-	 * with needed data
-	 * and it has already the action itself,
-	 * that is copied from ion-auth Auth controller
-	 */
-	public function newUser(){
-
-		$this->load->library('form_validation');
-		//validate form input
-		$this->form_validation->set_rules('first_name', lang('system_first_name'), 'required|xss_clean');
-		$this->form_validation->set_rules('last_name', lang('system_last_name'), 'required|xss_clean');
-		$this->form_validation->set_rules('email', lang('system_email'), 'required|valid_email');
-		$this->form_validation->set_rules('password', lang('system_password'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
-		$this->form_validation->set_rules('password_confirm', lang('system_password_conf'), 'required');
-
-		if ($this->form_validation->run() == true)
-		{
-			$username = strtolower($this->input->post('first_name')) . ' ' . strtolower($this->input->post('last_name'));
-			$email = $this->input->post('email');
-			$password = $this->input->post('password');
-
-			$additional_data = array('first_name' => $this->input->post('first_name'),
-				'last_name' => $this->input->post('last_name')
-			);
-		}
-		if ($this->form_validation->run() == true 
-			&& $this->ion_auth->register($username, $password, $email, $additional_data,$this->input->post('group')))
-		{ //check to see if we are creating the user
-			//redirect them back to the admin page
-			$this->session->set_flashdata('message', lang('system_user_created'));
-			redirect("users_editor");
-		}else{ //display the create user form
-			//set the flash data error message if there is one
-			$groups = new Group();
-			$groups->get();
-			$groups_array = array();
-			foreach( $groups as $group )
-				$groups_array[$group->name] = $group->name;
-				
-			$this->print_text(
-				$this->gui->form('users_editor/newUser',
-					array(
-					' ' => (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'))),
-					lang('system_group_label') => $this->gui->dropdown('group','',$groups_array),
-					lang('system_first_name').'*' => $this->gui->textbox('first_name',$this->form_validation->set_value('first_name')),
-					lang('system_last_name').'*' => $this->gui->textbox('last_name',$this->form_validation->set_value('last_name')),
-					lang('system_email').'*' => $this->gui->textbox( 'email', $this->form_validation->set_value('email')),
-					lang('system_password').'*' => $this->gui->password( 'password', $this->form_validation->set_value('password')),
-					lang('system_password_conf').'*' => $this->gui->password( 'password_confirm', $this->form_validation->set_value('password_confirm')),
-					'' => $this->gui->button('submit',lang('system_create_user'), array('type'=>'submit'))
-			)));
-		}
-	}
-	
-	/**
 	 * edit user information
 	 * 
 	 * @param integer $id the user id needed to be edited
@@ -289,7 +233,7 @@ class Users_editor extends Application {
 			$groups_array[$group->id] = $group->name;
 			
 		$user = $this->ion_auth->get_user($id);
-		$this->print_text(
+		$this->print_text( '<p>'.
 			$this->gui->form('users_editor/editUserAction',
 				array(
 					lang('system_group_label') => $this->gui->dropdown('group',$user->group_id,$groups_array),
@@ -311,7 +255,7 @@ class Users_editor extends Application {
 						anchor('users_editor/deleteUser/'.$id,lang('system_delete_user'))
 				),'',
 				array('id'=>$user->id)
-			)
+			) .'</p>'
 		);
 		
 	}

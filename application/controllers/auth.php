@@ -24,17 +24,15 @@ class Auth extends CI_Controller {
 	//log the user in
 	public function login(){
 		
-		$this->data['title'] = lang('system_login');
-
 		//validate form input
-		$this->form_validation->set_rules('email', lang('system_email'), 'required|valid_email');
+		$this->form_validation->set_rules('username', lang('system_email'), 'required');
 		$this->form_validation->set_rules('password', lang('system_password'), 'required');
 
 		if ($this->form_validation->run() == true){ //check to see if the user is logging in
 			//check for "remember me"
 			$remember = (bool) $this->input->post('remember');
 
-			if ($this->ion_auth->login($this->input->post('email'), $this->input->post('password'), $remember)){ //if the login is successful
+			if ($this->ion_auth->login($this->input->post('username'), $this->input->post('password'), $remember)){ //if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
 				redirect($this->config->item('base_url'), 'refresh');
@@ -47,10 +45,10 @@ class Auth extends CI_Controller {
 			//set the flash data error message if there is one
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
-			$this->data['email'] = array('name' => 'email',
-				'id' => 'email',
+			$this->data['username'] = array('name' => 'username',
+				'id' => 'username',
 				'type' => 'text',
-				'value' => $this->form_validation->set_value('email'),
+				'value' => $this->form_validation->set_value('username'),
 			);
 			$this->data['password'] = array('name' => 'password',
 				'id' => 'password',
@@ -64,11 +62,10 @@ class Auth extends CI_Controller {
 	//log the user out
 	public function logout(){
 		
-		$this->data['title'] = lang('system_logout');
 		//log the user out
 		$logout = $this->ion_auth->logout();
 		//redirect them back to the page they came from
-		redirect('auth', 'refresh');
+		redirect('auth/login', 'refresh');
 		
 	}
 
@@ -172,7 +169,7 @@ class Auth extends CI_Controller {
 		if ($activation){
 			//redirect them to the auth page
 			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth", 'refresh');
+			redirect("auth/login", 'refresh');
 		}else{
 			//redirect them to the forgot password page
 			$this->session->set_flashdata('message', $this->ion_auth->errors());
@@ -188,12 +185,13 @@ class Auth extends CI_Controller {
 		//validate form input
 		$this->form_validation->set_rules('first_name', lang('system_first_name'), 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', lang('system_last_name'), 'required|xss_clean');
+		$this->form_validation->set_rules('username', lang('system_username'), 'trim|required|min_length[5]|max_length[15]|xss_clean');
 		$this->form_validation->set_rules('email', lang('system_email'), 'required|valid_email');
 		$this->form_validation->set_rules('password', lang('system_password'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
 		$this->form_validation->set_rules('password_confirm', lang('system_password_conf'), 'required');
 
 		if ($this->form_validation->run() == true){
-			$username = strtolower($this->input->post('first_name')) . ' ' . strtolower($this->input->post('last_name'));
+			$username = $this->input->post('username');
 			$email = $this->input->post('email');
 			$password = $this->input->post('password');
 
@@ -203,10 +201,11 @@ class Auth extends CI_Controller {
 			);
 		}
 		
-		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data)){ //check to see if we are creating the user
+		if ($this->form_validation->run() == true
+			&& $this->ion_auth->register($username, $password, $email, $additional_data)){
 			//redirect them back to the admin page
 			$this->session->set_flashdata('message', "User Created");
-			redirect("auth", 'refresh');
+			redirect("auth/login", 'refresh');
 		}else{ //display the create user form
 			//set the flash data error message if there is one
 			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
@@ -225,6 +224,11 @@ class Auth extends CI_Controller {
 				'id' => 'email',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('email'),
+			);
+			$this->data['username'] = array('name' => 'username',
+				'id' => 'username',
+				'type' => 'text',
+				'value' => $this->form_validation->set_value('username'),
 			);
 			$this->data['password'] = array('name' => 'password',
 				'id' => 'password',
