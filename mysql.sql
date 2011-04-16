@@ -1,11 +1,11 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE `contents` (
-  `id` int(9) NOT NULL AUTO_INCREMENT,
-  `parent_content` int(9) DEFAULT NULL,
-  `parent_section` int(9) DEFAULT NULL,
+  `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_content` int(9) unsigned DEFAULT NULL,
+  `parent_section` int(9) unsigned DEFAULT NULL,
   `title` varchar(100) DEFAULT NULL,
-  `user` int(9) DEFAULT NULL,
+  `user` int(9) unsigned DEFAULT NULL,
   `subsection` tinyint(4) DEFAULT '1',
   `cell` tinyint(4) DEFAULT NULL,
   `sort` int(11) DEFAULT NULL,
@@ -24,7 +24,7 @@ INSERT INTO `contents` (`id`, `parent_content`, `parent_section`, `title`, `user
 (2, 1, 1, NULL, 1, 0, 0, 0, 'default.php', NULL, NULL, NULL);
 
 CREATE TABLE `groups` (
-  `id` int(9) NOT NULL AUTO_INCREMENT,
+  `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   `description` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
@@ -35,22 +35,20 @@ INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 (2, 'members', 'General User');
 
 CREATE TABLE `meta` (
-  `id` int(9) NOT NULL AUTO_INCREMENT,
-  `user_id` int(9) DEFAULT NULL,
+  `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(9) unsigned DEFAULT NULL,
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,
-  `company` varchar(100) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-INSERT INTO `meta` (`id`, `user_id`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, 1, 'Admin', 'istrator', 'ADMIN', '0');
+INSERT INTO `meta` (`id`, `user_id`, `first_name`, `last_name`) VALUES
+(1, 1, 'Admin', 'istrator');
 
 CREATE TABLE `sections` (
-  `id` int(9) NOT NULL AUTO_INCREMENT,
-  `parent_section` int(9) DEFAULT NULL,
+  `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_section` int(9) unsigned DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `sort` int(11) DEFAULT NULL,
   `view` text,
@@ -62,8 +60,8 @@ INSERT INTO `sections` (`id`, `parent_section`, `name`, `sort`, `view`) VALUES
 (1, NULL, NULL, 0, NULL);
 
 CREATE TABLE `users` (
-  `id` int(9) NOT NULL AUTO_INCREMENT,
-  `group_id` int(9) NOT NULL,
+  `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
+  `group_id` int(9) unsigned NOT NULL,
   `ip_address` char(16) NOT NULL,
   `username` varchar(15) NOT NULL,
   `password` varchar(40) NOT NULL,
@@ -82,6 +80,14 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `group_id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `remember_code`, `created_on`, `last_login`, `active`) VALUES
 (1, 1, '127.0.0.1', 'administrator', '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4', '9462e8eee0', 'admin@admin.com', '', NULL, NULL, 1268889823, 1268889823, 1);
 
+CREATE TABLE `ci_sessions` (
+session_id varchar(40) DEFAULT '0' NOT NULL,
+ip_address varchar(16) DEFAULT '0' NOT NULL,
+user_agent varchar(50) NOT NULL,
+last_activity int(10) unsigned DEFAULT 0 NOT NULL,
+user_data text DEFAULT '' NOT NULL,
+PRIMARY KEY (session_id)
+);
 
 ALTER TABLE `contents`
   ADD CONSTRAINT `contents_ibfk_1` FOREIGN KEY (`parent_content`) REFERENCES `contents` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,

@@ -16,7 +16,7 @@
 * Original Author name has been kept but that does not mean that the method has not been modified.
 * 
 */
-
+	require 'config.php';
 	/**
 	 * Tables.
 	 **/
@@ -27,7 +27,7 @@
 	/**
 	 * Site Title, example.com
 	 */
-	$config['site_title']		   = "Example.com";
+	$config['site_title']		   = $config_site_name;
 	
 	/**
 	 * Admin Email, admin@example.com

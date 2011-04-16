@@ -233,10 +233,6 @@ class Users_editor extends Application {
 		$this->form_validation->set_rules('first_name', lang('system_first_name'), 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', lang('system_last_name'), 'required|xss_clean');
 		$this->form_validation->set_rules('email', lang('system_email'), 'required|valid_email');
-		$this->form_validation->set_rules('phone1', lang('system_phone_first'), 'xss_clean|min_length[3]|max_length[3]');
-		$this->form_validation->set_rules('phone2', lang('system_phone_second'), 'xss_clean|min_length[3]|max_length[3]');
-		$this->form_validation->set_rules('phone3', lang('system_phone_third'), 'xss_clean|min_length[4]|max_length[4]');
-		$this->form_validation->set_rules('company', lang('system_company'), 'xss_clean');
 		$this->form_validation->set_rules('password', lang('system_password'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
 		$this->form_validation->set_rules('password_confirm', lang('system_password_conf'), 'required');
 
@@ -247,9 +243,7 @@ class Users_editor extends Application {
 			$password = $this->input->post('password');
 
 			$additional_data = array('first_name' => $this->input->post('first_name'),
-				'last_name' => $this->input->post('last_name'),
-				'company' => $this->input->post('company'),
-				'phone' => $this->input->post('phone1') . '-' . $this->input->post('phone2') . '-' . $this->input->post('phone3'),
+				'last_name' => $this->input->post('last_name')
 			);
 		}
 		if ($this->form_validation->run() == true 
@@ -276,10 +270,6 @@ class Users_editor extends Application {
 					lang('system_email').'*' => $this->gui->textbox( 'email', $this->form_validation->set_value('email')),
 					lang('system_password').'*' => $this->gui->password( 'password', $this->form_validation->set_value('password')),
 					lang('system_password_conf').'*' => $this->gui->password( 'password_confirm', $this->form_validation->set_value('password_confirm')),
-					lang('system_company') => $this->gui->textbox( 'company', $this->form_validation->set_value('company')),
-					lang('system_phone') => $this->gui->textbox( 'phone1', $this->form_validation->set_value('phone1')).' - '.
-					$this->gui->textbox( 'phone2', $this->form_validation->set_value('phone2')).' - '.
-					$this->gui->textbox( 'phone3', $this->form_validation->set_value('phone3')),
 					'' => $this->gui->button('submit',lang('system_create_user'), array('type'=>'submit'))
 			)));
 		}

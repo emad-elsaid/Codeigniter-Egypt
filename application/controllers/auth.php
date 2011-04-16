@@ -189,8 +189,6 @@ class Auth extends CI_Controller {
 		$this->form_validation->set_rules('first_name', lang('system_first_name'), 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', lang('system_last_name'), 'required|xss_clean');
 		$this->form_validation->set_rules('email', lang('system_email'), 'required|valid_email');
-		$this->form_validation->set_rules('phone', lang('system_phone'), 'required|xss_clean|min_length[3]|max_length[20]');
-		$this->form_validation->set_rules('company', lang('system_company'), 'required|xss_clean');
 		$this->form_validation->set_rules('password', lang('system_password'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
 		$this->form_validation->set_rules('password_confirm', lang('system_password_conf'), 'required');
 
@@ -199,10 +197,9 @@ class Auth extends CI_Controller {
 			$email = $this->input->post('email');
 			$password = $this->input->post('password');
 
-			$additional_data = array('first_name' => $this->input->post('first_name'),
-				'last_name' => $this->input->post('last_name'),
-				'company' => $this->input->post('company'),
-				'phone' => $this->input->post('phone') ,
+			$additional_data = array(
+				'first_name' => $this->input->post('first_name'),
+				'last_name' => $this->input->post('last_name')
 			);
 		}
 		
@@ -228,16 +225,6 @@ class Auth extends CI_Controller {
 				'id' => 'email',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('email'),
-			);
-			$this->data['company'] = array('name' => 'company',
-				'id' => 'company',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('company'),
-			);
-			$this->data['phone'] = array('name' => 'phone',
-				'id' => 'phone',
-				'type' => 'text',
-				'value' => $this->form_validation->set_value('phone'),
 			);
 			$this->data['password'] = array('name' => 'password',
 				'id' => 'password',

@@ -65,16 +65,8 @@ dojo.addOnLoad( null, function(){
       <?php echo form_input($last_name);?>
       </p>
       
-      <p><?=lang('system_company')?><br />
-      <?php echo form_input($company);?>
-      </p>
-      
       <p><?=lang('system_email')?><br />
       <?php echo form_input($email);?>
-      </p>
-      
-      <p><?=lang('system_phone')?><br />
-      <?php echo form_input($phone);?>
       </p>
       
       <p><?=lang('system_password')?><br />
