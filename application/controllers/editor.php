@@ -422,13 +422,7 @@ EOT;
 
 		$this->add_info( lang('system_content_info') );
 		$this->print_text( $this->gui->form( '#', $data_table ) );
-		theme_add(<<<EOT
-<style>
-label {font-weight: bold;}
-tr {border-bottom: 1px solid black;}
-</style>
-EOT
-		);
+		
 	}
 
 
