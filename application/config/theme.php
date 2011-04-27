@@ -21,3 +21,4 @@ $config['js_at_foot'] 				= FALSE;
  * google CDN automatically
  */
 $config['dojo_CDN']					= FALSE;
+$config['dojo_version']				= '1.6';

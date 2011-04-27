@@ -301,8 +301,8 @@ if( ! function_exists('theme_dojo') ){
 		
 		if( count($CI->config->config['dojo_files'])==0 ){
 			if( $CI->config->config['dojo_CDN'] ){
-				theme_css('http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/'.$CI->config->config['dojo_style'].'/'.$CI->config->config['dojo_style'].'.css');
-				theme_js('http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js');
+				theme_css('http://ajax.googleapis.com/ajax/libs/dojo/'.$CI->config->config['dojo_version'] .'/dijit/themes/'.$CI->config->config['dojo_style'].'/'.$CI->config->config['dojo_style'].'.css');
+				theme_js('http://ajax.googleapis.com/ajax/libs/dojo/'.$CI->config->config['dojo_version'] .'/dojo/dojo.xd.js');
 			} else {
 				theme_css('dojo/dijit/themes/'.$CI->config->config['dojo_style'].'/'.$CI->config->config['dojo_style'].'.css');
 				theme_js('dojo/dojo/dojo.js');
