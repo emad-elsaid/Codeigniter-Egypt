@@ -20,5 +20,5 @@ $config['js_at_foot'] 				= FALSE;
  * and HTTP requests, then dojo and dijit will be requested from 
  * google CDN automatically
  */
-$config['dojo_CDN']					= FALSE;
-$config['dojo_version']				= '1.6';
+$config['dojo_CDN']					= TRUE;
+$config['dojo_version']				= '1.6.0';

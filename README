@@ -21,11 +21,11 @@ Codeigniter-Egypt support the idea of applications
 
 [program built on]
 ---
-* CodeIgniter PHP framework Version 2.0
-* Datamapper Version 1.8.0
-* Ion-Auth 22/2/2011 HEAD from Github
-* Dojo+Dijit Version 1.6 (New lines removed)
-* jquery Version 1.5.1
+* CodeIgniter PHP framework Version 2.0.2
+* Datamapper Version 1.8.1
+* Ion-Auth 1/7/2011 HEAD from Github
+* Dojo tool kit Version 1.6.0 (from Google CDN)
+* jquery Version 1.6.2
 
 [The idea]
 ---

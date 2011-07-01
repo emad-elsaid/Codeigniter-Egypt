@@ -471,6 +471,17 @@ class Ion_auth
 	}
 
 	/**
+	 * Get Number of Users
+	 *
+	 * @return int Number of Users
+	 * @author Sven Lueckenbach
+	 **/
+	public function get_users_count($group_name=false)
+	{
+		return $this->ci->ion_auth_model->get_users_count($group_name);
+	}
+
+	/**
 	 * Get Users Array
 	 *
 	 * @return array Users
@@ -578,6 +589,28 @@ class Ion_auth
 	public function get_users_by_email($email)
 	{
 		return $this->ci->ion_auth_model->get_users_by_email($email)->result();
+	}
+	
+	/**
+	 * Get User by Username
+	 *
+	 * @return object User
+	 * @author Kevin Smith
+	 **/
+	public function get_user_by_username($username)
+	{
+		return $this->ci->ion_auth_model->get_user_by_username($username)->row();
+	}
+
+	/**
+	 * Get Users by Username
+	 *
+	 * @return object Users
+	 * @author Kevin Smith
+	 **/
+	public function get_users_by_username($username)
+	{
+		return $this->ci->ion_auth_model->get_users_by_username($username)->result();
 	}
 	
 	/**
