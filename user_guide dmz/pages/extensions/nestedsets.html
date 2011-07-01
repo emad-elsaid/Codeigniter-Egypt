@@ -220,14 +220,14 @@ If you don't specify it, the current object is used as reference to create a new
 <p>The parameter <var>$node</var> is optional. If you specify it, after the call the current object will contain the new sibling record created.
 If you don't specify it, the current object is used as reference to create a new previous sibling, and will be overwritten with the newly created object.</p>
 <p>You can add a new previous sibling node to any valid tree node just by calling this method.</p>
-<p class="important"><strong><em>Note: </em></strong>You can not add a new previous silbling to a root node.</p>
+<p class="important"><strong><em>Note: </em></strong>You can not add a new previous sibling to a root node.</p>
 
 <h3>Usage</h3>
 <pre>
 <var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
 </kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>();
 </kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_first_child</u></var><kbd>();</kbd><samp> // we need a non-root node</samp>
-<var>$tree</var><kbd>-&gt;</kbd><var><u>new_previous_silbing</u></var><kbd>();</kbd><samp> // the root node now has a new first child</samp>
+<var>$tree</var><kbd>-&gt;</kbd><var><u>new_previous_sibling</u></var><kbd>();</kbd><samp> // the root node now has a new first child</samp>
 </pre>
 
 <h2>new_next_sibling(<i>$node</i>)</h2>
@@ -238,13 +238,13 @@ If you don't specify it, the current object is used as reference to create a new
 <p>The parameter <var>$node</var> is optional. If you specify it, after the call the current object will contain the new sibling record created.
 If you don't specify it, the current object is used as reference to create a new next sibling, and will be overwritten with the newly created object.</p>
 <p>You can add a new next sibling node to any valid tree node just by calling this method.</p>
-<p class="important"><strong><em>Note: </em></strong>You can not add a new next silbling to a root node.</p>
+<p class="important"><strong><em>Note: </em></strong>You can not add a new next sibling to a root node.</p>
 
 <h3>Usage</h3>
 <pre>
 <var>$tree </var><kbd>= new </kbd><var>Tree</var><kbd>();
 <samp>// you can use object chaining on most nestedsets methods</samp>
-</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>()<kbd>-&gt;</kbd><var><u>get_last_child</u></var><kbd>()</kbd><kbd>-&gt;</kbd><var><u>new_next_silbing</u></var><kbd>();
+</kbd><var>$tree</var><kbd>-&gt;</kbd><var><u>get_root</u></var><kbd>()<kbd>-&gt;</kbd><var><u>get_last_child</u></var><kbd>()</kbd><kbd>-&gt;</kbd><var><u>new_next_sibling</u></var><kbd>();
 </kbd></pre>
 
 <h2>get_root()</h2>
@@ -515,7 +515,7 @@ If you don't specify it, the next sibling of the current object will be loaded, 
 <ul>
 	<li><b>Returns</b>: <dfn>TRUE</dfn> or <dfn>FALSE</dfn> if the current node object has a previous sibling.</li>
 </ul>
-<p>Checks if the current object has a previous silbing (i.e. is not the first child).</p>
+<p>Checks if the current object has a previous sibling (i.e. is not the first child).</p>
 
 <h3>Usage</h3>
 <pre>
@@ -529,7 +529,7 @@ If you don't specify it, the next sibling of the current object will be loaded, 
 <ul>
 	<li><b>Returns</b>: <dfn>TRUE</dfn> or <dfn>FALSE</dfn> if the current node object has a next sibling.</li>
 </ul>
-<p>Checks if the current object has a next silbing (i.e. is not the last child).</p>
+<p>Checks if the current object has a next sibling (i.e. is not the last child).</p>
 
 <h3>Usage</h3>
 <pre>
@@ -726,8 +726,8 @@ If multi-tree is enabled, and no parameter is passed, the tree selected using th
 Next Topic:&nbsp;&nbsp;<a href=""></a></span>
 </p>
 <div id="copyrights">
-<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
-<p><a href="license.html">Other License Information</a></p>
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010-2011 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="../license.html">Other License Information</a></p>
 </div>
 </div>
 

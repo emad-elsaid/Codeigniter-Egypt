@@ -75,6 +75,22 @@ Delete All
 
 <p>This is especially useful for deleting related items.</p>
 
+<p>&nbsp;</p>
+
+<h1>Truncate</h1>
+
+<p>Since Delete All will iterate over all objects in an objects all list, it will run a delete query for every record found. While this is very useful if you want to
+delete a subset of records in the table, it is very ineffecient when you simply want to delete all records.</p>
+
+<p>If that is the goal, just use:</p>
+<pre>
+<var>$b </var><kbd>= new </kbd><var>Book</var><kbd>();
+</kbd><var>$b</var><kbd>-&gt;</kbd><var><u>truncate</u></var><kbd>();</kbd>
+</pre>
+
+<p>This will delete all records in the <kbd>books</kbd> table, reset all in-table-foreign-keys in related tables linking to the <kbd>books</kbd> table, and delete all records in relationship tables referenced by the <var>Book</var> model.</p>
+
+<p class="note">Note that if your relationship tables are used in multiple many-to-many relations, you should not use this method, as it will also delete all relationships between the other models using the same relationship table!</p>
 
 </div>
 <!-- END CONTENT -->
@@ -90,7 +106,7 @@ Delete All
 Next Topic:&nbsp;&nbsp;<a href=""></a></span>
 </p>
 <div id="copyrights">
-<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010-2011 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
 <p><a href="license.html">Other License Information</a></p>
 </div>
 </div>

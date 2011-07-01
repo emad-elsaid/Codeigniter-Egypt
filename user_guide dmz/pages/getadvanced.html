@@ -127,6 +127,10 @@ Get (Advanced)
 	<li><var><i>or_where_in</i></var></li>
 	<li><var><i>where_not_in</i></var></li>
 	<li><var><i>or_where_not_in</i></var></li>
+	<li><var><i>where_between</i></var> - Requires two values to be specified</li>
+	<li><var><i>or_where_between</i></var> - Requires two values to be specified</li>
+	<li><var><i>where_not_between</i></var> - Requires two values to be specified</li>
+	<li><var><i>or_where_not_between</i></var> - Requires two values to be specified</li>
 	<li><var><i>like</i></var></li>
 	<li><var><i>not_like</i></var></li>
 	<li><var><i>or_like</i></var></li>
@@ -185,10 +189,7 @@ Get (Advanced)
 
 <div class="note">
 	<p>
-		If the query clause is <var>where</var>, and <dfn>$value</dfn> is an array, it is assumed you want to use a <var>where_in</var> clause.
-		If <dfn>$value</dfn> is a Datamapper object, the <dfn>$value</dfn> array will be converted to an
-		array with object id's of the result set, which is then used to run the <var>where_in</var> query.
-		It is your responsability to use the correct object, it is not validated!
+		If the query clause is <var>where</var>, and <dfn>$value</dfn> is a Datamapper object, Datamapper will convert the query into <var>where_in</var> clause and use the id's of the results stored in the object as parameters.
 	</p>
 </div>
 
@@ -200,7 +201,7 @@ Get (Advanced)
 
 </kbd><samp>// Get all the messages these males have posted
 </samp><var>$p </var><kbd>= new </kbd><var>Post</var><kbd>();
-</samp><var>$u</var><kbd>-&gt;</kbd><var><i>where</i><u>_related</u></var><kbd>(</kbd><var><s>'user'</s></var><kbd>, </kbd><dfn>'id'</dfn><kbd>, </kbd><var>$u</var><kbd>-&gt;</kbd><dfn>all</dfn><kbd>)-&gt;</kbd><var><u>get</u></var><kbd>();</kbd>
+</samp><var>$p</var><kbd>-&gt;</kbd><var><i>where</i><u>_related</u></var><kbd>(</kbd><var><s>'user'</s></var><kbd>, </kbd><dfn>'id'</dfn><kbd>, </kbd><var>$u</var><kbd>)-&gt;</kbd><var><u>get</u></var><kbd>();</kbd>
 </pre>
 
 
@@ -273,6 +274,8 @@ Get (Advanced)
 
 <p>Which of the available usage formats you use will depend on your personal preference, although you should be consistent with your choice.  It also might depend on whether you have a related object already available to use.</p>
 
+<p class="note">To find records that do not have a relation, specify '<strong>id</strong>' as the <dfn>$field</dfn> and <strong>NULL</strong> as the <dfn>$value</dfn>.</p>
+
 <h2 id="_join_field">$object->{query}_join_field($model, $field, $value);</h2>
 
 <p>This method allows you to query extra columns on a join table.</p>
@@ -310,7 +313,6 @@ Get (Advanced)
 
 <h2 id="include_related">$object->include_related($model, $fields = NULL, $prefix = TRUE, $instantiate = FALSE)</h2>
 <p>Includes the all or some of the columns from a related object.  By default, this method adds a prefix based on $model to every column.  If for some reason the included column overlaps with a field already in the $object, that column is skipped.  This method can significantly reduce your query overhead.</p>
-<p class="important"><strong><em>Important:</em></strong> This method will only work with <strong>$has_one</strong> related models.</p>
 <ul>
 	<li><var><s>$model</s></var> - A related model name OR the <b>relationship key</b> for advanced relationships, or a related object.  Also accepts deep relationships.</li>
 	<li><dfn>$fields</dfn> - NULL or '*' to include all columns.  To specify a subset of columns (recommended), replace with a single value, or an array of column names.</li>
@@ -344,6 +346,7 @@ foreach(</kbd><var>$u</var> <kbd>as </kbd><var>$user</var><kbd>) {
 }</kbd>
 </pre>
 
+<p class="important"><strong><em>Important:</em></strong> This method creates a full join on both tables. Make sure to use the appropriate where clauses, and/or use DISTINCT, to limit the number of rows in the result!</p>
 
 <h2 id="Deep.Relationship.Include">Including Fields from Deep Relationships</h2>
 <p>This method also supports deep relationships.  You can only include columns from objects that are related by single relationships all the way.  The default column prefix for deep relationships is to replace all forward slashes with underscores.  You can still override this to be whatever you want.</p>
@@ -423,7 +426,7 @@ foreach(</kbd><var>$u</var><kbd>-&gt;</kbd><var>alarm</var> <kbd>as </kbd><var>$
 Next Topic:&nbsp;&nbsp;<a href=""></a></span>
 </p>
 <div id="copyrights">
-<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010-2011 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
 <p><a href="license.html">Other License Information</a></p>
 </div>
 </div>

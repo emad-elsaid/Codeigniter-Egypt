@@ -92,7 +92,7 @@ a.def:hover {
 }
 
 #nav_inner .td_sep {
-    background: transparent url(../images/nav_separator.jpg) repeat-y left top;
+    background: transparent url(../images/nav_separator_darker.jpg) repeat-y left top;
     width: 25%;
     padding: 0 0 0 20px;
 }
@@ -586,7 +586,7 @@ a.def:hover {
     padding: 0 1em;
 	text-align: left;
 }
-/* allows tables to 'wrap' around example blocks */ 
+/* allows tables to 'wrap' around example blocks */
 #content .exampleWrap {
 	padding-right: 224px;
 }

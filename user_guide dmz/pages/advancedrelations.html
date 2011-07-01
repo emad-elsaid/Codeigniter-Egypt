@@ -129,10 +129,28 @@ Advanced Relationships
 	<td>Used with custom column names, or in some unusual self-relationships.</td>
 </tr>
 <tr>
-	<td><kbd>join_table</kbd></td>
+	<td>join_table</td>
 	<td>Override the generated table name for this relation.</td>
 	<td><var>''</var></td>
 	<td>Custom table name. Also used in some multi-table (more than two) relationships.</td>
+</tr>
+<tr>
+	<td>model_path</td>
+	<td>Alternative location for this model.</td>
+	<td><b>APPPATH</b></td>
+	<td>Used in a modular context, where models are used cross-module. Note that is it the module path, <b>NOT</b> the model path!</td>
+</tr>
+<tr>
+	<td>auto_populate</td>
+	<td>Autopopulate the objects for this relation.</td>
+	<td><var><b>FALSE</b></var></td>
+	<td>Use the same as the global settings <var>$auto_populate_has_one</var> and <var>$auto_populate_has_many</var>, but then on a per-relationship basis.</td>
+</tr>
+<tr>
+	<td>cascade_delete</td>
+	<td>Delete the relation when deleting the parent object.</td>
+	<td><var><b>TRUE</b></var></td>
+	<td>Use the same as the configuration variable and the global setting <var>$cascade_delete</var>, but then on a per-relationship basis.</td>
 </tr>
 </table>
 
@@ -236,27 +254,36 @@ You want to use alternative name for a foreign key column name. Say want to use 
 </ul>
 
 <h2 id="reciprocal">Many-to-Many Reciprocal Self Relationships</h2>
+
 <p>In this type of relationship, you have records that related to each other, and where saving or deleting the relationship in one direction should also maintain the relationship in the reverse direction.</p>
+
+<p>The best example I can think of is in the area of genealogy.</p>
+<p>Suppose you have a table with information about people, and you want to relate them
+(grandparent-parent-child etc). You always have to make the relation both ways, since it can’t be that person A is the child of person B,
+but B is not the parent of A. If you define this relation as reciprocal, when you save the relation between A and B, automatically the
+relation between B and A is saved as well. And when you delete the relationship, both relations are deleted.</p>
+
 <pre>
-<kbd>class </kbd><var>Document </var><kbd>extends </kbd><var><u>DataMapper</u> </var><kbd>{
+<kbd>class </kbd><var>Person </var><kbd>extends </kbd><var><u>DataMapper</u> </var><kbd>{
     </kbd><var><i>$has_many</i> </var><kbd>= array(
-        </kbd><strong>'related_document'</strong> <kbd>=&gt; array(
-            </kbd>'class' <kbd>=&gt; </kbd><dfn><var><s>'document'</s></var></dfn><kbd>,
-            </kbd>'other_field' <kbd>=&gt; </kbd><dfn>'document'</var></dfn><kbd>,
+        </kbd><strong>'related_person'</strong> <kbd>=&gt; array(
+            </kbd>'class' <kbd>=&gt; </kbd><dfn><var><s>'person'</s></var></dfn><kbd>,
+            </kbd>'other_field' <kbd>=&gt; </kbd><dfn>'person'</var></dfn><kbd>,
             </kbd>'reciprocal' <kbd>=&gt; </kbd><dfn>TRUE</dfn><kbd>
         ),
-        </kbd><strong>'document'</strong> <kbd>=&gt; array(
-            </kbd>'other_field' <kbd>=&gt; </kbd><dfn>'related_document'</var></dfn><kbd>,
+        </kbd><strong>'person'</strong> <kbd>=&gt; array(
+            </kbd>'other_field' <kbd>=&gt; </kbd><dfn>'related_person'</var></dfn><kbd>,
+            </kbd>'reciprocal' <kbd>=&gt; </kbd><dfn>TRUE</dfn><kbd>
         )
     );
 }
 </pre>
 <p>To get this to work, you will need:</p>
 <ul>
-	<li>You need a relationship table to define this many-to-many relation, which is this case would be called '<dfn>documents_documents</dfn>'.</li>
-	<li>This table needs to contain a column called '<dfn>document_id</dfn>' and a column called '<dfn>related_document_id</dfn>'.</li>
+	<li>You need a relationship table to define this many-to-many relation, which is this case would be called '<dfn>persons_persons</dfn>'.</li>
+	<li>This table needs to contain a column called '<dfn>person_id</dfn>' and a column called '<dfn>related_person_id</dfn>'.</li>
 </ul>
-
+<p class="note">Note that this defined per relation. If you want this to work both ways, you need to specify the '<dfn>reciprocal</dfn>' setting on <b>BOTH</b> relationship definitions.</p>
 <h2>Setting up the Table Structure with Advanced Relationships</h2>
 <p>The table structure has one key difference.  While the names of the tables is still determined using the plural form of the model, the <em>column names</em> are now defined using the <strong>relationship key</strong>.</p>
 
@@ -463,7 +490,7 @@ or from the application itself.</p>
 Next Topic:&nbsp;&nbsp;<a href=""></a></span>
 </p>
 <div id="copyrights">
-<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010-2011 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
 <p><a href="license.html">Other License Information</a></p>
 </div>
 </div>

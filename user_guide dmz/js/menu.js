@@ -40,7 +40,9 @@ var Menu = new Class({
 			{ url: "download", name: "Downloading Datamapper ORM" },
 			{ url: "installation", name: "Installation Instructions" },
 			{ url: "upgrade", name: "Upgrading Instructions" },
-			{ url: "troubleshooting", name: "Troubleshooting / FAQ" }
+			{ url: "troubleshooting", name: "Troubleshooting / FAQ" },
+			"Glossary",
+			{ url: "glossary", name: "Glossary" }
 		],
 		[
 			"General Topics",
@@ -80,6 +82,8 @@ var Menu = new Class({
 			{ url: "utility", name: "Utility Methods" }
 		],
 		[
+			"Advanced Usage",
+			{ url: "advancedusage", name: "Advanced Usage" },
 			"Relationships",
 			{ url: "accessingrelations", name: "Accessing Relationships" },
 			{ url: "savingrelations", name: "Saving Relationships" },
@@ -90,9 +94,7 @@ var Menu = new Class({
 			{ url: "extwrite", name: "Writing an Extension"},
 			{ url: "extlist", name: "Included Extensions"},
 			"Examples",
-			{ url: "examples", name: "Example Application" },
-			"Glossary",
-			{ url: "glossary", name: "Glossary" }
+			{ url: "examples", name: "Example Application" }
 		]
 	],
 

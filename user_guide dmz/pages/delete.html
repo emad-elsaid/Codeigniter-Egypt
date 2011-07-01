@@ -163,7 +163,7 @@ Delete
 </samp><var>$relatedposts </var><kbd>= new </kbd><var>Post</var><kbd>();
 </kbd><var>$relatedposts</var><kbd>-&gt;</kbd><var><u>where_in</u></var><kbd>(</kbd><var>$related_ids</var><kbd>)-&gt;</kbd><var><u>get</u></var><kbd>();
 </kbd><samp>// delete related posts
-</samp><var>$post</var><kbd>-&gt;</kbd><var><u>delete_</u><s>relatedpost</s></var><kbd>(</kbd><var>$relatedposts</var><kbd>-&gt;</kbd><dfn>all</dfn><kbd>);</kbd>
+</samp><var>$post</var><kbd>-&gt;</kbd><var><u>delete</u><kbd>(</kbd><var>$relatedposts</var><kbd>, <var><s>'relatedpost'</s></var><kbd>);</kbd>
 </pre>
 
 
@@ -197,7 +197,7 @@ Delete
 Next Topic:&nbsp;&nbsp;<a href=""></a></span>
 </p>
 <div id="copyrights">
-<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010-2011 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
 <p><a href="license.html">Other License Information</a></p>
 </div>
 </div>

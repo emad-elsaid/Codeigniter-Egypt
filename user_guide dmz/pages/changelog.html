@@ -56,6 +56,56 @@ Change Log
 
 <p>For more information on upgrading to the latest release, please see <a href="upgrade.html">Upgrade Instructions</a></p>
 
+<h2><a href="http://bitbucket.org/wanwizard/datamapper/downloads/">Version 1.8.2</a></h2>
+<p>Release Date: t.b.d.</p>
+
+<ul>
+	<li><strong>New Features</strong>
+	</li>
+	<li><strong>Bug Fixes</strong>
+	</li>
+	<li><strong>Other Changes</strong>
+	</li>
+</ul>
+
+<h2><a href="http://bitbucket.org/wanwizard/datamapper/downloads/">Version 1.8.1</a></h2>
+<p>Release Date: June 7th, 2011</p>
+
+<ul>
+	<li><strong>New Features</strong>
+		<ul>
+			<li>Alternative model locations are supported through the <var><b>model_path</b></var> advanced relationship parameter, or through the <a href="advancedusage.html#add_model_path">add_model_path</a> static method.</li>
+			<li>Added new <var><u>truncate</u></var> method to delete all records, and relations to those records.</li>
+			<li>You can now pass a string as parameter to the to_array() and all_to_array() methods of the array extension, if you want to select only a single field.</li>
+			<li>You can now run include_related on 'many' relations, see <a href="getadvanced.html#include_related">runtime</a> for an explaination.</li>
+			<li>Added new <var><u>force_validation()</u></var> method to force revalidation when you read a record from the database that would not pass the save rules.</li>
+			<li>A new configuration value <var><b>cascade_delete</b></var> determines if delete operations need to cascade. See <a href="troubleshooting.html#Relationships.CascadingDeletes">here</a>.</li>
+			<li>Added support for the new CI reactor versions, in which Lang and Loader library properties are no longer public.</li>
+			<li>Added new <var><u>where_between()</u></var> methods to support "WHERE field BETWEEN a AND b" type queries.</li>
+			<li>The json extension now supports related objects, which will be exported as nested objects ('id' fields only).</li>
+		</ul>
+	</li>
+	<li><strong>Bug Fixes</strong>
+		<ul>
+			<li>Added support for a database prefix when specifying a join table ('database.tablename').</li>
+			<li>Extensions now receive the object that loads then as second parameter of the constructor, as documented.</li>
+			<li>Do not unnecessarily join tables in a many to many relationship when defining a where clause on the related 'id' field.</li>
+			<li>Fixed broken subqueries.</li>
+			<li>Fixed broken <var><u>like()</u></var> queries: missing trailing space and no automatic escaping.</li>
+			<li>Fixed nestedsets extension methods for moving sibling and child objects.</li>
+			<li>Fixed language error messages in the log due to undefined validation labels when using CI Reactor or CI 2.0.2.</li>
+			<li>Fixed incorrect SQL generated when using <var><u>where()</u></var> with a multi-value array just after a <var><u>group_start()</u></var>.</li>
+			<li>Fixed broken query caching when using <var><u>group_start()</u></var>.</li>
+		</ul>
+	</li>
+	<li><strong>Other Changes</strong>
+		<ul>
+			<li>Datamapper now checks if the CodeIgniter database library is loaded when the Datamapper class is instantiated, and exits with an error message if not.</li>
+			<li>The functionality of reciprocal self relationships is more clearly documented.</li>
+		</ul>
+	</li>
+</ul>
+
 <h2><a href="http://bitbucket.org/wanwizard/datamapper/downloads/">Version 1.8.0</a></h2>
 <p>Release Date: January 12, 2011</p>
 <ul>
@@ -92,8 +142,8 @@ Change Log
 	</li>
 </ul>
 
-<h2><a href="http://bitbucket.org/wanwizard/datamapper/downloads/DMZ_1.7.1.zip">Version 1.7.1</a></h2>
-<p>Release Date: March 22, 2010</p>
+<h2><a href="http://cdn.bitbucket.org/wanwizard/datamapper/downloads/DMZ_1.7.1.zip">Version 1.7.1</a></h2>
+<p>Release Date: March 22, 2010-2011</p>
 <ul>
 	<li><strong>New Features</strong>
 		<ul>
@@ -126,8 +176,8 @@ Change Log
 	</li>
 </ul>
 
-<h2><a href="http://bitbucket.org/wanwizard/datamapper/downloads/DMZ_1.7.0.zip">Version 1.7.0</a></h2>
-<p>Release Date: March 15, 2010</p>
+<h2><a href="http://cdn.bitbucket.org/wanwizard/datamapper/downloads/DMZ_1.7.0.zip">Version 1.7.0</a></h2>
+<p>Release Date: March 15, 2010-2011</p>
 <ul>
 	<li><strong>Performance Improvements</strong>
 		<p>
@@ -240,7 +290,7 @@ Change Log
 	</li>
 </ul>
 
-<h2><a href="http://bitbucket.org/wanwizard/datamapper/downloads/DMZ_1.6.2.zip">Version 1.6.2</a></h2>
+<h2><a href="http://cdn.bitbucket.org/wanwizard/datamapper/downloads/DMZ_1.6.2.zip">Version 1.6.2</a></h2>
 <p>Release Date: December 28, 2009</p>
 <ul>
 	<li><strong>Bug Fixes</strong>
@@ -256,7 +306,7 @@ Change Log
 			<li>French, provided by <a href="http://codeigniter.com/forums/member/85622/">jpi</a></li>
 			<li>Spanish, provided by <a href="http://codeigniter.com/forums/member/73380/">tdktank59</a> and <a href="http://codeigniter.com/forums/member/40744/">Muser</a></li>
 			<li>Catalan, provided by <a href="http://codeigniter.com/forums/member/40744/">Muser</a></li>
-			<li>Brazilian Portuguese, provided by <a href="http://codeigniter.com/forums/member/70919/">Dantetekanem</a></li>
+			<li>Brazilian Portuguese, provided by Dantetekanem (CI forum member 70919)</li>
 		</ul>
 	</li>
 	<li><strong>Other Changes</strong>
@@ -269,20 +319,20 @@ Change Log
 	</li>
 </ul>
 
-<h2><a href="http://bitbucket.org/wanwizard/datamapper/downloads/DMZ_1.6.1.zip">Version 1.6.1</a></h2>
+<h2><a href="http://cdn.bitbucket.org/wanwizard/datamapper/downloads/DMZ_1.6.1.zip">Version 1.6.1</a></h2>
 <p>Release Date: November 30, 2009</p>
 <ul>
 	<li><strong>Changes</strong>
 		<ul>
 			<li>
-				Fixed bug found by <a href="http://codeigniter.com/forums/member/68134/">monkeyhouse</a> in the db_params default configuration.<br/>
+				Fixed bug found by monkeyhouse (CI forum member 68134) in the db_params default configuration.<br/>
 				You only need to get this update if you are getting a &ldquo;<i>You have not selected a database type to connect to.</i>&rdquo; error.
 			</li>
 		</ul>
 	</li>
 </ul>
 
-<h2><a href="http://bitbucket.org/wanwizard/datamapper/downloads/DMZ_1.6.0.zip">Version 1.6.0</a></h2>
+<h2><a href="http://cdn.bitbucket.org/wanwizard/datamapper/downloads/DMZ_1.6.0.zip">Version 1.6.0</a></h2>
 <p>Release Date: November 23, 2009</p>
 <ul>
 	<li><strong>Core Changes</strong>
@@ -351,7 +401,7 @@ Change Log
 Next Topic:&nbsp;&nbsp;<a href=""></a></span>
 </p>
 <div id="copyrights">
-<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
+<p><a href="/">Datamapper ORM</a> &nbsp;&middot;&nbsp; Copyright &copy; 2010-2011 &nbsp;&middot;&nbsp; Harro "WanWizard" Verton</p>
 <p><a href="license.html">Other License Information</a></p>
 </div>
 </div>

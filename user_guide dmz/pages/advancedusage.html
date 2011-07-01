@@ -3,7 +3,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Deleting Relationships : DataMapper ORM - User Guide</title>
+<title>Get By : DataMapper ORM - User Guide</title>
 
 <link rel="shortcut icon" type="image/png" href="../images/favicon.png" />
 <link rel="stylesheet" type="text/css" media="all" href="../css/userguide.css" />
@@ -36,7 +36,7 @@
 <td id="breadcrumb">
 <a href="/">Datamapper ORM Home</a> &nbsp;&#8250;&nbsp;
 <a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-Deleting Relationships
+Advanced Usage
 </td>
 </tr>
 
@@ -50,11 +50,28 @@ Deleting Relationships
 <div id="content">
 
 
-<h1>Deleting Relationships</h1>
+<h1><a name="add_model_path"></a>Add Model Path</h1>
 
-<p>Read <a href="delete.html">Delete</a> to see how to delete relationships.</p>
+<p>Add Model Path is a static dynamic method that allows you to define alternative file locations for the model autoloader.
+When a model is requested the autoloader checks all defined paths for the existence of a models folder. If that exists, it will check if the request model file exists, and if so, it will be loaded.</p>
+<p>Datamapper searches the following locations:
+	<ul>
+		<li>The application model directory</li>
+		<li>The module directories of <b>loaded</b> modules (HMVC &amp; Modular CI)</li>
+		<li>All defined CodeIgniter packages (CI 2.0+, added with <var>$this->load->add_package_path</var>)</li>
+		<li>All manually added paths</li>
+	</ul>
+</p>
+<p>You can add model search paths to Datamapper manually using the Add Model Path static method:</p>
+<pre>
+<samp>// add the users, groups and admin modules to the model autoloader search path</samp>
+<var>Datamapper</var><kbd>::</kbd><var><u>add_model_path</u></var><kbd>(</kbd><var> array(</var> <dfn>APPPATH.'modules/users'</dfn>, <dfn>APPPATH.'modules/groups'</dfn>, <dfn>APPPATH.'modules/admin'</dfn> <var>)</var><kbd> );</kbd>
+</pre>
+<p class="note">Note that this is a global operation, you will have to do this only once per page request, for example in the controlller constructor.</p>
 
+<p>&nbsp;</p>
 
+</div>
 
 </div>
 <!-- END CONTENT -->

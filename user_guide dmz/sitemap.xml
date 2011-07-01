@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>http://datamapper.wanwizard.eu/</loc>
+  <lastmod>2011-02-06T21:43:41+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/toc.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/validation.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/glossary.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/requirements.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/changelog.html</loc>
+  <lastmod>2011-01-24T17:36:59+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/upgrade.html</loc>
+  <lastmod>2011-01-15T21:03:33+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/joinfields.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/getadvanced.html</loc>
+  <lastmod>2011-01-15T21:03:34+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/advancedrelations.html</loc>
+  <lastmod>2011-01-24T17:36:59+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/extensions.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/subqueries.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/functions.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/get.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/save.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/license.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/index.html</loc>
+  <lastmod>2011-02-06T21:43:41+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/models.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/extlist.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/database.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/relationtypes.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/advancedusage.html</loc>
+  <lastmod>2011-01-24T17:36:59+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/extensions/nestedsets.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/count.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/getalt.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/localize.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/utility.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/extensions/rowindex.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/extensions/htmlform.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/clonecopy.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/config.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/prodcache.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/troubleshooting.html</loc>
+  <lastmod>2011-01-24T17:36:59+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/changelog/1.5.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/changelog/1.4.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/changelog/1.3.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/changelog/1.2.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/reservednames.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/controllers.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/extwrite.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/gettingstarted.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/extensions/array.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/extensions/json.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/extensions/csv.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/extensions/translate.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/extensions/simplecache.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/settingrelations.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/examples/htmlform.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/installation.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/getrules.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/examples/login.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/update.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/examples.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/manual.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/delete.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/prefix.html</loc>
+  <lastmod>2011-01-04T20:25:07+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>http://datamapper.wanwizard.eu/pages/download.html</loc>
+  <lastmod>2011-01-15T21:03:33+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.41</priority>
+</url>
+</urlset>
